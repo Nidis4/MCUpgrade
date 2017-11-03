@@ -12,7 +12,7 @@ $database = new Database();
 $db = $database->getConnection();
  
 // initialize object
-$application = new Appication($db);
+$application = new Application($db);
  
 // query categorys
 $stmt = $application->read();
