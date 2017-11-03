@@ -14,11 +14,9 @@ class Admin{
     public $email;
     public $mobile_nr;
     public $password_changed;
-    public $sms_code;
     public $type;
     public $last_login;
     public $active;
-    public $created;
  
     // constructor with $db as database connection
     public function __construct($db){
@@ -29,7 +27,7 @@ class Admin{
     function read(){
      
         // select all query
-        $query = "SELECT  a.id, a.username, a.password, a.first_name, a.last_name, a.email, a.mobile_nr, a.password_changed, a.sms_code, a.type, a.last_login, a.active
+        $query = "SELECT  a.id, a.username, a.password, a.first_name, a.last_name, a.email, a.mobile_nr, a.password_changed, a.type, a.last_login, a.active
                 FROM `" . $this->table_name . "` a ORDER BY a.id ASC";
      
         // prepare query statement

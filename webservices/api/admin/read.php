@@ -47,7 +47,6 @@ if($num>0){
             //"description" => html_entity_decode($description),
             "mobile_nr" => $mobile_nr,
             "password_changed" => $password_changed,
-            "sms_code" => $sms_code,
             "type" => $type,
             "last_login" => $last_login,
             "active" => $active
