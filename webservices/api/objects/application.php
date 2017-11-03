@@ -7,7 +7,7 @@ class Application{
  
     // object properties
     public $id;
-    public $category_id
+    public $category_id;
     public $title;
     public $title_greek;
     public $short_description;
