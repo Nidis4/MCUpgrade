@@ -29,10 +29,8 @@ class Admin{
     function read(){
      
         // select all query
-        $query = "SELECT  a.id, a.username, a.password, a.first_name, a.last_name, a.email, a.mobile_nr, a.password_changed, a.sms_code, a.type, a.last_login, a.active, a.created
-                FROM " . $this->table_name . " p
-                ORDER BY
-                    p.created DESC";
+        $query = "SELECT  a.id, a.username, a.password, a.first_name, a.last_name, a.email, a.mobile_nr, a.password_changed, a.sms_code, a.type, a.last_login, a.active
+                FROM `" . $this->table_name . "` a ORDER BY a.id ASC";
      
         // prepare query statement
         $stmt = $this->conn->prepare($query);

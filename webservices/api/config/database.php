@@ -5,7 +5,7 @@ class Database{
     private $host = "localhost";
     private $db_name = "upgradem_main";
     private $username = "upgradem_super";
-    private $password = "pN.gEy=f2#z}";
+    private $password = "x}zLIzWrI^zC";
     public $conn;
  
     // get the database connection
