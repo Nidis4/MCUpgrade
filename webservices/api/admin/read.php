@@ -8,7 +8,7 @@ header("Content-Type: application/json; charset=UTF-8");
  
 // include database and object files
 include_once '../config/database.php';
-include_once '../objects/admins.php';
+include_once '../objects/admin.php';
  
 // instantiate database and admin object
 $database = new Database();
@@ -50,7 +50,7 @@ if($num>0){
             "sms_code" => $sms_code,
             "type" => $type,
             "last_login" => $last_login,
-            "active" => $active,
+            "active" => $active
         );
  
         array_push($admin_arr["records"], $admin_item);
