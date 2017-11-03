@@ -25,8 +25,8 @@ $num = $stmt->rowCount();
 if($num>0){
  
     // admins array
-    $admins_arr=array();
-    $admins_arr["records"]=array();
+    $admin_arr=array();
+    $admin_arr["records"]=array();
  
     // retrieve our table contents
     // fetch() is faster than fetchAll()
