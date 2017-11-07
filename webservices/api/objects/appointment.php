@@ -46,6 +46,53 @@ class Appointment{
         return $stmt;
     }
 
+    // used when filling up the update product form
+    function readOne(){
+     
+        // query to read single record
+        $query = "SELECT
+                    `id`, `prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`
+                FROM
+                    " . $this->table_name . "
+                WHERE
+                    id = ?
+                LIMIT
+                    0,1";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind id of product to be updated
+        $stmt->bindParam(1, $this->id);
+     
+        // execute query
+        $stmt->execute();
+     
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+        // set values to object properties
+        $this->prof_member_id = $row['prof_member_id'];
+        $this->cust_member_id = $row['cust_member_id'];
+        $this->application_id = $row['application_id'];
+        $this->date = $row['date'];
+        $this->time = $row['time'];
+        $this->address = $row['address'];
+        $this->budget = $row['budget'];
+        $this->commision =$row['commision'];
+        $this->agent_id = $row['agent_id'];
+        $this->comment = $row['comment'];
+        $this->sms = $row['sms'];
+        $this->sms_log_id = $row['sms_log_id'];
+        $this->googleEventId = $row['googleEventId'];
+        $this->datetimeCreated = $row['datetimeCreated'];
+        $this->datetimeStatusUpdated = $row['datetimeStatusUpdated'];
+        $this->sourceAppointmentId = $row['sourceAppointmentId'];
+        $this->status = $row['status'];
+        $this->cancelComment = $row['cancelComment'];
+
+    }
+
 
 }
 ?>
