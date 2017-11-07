@@ -4,7 +4,8 @@ class Member{
     // database connection and table name
     private $conn;
     private $table_name = "members";
-    private $contact_table_name = "members";
+    private $contact_table_name = "members_contact_details";
+    private $account_table_name = "members_account_info";
  
     // object properties
     public $member_id;
@@ -26,9 +27,24 @@ class Member{
     public function contactDetails(){
         //select all data
         $query = "SELECT
-                    `id`, `member_id`, `address`, `area`, `city`, `country_id`, `latitude`, `longtitude`, `postcode`, `phone`, `mobile`
+                    `member_id`, `address`, `area`, `city`, `country_id`, `latitude`, `longtitude`, `postcode`, `phone`, `mobile`
                 FROM
                     " . $this->contact_table_name . "
+                ORDER BY
+                    id ASC";
+ 
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+ 
+        return $stmt;
+    }
+
+    public function accountInfo(){
+        //select all data
+        $query = "SELECT
+                    `member_id`, `email`, `password`, `last_login`, `last_login_ip`, `modified`, `status`, `user_type`, `created`
+                FROM
+                    " . $this->account_table_name . "
                 ORDER BY
                     id ASC";
  
