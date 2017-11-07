@@ -59,6 +59,7 @@ class Appointment{
                 LIMIT
                     0,1";
      
+     echo $query;
         // prepare query statement
         $stmt = $this->conn->prepare( $query );
      
