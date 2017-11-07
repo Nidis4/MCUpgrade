@@ -20,6 +20,9 @@ $appointment = new Appointment($db);
 // set ID property of product to be edited
 $appointment->id = isset($_GET['id']) ? $_GET['id'] : die();
 
+
+echo $appointment->id;
+
 // create array
 $stmt = $appointment->readOne();
  
