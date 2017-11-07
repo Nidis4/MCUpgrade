@@ -64,8 +64,10 @@ class Appointment{
         $stmt = $this->conn->prepare( $query );
      
      echo $this->id." ------ ";
+
+     $cur_id = $this->id;
         // bind id of product to be updated
-        $stmt->bindParam(1, $this->id);
+        $stmt->bindParam(1, $cur_id);
      
         // execute query
         $stmt->execute();
