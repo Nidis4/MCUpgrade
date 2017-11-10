@@ -16,12 +16,9 @@ $db = $database->getConnection();
  
 // initialize object
 $admin = new Admin($db);
- echo "Before".$_POST['username'];
-//$admin->username = isset($_POST['username']) ? $_POST['username'] : die();
-//$admin->password = isset($_POST['password']) ? $_POST['password'] : die();
- 
- echo "After".$_POST['password'];
-// query Admins
+$admin->username = isset($_POST['username']) ? $_POST['username'] : die();
+$admin->password = isset($_POST['password']) ? $_POST['password'] : die();
+ s// query Admins
 $stmt = $admin->login();
 $num = $stmt->rowCount();
  
