@@ -7,6 +7,7 @@ header("Access-Control-Allow-Credentials: true");
 header('Content-Type: application/json');
  
 // include database and object files
+include_once '../config/core.php';
 include_once '../config/database.php';
 include_once '../objects/appointment.php';
  
