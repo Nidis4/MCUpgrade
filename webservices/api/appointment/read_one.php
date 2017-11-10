@@ -22,7 +22,7 @@ $appointment = new Appointment($db);
 $appointment->id = isset($_GET['id']) ? $_GET['id'] : die();
 
 
-echo $appointment->id;
+//echo $appointment->id;
 
 // create array
 $stmt = $appointment->readOne();
