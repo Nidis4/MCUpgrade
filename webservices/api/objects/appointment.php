@@ -67,11 +67,14 @@ class Appointment{
 
      $cur_id = 1;
         // bind id of product to be updated
-        $stmt->bindParam(':id', $cur_id);
+        $stmt->bindParam(':id',  $cur_id, PDO::PARAM_INT);
         //$stmt->bindValue(':id', '$cur_id', PDO::PARAM_STR);
      
         // execute query
         $stmt->execute();
+
+        $num = $stmt->rowCount();
+        echo "<br>Num : ".$num;
      
         // get retrieved row
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
