@@ -59,13 +59,13 @@ class Appointment{
                 LIMIT
                     0,1";
      
-     echo $query;
+     //echo $query;
         // prepare query statement
         $stmt = $this->conn->prepare( $query );
      
-     echo $this->id." ------ ";
+     //echo $this->id." ------ ";
 
-     $cur_id = 1;
+     $cur_id = $this->id;
         // bind id of product to be updated
         $stmt->bindParam(':id',  $cur_id, PDO::PARAM_INT);
         //$stmt->bindValue(':id', '$cur_id', PDO::PARAM_STR);

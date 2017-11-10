@@ -28,25 +28,25 @@ $appointment->id = isset($_GET['id']) ? $_GET['id'] : die();
 $stmt = $appointment->readOne();
  
         $appointment_arr=array(
-            "id" => $id,
-            "prof_member_id" => $prof_member_id,
-            "cust_member_id" => $cust_member_id,
-            "application_id" => $application_id,
-            "date" => $date,
-            "time" => $time,
-            "address" => $address,
-            "budget" => $budget,
-            "commision" => $commision,
-            "agent_id" => $agent_id,
-            "comment" => $comment,
-            "sms" => $sms,
-            "sms_log_id" => $sms_log_id,
-            "googleEventId" => $googleEventId,
-            "datetimeCreated" => $datetimeCreated,
-            "datetimeStatusUpdated" => $datetimeStatusUpdated,
-            "sourceAppointmentId" => $sourceAppointmentId,
-            "status" => $status,
-            "cancelComment" => $cancelComment
+            "id" => $appointment->id,
+            "prof_member_id" => $appointment->prof_member_id,
+            "cust_member_id" => $appointment->cust_member_id,
+            "application_id" => $appointment->application_id,
+            "date" => $appointment->date,
+            "time" => $appointment->time,
+            "address" => $appointment->address,
+            "budget" => $appointment->budget,
+            "commision" => $appointment->commision,
+            "agent_id" => $appointment->agent_id,
+            "comment" => $appointment->comment,
+            "sms" => $appointment->sms,
+            "sms_log_id" => $appointment->sms_log_id,
+            "googleEventId" => $appointment->googleEventId,
+            "datetimeCreated" => $appointment->datetimeCreated,
+            "datetimeStatusUpdated" => $appointment->datetimeStatusUpdated,
+            "sourceAppointmentId" => $appointment->sourceAppointmentId,
+            "status" => $appointment->status,
+            "cancelComment" => $appointment->cancelComment
         );
      
  
