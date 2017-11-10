@@ -65,10 +65,10 @@ class Appointment{
      
      echo $this->id." ------ ";
 
-     $cur_id = $this->id;
+     $cur_id = 1;
         // bind id of product to be updated
-        //$stmt->bindParam(1, $cur_id);
-        $stmt->bindValue(':id', '$cur_id', PDO::PARAM_STR);
+        $stmt->bindParam(':id', $cur_id);
+        //$stmt->bindValue(':id', '$cur_id', PDO::PARAM_STR);
      
         // execute query
         $stmt->execute();
