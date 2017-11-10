@@ -74,7 +74,6 @@ class Appointment{
         $stmt->execute();
 
         $num = $stmt->rowCount();
-        echo "<br>Num : ".$num;
      
         // get retrieved row
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -99,6 +98,31 @@ class Appointment{
         $this->status = $row['status'];
         $this->cancelComment = $row['cancelComment'];
 
+    } // Read One
+
+    // read products with pagination
+    public function readPaging($from_record_num, $records_per_page){
+     
+        // select query
+        $query = "SELECT
+                    `id`, `prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`
+                FROM
+                    " . $this->table_name . "
+                ORDER BY `id` DESC
+                LIMIT ?, ?";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind variable values
+        $stmt->bindParam(1, $from_record_num, PDO::PARAM_INT);
+        $stmt->bindParam(2, $records_per_page, PDO::PARAM_INT);
+     
+        // execute query
+        $stmt->execute();
+     
+        // return values from database
+        return $stmt;
     }
 
 
