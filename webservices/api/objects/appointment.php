@@ -55,7 +55,7 @@ class Appointment{
                 FROM
                     " . $this->table_name . "
                 WHERE
-                    id = :id
+                    id = ?
                 LIMIT
                     0,1";
      
@@ -67,7 +67,7 @@ class Appointment{
 
      $cur_id = $this->id;
         // bind id of product to be updated
-        $stmt->bindValue(':id', '$cur_id', PDO::PARAM_STR);
+        $stmt->bindParam(1, $cur_id);
      
         // execute query
         $stmt->execute();
