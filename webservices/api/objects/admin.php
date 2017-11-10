@@ -43,7 +43,7 @@ class Admin{
         // select all query
         $query = "SELECT  a.id, a.username, a.password, a.first_name, a.last_name, a.email, a.mobile_nr, a.password_changed, a.type, a.last_login, a.active
                 FROM `" . $this->table_name . "` a 
-                WHERE username LIKE ':username' AND password LIKE ':password'
+                WHERE username LIKE :username AND password LIKE :password
                 ORDER BY a.id ASC";
      
         // prepare query statement
@@ -51,7 +51,9 @@ class Admin{
 
         $username = $this->username;
         $password = $this->password;
+        echo $username;
         $password = md5($password);
+        echo $password;
         // bind id of product to be updated
         $stmt->bindParam(':username',  $username, PDO::PARAM_STR);
         $stmt->bindParam(':password',  $password, PDO::PARAM_STR);
