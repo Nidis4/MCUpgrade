@@ -17,7 +17,8 @@ $db = $database->getConnection();
 // initialize object
 $admin = new Admin($db);
 $admin->username = isset($_POST['username']) ? $_POST['username'] : die();
-$admin->password = isset($_POST['password']) ? $_POST['password'] : die();
+$admin->password = isset($_POST['password']) ? md5($_POST['password']) : die();
+
 // query Admins
 $stmt = $admin->login();
 $num = $stmt->rowCount();
@@ -27,7 +28,7 @@ if($num>0){
  
     // admins array
     $admin_arr=array();
-    $admin_arr["records"]=array();
+    //$admin_arr["records"]=array();
  
     // retrieve our table contents
     // fetch() is faster than fetchAll()
@@ -51,7 +52,8 @@ if($num>0){
             "active" => $active
         );
  
-        array_push($admin_arr["records"], $admin_item);
+        admin_array
+        array_push($admin_arr, $admin_item);
     }
  
     echo json_encode($admin_arr);
