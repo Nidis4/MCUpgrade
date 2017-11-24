@@ -51,10 +51,10 @@
 				$appointments = file_get_contents('http://upgrade.myconstructor.gr/webservices/api/appointment/read_paging.php');
 				$json = json_decode($appointments, true); // decode the JSON into an associative array
 				$budget = $json['records'][0]['budget'];
-				echo $budget;
+				echo "Budget: ".$budget;
 				foreach ($json['records'] as $field => $value) {
 				    // Use $field and $value here
-				    echo $field." ".$value;
+				    echo "1".$field." ".$value;
 				}
 			?>
 
