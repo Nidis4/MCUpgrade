@@ -1,5 +1,5 @@
 <?php
-echo ='<!-- Web Fonts  -->
+echo '<!-- Web Fonts  -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
 
 	<!-- Vendor CSS -->
