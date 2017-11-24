@@ -28,7 +28,7 @@ include('session.php');
 		<section class="body">
 
 			<?php
-			include('includes/header.php');
+			include('header.php');
 			?>
 			<div class="inner-wrapper">
 				<!-- start: sidebar -->
