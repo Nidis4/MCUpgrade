@@ -52,7 +52,7 @@ if($num>0){
             "active" => $active
         );
  
-        admin_array
+        //admin_array
         array_push($admin_arr, $admin_item);
     }
  
