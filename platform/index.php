@@ -1,6 +1,6 @@
 <?php
-session_start();
-echo $_SESSION['login_user'];
+include('session.php');
+echo "Session: ".$_SESSION['login_user'];
 ?>
 <!doctype html>
 <html class="fixed sidebar-left-collapsed">

@@ -20,7 +20,7 @@ $("#loginForm").submit(function(){
                 if (result == '1') {
                 	 // Send Ajax request to backend.php, with src set as "img" in the POST data
                 	 var user = data['username'];
-    				$.post("/session.php", {"user": user});
+    				$.post("session.php", {"user": user});
 
                     window.location.replace('../platform/index.php');
                 }
