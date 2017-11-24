@@ -3,9 +3,7 @@ var apiLocation = 'http://upgrade.myconstructor.gr/webservices/api/';
 $("#loginForm").submit(function(){
     
     apiLocation += 'admin/login.php';
-    alert("Submitted "+apiLocation);
-    alert($("#username").val());
-    alert($("#password").val());
+
     $.ajax({
             type: "POST",
             url: apiLocation,
@@ -17,7 +15,9 @@ $("#loginForm").submit(function(){
             success: function(data)
             {
             	var result = data['ResultCode'];
-                if (data == '1') {
+            	//alert(data[0]);
+            	//alert (result);
+                if (result == '1') {
                     window.location.replace('../index.html');
                 }
                 else {

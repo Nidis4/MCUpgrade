@@ -27,8 +27,6 @@ $num = $stmt->rowCount();
 if($num>0){
  
     // admins array
-    $admin_arr=array();
-    //$admin_arr["records"]=array();
  
     // retrieve our table contents
     // fetch() is faster than fetchAll()
@@ -54,10 +52,10 @@ if($num>0){
         );
  
         //admin_array
-        array_push($admin_arr, $admin_item);
+        //array_push($admin_arr, $admin_item);
     }
  
-    echo json_encode($admin_arr);
+    echo json_encode($admin_item);
 }
  
 else{
