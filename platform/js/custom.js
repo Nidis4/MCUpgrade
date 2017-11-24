@@ -13,17 +13,12 @@ $("#loginForm").submit(function(){
                 username: $("#username").val(),
                 password: $("#password").val()
             },
+            dataType: "json",
             success: function(data)
             {
-            	alert(data);
-
-            	var len = data.length;
-            	for (i=0; i < len; i++){
-            		post = data[i];
-            		alert(post.username)
-            	}
-                if (data === 'Correct') {
-                    //window.location.replace('admin/admin.php');
+            	var result = data['ResultCode'];
+                if (data == '1') {
+                    window.location.replace('../index.html');
                 }
                 else {
                     alert("Klarino");

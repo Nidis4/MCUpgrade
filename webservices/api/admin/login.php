@@ -17,7 +17,7 @@ $db = $database->getConnection();
 // initialize object
 $admin = new Admin($db);
 $admin->username = isset($_POST['username']) ? $_POST['username'] : die();
-$admin->password = isset($_POST['password']) ? md5($_POST['password']) : die();
+$admin->password = isset($_POST['password']) ? $_POST['password'] : die();
 
 // query Admins
 $stmt = $admin->login();
@@ -42,6 +42,7 @@ if($num>0){
         $admin->loginUser($id);
  
         $admin_item=array(
+            "ResultCode" => "1",
             "id" => $id,
             "username" => $username,
             "first_name" => $first_name,
@@ -61,7 +62,7 @@ if($num>0){
  
 else{
     echo json_encode(
-        array("message" => "No Admins found.")
+        array("ResultCode" => "0")
     );
 }
 ?>
