@@ -18,10 +18,15 @@ $("#loginForm").submit(function(){
             	//alert(data[0]);
             	//alert (result);
                 if (result == '1') {
-                    window.location.replace('../index.html');
+                	 // Send Ajax request to backend.php, with src set as "img" in the POST data
+                	 var user = data['username'];
+    				$.post("/session.php", {"user": user});
+
+                    window.location.replace('../platform/index.php');
                 }
                 else {
-                    alert("Klarino");
+                    alert("Έχετε πληκτρολογήσει λάθος στοιχεία. Παρακαλώ προσπαθήστε ξανά!");
+                    location.reload();
                 }
             }
         });
