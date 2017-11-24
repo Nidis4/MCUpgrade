@@ -6,6 +6,7 @@ session_start();// Starting Session
 
 if ( isset($_POST['user']) && isset($_POST['user'])!="" ){
 	$_SESSION['login_user'] = $_POST['user'];
+	$_SESSION['fullname'] = $_POST['fullname'];
 }
 else {
 	$user_check=$_SESSION['login_user'];
