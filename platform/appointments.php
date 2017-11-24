@@ -59,6 +59,7 @@
 				    // Use $field and $value here
 				    echo "1".$field." ".$value;
 				}
+				echo 'file_get_contents : ', ini_get('allow_url_fopen') ? 'Enabled' : 'Disabled';
 			?>
 
 			<div class="inner-wrapper">
