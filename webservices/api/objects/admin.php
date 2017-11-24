@@ -24,8 +24,7 @@ class Admin{
     }
 
     // read products
-    function read(){
-     
+    function read(){    
         // select all query
         $query = "SELECT  a.id, a.username, a.password, a.first_name, a.last_name, a.email, a.mobile_nr, a.password_changed, a.type, a.last_login, a.active
                 FROM `" . $this->table_name . "` a ORDER BY a.id ASC";
@@ -38,6 +37,14 @@ class Admin{
      
         return $stmt;
     }
+    function loginUser($id){
+        $query = "UPDATE `admin` SET `last_login`=now() WHERE `id`='".$id."'";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+
+    }
+
     function login(){
      
         // select all query

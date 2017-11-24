@@ -37,16 +37,15 @@ if($num>0){
         // this will make $row['name'] to
         // just $name only
         extract($row);
+
+        $admin->loginUser($id);
  
         $admin_item=array(
             "id" => $id,
             "username" => $username,
-            "password" => $password,
             "first_name" => $first_name,
             "last_name" => $last_name,
             "email" => $email,
-            "mobile_nr" => $mobile_nr,
-            "password_changed" => $password_changed,
             "type" => $type,
             "last_login" => $last_login,
             "active" => $active
