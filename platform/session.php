@@ -8,11 +8,12 @@ if (isset($_POST['user']) && isset($_POST['user'])!=""){
 	$_SESSION['login_user'] = $_POST['user'];
 	$_SESSION['fullname'] = $_POST['fullname'];
 }
-else {
-	$user_check=$_SESSION['login_user'];
+else {	
 	if(!isset($_SESSION['login_user'])){
 		header('Location: login.html'); // Redirecting To Home Page
 		exit();
+	}else{
+		$user_check=$_SESSION['login_user'];
 	}
 }
 ?>

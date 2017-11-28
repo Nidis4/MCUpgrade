@@ -49,9 +49,9 @@
 				include('header.php');
 
 				$appointments = file_get_contents('http://upgrade.myconstructor.gr/webservices/api/appointment/read_paging.php');
-				echo "File :".$appointments;
+				//echo "File :".$appointments;
 				$json = json_decode($appointments, true); // decode the JSON into an associative array
-				echo "JSON :".$json;
+				//echo "JSON :".$json;
 				echo "OBJ :".$json[0];
 				$budget = $json['records'][0]['budget'];
 				echo "Budget: ".$budget;
