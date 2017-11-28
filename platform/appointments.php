@@ -51,7 +51,7 @@ include('config/core.php');
 			<?php
 				include('header.php');
 
-				$appointments = file_get_contents('http://upgrade.myconstructor.gr/webservices/api/appointment/read_paging.php');
+				$appointments = file_get_contents($api_url.'webservices/api/appointment/read_paging.php');
 				$appointmentsPag = json_decode($appointments, true); // decode the JSON into an associative array
 				
 			?>
@@ -117,15 +117,16 @@ include('config/core.php');
 										foreach ($appointmentsPag['records'] as $field => $value) {
 											$id = $appointmentsPag['records'][$field]['id'];
 											$submission_date = $appointmentsPag['records'][$field]['datetimeCreated'];
-											$prof = $appointmentsPag['records'][$field]['prof_member_id'];
+											$prof_id = $appointmentsPag['records'][$field]['prof_member_id'];
+											$prof_name = $appointmentsPag['records'][$field]['prof_member_name'];
 											$employer = $appointmentsPag['records'][$field]['cust_member_id'];
 											$date = $appointmentsPag['records'][$field]['date']." ".$appointmentsPag['records'][$field]['time'];
 											$budget = $appointmentsPag['records'][$field]['budget'];
-											$commission = $appointmentsPag['records'][$field]['30'];
+											$commission = $appointmentsPag['records'][$field]['commision'];
 
 											echo '<tr data-item-id="'.$id.'">
 													  <td>'.$submission_date.'</td>
-													  <td>'.$prof.'</td>
+													  <td><a href="'.$prof_id.'">'.$prof_name.'</a></td>
 													  <td>'.$employer.'</td>
 													  <td>'.$date.'</td>
 													  <td>'.$budget.'</td>
@@ -134,7 +135,8 @@ include('config/core.php');
 														<a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>
 														<a href="#" class="hidden on-editing cancel-row"><i class="fa fa-times"></i></a>
 														<a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
-														<a href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+														<a href="#" class="hidden on-default remove-row"><i class="fa fa-trash-o"></i></a>
+														<a href="#" class="on-editing cancel-row"><i class="fa fa-times"></i></a>
 													  </td>
 												  </tr>';
 
@@ -261,6 +263,7 @@ include('config/core.php');
 		<script src="js/theme.js"></script>
 		
 		<!-- Theme Custom -->
+		<script src="js/core.js"></script>
 		<script src="js/custom.js"></script>
 		
 		<!-- Theme Initialization Files -->

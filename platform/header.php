@@ -1,7 +1,7 @@
 <!-- start: header -->
 			<header class="header">
 				<div class="logo-container">
-					<a href="../2.0.0" class="logo">
+					<a href="<?php echo $home_url?>" class="logo">
 						<img src="img/logo.png" width="162" height="47" alt="Porto Admin" />
 					</a>
 					<div class="d-md-none toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">

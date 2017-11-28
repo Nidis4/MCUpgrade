@@ -4,8 +4,15 @@ class Database{
     // specify your own database credentials
     private $host = "localhost";
     private $db_name = "upgradem_main";
+    
+    // Environment 
     private $username = "upgradem_super";
     private $password = "x}zLIzWrI^zC";
+
+    // Localhost
+    //private $username = "root";
+    //private $password = "";
+
     public $conn;
  
     // get the database connection

@@ -39,10 +39,13 @@ if($num>0){
         // this will make $row['name'] to
         // just $name only
         extract($row);
+
+        $professionalName = $appointment->getProfessionalNameByID($prof_member_id);
  
         $appointment_item=array(
             "id" => $id,
             "prof_member_id" => $prof_member_id,
+            "prof_member_name" => $professionalName,
             "cust_member_id" => $cust_member_id,
             "application_id" => $application_id,
             "date" => $date,

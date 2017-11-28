@@ -46,7 +46,6 @@ class Appointment{
         return $stmt;
     }
 
-    // used when filling up the update product form
     function readOne(){
      
         // query to read single record
@@ -134,6 +133,16 @@ class Appointment{
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
      
         return $row['total_rows'];
+    }
+
+    public function getProfessionalNameByID($id){
+        $query = "SELECT first_name, last_name FROM members";
+     
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+        return $row['first_name']." ".$row['last_name'];
     }
 
 

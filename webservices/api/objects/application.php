@@ -39,5 +39,33 @@ class Application{
  
         return $stmt;
     }
+
+    function readByCategory(){
+     
+        // query to read single record
+        $query = "SELECT
+                    id, category_id, title, title_greek, short_description, short_description_gr, detail_description, detail_description_gr, unit, min_price, sequence, modified
+                FROM
+                    " . $this->table_name . "
+                WHERE
+                    category_id = :cat_id
+                ORDER BY
+                    title_greek ASC";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        $cur_id = $this->category_id;
+        // bind id of product to be updated
+        $stmt->bindParam(':cat_id',  $cur_id, PDO::PARAM_INT);
+        //$stmt->bindValue(':id', '$cur_id', PDO::PARAM_STR);
+     
+        // execute query
+        $stmt->execute();
+
+        return $stmt;
+
+    } // Read One
+
 }
 ?>

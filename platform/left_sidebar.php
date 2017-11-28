@@ -455,7 +455,7 @@
 				                        </a>
 				                        <ul class="nav nav-children">
 				                            <li>
-				                                <a class="nav-link" href="#">
+				                                <a class="nav-link" href="createAppointment.php">
 				                                    Create New
 				                                </a>
 				                            </li>
@@ -486,7 +486,7 @@
 				                            </li>
 				                        </ul>
 				                    </li>
-				                    <li class="nav-parent nav-expanded nav-active">
+				                    <li class="nav-parent">
 				                        <a class="nav-link" href="#">
 				                            <i class="fa fa-table" aria-hidden="true"></i>
 				                            <span>Tables</span>
@@ -507,7 +507,7 @@
 				                                    Responsive
 				                                </a>
 				                            </li>
-				                            <li class="nav-active">
+				                            <li>
 				                                <a class="nav-link" href="tables-editable.html">
 				                                    Editable
 				                                </a>

@@ -18,7 +18,7 @@ include('config/core.php');
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
 		<?php
-		include('includes/css.php');
+			include('includes/css.php');
 		?>
 
 		<!-- Head Libs -->
@@ -498,6 +498,7 @@ include('config/core.php');
 		<script src="js/theme.js"></script>
 		
 		<!-- Theme Custom -->
+		<script src="js/core.js"></script>
 		<script src="js/custom.js"></script>
 		
 		<!-- Theme Initialization Files -->

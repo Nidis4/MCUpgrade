@@ -1,12 +1,11 @@
-var apiLocation = 'http://upgrade.myconstructor.gr/webservices/api/';
 /* Add here all your JS customizations */
 $("#loginForm").submit(function(){
     
-    apiLocation += 'admin/login.php';
+    var getLoginAPI = API_LOCATION+'admin/login.php';
 
     $.ajax({
             type: "POST",
-            url: apiLocation,
+            url: getLoginAPI,
             data: {
                 username: $("#username").val(),
                 password: $("#password").val()
@@ -35,3 +34,49 @@ $("#loginForm").submit(function(){
         });
     return false;
 });
+
+$('select#category').on('change', function() {
+    var cat_id = this.value;
+    //alert( this.value );
+    $('select#applications').prop("disabled", false);
+    var getApplicationsAPI = API_LOCATION+'application/readByCategory.php?cat_id='+cat_id;
+    //alert(getApplicationsAPI);
+    $("#applications").empty();
+    $.ajax({
+            type: "POST",
+            url: getApplicationsAPI,
+            dataType: "json",
+            success: function(data)
+            {
+                //alert(data.length);
+                 var htmlStr = '';
+                $.each(data, function(k, v){
+                    //htmlStr += v.id + ' ' + v.name + '<br />';
+                    //alert(v.id);
+                    htmlStr += '<option value="'+v.id+'">'+v.title_greek+'</option>';
+               });
+               $("#applications").append(htmlStr);
+               
+            }
+        });
+});
+
+$( document ).ready(function() {
+    setNavigation();
+});
+
+function setNavigation(){
+    var path = window.location.pathname;
+    path = path.replace(/\/$/,"");
+    path = decodeURIComponent(path);
+
+    $("a.nav-link").each(function () {
+        //alert(path);
+        var href = '/platform/'+$(this).attr('href');
+
+        if (path.substring(0,href.length) === href){
+            $(this).closest('li').addClass('nav-active');
+            $(this).closest('.nav-parent').addClass('nav-active nav-expanded');
+        }
+    })
+}

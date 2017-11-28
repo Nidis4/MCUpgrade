@@ -5,25 +5,26 @@ header("Content-Type: application/json; charset=UTF-8");
  
 // include database and object files
 include_once '../config/database.php';
-include_once '../objects/category.php';
+include_once '../objects/application.php';
  
 // instantiate database and category object
 $database = new Database();
 $db = $database->getConnection();
  
 // initialize object
-$category = new Category($db);
+$application = new Application($db);
+$application->category_id = isset($_GET['cat_id']) ? $_GET['cat_id'] : die();
  
 // query categorys
-$stmt = $category->read();
+$stmt = $application->readByCategory();
 $num = $stmt->rowCount();
  
 // check if more than 0 record found
 if($num>0){
  
     // products array
-    $categories_arr=array();
-    //$categories_arr["records"]=array();
+    $applications_arr=array();
+    //$applications_arr["records"]=array();
  
     // retrieve our table contents
     // fetch() is faster than fetchAll()
@@ -34,26 +35,30 @@ if($num>0){
         // just $name only
         extract($row);
  
-        $category_item=array(
+        $application_item=array(
             "id" => $id,
+            "category_id" => $category_id,
             "title" => $title,
             "title_greek" => $title_greek,
-            "description" => html_entity_decode($description),
-            "description_greek" => html_entity_decode($description_greek),
+            "short_description" => html_entity_decode($short_description),
+            "short_description_gr" => html_entity_decode($short_description_gr),
+            "detail_description" => html_entity_decode($detail_description),
+            "detail_description_gr" => html_entity_decode($detail_description_gr),
+            "unit" => $unit,
+            "min_price" => $min_price,
             "sequence" => $sequence,
-            "modified" => $modified,
-            "commissionRate" => html_entity_decode($commissionRate)
+            "modified" => $modified
         );
  
-        array_push($categories_arr, $category_item);
+        array_push($applications_arr, $application_item);
     }
  
-    echo json_encode($categories_arr);
+    echo json_encode($applications_arr);
 }
  
 else{
     echo json_encode(
-        array("message" => "No products found.")
+        array("message" => "No Application found.")
     );
 }
 ?>

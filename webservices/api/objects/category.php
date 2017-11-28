@@ -7,8 +7,6 @@ class Category{
  
     // object properties
     public $id;
-    public $name;
-    public $name_greek;
     public $title;
     public $title_greek;
     public $description;
@@ -25,11 +23,11 @@ class Category{
     public function read(){
         //select all data
         $query = "SELECT
-                    id, name, name_greek, title, title_greek, description, description_greek, sequence, modified, commissionRate
+                    id, title, title_greek, description, description_greek, sequence, modified, commissionRate
                 FROM
                     " . $this->table_name . "
                 ORDER BY
-                    id ASC";
+                    title_greek ASC";
  
         $stmt = $this->conn->prepare( $query );
         $stmt->execute();
