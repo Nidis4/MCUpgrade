@@ -60,7 +60,7 @@ include('config/core.php');
 				
 				<!-- Sidebar Position -->
 				<?php
-					include('left-sidebar.php');
+					include('left_sidebar.php');
 				?>
 
 				<section role="main" class="content-body">
