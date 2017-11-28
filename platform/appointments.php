@@ -52,14 +52,15 @@
 				//echo "File :".$appointments;
 				$json = json_decode($appointments, true); // decode the JSON into an associative array
 				//echo "JSON :".$json;
-				echo "OBJ :".$json[0];
+				echo "OBJ :".$json[0]; // outputs 0
 				$budget = $json['records'][0]['budget'];
 				echo "Budget: ".$budget;
 				foreach ($json['records'] as $field => $value) {
 				    // Use $field and $value here
-				    echo "1".$field." ".$value;
+				    //echo "1".$field." ".$value;
+				    echo $json['records'][$field]['id']."<br>";
 				}
-				echo 'file_get_contents : ', ini_get('allow_url_fopen') ? 'Enabled' : 'Disabled';
+				
 			?>
 
 			<div class="inner-wrapper">
