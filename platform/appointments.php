@@ -114,7 +114,7 @@ include('config/core.php');
 									</thead>
 									<tbody>
 										<?php
-										foreach ($appointmentsPag['records'] as $field) {
+										foreach ($appointmentsPag['records'] as $field => $value) {
 											$id = $appointmentsPag['records'][$field]['id'];
 											$submission_date = $appointmentsPag['records'][$field]['datetimeCreated'];
 											$prof = $appointmentsPag['records'][$field]['prof_member_id'];
@@ -123,14 +123,13 @@ include('config/core.php');
 											$budget = $appointmentsPag['records'][$field]['budget'];
 											$commission = $appointmentsPag['records'][$field]['30'];
 
-											echo '<tr data-item-id="$id">
-													  <td>$id</td>
-													  <td>$submission_date</td>
-													  <td>$prof</td>
-													  <td>$employer</td>
-													  <td>$date</td>
-													  <td>$budget</td>
-													  <td>$commission</td>
+											echo '<tr data-item-id="'.$id.'">
+													  <td>'.$submission_date.'</td>
+													  <td>'.$prof.'</td>
+													  <td>'.$employer.'</td>
+													  <td>'.$date.'</td>
+													  <td>'.$budget.'</td>
+													  <td>'.$commission.'</td>
 													  <td class="actions">
 														<a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>
 														<a href="#" class="hidden on-editing cancel-row"><i class="fa fa-times"></i></a>
