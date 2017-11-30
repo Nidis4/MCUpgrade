@@ -105,7 +105,7 @@ include('config/core.php');
 										<tr>
 											<th>Submission Date</th>
 											<th>Professional</th>
-											<th>Employer</th>
+											<th>Customer</th>
 											<th>Date</th>
 											<th>Budget</th>
 											<th>Commision</th>
@@ -119,7 +119,8 @@ include('config/core.php');
 											$submission_date = $appointmentsPag['records'][$field]['datetimeCreated'];
 											$prof_id = $appointmentsPag['records'][$field]['prof_member_id'];
 											$prof_name = $appointmentsPag['records'][$field]['prof_member_name'];
-											$employer = $appointmentsPag['records'][$field]['cust_member_id'];
+											$cust_id = $appointmentsPag['records'][$field]['cust_member_id'];
+											$cust_name = $appointmentsPag['records'][$field]['cust_member_name'];
 											$date = $appointmentsPag['records'][$field]['date']." ".$appointmentsPag['records'][$field]['time'];
 											$budget = $appointmentsPag['records'][$field]['budget'];
 											$commission = $appointmentsPag['records'][$field]['commision'];
@@ -127,7 +128,7 @@ include('config/core.php');
 											echo '<tr data-item-id="'.$id.'">
 													  <td>'.$submission_date.'</td>
 													  <td><a href="'.$prof_id.'">'.$prof_name.'</a></td>
-													  <td>'.$employer.'</td>
+													  <td><a href="'.$cust_id.'">'.$cust_name.'</a></td>
 													  <td>'.$date.'</td>
 													  <td>'.$budget.'</td>
 													  <td>'.$commission.'</td>

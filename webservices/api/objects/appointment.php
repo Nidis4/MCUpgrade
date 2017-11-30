@@ -107,7 +107,7 @@ class Appointment{
                     `id`, `prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`
                 FROM
                     " . $this->table_name . "
-                ORDER BY `id` DESC
+                ORDER BY `datetimeCreated` DESC
                 LIMIT ?, ?";
      
         // prepare query statement
@@ -136,7 +136,17 @@ class Appointment{
     }
 
     public function getProfessionalNameByID($id){
-        $query = "SELECT first_name, last_name FROM members";
+        $query = "SELECT first_name, last_name FROM professionals WHERE `id`=".$id."";
+     
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+        return $row['first_name']." ".$row['last_name'];
+    }
+
+    public function getCustomerNameByID($id){
+        $query = "SELECT first_name, last_name FROM customers WHERE `id`=".$id."";
      
         $stmt = $this->conn->prepare( $query );
         $stmt->execute();

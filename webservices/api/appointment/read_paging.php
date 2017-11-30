@@ -41,12 +41,14 @@ if($num>0){
         extract($row);
 
         $professionalName = $appointment->getProfessionalNameByID($prof_member_id);
+        $customerName = $appointment->getCustomerNameByID($cust_member_id);
  
         $appointment_item=array(
             "id" => $id,
             "prof_member_id" => $prof_member_id,
             "prof_member_name" => $professionalName,
             "cust_member_id" => $cust_member_id,
+            "cust_member_name" => $customerName,
             "application_id" => $application_id,
             "date" => $date,
             "time" => $time,
