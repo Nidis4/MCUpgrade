@@ -98,13 +98,13 @@ include('config/core.php');
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Status <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="surname" class="form-control" value="New" disabled required/>
+												<input type="text" name="status" class="form-control" value="New" disabled required/>
 											</div>
 										</div>
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Agent <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="firstname" class="form-control" value="<?php echo $_SESSION['fullname'] ?>" required disabled/>
+												<input type="text" name="agent" class="form-control" value="<?php echo $_SESSION['fullname'] ?>" required disabled/>
 											</div>
 										</div>
 										<div class="form-group row">
@@ -133,21 +133,33 @@ include('config/core.php');
 												</div>
 										</div>
 										<div class="form-group row">
-											<label class="col-sm-3 control-label text-sm-right pt-2">Prefecture <span class="required">*</span></label>
+											<label class="col-sm-3 control-label text-sm-right pt-2">County <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="firstname" class="form-control" placeholder="eg.: John" required/>
+												<?php
+													$counties = file_get_contents($api_url.'webservices/api/county/read.php');
+													$counties = json_decode($counties, true); // decode the JSON into an associative array
+												?>
+												<select data-plugin-selectTwo class="form-control populate" id="county">
+														<?php
+															foreach ($counties as $counties) {
+																$county_id = $counties['id'];
+																$county_name = $counties['county_name_gr'];
+																echo '<option value="'.$county_id.'">'.$county_name.'</option>';
+															}
+														?>
+													</select>
 											</div>
 										</div>
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Budget <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="firstname" class="form-control" placeholder="eg.: John" required/>
+												<input type="text" name="budget" class="form-control" placeholder="eg.: John" required/>
 											</div>
 										</div>
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Commision <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="firstname" class="form-control" placeholder="eg.: John" required/>
+												<input type="text" name="commision" class="form-control" placeholder="eg.: John" required/>
 											</div>
 										</div>
 									</div>
@@ -181,13 +193,16 @@ include('config/core.php');
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Surname <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="surname" class="form-control" placeholder="eg.: Doe" required/>
+												<input type="text" name="surname" id="surname" class="form-control" placeholder="eg.: Doe" required/>
 											</div>
+										</div>
+										<div class="row" id='suggestions'>
+											
 										</div>
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Firstname <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="firstname" class="form-control" placeholder="eg.: John" required/>
+												<input type="text" name="firstname" id="firstname" class="form-control" placeholder="eg.: John" required/>
 											</div>
 										</div>
 										<div class="form-group row">

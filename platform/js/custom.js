@@ -61,6 +61,51 @@ $('select#category').on('change', function() {
         });
 });
 
+
+$("input#surname").keyup(function () {
+    var searchRequest = null;
+    var minlength = 3;
+    var that = this,
+    value = $(this).val();   
+
+    if (value.length >= minlength ) {
+        if (searchRequest != null) 
+            searchRequest.abort();
+            var getSearchAPI = API_LOCATION+'customer/search.php?s='+value;
+            searchRequest = $.ajax({
+                type: "POST",
+                url: getSearchAPI,
+                dataType: "json",
+                success: function(data){
+                    //we need to check if the value is the same
+                    var htmlStr = '';
+                    $("#suggestions").empty();
+                    if (value==$(that).val()) {
+                        $.each(data, function(k, v){
+                            htmlStr += '<div id="'+v.id+'" class="selectCustomer" onclick="selectCustomer('+v.id+',\''+v.first_name+'\',\''+v.last_name+'\')">'+v.first_name+' '+v.last_name+'</div>';
+                       });
+                    }
+                    $("#suggestions").append(htmlStr);
+                    $("#suggestions").show();
+                }
+            });
+        }
+        else{
+            $("#suggestions").empty();
+            $("#suggestions").hide();
+        }
+    });
+
+
+function selectCustomer(id,first_name,last_name){
+    $("#suggestions").empty();
+    $("#suggestions").hide();
+    alert(id);
+    $("#surname").val(last_name);
+    $("#firstname").val(first_name);
+}
+
+
 $( document ).ready(function() {
     setNavigation();
 });
