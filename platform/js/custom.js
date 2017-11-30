@@ -82,7 +82,8 @@ $("input#surname").keyup(function () {
                     $("#suggestions").empty();
                     if (value==$(that).val()) {
                         $.each(data, function(k, v){
-                            htmlStr += '<div id="'+v.id+'" class="selectCustomer" onclick="selectCustomer('+v.id+',\''+v.first_name+'\',\''+v.last_name+'\')">'+v.first_name+' '+v.last_name+'</div>';
+                            htmlStr += '<div id="'+v.id+'" class="selectCustomer" onclick="selectCustomer('+v.id+',\''+v.first_name+'\',\''+v.last_name+'\',\''+v.address+'\',\''
+                            +v.mobile+'\',\''+v.phone+'\',\''+v.email+'\')">'+v.first_name+' '+v.last_name+': '+v.mobile+'</div>';
                        });
                     }
                     $("#suggestions").append(htmlStr);
@@ -97,12 +98,16 @@ $("input#surname").keyup(function () {
     });
 
 
-function selectCustomer(id,first_name,last_name){
+function selectCustomer(id,first_name,last_name,address, mobile, phone,email){
     $("#suggestions").empty();
     $("#suggestions").hide();
     alert(id);
     $("#surname").val(last_name);
     $("#firstname").val(first_name);
+    $("#address").val(address);
+    $("#mobile").val(mobile);
+    $("#phone").val(phone);
+    $("#email").val(email);
 }
 
 

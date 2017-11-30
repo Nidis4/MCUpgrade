@@ -464,7 +464,7 @@
 				                                    List of Appointments
 				                                </a>
 				                            </li>
-				                            <li>
+				                            <!--<li>
 				                                <a class="nav-link" href="forms-validation.html">
 				                                    Validation
 				                                </a>
@@ -483,7 +483,7 @@
 				                                <a class="nav-link" href="forms-code-editor.html">
 				                                    Code Editor
 				                                </a>
-				                            </li>
+				                            </li>-->
 				                        </ul>
 				                    </li>
 				                    <li class="nav-parent">

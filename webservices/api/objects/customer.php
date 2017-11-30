@@ -23,11 +23,15 @@ function search($keywords){
  
     // select all query
     $query = "SELECT
-                id, first_name, last_name, sex
+                c.id, c.first_name, c.last_name, c.sex, cc.address, cc.area , cc.postcode, cc.phone, cc.mobile, ca.email
             FROM
-                " . $this->table_name . " 
+                " . $this->table_name . " c
+                INNER JOIN ". $this->contact_table_name." cc
+                    ON c.id = cc.customer_id
+                INNER JOIN ". $this->account_table_name." ca
+                    ON c.id = ca.customer_id
             WHERE
-                first_name LIKE ? OR last_name LIKE ?";
+                c.first_name LIKE ? OR c.last_name LIKE ? OR cc.mobile LIKE ?";
  
     // prepare query statement
     $stmt = $this->conn->prepare($query);
@@ -39,6 +43,7 @@ function search($keywords){
     // bind
     $stmt->bindParam(1, $keywords);
     $stmt->bindParam(2, $keywords);
+    $stmt->bindParam(3, $keywords);
  
     // execute query
     $stmt->execute();

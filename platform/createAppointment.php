@@ -217,19 +217,19 @@ include('config/core.php');
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Address <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="address" class="form-control" placeholder="eg.: Gonata 7, 152 12, Athens" required/>
+												<input type="text" name="address" id="address" class="form-control" placeholder="eg.: Gonata 7, 152 12, Athens" required/>
 											</div>
 										</div>
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Mobile <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="tel" name="mobile" class="form-control" placeholder="eg.: 6971231231" required/>
+												<input type="tel" name="mobile" id="mobile" class="form-control" placeholder="eg.: 6971231231" required/>
 											</div>
 										</div>
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Landline <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="tel" name="landline" class="form-control" placeholder="eg.: 2106412123" required/>
+												<input type="tel" name="landline" id="phone" class="form-control" placeholder="eg.: 2106412123" required/>
 											</div>
 										</div>
 										<div class="form-group row">
@@ -239,7 +239,7 @@ include('config/core.php');
 													<span class="input-group-addon">
 														<i class="fa fa-envelope"></i>
 													</span>
-													<input type="email" name="email" class="form-control" placeholder="eg.: email@email.com" required/>
+													<input type="email" name="email" id="email" class="form-control" placeholder="eg.: email@email.com" required/>
 												</div>
 											</div>
 											<div class="col-sm-9">

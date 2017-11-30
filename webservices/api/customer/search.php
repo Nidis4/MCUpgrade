@@ -41,7 +41,11 @@ if($num>0){
             "id" => $id,
             "first_name" => $first_name,
             "last_name" => $last_name,
-            "sex" => $sex
+            "sex" => $sex,
+            "address" => $address." ".$area.",".$postcode,
+            "phone" => $phone,
+            "mobile" => $mobile,
+            "email" => $email
         );
  
         array_push($customers_arr, $customer_item);
