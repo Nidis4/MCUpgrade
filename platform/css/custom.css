@@ -1,1 +1,9 @@
 /* Add here all your CSS customizations */
+#suggestions {
+    max-height: 100px;
+    overflow-y: scroll;
+    margin-bottom: 10px;
+}
+tr.status-0, .table-striped tbody tr:nth-of-type(odd).status-0 {
+    background-color: #f8d7da;
+}

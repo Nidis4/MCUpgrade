@@ -42,7 +42,7 @@ if($num>0){
             "first_name" => $first_name,
             "last_name" => $last_name,
             "sex" => $sex,
-            "address" => $address." ".$area.",".$postcode,
+            "address" => $address." ".$area." ".$postcode,
             "phone" => $phone,
             "mobile" => $mobile,
             "email" => $email

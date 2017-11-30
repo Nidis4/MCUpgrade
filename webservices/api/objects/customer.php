@@ -26,9 +26,9 @@ function search($keywords){
                 c.id, c.first_name, c.last_name, c.sex, cc.address, cc.area , cc.postcode, cc.phone, cc.mobile, ca.email
             FROM
                 " . $this->table_name . " c
-                INNER JOIN ". $this->contact_table_name." cc
+                LEFT JOIN ". $this->contact_table_name." cc
                     ON c.id = cc.customer_id
-                INNER JOIN ". $this->account_table_name." ca
+                LEFT JOIN ". $this->account_table_name." ca
                     ON c.id = ca.customer_id
             WHERE
                 c.first_name LIKE ? OR c.last_name LIKE ? OR cc.mobile LIKE ?";

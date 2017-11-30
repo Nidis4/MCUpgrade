@@ -196,7 +196,7 @@ include('config/core.php');
 												<input type="text" name="surname" id="surname" class="form-control" placeholder="eg.: Doe" required/>
 											</div>
 										</div>
-										<div class="row" id='suggestions'>
+										<div class="row col-sm-9 offset-sm-3" id='suggestions'>
 											
 										</div>
 										<div class="form-group row">

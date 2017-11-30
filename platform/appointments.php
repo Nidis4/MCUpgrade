@@ -122,8 +122,9 @@ include('config/core.php');
 											$date = $appointmentsPag['records'][$field]['date']." ".$appointmentsPag['records'][$field]['time'];
 											$budget = $appointmentsPag['records'][$field]['budget'];
 											$commission = $appointmentsPag['records'][$field]['commision'];
+											$status = $appointmentsPag['records'][$field]['status'];
 
-											echo '<tr data-item-id="'.$id.'">
+											echo '<tr data-item-id="'.$id.'" class="status-'.$status.'">
 													  <td>'.$submission_date.'</td>
 													  <td><a href="'.$prof_id.'">'.$prof_name.'</a></td>
 													  <td><a href="'.$cust_id.'">'.$cust_name.'</a></td>
@@ -140,8 +141,7 @@ include('config/core.php');
 												  </tr>';
 
 										}
-										?>
-										
+										?>										
 									</tbody>
 								</table>
 							</div>
