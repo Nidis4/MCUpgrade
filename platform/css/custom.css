@@ -7,3 +7,9 @@
 tr.status-0, .table-striped tbody tr:nth-of-type(odd).status-0 {
     background-color: #f8d7da;
 }
+.status-0 .cancel-row .fa, .status-0 .edit-row .fa ,.status-1 .copy-row .fa, .status-2 .copy-row .fa  {
+    display: none;
+}
+.selectCustomer {
+    width: 100%;
+}

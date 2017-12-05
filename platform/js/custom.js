@@ -101,7 +101,7 @@ $("input#surname").keyup(function () {
 function selectCustomer(id,first_name,last_name,address, mobile, phone,email){
     $("#suggestions").empty();
     $("#suggestions").hide();
-    alert(id);
+    //alert(id);
     $("#surname").val(last_name);
     $("#firstname").val(first_name);
     $("#address").val(address);
@@ -130,3 +130,31 @@ function setNavigation(){
         }
     })
 }
+
+$( ".cancel-row" ).click(function() {
+    var id = $(this).closest('tr').attr('data-item-id');
+    if (confirm('Are you sure you want to cancel this appointment?')) {
+        var getCancelAPI = API_LOCATION+'appointment/cancel.php?id='+id;
+            cancelRequest = $.ajax({
+                type: "POST",
+                url: getCancelAPI,
+                dataType: "json",
+                success: function(data){
+                    var result = data['ResultCode'];
+                    if (result=='1'){
+                         location.reload();
+                    }
+                }
+            });
+    } else {
+        // Do nothing!
+    }
+    
+}); // Cancel Appointment 
+
+$( ".copy-row" ).click(function() {
+    var id = $(this).closest('tr').attr('data-item-id');
+    
+    alert("Should be Implemented");
+    
+});

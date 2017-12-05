@@ -99,6 +99,28 @@ class Appointment{
 
     } // Read One
 
+    function cancelAppointment(){
+
+        // query to read single record
+        $query = "UPDATE " . $this->table_name . "
+                    SET
+                    `status`=0
+                WHERE
+                    id = :id";
+     
+        $stmt = $this->conn->prepare( $query );
+     
+     $cur_id = $this->id;
+        // bind id of product to be updated
+        $stmt->bindParam(':id',  $cur_id, PDO::PARAM_INT);
+
+        if ($stmt->execute()) { 
+           return 1;
+        } else {
+           return 0;
+        }
+    } // CancelAppointment
+
     // read products with pagination
     public function readPaging($from_record_num, $records_per_page){
      
