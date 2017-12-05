@@ -47,6 +47,9 @@ function LiveDB(){
 	global $live_db_name;
 
 	$con = mysqli_connect("localhost", $live_user_name, $live_db_pass, $live_db_name);
+	mysqli_query($con, "SET NAMES 'utf8'"); 
+	mysqli_query($con, "SET CHARACTER SET 'utf8'"); 
+
 	if (mysqli_connect_errno())
 	  {
 	  	echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -59,7 +62,10 @@ function UpgradeDB(){
 	global $upgrade_user_name;
 	global $upgrade_db_name;
 
-	 $con = mysqli_connect("localhost",'$upgrade_user_name', '$upgrade_db_pass', '$upgrade_db_name');
+	 $con = mysqli_connect("localhost", $upgrade_user_name, $upgrade_db_pass, $upgrade_db_name);
+	 mysqli_query($con, "SET NAMES 'utf8'"); 
+	 mysqli_query($con, "SET CHARACTER SET 'utf8'"); 
+	
 	 if (mysqli_connect_errno())
 	   {
 	   echo "Failed to connect to MySQL: " . mysqli_connect_error();
