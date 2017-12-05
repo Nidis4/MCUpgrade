@@ -30,11 +30,19 @@ function syncCategories(){
 
 function LiveDB(){
 	 $con = mysqli_connect("localhost",$live_user_name,$live_db_pass,$live_db_name);
+	 if (mysqli_connect_errno())
+  {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  }
 	 return $con;
 }
 
 function UpgradeDB(){
 	 $con = mysqli_connect("localhost",$upgrade_db_name,$upgrade_user_name,$upgrade_db_pass);
+	 if (mysqli_connect_errno())
+	   {
+	   echo "Failed to connect to MySQL: " . mysqli_connect_error();
+	   }
 	 return $con;
 }
 
