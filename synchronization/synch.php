@@ -61,9 +61,14 @@ function syncApplications(){
 
 function insertApplications($id, $category_id, $title, $title_greek, $short_description, $short_description_gr, $detail_description, $detail_description_gr, $unit, $min_price, $sequence, $modified){
 	echo "Inserting Applications ".$id."<br>";
+	
+	$short_description = base64_encode($short_description);
+	$short_description_gr = base64_encode($short_description_gr);
+	$detail_description = base64_encode($detail_description);
+	$detail_description_gr = base64_encode($detail_description_gr);
 
 	$query = "INSERT INTO `applications` ( `id`, `category_id`, `title`, `title_greek`, `short_description`, `short_description_gr`, `detail_description`, `detail_description_gr`, `unit`, `min_price`, `sequence`, `modified`) VALUES (".$id.",'".$category_id."','".$title."','".$title_greek."','".$short_description."','".$short_description_gr."','".$detail_description."','".$detail_description_gr."','".$unit."','".$min_price."', '".$sequence."', '".$modified."') ON DUPLICATE KEY UPDATE `category_id`='".$category_id."', `title`='".$title."', `title_greek`='".$title_greek."', `short_description`='".$short_description."', `short_description_gr`='".$short_description_gr."', `detail_description`='".$detail_description."', `detail_description_gr`='".$detail_description_gr."', `unit`='".$unit."', `min_price`='".$min_price."', `sequence`='".$sequence."', `modified`='".$modified."' ";
-	echo $query;
+	//echo $query;
 
 	$upgrade = UpgradeDB();
 	$result = $upgrade->query($query);
