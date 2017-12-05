@@ -98,13 +98,13 @@ include('config/core.php');
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Status <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="status" class="form-control" value="New" disabled required/>
+												<input type="text" name="status" class="form-control" value="New" disabled required />
 											</div>
 										</div>
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Agent <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="agent" class="form-control" value="<?php echo $_SESSION['fullname'] ?>" required disabled/>
+												<input type="text" name="agent" id="agent" agentUser="<?php echo $_SESSION['login_user'];?>" class="form-control" value="<?php echo $_SESSION['fullname'];?>" required disabled/>
 											</div>
 										</div>
 										<div class="form-group row">
@@ -153,13 +153,13 @@ include('config/core.php');
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Budget <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="budget" class="form-control" placeholder="eg.: John" required/>
+												<input type="text" name="budget" id="budget" class="form-control" placeholder="eg.: John" required value="0" />
 											</div>
 										</div>
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Commision <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="commision" class="form-control" placeholder="eg.: John" required/>
+												<input type="text" name="commision" id="commision" class="form-control" placeholder="eg.: John" required value="0" />
 											</div>
 										</div>
 									</div>
@@ -208,16 +208,16 @@ include('config/core.php');
 										<div class="form-group row">
 												<label class="col-lg-3 control-label text-lg-right pt-2">Sex</label>
 												<div class="col-lg-6">
-													<select data-plugin-selectTwo class="form-control populate">
-															<option value="CT">MR</option>
-															<option value="DE">MRS</option>
+													<select data-plugin-selectTwo class="form-control populate" id="sex">
+															<option value="MR">MR</option>
+															<option value="MRS">MRS</option>
 													</select>
 												</div>
 										</div>
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Address <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="address" id="address" class="form-control" placeholder="eg.: Gonata 7, 152 12, Athens" required/>
+												<input type="text" name="address" id="pac-input-address" class="form-control" placeholder="eg.: Gonata 7, 152 12, Athens" required/>
 											</div>
 										</div>
 										<div class="form-group row">
@@ -260,7 +260,15 @@ include('config/core.php');
 						</div>
 						
 					</div>
-			
+					<div class="row">
+						<div class="col-sm-6 offset-sm-3 text-center">
+							<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning createAppointment">Save Appointment</button>
+						</div>
+						<div class="col-sm-3 text-right">
+							<button type="button" class="mb-1 mt-1 mr-1 btn btn-danger cancelAppointment">Cancel</button>
+						</div>
+					</div>
+			<div id="map"></div>
 					<!-- end: page -->
 				</section>
 			</div>
@@ -349,6 +357,9 @@ include('config/core.php');
 		<!-- Theme Custom -->
 		<script src="js/core.js"></script>
 		<script src="js/custom.js"></script>
+		<script src="js/searchAddress.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOB9VUHID5_exudRHHduRUvCYOu--Lg0w&libraries=places&callback=initAutocomplete" async defer></script>
+
 		
 		<!-- Theme Initialization Files -->
 		<script src="js/theme.init.js"></script>

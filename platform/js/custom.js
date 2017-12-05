@@ -53,7 +53,12 @@ $('select#category').on('change', function() {
                 $.each(data, function(k, v){
                     //htmlStr += v.id + ' ' + v.name + '<br />';
                     //alert(v.id);
-                    htmlStr += '<option value="'+v.id+'">'+v.title_greek+'</option>';
+                    if (v.id!=undefined){
+                        htmlStr += '<option value="'+v.id+'">'+v.title_greek+'</option>';
+                    }
+                    else{
+
+                    }
                });
                $("#applications").append(htmlStr);
                
@@ -82,8 +87,13 @@ $("input#surname").keyup(function () {
                     $("#suggestions").empty();
                     if (value==$(that).val()) {
                         $.each(data, function(k, v){
-                            htmlStr += '<div id="'+v.id+'" class="selectCustomer" onclick="selectCustomer('+v.id+',\''+v.first_name+'\',\''+v.last_name+'\',\''+v.address+'\',\''
-                            +v.mobile+'\',\''+v.phone+'\',\''+v.email+'\')">'+v.first_name+' '+v.last_name+': '+v.mobile+'</div>';
+                            if (v.id!=undefined){
+                                htmlStr += '<div id="'+v.id+'" class="selectCustomer" onclick="selectCustomer('+v.id+',\''+v.first_name+'\',\''+v.last_name+'\',\''+v.address+'\',\''
+                                +v.mobile+'\',\''+v.phone+'\',\''+v.email+'\')">'+v.first_name+' '+v.last_name+': '+v.mobile+'</div>';
+                            }
+                            else{
+                                htmlStr += 'No such Customer';
+                            }
                        });
                     }
                     $("#suggestions").append(htmlStr);
@@ -157,4 +167,35 @@ $( ".copy-row" ).click(function() {
     
     alert("Should be Implemented");
     
+});
+
+$( ".createAppointment" ).click(function() {
+    var agent = $("#agent").attr('agentUser');
+    var application = $("#applications").val();
+    var county = $("#county").val();
+    var budget = $("#budget").val();
+    var commision = $("#commision").val();
+
+    var surname = $("#surname").val();
+    var firstname = $("#firstname").val();
+    var sex = $("#sex").val();
+    var address = $("#pac-input-address").val();
+    var mobile = $("#mobile").val();
+    var phone = $("#phone").val();
+    var email = $("#email").val();
+
+    alert("Agent "+agent);
+    alert("Applications "+application);
+    alert("County "+county);
+    alert("Budget "+budget);
+    alert("Commision "+commision);
+
+    alert("surname "+surname);
+    alert("firstname "+firstname);
+    alert("sex "+sex);
+    alert("address "+address);
+    alert("mobile "+mobile);
+    alert("phone "+phone);
+
+    alert("email "+email);
 });
