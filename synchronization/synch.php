@@ -1,4 +1,6 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
+
 $upgrade_db_name = 'upgradem_main';
 $upgrade_user_name = 'upgradem_super';
 $upgrade_db_pass = 'x}zLIzWrI^zC';
@@ -20,12 +22,23 @@ function syncCategories(){
 
 	    /* fetch associative array */
 	    while ($row = $result->fetch_assoc()) {
-	        printf ("%s (%s)\n", $row["name"], $row["name_greek"]);
+	        //printf ("%s (%s)\n", $row["name"], $row["name_greek"]);
+	        insertCategories($row['id'], $row['name'], $row['name_greek'], $row['title'], $row['title_greek'], $row['description'], $row['description_greek'], $row['sequence'], $row['modified'], $row['commissionRate']);
 	    }
 
 	    /* free result set */
 	    $result->free();
 	}
+}
+
+function insertCategories($id, $name, $name_greek, $title, $title_greek, $description, $description_greek, $sequence, $modified, $commissionRate){
+	echo "Inserting Category ".$id."<br>";
+
+	$query = "INSERT INTO `categories` ( `id`, `name`, `name_greek`, `title`, `title_greek`, `description`, `description_greek`, `sequence`, `modified`, `commissionRate`) VALUES (".$id.",'".$name."','".$name_greek."','".$title."','".$title_greek."','".$description."','".$description_greek."','".$sequence."','".$modified."','".$commissionRate."') ON DUPLICATE KEY UPDATE `name`='".$name."', `name_greek`='".$name_greek."', `title`='".$title."', `title_greek`='".$title_greek."', `description`='".$description."', `description_greek`='".$description_greek."', `sequence`='".$sequence."', `modified`='".$modified."', `commissionRate`='".$commissionRate."' ";
+	echo $query;
+
+	$upgrade = UpgradeDB();
+	$result = $upgrade->query($query);
 }
 
 function LiveDB(){
