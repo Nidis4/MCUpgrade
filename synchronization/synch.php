@@ -5,7 +5,7 @@ $upgrade_db_pass = 'x}zLIzWrI^zC';
 
 $live_db_name = 'my_constructor';
 $live_user_name = 'stgmycon_db_user';
-$live_db_pass ='u~,oEFS]5b}I';
+$live_db_pass = 'u~,oEFS]5b}I';
 
 
 echo "Synchronization Starts<br>";
@@ -29,7 +29,7 @@ function syncCategories(){
 }
 
 function LiveDB(){
-	 $con = mysqli_connect("localhost",$live_user_name,$live_db_pass,$live_db_name);
+	 $con = mysqli_connect("localhost", '$live_user_name' ,'$live_db_pass','$live_db_name');
 	 if (mysqli_connect_errno())
   {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -38,7 +38,7 @@ function LiveDB(){
 }
 
 function UpgradeDB(){
-	 $con = mysqli_connect("localhost",$upgrade_db_name,$upgrade_user_name,$upgrade_db_pass);
+	 $con = mysqli_connect("localhost",'$upgrade_user_name', '$upgrade_db_pass', '$upgrade_db_name');
 	 if (mysqli_connect_errno())
 	   {
 	   echo "Failed to connect to MySQL: " . mysqli_connect_error();
