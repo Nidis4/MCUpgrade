@@ -29,15 +29,23 @@ function syncCategories(){
 }
 
 function LiveDB(){
-	 $con = mysqli_connect("localhost", '$live_user_name' ,'$live_db_pass','$live_db_name');
-	 if (mysqli_connect_errno())
-  {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  }
+	global $live_user_name;
+	global $live_db_pass;
+	global $live_db_name;
+
+	$con = mysqli_connect("localhost", $live_user_name, $live_db_pass, $live_db_name);
+	if (mysqli_connect_errno())
+	  {
+	  	echo "Failed to connect to MySQL: " . mysqli_connect_error();
+	  }
 	 return $con;
 }
 
 function UpgradeDB(){
+	global $upgrade_db_pass;
+	global $upgrade_user_name;
+	global $upgrade_db_name;
+
 	 $con = mysqli_connect("localhost",'$upgrade_user_name', '$upgrade_db_pass', '$upgrade_db_name');
 	 if (mysqli_connect_errno())
 	   {
