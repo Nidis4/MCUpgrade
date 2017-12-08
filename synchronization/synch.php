@@ -36,7 +36,7 @@ function syncCustomers(){
 	}
 }
 
-function insertCustomers($id, $first_name, $last_name, $sex, $email, $password, $created, $modified, $last_login, $last_login_ip, $status, $address, $area, $city, $country_id, $postcode, $latitude, $longitude, $phone, $mobile_no);{
+function insertCustomers($id, $first_name, $last_name, $sex, $email, $password, $created, $modified, $last_login, $last_login_ip, $status, $address, $area, $city, $country_id, $postcode, $latitude, $longitude, $phone, $mobile_no){
 	echo "Inserting Customer ".$id."<br>";
 
 	$query = "INSERT INTO `customers`(`id`, `first_name`, `last_name`, `sex`) VALUES (".$id.",'".$first_name."','".$last_name."','".$sex."') ON DUPLICATE KEY UPDATE `first_name`='".$first_name."', `last_name`='".$last_name."', `sex`='".$sex."' ";
