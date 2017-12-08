@@ -13,7 +13,43 @@ $live_db_pass = 'u~,oEFS]5b}I';
 echo "Synchronization Starts<br>";
 syncCategories();
 syncApplications();
+syncCustomers();
 
+
+function syncCustomers(){
+	echo "In Sync Customers<br>";
+	$query = "SELECT `id`, `first_name`, `last_name`, `sex`, `email`, `password`, `created`, `modified`, `last_login`, `last_login_ip`, `status`, `address`, `area`, `city`, `country_id`, `postcode`, `latitude`, `longitude`, `phone`, `mobile_no` FROM `members` WHERE `user_type`='Employer'";
+
+	$live = LiveDB();
+	if ($result = $live->query($query)) {
+
+	    /* fetch associative array */
+	    while ($row = $result->fetch_assoc()) {
+	        insertCustomers($row['id'], $row['first_name'], $row['last_name'], $row['sex'], $row['email'], $row['password'], $row['created'], $row['modified'], $row['last_login'], $row['last_login_ip'], $row['status'], $row['address'], $row['area'], $row['city'], $row['country_id'], $row['postcode'], $row['latitude'], $row['longitude'], $row['phone'], $row['mobile_no']);
+	    }
+
+	    /* free result set */
+	    $result->free();
+	}
+}
+
+function insertCustomers($id, $first_name, $last_name, $sex, $email, $password, $created, $modified, $last_login, $last_login_ip, $status, $address, $area, $city, $country_id, $postcode, $latitude, $longitude, $phone, $mobile_no);{
+	echo "Inserting Customer ".$id."<br>";
+
+	$query = "INSERT INTO `customers`(`id`, `first_name`, `last_name`, `sex`) VALUES (".$id.",'".$first_name."','".$last_name."','".$sex."') ON DUPLICATE KEY UPDATE `first_name`='".$first_name."', `last_name`='".$last_name."', `sex`='".$sex."' ";
+	$upgrade = UpgradeDB();
+	$result = $upgrade->query($query);
+	echo $query."<br>";
+
+	$query = "INSERT INTO `customers_account_info`(`customer_id`, `email`, `password`, `created`, `modified`, `last_login`, `last_login_ip`, `status`) VALUES (".$id.",'".$email."','".$password."','".$created."','".$modified."','".$last_login."','".$last_login_ip."','".$status."') ON DUPLICATE KEY UPDATE `email`='".$email."', `password`='".$password."', `created`='".$created."', `modified`='".$modified."', `last_login`='".$last_login."', `last_login_ip`='".$last_login_ip."', `status`='".$status."' ";
+	$result = $upgrade->query($query);
+	echo $query."<br>";
+
+	$query = "INSERT INTO `customers_contact_details`(`customer_id`, `address`, `area`, `city`, `country_id`, `latitude`, `longtitude`, `postcode`, `phone`, `mobile`) VALUES (".$id.",'".$address."','".$area."','".$city."','".$country_id."','".$latitude."','".$longtitude."','".$postcode."','".$phone."','".$mobile_no."') ON DUPLICATE KEY UPDATE `address`='".$address."', `area`='".$area."', `city`='".$city."', `country_id`='".$country_id."', `latitude`='".$longtitude."', `postcode`='".$postcode."', `phone`='".$phone."', `mobile`='".$mobile_no."' ";
+	$result = $upgrade->query($query);
+	echo $query."<br>";
+
+}
 
 function syncCategories(){
 	echo "In Sync Categories<br>";
@@ -68,7 +104,6 @@ function insertApplications($id, $category_id, $title, $title_greek, $short_desc
 	$detail_description_gr = base64_encode($detail_description_gr);
 
 	$query = "INSERT INTO `applications` ( `id`, `category_id`, `title`, `title_greek`, `short_description`, `short_description_gr`, `detail_description`, `detail_description_gr`, `unit`, `min_price`, `sequence`, `modified`) VALUES (".$id.",'".$category_id."','".$title."','".$title_greek."','".$short_description."','".$short_description_gr."','".$detail_description."','".$detail_description_gr."','".$unit."','".$min_price."', '".$sequence."', '".$modified."') ON DUPLICATE KEY UPDATE `category_id`='".$category_id."', `title`='".$title."', `title_greek`='".$title_greek."', `short_description`='".$short_description."', `short_description_gr`='".$short_description_gr."', `detail_description`='".$detail_description."', `detail_description_gr`='".$detail_description_gr."', `unit`='".$unit."', `min_price`='".$min_price."', `sequence`='".$sequence."', `modified`='".$modified."' ";
-	//echo $query;
 
 	$upgrade = UpgradeDB();
 	$result = $upgrade->query($query);
