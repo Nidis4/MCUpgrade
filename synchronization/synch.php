@@ -23,7 +23,7 @@ syncAppointments();
 function syncAppointments(){
 	echo "In Sync Appointments<br>";
 
-	$query = "SELECT `id`,  `member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`,  FROM `appointments`";
+	$query = "SELECT `id`, `member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment` FROM `appointments`";
 
 	$live = LiveDB();
 	if ($result = $live->query($query)) {
@@ -55,6 +55,7 @@ function syncProfessionals(){
 	$live = LiveDB();
 	if ($result = $live->query($query)) {
 
+
 	    /* fetch associative array */
 	    while ($row = $result->fetch_assoc()) {
 	        insertProfessional($row['id'], $row['first_name'], $row['last_name'], $row['nick_name'], $row['current_working'], $row['description'], $row['image'], $row['id_card_number'], $row['personal_vat_id'], $row['company_vat_id'], $row['profile_status'], $row['profile_status_change_reason'], $row['admin_comments'], $row['hide_earning'], $row['sex'], $row['email'], $row['password'], $row['created'], $row['modified'], $row['last_login'], $row['last_login_ip'], $row['status'], $row['address'], $row['area'], $row['city'], $row['country_id'], $row['postcode'], $row['latitude'], $row['longitude'], $row['phone'], $row['mobile_no']);
@@ -67,7 +68,8 @@ function syncProfessionals(){
 
 function insertProfessional($id, $first_name, $last_name, $nick_name, $current_working, $description, $image, $id_card_number, $personal_vat_id, $company_vat_id, $profile_status, $profile_status_change_reason, $admin_comments, $hide_earning, $sex, $email, $password, $created, $modified, $last_login, $last_login_ip, $status, $address, $area, $city, $country_id, $postcode, $latitude, $longitude, $phone, $mobile_no){
 	echo "Inserting Professional ".$id."<br>";
-
+	$area = base64_encode($area);
+	$description = base64_encode($description);
 	$query = "INSERT INTO `professionals`(`id`, `first_name`, `last_name`, `nick_name`, `current_working`, `description`, `image`, `id_card_number`, `personal_vat_id`, `company_vat_id`, `profile_status`, `profile_status_change_reason`, `admin_comments`, `hide_earning`, `sex`) VALUES (".$id.",'".$first_name."','".$last_name."' ,'".$nick_name."' ,'".$current_working."','".$description."' ,'".$image."' ,'".$id_card_number."' ,'".$personal_vat_id."' ,'".$company_vat_id."' ,'".$profile_status."' ,'".$profile_status_change_reason."' ,'".$admin_comments."' ,'".$hide_earning."' ,'".$sex."') ON DUPLICATE KEY UPDATE `first_name`='".$first_name."', `last_name`='".$last_name."', `nick_name`='".$nick_name."', `current_working`='".$current_working."', `description`='".$description."', `image`='".$image."', `id_card_number`='".$id_card_number."', `personal_vat_id`='".$personal_vat_id."', `company_vat_id`='".$company_vat_id."', `profile_status`='".$profile_status."', `profile_status_change_reason`='".$profile_status_change_reason."', `admin_comments`='".$admin_comments."', `hide_earning`='".$hide_earning."', `sex`='".$sex."' ";
 	$upgrade = UpgradeDB();
 	if (!$upgrade->query($query)) {
