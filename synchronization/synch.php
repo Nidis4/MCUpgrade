@@ -14,9 +14,9 @@ $live_db_pass = 'u~,oEFS]5b}I';
 
 
 echo "Synchronization Starts<br>";
-syncCategories();
-syncApplications();
-syncCustomers();
+//syncCategories();
+//syncApplications();
+//syncCustomers();
 syncProfessionals();
 syncAppointments();
 
@@ -41,7 +41,7 @@ function insertAppointment($id, $prof_member_id, $cust_member_id, $application_i
 	echo "Inserting Appointment ".$id."<br>";
 
 	$query = "INSERT INTO `appointments`(`id`, `prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`) VALUES (".$id.",'".$prof_member_id."','".$cust_member_id."','".$application_id."','".$date."','".$time."','".$address."','".$budget."','".$commision."','".$agent_id."' ,'".$comment."' ,'".$sms."' ,'".$sms_log_id."' ,'".$googleEventId."' ,'".$datetimeCreated."' ,'".$datetimeStatusUpdated."' ,'".$sourceAppointmentId."' ,'".$status."' ,'".$cancelComment."') ON DUPLICATE KEY UPDATE `prof_member_id`='".$prof_member_id."', `cust_member_id`='".$cust_member_id."', `application_id`='".$application_id."', `date`='".$date."', `time`='".$time."', `address`='".$address."', `budget`='".$budget."', `commision`='".$commision."', `agent_id`='".$agent_id."', `comment`='".$comment."', `sms`='".$sms."', `sms_log_id`='".$sms_log_id."', `googleEventId`='".$googleEventId."', `datetimeCreated`='".$datetimeCreated."', `datetimeStatusUpdated`='".$datetimeStatusUpdated."', `sourceAppointmentId`='".$sourceAppointmentId."', `status`='".$status."', `cancelComment`='".$cancelComment."' ";
-	//echo $query;
+	echo $query;
 
 	$upgrade = UpgradeDB();
 	$result = $upgrade->query($query);
@@ -70,15 +70,15 @@ function insertProfessional($id, $first_name, $last_name, $nick_name, $current_w
 	$query = "INSERT INTO `professionals`(`id`, `first_name`, `last_name`, `nick_name`, `current_working`, `description`, `image`, `id_card_number`, `personal_vat_id`, `company_vat_id`, `profile_status`, `profile_status_change_reason`, `admin_comments`, `hide_earning`, `sex`) VALUES (".$id.",'".$first_name."','".$last_name."' ,'".$nick_name."' ,'".$current_working."','".$description."' ,'".$image."' ,'".$id_card_number."' ,'".$personal_vat_id."' ,'".$company_vat_id."' ,'".$profile_status."' ,'".$profile_status_change_reason."' ,'".$admin_comments."' ,'".$hide_earning."' ,'".$sex."') ON DUPLICATE KEY UPDATE `first_name`='".$first_name."', `last_name`='".$last_name."', `nick_name`='".$nick_name."', `current_working`='".$current_working."', `description`='".$description."', `image`='".$image."', `id_card_number`='".$id_card_number."', `personal_vat_id`='".$personal_vat_id."', `company_vat_id`='".$company_vat_id."', `profile_status`='".$profile_status."', `profile_status_change_reason`='".$profile_status_change_reason."', `admin_comments`='".$admin_comments."', `hide_earning`='".$hide_earning."', `sex`='".$sex."' ";
 	$upgrade = UpgradeDB();
 	$result = $upgrade->query($query);
-	echo $query."<br>";
+	//echo $query."<br>";
 
 	$query = "INSERT INTO `professionals_account_info`(`professional_id`, `email`, `password`, `created`, `modified`, `last_login`, `last_login_ip`, `status`) VALUES (".$id.",'".$email."','".$password."','".$created."','".$modified."','".$last_login."','".$last_login_ip."','".$status."') ON DUPLICATE KEY UPDATE `email`='".$email."', `password`='".$password."', `created`='".$created."', `modified`='".$modified."', `last_login`='".$last_login."', `last_login_ip`='".$last_login_ip."', `status`='".$status."' ";
 	$result = $upgrade->query($query);
-	echo $query."<br>";
+	///echo $query."<br>";
 
-	$query = "INSERT INTO `professionals_contact_details`(`professional_id`, `address`, `area`, `city`, `country_id`, `latitude`, `longtitude`, `postcode`, `phone`, `mobile`) VALUES (".$id.",'".$address."','".$area."','".$city."','".$country_id."','".$latitude."','".$longitude."','".$postcode."','".$phone."','".$mobile_no."') ON DUPLICATE KEY UPDATE `address`='".$address."', `area`='".$area."', `city`='".$city."', `country_id`='".$country_id."', `latitude`='".$latitude."', `longitude`='".$longitude."',`postcode`='".$postcode."', `phone`='".$phone."', `mobile`='".$mobile_no."' ";
+	$query = "INSERT INTO `professionals_contact_details`(`professional_id`, `address`, `area`, `city`, `country_id`, `latitude`, `longitude`, `postcode`, `phone`, `mobile`) VALUES (".$id.",'".$address."','".$area."','".$city."','".$country_id."','".$latitude."','".$longitude."','".$postcode."','".$phone."','".$mobile_no."') ON DUPLICATE KEY UPDATE `address`='".$address."', `area`='".$area."', `city`='".$city."', `country_id`='".$country_id."', `latitude`='".$latitude."', `longitude`='".$longitude."',`postcode`='".$postcode."', `phone`='".$phone."', `mobile`='".$mobile_no."' ";
 	$result = $upgrade->query($query);
-	echo $query."<br>";
+	//echo $query."<br>";
 
 }
 
