@@ -22,14 +22,15 @@ syncAppointments();
 
 function syncAppointments(){
 	echo "In Sync Appointments<br>";
-	$query = "SELECT `id`, `prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment` FROM `appointments`";
+
+	$query = "SELECT `id`,  `member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`,  FROM `appointments`";
 
 	$live = LiveDB();
 	if ($result = $live->query($query)) {
 
 	    /* fetch associative array */
 	    while ($row = $result->fetch_assoc()) {
-	        insertAppointment($row['id'], $row['prof_member_id'], $row['cust_member_id'], $row['application_id'], $row['date'], $row['time'], $row['address'], $row['budget'], $row['commision'], $row['agent_id'], $row['comment'], $row['sms'], $row['sms_log_id'], $row['googleEventId'], $row['datetimeCreated'], $row['datetimeStatusUpdated'], $row['sourceAppointmentId'], $row['status'], $row['cancelComment']);
+	        insertAppointment($row['id'], $row['member_id'], '', $row['application_id'], $row['date'], $row['time'], $row['address'], $row['budget'], $row['commision'], $row['agent_id'], $row['comment'], $row['sms'], $row['sms_log_id'], $row['googleEventId'], $row['datetimeCreated'], $row['datetimeStatusUpdated'], $row['sourceAppointmentId'], $row['status'], $row['cancelComment']);
 	    }
 
 	    /* free result set */
@@ -69,16 +70,25 @@ function insertProfessional($id, $first_name, $last_name, $nick_name, $current_w
 
 	$query = "INSERT INTO `professionals`(`id`, `first_name`, `last_name`, `nick_name`, `current_working`, `description`, `image`, `id_card_number`, `personal_vat_id`, `company_vat_id`, `profile_status`, `profile_status_change_reason`, `admin_comments`, `hide_earning`, `sex`) VALUES (".$id.",'".$first_name."','".$last_name."' ,'".$nick_name."' ,'".$current_working."','".$description."' ,'".$image."' ,'".$id_card_number."' ,'".$personal_vat_id."' ,'".$company_vat_id."' ,'".$profile_status."' ,'".$profile_status_change_reason."' ,'".$admin_comments."' ,'".$hide_earning."' ,'".$sex."') ON DUPLICATE KEY UPDATE `first_name`='".$first_name."', `last_name`='".$last_name."', `nick_name`='".$nick_name."', `current_working`='".$current_working."', `description`='".$description."', `image`='".$image."', `id_card_number`='".$id_card_number."', `personal_vat_id`='".$personal_vat_id."', `company_vat_id`='".$company_vat_id."', `profile_status`='".$profile_status."', `profile_status_change_reason`='".$profile_status_change_reason."', `admin_comments`='".$admin_comments."', `hide_earning`='".$hide_earning."', `sex`='".$sex."' ";
 	$upgrade = UpgradeDB();
-	$result = $upgrade->query($query);
-	//echo $query."<br>";
+	if (!$upgrade->query($query)) {
+	    echo $query."<br>";
+	    printf("Errormessage: %s\n", $mysqli->error);
+	}
+
 
 	$query = "INSERT INTO `professionals_account_info`(`professional_id`, `email`, `password`, `created`, `modified`, `last_login`, `last_login_ip`, `status`) VALUES (".$id.",'".$email."','".$password."','".$created."','".$modified."','".$last_login."','".$last_login_ip."','".$status."') ON DUPLICATE KEY UPDATE `email`='".$email."', `password`='".$password."', `created`='".$created."', `modified`='".$modified."', `last_login`='".$last_login."', `last_login_ip`='".$last_login_ip."', `status`='".$status."' ";
 	$result = $upgrade->query($query);
-	///echo $query."<br>";
+	if (!$upgrade->query($query)) {
+	    echo $query."<br>";
+	    printf("Errormessage: %s\n", $mysqli->error);
+	}
 
 	$query = "INSERT INTO `professionals_contact_details`(`professional_id`, `address`, `area`, `city`, `country_id`, `latitude`, `longitude`, `postcode`, `phone`, `mobile`) VALUES (".$id.",'".$address."','".$area."','".$city."','".$country_id."','".$latitude."','".$longitude."','".$postcode."','".$phone."','".$mobile_no."') ON DUPLICATE KEY UPDATE `address`='".$address."', `area`='".$area."', `city`='".$city."', `country_id`='".$country_id."', `latitude`='".$latitude."', `longitude`='".$longitude."',`postcode`='".$postcode."', `phone`='".$phone."', `mobile`='".$mobile_no."' ";
 	$result = $upgrade->query($query);
-	//echo $query."<br>";
+	if (!$upgrade->query($query)) {
+	    echo $query."<br>";
+	    printf("Errormessage: %s\n", $mysqli->error);
+	}
 
 }
 
@@ -104,15 +114,24 @@ function insertCustomers($id, $first_name, $last_name, $sex, $email, $password, 
 
 	$query = "INSERT INTO `customers`(`id`, `first_name`, `last_name`, `sex`) VALUES (".$id.",'".$first_name."','".$last_name."','".$sex."') ON DUPLICATE KEY UPDATE `first_name`='".$first_name."', `last_name`='".$last_name."', `sex`='".$sex."' ";
 	$upgrade = UpgradeDB();
-	$result = $upgrade->query($query);
+	if (!$upgrade->query($query)) {
+	    echo $query."<br>";
+	    printf("Errormessage: %s\n", $mysqli->error);
+	}
 	//echo $query."<br>";
 
 	$query = "INSERT INTO `customers_account_info`(`customer_id`, `email`, `password`, `created`, `modified`, `last_login`, `last_login_ip`, `status`) VALUES (".$id.",'".$email."','".$password."','".$created."','".$modified."','".$last_login."','".$last_login_ip."','".$status."') ON DUPLICATE KEY UPDATE `email`='".$email."', `password`='".$password."', `created`='".$created."', `modified`='".$modified."', `last_login`='".$last_login."', `last_login_ip`='".$last_login_ip."', `status`='".$status."' ";
-	$result = $upgrade->query($query);
+	if (!$upgrade->query($query)) {
+	    echo $query."<br>";
+	    printf("Errormessage: %s\n", $mysqli->error);
+	}
 	//echo $query."<br>";
 
 	$query = "INSERT INTO `customers_contact_details`(`customer_id`, `address`, `area`, `city`, `country_id`, `latitude`, `longitude`, `postcode`, `phone`, `mobile`) VALUES (".$id.",'".$address."','".$area."','".$city."','".$country_id."','".$latitude."','".$longitude."','".$postcode."','".$phone."','".$mobile_no."') ON DUPLICATE KEY UPDATE `address`='".$address."', `area`='".$area."', `city`='".$city."', `country_id`='".$country_id."', `latitude`='".$latitude."', `longitude`='".$longitude."',`postcode`='".$postcode."', `phone`='".$phone."', `mobile`='".$mobile_no."' ";
-	$result = $upgrade->query($query);
+	if (!$upgrade->query($query)) {
+	    echo $query."<br>";
+	    printf("Errormessage: %s\n", $mysqli->error);
+	}
 	//echo $query."<br>";
 }
 
