@@ -17,7 +17,42 @@ echo "Synchronization Starts<br>";
 syncCategories();
 syncApplications();
 syncCustomers();
+syncProfessionals();
 
+function syncProfessionals(){
+	echo "In Sync Professionals<br>";
+	$query = "SELECT `id`, `first_name`, `last_name`, `nick_name`, `current_working`, `description`, `image`, `id_card_number`, `personal_vat_id`, `company_vat_id`, `profile_status`, `profile_status_change_reason`, `admin_comments`, `hide_earning`, `sex`, `email`, `password`, `created`, `modified`, `last_login`, `last_login_ip`, `status`, `address`, `area`, `city`, `country_id`, `postcode`, `latitude`, `longitude`, `phone`, `mobile_no` FROM `members` WHERE `user_type`='Professional'";
+
+	$live = LiveDB();
+	if ($result = $live->query($query)) {
+
+	    /* fetch associative array */
+	    while ($row = $result->fetch_assoc()) {
+	        insertProfessional($row['id'], $row['first_name'], $row['last_name'], $row['nick_name'], $row['current_working'], $row['description'], $row['image'], $row['id_card'], $row['id_card_number'], $row['personal_vat_id'], $row['company_vat_id'], $row['profile_status'], $row['profile_status_change_reason'], $row['admin_comments'], $row['hide_earning'], $row['sex'], $row['email'], $row['password'], $row['created'], $row['modified'], $row['last_login'], $row['last_login_ip'], $row['status'], $row['address'], $row['area'], $row['city'], $row['country_id'], $row['postcode'], $row['latitude'], $row['longitude'], $row['phone'], $row['mobile_no']);
+	    }
+
+	    /* free result set */
+	    $result->free();
+	}
+}
+
+function insertProfessional($id, $first_name, $last_name, $nick_name, $current_working, $description, $image, $id_card_number, $personal_vat_id, $company_vat_id, $profile_status, $profile_status_change_reason, $admin_comments, $hide_earning, $sex, $email, $password, $created, $modified, $last_login, $last_login_ip, $status, $address, $area, $city, $country_id, $postcode, $latitude, $longitude, $phone, $mobile_no){
+	echo "Inserting Customer ".$id."<br>";
+
+	$query = "INSERT INTO `professionals`(`id`, `first_name`, `last_name`, `nick_name`, `current_working`, `description`, `image`, `id_card_number`, `personal_vat_id`, `company_vat_id`, `profile_status`, `profile_status_change_reason`, `admin_comments`, `hide_earning`, `sex`) VALUES (".$id.",'".$first_name."','".$last_name."' ,'".$nick_name."' ,'".$current_working."','".$description."' ,'".$image."' ,'".$id_card."' ,'".$id_card_number."' ,'".$personal_vat_id."' ,'".$company_vat_id."' ,'".$profile_status."' ,'".$profile_status_change_reason."' ,'".$admin_comments."' ,'".$hide_earning."' ,'".$sex."') ON DUPLICATE KEY UPDATE `first_name`='".$first_name."', `last_name`='".$last_name."', `nick_name`='".$nick_name."', `current_working`='".$current_working."', `description`='".$description."', `image`='".$image."', `id_card`='".$id_card."', `id_card_number`='".$id_card_number."', `personal_vat_id`='".$personal_vat_id."', `company_vat_id`='".$company_vat_id."', `profile_status`='".$profile_status."', `profile_status`='".$profile_status."', `profile_status`='".$profile_status."', `profile_status`='".$profile_status."' ";
+	$upgrade = UpgradeDB();
+	$result = $upgrade->query($query);
+	echo $query."<br>";
+
+	$query = "INSERT INTO `customers_account_info`(`customer_id`, `email`, `password`, `created`, `modified`, `last_login`, `last_login_ip`, `status`) VALUES (".$id.",'".$email."','".$password."','".$created."','".$modified."','".$last_login."','".$last_login_ip."','".$status."') ON DUPLICATE KEY UPDATE `email`='".$email."', `password`='".$password."', `created`='".$created."', `modified`='".$modified."', `last_login`='".$last_login."', `last_login_ip`='".$last_login_ip."', `status`='".$status."' ";
+	$result = $upgrade->query($query);
+	echo $query."<br>";
+
+	$query = "INSERT INTO `customers_contact_details`(`customer_id`, `address`, `area`, `city`, `country_id`, `latitude`, `longitude`, `postcode`, `phone`, `mobile`) VALUES (".$id.",'".$address."','".$area."','".$city."','".$country_id."','".$latitude."','".$longitude."','".$postcode."','".$phone."','".$mobile_no."') ON DUPLICATE KEY UPDATE `address`='".$address."', `area`='".$area."', `city`='".$city."', `country_id`='".$country_id."', `latitude`='".$latitude."', `longitude`='".$longitude."',`postcode`='".$postcode."', `phone`='".$phone."', `mobile`='".$mobile_no."' ";
+	$result = $upgrade->query($query);
+	echo $query."<br>";
+
+}
 
 function syncCustomers(){
 	echo "In Sync Customers<br>";
@@ -48,7 +83,7 @@ function insertCustomers($id, $first_name, $last_name, $sex, $email, $password, 
 	$result = $upgrade->query($query);
 	echo $query."<br>";
 
-	$query = "INSERT INTO `customers_contact_details`(`customer_id`, `address`, `area`, `city`, `country_id`, `latitude`, `longtitude`, `postcode`, `phone`, `mobile`) VALUES (".$id.",'".$address."','".$area."','".$city."','".$country_id."','".$latitude."','".$longtitude."','".$postcode."','".$phone."','".$mobile_no."') ON DUPLICATE KEY UPDATE `address`='".$address."', `area`='".$area."', `city`='".$city."', `country_id`='".$country_id."', `latitude`='".$longtitude."', `postcode`='".$postcode."', `phone`='".$phone."', `mobile`='".$mobile_no."' ";
+	$query = "INSERT INTO `customers_contact_details`(`customer_id`, `address`, `area`, `city`, `country_id`, `latitude`, `longitude`, `postcode`, `phone`, `mobile`) VALUES (".$id.",'".$address."','".$area."','".$city."','".$country_id."','".$latitude."','".$longitude."','".$postcode."','".$phone."','".$mobile_no."') ON DUPLICATE KEY UPDATE `address`='".$address."', `area`='".$area."', `city`='".$city."', `country_id`='".$country_id."', `latitude`='".$latitude."', `longitude`='".$longitude."',`postcode`='".$postcode."', `phone`='".$phone."', `mobile`='".$mobile_no."' ";
 	$result = $upgrade->query($query);
 	echo $query."<br>";
 
