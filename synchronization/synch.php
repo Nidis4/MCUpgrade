@@ -74,9 +74,9 @@ function insertProfessional($id, $first_name, $last_name, $nick_name, $current_w
 	//echo "Inserting Professional ".$id."<br>";
 	$upgrade = UpgradeDB();
 	
-	$area = mysql_real_escape_string($area);
-	$description = mysql_real_escape_string($description);
-	$admin_comments = mysql_real_escape_string($admin_comments);
+	$area = $upgrade->real_escape_string($area);
+	$description = $upgrade->real_escape_string($description);
+	$admin_comments = $upgrade->real_escape_string($admin_comments);
 	$query = "INSERT INTO `professionals`(`id`, `first_name`, `last_name`, `nick_name`, `current_working`, `description`, `image`, `id_card_number`, `personal_vat_id`, `company_vat_id`, `profile_status`, `profile_status_change_reason`, `admin_comments`, `hide_earning`, `sex`) VALUES (".$id.",'".$first_name."','".$last_name."' ,'".$nick_name."' ,'".$current_working."','".$description."' ,'".$image."' ,'".$id_card_number."' ,'".$personal_vat_id."' ,'".$company_vat_id."' ,'".$profile_status."' ,'".$profile_status_change_reason."' ,'".$admin_comments."' ,'".$hide_earning."' ,'".$sex."') ON DUPLICATE KEY UPDATE `first_name`='".$first_name."', `last_name`='".$last_name."', `nick_name`='".$nick_name."', `current_working`='".$current_working."', `description`='".$description."', `image`='".$image."', `id_card_number`='".$id_card_number."', `personal_vat_id`='".$personal_vat_id."', `company_vat_id`='".$company_vat_id."', `profile_status`='".$profile_status."', `profile_status_change_reason`='".$profile_status_change_reason."', `admin_comments`='".$admin_comments."', `hide_earning`='".$hide_earning."', `sex`='".$sex."' ";
 	
 	if (!$upgrade->query($query)) {
@@ -135,11 +135,11 @@ function insertCustomers($id, $first_name, $last_name, $sex, $email, $password, 
 	//echo "Inserting Customer ".$id."<br>";
 	$upgrade = UpgradeDB();
 
-	$first_name = mysql_real_escape_string($first_name);
-	$last_name = mysql_real_escape_string($last_name);
-	$address = mysql_real_escape_string($address);
-	$area = mysql_real_escape_string($area);
-	$city = mysql_real_escape_string($city);
+	$first_name = $upgrade->real_escape_string($first_name);
+	$last_name = $upgrade->real_escape_string($last_name);
+	$address = $upgrade->real_escape_string($address);
+	$area = $upgrade->real_escape_string($area);
+	$city = $upgrade->real_escape_string($city);
 
 	$query = "INSERT INTO `customers`(`id`, `first_name`, `last_name`, `sex`) VALUES ('".$id."','".$first_name."','".$last_name."','".$sex."') ON DUPLICATE KEY UPDATE `first_name`='".$first_name."', `last_name`='".$last_name."', `sex`='".$sex."' ";
 	
@@ -186,8 +186,8 @@ function syncCategories(){
 function insertCategories($id, $name, $name_greek, $title, $title_greek, $description, $description_greek, $sequence, $modified, $commissionRate){
 	//echo "Inserting Category ".$id."<br>";
 	$upgrade = UpgradeDB();
-	$name_greek = mysql_real_escape_string($name_greek);
-	$title_greek = mysql_real_escape_string($title_greek);
+	$name_greek = $upgrade->real_escape_string($name_greek);
+	$title_greek = $upgrade->real_escape_string($title_greek);
 
 	$query = "INSERT INTO `categories` ( `id`, `name`, `name_greek`, `title`, `title_greek`, `description`, `description_greek`, `sequence`, `modified`, `commissionRate`) VALUES (".$id.",'".$name."','".$name_greek."','".$title."','".$title_greek."','".$description."','".$description_greek."','".$sequence."','".$modified."','".$commissionRate."') ON DUPLICATE KEY UPDATE `name`='".$name."', `name_greek`='".$name_greek."', `title`='".$title."', `title_greek`='".$title_greek."', `description`='".$description."', `description_greek`='".$description_greek."', `sequence`='".$sequence."', `modified`='".$modified."', `commissionRate`='".$commissionRate."' ";
 	//echo $query;
@@ -219,11 +219,11 @@ function insertApplications($id, $category_id, $title, $title_greek, $short_desc
 	//echo "Inserting Applications ".$id."<br>";
 	$upgrade = UpgradeDB();
 
-	$title = mysql_real_escape_string($title);
-	$short_description = mysql_real_escape_string($short_description);
-	$short_description_gr = mysql_real_escape_string($short_description_gr);
-	$detail_description = mysql_real_escape_string($detail_description);
-	$detail_description_gr = mysql_real_escape_string($detail_description_gr);
+	$title = $upgrade->real_escape_string($title);
+	$short_description = $upgrade->real_escape_string($short_description);
+	$short_description_gr = $upgrade->real_escape_string($short_description_gr);
+	$detail_description = $upgrade->real_escape_string($detail_description);
+	$detail_description_gr = $upgrade->real_escape_string($detail_description_gr);
 
 	$query = "INSERT INTO `applications` ( `id`, `category_id`, `title`, `title_greek`, `short_description`, `short_description_gr`, `detail_description`, `detail_description_gr`, `unit`, `min_price`, `sequence`, `modified`) VALUES (".$id.",'".$category_id."','".$title."','".$title_greek."','".$short_description."','".$short_description_gr."','".$detail_description."','".$detail_description_gr."','".$unit."','".$min_price."', '".$sequence."', '".$modified."') ON DUPLICATE KEY UPDATE `category_id`='".$category_id."', `title`='".$title."', `title_greek`='".$title_greek."', `short_description`='".$short_description."', `short_description_gr`='".$short_description_gr."', `detail_description`='".$detail_description."', `detail_description_gr`='".$detail_description_gr."', `unit`='".$unit."', `min_price`='".$min_price."', `sequence`='".$sequence."', `modified`='".$modified."' ";
 
