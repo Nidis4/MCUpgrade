@@ -16,21 +16,21 @@ $live_db_pass = 'u~,oEFS]5b}I';
 echo "Synchronization Starts<br>";
 //syncCategories();
 //syncApplications();
-syncCustomers();
+//syncCustomers();
 //syncProfessionals();
-//syncAppointments();
+syncAppointments();
 
 function syncAppointments(){
 	echo "In Sync Appointments<br>";
 
-	$query = "SELECT `id`, `member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment` FROM `appointments`";
+	$query = "SELECT `id`, `member_id`, `mobile`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment` FROM `appointments`";
 
 	$live = LiveDB();
 	if ($result = $live->query($query)) {
 
 	    /* fetch associative array */
 	    while ($row = $result->fetch_assoc()) {
-	        insertAppointment($row['id'], $row['member_id'], '', $row['application_id'], $row['date'], $row['time'], $row['address'], $row['budget'], $row['commision'], $row['agent_id'], $row['comment'], $row['sms'], $row['sms_log_id'], $row['googleEventId'], $row['datetimeCreated'], $row['datetimeStatusUpdated'], $row['sourceAppointmentId'], $row['status'], $row['cancelComment']);
+	        insertAppointment($row['id'], $row['member_id'], $row['member_id'], $row['application_id'], $row['date'], $row['time'], $row['address'], $row['budget'], $row['commision'], $row['agent_id'], $row['comment'], $row['sms'], $row['sms_log_id'], $row['googleEventId'], $row['datetimeCreated'], $row['datetimeStatusUpdated'], $row['sourceAppointmentId'], $row['status'], $row['cancelComment']);
 	    }
 
 	    /* free result set */
@@ -38,13 +38,18 @@ function syncAppointments(){
 	}
 }
 
-function insertAppointment($id, $prof_member_id, $cust_member_id, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment, $sms, $sms_log_id, $googleEventId, $datetimeCreated, $datetimeStatusUpdated, $sourceAppointmentId, $status, $cancelComment){
+function insertAppointment($id, $prof_member_id, $mobile, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment, $sms, $sms_log_id, $googleEventId, $datetimeCreated, $datetimeStatusUpdated, $sourceAppointmentId, $status, $cancelComment){
 	echo "Inserting Appointment ".$id."<br>";
 
+	$upgrade = UpgradeDB();
+
+	$cust_member_id = getIDByMobile($mobile);
+
 	$query = "INSERT INTO `appointments`(`id`, `prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`) VALUES (".$id.",'".$prof_member_id."','".$cust_member_id."','".$application_id."','".$date."','".$time."','".$address."','".$budget."','".$commision."','".$agent_id."' ,'".$comment."' ,'".$sms."' ,'".$sms_log_id."' ,'".$googleEventId."' ,'".$datetimeCreated."' ,'".$datetimeStatusUpdated."' ,'".$sourceAppointmentId."' ,'".$status."' ,'".$cancelComment."') ON DUPLICATE KEY UPDATE `prof_member_id`='".$prof_member_id."', `cust_member_id`='".$cust_member_id."', `application_id`='".$application_id."', `date`='".$date."', `time`='".$time."', `address`='".$address."', `budget`='".$budget."', `commision`='".$commision."', `agent_id`='".$agent_id."', `comment`='".$comment."', `sms`='".$sms."', `sms_log_id`='".$sms_log_id."', `googleEventId`='".$googleEventId."', `datetimeCreated`='".$datetimeCreated."', `datetimeStatusUpdated`='".$datetimeStatusUpdated."', `sourceAppointmentId`='".$sourceAppointmentId."', `status`='".$status."', `cancelComment`='".$cancelComment."' ";
+	
 	echo $query;
 
-	$upgrade = UpgradeDB();
+	
 	if (!$upgrade->query($query)) {
 	    echo $query."<br>";
 	    printf("Errormessage: %s\n", $mysqli->error);
@@ -129,6 +134,8 @@ function syncCustomers(){
 
 function insertCustomers($id, $first_name, $last_name, $sex, $email, $password, $created, $modified, $last_login, $last_login_ip, $status, $address, $area, $city, $country_id, $postcode, $latitude, $longitude, $phone, $mobile_no){
 	echo "Inserting Customer ".$id."<br>";
+	$last_name = base64_encode($last_name);
+	$address = base64_encode($address);
 
 	$query = "INSERT INTO `customers`(`id`, `first_name`, `last_name`, `sex`) VALUES ('".$id."','".$first_name."','".$last_name."','".$sex."') ON DUPLICATE KEY UPDATE `first_name`='".$first_name."', `last_name`='".$last_name."', `sex`='".$sex."' ";
 	$upgrade = UpgradeDB();
@@ -211,6 +218,16 @@ function insertApplications($id, $category_id, $title, $title_greek, $short_desc
 
 	$upgrade = UpgradeDB();
 	$result = $upgrade->query($query);
+}
+
+function getIDByMobile($mobile){
+	$upgrade = UpgradeDB();
+	$query = "SELECT `customer_id` FROM `customers_contact_details` WHERE `mobile`='".$mobile."'";
+
+	$result = $upgrade->query($query);
+	$row = mysql_fetch_row($result);
+	echo $row[0]."<br>";
+	return $row[0];
 }
 
 function LiveDB(){
