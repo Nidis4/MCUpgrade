@@ -16,9 +16,9 @@ $live_db_pass = 'u~,oEFS]5b}I';
 echo "Synchronization Starts<br>";
 //syncCategories();
 //syncApplications();
-//syncCustomers();
-syncProfessionals();
-syncAppointments();
+syncCustomers();
+//syncProfessionals();
+//syncAppointments();
 
 function syncAppointments(){
 	echo "In Sync Appointments<br>";
@@ -45,7 +45,10 @@ function insertAppointment($id, $prof_member_id, $cust_member_id, $application_i
 	echo $query;
 
 	$upgrade = UpgradeDB();
-	$result = $upgrade->query($query);
+	if (!$upgrade->query($query)) {
+	    echo $query."<br>";
+	    printf("Errormessage: %s\n", $mysqli->error);
+	}
 }
 
 function syncProfessionals(){
@@ -54,7 +57,6 @@ function syncProfessionals(){
 
 	$live = LiveDB();
 	if ($result = $live->query($query)) {
-
 
 	    /* fetch associative array */
 	    while ($row = $result->fetch_assoc()) {
@@ -70,6 +72,7 @@ function insertProfessional($id, $first_name, $last_name, $nick_name, $current_w
 	echo "Inserting Professional ".$id."<br>";
 	$area = base64_encode($area);
 	$description = base64_encode($description);
+	$admin_comments = base64_encode($admin_comments);
 	$query = "INSERT INTO `professionals`(`id`, `first_name`, `last_name`, `nick_name`, `current_working`, `description`, `image`, `id_card_number`, `personal_vat_id`, `company_vat_id`, `profile_status`, `profile_status_change_reason`, `admin_comments`, `hide_earning`, `sex`) VALUES (".$id.",'".$first_name."','".$last_name."' ,'".$nick_name."' ,'".$current_working."','".$description."' ,'".$image."' ,'".$id_card_number."' ,'".$personal_vat_id."' ,'".$company_vat_id."' ,'".$profile_status."' ,'".$profile_status_change_reason."' ,'".$admin_comments."' ,'".$hide_earning."' ,'".$sex."') ON DUPLICATE KEY UPDATE `first_name`='".$first_name."', `last_name`='".$last_name."', `nick_name`='".$nick_name."', `current_working`='".$current_working."', `description`='".$description."', `image`='".$image."', `id_card_number`='".$id_card_number."', `personal_vat_id`='".$personal_vat_id."', `company_vat_id`='".$company_vat_id."', `profile_status`='".$profile_status."', `profile_status_change_reason`='".$profile_status_change_reason."', `admin_comments`='".$admin_comments."', `hide_earning`='".$hide_earning."', `sex`='".$sex."' ";
 	$upgrade = UpgradeDB();
 	if (!$upgrade->query($query)) {
@@ -104,6 +107,19 @@ function syncCustomers(){
 	    /* fetch associative array */
 	    while ($row = $result->fetch_assoc()) {
 	        insertCustomers($row['id'], $row['first_name'], $row['last_name'], $row['sex'], $row['email'], $row['password'], $row['created'], $row['modified'], $row['last_login'], $row['last_login_ip'], $row['status'], $row['address'], $row['area'], $row['city'], $row['country_id'], $row['postcode'], $row['latitude'], $row['longitude'], $row['phone'], $row['mobile_no']);
+	    }
+
+	    /* free result set */
+	    $result->free();
+	}
+
+	$query = "SELECT `name`, `surname`,`address`, `mobile`, `land_line`, `email`, `sex`,`datetimeCreated` FROM `appointments` WHERE `mobile`!= '' GROUP BY `mobile`";
+	$live = LiveDB();
+	if ($result = $live->query($query)) {
+
+	    /* fetch associative array */
+	    while ($row = $result->fetch_assoc()) {
+	        insertCustomers('', $row['name'], $row['surname'], $row['sex'], $row['email'], '', $row['datetimeCreated'], $row['datetimeCreated'], '', '', '', $row['address'], '', '', '', '', '', '', $row['land_line'], $row['mobile']);
 	    }
 
 	    /* free result set */
