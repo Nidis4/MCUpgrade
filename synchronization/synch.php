@@ -137,7 +137,9 @@ function insertCustomers($id, $first_name, $last_name, $sex, $email, $password, 
 	    printf("Errormessage: %s\n", $mysqli->error);
 	}
 	//echo $query."<br>";
-
+	if ($id==''){
+		$id = mysqli_insert_id($upgrade);
+	}
 	$query = "INSERT INTO `customers_account_info`(`customer_id`, `email`, `password`, `created`, `modified`, `last_login`, `last_login_ip`, `status`) VALUES ('".$id."','".$email."','".$password."','".$created."','".$modified."','".$last_login."','".$last_login_ip."','".$status."') ON DUPLICATE KEY UPDATE `email`='".$email."', `password`='".$password."', `created`='".$created."', `modified`='".$modified."', `last_login`='".$last_login."', `last_login_ip`='".$last_login_ip."', `status`='".$status."' ";
 	if (!$upgrade->query($query)) {
 	    echo $query."<br>";
