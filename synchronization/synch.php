@@ -30,7 +30,7 @@ function syncAppointments(){
 
 	    /* fetch associative array */
 	    while ($row = $result->fetch_assoc()) {
-	        insertAppointment($row['id'], $row['member_id'], $row['member_id'], $row['application_id'], $row['date'], $row['time'], $row['address'], $row['budget'], $row['commision'], $row['agent_id'], $row['comment'], $row['sms'], $row['sms_log_id'], $row['googleEventId'], $row['datetimeCreated'], $row['datetimeStatusUpdated'], $row['sourceAppointmentId'], $row['status'], $row['cancelComment']);
+	        insertAppointment($row['id'], $row['member_id'], $row['mobile'], $row['application_id'], $row['date'], $row['time'], $row['address'], $row['budget'], $row['commision'], $row['agent_id'], $row['comment'], $row['sms'], $row['sms_log_id'], $row['googleEventId'], $row['datetimeCreated'], $row['datetimeStatusUpdated'], $row['sourceAppointmentId'], $row['status'], $row['cancelComment']);
 	    }
 
 	    /* free result set */
