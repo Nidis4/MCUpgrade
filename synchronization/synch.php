@@ -225,9 +225,10 @@ function getIDByMobile($mobile){
 	$query = "SELECT `customer_id` FROM `customers_contact_details` WHERE `mobile`='".$mobile."'";
 
 	$result = $upgrade->query($query);
-	$row = mysql_fetch_row($result);
-	echo $row[0]."<br>";
-	return $row[0];
+	$row = $result->fetch_assoc()
+	
+	echo $row['customer_id']."<br>";
+	return $row['customer_id'];
 }
 
 function LiveDB(){
