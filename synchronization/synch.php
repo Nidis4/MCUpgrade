@@ -222,12 +222,13 @@ function insertApplications($id, $category_id, $title, $title_greek, $short_desc
 
 function getIDByMobile($mobile){
 	$upgrade = UpgradeDB();
-	$query = "SELECT `customer_id` FROM `customers_contact_details` WHERE `mobile`='".$mobile."'";
-
+	$query = "SELECT `customer_id` FROM `customers_contact_details` WHERE `mobile`='".$mobile."' LIMIT 0,1";
+	
+	echo $query;
 	$result = $upgrade->query($query);
 	$row = $result->fetch_assoc();
 	
-	echo $row['customer_id']."<br>";
+	echo $row['customer_id']."----<br>";
 	return $row['customer_id'];
 }
 
