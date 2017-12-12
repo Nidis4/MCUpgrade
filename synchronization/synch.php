@@ -225,7 +225,7 @@ function getIDByMobile($mobile){
 	$query = "SELECT `customer_id` FROM `customers_contact_details` WHERE `mobile`='".$mobile."'";
 
 	$result = $upgrade->query($query);
-	$row = $result->fetch_assoc()
+	$row = $result->fetch_assoc();
 	
 	echo $row['customer_id']."<br>";
 	return $row['customer_id'];
