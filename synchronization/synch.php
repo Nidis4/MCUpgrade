@@ -15,8 +15,8 @@ $live_db_pass = 'u~,oEFS]5b}I';
 
 echo "Synchronization Starts<br>";
 syncCategories();
-syncApplications();
-syncCustomers();
+//syncApplications();
+//syncCustomers();
 syncProfessionals();
 syncAppointments();
 
@@ -49,7 +49,7 @@ function insertAppointment($id, $prof_member_id, $mobile, $application_id, $date
 	
 	if (!$upgrade->query($query)) {
 	    echo $query."<br>";
-	    printf("Errormessage: %s\n", $mysqli->error);
+	    printf("Errormessage: %s\n", $upgrade->error);
 	}
 }
 
@@ -81,7 +81,7 @@ function insertProfessional($id, $first_name, $last_name, $nick_name, $current_w
 	
 	if (!$upgrade->query($query)) {
 	    echo $query."<br>";
-	    printf("Errormessage: %s\n", $mysqli->error);
+	    printf("Errormessage: %s\n", $upgrade->error);
 	}
 
 
@@ -89,14 +89,14 @@ function insertProfessional($id, $first_name, $last_name, $nick_name, $current_w
 	$result = $upgrade->query($query);
 	if (!$upgrade->query($query)) {
 	    echo $query."<br>";
-	    printf("Errormessage: %s\n", $mysqli->error);
+	    printf("Errormessage: %s\n", $upgrade->error);
 	}
 
 	$query = "INSERT INTO `professionals_contact_details`(`professional_id`, `address`, `area`, `city`, `country_id`, `latitude`, `longitude`, `postcode`, `phone`, `mobile`) VALUES (".$id.",'".$address."','".$area."','".$city."','".$country_id."','".$latitude."','".$longitude."','".$postcode."','".$phone."','".$mobile_no."') ON DUPLICATE KEY UPDATE `address`='".$address."', `area`='".$area."', `city`='".$city."', `country_id`='".$country_id."', `latitude`='".$latitude."', `longitude`='".$longitude."',`postcode`='".$postcode."', `phone`='".$phone."', `mobile`='".$mobile_no."' ";
 	$result = $upgrade->query($query);
 	if (!$upgrade->query($query)) {
 	    echo $query."<br>";
-	    printf("Errormessage: %s\n", $mysqli->error);
+	    printf("Errormessage: %s\n", $upgrade->error);
 	}
 
 }
@@ -145,7 +145,7 @@ function insertCustomers($id, $first_name, $last_name, $sex, $email, $password, 
 	
 	if (!$upgrade->query($query)) {
 	    echo $query."<br>";
-	    printf("Errormessage: %s\n", $mysqli->error);
+	    printf("Errormessage: %s\n", $upgrade->error);
 	}
 	//echo $query."<br>";
 	if ($id==''){
@@ -154,14 +154,14 @@ function insertCustomers($id, $first_name, $last_name, $sex, $email, $password, 
 	$query = "INSERT INTO `customers_account_info`(`customer_id`, `email`, `password`, `created`, `modified`, `last_login`, `last_login_ip`, `status`) VALUES ('".$id."','".$email."','".$password."','".$created."','".$modified."','".$last_login."','".$last_login_ip."','".$status."') ON DUPLICATE KEY UPDATE `email`='".$email."', `password`='".$password."', `created`='".$created."', `modified`='".$modified."', `last_login`='".$last_login."', `last_login_ip`='".$last_login_ip."', `status`='".$status."' ";
 	if (!$upgrade->query($query)) {
 	    echo $query."<br>";
-	    printf("Errormessage: %s\n", $mysqli->error);
+	    printf("Errormessage: %s\n", $upgrade->error);
 	}
 	//echo $query."<br>";
 
 	$query = "INSERT INTO `customers_contact_details`(`customer_id`, `address`, `area`, `city`, `country_id`, `latitude`, `longitude`, `postcode`, `phone`, `mobile`) VALUES ('".$id."','".$address."','".$area."','".$city."','".$country_id."','".$latitude."','".$longitude."','".$postcode."','".$phone."','".$mobile_no."') ON DUPLICATE KEY UPDATE `address`='".$address."', `area`='".$area."', `city`='".$city."', `country_id`='".$country_id."', `latitude`='".$latitude."', `longitude`='".$longitude."',`postcode`='".$postcode."', `phone`='".$phone."', `mobile`='".$mobile_no."' ";
 	if (!$upgrade->query($query)) {
 	    echo $query."<br>";
-	    printf("Errormessage: %s\n", $mysqli->error);
+	    printf("Errormessage: %s\n", $upgrade->error);
 	}
 	//echo $query."<br>";
 }
@@ -188,13 +188,14 @@ function insertCategories($id, $name, $name_greek, $title, $title_greek, $descri
 	$upgrade = UpgradeDB();
 	$name_greek = $upgrade->real_escape_string($name_greek);
 	$title_greek = $upgrade->real_escape_string($title_greek);
+	$description_greek = $upgrade->real_escape_string($description_greek);
 
 	$query = "INSERT INTO `categories` ( `id`, `name`, `name_greek`, `title`, `title_greek`, `description`, `description_greek`, `sequence`, `modified`, `commissionRate`) VALUES (".$id.",'".$name."','".$name_greek."','".$title."','".$title_greek."','".$description."','".$description_greek."','".$sequence."','".$modified."','".$commissionRate."') ON DUPLICATE KEY UPDATE `name`='".$name."', `name_greek`='".$name_greek."', `title`='".$title."', `title_greek`='".$title_greek."', `description`='".$description."', `description_greek`='".$description_greek."', `sequence`='".$sequence."', `modified`='".$modified."', `commissionRate`='".$commissionRate."' ";
 	//echo $query;
 
 	if (!$upgrade->query($query)) {
 	    echo $query."<br>";
-	    printf("Errormessage: %s\n", $mysqli->error);
+	    printf("Errormessage: %s\n", $upgrade->error);
 	}
 }
 
@@ -229,7 +230,7 @@ function insertApplications($id, $category_id, $title, $title_greek, $short_desc
 
 	if (!$upgrade->query($query)) {
 	    echo $query."<br>";
-	    printf("Errormessage: %s\n", $mysqli->error);
+	    printf("Errormessage: %s\n", $upgrade->error);
 	}
 }
 
