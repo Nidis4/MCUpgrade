@@ -14,16 +14,16 @@ $live_db_pass = 'u~,oEFS]5b}I';
 
 
 echo "Synchronization Starts<br>";
-//syncCategories();
-//syncApplications();
-//syncCustomers();
-//syncProfessionals();
+syncCategories();
+syncApplications();
+syncCustomers();
+syncProfessionals();
 syncAppointments();
 
 function syncAppointments(){
 	echo "In Sync Appointments<br>";
 
-	$query = "SELECT `id`, `member_id`, `mobile`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment` FROM `appointments`";
+	$query = "SELECT `id`, `member_id`, `mobile`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment` FROM `appointments` WHERE `category_id`!=0";
 
 	$live = LiveDB();
 	if ($result = $live->query($query)) {
@@ -39,16 +39,13 @@ function syncAppointments(){
 }
 
 function insertAppointment($id, $prof_member_id, $mobile, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment, $sms, $sms_log_id, $googleEventId, $datetimeCreated, $datetimeStatusUpdated, $sourceAppointmentId, $status, $cancelComment){
-	echo "Inserting Appointment ".$id."<br>";
+	//echo "Inserting Appointment ".$id."<br>";
 
 	$upgrade = UpgradeDB();
 
 	$cust_member_id = getIDByMobile($mobile);
 
 	$query = "INSERT INTO `appointments`(`id`, `prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`) VALUES (".$id.",'".$prof_member_id."','".$cust_member_id."','".$application_id."','".$date."','".$time."','".$address."','".$budget."','".$commision."','".$agent_id."' ,'".$comment."' ,'".$sms."' ,'".$sms_log_id."' ,'".$googleEventId."' ,'".$datetimeCreated."' ,'".$datetimeStatusUpdated."' ,'".$sourceAppointmentId."' ,'".$status."' ,'".$cancelComment."') ON DUPLICATE KEY UPDATE `prof_member_id`='".$prof_member_id."', `cust_member_id`='".$cust_member_id."', `application_id`='".$application_id."', `date`='".$date."', `time`='".$time."', `address`='".$address."', `budget`='".$budget."', `commision`='".$commision."', `agent_id`='".$agent_id."', `comment`='".$comment."', `sms`='".$sms."', `sms_log_id`='".$sms_log_id."', `googleEventId`='".$googleEventId."', `datetimeCreated`='".$datetimeCreated."', `datetimeStatusUpdated`='".$datetimeStatusUpdated."', `sourceAppointmentId`='".$sourceAppointmentId."', `status`='".$status."', `cancelComment`='".$cancelComment."' ";
-	
-	echo $query;
-
 	
 	if (!$upgrade->query($query)) {
 	    echo $query."<br>";
@@ -133,7 +130,7 @@ function syncCustomers(){
 }
 
 function insertCustomers($id, $first_name, $last_name, $sex, $email, $password, $created, $modified, $last_login, $last_login_ip, $status, $address, $area, $city, $country_id, $postcode, $latitude, $longitude, $phone, $mobile_no){
-	echo "Inserting Customer ".$id."<br>";
+	//echo "Inserting Customer ".$id."<br>";
 	$last_name = base64_encode($last_name);
 	$address = base64_encode($address);
 
@@ -180,13 +177,16 @@ function syncCategories(){
 }
 
 function insertCategories($id, $name, $name_greek, $title, $title_greek, $description, $description_greek, $sequence, $modified, $commissionRate){
-	echo "Inserting Category ".$id."<br>";
+	//echo "Inserting Category ".$id."<br>";
 
 	$query = "INSERT INTO `categories` ( `id`, `name`, `name_greek`, `title`, `title_greek`, `description`, `description_greek`, `sequence`, `modified`, `commissionRate`) VALUES (".$id.",'".$name."','".$name_greek."','".$title."','".$title_greek."','".$description."','".$description_greek."','".$sequence."','".$modified."','".$commissionRate."') ON DUPLICATE KEY UPDATE `name`='".$name."', `name_greek`='".$name_greek."', `title`='".$title."', `title_greek`='".$title_greek."', `description`='".$description."', `description_greek`='".$description_greek."', `sequence`='".$sequence."', `modified`='".$modified."', `commissionRate`='".$commissionRate."' ";
 	//echo $query;
 
 	$upgrade = UpgradeDB();
-	$result = $upgrade->query($query);
+	if (!$upgrade->query($query)) {
+	    echo $query."<br>";
+	    printf("Errormessage: %s\n", $mysqli->error);
+	}
 }
 
 function syncApplications(){
@@ -207,7 +207,7 @@ function syncApplications(){
 }
 
 function insertApplications($id, $category_id, $title, $title_greek, $short_description, $short_description_gr, $detail_description, $detail_description_gr, $unit, $min_price, $sequence, $modified){
-	echo "Inserting Applications ".$id."<br>";
+	//echo "Inserting Applications ".$id."<br>";
 	
 	$short_description = base64_encode($short_description);
 	$short_description_gr = base64_encode($short_description_gr);
@@ -217,18 +217,21 @@ function insertApplications($id, $category_id, $title, $title_greek, $short_desc
 	$query = "INSERT INTO `applications` ( `id`, `category_id`, `title`, `title_greek`, `short_description`, `short_description_gr`, `detail_description`, `detail_description_gr`, `unit`, `min_price`, `sequence`, `modified`) VALUES (".$id.",'".$category_id."','".$title."','".$title_greek."','".$short_description."','".$short_description_gr."','".$detail_description."','".$detail_description_gr."','".$unit."','".$min_price."', '".$sequence."', '".$modified."') ON DUPLICATE KEY UPDATE `category_id`='".$category_id."', `title`='".$title."', `title_greek`='".$title_greek."', `short_description`='".$short_description."', `short_description_gr`='".$short_description_gr."', `detail_description`='".$detail_description."', `detail_description_gr`='".$detail_description_gr."', `unit`='".$unit."', `min_price`='".$min_price."', `sequence`='".$sequence."', `modified`='".$modified."' ";
 
 	$upgrade = UpgradeDB();
-	$result = $upgrade->query($query);
+	if (!$upgrade->query($query)) {
+	    echo $query."<br>";
+	    printf("Errormessage: %s\n", $mysqli->error);
+	}
 }
 
 function getIDByMobile($mobile){
 	$upgrade = UpgradeDB();
 	$query = "SELECT `customer_id` FROM `customers_contact_details` WHERE `mobile`='".$mobile."' LIMIT 0,1";
 	
-	echo $query;
+	//echo $query;
 	$result = $upgrade->query($query);
 	$row = $result->fetch_assoc();
 	
-	echo $row['customer_id']."----<br>";
+	//echo $row['customer_id']."----<br>";
 	return $row['customer_id'];
 }
 
