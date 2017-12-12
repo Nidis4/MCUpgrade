@@ -130,7 +130,7 @@ function syncCustomers(){
 function insertCustomers($id, $first_name, $last_name, $sex, $email, $password, $created, $modified, $last_login, $last_login_ip, $status, $address, $area, $city, $country_id, $postcode, $latitude, $longitude, $phone, $mobile_no){
 	echo "Inserting Customer ".$id."<br>";
 
-	$query = "INSERT INTO `customers`(`id`, `first_name`, `last_name`, `sex`) VALUES (".$id.",'".$first_name."','".$last_name."','".$sex."') ON DUPLICATE KEY UPDATE `first_name`='".$first_name."', `last_name`='".$last_name."', `sex`='".$sex."' ";
+	$query = "INSERT INTO `customers`(`id`, `first_name`, `last_name`, `sex`) VALUES ('".$id."','".$first_name."','".$last_name."','".$sex."') ON DUPLICATE KEY UPDATE `first_name`='".$first_name."', `last_name`='".$last_name."', `sex`='".$sex."' ";
 	$upgrade = UpgradeDB();
 	if (!$upgrade->query($query)) {
 	    echo $query."<br>";
@@ -138,14 +138,14 @@ function insertCustomers($id, $first_name, $last_name, $sex, $email, $password, 
 	}
 	//echo $query."<br>";
 
-	$query = "INSERT INTO `customers_account_info`(`customer_id`, `email`, `password`, `created`, `modified`, `last_login`, `last_login_ip`, `status`) VALUES (".$id.",'".$email."','".$password."','".$created."','".$modified."','".$last_login."','".$last_login_ip."','".$status."') ON DUPLICATE KEY UPDATE `email`='".$email."', `password`='".$password."', `created`='".$created."', `modified`='".$modified."', `last_login`='".$last_login."', `last_login_ip`='".$last_login_ip."', `status`='".$status."' ";
+	$query = "INSERT INTO `customers_account_info`(`customer_id`, `email`, `password`, `created`, `modified`, `last_login`, `last_login_ip`, `status`) VALUES ('".$id."','".$email."','".$password."','".$created."','".$modified."','".$last_login."','".$last_login_ip."','".$status."') ON DUPLICATE KEY UPDATE `email`='".$email."', `password`='".$password."', `created`='".$created."', `modified`='".$modified."', `last_login`='".$last_login."', `last_login_ip`='".$last_login_ip."', `status`='".$status."' ";
 	if (!$upgrade->query($query)) {
 	    echo $query."<br>";
 	    printf("Errormessage: %s\n", $mysqli->error);
 	}
 	//echo $query."<br>";
 
-	$query = "INSERT INTO `customers_contact_details`(`customer_id`, `address`, `area`, `city`, `country_id`, `latitude`, `longitude`, `postcode`, `phone`, `mobile`) VALUES (".$id.",'".$address."','".$area."','".$city."','".$country_id."','".$latitude."','".$longitude."','".$postcode."','".$phone."','".$mobile_no."') ON DUPLICATE KEY UPDATE `address`='".$address."', `area`='".$area."', `city`='".$city."', `country_id`='".$country_id."', `latitude`='".$latitude."', `longitude`='".$longitude."',`postcode`='".$postcode."', `phone`='".$phone."', `mobile`='".$mobile_no."' ";
+	$query = "INSERT INTO `customers_contact_details`(`customer_id`, `address`, `area`, `city`, `country_id`, `latitude`, `longitude`, `postcode`, `phone`, `mobile`) VALUES ('".$id."','".$address."','".$area."','".$city."','".$country_id."','".$latitude."','".$longitude."','".$postcode."','".$phone."','".$mobile_no."') ON DUPLICATE KEY UPDATE `address`='".$address."', `area`='".$area."', `city`='".$city."', `country_id`='".$country_id."', `latitude`='".$latitude."', `longitude`='".$longitude."',`postcode`='".$postcode."', `phone`='".$phone."', `mobile`='".$mobile_no."' ";
 	if (!$upgrade->query($query)) {
 	    echo $query."<br>";
 	    printf("Errormessage: %s\n", $mysqli->error);
