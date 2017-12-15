@@ -16,7 +16,7 @@ $live_db_pass = 'u~,oEFS]5b}I';
 echo "Synchronization Starts<br>";
 //syncCategories();
 //syncApplications();
-syncCustomers();
+//syncCustomers();
 syncProfessionals();
 syncAppointments();
 
