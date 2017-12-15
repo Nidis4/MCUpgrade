@@ -128,7 +128,7 @@ class Appointment{
         $query = "SELECT
                     `id`, `prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`
                 FROM
-                    " . $this->table_name . "
+                    " . $this->table_name . " WHERE `status`=1 OR `status`=0
                 ORDER BY `datetimeCreated` DESC
                 LIMIT ?, ?";
      

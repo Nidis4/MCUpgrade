@@ -6,25 +6,25 @@ header("Content-Type: application/json; charset=UTF-8");
 // include database and object files
 include_once '../config/database.php';
 include_once '../config/core.php';
-include_once '../objects/members.php';
+include_once '../objects/professional.php';
  
 // instantiate database and category object
 $database = new Database();
 $db = $database->getConnection();
  
 // initialize object
-$member = new Member($db);
+$professional = new Professional($db);
  
 // query categorys
-$stmt = $member->contactDetails();
+$stmt = $professional->contactDetails();
 $num = $stmt->rowCount();
  
 // check if more than 0 record found
 if($num>0){
  
     // products array
-    $members_arr=array();
-    $members_arr["records"]=array();
+    $professionals_arr=array();
+    $professionals_arr["records"]=array();
  
     // retrieve our table contents
     // fetch() is faster than fetchAll()
@@ -36,7 +36,7 @@ if($num>0){
         extract($row);
  
         $member_item=array(
-            "member_id" => $member_id,
+            "professional_id" => $professional_id,
             "address" => $address,
             "area" => $area,
             "city" => $city,
@@ -48,10 +48,10 @@ if($num>0){
             "postcode" => $postcode
         );
  
-        array_push($members_arr["records"], $member_item);
+        array_push($professionals_arr["records"], $professional_item);
     }
  
-    echo json_encode($members_arr);
+    echo json_encode($professionals_arr);
 }
  
 else{

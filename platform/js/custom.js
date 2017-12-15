@@ -175,6 +175,8 @@ $( ".createAppointment" ).click(function() {
     var county = $("#county").val();
     var budget = $("#budget").val();
     var commision = $("#commision").val();
+    var startDate = $("#startDate").val();
+    var endDate = $("#endDate").val();
 
     var surname = $("#surname").val();
     var firstname = $("#firstname").val();
@@ -189,6 +191,8 @@ $( ".createAppointment" ).click(function() {
     alert("County "+county);
     alert("Budget "+budget);
     alert("Commision "+commision);
+    alert("Start "+startDate);
+    alert("End "+endDate);
 
     alert("surname "+surname);
     alert("firstname "+firstname);
@@ -196,6 +200,7 @@ $( ".createAppointment" ).click(function() {
     alert("address "+address);
     alert("mobile "+mobile);
     alert("phone "+phone);
+    
 
     alert("email "+email);
 });

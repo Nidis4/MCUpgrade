@@ -151,6 +151,19 @@ include('config/core.php');
 											</div>
 										</div>
 										<div class="form-group row">
+												<label class="col-lg-3 control-label text-lg-right pt-2">Date range</label>
+												<div class="col-lg-9">
+													<div class="input-daterange input-group" data-plugin-datepicker="">
+														<span class="input-group-addon">
+															<i class="fa fa-calendar"></i>
+														</span>
+														<input type="text" class="form-control" name="start" id='startDate'>
+														<span class="input-group-addon">to</span>
+														<input type="text" class="form-control" name="end" id='endDate'>
+													</div>
+												</div>
+											</div>
+										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Budget <span class="required">*</span></label>
 											<div class="col-sm-9">
 												<input type="text" name="budget" id="budget" class="form-control" placeholder="eg.: John" required value="0" />

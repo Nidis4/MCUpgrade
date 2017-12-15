@@ -15,8 +15,8 @@ $live_db_pass = 'u~,oEFS]5b}I';
 
 echo "Synchronization Starts<br>";
 syncCategories();
-//syncApplications();
-//syncCustomers();
+syncApplications();
+syncCustomers();
 syncProfessionals();
 syncAppointments();
 
@@ -45,6 +45,8 @@ function insertAppointment($id, $prof_member_id, $mobile, $application_id, $date
 
 	$cust_member_id = getIDByMobile($mobile);
 
+	$comment = $upgrade->real_escape_string($comment);
+
 	$query = "INSERT INTO `appointments`(`id`, `prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`) VALUES (".$id.",'".$prof_member_id."','".$cust_member_id."','".$application_id."','".$date."','".$time."','".$address."','".$budget."','".$commision."','".$agent_id."' ,'".$comment."' ,'".$sms."' ,'".$sms_log_id."' ,'".$googleEventId."' ,'".$datetimeCreated."' ,'".$datetimeStatusUpdated."' ,'".$sourceAppointmentId."' ,'".$status."' ,'".$cancelComment."') ON DUPLICATE KEY UPDATE `prof_member_id`='".$prof_member_id."', `cust_member_id`='".$cust_member_id."', `application_id`='".$application_id."', `date`='".$date."', `time`='".$time."', `address`='".$address."', `budget`='".$budget."', `commision`='".$commision."', `agent_id`='".$agent_id."', `comment`='".$comment."', `sms`='".$sms."', `sms_log_id`='".$sms_log_id."', `googleEventId`='".$googleEventId."', `datetimeCreated`='".$datetimeCreated."', `datetimeStatusUpdated`='".$datetimeStatusUpdated."', `sourceAppointmentId`='".$sourceAppointmentId."', `status`='".$status."', `cancelComment`='".$cancelComment."' ";
 	
 	if (!$upgrade->query($query)) {
@@ -62,7 +64,8 @@ function syncProfessionals(){
 
 	    /* fetch associative array */
 	    while ($row = $result->fetch_assoc()) {
-	        insertProfessional($row['id'], $row['first_name'], $row['last_name'], $row['nick_name'], $row['current_working'], $row['description'], $row['image'], $row['id_card_number'], $row['personal_vat_id'], $row['company_vat_id'], $row['profile_status'], $row['profile_status_change_reason'], $row['admin_comments'], $row['hide_earning'], $row['sex'], $row['email'], $row['password'], $row['created'], $row['modified'], $row['last_login'], $row['last_login_ip'], $row['status'], $row['address'], $row['area'], $row['city'], $row['country_id'], $row['postcode'], $row['latitude'], $row['longitude'], $row['phone'], $row['mobile_no']);
+	    	$address = getAddressByProfID($row['id']);
+	        insertProfessional($row['id'], $row['first_name'], $row['last_name'], $row['nick_name'], $row['current_working'], $row['description'], $row['image'], $row['id_card_number'], $row['personal_vat_id'], $row['company_vat_id'], $row['profile_status'], $row['profile_status_change_reason'], $row['admin_comments'], $row['hide_earning'], $row['sex'], $row['email'], $row['password'], $row['created'], $row['modified'], $row['last_login'], $row['last_login_ip'], $row['status'], $address, $row['area'], $row['city'], $row['country_id'], $row['postcode'], $row['latitude'], $row['longitude'], $row['phone'], $row['mobile_no']);
 	    }
 
 	    /* free result set */
@@ -74,6 +77,7 @@ function insertProfessional($id, $first_name, $last_name, $nick_name, $current_w
 	//echo "Inserting Professional ".$id."<br>";
 	$upgrade = UpgradeDB();
 	
+	$first_name = $upgrade->real_escape_string($first_name);
 	$area = $upgrade->real_escape_string($area);
 	$description = $upgrade->real_escape_string($description);
 	$admin_comments = $upgrade->real_escape_string($admin_comments);
@@ -244,6 +248,18 @@ function getIDByMobile($mobile){
 	
 	//echo $row['customer_id']."----<br>";
 	return $row['customer_id'];
+}
+
+function getAddressByProfID($id){
+	$live = LiveDB();
+	$query = "SELECT `address`  FROM `my_constructor`.`professionals` WHERE `member_id`=".$id."";
+	
+	//echo $query;
+	$result = $live->query($query);
+	$row = $result->fetch_assoc();
+	
+	//echo $row['customer_id']."----<br>";
+	return $row['address'];
 }
 
 function LiveDB(){
