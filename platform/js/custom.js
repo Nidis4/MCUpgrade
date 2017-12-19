@@ -37,6 +37,8 @@ $("#loginForm").submit(function(){
 
 $('select#category').on('change', function() {
     var cat_id = this.value;
+
+
     //alert( this.value );
     $('select#applications').prop("disabled", false);
     var getApplicationsAPI = API_LOCATION+'application/readByCategory.php?cat_id='+cat_id;
@@ -106,6 +108,14 @@ $("input#surname").keyup(function () {
             $("#suggestions").hide();
         }
     });
+
+$("input#budget").keyup(function () {
+    var commision = $('select#category option:selected').attr('comm');
+    //alert(commision);
+
+    var comm = $("#budget").val()*commision/100;
+     $("#commision").val(comm);
+});
 
 
 function selectCustomer(id,first_name,last_name,address, mobile, phone,email){
