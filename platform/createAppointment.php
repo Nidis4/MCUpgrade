@@ -273,6 +273,9 @@ include('config/core.php');
 						</div>
 						
 					</div>
+					<div class="row" id='available'>
+						
+					</div>
 					<div class="row">
 						<div class="col-sm-6 offset-sm-3 text-center">
 							<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning createAppointment">Save Appointment</button>

@@ -13,3 +13,18 @@ tr.status-0, .table-striped tbody tr:nth-of-type(odd).status-0 {
 .selectCustomer {
     width: 100%;
 }
+.profile{
+	width: 100%;
+}
+.profile .name {
+    width: 30%;
+    float: left;
+}
+.profile .distance{
+    width: 20%;
+    float: left;
+}
+.busy {
+    width: 50%;
+    float: left;
+}

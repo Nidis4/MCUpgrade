@@ -185,22 +185,43 @@ $( ".createAppointment" ).click(function() {
     var mobile = $("#mobile").val();
     var phone = $("#phone").val();
     var email = $("#email").val();
-
-    alert("Agent "+agent);
-    alert("Applications "+application);
-    alert("County "+county);
-    alert("Budget "+budget);
-    alert("Commision "+commision);
-    alert("Start "+startDate);
-    alert("End "+endDate);
-
-    alert("surname "+surname);
-    alert("firstname "+firstname);
-    alert("sex "+sex);
-    alert("address "+address);
-    alert("mobile "+mobile);
-    alert("phone "+phone);
     
 
-    alert("email "+email);
+    //alert("email "+email);
+    if (address=="" || application == null || county == "" || startDate == "" || endDate == ""){
+        alert("Empty Address");
+    }
+    else{ 
+        //alert("County: "+county);
+        //alert("Application: "+application);
+        //alert("Start: "+startDate);
+        //alert("End: "+endDate);
+        //alert("Address: "+address);
+        var getAvailableAPI = API_LOCATION+'professional/available.php?county_id='+county+'&application_id='+application+'&startDate='+startDate+'&endDate='+endDate+'&address='+address;
+
+        $.ajax({
+            type: "POST",
+            url: getAvailableAPI,
+            dataType: "json",
+            success: function(data)
+            {
+                 var htmlStr = "";
+                $.each(data, function(k, v){
+                            //alert(v.first_name+" "+v.last_name+": "+v.distance);
+                            htmlStr += "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='distance'>"+v.distance+"</div>";
+                             if (v.busy!=undefined){
+                                htmlStr += "<div class='busy'>";
+                                 $.each(v.busy, function(z, x){
+                                    //alert(x.date+" "+x.timeslot);
+                                    htmlStr += "<div class='timeslots'>"+x.date+" "+x.timeslot+" στο "+x.address+"</div>";
+                                 });
+                                 htmlStr += "</div>";
+                             }
+                             htmlStr += "</div>";
+                       });
+                $("#available").append(htmlStr);
+            }
+        });
+
+    }
 });

@@ -17,6 +17,8 @@ $professional->county_id = isset($_GET['county_id']) ? $_GET['county_id'] : die(
 $professional->application_id = isset($_GET['application_id']) ? $_GET['application_id'] : die();
 $startDate = isset($_GET['startDate']) ? $_GET['startDate'] : die();
 $endDate = isset($_GET['endDate']) ? $_GET['endDate'] : die();
+$addressAppoint = isset($_GET['address']) ? $_GET['address'] : die();
+//$addressAppoint = urldecode($addressAppoint);
  
 // query categorys
 $stmt = $professional->available();
@@ -37,7 +39,41 @@ if($num>0){
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
         extract($row);
+        $url = "";
+        $dist = "";
+        $time ="";
+        $response ="";
+        $response_a ="";
+        if ($address!=""){
+            $addressEn = urlencode($address);
+            //$addressAppoint = "Ηρακλείτου 113, Χαλάνδρι";
+            $addressAppointEn = urlencode($addressAppoint);
+            //$response = file_get_contents("https://maps.googleapis.com/maps/api/distancematrix/json?origins=Ηρακλείτου+113,Χαλάνδρι&destinations=Athens&key=AIzaSyA1FK-ipf2Xe0W74fo7nnyufuA0Yh1JMFE");
+            //$url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=".$addressEn."&destinations=Athens&key=AIzaSyA1FK-ipf2Xe0W74fo7nnyufuA0Yh1JMFE";
+            $url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=".$addressEn."&destinations=".$addressAppointEn."&key=AIzaSyA1FK-ipf2Xe0W74fo7nnyufuA0Yh1JMFE";
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+            $response = curl_exec($ch);
+            curl_close($ch);
         
+            $response_a = json_decode($response, true);
+
+            if($response_a['status'] != 'OK' ||  $response_a['rows'][0]['elements'][0]['status'] == "NOT_FOUND") {
+               $dist = "NOT OK";
+            }
+
+            $dist = $response_a['rows'][0]['elements'][0]['distance']['text'];
+            $time = $response_a['rows'][0]['elements'][0]['status'];
+        }
+        else{
+            $dist="Unknown";
+        }
+
         $busy_arr = getBusySlots($startDate, $endDate, $id,$professional);
         // extract row
         // this will make $row['name'] to
@@ -48,6 +84,12 @@ if($num>0){
             "id" => $id,
             "first_name" => $first_name,
             "last_name" => $last_name,
+            "address" => $address,
+            "Apoointment" => $addressAppoint,
+            "distance" => $dist,
+            //"time" => $time,
+            //"url" => $url,
+            //"response" => $response_a,
             "busy" => $busy_arr
         );
  

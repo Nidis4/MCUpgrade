@@ -14,9 +14,9 @@ $live_db_pass = 'u~,oEFS]5b}I';
 
 
 echo "Synchronization Starts<br>";
-//syncCategories();
-//syncApplications();
-//syncCustomers();
+syncCategories();
+syncApplications();
+syncCustomers();
 syncProfessionals();
 syncAppointments();
 
@@ -45,6 +45,7 @@ function insertAppointment($id, $prof_member_id, $mobile, $application_id, $date
 
 	$cust_member_id = getIDByMobile($mobile);
 
+	$address = $upgrade->real_escape_string($address);
 	$comment = $upgrade->real_escape_string($comment);
 
 	$query = "INSERT INTO `appointments`(`id`, `prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`) VALUES (".$id.",'".$prof_member_id."','".$cust_member_id."','".$application_id."','".$date."','".$time."','".$address."','".$budget."','".$commision."','".$agent_id."' ,'".$comment."' ,'".$sms."' ,'".$sms_log_id."' ,'".$googleEventId."' ,'".$datetimeCreated."' ,'".$datetimeStatusUpdated."' ,'".$sourceAppointmentId."' ,'".$status."' ,'".$cancelComment."') ON DUPLICATE KEY UPDATE `prof_member_id`='".$prof_member_id."', `cust_member_id`='".$cust_member_id."', `application_id`='".$application_id."', `date`='".$date."', `time`='".$time."', `address`='".$address."', `budget`='".$budget."', `commision`='".$commision."', `agent_id`='".$agent_id."', `comment`='".$comment."', `sms`='".$sms."', `sms_log_id`='".$sms_log_id."', `googleEventId`='".$googleEventId."', `datetimeCreated`='".$datetimeCreated."', `datetimeStatusUpdated`='".$datetimeStatusUpdated."', `sourceAppointmentId`='".$sourceAppointmentId."', `status`='".$status."', `cancelComment`='".$cancelComment."' ";

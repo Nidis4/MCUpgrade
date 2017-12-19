@@ -58,7 +58,7 @@ class Professional{
     }
 
     public function available(){
-        $query = "SELECT p.`id`, p.`first_name`, p.`last_name`, p.`profile_status` FROM `professionals` p, `professionals_counties` c, `professionals_applications` a WHERE c.professional_id=p.id AND a.professional_id=p.id AND c.county_id= :county AND a.application_id=:application ";
+        $query = "SELECT p.`id`, p.`first_name`, p.`last_name`, p.`profile_status`, co.`address` FROM `professionals` p, `professionals_counties` c, `professionals_applications` a, `professionals_contact_details` co WHERE c.professional_id=p.id AND a.professional_id=p.id AND co.professional_id=p.id  AND c.county_id= :county AND a.application_id=:application ";
 
         $stmt = $this->conn->prepare( $query );
 
@@ -73,7 +73,7 @@ class Professional{
     }
 
     public function busySlots($startDate, $endDate, $id){
-        $query ="SELECT `date`,`time`, `address` FROM `appointments` WHERE `prof_member_id`=".$id." AND `date` BETWEEN '".$startDate."' AND '".$endDate."'";
+        $query ="SELECT `date`,`time`, `address` FROM `appointments` WHERE `prof_member_id`=".$id." AND (`status`=1 OR `status`=0) AND `date` BETWEEN '".$startDate."' AND '".$endDate."'  ORDER BY `date`";
         $stmt = $this->conn->prepare( $query );
         $stmt->execute();
  
