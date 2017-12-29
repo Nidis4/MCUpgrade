@@ -223,7 +223,7 @@ $( ".createAppointment" ).click(function() {
                                 htmlStr += "<div class='busy'>";
                                  $.each(v.busy, function(z, x){
                                     //alert(x.date+" "+x.timeslot);
-                                    htmlStr += "<div class='timeslots'>"+x.date+" "+x.timeslot+" στο "+x.address+"</div>";
+                                    htmlStr += "<div class='timeslots'>"+x.date+" "+x.timeslot+" στο "+x.address+" - "+x.distance+"</div>";
                                  });
                                  htmlStr += "</div>";
                              }

@@ -18,14 +18,14 @@ $professional->application_id = isset($_GET['application_id']) ? $_GET['applicat
 $startDate = isset($_GET['startDate']) ? $_GET['startDate'] : die();
 $endDate = isset($_GET['endDate']) ? $_GET['endDate'] : die();
 $addressAppoint = isset($_GET['address']) ? $_GET['address'] : die();
-//$addressAppoint = urldecode($addressAppoint);
- 
+$addressAppointEn = urlencode($addressAppoint);
+
 // query categorys
 $stmt = $professional->available();
 $num = $stmt->rowCount();
 
 $allProfessionals = array();
- 
+$urls = array();
 // check if more than 0 record found
 if($num>0){
  
@@ -35,8 +35,8 @@ if($num>0){
     //$busy_arr = array();
     //$applications_arr["records"]=array();
  
-    $urls = array();
-    $addressAppointEn = urlencode($addressAppoint);
+    
+    
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
@@ -48,9 +48,7 @@ if($num>0){
         $response_a = "";
         if ($address != ""){
             $addressEn = urlencode($address);
-            //$addressAppoint = "Ηρακλείτου 113, Χαλάνδρι";
-            //$response = file_get_contents("https://maps.googleapis.com/maps/api/distancematrix/json?origins=Ηρακλείτου+113,Χαλάνδρι&destinations=Athens&key=AIzaSyA1FK-ipf2Xe0W74fo7nnyufuA0Yh1JMFE");
-            //$url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=".$addressEn."&destinations=Athens&key=AIzaSyA1FK-ipf2Xe0W74fo7nnyufuA0Yh1JMFE";
+
             $url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=".$addressEn."&destinations=".$addressAppointEn."&key=AIzaSyA1FK-ipf2Xe0W74fo7nnyufuA0Yh1JMFE";
 
             array_push($urls, $url);
@@ -87,13 +85,34 @@ if($num>0){
 
             if($response_a['status'] != 'OK' ||  $response_a['rows'][0]['elements'][0]['status'] == "NOT_FOUND") {
                $dist = "NOT OK";
+            }  
+            else{
+                $dist = $response_a['rows'][0]['elements'][0]['distance']['text'];
+                $time = $response_a['rows'][0]['elements'][0]['status'];
             }
-
-            $dist = $response_a['rows'][0]['elements'][0]['distance']['text'];
-            $time = $response_a['rows'][0]['elements'][0]['status'];
-
             $professionals_arr[$row]['distance'] = $dist;
             $d++;
+        
+
+            foreach($professional_item['busy'] as $busy_row => &$busy_item){
+
+                $distance = $distances[$d];
+                $response_a = json_decode($distance, true);
+
+                if($response_a['status'] != 'OK' ||  $response_a['rows'][0]['elements'][0]['status'] == "NOT_FOUND") {
+                   $dist = "NOT OK";
+                }  
+                else{
+                    $dist = $response_a['rows'][0]['elements'][0]['distance']['text'];
+                    $time = $response_a['rows'][0]['elements'][0]['status'];
+                }
+                //echo "Αποσταση: ".$dist."<br>";
+                //echo "Value: ".$professional_item['busy'][$busy_row]['distance']."<br>";
+                $professionals_arr[$row]['busy'][$busy_row]['distance'] =$dist;
+
+                $d++;
+
+            }
         }
     }
 
@@ -132,6 +151,8 @@ function calcutateDistances($nodes){
 }
 
 function getBusySlots($startDate, $endDate, $id, $professional){
+    global $addressAppointEn, $urls;
+    
     $stmt = $professional->busySlots($startDate, $endDate, $id);
 
     $busy_arr = array();
@@ -139,11 +160,15 @@ function getBusySlots($startDate, $endDate, $id, $professional){
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
         extract($row);
 
+        $addressEn = urlencode($address);
+        $url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=".$addressEn."&destinations=".$addressAppointEn."&key=AIzaSyA1FK-ipf2Xe0W74fo7nnyufuA0Yh1JMFE";
+        array_push($urls, $url);
+
         $busy_item = array(
             "date" => $date,
             "timeslot" => $time,
             "address" => $address,
-            "distance" => ""
+            "distance" => $url
         );
         array_push($busy_arr, $busy_item);
     }
