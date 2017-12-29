@@ -23,8 +23,6 @@ $addressAppoint = isset($_GET['address']) ? $_GET['address'] : die();
 // query categorys
 $stmt = $professional->available();
 $num = $stmt->rowCount();
-
-$allProfessionals = array();
  
 // check if more than 0 record found
 if($num>0){
@@ -38,6 +36,18 @@ if($num>0){
     $urls = array();
     $addressAppointEn = urlencode($addressAppoint);
 
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+        extract($row);
+        if ($address!=""){
+            $addressEn = urlencode($address);
+            $url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=".$addressEn."&destinations=".$addressAppointEn."&key=AIzaSyA1FK-ipf2Xe0W74fo7nnyufuA0Yh1JMFE";
+            array_push($urls, $url);
+        }
+    }
+
+    //echo json_encode($urls);
+
+    $stmt = $professional->available();
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
         extract($row);
@@ -53,37 +63,16 @@ if($num>0){
             //$url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=".$addressEn."&destinations=Athens&key=AIzaSyA1FK-ipf2Xe0W74fo7nnyufuA0Yh1JMFE";
             $url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=".$addressEn."&destinations=".$addressAppointEn."&key=AIzaSyA1FK-ipf2Xe0W74fo7nnyufuA0Yh1JMFE";
 
-            array_push($urls, $url);
-
-        }
-        else{
-            $dist="Unknown";
-        }
-
-        $busy_arr = getBusySlots($startDate, $endDate, $id,$professional);
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+            $response = curl_exec($ch);
+            curl_close($ch);
         
-        $professional_item=array(
-            "id" => $id,
-            "first_name" => $first_name,
-            "last_name" => $last_name,
-            "address" => $address,
-            "Appointment" => $addressAppoint,
-            "distance" => $dist,
-            "busy" => $busy_arr
-        );
- 
-        array_push($professionals_arr, $professional_item);
-    }
-
-    $distances = calcutateDistances($urls);
-    $d=0;
-
-    foreach($professionals_arr as $row => $professional_item){
-
-        if ($professional_item['distance'] == ""){
-            $distance = $distances[$d];
-
-            $response_a = json_decode($distance, true);
+            $response_a = json_decode($response, true);
 
             if($response_a['status'] != 'OK' ||  $response_a['rows'][0]['elements'][0]['status'] == "NOT_FOUND") {
                $dist = "NOT OK";
@@ -91,12 +80,33 @@ if($num>0){
 
             $dist = $response_a['rows'][0]['elements'][0]['distance']['text'];
             $time = $response_a['rows'][0]['elements'][0]['status'];
-
-            $professionals_arr[$row]['distance'] = $dist;
-            $d++;
         }
-    }
+        else{
+            $dist="Unknown";
+        }
 
+        $busy_arr = getBusySlots($startDate, $endDate, $id,$professional);
+        // extract row
+        // this will make $row['name'] to
+        // just $name only
+        
+ 
+        $professional_item=array(
+            "id" => $id,
+            "first_name" => $first_name,
+            "last_name" => $last_name,
+            "address" => $address,
+            "Appointment" => $addressAppoint,
+            "distance" => $dist,
+            //"time" => $time,
+            //"url" => $url,
+            //"response" => $response_a,
+            "busy" => $busy_arr
+        );
+ 
+        array_push($professionals_arr, $professional_item);
+    }
+ 
     echo json_encode($professionals_arr);
 } 
 else{
@@ -105,45 +115,18 @@ else{
     );
 }
 
-function calcutateDistances($nodes){
-    $node_count = count($nodes);
-
-    $curl_arr = array();
-    $master = curl_multi_init();
-
-    for($i = 0; $i < $node_count; $i++)
-    {
-        $url =$nodes[$i];
-        $curl_arr[$i] = curl_init($url);
-        curl_setopt($curl_arr[$i], CURLOPT_RETURNTRANSFER, true);
-        curl_multi_add_handle($master, $curl_arr[$i]);
-    }
-
-    do {
-        curl_multi_exec($master,$running);
-    } while($running > 0);
-
-
-    for($i = 0; $i < $node_count; $i++)
-    {
-        $results[] = curl_multi_getcontent  ( $curl_arr[$i]  );
-    }
-    return $results;
-}
-
 function getBusySlots($startDate, $endDate, $id, $professional){
     $stmt = $professional->busySlots($startDate, $endDate, $id);
 
     $busy_arr = array();
-    
+
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
         extract($row);
 
         $busy_item = array(
             "date" => $date,
             "timeslot" => $time,
-            "address" => $address,
-            "distance" => ""
+            "address" => $address
         );
         array_push($busy_arr, $busy_item);
     }

@@ -163,7 +163,7 @@ include('config/core.php');
 														<input type="text" class="form-control" name="end" id='endDate'>
 													</div>
 												</div>
-											</div>
+										</div>
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Budget <span class="required">*</span></label>
 											<div class="col-sm-9">
