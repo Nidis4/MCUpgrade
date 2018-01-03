@@ -76,7 +76,7 @@ if($num>0){
     $distances = calcutateDistances($urls);
     $d=0;
 
-    foreach($professionals_arr as $row => $professional_item){
+    foreach($professionals_arr as $row => $professional_item){  
 
         if ($professional_item['distance'] == ""){
             $distance = $distances[$d];
@@ -87,7 +87,7 @@ if($num>0){
                $dist = "NOT OK";
             }  
             else{
-                $dist = $response_a['rows'][0]['elements'][0]['distance']['text'];
+                $dist = $response_a['rows'][0]['elements'][0]['distance']['value'];
                 $time = $response_a['rows'][0]['elements'][0]['status'];
             }
             $professionals_arr[$row]['distance'] = $dist;
@@ -103,7 +103,7 @@ if($num>0){
                    $dist = "NOT OK";
                 }  
                 else{
-                    $dist = $response_a['rows'][0]['elements'][0]['distance']['text'];
+                    $dist = $response_a['rows'][0]['elements'][0]['distance']['value'];
                     $time = $response_a['rows'][0]['elements'][0]['status'];
                 }
                 //echo "Αποσταση: ".$dist."<br>";

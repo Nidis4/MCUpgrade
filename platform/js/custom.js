@@ -52,11 +52,13 @@ $('select#category').on('change', function() {
             {
                 //alert(data.length);
                  var htmlStr = '';
+                 htmlStr += '<option value="" disabled selected>Select your option</option>';
                 $.each(data, function(k, v){
                     //htmlStr += v.id + ' ' + v.name + '<br />';
                     //alert(v.id);
+
                     if (v.id!=undefined){
-                        htmlStr += '<option value="'+v.id+'">'+v.title_greek+'</option>';
+                        htmlStr += '<option value="'+v.id+'" minp="'+v.min_price+'" dur="60">'+v.title_greek+'</option>';
                     }
                     else{
 
@@ -66,6 +68,14 @@ $('select#category').on('change', function() {
                
             }
         });
+});
+
+$('select#applications').on('change', function() {
+    var minprice = $('select#applications option:selected').attr('minp');
+    var duration = $('select#applications option:selected').attr('dur');
+
+    $('#budget').val(minprice);
+    $('#duration').val(duration);
 });
 
 
@@ -215,8 +225,30 @@ $( ".createAppointment" ).click(function() {
             dataType: "json",
             success: function(data)
             {
+                $("#available").empty();
                  var htmlStr = "";
+                 var first = 100000;
+                 var second= 100000;
+                 var third = 100000;
                 $.each(data, function(k, v){
+
+                    if (v.distance < third){
+                        if (v.distance < second){
+                            if (v.distance < first){
+                                third = second;
+                                second = first;
+                                first = v.distance;
+                            }
+                            else{
+                                third = second;
+                                second = v.distance;
+                            }
+                        }
+                        else{
+                            third = v.distance;
+                        }
+                    }
+
                             //alert(v.first_name+" "+v.last_name+": "+v.distance);
                             htmlStr += "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='distance'>"+v.distance+"</div>";
                              if (v.busy!=undefined){
@@ -224,12 +256,32 @@ $( ".createAppointment" ).click(function() {
                                  $.each(v.busy, function(z, x){
                                     //alert(x.date+" "+x.timeslot);
                                     htmlStr += "<div class='timeslots'>"+x.date+" "+x.timeslot+" στο "+x.address+" - "+x.distance+"</div>";
+                                    if (x.distance < third){
+                                        if (x.distance < second){
+                                            if (x.distance < first){
+                                                third = second;
+                                                second = first;
+                                                first = x.distance;
+                                            }
+                                            else{
+                                                third = second;
+                                                second = x.distance;
+                                            }
+                                        }
+                                        else{
+                                            third = x.distance;
+                                        }
+                                    }
                                  });
                                  htmlStr += "</div>";
                              }
                              htmlStr += "</div>";
                        });
                 $("#available").append(htmlStr);
+
+                alert("First Choice "+first);
+                alert("Second Choice "+second);
+                alert("third Choice "+third);
             }
         });
 

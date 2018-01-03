@@ -134,6 +134,12 @@ include('config/core.php');
 												</div>
 										</div>
 										<div class="form-group row">
+												<label class="col-lg-3 control-label text-lg-right pt-2">Duration in mins</label>
+												<div class="col-lg-9">
+													<input class="form-control" id="duration" type="number" min="0" max="900" step="30">
+												</div>
+										</div>
+										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">County <span class="required">*</span></label>
 											<div class="col-sm-9">
 												<?php

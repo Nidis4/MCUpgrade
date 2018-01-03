@@ -3,7 +3,7 @@ include('session.php');
 include('config/core.php');
 ?>
 <!doctype html>
-<html class="fixed">
+<html class="fixed sidebar-left-collapsed">
 	<head>
 		<!-- Basic -->
 		<meta charset="UTF-8">
@@ -94,7 +94,7 @@ include('config/core.php');
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="mb-3">
-											<button id="addToTable" class="btn btn-primary">Add <i class="fa fa-plus"></i></button>
+											<a href='createAppointment.php'><button id="addToTable" class="btn btn-primary">Add <i class="fa fa-plus"></i></button></a>
 										</div>
 									</div>
 								</div>
