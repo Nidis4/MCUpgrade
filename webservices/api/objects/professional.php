@@ -79,5 +79,78 @@ class Professional{
  
         return $stmt;
     }
+
+     public function readPaging($from_record_num, $records_per_page){
+     
+        // select query
+        $query = "SELECT
+                p.`id`, p.`first_name`, p.`last_name`, p.`profile_status`, co.`address` FROM `professionals` p,  `professionals_contact_details` co WHERE co.professional_id=p.id 
+                ORDER BY
+                    p.`id` DESC
+                LIMIT ?, ?";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind variable values
+        $stmt->bindParam(1, $from_record_num, PDO::PARAM_INT);
+        $stmt->bindParam(2, $records_per_page, PDO::PARAM_INT);
+     
+        // execute query
+        $stmt->execute();
+     
+        // return values from database
+        return $stmt;
+    }
+
+    // used for paging 
+    public function count(){
+        $query = "SELECT COUNT(*) as total_rows FROM " . $this->table_name . "";
+     
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+        return $row['total_rows'];
+    }
+
+    public function readOne(){
+     
+        // query to read single record
+        $query = "SELECT
+                p.`id`, p.`first_name`, p.`last_name`, cc.`address`
+            FROM
+                " . $this->table_name . " p
+                LEFT JOIN ". $this->contact_table_name." cc
+                    ON p.id = cc.professional_id
+                WHERE
+                    p.id = :id
+                LIMIT
+                    0,1";
+     
+        //echo $query;
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        //echo $this->id." ------ ";
+
+         $cur_id = $this->id;
+        // bind id of product to be updated
+        $stmt->bindParam(':id',  $cur_id, PDO::PARAM_INT);
+        //$stmt->bindValue(':id', '$cur_id', PDO::PARAM_STR);
+     
+        // execute query
+        $stmt->execute();
+
+        $num = $stmt->rowCount();
+     
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+        // set values to object properties
+        $this->first_name = $row['first_name'];
+        $this->last_name = $row['last_name'];
+        $this->address = $row['address'];
+    } // Read One
 }
 ?>

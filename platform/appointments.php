@@ -126,8 +126,8 @@ include('config/core.php');
 
 											echo '<tr data-item-id="'.$id.'" class="status-'.$status.'">
 													  <td>'.$submission_date.'</td>
-													  <td><a href="'.$prof_id.'">'.$prof_name.'</a></td>
-													  <td><a href="'.$cust_id.'">'.$cust_name.'</a></td>
+													  <td><a href="professional.php?id='.$prof_id.'">'.$prof_name.'</a></td>
+													  <td><a href="customer.php?id='.$cust_id.'">'.$cust_name.'</a></td>
 													  <td>'.$date.'</td>
 													  <td>'.$budget.'</td>
 													  <td>'.$commission.'</td>
