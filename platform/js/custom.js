@@ -68,6 +68,19 @@ $('select#category').on('change', function() {
                
             }
         });
+
+    // To get the Questions for the Selected Category
+    var getApplicationsQue = API_LOCATION+'application/readByCategoryQue.php?cat_id='+cat_id;
+    $.ajax({
+            type: "POST",
+            url: getApplicationsQue,
+            dataType: "html",
+            success: function(data)
+            {
+               $(".application_questions").append(data);
+               
+            }
+        });
 });
 
 $('select#applications').on('change', function() {

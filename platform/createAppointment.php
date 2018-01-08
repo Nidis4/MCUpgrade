@@ -118,7 +118,7 @@ include('config/core.php');
 														<?php
 															foreach ($categories as $category) {
 																$cat_id = $category['id'];
-																$cat_name = $category['title_greek'];
+																$cat_name = $category['title'];
 																$commision = $category['commissionRate'];
 																echo '<option value="'.$cat_id.'" comm="'.$commision.'">'.$cat_name.'</option>';
 															}
@@ -132,6 +132,8 @@ include('config/core.php');
 													<select data-plugin-selectTwo class="form-control populate" id="applications" disabled>
 													</select>
 												</div>
+										</div>
+										<div class="form-group row application_questions">
 										</div>
 										<div class="form-group row">
 												<label class="col-lg-3 control-label text-lg-right pt-2">Duration in mins</label>
