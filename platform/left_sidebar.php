@@ -277,175 +277,17 @@
 				                    <li class="nav-parent">
 				                        <a class="nav-link" href="#">
 				                            <i class="fa fa-tasks" aria-hidden="true"></i>
-				                            <span>UI Elements</span>
+				                            <span>Customers</span>
 				                        </a>
 				                        <ul class="nav nav-children">
 				                            <li>
-				                                <a class="nav-link" href="ui-elements-typography.html">
-				                                    Typography
+				                                <a class="nav-link" href="customers.php">
+				                                    List of Customers
 				                                </a>
 				                            </li>
-				                            <li class="nav-parent">
-				                                <a class="nav-link" href="#">
-				                                    Icons <span class="mega-sub-nav-toggle toggled float-right" data-toggle="collapse" data-target=".mega-sub-nav-sub-menu-1"></span>
-				                                </a>
-				                                <ul class="nav nav-children">
-				                                    <li>
-				                                        <a class="nav-link" href="ui-elements-icons-elusive.html">
-				                                            Elusive
-				                                        </a>
-				                                    </li>
-				                                    <li>
-				                                        <a class="nav-link" href="ui-elements-icons-font-awesome.html">
-				                                            Font Awesome
-				                                        </a>
-				                                    </li>
-				                                    <li>
-				                                        <a class="nav-link" href="ui-elements-icons-line-icons.html">
-				                                            Line Icons
-				                                        </a>
-				                                    </li>
-				                                    <li>
-				                                        <a class="nav-link" href="ui-elements-icons-meteocons.html">
-				                                            Meteocons
-				                                        </a>
-				                                    </li>
-				                                </ul>
-				                            </li>
-				                            <li>
-				                                <a class="nav-link" href="ui-elements-tabs.html">
-				                                    Tabs
-				                                </a>
-				                            </li>
-				                            <li>
-				                                <a class="nav-link" href="ui-elements-cards.html">
-				                                    Cards
-				                                </a>
-				                            </li>
-				                            <li>
-				                                <a class="nav-link" href="ui-elements-widgets.html">
-				                                    Widgets
-				                                </a>
-				                            </li>
-				                            <li>
-				                                <a class="nav-link" href="ui-elements-portlets.html">
-				                                    Portlets
-				                                </a>
-				                            </li>
-				                            <li>
-				                                <a class="nav-link" href="ui-elements-buttons.html">
-				                                    Buttons
-				                                </a>
-				                            </li>
-				                            <li>
-				                                <a class="nav-link" href="ui-elements-alerts.html">
-				                                    Alerts
-				                                </a>
-				                            </li>
-				                            <li>
-				                                <a class="nav-link" href="ui-elements-notifications.html">
-				                                    Notifications
-				                                </a>
-				                            </li>
-				                            <li>
-				                                <a class="nav-link" href="ui-elements-modals.html">
-				                                    Modals
-				                                </a>
-				                            </li>
-				                            <li>
-				                                <a class="nav-link" href="ui-elements-lightbox.html">
-				                                    Lightbox
-				                                </a>
-				                            </li>
-				                            <li>
-				                                <a class="nav-link" href="ui-elements-progressbars.html">
-				                                    Progress Bars
-				                                </a>
-				                            </li>
-				                            <li>
-				                                <a class="nav-link" href="ui-elements-sliders.html">
-				                                    Sliders
-				                                </a>
-				                            </li>
-				                            <li>
-				                                <a class="nav-link" href="ui-elements-carousels.html">
-				                                    Carousels
-				                                </a>
-				                            </li>
-				                            <li>
-				                                <a class="nav-link" href="ui-elements-accordions.html">
-				                                    Accordions
-				                                </a>
-				                            </li>
-				                            <li>
-				                                <a class="nav-link" href="ui-elements-toggles.html">
-				                                    Toggles
-				                                </a>
-				                            </li>
-				                            <li>
-				                                <a class="nav-link" href="ui-elements-nestable.html">
-				                                    Nestable
-				                                </a>
-				                            </li>
-				                            <li>
-				                                <a class="nav-link" href="ui-elements-tree-view.html">
-				                                    Tree View
-				                                </a>
-				                            </li>
-				                            <li>
-				                                <a class="nav-link" href="ui-elements-scrollable.html">
-				                                    Scrollable
-				                                </a>
-				                            </li>
-				                            <li>
-				                                <a class="nav-link" href="ui-elements-grid-system.html">
-				                                    Grid System
-				                                </a>
-				                            </li>
-				                            <li>
-				                                <a class="nav-link" href="ui-elements-charts.html">
-				                                    Charts
-				                                </a>
-				                            </li>
-				                            <li class="nav-parent">
-				                                <a class="nav-link" href="#">
-				                                    Animations <span class="mega-sub-nav-toggle float-right" data-toggle="collapse" data-target=".mega-sub-nav-sub-menu-2"></span>
-				                                </a>
-				                                <ul class="nav nav-children">
-				                                    <li>
-				                                        <a class="nav-link" href="ui-elements-animations-appear.html">
-				                                            Appear
-				                                        </a>
-				                                    </li>
-				                                    <li>
-				                                        <a class="nav-link" href="ui-elements-animations-hover.html">
-				                                            Hover
-				                                        </a>
-				                                    </li>
-				                                </ul>
-				                            </li>
-				                            <li class="nav-parent">
-				                                <a class="nav-link" href="#">
-				                                    Loading <span class="mega-sub-nav-toggle float-right" data-toggle="collapse" data-target=".mega-sub-nav-sub-menu-3"></span>
-				                                </a>
-				                                <ul class="nav nav-children">
-				                                    <li>
-				                                        <a class="nav-link" href="ui-elements-loading-overlay.html">
-				                                            Overlay
-				                                        </a>
-				                                    </li>
-				                                    <li>
-				                                        <a class="nav-link" href="ui-elements-loading-progress.html">
-				                                            Progress
-				                                        </a>
-				                                    </li>
-				                                </ul>
-				                            </li>
-				                            <li>
-				                                <a class="nav-link" href="ui-elements-extra.html">
-				                                    Extra
-				                                </a>
-				                            </li>
+				                            
+				                           
+				                            
 				                        </ul>
 				                    </li>
 				                    <li class="nav-parent">
@@ -464,26 +306,7 @@
 				                                    List of Appointments
 				                                </a>
 				                            </li>
-				                            <!--<li>
-				                                <a class="nav-link" href="forms-validation.html">
-				                                    Validation
-				                                </a>
-				                            </li>
-				                            <li>
-				                                <a class="nav-link" href="forms-layouts.html">
-				                                    Layouts
-				                                </a>
-				                            </li>
-				                            <li>
-				                                <a class="nav-link" href="forms-wizard.html">
-				                                    Wizard
-				                                </a>
-				                            </li>
-				                            <li>
-				                                <a class="nav-link" href="forms-code-editor.html">
-				                                    Code Editor
-				                                </a>
-				                            </li>-->
+				                            
 				                        </ul>
 				                    </li>
 				                    <li class="nav-parent">
