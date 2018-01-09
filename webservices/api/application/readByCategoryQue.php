@@ -15,10 +15,42 @@ if($catId == "60"){
     <!-- Display if m2 greater than 80 -->
     <label class="col-lg-3 control-label text-lg-right pt-2 MoreThanEightyDisplayNewQuestion" style="display: none">Το ακίνητο είναι μεζονέτα?  </label>
     <div class="col-lg-9 row MoreThanEightyDisplayNewQuestion" style="display: none">
-        <div class="col-lg-1"><input class="form-control ElectricalPanelsecondNewInputName" type="radio" name="ElectricalPanelsecondNewInputName" value="YES" id="ElectricalPanelsecondNewInputId"></div>
-        <div class="col-lg-2 pt-2">YES</div>
-        <div class="col-lg-1"><input class="form-control ElectricalPanelsecondNewInputName" type="radio" name="ElectricalPanelsecondNewInputName" value="NO" id="ElectricalPanelsecondNewInputIdBestDesign"></div>
-        <div class="col-lg-4 pt-2">NO</div>
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="ElectricalPanelsecondNewInputName" type="radio" name="ElectricalPanelsecondNewInputName" value="YES" id="ElectricalPanelsecondNewInputId">
+                    YES
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="ElectricalPanelsecondNewInputName" type="radio" name="ElectricalPanelsecondNewInputName" value="NO" id="ElectricalPanelsecondNewInputIdBestDesign">
+                    NO
+                </label>
+            </div>
+        </div>
+    </div>    
+
+    <!-- Display if Yes -->
+    <label class="col-lg-3 control-label text-lg-right pt-2 ElectricalPanelsecondNewInputNameYes" style="display: none">Συνήθως κάθε όροφος έχει ξεχωριστό πίνακα, πόσους πίνακες έχετε?</label>
+    <div class="col-lg-9 row ElectricalPanelsecondNewInputNameYes" style="display: none">
+        <div data-plugin-spinner data-plugin-options='{ "value":1, "step": 1, "min": 1, "max": 200 }'>
+            <div class="input-group">
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-down">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <input type="text" class="spinner-input form-control" value="1" maxlength="3" readonly>
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-up">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
    
@@ -28,33 +60,104 @@ if($catId == "60"){
 
     <label class="col-lg-3 control-label text-lg-right pt-2">Το ρεύμα είναι τριφασικό?  </label>
     <div class="col-lg-9 row">
-        <div class="col-lg-1"><input class="form-control" type="radio" name="ElectricalCertificatebedStatus" value="YES" id="ElectricalCertificateCategory"></div>
-        <div class="col-lg-2 pt-2">YES</div>
-        <div class="col-lg-1"><input class="form-control" type="radio" name="ElectricalCertificatebedStatus" value="NO" id="ElectricalCertificateCategorytriple"></div>
-        <div class="col-lg-4 pt-2">NO</div>
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="" type="radio" name="ElectricalCertificatebedStatus" value="YES" id="ElectricalCertificateCategory">
+                    YES
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="" type="radio" name="ElectricalCertificatebedStatus" value="NO" id="ElectricalCertificateCategorytriple">
+                    NO
+                </label>
+            </div>
+        </div>
     </div>
 
     <label class="col-lg-3 control-label text-lg-right pt-2">Έχετε έναν λογαριασμό της ΔΕΗ ή κάποιου άλλου παρόχου ρεύματος;  </label>
     <div class="col-lg-9 row">
-        <div class="col-lg-1"><input class="form-control ElectricalTagStatus" type="radio" name="ElectricalTagStatus" value="YES" ></div>
-        <div class="col-lg-2 pt-2">YES</div>
-        <div class="col-lg-1"><input class="form-control ElectricalTagStatus" type="radio" name="ElectricalTagStatus" value="NO" ></div>
-        <div class="col-lg-4 pt-2">NO</div>
-        <div class="col-lg-12 pt-2 ElectricalTagStatusYes" style="display: none">Παρακαλώ να έχετε μάζί σας στο ραντεβού ένα λογαριασμό ρεύματος</div>
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="ElectricalTagStatus" type="radio" name="ElectricalTagStatus" value="YES" id="ElectricalCertificateCategory">
+                    YES
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="ElectricalTagStatus" type="radio" name="ElectricalTagStatus" value="NO" id="ElectricalCertificateCategorytriple">
+                    NO
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-12 pt-2 ElectricalTagStatusYes"></div>
     </div>
     <label class="col-lg-3 control-label text-lg-right pt-2">Έχετε ηλεκτρολογικό πίνακα;  </label>
     <div class="col-lg-9 row">
-        <div class="col-lg-1"><input class="form-control" type="radio" name="ElectricalPanelName" value="YES" id="ElectricalPanelId"></div>
-        <div class="col-lg-2 pt-2">YES</div>
-        <div class="col-lg-1"><input class="form-control" type="radio" name="ElectricalPanelName" value="NO" id="ElectricalPanelId"></div>
-        <div class="col-lg-4 pt-2">NO</div>
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="ElectricalPanelName" type="radio" name="ElectricalPanelName" value="YES" id="ElectricalPanelId">
+                    YES
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="ElectricalPanelName" type="radio" name="ElectricalPanelName" value="NO" id="ElectricalPanelIdtriple">
+                    NO
+                </label>
+            </div>
+        </div>        
     </div>
+    <!-- Display if No -->
+    <label class="col-lg-3 control-label text-lg-right pt-2 ElectricalPanelNameNo" style="display: none">Θέλετε να εγκαταστήσουμε εμείς τον πίνακα?  </label>
+    <div class="col-lg-9 row ElectricalPanelNameNo" style="display: none">
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="ElectricalPanelNamesecond" type="radio" name="ElectricalPanelNamesecond" value="YES" id="ElectricalPanelNamesecond">
+                    YES
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="ElectricalPanelNamesecond" type="radio" name="ElectricalPanelNamesecond" value="NO" id="ElectricalPanelNamesecondBestDesign">
+                    NO
+                </label>
+            </div>
+        </div>
+    </div> 
+
+
+
     <label class="col-lg-3 control-label text-lg-right pt-2">Έχετε ρελέ τάσης διαφυγής;   </label>
     <div class="col-lg-9 row">
-        <div class="col-lg-1"><input class="form-control" type="radio" name="ElectricalVoltageRelayName" value="YES" id="ElectricalVoltageRelayID"></div>
-        <div class="col-lg-2 pt-2">YES</div>
-        <div class="col-lg-1"><input class="form-control" type="radio" name="ElectricalVoltageRelayName" value="NO" id="ElectricalVoltageRelayID"></div>
-        <div class="col-lg-4 pt-2">NO</div>
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="" type="radio" name="ElectricalVoltageRelayName" value="YES" id="ElectricalVoltageRelayID">
+                    YES
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="" type="radio" name="ElectricalVoltageRelayName" value="NO" id="ElectricalVoltageRelayIDa">
+                    NO
+                </label>
+            </div>
+        </div>
     </div>
 
     <script type="text/javascript">
@@ -71,11 +174,62 @@ if($catId == "60"){
            $(".ElectricalTagStatus").on('change',function(){
                 var rvale = $(this).val();                
                 if(rvale == "YES"){
-                   $(".ElectricalTagStatusYes").css('display','inherit'); 
+                   $(".ElectricalTagStatusYes").text('Παρακαλώ να έχετε μάζί σας στο ραντεβού ένα λογαριασμό ρεύματος'); 
                 }else{
-                   $(".ElectricalTagStatusYes").css('display','none'); 
+                   $(".ElectricalTagStatusYes").text('Εναλλακτικά,βεβαιωθείτε οτι έχετε αριθμό ρολογιού και αριθμο παροχής'); 
                 }
            });
+
+           $(".ElectricalPanelName").on('change',function(){
+                var rvale = $(this).val();                
+                if(rvale == "YES"){
+                   $(".ElectricalPanelNameNo").css('display','none'); 
+                }else{                   
+                   $(".ElectricalPanelNameNo").css('display','inherit'); 
+                }
+           });
+
+           $(".ElectricalPanelsecondNewInputName").on('change',function(){
+                var rvale = $(this).val();                
+                if(rvale == "YES"){
+                   $(".ElectricalPanelsecondNewInputNameYes").css('display','inherit'); 
+                }else{
+                   $(".ElectricalPanelsecondNewInputNameYes").css('display','none');
+                   var vale = parseInt($('.spinner-input').val());
+                   if(vale >= 2){
+                        var uvars = (parseInt(vale - 1)) * 34;
+                        var newbud = parseFloat($('#budget').val()) - parseInt(uvars);
+                        $('#budget').val(newbud);
+                   }
+                   $('.spinner-input').val('1'); 
+                }
+           });
+
+           $(".spinner-buttons .spinner-down").on('click',function(){
+                var vale = $('.spinner-input').val();
+                if(vale >= 2){
+                    var newvale = parseInt(vale) - 1;
+                    $('.spinner-input').val(newvale);
+                    var newbud = parseFloat($('#budget').val()) - 34;
+                    $('#budget').val(newbud);
+                }
+                
+           });
+
+           $(".spinner-buttons .spinner-up").on('click',function(){
+                var vale = $('.spinner-input').val();
+                var newvale = parseInt(vale) + 1;
+                $('.spinner-input').val(newvale);
+                var upsp = $('.spinner-input').val();
+                var upsp = $('.spinner-input').val();
+                if(upsp >= 2){
+                    var newbud = parseFloat($('#budget').val()) + 34;
+                    $('#budget').val(newbud);
+                }
+           });
+
+           
+
 
 
 

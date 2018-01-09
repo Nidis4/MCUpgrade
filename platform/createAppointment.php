@@ -375,7 +375,7 @@ include('config/core.php');
 		<!-- Specific Page Vendor -->
 		<script src="vendor/jquery-validation/jquery.validate.js"></script>
 		<script src="vendor/select2/js/select2.js"></script>
-		
+		<script src="vendor/fuelux/js/spinner.js"></script>
 		<!-- Theme Base, Components and Settings -->
 		<script src="js/theme.js"></script>
 		
