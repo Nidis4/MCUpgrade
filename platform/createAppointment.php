@@ -184,6 +184,12 @@ include('config/core.php');
 												<input type="text" name="commision" id="commision" class="form-control" placeholder="eg.: John" required value="0" />
 											</div>
 										</div>
+										<div class="form-group row">
+											<label class="col-sm-3 control-label text-sm-right pt-2">Comments</label>
+											<div class="col-sm-9">												
+												<textarea name="comment" id="comment123" class="form-control"></textarea>
+											</div>
+										</div>
 									</div>
 									<footer class="card-footer">
 										<div class="row justify-content-end">

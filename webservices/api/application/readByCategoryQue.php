@@ -63,7 +63,7 @@ if($catId == "60"){
         <div class="col-lg-3">            
             <div class="radio">
                 <label class="pt-3">
-                    <input class="" type="radio" name="ElectricalCertificatebedStatus" value="YES" id="ElectricalCertificateCategory">
+                    <input class="ElectricalCertificatebedStatus" type="radio" name="ElectricalCertificatebedStatus" value="YES" id="ElectricalCertificateCategory">
                     YES
                 </label>
             </div>
@@ -71,7 +71,7 @@ if($catId == "60"){
         <div class="col-lg-3">            
             <div class="radio">
                 <label class="pt-3">
-                    <input class="" type="radio" name="ElectricalCertificatebedStatus" value="NO" id="ElectricalCertificateCategorytriple">
+                    <input class="ElectricalCertificatebedStatus" type="radio" name="ElectricalCertificatebedStatus" value="NO" id="ElectricalCertificateCategorytriple">
                     NO
                 </label>
             </div>
@@ -140,8 +140,8 @@ if($catId == "60"){
 
 
 
-    <label class="col-lg-3 control-label text-lg-right pt-2">Έχετε ρελέ τάσης διαφυγής;   </label>
-    <div class="col-lg-9 row">
+    <label class="col-lg-3 control-label text-lg-right pt-2 ElectricalVoltageRelayNameYes">Έχετε ρελέ τάσης διαφυγής;   </label>
+    <div class="col-lg-9 row ElectricalVoltageRelayNameYes">
         <div class="col-lg-3">            
             <div class="radio">
                 <label class="pt-3">
@@ -188,6 +188,29 @@ if($catId == "60"){
                    $(".ElectricalPanelNameNo").css('display','inherit'); 
                 }
            });
+
+           $(".ElectricalCertificatebedStatus").on('change',function(){
+                var rvale = $(this).val(); 
+                if(rvale == "YES"){ 
+                   $("#comment123").val('3φασικό'); 
+                }else{ 
+
+                }
+           });
+
+           
+
+           $(".ElectricalPanelNamesecond").on('change',function(){
+                var rvale = $(this).val();                
+                if(rvale == "YES"){
+                   $(".ElectricalVoltageRelayNameYes").css('display','none'); 
+                   $("#comment123").val('3φασικό , Εγκατάσταση νέου πίνακα '+ '150' +' €');
+                }else{                   
+                   $(".ElectricalVoltageRelayNameYes").css('display','inherit'); 
+                }
+           });
+
+
 
            $(".ElectricalPanelsecondNewInputName").on('change',function(){
                 var rvale = $(this).val();                
