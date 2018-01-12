@@ -20,7 +20,12 @@ $db = $database->getConnection();
 $appointment = new Appointment($db);
  
 // query products
-$stmt = $appointment->readPaging($from_record_num, $records_per_page);
+if (isset($_GET['cust_id'])) {
+    $cust_id = $_GET['cust_id'];
+    $stmt = $appointment->readPagingByCust($from_record_num, $records_per_page, $cust_id);
+} else {
+    $stmt = $appointment->readPaging($from_record_num, $records_per_page);
+}
 $num = $stmt->rowCount();
  
 // check if more than 0 record found

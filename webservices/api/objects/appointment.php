@@ -146,6 +146,32 @@ class Appointment{
         return $stmt;
     }
 
+    // read products with pagination for Customer
+    public function readPagingByCust($from_record_num, $records_per_page, $cust_id){
+     
+        // select query
+        $query = "SELECT
+                    `id`, `prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`
+                FROM
+                    " . $this->table_name . " WHERE `cust_member_id`= ? AND (`status`=1 OR `status`=0)
+                ORDER BY `datetimeCreated` DESC
+                LIMIT ?, ?";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind variable values
+        $stmt->bindParam(1, $cust_id, PDO::PARAM_INT);
+        $stmt->bindParam(2, $from_record_num, PDO::PARAM_INT);
+        $stmt->bindParam(3, $records_per_page, PDO::PARAM_INT);
+     
+        // execute query
+        $stmt->execute();
+     
+        // return values from database
+        return $stmt;
+    }
+
     // used for paging products
     public function count(){
         $query = "SELECT COUNT(*) as total_rows FROM " . $this->table_name . "";

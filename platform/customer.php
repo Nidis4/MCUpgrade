@@ -49,9 +49,23 @@ include('config/core.php');
 		<section class="body">
 
 			<?php
+				
+				if (isset($_GET['id'])) {
+				    $id = $_GET['id'];
+				} else {
+				    // Fallback behaviour goes here
+				    $url = $home_url."platform/customers.php";
+				    echo $url;
+				    header("Location: ".$url);
+					die();
+				}
 				include('header.php');
-				$appointments = file_get_contents($api_url.'webservices/api/appointment/read_paging.php');
-				$appointmentsPag = json_decode($appointments, true); // decode the JSON into an associative array				
+
+				$customer = file_get_contents($api_url.'webservices/api/customer/read_one.php?id='.$id);
+				$customer = json_decode($customer, true); // decode the JSON into an associative array	
+
+				$appointments = file_get_contents($api_url.'webservices/api/appointment/read_paging.php?cust_id='.$id);
+				$appointmentsPag = json_decode($appointments, true); // decode the JSON into an associative array			
 			?>
 
 			<div class="inner-wrapper">
@@ -72,8 +86,8 @@ include('config/core.php');
 										<i class="fa fa-home"></i>
 									</a>
 								</li>
-								<li><span>Tables</span></li>
-								<li><span>Editable</span></li>
+								<li><span>Home</span></li>
+								<li><span>Customers</span></li>
 							</ol>
 					
 							<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
@@ -88,16 +102,67 @@ include('config/core.php');
 									<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
 								</div>
 						
-								<h2 class="card-title">List of Appointments</h2>
+								<h2 class="card-title">Customer Information #<?php echo $customer['id']; ?></h2>
 							</header>
 							<div class="card-body">
-								<div class="row">
-									<div class="col-sm-6">
-										<div class="mb-3">
-											<a href='createAppointment.php'><button id="addToTable" class="btn btn-primary">Add <i class="fa fa-plus"></i></button></a>
-										</div>
+								<div class="form-group row">
+									<label class="col-sm-3 control-label text-sm-right pt-2">Name <span class="required">*</span></label>
+									<div class="col-sm-4">
+										<input type="text" name="first_name" class="form-control" value="<?php echo $customer['first_name']; ?>" required />
+									</div>
+									<div class="col-sm-3 offset-sm-1">
+										<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning" id="updateCustomer">Update Details</button>
 									</div>
 								</div>
+								<div class="form-group row">
+									<label class="col-sm-3 control-label text-sm-right pt-2">Surname <span class="required">*</span></label>
+									<div class="col-sm-4">
+										<input type="text" name="last_name" id="last_name" class="form-control" value="<?php echo $customer['last_name']; ?>" required />
+									</div>										
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-3 control-label text-sm-right pt-2">Sex <span class="required">*</span></label>
+									<div class="col-sm-4">
+										<input type="text" name="sex" id="sex" class="form-control" value="<?php echo $customer['sex']; ?>" required />
+									</div>										
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-3 control-label text-sm-right pt-2">Address <span class="required">*</span></label>
+									<div class="col-sm-4">
+										<input type="text" name="address" id="pac-input-address" class="form-control" value="<?php echo $customer['address']; ?>" required />
+									</div>										
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-3 control-label text-sm-right pt-2">Mobile <span class="required">*</span></label>
+									<div class="col-sm-4">
+										<input type="text" name="mobile" id="mobile" class="form-control" value="<?php echo $customer['mobile']; ?>" required />
+									</div>										
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-3 control-label text-sm-right pt-2">Landline <span class="required">*</span></label>
+									<div class="col-sm-4">
+										<input type="text" name="phone" id="phone" class="form-control" value="<?php echo $customer['phone']; ?>" required />
+									</div>										
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-3 control-label text-sm-right pt-2">E-mail <span class="required">*</span></label>
+									<div class="col-sm-4">
+										<input type="text" name="email" id="email" class="form-control" value="<?php echo $customer['email']; ?>" required />
+									</div>										
+								</div>
+							</div>
+						</section>
+
+						<section class="card">
+							<header class="card-header">
+								<div class="card-actions">
+									<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+									<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
+								</div>
+						
+								<h2 class="card-title">Customer's Appointments</h2>
+							</header>
+							<div class="card-body">
 								<table class="table table-bordered table-striped mb-0" id="datatable-editable">
 									<thead>
 										<tr>
@@ -262,6 +327,8 @@ include('config/core.php');
 		<!-- Theme Custom -->
 		<script src="js/core.js"></script>
 		<script src="js/custom.js"></script>
+		<script src="js/searchAddress.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOB9VUHID5_exudRHHduRUvCYOu--Lg0w&libraries=places&callback=initAutocomplete" async defer></script>
 		
 		<!-- Theme Initialization Files -->
 		<script src="js/theme.init.js"></script>
