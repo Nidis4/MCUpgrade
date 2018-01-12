@@ -152,7 +152,7 @@ include('config/core.php');
 														<?php
 															foreach ($counties as $counties) {
 																$county_id = $counties['id'];
-																$county_name = $counties['county_name_gr'];
+																$county_name = $counties['county_name'];
 																echo '<option value="'.$county_id.'">'.$county_name.'</option>';
 															}
 														?>
@@ -175,7 +175,8 @@ include('config/core.php');
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Budget <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="budget" id="budget" class="form-control" placeholder="eg.: John" required value="0" />
+												<input type="text" name="budget" id="budget" class="form-control" placeholder="Add Budget" required value="0" />
+												<input type="hidden" name="countrybudget" value="0" id="countrybudget">
 											</div>
 										</div>
 										<div class="form-group row">
@@ -397,5 +398,15 @@ include('config/core.php');
 
 		<!-- Examples -->
 		<script src="js/examples/examples.validation.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#county").on('change',function(){
+					var cnt = $(this).val();
+					if($('#ElectricalCertificateCategory1').length){
+						ElectricalCertificateCountyBudget();
+					} 
+				});
+			});
+		</script>
 	</body>
 </html>

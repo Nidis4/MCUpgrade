@@ -49,6 +49,7 @@ if($catId == "60"){
                         <i class="fa fa-plus"></i>
                     </button>
                 </div>
+                <input type="hidden" name="spinbudget" id="spinbudget" value="0">
             </div>
         </div>
     </div>
@@ -76,6 +77,7 @@ if($catId == "60"){
                 </label>
             </div>
         </div>
+        
     </div>
 
     <label class="col-lg-3 control-label text-lg-right pt-2">Έχετε έναν λογαριασμό της ΔΕΗ ή κάποιου άλλου παρόχου ρεύματος;  </label>
@@ -145,7 +147,7 @@ if($catId == "60"){
         <div class="col-lg-3">            
             <div class="radio">
                 <label class="pt-3">
-                    <input class="" type="radio" name="ElectricalVoltageRelayName" value="YES" id="ElectricalVoltageRelayID">
+                    <input class="ElectricalVoltageRelayNamedf" type="radio" name="ElectricalVoltageRelayName" value="YES" id="ElectricalVoltageRelayID">
                     YES
                 </label>
             </div>
@@ -153,23 +155,108 @@ if($catId == "60"){
         <div class="col-lg-3">            
             <div class="radio">
                 <label class="pt-3">
-                    <input class="" type="radio" name="ElectricalVoltageRelayName" value="NO" id="ElectricalVoltageRelayIDa">
+                    <input class="ElectricalVoltageRelayNamedf" type="radio" name="ElectricalVoltageRelayName" value="NO" id="ElectricalVoltageRelayIDa">
                     NO
                 </label>
             </div>
         </div>
     </div>
 
+
+    <label class="col-lg-3 control-label text-lg-right pt-2 ElectricalVoltageRelayNamedfNo" style="display: none;">Θέλετε να εγκαταστήσουμε το ρελέ διαφυγής;   </label>
+    <div class="col-lg-9 row ElectricalVoltageRelayNamedfNo" style="display: none;">
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="EltageRelayNamedfNo" type="radio" name="EltageRelayNamedfNo" value="YES" id="">
+                    YES
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="EltageRelayNamedfNo" type="radio" name="EltageRelayNamedfNo" value="NO" id="">
+                    NO
+                </label>
+            </div>
+        </div>
+        <input type="hidden" name="volBudget" id="volBudget" value='0'>
+    </div>
+    
+    <input type="hidden" name="dfgdBudget" id="dfgdBudget" value='0' style="display: block;">
+
     <script type="text/javascript">
+        function update_budget(){
+            //var  bud = $("#budget").val();
+            var  cbud = 0;
+            var  abud = 0;
+            var  sbud = 0;
+            var  vbud = 0;
+
+            if($("#countrybudget").length){ cbud = $("#countrybudget").val();}
+            if($("#dfgdBudget").length){ abud = $("#dfgdBudget").val();}
+            if($("#spinbudget").length){ sbud = $("#spinbudget").val();}
+            if($("#volBudget").length){ sbud = $("#volBudget").val();}
+           
+
+            var totalbud = parseFloat(cbud) + parseFloat(sbud) + parseFloat(abud);
+
+            $("#budget").val(totalbud);
+        }
+        function ElectricalCertificateCountyBudget(){
+            // Add Budget
+                var vale = $('#ElectricalCertificateCategory1').val();
+                var country = $("#county").val();
+                if(country == 1){
+                    if(vale >= 1 && vale <= 30){
+                        $("#countrybudget").val('29');
+                    }else if(vale >= 31 && vale <= 100){
+                        $("#countrybudget").val('34');
+                    }else if(vale >= 101 && vale <= 150){
+                        $("#countrybudget").val('44');
+                    }else if(vale >= 151 && vale <= 200){
+                        $("#countrybudget").val('49');
+                    }else if(vale >= 201){
+                        var zbud = 49 + ((parseFloat(vale) - 200) * 0.3);
+                        $("#countrybudget").val(zbud);
+                    }
+                    
+                }else if(country == 2){
+                    if(vale >= 1 && vale <= 30){
+                        $("#countrybudget").val('49');
+                    }else if(vale >= 31 && vale <= 100){
+                        $("#countrybudget").val('54');
+                    }else if(vale >= 101 && vale <= 150){
+                        $("#countrybudget").val('64');
+                    }else if(vale >= 151 && vale <= 200){
+                        $("#countrybudget").val('74');
+                    }else if(vale >= 201){
+                        var zbud = 74 + ((parseFloat(vale) - 200) * 0.3);
+                        $("#countrybudget").val(zbud);
+                    }
+                    
+                }
+                update_budget();
+        }
         $(document).ready(function(){
-           $("#ElectricalCertificateCategory1").on('change',function(){
+
+            
+            
+            $("#ElectricalCertificateCategory1").on('change',function(){
                 var vale = $(this).val();
+                var country = $("#county").val();
+                $("#countrybudget").val('0');
+
                 if(vale >= 81){
                    $(".MoreThanEightyDisplayNewQuestion").css('display','inherit'); 
                 }else{
                    $(".MoreThanEightyDisplayNewQuestion").css('display','none'); 
                 }
-           });
+
+                ElectricalCertificateCountyBudget();
+
+            });
 
            $(".ElectricalTagStatus").on('change',function(){
                 var rvale = $(this).val();                
@@ -192,10 +279,13 @@ if($catId == "60"){
            $(".ElectricalCertificatebedStatus").on('change',function(){
                 var rvale = $(this).val(); 
                 if(rvale == "YES"){ 
-                   $("#comment123").val('3φασικό'); 
+                   $("#comment123").val('3φασικό');    
+                   var sd = 15;               
+                   $("#dfgdBudget").val(sd);
                 }else{ 
-
+                   $("#dfgdBudget").val('0'); 
                 }
+                update_budget();
            });
 
            
@@ -221,10 +311,11 @@ if($catId == "60"){
                    var vale = parseInt($('.spinner-input').val());
                    if(vale >= 2){
                         var uvars = (parseInt(vale - 1)) * 34;
-                        var newbud = parseFloat($('#budget').val()) - parseInt(uvars);
-                        $('#budget').val(newbud);
+                        var newbud = parseFloat($('#spinbudget').val()) - parseInt(uvars);
+                        $('#spinbudget').val(newbud);
                    }
-                   $('.spinner-input').val('1'); 
+                   $('.spinner-input').val('1');
+                   update_budget(); 
                 }
            });
 
@@ -233,9 +324,10 @@ if($catId == "60"){
                 if(vale >= 2){
                     var newvale = parseInt(vale) - 1;
                     $('.spinner-input').val(newvale);
-                    var newbud = parseFloat($('#budget').val()) - 34;
-                    $('#budget').val(newbud);
+                    var newbud = parseFloat($('#spinbudget').val()) - 34;
+                    $('#spinbudget').val(newbud);
                 }
+                update_budget();
                 
            });
 
@@ -246,13 +338,33 @@ if($catId == "60"){
                 var upsp = $('.spinner-input').val();
                 var upsp = $('.spinner-input').val();
                 if(upsp >= 2){
-                    var newbud = parseFloat($('#budget').val()) + 34;
-                    $('#budget').val(newbud);
+                    var newbud = parseFloat($('#spinbudget').val()) + 34;
+                    $('#spinbudget').val(newbud);
                 }
+                update_budget();
            });
 
            
+           $(".ElectricalVoltageRelayNamedf").on('change',function(){
+                var rvale = $(this).val();                
+                if(rvale == "YES"){
+                    $(".ElectricalVoltageRelayNamedfNo").css('display','none'); 
+                }else{
+                    $(".ElectricalVoltageRelayNamedfNo").css('display','inherit'); 
+                }
+           });
 
+
+           $(".EltageRelayNamedfNo").on('change',function(){
+                var rvale = $(this).val();                
+                if(rvale == "YES"){
+                    $("#volBudget").val('70');
+                }else{
+                    $("#volBudget").val('0');
+                }
+
+                update_budget();
+           });
 
 
 
