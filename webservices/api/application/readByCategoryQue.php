@@ -199,11 +199,11 @@ if($catId == "60"){
             var samecatebud = $("#samecatebud").val();
 
             if(samecatebud >= 2){
-                cmt = samecatebud+' X ' + cmt;                
+                cmt = samecatebud+" X \n" + cmt;                
             }
             $("#comment123").val(cmt);
         }
-
+ 
         function update_budget(){
 
             //var  bud = $("#budget").val();
