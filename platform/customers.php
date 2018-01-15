@@ -93,11 +93,41 @@ include('config/core.php');
 							<div class="card-body">
 								<div class="row">
 									<div class="col-sm-6">
-										<div class="mb-3">
-											<a href='createAppointment.php'><button id="addToTable" class="btn btn-primary">Add <i class="fa fa-plus"></i></button></a>
+										<div class="form-group row">
+											<label class="col-sm-3 control-label text-sm-right pt-2">Name <span class="required">*</span></label>
+											<div class="col-sm-9">
+												<input type="text" name="last_name" id="last_name" class="form-control" value="" required />
+											</div>										
 										</div>
+										<div class="form-group row">
+											<label class="col-sm-3 control-label text-sm-right pt-2">Surname <span class="required">*</span></label>
+											<div class="col-sm-9">
+												<input type="text" name="last_name" id="last_name" class="form-control" value="" required />
+											</div>										
+										</div>	
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group row">
+											<label class="col-sm-3 control-label text-sm-right pt-2">Mobile <span class="required">*</span></label>
+											<div class="col-sm-9">
+												<input type="text" name="last_name" id="last_name" class="form-control" value="" required />
+											</div>										
+										</div>
+										<div class="form-group row">
+											<label class="col-sm-3 control-label text-sm-right pt-2">E-mail <span class="required">*</span></label>
+											<div class="col-sm-9">
+												<input type="text" name="last_name" id="last_name" class="form-control" value="" required />
+											</div>										
+										</div>
+										
 									</div>
 								</div>
+								<div class="row">
+									<div class="col-sm-4 offset-sm-4 text-center">
+										<button type="button" class="mb-1 mt-4 mr-1 btn btn-warning" id="searchCustomer">Search</button>
+									</div>
+								</div>
+								
 								<table class="table table-bordered table-striped mb-0" id="datatable-editable">
 									<thead>
 										<tr>
@@ -129,7 +159,7 @@ include('config/core.php');
 													  <td>'.$landline.'</td>
 													  <td>'.$address.'</td>
 													  <td class="actions">
-														<a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
+														<a href="customer.php?id='.$id.'" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
 													  </td>
 												  </tr>';
 
