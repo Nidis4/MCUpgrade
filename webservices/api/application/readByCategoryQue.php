@@ -197,9 +197,9 @@ if($catId == "60"){
             cmt = dfgdcomment+ ' ' + epBudget;
 
             var samecatebud = $("#samecatebud").val();
-            
+
             if(samecatebud >= 2){
-                cmt = samecatebud+'o ' + cmt;                
+                cmt = samecatebud+' X ' + cmt;                
             }
             $("#comment123").val(cmt);
         }
