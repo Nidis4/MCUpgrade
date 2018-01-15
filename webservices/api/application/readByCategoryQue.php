@@ -184,23 +184,35 @@ if($catId == "60"){
         <input type="hidden" name="volBudget" id="volBudget" value='0'>
     </div>
     
-    <input type="hidden" name="dfgdBudget" id="dfgdBudget" value='0' style="display: block;">
+    <input type="hidden" name="dfgdBudget" id="dfgdBudget" rel="" value='0' style="display: block;">
+    <input type="hidden" name="epBudget" id="epBudget" rel="" value='0' style="display: block;">
 
     <script type="text/javascript">
+
+        function update_comment(){
+            var dfgdcomment = $("#dfgdBudget").attr('rel');
+            var epBudget = $("#epBudget").attr('rel');
+
+            var cmt = dfgdcomment+ ' ' + epBudget;
+            $("#comment123").val(cmt);
+        }
+
         function update_budget(){
             //var  bud = $("#budget").val();
             var  cbud = 0;
             var  abud = 0;
             var  sbud = 0;
             var  vbud = 0;
+            var  ebud = 0;
 
             if($("#countrybudget").length){ cbud = $("#countrybudget").val();}
             if($("#dfgdBudget").length){ abud = $("#dfgdBudget").val();}
             if($("#spinbudget").length){ sbud = $("#spinbudget").val();}
-            if($("#volBudget").length){ sbud = $("#volBudget").val();}
+            if($("#volBudget").length){ vbud = $("#volBudget").val();}
+            if($("#epBudget").length){ ebud = $("#epBudget").val();}
            
 
-            var totalbud = parseFloat(cbud) + parseFloat(sbud) + parseFloat(abud);
+            var totalbud = parseFloat(cbud) + parseFloat(sbud) + parseFloat(abud) + parseFloat(vbud) + parseFloat(ebud);
 
             $("#budget").val(totalbud);
         }
@@ -278,14 +290,38 @@ if($catId == "60"){
 
            $(".ElectricalCertificatebedStatus").on('change',function(){
                 var rvale = $(this).val(); 
+
+                var epBudget = 0;
                 if(rvale == "YES"){ 
-                   $("#comment123").val('3φασικό');    
+                   $("#dfgdBudget").attr('rel','3φασικό');    
                    var sd = 15;               
                    $("#dfgdBudget").val(sd);
                 }else{ 
                    $("#dfgdBudget").val('0'); 
+                   $("#dfgdBudget").attr('rel','');  
                 }
+
+                // if($('.ElectricalPanelNameNo').length){
+                //    var rvale1 = $('.ElectricalPanelNamesecond').val(); 
+                //    alert(rvale1);
+                //    if(rvale1 == "YES" && rvale == "YES"){ 
+                //         epBudget = 300;
+                //         $("#epBudget").attr('rel','Εγκατάσταση νέου πίνακα '+ '300' +' €');
+                //    }else if(rvale1 == "YES" && rvale == "NO"){
+                //         epBudget = 150;
+                //         $("#epBudget").attr('rel','Εγκατάσταση νέου πίνακα '+ '150' +' €');
+                //    }else{
+                //         epBudget = 0;
+                //         $("#epBudget").attr('rel','');
+                //    }
+                       
+                // }
+                // $("#epBudget").val(epBudget); 
+
+
                 update_budget();
+                 update_comment();
+                   
            });
 
            
@@ -294,10 +330,24 @@ if($catId == "60"){
                 var rvale = $(this).val();                
                 if(rvale == "YES"){
                    $(".ElectricalVoltageRelayNameYes").css('display','none'); 
-                   $("#comment123").val('3φασικό , Εγκατάσταση νέου πίνακα '+ '150' +' €');
-                }else{                   
+                   var epBudget = 150;
+                   $("#epBudget").attr('rel','Εγκατάσταση νέου πίνακα '+ '150' +' €'); 
+                   var rvale1 = $('.ElectricalCertificatebedStatus').val(); 
+                   if(rvale1 == "YES"){ 
+                        epBudget = 300;
+                        $("#epBudget").attr('rel','Εγκατάσταση νέου πίνακα '+ '300' +' €');
+                   }
+                  
+                   $("#epBudget").val(epBudget);
+                   
+                }else{
+                   $("#epBudget").attr('rel','');                   
                    $(".ElectricalVoltageRelayNameYes").css('display','inherit'); 
+                   $("#epBudget").val(0);
                 }
+
+                update_budget();
+                 update_comment();
            });
 
 
