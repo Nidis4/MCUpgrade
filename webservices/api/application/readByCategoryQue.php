@@ -190,14 +190,22 @@ if($catId == "60"){
     <script type="text/javascript">
 
         function update_comment(){
+            var cmt;
             var dfgdcomment = $("#dfgdBudget").attr('rel');
             var epBudget = $("#epBudget").attr('rel');
 
-            var cmt = dfgdcomment+ ' ' + epBudget;
+            cmt = dfgdcomment+ ' ' + epBudget;
+
+            var samecatebud = $("#samecatebud").val();
+            
+            if(samecatebud >= 2){
+                cmt = samecatebud+'o ' + cmt;                
+            }
             $("#comment123").val(cmt);
         }
 
         function update_budget(){
+
             //var  bud = $("#budget").val();
             var  cbud = 0;
             var  abud = 0;
@@ -210,9 +218,16 @@ if($catId == "60"){
             if($("#spinbudget").length){ sbud = $("#spinbudget").val();}
             if($("#volBudget").length){ vbud = $("#volBudget").val();}
             if($("#epBudget").length){ ebud = $("#epBudget").val();}
-           
+            
+
 
             var totalbud = parseFloat(cbud) + parseFloat(sbud) + parseFloat(abud) + parseFloat(vbud) + parseFloat(ebud);
+
+            var samecatebud = $("#samecatebud").val();
+
+            if(samecatebud >= 2){
+                totalbud = samecatebud * totalbud;                
+            }
 
             $("#budget").val(totalbud);
         }
@@ -250,6 +265,7 @@ if($catId == "60"){
                     
                 }
                 update_budget();
+                update_comment();
         }
         $(document).ready(function(){
 
@@ -366,6 +382,7 @@ if($catId == "60"){
                    }
                    $('.spinner-input').val('1');
                    update_budget(); 
+                   update_comment();
                 }
            });
 
@@ -378,6 +395,7 @@ if($catId == "60"){
                     $('#spinbudget').val(newbud);
                 }
                 update_budget();
+                update_comment();
                 
            });
 
@@ -392,6 +410,7 @@ if($catId == "60"){
                     $('#spinbudget').val(newbud);
                 }
                 update_budget();
+                update_comment();
            });
 
            
@@ -414,6 +433,7 @@ if($catId == "60"){
                 }
 
                 update_budget();
+                update_comment();
            });
 
 

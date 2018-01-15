@@ -109,7 +109,7 @@ include('config/core.php');
 										</div>
 										<div class="form-group row">
 												<label class="col-lg-3 control-label text-lg-right pt-2">Category</label>
-												<div class="col-lg-9">
+												<div class="col-lg-6">
 													<?php
 														$categories = file_get_contents($api_url.'webservices/api/category/read.php');
 														$categories = json_decode($categories, true); // decode the JSON into an associative array
@@ -125,6 +125,16 @@ include('config/core.php');
 														?>
 													</select>
 												</div>
+												<div class="col-lg-3 smbutton">
+													<button type="button" class="btn btn-default sameadd" disabled="">
+								                        <i class="fa fa-plus"></i> Same
+								                    </button>
+								                    <button type="button" class="btn btn-danger sameremove" style="display: none; margin-top: 5px;">
+								                        <i class="fa fa-minus"></i> Same
+								                    </button>
+								                    <input type="hidden" name="samecatebud" id="samecatebud" value="1">
+												</div>
+												
 										</div>
 										<div class="form-group row">
 												<label class="col-lg-3 control-label text-lg-right pt-2">Applications</label>
@@ -400,12 +410,40 @@ include('config/core.php');
 		<script src="js/examples/examples.validation.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
+				
 				$("#county").on('change',function(){
 					var cnt = $(this).val();
 					if($('#ElectricalCertificateCategory1').length){
 						ElectricalCertificateCountyBudget();
 					} 
 				});
+				$("#category").on('change',function(){
+					 $(".smbutton button").removeAttr('disabled');
+				});
+
+				$(".sameadd").on('click',function(){
+					var pres = $("#samecatebud").val();
+					if(pres == 1){
+						$('.sameremove').css('display','block');
+					}
+					$('#samecatebud').val(parseInt(pres) + 1);
+					update_budget();
+					update_comment();
+				});
+
+				$('.sameremove').on('click',function(){
+					var pres = $("#samecatebud").val();
+					if(pres >= 2){
+						$('#samecatebud').val(parseInt(pres) - 1);
+						if(pres == 2){
+							$('.sameremove').css('display','none');	
+						}
+						
+					}
+				    update_budget();
+				    update_comment();	
+				});
+
 			});
 		</script>
 	</body>
