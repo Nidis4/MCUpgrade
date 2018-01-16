@@ -53,7 +53,47 @@ class Customer{
     $stmt->execute();
  
     return $stmt;
-}
+    }
+
+    // search products
+    public function searchList($name, $surname, $mobile, $email){
+ 
+    // select all query
+    $query = "SELECT
+                c.id, c.first_name, c.last_name, c.sex, cc.address, cc.area , cc.postcode, cc.phone, cc.mobile, ca.email
+            FROM
+                " . $this->table_name . " c
+                LEFT JOIN ". $this->contact_table_name." cc
+                    ON c.id = cc.customer_id
+                LEFT JOIN ". $this->account_table_name." ca
+                    ON c.id = ca.customer_id
+            WHERE
+                c.first_name LIKE ? AND c.last_name LIKE ? AND cc.mobile LIKE ? AND ca.email LIKE ?";
+ 
+    // prepare query statement
+    $stmt = $this->conn->prepare($query);
+ 
+    // sanitize
+    $name=htmlspecialchars(strip_tags($name));
+    $name = "%{$name}%";
+    $surname=htmlspecialchars(strip_tags($surname));
+    $surname = "%{$surname}%";
+    $mobile=htmlspecialchars(strip_tags($mobile));
+    $mobile = "%{$mobile}%";
+    $email=htmlspecialchars(strip_tags($email));
+    $email = "%{$email}%";
+ 
+    // bind
+    $stmt->bindParam(1, $name);
+    $stmt->bindParam(2, $surname);
+    $stmt->bindParam(3, $mobile);
+    $stmt->bindParam(4, $email);
+ 
+    // execute query
+    $stmt->execute();
+ 
+    return $stmt;
+    }
 
     // used by select drop-down list
     public function contactDetails(){

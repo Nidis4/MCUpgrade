@@ -6,12 +6,12 @@ class Database{
     private $db_name = "upgradem_main";
     
     // Environment 
-    private $username = "upgradem_super";
-    private $password = "x}zLIzWrI^zC";
+    //private $username = "upgradem_super";
+    //private $password = "x}zLIzWrI^zC";
 
     // Localhost
-    //private $username = "root";
-    //private $password = "";
+    private $username = "root";
+    private $password = "";
 
     public $conn;
  

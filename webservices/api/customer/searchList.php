@@ -4,32 +4,33 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
  
 // include database and object files
-include_once '../config/core.php';
-include_once '../shared/utilities.php';
 include_once '../config/database.php';
-include_once '../objects/professional.php';
- 
-// utilities
-$utilities = new Utilities();
+include_once '../objects/customer.php';
  
 // instantiate database and product object
 $database = new Database();
 $db = $database->getConnection();
  
 // initialize object
-$professional = new Professional($db);
+$customer = new Customer($db);
+ 
+// get keywords
+$name = isset($_GET["n"]) ? $_GET["n"] : "";
+$surname = isset($_GET["s"]) ? $_GET["s"] : "";
+$mobile = isset($_GET["m"]) ? $_GET["m"] : "";
+$email = isset($_GET["e"]) ? $_GET["e"] : "";
  
 // query products
-$stmt = $professional->readPaging($from_record_num, $records_per_page);
+$stmt = $customer->searchList($name, $surname, $mobile, $email);
+//$stmt = $customer->search($keywords);
 $num = $stmt->rowCount();
  
 // check if more than 0 record found
 if($num>0){
  
     // products array
-    $professionals_arr=array();
-    $professionals_arr["records"]=array();
-    $professionals_arr["paging"]=array();
+    $customers_arr=array();
+    //$products_arr["records"]=array();
  
     // retrieve our table contents
     // fetch() is faster than fetchAll()
@@ -40,28 +41,26 @@ if($num>0){
         // just $name only
         extract($row);
  
-        $professional_item=array(
+        $customer_item=array(
             "id" => $id,
             "first_name" => $first_name,
             "last_name" => $last_name,
-            "address" => $address
+            "sex" => $sex,
+            "address" => $address." ".$area." ".$postcode,
+            "phone" => $phone,
+            "mobile" => $mobile,
+            "email" => $email
         );
  
-        array_push($professionals_arr["records"], $professional_item);
+        array_push($customers_arr, $customer_item);
     }
  
- 
-    // include paging
-    $total_rows=$professional->count();
-    $page_url="{$home_url}professional/read_paging.php?";
-    $paging=$utilities->getPaging($page, $total_rows, $records_per_page, $page_url);
-    $professionals_arr["paging"]=$paging;
- 
-    echo json_encode($professionals_arr);
+    echo json_encode($customers_arr);
 }
+ 
 else{
     echo json_encode(
-        array("message" => "No products found.")
+        array("message" => "No Customers found.")
     );
 }
 ?>
