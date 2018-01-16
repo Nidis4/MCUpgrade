@@ -413,7 +413,7 @@ include('config/core.php');
 				
 				$("#county").on('change',function(){
 					var cnt = $(this).val();
-					if($('#ElectricalCertificateCategory1').length){
+					if($('#buildingmtwo').length){
 						ElectricalCertificateCountyBudget();
 					} 
 				});

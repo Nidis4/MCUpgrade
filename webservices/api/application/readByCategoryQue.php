@@ -3,14 +3,10 @@
 $catId = $_GET['cat_id'];
 
 // For Electrical Certificates
-if($catId == "60"){
+if($catId == "60"){ // Electrical Certificate
 ?>
-    <input type="hidden" name="ElectricalPanelNamesecond1" value="" class="ElectricalPanelNamesecondccc">
-    <input type="hidden" name="ElectricalPanelNamesecond11" value="" class="ElectricalPanelNamesecondccc1">
-    <input type="hidden" name="ElectricalPanelNamesecond2" value="" class="ElectricalPanelNamesecondcc2">
-
     <label class="col-lg-3 control-label text-lg-right pt-2">Πόσα τετραγωνικά μέτρα είναι το ακίνητο;  </label>
-    <div class="col-lg-9"><input class="form-control" type="number" name="data[Appointment][par]" id="ElectricalCertificateCategory1" /></div>
+    <div class="col-lg-9"><input class="form-control" type="number" name="buildingmtwo" id="buildingmtwo" /></div>
 
     <!-- Display if m2 greater than 80 -->
     <label class="col-lg-3 control-label text-lg-right pt-2 MoreThanEightyDisplayNewQuestion" style="display: none">Το ακίνητο είναι μεζονέτα?  </label>
@@ -233,7 +229,7 @@ if($catId == "60"){
         }
         function ElectricalCertificateCountyBudget(){
             // Add Budget
-                var vale = $('#ElectricalCertificateCategory1').val();
+                var vale = $('#buildingmtwo').val();
                 var country = $("#county").val();
                 if(country == 1){
                     if(vale >= 1 && vale <= 30){
@@ -271,7 +267,7 @@ if($catId == "60"){
 
             
             
-            $("#ElectricalCertificateCategory1").on('change',function(){
+            $("#buildingmtwo").on('change',function(){
                 var vale = $(this).val();
                 var country = $("#county").val();
                 $("#countrybudget").val('0');
@@ -442,4 +438,221 @@ if($catId == "60"){
         });
     </script>
     
-<?php } ?>
+<?php }else if($catId == "43"){ // Energy Certificate
+?>
+        <!-- How many m2 are the building ? (greek: Πόσα μ2 είναι το ακινητό σας?) -->
+        <label class="col-lg-3 control-label text-lg-right pt-2">Πόσα μ2 είναι το ακινητό σας? </label>
+        <div class="col-lg-9"><input class="form-control" type="number" name="buildingmtwo" id="buildingmtwo" /></div>
+
+        <!-- Do you have building drawing? (greek: Έχετε κάτοψη του ακινήτου? ) -->
+        <label class="col-lg-3 control-label text-lg-right pt-2">Έχετε κάτοψη του ακινήτου?  </label>
+        <div class="col-lg-9 row">
+            <div class="col-lg-3">            
+                <div class="radio">
+                    <label class="pt-3">
+                        <input class="buildingdrawingstatus" type="radio" name="buildingdrawingstatus" value="YES" id="buildingdrawingstatusyes">
+                        YES
+                    </label>
+                </div>
+            </div>
+            <div class="col-lg-3">            
+                <div class="radio">
+                    <label class="pt-3">
+                        <input class="buildingdrawingstatus" type="radio" name="buildingdrawingstatus" value="NO" id="buildingdrawingstatusno">
+                        NO
+                    </label>
+                </div>
+            </div>
+            <div class="col-lg-12 pt-2 buildingdrawingstatusYes"></div>
+            <input type="hidden" name="buildingdrawingbudget" id="buildingdrawingbudget" rel="" value="0">            
+        </div>
+
+        <!-- Is the building built after 1983? (greek: το ακίνητο είναι χτισμένο μέτα το 1983?) -->
+        <label class="col-lg-3 control-label text-lg-right pt-2">το ακίνητο είναι χτισμένο μέτα το 1983?  </label>
+        <div class="col-lg-9 row">
+            <div class="col-lg-3">            
+                <div class="radio">
+                    <label class="pt-3">
+                        <input class="buildingbuiltstatus" type="radio" name="buildingbuiltstatus" value="YES" id="buildingbuiltstatusyes">
+                        YES
+                    </label>
+                </div>
+            </div>
+            <div class="col-lg-3">            
+                <div class="radio">
+                    <label class="pt-3">
+                        <input class="buildingbuiltstatus" type="radio" name="buildingbuiltstatus" value="NO" id="buildingbuiltstatusno">
+                        NO
+                    </label>
+                </div>
+            </div>
+            <div class="col-lg-12 pt-2 buildingbuiltstatusYes"></div>            
+        </div>
+
+        <!-- Do you have available E9 of the owner ?  Greek (Έχετε διαθέσιμο το Ε9 του ιδιοκτήτη?) -->
+        <label class="col-lg-3 control-label text-lg-right pt-2">Έχετε διαθέσιμο το Ε9 του ιδιοκτήτη?  </label>
+        <div class="col-lg-9 row">
+            <div class="col-lg-3">            
+                <div class="radio">
+                    <label class="pt-3">
+                        <input class="availableownerstatus" type="radio" name="availableownerstatus" value="YES" id="availableownerstatusyes">
+                        YES
+                    </label>
+                </div>
+            </div>
+            <div class="col-lg-3">            
+                <div class="radio">
+                    <label class="pt-3">
+                        <input class="availableownerstatus" type="radio" name="availableownerstatus" value="NO" id="availableownerstatusno">
+                        NO
+                    </label>
+                </div>
+            </div>
+            <div class="col-lg-12 pt-2 availableownerstatusYes"></div>            
+        </div>
+        <div class="col-lg-12">
+            <div class="alert alert-info nomargin">
+                <p>Να σας ενημερώσω για την διαδικασία, έρχεται ο μηχανικός κάνει την αυτοψία, φωτογραφίζει τα έγγραφα δεν θα πάρουμε αντίγραφα, θα πληρωθεί επι τόπου και θα σας στείλει με email το πιστοποιητικο σε 1-3 εργάσιμες</p>
+            </div>     
+        </div>
+              
+
+        <!-- Javascript Code -->
+        <script type="text/javascript">
+
+            function update_comment(){
+                var cmt;
+                var dfgdcomment = $("#buildingmtwo").val()+'m2';
+                var epBudget = $("#buildingdrawingbudget").attr('rel');
+
+                cmt = dfgdcomment + ' ' + epBudget;
+
+                var samecatebud = $("#samecatebud").val();
+
+                if(samecatebud >= 2){
+                    cmt = samecatebud+" X \n" + cmt;                
+                }
+                $("#comment123").val(cmt);
+            }
+     
+            function update_budget(){
+
+                //var  bud = $("#budget").val();
+                var  cbud = 0;
+                var  dbud = 0;
+               
+
+                if($("#countrybudget").length){ cbud = $("#countrybudget").val();}
+                if($("#buildingdrawingbudget").length){ dbud = $("#buildingdrawingbudget").val();}
+               
+                var totalbud = parseFloat(cbud) + parseFloat(dbud);
+                var samecatebud = $("#samecatebud").val();
+                if(samecatebud >= 2){
+                    totalbud = samecatebud * totalbud;                
+                }
+
+                $("#budget").val(totalbud);
+            }
+            function ElectricalCertificateCountyBudget(){
+                // Add Budget
+                    var vale = $('#buildingmtwo').val();
+                    var country = $("#county").val();
+                    if(country == 1){
+                        if(vale >= 1 && vale <= 30){
+                            $("#countrybudget").val('29');
+                        }else if(vale >= 31 && vale <= 100){
+                            $("#countrybudget").val('38');
+                        }else if(vale >= 101 && vale <= 150){
+                            $("#countrybudget").val('60');
+                        }else if(vale >= 151 && vale <= 200){
+                            $("#countrybudget").val('90');
+                        }else if(vale >= 201){
+                            var zbud = 90 + ((parseFloat(vale) - 200) * 0.3);
+                            $("#countrybudget").val(zbud);
+                        }
+                        
+                    }else if(country == 2){
+                        if(vale >= 1 && vale <= 100){
+                            $("#countrybudget").val('45');
+                        }else if(vale >= 101 && vale <= 150){
+                            $("#countrybudget").val('60');
+                        }else if(vale >= 151 && vale <= 200){
+                            $("#countrybudget").val('90');
+                        }else if(vale >= 201){
+                            var zbud = 90 + ((parseFloat(vale) - 200) * 0.3);
+                            $("#countrybudget").val(zbud);
+                        }
+                        
+                    }
+                    update_budget();
+                    update_comment();
+            }
+
+            $(document).ready(function(){
+                // 
+                $("#buildingmtwo").on('change',function(){
+                    var vale = $(this).val();
+                    var country = $("#county").val();
+                    $("#countrybudget").val('0');
+                    ElectricalCertificateCountyBudget();
+                });
+
+
+                //
+                $(".buildingdrawingstatus").on('change',function(){
+                    var rvale = $(this).val();  
+
+                    if(rvale == "YES"){
+                       $(".buildingdrawingstatusYes").text('Παρακαλώ να έχετε μαζί σας στο ραντεβού την κάτοψη'); 
+                       $("#buildingdrawingbudget").val('0');
+                       $("#buildingdrawingbudget").attr('rel','Έχει κάτοψη');
+                    }else{
+                        
+                        var vale = $('#buildingmtwo').val();
+                         
+                        if(vale >= 1 && vale <= 75){
+                            $("#buildingdrawingbudget").val('10');
+                        }else if(vale >= 76 && vale <= 100){
+                            $("#buildingdrawingbudget").val('15');
+                        }else if(vale >= 101 && vale <= 150){
+                            $("#buildingdrawingbudget").val('20');
+                        }else if(vale >= 151 && vale <= 200){
+                            $("#buildingdrawingbudget").val('25');
+                        }else if(vale >= 201){
+                            var zbud = 25 + (((parseFloat(vale) - 200)/100) * 10);
+                            $("#buildingdrawingbudget").val(zbud);
+                        }
+
+                        $(".buildingdrawingstatusYes").text('κάτοψη + '+ $("#buildingdrawingbudget").val() +' €'); 
+                        
+                        $("#buildingdrawingbudget").attr('rel','κάτοψη + '+ $("#buildingdrawingbudget").val() +' €');
+                        //alert($("#buildingdrawingbudget").val());
+                    }
+                    update_budget();
+                    update_comment();
+               });
+
+
+                $(".buildingbuiltstatus").on('change',function(){
+                    var rvale = $(this).val();                
+                    if(rvale == "YES"){
+                       $(".buildingbuiltstatusYes").text('Παρακαλώ να έχετε τον αριθμό αδείας διαθέσιμο'); 
+                    }else{
+                        $(".buildingbuiltstatusYes").text(''); 
+                    }
+               });
+
+                $(".availableownerstatus").on('change',function(){
+                    var rvale = $(this).val();                
+                    if(rvale == "YES"){
+                       $(".availableownerstatusYes").text('Παρακαλώ να έχετε το Ε9 στο ραντεβού'); 
+                    }else{
+                        $(".availableownerstatusYes").text('Εναλλακτικά με το Ε9 πρέπει να φέρετε το συμβολαιο ιδιοκτησίας, γονική παροχή ή οποιοδήποτε επίσημο έγγραφο που να φαίνεται ο ιδιοκτήτης'); 
+                    }
+               });
+
+
+            });
+        </script>
+<?php
+} ?>
