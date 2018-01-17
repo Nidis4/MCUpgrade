@@ -94,29 +94,29 @@ include('config/core.php');
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group row">
-											<label class="col-sm-3 control-label text-sm-right pt-2">Name <span class="required">*</span></label>
+											<label class="col-sm-3 control-label text-sm-right pt-2">Name </label>
 											<div class="col-sm-9">
-												<input type="text" name="last_name" id="last_name" class="form-control" value="" required />
+												<input type="text" name="first_name" id="first_name" class="form-control" value=""  />
 											</div>										
 										</div>
 										<div class="form-group row">
-											<label class="col-sm-3 control-label text-sm-right pt-2">Surname <span class="required">*</span></label>
+											<label class="col-sm-3 control-label text-sm-right pt-2">Surname </label>
 											<div class="col-sm-9">
-												<input type="text" name="last_name" id="last_name" class="form-control" value="" required />
+												<input type="text" name="last_name" id="last_name" class="form-control" value=""  />
 											</div>										
 										</div>	
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group row">
-											<label class="col-sm-3 control-label text-sm-right pt-2">Mobile <span class="required">*</span></label>
+											<label class="col-sm-3 control-label text-sm-right pt-2">Mobile </label>
 											<div class="col-sm-9">
-												<input type="text" name="last_name" id="last_name" class="form-control" value="" required />
+												<input type="text" name="mobile" id="mobile" class="form-control" value=""  />
 											</div>										
 										</div>
 										<div class="form-group row">
-											<label class="col-sm-3 control-label text-sm-right pt-2">E-mail <span class="required">*</span></label>
+											<label class="col-sm-3 control-label text-sm-right pt-2">E-mail </label>
 											<div class="col-sm-9">
-												<input type="text" name="last_name" id="last_name" class="form-control" value="" required />
+												<input type="text" name="email" id="email" class="form-control" value=""  />
 											</div>										
 										</div>
 										
@@ -140,7 +140,7 @@ include('config/core.php');
 											<th>Action</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody id="customers-table">
 										<?php
 										foreach ($customersPag['records'] as $field => $value) {
 											$id = $customersPag['records'][$field]['id'];

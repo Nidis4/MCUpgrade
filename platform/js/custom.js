@@ -202,6 +202,37 @@ $( ".copy-row" ).click(function() {
     
 });
 
+$( "#searchCustomer" ).click(function() {
+    //alert("Search Customer");
+    var first_name = $("#first_name").val();
+    var last_name = $("#last_name").val();
+    var mobile = $("#mobile").val();
+    var email = $("#email").val();
+
+    var getAvailableAPI = API_LOCATION+'customer/searchList.php?n='+first_name+'&s='+last_name+'&m='+mobile+'&e='+email;
+    //alert(getAvailableAPI);
+
+    $.ajax({
+        type: "POST",
+        url: getAvailableAPI,
+        dataType: "json",
+        success: function(data)
+        {
+            htmlStr = "";
+            $("#customers-table").empty();
+            $.each(data, function(k, v){
+
+                //alert(v.first_name+" "+v.last_name+": ");
+                htmlStr += '<tr data-item-id="'+v.id+'"><td>'+v.first_name+' '+v.last_name+'</td><td>'+v.mobile+'</td><td>'+v.email+'</td><td>'+v.sex+'</td><td>'+v.landline+'</td><td>'+v.address+'</td><td class="actions"><a href="customer.php?id='+v.id+'" class="on-default edit-row"><i class="fa fa-pencil"></i></a></td></tr>';
+                          
+            });
+            $("#customers-table").append(htmlStr);
+
+            }
+        });
+
+});
+
 $( ".createAppointment" ).click(function() {
     var agent = $("#agent").attr('agentUser');
     var application = $("#applications").val();
