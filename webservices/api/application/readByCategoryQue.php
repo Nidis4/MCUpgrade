@@ -655,4 +655,64 @@ if($catId == "60"){ // Electrical Certificate
             });
         </script>
 <?php
+}else if($catId == "109"){ // Marbles
+?>
+        <!-- How many m2 is the surface that we are going to shoe(greek:Ποσα τετραγωνικά είναι η επιφάνεια που θα γυαλίσουμε;) -->
+        <label class="col-lg-3 control-label text-lg-right pt-2">Ποσα τετραγωνικά είναι η επιφάνεια που θα γυαλίσουμε </label>
+        <div class="col-lg-9"><input class="form-control" type="number" name="buildingmtwo" id="buildingmtwo" /></div>
+        <input type="hidden" name="buildingmtwobudget" id="buildingmtwobudget" value="0">
+        <!-- Javascript Code -->
+        <script type="text/javascript">
+
+            function update_comment(){
+                var cmt;
+                //var dfgdcomment = $("#buildingmtwo").val()+'m2';
+                //var epBudget = $("#buildingdrawingbudget").attr('rel');
+
+                //cmt = dfgdcomment + ' ' + epBudget;
+
+                var samecatebud = $("#samecatebud").val();
+
+                if(samecatebud >= 2){
+                    cmt = samecatebud+" X \n" + cmt;                
+                }
+                $("#comment123").val(cmt);
+            }
+     
+            function update_budget(){
+
+                //var  bud = $("#budget").val();
+                var  mbud = 0;
+
+                if($("#buildingmtwobudget").length){ mbud = $("#buildingmtwobudget").val();}
+                
+                var totalbud = parseFloat(mbud);
+                
+                var samecatebud = $("#samecatebud").val();
+
+                if(samecatebud >= 2){
+                    totalbud = samecatebud * totalbud;                
+                }
+
+                $("#budget").val(totalbud);
+            }
+            
+
+            $(document).ready(function(){
+                // 
+                $("#buildingmtwo").on('change',function(){
+                    var vale = $(this).val();                    
+                    var mul = parseFloat(vale) * 8;
+
+                    if(mul <= 129){
+                        mul = 130;
+                    }
+
+                    $("#buildingmtwobudget").val(mul);
+                    update_budget();
+                    update_comment();
+                });
+         });
+        </script>
+<?php
 } ?>
