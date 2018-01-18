@@ -1,4 +1,5 @@
 <?php
+
 class Category{
  
     // database connection and table name
@@ -30,6 +31,29 @@ class Category{
                     title_greek ASC";
  
         $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+ 
+        return $stmt;
+    }
+
+    public function readByCategoryPrice(){
+        //select all Prices data
+        $query = "SELECT
+                    *
+                FROM
+                    categories_prices
+                WHERE
+                    category_id = :cat_id
+                ORDER BY
+                    id ASC";
+ 
+        $stmt = $this->conn->prepare( $query );
+
+        $cur_id = $this->category_id;
+        // bind id of product to be updated
+        $stmt->bindParam(':cat_id',  $cur_id, PDO::PARAM_INT);
+        //$stmt->bindValue(':id', '$cur_id', PDO::PARAM_STR);
+
         $stmt->execute();
  
         return $stmt;

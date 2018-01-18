@@ -2,8 +2,33 @@
 // required header
 $catId = $_GET['cat_id'];
 
+include_once '../config/database.php';
+include_once '../objects/category.php';
+ 
+// instantiate database and category object
+$database = new Database();
+$db = $database->getConnection();
+ 
+// initialize object
+$category = new Category($db);
+$category->category_id = isset($_GET['cat_id']) ? $_GET['cat_id'] : die();
+ 
+// query categorys
+$stmt = $category->readByCategoryPrice();
+$num = $stmt->rowCount();
+
 // For Electrical Certificates
 if($catId == "60"){ // Electrical Certificate
+    
+    if($num>0){
+        $prices =  array();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+            $prices[$row['pkey']] = $row['pvalue'];
+        }
+
+    }
+
+    
 ?>
     <label class="col-lg-3 control-label text-lg-right pt-2">Πόσα τετραγωνικά μέτρα είναι το ακίνητο;  </label>
     <div class="col-lg-9"><input class="form-control" type="number" name="buildingmtwo" id="buildingmtwo" /></div>
@@ -49,11 +74,6 @@ if($catId == "60"){ // Electrical Certificate
             </div>
         </div>
     </div>
-
-   
-
-
-
 
     <label class="col-lg-3 control-label text-lg-right pt-2">Το ρεύμα είναι τριφασικό?  </label>
     <div class="col-lg-9 row">
@@ -233,30 +253,30 @@ if($catId == "60"){ // Electrical Certificate
                 var country = $("#county").val();
                 if(country == 1){
                     if(vale >= 1 && vale <= 30){
-                        $("#countrybudget").val('29');
+                        $("#countrybudget").val('<?php echo $prices['1-30m2_attica'];?>');
                     }else if(vale >= 31 && vale <= 100){
-                        $("#countrybudget").val('34');
+                        $("#countrybudget").val('<?php echo $prices['30-100m2_attica'];?>');
                     }else if(vale >= 101 && vale <= 150){
-                        $("#countrybudget").val('44');
+                        $("#countrybudget").val('<?php echo $prices['100-150m2_attica'];?>');
                     }else if(vale >= 151 && vale <= 200){
-                        $("#countrybudget").val('49');
+                        $("#countrybudget").val('<?php echo $prices['150-200m2_attica'];?>');
                     }else if(vale >= 201){
-                        var zbud = 49 + ((parseFloat(vale) - 200) * 0.3);
+                        var zbud = <?php echo $prices['150-200m2_attica'];?> + ((parseFloat(vale) - 200) * 0.3);
                         $("#countrybudget").val(zbud);
                     }
                     
                 }else if(country == 2){
                     if(vale >= 1 && vale <= 30){
-                        $("#countrybudget").val('49');
+                        $("#countrybudget").val('<?php echo $prices['1-30m2_thessaloniki'];?>');
                     }else if(vale >= 31 && vale <= 100){
-                        $("#countrybudget").val('54');
+                        $('#countrybudget').val('<?php echo $prices['30-100m2_thessaloniki'];?>');
                     }else if(vale >= 101 && vale <= 150){
-                        $("#countrybudget").val('64');
+                        $('#countrybudget').val('<?php echo $prices['100-150m2_thessaloniki'];?>');
                     }else if(vale >= 151 && vale <= 200){
-                        $("#countrybudget").val('74');
+                        $('#countrybudget').val('<?php echo $prices['150-200m2_thessaloniki'];?>');
                     }else if(vale >= 201){
-                        var zbud = 74 + ((parseFloat(vale) - 200) * 0.3);
-                        $("#countrybudget").val(zbud);
+                        var zbud = <?php echo $prices['150-200m2_thessaloniki'];?> + ((parseFloat(vale) - 200) * <?php echo $prices['charge_for_extra_m2_over_200'];?>);
+                        $('#countrybudget').val(zbud);
                     }
                     
                 }
@@ -306,7 +326,7 @@ if($catId == "60"){ // Electrical Certificate
                 var epBudget = 0;
                 if(rvale == "YES"){ 
                    $("#dfgdBudget").attr('rel','3φασικό');    
-                   var sd = 15;               
+                   var sd = '<?php echo $prices['3phase'];?>';               
                    $("#dfgdBudget").val(sd);
                 }else{ 
                    $("#dfgdBudget").val('0'); 
@@ -342,12 +362,12 @@ if($catId == "60"){ // Electrical Certificate
                 var rvale = $(this).val();                
                 if(rvale == "YES"){
                    $(".ElectricalVoltageRelayNameYes").css('display','none'); 
-                   var epBudget = 150;
-                   $("#epBudget").attr('rel','Εγκατάσταση νέου πίνακα '+ '150' +' €'); 
+                   var epBudget = '<?php echo $prices['install_electrical_panel_for_single_phase'];?>';
+                   $("#epBudget").attr('rel','Εγκατάσταση νέου πίνακα '+ '<?php echo $prices['install_electrical_panel_for_single_phase'];?>' +' €'); 
                    var rvale1 = $('.ElectricalCertificatebedStatus').val(); 
                    if(rvale1 == "YES"){ 
-                        epBudget = 300;
-                        $("#epBudget").attr('rel','Εγκατάσταση νέου πίνακα '+ '300' +' €');
+                        epBudget = '<?php echo $prices['install_electrical_panel_for_3phase'];?>';
+                        $("#epBudget").attr('rel','Εγκατάσταση νέου πίνακα '+ '<?php echo $prices['install_electrical_panel_for_3phase'];?>' +' €');
                    }
                   
                    $("#epBudget").val(epBudget);
@@ -423,7 +443,7 @@ if($catId == "60"){ // Electrical Certificate
            $(".EltageRelayNamedfNo").on('change',function(){
                 var rvale = $(this).val();                
                 if(rvale == "YES"){
-                    $("#volBudget").val('70');
+                    $("#volBudget").val('<?php echo $prices['rele_install_single_phase'];?>');
                 }else{
                     $("#volBudget").val('0');
                 }
@@ -439,6 +459,15 @@ if($catId == "60"){ // Electrical Certificate
     </script>
     
 <?php }else if($catId == "43"){ // Energy Certificate
+
+
+    if($num>0){
+        $prices =  array();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+            $prices[$row['pkey']] = $row['pvalue'];
+        }
+
+    }
 ?>
         <!-- How many m2 are the building ? (greek: Πόσα μ2 είναι το ακινητό σας?) -->
         <label class="col-lg-3 control-label text-lg-right pt-2">Πόσα μ2 είναι το ακινητό σας? </label>
@@ -559,27 +588,27 @@ if($catId == "60"){ // Electrical Certificate
                     var country = $("#county").val();
                     if(country == 1){
                         if(vale >= 1 && vale <= 30){
-                            $("#countrybudget").val('29');
+                            $("#countrybudget").val('<?php echo $prices['1-30m2_attica'];?>');
                         }else if(vale >= 31 && vale <= 100){
-                            $("#countrybudget").val('38');
+                            $("#countrybudget").val('<?php echo $prices['30-100m2_attica'];?>');
                         }else if(vale >= 101 && vale <= 150){
-                            $("#countrybudget").val('60');
+                            $("#countrybudget").val('<?php echo $prices['100-150m2_attica'];?>');
                         }else if(vale >= 151 && vale <= 200){
-                            $("#countrybudget").val('90');
+                            $("#countrybudget").val('<?php echo $prices['150-200m2_attica'];?>');
                         }else if(vale >= 201){
-                            var zbud = 90 + ((parseFloat(vale) - 200) * 0.3);
+                            var zbud = <?php echo $prices['150-200m2_attica'];?> + ((parseFloat(vale) - 200) * <?php echo $prices['charge_for_extra_m2_over_200'];?>);
                             $("#countrybudget").val(zbud);
                         }
                         
                     }else if(country == 2){
                         if(vale >= 1 && vale <= 100){
-                            $("#countrybudget").val('45');
+                            $("#countrybudget").val('<?php echo $prices['1-100m2_thessaloniki'];?>');
                         }else if(vale >= 101 && vale <= 150){
-                            $("#countrybudget").val('60');
+                            $("#countrybudget").val('<?php echo $prices['100-150m2_thessaloniki'];?>');
                         }else if(vale >= 151 && vale <= 200){
-                            $("#countrybudget").val('90');
+                            $("#countrybudget").val('<?php echo $prices['150-200m2_thessaloniki'];?>');
                         }else if(vale >= 201){
-                            var zbud = 90 + ((parseFloat(vale) - 200) * 0.3);
+                            var zbud = <?php echo $prices['150-200m2_thessaloniki'];?> + ((parseFloat(vale) - 200) * <?php echo $prices['charge_for_extra_m2_over_200'];?>);
                             $("#countrybudget").val(zbud);
                         }
                         
@@ -611,15 +640,15 @@ if($catId == "60"){ // Electrical Certificate
                         var vale = $('#buildingmtwo').val();
                          
                         if(vale >= 1 && vale <= 75){
-                            $("#buildingdrawingbudget").val('10');
+                            $("#buildingdrawingbudget").val('<?php echo $prices['1-75_building_drawing'];?>');
                         }else if(vale >= 76 && vale <= 100){
-                            $("#buildingdrawingbudget").val('15');
+                            $("#buildingdrawingbudget").val('<?php echo $prices['76-100_building_drawing'];?>');
                         }else if(vale >= 101 && vale <= 150){
-                            $("#buildingdrawingbudget").val('20');
+                            $("#buildingdrawingbudget").val('<?php echo $prices['101-150_building_drawing'];?>');
                         }else if(vale >= 151 && vale <= 200){
-                            $("#buildingdrawingbudget").val('25');
+                            $("#buildingdrawingbudget").val('<?php echo $prices['151-200_building_drawing'];?>');
                         }else if(vale >= 201){
-                            var zbud = 25 + (((parseFloat(vale) - 200)/100) * 10);
+                            var zbud = <?php echo $prices['151-200_building_drawing'];?> + (((parseFloat(vale) - 200)/100) * 10);
                             $("#buildingdrawingbudget").val(zbud);
                         }
 
@@ -656,6 +685,14 @@ if($catId == "60"){ // Electrical Certificate
         </script>
 <?php
 }else if($catId == "109"){ // Marbles
+
+        if($num>0){
+            $prices =  array();
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                $prices[$row['pkey']] = $row['pvalue'];
+            }
+
+        }
 ?>
         <!-- How many m2 is the surface that we are going to shoe(greek:Ποσα τετραγωνικά είναι η επιφάνεια που θα γυαλίσουμε;) -->
         <label class="col-lg-3 control-label text-lg-right pt-2">Ποσα τετραγωνικά είναι η επιφάνεια που θα γυαλίσουμε </label>
@@ -702,10 +739,10 @@ if($catId == "60"){ // Electrical Certificate
                 // 
                 $("#buildingmtwo").on('change',function(){
                     var vale = $(this).val();                    
-                    var mul = parseFloat(vale) * 8;
+                    var mul = parseFloat(vale) * <?php echo $prices['multiple_m2_by'];?>;
 
-                    if(mul <= 129){
-                        mul = 130;
+                    if(mul <= (<?php echo $prices['minimum_multiply_value'];?> - 1)){
+                        mul = <?php echo $prices['minimum_multiply_value'];?>;
                     }
 
                     $("#buildingmtwobudget").val(mul);
