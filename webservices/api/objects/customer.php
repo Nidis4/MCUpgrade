@@ -68,7 +68,8 @@ class Customer{
                 LEFT JOIN ". $this->account_table_name." ca
                     ON c.id = ca.customer_id
             WHERE
-                c.first_name LIKE ? AND c.last_name LIKE ? AND cc.mobile LIKE ? AND ca.email LIKE ?";
+                c.first_name LIKE ? AND c.last_name LIKE ? AND cc.mobile LIKE ? AND ca.email LIKE ?
+                LIMIT 0, 30";
  
     // prepare query statement
     $stmt = $this->conn->prepare($query);

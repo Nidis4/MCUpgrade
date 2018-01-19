@@ -232,6 +232,36 @@ $( "#searchCustomer" ).click(function() {
         });
 
 });
+$( "#searchProfessional" ).click(function() {
+    //alert("Search professional");
+    var first_name = $("#first_name").val();
+    var last_name = $("#last_name").val();
+    var mobile = $("#mobile").val();
+    var email = $("#email").val();
+
+    var getAvailableAPI = API_LOCATION+'professional/searchList.php?n='+first_name+'&s='+last_name+'&m='+mobile+'&e='+email;
+    //alert(getAvailableAPI);
+
+    $.ajax({
+        type: "POST",
+        url: getAvailableAPI,
+        dataType: "json",
+        success: function(data)
+        {
+            htmlStr = "";
+            $("#customers-table").empty();
+            $.each(data, function(k, v){
+                if (v.id!=undefined){
+                //alert(v.first_name+" "+v.last_name+": ");
+                htmlStr += '<tr data-item-id="'+v.id+'"><td>'+v.first_name+' '+v.last_name+'</td><td>'+v.mobile+'</td><td>'+v.landline+'</td><td>'+v.address+'</td><td>'+v.admin_comments+'</td><td class="actions"><a href="professional.php?id='+v.id+'" class="on-default edit-row"><i class="fa fa-pencil"></i></a></td></tr>';
+                }    
+            });
+            $("#customers-table").append(htmlStr);
+
+            }
+        });
+
+});
 
 $( ".createAppointment" ).click(function() {
     var agent = $("#agent").attr('agentUser');

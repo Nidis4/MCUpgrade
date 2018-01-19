@@ -276,6 +276,22 @@
 				                    </li>
 				                    <li class="nav-parent">
 				                        <a class="nav-link" href="#">
+				                            <i class="fa fa-table" aria-hidden="true"></i>
+				                            <span>Professionals</span>
+				                        </a>
+				                        <ul class="nav nav-children">
+				                            <li>
+				                                <a class="nav-link" href="professionals.php">
+				                                    List of Professionals
+				                                </a>
+				                            </li>
+				                            
+				                           
+				                            
+				                        </ul>
+				                    </li>
+				                    <li class="nav-parent">
+				                        <a class="nav-link" href="#">
 				                            <i class="fa fa-tasks" aria-hidden="true"></i>
 				                            <span>Customers</span>
 				                        </a>

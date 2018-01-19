@@ -4,13 +4,8 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
  
 // include database and object files
-include_once '../config/core.php';
-include_once '../shared/utilities.php';
 include_once '../config/database.php';
 include_once '../objects/professional.php';
- 
-// utilities
-$utilities = new Utilities();
  
 // instantiate database and product object
 $database = new Database();
@@ -19,8 +14,15 @@ $db = $database->getConnection();
 // initialize object
 $professional = new Professional($db);
  
+// get keywords
+$name = isset($_GET["n"]) ? $_GET["n"] : "";
+$surname = isset($_GET["s"]) ? $_GET["s"] : "";
+$mobile = isset($_GET["m"]) ? $_GET["m"] : "";
+$email = isset($_GET["e"]) ? $_GET["e"] : "";
+ 
 // query products
-$stmt = $professional->readPaging($from_record_num, $records_per_page);
+$stmt = $professional->searchList($name, $surname, $mobile);
+//$stmt = $customer->search($keywords);
 $num = $stmt->rowCount();
  
 // check if more than 0 record found
@@ -28,8 +30,7 @@ if($num>0){
  
     // products array
     $professionals_arr=array();
-    $professionals_arr["records"]=array();
-    $professionals_arr["paging"]=array();
+    //$products_arr["records"]=array();
  
     // retrieve our table contents
     // fetch() is faster than fetchAll()
@@ -50,21 +51,15 @@ if($num>0){
             "admin_comments" => $admin_comments
         );
  
-        array_push($professionals_arr["records"], $professional_item);
+        array_push($professionals_arr, $professional_item);
     }
- 
- 
-    // include paging
-    $total_rows=$professional->count();
-    $page_url="{$home_url}professional/read_paging.php?";
-    $paging=$utilities->getPaging($page, $total_rows, $records_per_page, $page_url);
-    $professionals_arr["paging"]=$paging;
  
     echo json_encode($professionals_arr);
 }
+ 
 else{
     echo json_encode(
-        array("message" => "No products found.")
+        array("message" => "No Professional found.")
     );
 }
 ?>
