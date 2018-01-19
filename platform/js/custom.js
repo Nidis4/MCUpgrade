@@ -77,7 +77,7 @@ $('select#category').on('change', function() {
             dataType: "html",
             success: function(data)
             {
-               $(".application_questions").append(data);
+               $(".application_questions").html(data);
                
             }
         });
