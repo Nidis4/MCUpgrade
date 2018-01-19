@@ -23,7 +23,12 @@ $appointment = new Appointment($db);
 if (isset($_GET['cust_id'])) {
     $cust_id = $_GET['cust_id'];
     $stmt = $appointment->readPagingByCust($from_record_num, $records_per_page, $cust_id);
-} else {
+} 
+elseif (isset($_GET['prof_id'])) {
+    $prof_id = $_GET['prof_id'];
+    $stmt = $appointment->readPagingByProf($from_record_num, $records_per_page, $prof_id);
+}
+else {
     $stmt = $appointment->readPaging($from_record_num, $records_per_page);
 }
 $num = $stmt->rowCount();

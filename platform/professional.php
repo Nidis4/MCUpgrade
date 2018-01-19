@@ -64,7 +64,7 @@ include('config/core.php');
 				$professional = file_get_contents($api_url.'webservices/api/professional/read_one.php?id='.$id);
 				$professional = json_decode($professional, true); // decode the JSON into an associative array	
 
-				$appointments = file_get_contents($api_url.'webservices/api/appointment/read_paging.php?cust_id='.$id);
+				$appointments = file_get_contents($api_url.'webservices/api/appointment/read_paging.php?prof_id='.$id);
 				$appointmentsPag = json_decode($appointments, true); // decode the JSON into an associative array			
 			?>
 
