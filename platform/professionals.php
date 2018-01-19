@@ -90,7 +90,7 @@ include('config/core.php');
 						
 								<h2 class="card-title">List of Professionals</h2>
 							</header>
-							<div class="card-body">
+							<div class="card-body" id='profSearch'>
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group row">
@@ -114,9 +114,9 @@ include('config/core.php');
 											</div>										
 										</div>
 										<div class="form-group row">
-											<label class="col-sm-3 control-label text-sm-right pt-2">E-mail </label>
+											<label class="col-sm-3 control-label text-sm-right pt-2">Address </label>
 											<div class="col-sm-9">
-												<input type="text" name="email" id="email" class="form-control" value=""  />
+												<input type="text" name="address" id="address" class="form-control" value=""  />
 											</div>										
 										</div>
 										

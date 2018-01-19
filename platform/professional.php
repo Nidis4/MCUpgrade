@@ -54,15 +54,15 @@ include('config/core.php');
 				    $id = $_GET['id'];
 				} else {
 				    // Fallback behaviour goes here
-				    $url = $home_url."platform/customers.php";
+				    $url = $home_url."platform/professional.php";
 				    echo $url;
 				    header("Location: ".$url);
 					die();
 				}
 				include('header.php');
 
-				$customer = file_get_contents($api_url.'webservices/api/customer/read_one.php?id='.$id);
-				$customer = json_decode($customer, true); // decode the JSON into an associative array	
+				$professional = file_get_contents($api_url.'webservices/api/professional/read_one.php?id='.$id);
+				$professional = json_decode($professional, true); // decode the JSON into an associative array	
 
 				$appointments = file_get_contents($api_url.'webservices/api/appointment/read_paging.php?cust_id='.$id);
 				$appointmentsPag = json_decode($appointments, true); // decode the JSON into an associative array			
@@ -87,7 +87,7 @@ include('config/core.php');
 									</a>
 								</li>
 								<li><span>Home</span></li>
-								<li><span>Customers</span></li>
+								<li><span>Professionals</span></li>
 							</ol>
 					
 							<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
@@ -102,52 +102,52 @@ include('config/core.php');
 									<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
 								</div>
 						
-								<h2 class="card-title">Customer Information #<?php echo $customer['id']; ?></h2>
+								<h2 class="card-title">Professional Information #<?php echo $professional['id']; ?></h2>
 							</header>
 							<div class="card-body">
 								<div class="form-group row">
 									<label class="col-sm-3 control-label text-sm-right pt-2">Name <span class="required">*</span></label>
 									<div class="col-sm-4">
-										<input type="text" name="first_name" class="form-control" value="<?php echo $customer['first_name']; ?>" required />
+										<input type="text" name="first_name" class="form-control" value="<?php echo $professional['first_name']; ?>" required />
 									</div>
 									<div class="col-sm-3 offset-sm-1">
-										<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning" id="updateCustomer">Update Details</button>
+										<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning" id="updateProfessional">Update Details</button>
 									</div>
 								</div>
 								<div class="form-group row">
 									<label class="col-sm-3 control-label text-sm-right pt-2">Surname <span class="required">*</span></label>
 									<div class="col-sm-4">
-										<input type="text" name="last_name" id="last_name" class="form-control" value="<?php echo $customer['last_name']; ?>" required />
+										<input type="text" name="last_name" id="last_name" class="form-control" value="<?php echo $professional['last_name']; ?>" required />
 									</div>										
 								</div>
 								<div class="form-group row">
 									<label class="col-sm-3 control-label text-sm-right pt-2">Sex <span class="required">*</span></label>
 									<div class="col-sm-4">
-										<input type="text" name="sex" id="sex" class="form-control" value="<?php echo $customer['sex']; ?>" required />
+										<input type="text" name="sex" id="sex" class="form-control" value="<?php echo $professional['sex']; ?>" required />
 									</div>										
 								</div>
 								<div class="form-group row">
 									<label class="col-sm-3 control-label text-sm-right pt-2">Address <span class="required">*</span></label>
 									<div class="col-sm-4">
-										<input type="text" name="address" id="pac-input-address" class="form-control" value="<?php echo $customer['address']; ?>" required />
+										<input type="text" name="address" id="pac-input-address" class="form-control" value="<?php echo $professional['address']; ?>" required />
 									</div>										
 								</div>
 								<div class="form-group row">
 									<label class="col-sm-3 control-label text-sm-right pt-2">Mobile <span class="required">*</span></label>
 									<div class="col-sm-4">
-										<input type="text" name="mobile" id="mobile" class="form-control" value="<?php echo $customer['mobile']; ?>" required />
+										<input type="text" name="mobile" id="mobile" class="form-control" value="<?php echo $professional['mobile']; ?>" required />
 									</div>										
 								</div>
 								<div class="form-group row">
 									<label class="col-sm-3 control-label text-sm-right pt-2">Landline <span class="required">*</span></label>
 									<div class="col-sm-4">
-										<input type="text" name="phone" id="phone" class="form-control" value="<?php echo $customer['phone']; ?>" required />
+										<input type="text" name="phone" id="phone" class="form-control" value="<?php echo $professional['phone']; ?>" required />
 									</div>										
 								</div>
 								<div class="form-group row">
 									<label class="col-sm-3 control-label text-sm-right pt-2">E-mail <span class="required">*</span></label>
 									<div class="col-sm-4">
-										<input type="text" name="email" id="email" class="form-control" value="<?php echo $customer['email']; ?>" required />
+										<input type="text" name="email" id="email" class="form-control" value="<?php echo $professional['email']; ?>" required />
 									</div>										
 								</div>
 							</div>
@@ -160,7 +160,7 @@ include('config/core.php');
 									<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
 								</div>
 						
-								<h2 class="card-title">Customer's Appointments</h2>
+								<h2 class="card-title">Professional's Appointments</h2>
 							</header>
 							<div class="card-body">
 								<table class="table table-bordered table-striped mb-0" id="datatable-editable">
@@ -209,19 +209,7 @@ include('config/core.php');
 								</table>
 							</div>
 						</section>
-						<section class="card">
-							<header class="card-header">
-								<div class="card-actions">
-									<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-									<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
-								</div>
-						
-								<h2 class="card-title">Customer's Calls</h2>
-							</header>
-							<div class="card-body">
-								
-							</div>
-						</section>
+
 					<!-- end: page -->
 				</section>
 			</div>

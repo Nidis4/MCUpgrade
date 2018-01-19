@@ -18,10 +18,10 @@ $professional = new Professional($db);
 $name = isset($_GET["n"]) ? $_GET["n"] : "";
 $surname = isset($_GET["s"]) ? $_GET["s"] : "";
 $mobile = isset($_GET["m"]) ? $_GET["m"] : "";
-$email = isset($_GET["e"]) ? $_GET["e"] : "";
+$address = isset($_GET["e"]) ? $_GET["e"] : "";
  
 // query products
-$stmt = $professional->searchList($name, $surname, $mobile);
+$stmt = $professional->searchList($name, $surname, $mobile, $address);
 //$stmt = $customer->search($keywords);
 $num = $stmt->rowCount();
  

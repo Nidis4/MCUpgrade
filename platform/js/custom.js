@@ -221,25 +221,29 @@ $( "#searchCustomer" ).click(function() {
             htmlStr = "";
             $("#customers-table").empty();
             $.each(data, function(k, v){
-
                 //alert(v.first_name+" "+v.last_name+": ");
                 htmlStr += '<tr data-item-id="'+v.id+'"><td>'+v.first_name+' '+v.last_name+'</td><td>'+v.mobile+'</td><td>'+v.email+'</td><td>'+v.sex+'</td><td>'+v.landline+'</td><td>'+v.address+'</td><td class="actions"><a href="customer.php?id='+v.id+'" class="on-default edit-row"><i class="fa fa-pencil"></i></a></td></tr>';
-                          
             });
             $("#customers-table").append(htmlStr);
-
             }
         });
-
 });
+
+$('#profSearch .form-group input').keypress(function(e){
+        if(e.which == 13){//Enter key pressed
+            //alert("Clicked");
+            $('#searchProfessional').click();//Trigger search button click event
+        }
+    });
+
 $( "#searchProfessional" ).click(function() {
     //alert("Search professional");
     var first_name = $("#first_name").val();
     var last_name = $("#last_name").val();
     var mobile = $("#mobile").val();
-    var email = $("#email").val();
+    var address = $("#address").val();
 
-    var getAvailableAPI = API_LOCATION+'professional/searchList.php?n='+first_name+'&s='+last_name+'&m='+mobile+'&e='+email;
+    var getAvailableAPI = API_LOCATION+'professional/searchList.php?n='+first_name+'&s='+last_name+'&m='+mobile+'&e='+address;
     //alert(getAvailableAPI);
 
     $.ajax({
