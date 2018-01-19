@@ -752,4 +752,53 @@ if($catId == "60"){ // Electrical Certificate
          });
         </script>
 <?php
-} ?>
+} else if($catId == "57"){ // Air Condition 
+    ?>
+
+    <!-- How many aircondition of 9000 and/or 12000 btu do you have(greek:Πόσα κλιματιστικά έχετε που είναι 9000btu-12000btu;)? -->
+    <label class="col-lg-3 control-label text-lg-right pt-2 " >Πόσα κλιματιστικά έχετε που είναι 9000btu-12000btu;</label>
+    <div class="col-lg-5 " >
+        <div data-plugin-spinner data-plugin-options='{ "value":0, "step": 1, "min": 1, "max": 200 }'>
+            <div class="input-group" id="totalac">
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-down">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <input type="text" class="spinner-input form-control totalac" value="1" maxlength="3" readonly name="totalac">
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-up">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+    </div>
+
+    <!-- How many of them do you want to maintain(greek:Πόσα από αυτά είναι για συντήρηση)? -->
+    <label class="col-lg-3 control-label text-lg-right pt-2 " >Πόσα από αυτά είναι για συντήρηση?</label>
+    <div class="col-lg-5 " >
+        <div data-plugin-spinner data-plugin-options='{ "value":0, "step": 1, "min": 1, "max": 200 }'>
+            <div class="input-group" id='maintainac'>
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-down">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <input type="text" class="spinner-input form-control maintainac" value="1" maxlength="3" readonly name="maintainac">
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-up">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <input type="hidden" name="maintainacbudget">
+    </div>
+
+
+<?php } ?>
