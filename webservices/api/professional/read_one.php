@@ -31,7 +31,12 @@ $stmt = $professional->readOne();
             "id" => $professional->id,
             "first_name" => $professional->first_name,
             "last_name" => $professional->last_name,
-            "address" => $professional->address
+            "sex" => $professional->sex,
+            "address" => $professional->address,
+            "profile_status" => $professional->profile_status,
+            "mobile" => $professional->mobile,
+            "phone" => $professional->phone,
+            "email" => $professional->email
         );
      
  

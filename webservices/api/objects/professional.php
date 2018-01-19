@@ -72,6 +72,8 @@ class Professional{
         return $stmt;
     }
 
+
+
     public function busySlots($startDate, $endDate, $id){
         $query ="SELECT `date`,`time`, `address` FROM `appointments` WHERE `prof_member_id`=".$id." AND `status`=1 AND `date` BETWEEN '".$startDate."' AND '".$endDate."'  ORDER BY `date`";
         $stmt = $this->conn->prepare( $query );
@@ -84,7 +86,7 @@ class Professional{
      
         // select query
         $query = "SELECT
-                p.`id`, p.`first_name`, p.`last_name`, p.`profile_status`, co.`address` FROM `professionals` p,  `professionals_contact_details` co WHERE co.professional_id=p.id 
+                p.`id`, p.`first_name`, p.`last_name`, p.`profile_status`, p.`admin_comments`, co.`address`, co.`mobile`, co.`phone` FROM `professionals` p,  `professionals_contact_details` co WHERE co.professional_id=p.id 
                 ORDER BY
                     p.`id` DESC
                 LIMIT ?, ?";
@@ -103,6 +105,48 @@ class Professional{
         return $stmt;
     }
 
+    public function searchList($name, $surname, $mobile, $address){
+ 
+    // select all query
+    $query = "SELECT
+                p.`id`, p.`first_name`, p.`last_name`, p.`profile_status`, p.`admin_comments`, co.`address`, co.`mobile`, co.`phone`
+            FROM
+                " . $this->table_name . " p
+                LEFT JOIN ". $this->contact_table_name." co
+                    ON p.id = co.professional_id
+            WHERE
+                p.first_name LIKE ? AND p.last_name LIKE ? AND co.mobile LIKE ? AND co.address LIKE ?
+            ORDER BY
+                    p.`id` DESC
+                LIMIT 0, 30";
+
+                //echo $query;
+ 
+    // prepare query statement
+    $stmt = $this->conn->prepare($query);
+ 
+    // sanitize
+    $name=htmlspecialchars(strip_tags($name));
+    $name = "%{$name}%";
+    $surname=htmlspecialchars(strip_tags($surname));
+    $surname = "%{$surname}%";
+    $mobile=htmlspecialchars(strip_tags($mobile));
+    $mobile = "%{$mobile}%";
+    $address=htmlspecialchars(strip_tags($address));
+    $address = "%{$address}%";
+ 
+    // bind
+    $stmt->bindParam(1, $name);
+    $stmt->bindParam(2, $surname);
+    $stmt->bindParam(3, $mobile);
+    $stmt->bindParam(4, $address);
+ 
+    // execute query
+    $stmt->execute();
+ 
+    return $stmt;
+    }
+
     // used for paging 
     public function count(){
         $query = "SELECT COUNT(*) as total_rows FROM " . $this->table_name . "";
@@ -118,11 +162,13 @@ class Professional{
      
         // query to read single record
         $query = "SELECT
-                p.`id`, p.`first_name`, p.`last_name`, cc.`address`
+                 p.`id`, p.`first_name`, p.`last_name`, p.`sex`, p.`profile_status`, p.`admin_comments`, co.`address`, co.`mobile`, co.`phone`, ca.`email`
             FROM
                 " . $this->table_name . " p
-                LEFT JOIN ". $this->contact_table_name." cc
-                    ON p.id = cc.professional_id
+                LEFT JOIN ". $this->contact_table_name." co
+                    ON p.id = co.professional_id
+                LEFT JOIN ". $this->account_table_name." ca
+                    ON p.id = ca.professional_id
                 WHERE
                     p.id = :id
                 LIMIT
@@ -151,6 +197,12 @@ class Professional{
         $this->first_name = $row['first_name'];
         $this->last_name = $row['last_name'];
         $this->address = $row['address'];
+        $this->sex = $row['sex'];
+        $this->profile_status = $row['profile_status'];
+        $this->admin_comments = $row['admin_comments'];
+        $this->mobile = $row['mobile'];
+        $this->phone = $row['phone'];
+        $this->email = $row['email'];
     } // Read One
 }
 ?>
