@@ -150,6 +150,12 @@ include('config/core.php');
 										<input type="text" name="email" id="email" class="form-control" value="<?php echo $professional['email']; ?>" required />
 									</div>										
 								</div>
+								<div class="form-group row">
+									<label class="col-sm-3 control-label text-sm-right pt-2">Status <span class="required">*</span></label>
+									<div class="col-sm-4">
+										<input type="text" name="profile_status" id="profile_status" class="form-control" value="<?php echo $professional['profile_status']; ?>" required />
+									</div>										
+								</div>
 							</div>
 						</section>
 

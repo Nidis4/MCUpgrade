@@ -202,6 +202,13 @@ $( ".copy-row" ).click(function() {
     
 });
 
+$('#custSearch .form-group input').keypress(function(e){
+        if(e.which == 13){//Enter key pressed
+            //alert("Clicked");
+            $('#searchCustomer').click();//Trigger search button click event
+        }
+});
+
 $( "#searchCustomer" ).click(function() {
     //alert("Search Customer");
     var first_name = $("#first_name").val();
@@ -221,8 +228,9 @@ $( "#searchCustomer" ).click(function() {
             htmlStr = "";
             $("#customers-table").empty();
             $.each(data, function(k, v){
-                //alert(v.first_name+" "+v.last_name+": ");
-                htmlStr += '<tr data-item-id="'+v.id+'"><td>'+v.first_name+' '+v.last_name+'</td><td>'+v.mobile+'</td><td>'+v.email+'</td><td>'+v.sex+'</td><td>'+v.landline+'</td><td>'+v.address+'</td><td class="actions"><a href="customer.php?id='+v.id+'" class="on-default edit-row"><i class="fa fa-pencil"></i></a></td></tr>';
+                if (v.id!=undefined){
+                    htmlStr += '<tr data-item-id="'+v.id+'"><td>'+v.first_name+' '+v.last_name+'</td><td>'+v.mobile+'</td><td>'+v.email+'</td><td>'+v.sex+'</td><td>'+v.landline+'</td><td>'+v.address+'</td><td class="actions"><a href="customer.php?id='+v.id+'" class="on-default edit-row"><i class="fa fa-pencil"></i></a></td></tr>';
+                }
             });
             $("#customers-table").append(htmlStr);
             }
@@ -234,7 +242,7 @@ $('#profSearch .form-group input').keypress(function(e){
             //alert("Clicked");
             $('#searchProfessional').click();//Trigger search button click event
         }
-    });
+});
 
 $( "#searchProfessional" ).click(function() {
     //alert("Search professional");
@@ -256,8 +264,7 @@ $( "#searchProfessional" ).click(function() {
             $("#customers-table").empty();
             $.each(data, function(k, v){
                 if (v.id!=undefined){
-                //alert(v.first_name+" "+v.last_name+": ");
-                htmlStr += '<tr data-item-id="'+v.id+'"><td>'+v.first_name+' '+v.last_name+'</td><td>'+v.mobile+'</td><td>'+v.landline+'</td><td>'+v.address+'</td><td>'+v.admin_comments+'</td><td class="actions"><a href="professional.php?id='+v.id+'" class="on-default edit-row"><i class="fa fa-pencil"></i></a></td></tr>';
+                    htmlStr += '<tr data-item-id="'+v.id+'"><td>'+v.first_name+' '+v.last_name+'</td><td>'+v.mobile+'</td><td>'+v.landline+'</td><td>'+v.address+'</td><td>'+v.admin_comments+'</td><td class="actions"><a href="professional.php?id='+v.id+'" class="on-default edit-row"><i class="fa fa-pencil"></i></a></td></tr>';
                 }    
             });
             $("#customers-table").append(htmlStr);
