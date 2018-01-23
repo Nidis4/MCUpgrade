@@ -758,14 +758,14 @@ if($catId == "60"){ // Electrical Certificate
     <!-- How many aircondition of 9000 and/or 12000 btu do you have(greek:Πόσα κλιματιστικά έχετε που είναι 9000btu-12000btu;)? -->
     <label class="col-lg-3 control-label text-lg-right pt-2 " >Πόσα κλιματιστικά έχετε που είναι 9000btu-12000btu;</label>
     <div class="col-lg-5 " >
-        <div data-plugin-spinner data-plugin-options='{ "value":0, "step": 1, "min": 1, "max": 200 }'>
+        <div data-plugin-spinner data-plugin-options='{ "value":0, "step": 1, "min": 0, "max": 200 }'>
             <div class="input-group" id="totalac">
                 <div class="spinner-buttons input-group-btn">
                     <button type="button" class="btn btn-default spinner-down">
                         <i class="fa fa-minus"></i>
                     </button>
                 </div>
-                <input type="text" class="spinner-input form-control totalac" value="1" maxlength="3" readonly name="totalac">
+                <input type="text" class="spinner-input form-control totalac" value="0" maxlength="3" readonly name="totalac">
                 <div class="spinner-buttons input-group-btn">
                     <button type="button" class="btn btn-default spinner-up">
                         <i class="fa fa-plus"></i>
@@ -777,17 +777,17 @@ if($catId == "60"){ // Electrical Certificate
     <div class="col-lg-4">
     </div>
 
-    <!-- How many of them do you want to maintain(greek:Πόσα από αυτά είναι για συντήρηση)? -->
+    <!-- 1a How many of them do you want to maintain(greek:Πόσα από αυτά είναι για συντήρηση)? -->
     <label class="col-lg-3 control-label text-lg-right pt-2 " >Πόσα από αυτά είναι για συντήρηση?</label>
     <div class="col-lg-5 " >
-        <div data-plugin-spinner data-plugin-options='{ "value":0, "step": 1, "min": 1, "max": 200 }'>
+        <div data-plugin-spinner data-plugin-options='{ "value":0, "step": 1, "min": 0, "max": 200 }'>
             <div class="input-group" id='maintainac'>
                 <div class="spinner-buttons input-group-btn">
                     <button type="button" class="btn btn-default spinner-down">
                         <i class="fa fa-minus"></i>
                     </button>
                 </div>
-                <input type="text" class="spinner-input form-control maintainac" value="1" maxlength="3" readonly name="maintainac">
+                <input type="text" class="spinner-input form-control maintainac" value="0" maxlength="3" readonly name="maintainac">
                 <div class="spinner-buttons input-group-btn">
                     <button type="button" class="btn btn-default spinner-up">
                         <i class="fa fa-plus"></i>
@@ -797,8 +797,167 @@ if($catId == "60"){ // Electrical Certificate
         </div>
     </div>
     <div class="col-lg-4">
-        <input type="hidden" name="maintainacbudget">
+        
     </div>
 
+    <!-- 1b How many of them do you want to uninstall(greek: Ποσα απο αυτά ειναι για απεγκατάσταση;)? -->
+    <label class="col-lg-3 control-label text-lg-right pt-2 " >Ποσα απο αυτά ειναι για απεγκατάσταση;</label>
+    <div class="col-lg-5 " >
+        <div data-plugin-spinner data-plugin-options='{ "value":0, "step": 1, "min": 0, "max": 200 }'>
+            <div class="input-group" id='uninstallac'>
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-down">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <input type="text" class="spinner-input form-control uninstallac" value="0" maxlength="3" readonly name="uninstallac">
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-up">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        
+    </div>
+
+    <!-- 1c How many of them do you want to install(greek: Πόσα από αυτά είναι για εγκατασταση;)? -->
+    <label class="col-lg-3 control-label text-lg-right pt-2 " >Πόσα από αυτά είναι για εγκατασταση;</label>
+    <div class="col-lg-5 " >
+        <div data-plugin-spinner data-plugin-options='{ "value":0, "step": 1, "min": 0, "max": 200 }'>
+            <div class="input-group" id='installac'>
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-down">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <input type="text" class="spinner-input form-control installac" value="0" maxlength="3" readonly name="installac">
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-up">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        
+    </div>
+
+    <script type="text/javascript">
+
+            function update_comment(){
+                var cmt = "";
+                //var dfgdcomment = $("#buildingmtwo").val()+'m2';
+                //var epBudget = $("#buildingdrawingbudget").attr('rel');
+
+                if($(".maintainac").length){ 
+                    var manval = parseInt($(".maintainac").val());
+                    if(manval >= 1){
+                        cmt = cmt +" "+ manval +" κλιματιστικα 9000 ή 12000 btu για συντηρηση";
+                    }
+                }
+
+                if($(".uninstallac").length){ 
+                    var manval = parseInt($(".uninstallac").val());
+                    if(manval >= 1){
+                        cmt = cmt +" "+ manval +" κλιματιστικα 9000 ή 12000btu για απεγκατασταση";
+                    }
+                }
+
+                if($(".installac").length){ 
+                    var manval = parseInt($(".installac").val());
+                    if(manval >= 1){
+                        cmt = cmt +" "+ manval +" κλιματιστικα 9000 ή 12000 btu για εγκατασταση";
+                    }
+                }
+
+                //cmt = dfgdcomment + ' ' + epBudget;
+
+                var samecatebud = $("#samecatebud").val();
+
+                if(samecatebud >= 2){
+                    cmt = samecatebud+" X \n" + cmt;                
+                }
+                $("#comment123").val(cmt);
+            }
+     
+            function update_budget(){
+
+                //var  bud = $("#budget").val();
+                var  mbud = 0;
+                var  totalbud = 0;
+                var  manval = 0;
+
+                // 1a
+                if($(".maintainac").length){ 
+                    manval = parseInt($(".maintainac").val());
+                    if(manval >= 1){
+                        mbud = manval * 15;
+                        totalbud = totalbud + parseFloat(mbud);
+                    }
+                }
+
+                //1b
+                if($(".uninstallac").length){ 
+                    manval = parseInt($(".uninstallac").val());
+                    if(manval >= 1){
+                        mbud = manval * 20;
+                        totalbud = totalbud + parseFloat(mbud);
+                    }
+                }
+
+                //1c
+                if($(".installac").length){ 
+                    manval = parseInt($(".installac").val());
+                    if(manval >= 1){
+                        mbud = manval * 50;
+                        totalbud = totalbud + parseFloat(mbud);
+                    }
+                }
+                
+
+                
+                var samecatebud = $("#samecatebud").val();
+
+                if(samecatebud >= 2){
+                    totalbud = samecatebud * totalbud;                
+                }
+
+                $("#budget").val(totalbud);
+            }
+            
+
+            $(document).ready(function(){
+                $('.spinner-down').on('click',function(){
+                    var sid = $(this).parent().parent().attr('id');
+
+                    var valu = parseInt($("#"+sid+" input."+sid).val());
+
+                    if(valu >= 1){
+                        $("#"+sid+" input."+sid).val(valu - 1);    
+                    }
+                    
+                    update_budget();
+                    update_comment();
+                });
+
+                $('.spinner-up').on('click',function(){
+                    var sid = $(this).parent().parent().attr('id');
+
+                    var valu = parseInt($("#"+sid+" input."+sid).val());
+
+                    if(valu >= 0){
+                        
+                        $("#"+sid+" input."+sid).val(valu + 1); 
+                    }
+
+                    update_budget();
+                    update_comment();
+                    
+                });
+            });
 
 <?php } ?>
