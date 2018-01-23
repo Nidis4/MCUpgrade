@@ -21,6 +21,7 @@ class Professional{
     public $phone;
     public $postcode;
     public $county_id;
+    public $calendar_id;
  
     public function __construct($db){
         $this->conn = $db;
@@ -105,6 +106,25 @@ class Professional{
         return $stmt;
     }
 
+    public function getApplications(){
+     
+        // select query
+        $query = "SELECT c.name_greek, a.title_greek FROM `professionals_applications` po, `categories` c, `applications` a WHERE `professional_id`= ? AND po.category_id=c.id AND po.application_id = a.id";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind variable values
+        $id = $this->id;
+        $stmt->bindParam(1, $id, PDO::PARAM_INT);
+        
+        // execute query
+        $stmt->execute();
+     
+        // return values from database
+        return $stmt;
+    }
+
     public function searchList($name, $surname, $mobile, $address){
  
     // select all query
@@ -162,7 +182,7 @@ class Professional{
      
         // query to read single record
         $query = "SELECT
-                 p.`id`, p.`first_name`, p.`last_name`, p.`sex`, p.`profile_status`, p.`admin_comments`, co.`address`, co.`mobile`, co.`phone`, ca.`email`
+                 p.`id`, p.`first_name`, p.`last_name`, p.`sex`, p.`profile_status`, p.`admin_comments`, co.`address`, co.`mobile`, co.`phone`, ca.`email`, ca.`calendar_id`
             FROM
                 " . $this->table_name . " p
                 LEFT JOIN ". $this->contact_table_name." co
@@ -203,6 +223,7 @@ class Professional{
         $this->mobile = $row['mobile'];
         $this->phone = $row['phone'];
         $this->email = $row['email'];
+        $this->calendar_id = $row['calendar_id'];
     } // Read One
 }
 ?>

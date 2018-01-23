@@ -36,7 +36,9 @@ $stmt = $professional->readOne();
             "profile_status" => $professional->profile_status,
             "mobile" => $professional->mobile,
             "phone" => $professional->phone,
-            "email" => $professional->email
+            "email" => $professional->email,
+            "calendar_id" => $professional->calendar_id,
+            "admin_comments" => $professional->admin_comments
         );
      
  

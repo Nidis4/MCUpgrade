@@ -65,7 +65,10 @@ include('config/core.php');
 				$professional = json_decode($professional, true); // decode the JSON into an associative array	
 
 				$appointments = file_get_contents($api_url.'webservices/api/appointment/read_paging.php?prof_id='.$id);
-				$appointmentsPag = json_decode($appointments, true); // decode the JSON into an associative array			
+				$appointmentsPag = json_decode($appointments, true); // decode the JSON into an associative array
+
+				$applications = file_get_contents($api_url.'webservices/api/professional/getApplications.php?id='.$id);
+				$applications = json_decode($applications, true);		
 			?>
 
 			<div class="inner-wrapper">
@@ -156,6 +159,34 @@ include('config/core.php');
 										<input type="text" name="profile_status" id="profile_status" class="form-control" value="<?php echo $professional['profile_status']; ?>" required />
 									</div>										
 								</div>
+								<!-- <div class="form-group row">
+									<label class="col-sm-3 control-label text-sm-right pt-2">Category <span class="required">*</span></label>
+									<div class="col-sm-4">
+										<input type="text" name="profile_status" id="profile_status" class="form-control" value="<?php echo $professional['profile_status']; ?>" required />
+									</div>										
+								</div> -->
+								<div class="form-group row">
+									<label class="col-sm-3 control-label text-sm-right pt-2">Applications <span class="required">*</span></label>
+									<div class="col-sm-6">
+										<?php
+											foreach ($applications as $application) {
+												echo $application['category'].": ".$application['application']."<br>";
+											}
+										?>
+									</div>										
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-3 control-label text-sm-right pt-2">Google Calendar ID <span class="required">*</span></label>
+									<div class="col-sm-4">
+										<input type="text" name="profile_status" id="profile_status" class="form-control" value="<?php echo $professional['calendar_id']; ?>" required />
+									</div>										
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-3 control-label text-sm-right pt-2">Admin Comments <span class="required">*</span></label>
+									<div class="col-sm-4">
+										<input type="text" name="profile_status" id="profile_status" class="form-control" value="<?php echo $professional['admin_comments']; ?>" required />
+									</div>										
+								</div>
 							</div>
 						</section>
 
@@ -172,10 +203,10 @@ include('config/core.php');
 								<table class="table table-bordered table-striped mb-0" id="datatable-editable">
 									<thead>
 										<tr>
-											<th>Submission Date</th>
+											<th>Date</th>
 											<th>Professional</th>
 											<th>Customer</th>
-											<th>Date</th>
+											<th>Comments</th>
 											<th>Budget</th>
 											<th>Commision</th>
 											<th>Actions</th>
@@ -193,13 +224,14 @@ include('config/core.php');
 											$date = $appointmentsPag['records'][$field]['date']." ".$appointmentsPag['records'][$field]['time'];
 											$budget = $appointmentsPag['records'][$field]['budget'];
 											$commission = $appointmentsPag['records'][$field]['commision'];
+											$comment = $appointmentsPag['records'][$field]['comment'];
 											$status = $appointmentsPag['records'][$field]['status'];
 
 											echo '<tr data-item-id="'.$id.'" class="status-'.$status.'">
-													  <td>'.$submission_date.'</td>
+													  <td>'.$date.'</td>
 													  <td><a href="professional.php?id='.$prof_id.'">'.$prof_name.'</a></td>
 													  <td><a href="customer.php?id='.$cust_id.'">'.$cust_name.'</a></td>
-													  <td>'.$date.'</td>
+													  <td>'.$comment.'</td>
 													  <td>'.$budget.'</td>
 													  <td>'.$commission.'</td>
 													  <td class="actions">

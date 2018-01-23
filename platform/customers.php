@@ -150,7 +150,6 @@ include('config/core.php');
 											$mobile = $customersPag['records'][$field]['mobile'];
 											$landline = $customersPag['records'][$field]['phone'];
 											$email = $customersPag['records'][$field]['email'];
-
 											echo '<tr data-item-id="'.$id.'">
 													  <td>'.$name.'</td>
 													  <td>'.$mobile.'</td>
@@ -162,7 +161,6 @@ include('config/core.php');
 														<a href="customer.php?id='.$id.'" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
 													  </td>
 												  </tr>';
-
 										}
 										?>										
 									</tbody>
