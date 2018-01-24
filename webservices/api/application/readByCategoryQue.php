@@ -917,6 +917,335 @@ if($catId == "60"){ // Electrical Certificate
     <label class="col-lg-3 control-label text-lg-right pt-2 freonacdisplay" style="display: none"></label>
     <div class="col-lg-9 freonacdisplay" style="display: none"><input class="form-control" type="text" name="freonac" id="freonac" /></div>
 
+
+    <!-- 2)How many aircondition of 18000 btu do you have(greek:Πόσα κλιματιστικα των 18000btu έχετε;)? -->
+    <label class="col-lg-3 control-label text-lg-right pt-2 " >Πόσα κλιματιστικα των 18000btu έχετε;</label>
+    <div class="col-lg-5 " >
+        <div data-plugin-spinner data-plugin-options='{ "value":0, "step": 1, "min": 0, "max": 200 }'>
+            <div class="input-group" id='acnumber18000'>
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-down">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <input type="text" class="spinner-input form-control acnumber18000" value="0" maxlength="3" readonly name="acnumber18000">
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-up">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        
+    </div>
+
+    <!-- 2a)How many of them do you want to maintain(greek:Πόσα από αυτά είναι για συντήρηση)? - (box) -->
+    <label class="col-lg-3 control-label text-lg-right pt-2 " >Πόσα από αυτά είναι για συντήρηση?</label>
+    <div class="col-lg-5 " >
+        <div data-plugin-spinner data-plugin-options='{ "value":0, "step": 1, "min": 0, "max": 200 }'>
+            <div class="input-group" id='maintainac18000'>
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-down">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <input type="text" class="spinner-input form-control maintainac18000" value="0" maxlength="3" readonly name="maintainac18000">
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-up">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        
+    </div>
+
+    <!-- 2b How many of them do you want to uninstall(greek: Ποσα απο αυτά ειναι για απεγκατάσταση;)? -->
+    <label class="col-lg-3 control-label text-lg-right pt-2 " >Ποσα απο αυτά ειναι για απεγκατάσταση;</label>
+    <div class="col-lg-5 " >
+        <div data-plugin-spinner data-plugin-options='{ "value":0, "step": 1, "min": 0, "max": 200 }'>
+            <div class="input-group" id='uninstallac18000'>
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-down">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <input type="text" class="spinner-input form-control uninstallac18000" value="0" maxlength="3" readonly name="uninstallac18000">
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-up">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        
+    </div>
+
+    <!-- 2c How many of them do you want to install(greek: Πόσα από αυτά είναι για εγκατασταση;)? -->
+    <label class="col-lg-3 control-label text-lg-right pt-2 " >Πόσα από αυτά είναι για εγκατασταση;</label>
+    <div class="col-lg-5 " >
+        <div data-plugin-spinner data-plugin-options='{ "value":0, "step": 1, "min": 0, "max": 200 }'>
+            <div class="input-group" id='installac18000'>
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-down">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <input type="text" class="spinner-input form-control installac18000" value="0" maxlength="3" readonly name="installac18000">
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-up">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        
+    </div>
+
+
+    <!-- 2ci Do you believe that we are going to need more than 2m of copper tube?  YES   NO  (greek: Πιστεύετε ότι θα χρειαστεί παραπάνω από 2 μέτρα χαλκοσωλήνα? -->
+    <label class="col-lg-3 control-label text-lg-right pt-2 " >Πιστεύετε ότι θα χρειαστεί παραπάνω από 2 μέτρα χαλκοσωλήνα?  </label>
+    <div class="col-lg-9 row " >
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="needmorecopper18000" type="radio" name="needmorecopper18000" value="YES" id="needmorecopper18000yes">
+                    YES
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="needmorecopper18000" type="radio" name="needmorecopper18000" value="NO" id="needmorecopper18000no">
+                    NO
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-12 pt-2 needmorecopper18000info"></div>
+    </div>
+
+    <!-- How many meters of copper tube are we going to use (greek:Πόσα μέτρα χαλκοσωλήνα πρόκειται να χρησιμοποιήσουμε για την εγκατάσταση του κλιματιστικού;)?  default value in box 2 (as 2meters are the minimum) -(box) + -->
+    <label class="col-lg-3 control-label text-lg-right pt-2 coppertubemeter18000yes" style="display: none" >Πόσα μέτρα χαλκοσωλήνα πρόκειται να χρησιμοποιήσουμε για την εγκατάσταση του κλιματιστικού;</label>
+    <div class="col-lg-5 coppertubemeter18000yes" style="display: none">
+        <div data-plugin-spinner data-plugin-options='{ "value":2, "step": 1, "min": 2, "max": 200 }'>
+            <div class="input-group" id='coppertubemeter18000'>
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-down">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <input type="text" class="spinner-input form-control coppertubemeter18000 coppertubemeter18000yes" value="2" maxlength="3" readonly name="coppertubemeter18000">
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-up">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 coppertubemeter18000yes" style="display: none">
+        
+    </div>
+
+    <!-- 2ciC the aircondtion for installation is new or used? New Old (greek: Το κλιματιστικό που θα εγκατασταθεί είναι καινούργιο ή μεταχειρισμένο? -->
+    <label class="col-lg-3 control-label text-lg-right pt-2 " >Το κλιματιστικό που θα εγκατασταθεί είναι καινούργιο ή μεταχειρισμένο?  </label>
+    <div class="col-lg-9 row " >
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="acinstallation18000" type="radio" name="acinstallation18000" value="NEW" id="acinstallation18000NEW">
+                    NEW
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="acinstallation18000" type="radio" name="acinstallation18000" value="OLD" id="acinstallation18000OLD">
+                    OLD
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-12 pt-2 acinstallation18000info"></div>
+    </div>
+
+    <label class="col-lg-3 control-label text-lg-right pt-2 freonacdisplay18000" style="display: none"></label>
+    <div class="col-lg-9 freonacdisplay18000" style="display: none"><input class="form-control" type="text" name="freonac18000" id="freonac18000" /></div>
+
+    <!-- 2)How many aircondition of 24000 btu do you have(greek:Πόσα κλιματιστικα των 24000btu έχετε;)? -->
+    <label class="col-lg-3 control-label text-lg-right pt-2 " >Πόσα κλιματιστικα των 24000btu έχετε;</label>
+    <div class="col-lg-5 " >
+        <div data-plugin-spinner data-plugin-options='{ "value":0, "step": 1, "min": 0, "max": 200 }'>
+            <div class="input-group" id='acnumber24000'>
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-down">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <input type="text" class="spinner-input form-control acnumber24000" value="0" maxlength="3" readonly name="acnumber24000">
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-up">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        
+    </div>
+
+    <!-- 2a)How many of them do you want to maintain(greek:Πόσα από αυτά είναι για συντήρηση)? - (box) -->
+    <label class="col-lg-3 control-label text-lg-right pt-2 " >Πόσα από αυτά είναι για συντήρηση?</label>
+    <div class="col-lg-5 " >
+        <div data-plugin-spinner data-plugin-options='{ "value":0, "step": 1, "min": 0, "max": 200 }'>
+            <div class="input-group" id='maintainac24000'>
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-down">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <input type="text" class="spinner-input form-control maintainac24000" value="0" maxlength="3" readonly name="maintainac24000">
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-up">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        
+    </div>
+
+    <!-- 2b How many of them do you want to uninstall(greek: Ποσα απο αυτά ειναι για απεγκατάσταση;)? -->
+    <label class="col-lg-3 control-label text-lg-right pt-2 " >Ποσα απο αυτά ειναι για απεγκατάσταση;</label>
+    <div class="col-lg-5 " >
+        <div data-plugin-spinner data-plugin-options='{ "value":0, "step": 1, "min": 0, "max": 200 }'>
+            <div class="input-group" id='uninstallac24000'>
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-down">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <input type="text" class="spinner-input form-control uninstallac24000" value="0" maxlength="3" readonly name="uninstallac24000">
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-up">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        
+    </div>
+
+    <!-- 2c How many of them do you want to install(greek: Πόσα από αυτά είναι για εγκατασταση;)? -->
+    <label class="col-lg-3 control-label text-lg-right pt-2 " >Πόσα από αυτά είναι για εγκατασταση;</label>
+    <div class="col-lg-5 " >
+        <div data-plugin-spinner data-plugin-options='{ "value":0, "step": 1, "min": 0, "max": 200 }'>
+            <div class="input-group" id='installac24000'>
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-down">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <input type="text" class="spinner-input form-control installac24000" value="0" maxlength="3" readonly name="installac24000">
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-up">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        
+    </div>
+
+
+    <!-- 2ci Do you believe that we are going to need more than 2m of copper tube?  YES   NO  (greek: Πιστεύετε ότι θα χρειαστεί παραπάνω από 2 μέτρα χαλκοσωλήνα? -->
+    <label class="col-lg-3 control-label text-lg-right pt-2 " >Πιστεύετε ότι θα χρειαστεί παραπάνω από 2 μέτρα χαλκοσωλήνα?  </label>
+    <div class="col-lg-9 row " >
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="needmorecopper24000" type="radio" name="needmorecopper24000" value="YES" id="needmorecopper24000yes">
+                    YES
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="needmorecopper24000" type="radio" name="needmorecopper24000" value="NO" id="needmorecopper24000no">
+                    NO
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-12 pt-2 needmorecopper24000info"></div>
+    </div>
+
+    <!-- How many meters of copper tube are we going to use (greek:Πόσα μέτρα χαλκοσωλήνα πρόκειται να χρησιμοποιήσουμε για την εγκατάσταση του κλιματιστικού;)?  default value in box 2 (as 2meters are the minimum) -(box) + -->
+    <label class="col-lg-3 control-label text-lg-right pt-2 coppertubemeter24000yes" style="display: none" >Πόσα μέτρα χαλκοσωλήνα πρόκειται να χρησιμοποιήσουμε για την εγκατάσταση του κλιματιστικού;</label>
+    <div class="col-lg-5 coppertubemeter24000yes" style="display: none">
+        <div data-plugin-spinner data-plugin-options='{ "value":2, "step": 1, "min": 2, "max": 200 }'>
+            <div class="input-group" id='coppertubemeter24000'>
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-down">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <input type="text" class="spinner-input form-control coppertubemeter24000 coppertubemeter24000yes" value="2" maxlength="3" readonly name="coppertubemeter24000">
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-up">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 coppertubemeter24000yes" style="display: none">
+        
+    </div>
+
+    <!-- 2ciC the aircondtion for installation is new or used? New Old (greek: Το κλιματιστικό που θα εγκατασταθεί είναι καινούργιο ή μεταχειρισμένο? -->
+    <label class="col-lg-3 control-label text-lg-right pt-2 " >Το κλιματιστικό που θα εγκατασταθεί είναι καινούργιο ή μεταχειρισμένο?  </label>
+    <div class="col-lg-9 row " >
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="acinstallation24000" type="radio" name="acinstallation24000" value="NEW" id="acinstallation24000NEW">
+                    NEW
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="acinstallation24000" type="radio" name="acinstallation24000" value="OLD" id="acinstallation24000OLD">
+                    OLD
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-12 pt-2 acinstallation24000info"></div>
+    </div>
+
+    <label class="col-lg-3 control-label text-lg-right pt-2 freonacdisplay24000" style="display: none"></label>
+    <div class="col-lg-9 freonacdisplay24000" style="display: none"><input class="form-control" type="text" name="freonac24000" id="freonac24000" /></div>
+
+
+
     <script type="text/javascript">
 
             function update_comment(){
@@ -931,10 +1260,37 @@ if($catId == "60"){ // Electrical Certificate
                     }
                 }
 
+                if($(".maintainac18000").length){ 
+                    var manval = parseInt($(".maintainac18000").val());
+                    if(manval >= 1){
+                        cmt = cmt +" "+ manval +" κλιματιστικα 18000 btu για συντηρηση";
+                    }
+                }
+
+                if($(".maintainac24000").length){ 
+                    var manval = parseInt($(".maintainac24000").val());
+                    if(manval >= 1){
+                        cmt = cmt +" "+ manval +" κλιματιστικα 24000 btu για συντηρηση";
+                    }
+                }
+
                 if($(".uninstallac").length){ 
                     var manval = parseInt($(".uninstallac").val());
                     if(manval >= 1){
                         cmt = cmt +" "+ manval +" κλιματιστικα 9000 ή 12000btu για απεγκατασταση";
+                    }
+                }
+                if($(".uninstallac18000").length){ 
+                    var manval = parseInt($(".uninstallac18000").val());
+                    if(manval >= 1){
+                        cmt = cmt +" "+ manval +" κλιματιστικα 18000 btu για απεγκατασταση.";
+                    }
+                }
+
+                if($(".uninstallac24000").length){ 
+                    var manval = parseInt($(".uninstallac24000").val());
+                    if(manval >= 1){
+                        cmt = cmt +" "+ manval +" κλιματιστικα 24000 btu για απεγκατασταση.";
                     }
                 }
 
@@ -945,11 +1301,38 @@ if($catId == "60"){ // Electrical Certificate
                     }
                 }
 
+                if($(".installac18000").length){ 
+                    var manval = parseInt($(".installac18000").val());
+                    if(manval >= 1){
+                        cmt = cmt +" "+ manval +" κλιματιστικα 18000 btu για εγκατασταση";
+                    }
+                }
+                if($(".installac24000").length){ 
+                    var manval = parseInt($(".installac24000").val());
+                    if(manval >= 1){
+                        cmt = cmt +" "+ manval +" κλιματιστικα 24000 btu για εγκατασταση";
+                    }
+                }
+
 
                 if($(".coppertubemeter").length){ 
                     manval = parseInt($(".coppertubemeter").val());
                     if(manval >= 2){
                          cmt = cmt +" "+ manval +" μέτρα χαλκοσωλήνα για κλιματιστικο 9000 ή 12000btu";
+                    }
+                }
+
+                if($(".coppertubemeter18000").length){ 
+                    manval = parseInt($(".coppertubemeter18000").val());
+                    if(manval >= 2){
+                         cmt = cmt +" "+ manval +" μέτρα χαλκοσωλήνα για κλιματιστικο 18000 btu";
+                    }
+                }
+
+                if($(".coppertubemeter24000").length){ 
+                    manval = parseInt($(".coppertubemeter24000").val());
+                    if(manval >= 2){
+                         cmt = cmt +" "+ manval +" μέτρα χαλκοσωλήνα για κλιματιστικο 24000 btu";
                     }
                 }
 
@@ -979,11 +1362,47 @@ if($catId == "60"){ // Electrical Certificate
                     }
                 }
 
+                // 2a
+                if($(".maintainac18000").length){ 
+                    manval = parseInt($(".maintainac18000").val());
+                    if(manval >= 1){
+                        mbud = manval * 20;
+                        totalbud = totalbud + parseFloat(mbud);
+                    }
+                }
+
+                // 3a
+                if($(".maintainac24000").length){ 
+                    manval = parseInt($(".maintainac24000").val());
+                    if(manval >= 1){
+                        mbud = manval * 25;
+                        totalbud = totalbud + parseFloat(mbud);
+                    }
+                }
+
                 //1b
                 if($(".uninstallac").length){ 
                     manval = parseInt($(".uninstallac").val());
                     if(manval >= 1){
                         mbud = manval * 20;
+                        totalbud = totalbud + parseFloat(mbud);
+                    }
+                }
+
+                //2b
+                if($(".uninstallac18000").length){ 
+                    manval = parseInt($(".uninstallac18000").val());
+                    if(manval >= 1){
+                        mbud = manval * 20;
+                        totalbud = totalbud + parseFloat(mbud);
+                    }
+                }
+
+                //3b
+                if($(".uninstallac24000").length){ 
+                    manval = parseInt($(".uninstallac24000").val());
+                    if(manval >= 1){
+                        mbud = manval * 25;
                         totalbud = totalbud + parseFloat(mbud);
                     }
                 }
@@ -997,11 +1416,47 @@ if($catId == "60"){ // Electrical Certificate
                     }
                 }
 
+                //2c
+                if($(".installac18000").length){ 
+                    manval = parseInt($(".installac18000").val());
+                    if(manval >= 1){
+                        mbud = manval * 70;
+                        totalbud = totalbud + parseFloat(mbud);
+                    }
+                }
+
+                //3c
+                if($(".installac24000").length){ 
+                    manval = parseInt($(".installac24000").val());
+                    if(manval >= 1){
+                        mbud = manval * 90;
+                        totalbud = totalbud + parseFloat(mbud);
+                    }
+                }
+
                 //1ciA
                 if($(".coppertubemeter").length){ 
                     manval = parseInt($(".coppertubemeter").val());
                     if(manval >= 3){
                         mbud = (manval - 2) * 15;
+                        totalbud = totalbud + parseFloat(mbud);
+                    }
+                }
+
+                //2ciA
+                if($(".coppertubemeter18000").length){ 
+                    manval = parseInt($(".coppertubemeter18000").val());
+                    if(manval >= 3){
+                        mbud = (manval - 2) * 20;
+                        totalbud = totalbud + parseFloat(mbud);
+                    }
+                }
+
+                //3ciA
+                if($(".coppertubemeter24000").length){ 
+                    manval = parseInt($(".coppertubemeter24000").val());
+                    if(manval >= 3){
+                        mbud = (manval - 2) * 22;
                         totalbud = totalbud + parseFloat(mbud);
                     }
                 }
@@ -1023,7 +1478,7 @@ if($catId == "60"){ // Electrical Certificate
 
                     var valu = parseInt($("#"+sid+" input."+sid).val());
 
-                    if((valu >= 3) && (sid == "coppertubemeter")){
+                    if((valu >= 3) && ((sid == "coppertubemeter") || (sid == "coppertubemeter18000") || (sid == "coppertubemeter24000"))){
                         $("#"+sid+" input."+sid).val(valu - 1);    
                     }else if((valu >= 1) && (sid != "coppertubemeter")){
                         $("#"+sid+" input."+sid).val(valu - 1);    
@@ -1067,6 +1522,40 @@ if($catId == "60"){ // Electrical Certificate
 
                 });
 
+                $('.needmorecopper18000').on('change',function(){
+                    $('.needmorecopper18000info').text('Σας ενημερώνουμε οτι στην τιμή περιλαμβάνεται 2 μέτρα χαλκοσωλήνα,3 μέτρα υδροσωλήνα και 3 μέτρα καλώδιο.Για κάθε επιπλέον μέτρο χαλκοσωλήνα το κοστος ανέρχεται στα 20€,για κάθε επιπλέον μέτρο υδροσωλήνα το κοστος ανέρχεται στα 3€/μέτρο και για κάθε επιπλέον μετρο καλώδιο το κόστος ανέρχεται στα 3€/μέτρο');
+
+                     var rvale = $(this).val(); 
+                     
+                     if(rvale == "YES"){
+                        $('.coppertubemeter18000yes').css('display','inherit');
+                     }else{
+                        $('.coppertubemeter18000yes').css('display','none');
+                        $(".coppertubemeter18000").val('2');
+                     }
+
+                    update_budget();
+                    update_comment();
+
+                });
+
+                $('.needmorecopper24000').on('change',function(){
+                    $('.needmorecopper24000info').text('Σας ενημερώνουμε οτι στην τιμή περιλαμβάνεται 2 μέτρα χαλκοσωλήνα,3 μέτρα υδροσωλήνα και 3 μέτρα καλώδιο.Για κάθε επιπλέον μέτρο χαλκοσωλήνα το κοστος ανέρχεται στα 20€,για κάθε επιπλέον μέτρο υδροσωλήνα το κοστος ανέρχεται στα 3€/μέτρο και για κάθε επιπλέον μετρο καλώδιο το κόστος ανέρχεται στα 3€/μέτρο');
+
+                     var rvale = $(this).val(); 
+                     
+                     if(rvale == "YES"){
+                        $('.coppertubemeter24000yes').css('display','inherit');
+                     }else{
+                        $('.coppertubemeter24000yes').css('display','none');
+                        $(".coppertubemeter24000").val('2');
+                     }
+
+                    update_budget();
+                    update_comment();
+
+                });
+
                 $(".acinstallation").on('change',function(){
                     var rvale = $(this).val();
                     
@@ -1077,6 +1566,33 @@ if($catId == "60"){ // Electrical Certificate
                     }
 
                     $(".freonacdisplay").css('display','inherit');
+
+
+                });
+
+                $(".acinstallation18000").on('change',function(){
+                    var rvale = $(this).val();
+                    
+                    if(rvale == "NEW"){
+                        $("label.freonacdisplay18000").text('Κάποια κινέζικα κλιματιστικά θέλουν συμπλήρωση φρέον για να λειτουργήσουν, το κόστος για το φρέον είναι περίπου 15€/300gr και δεν συμπεριλαμβάνεται στην τιμή. Ποιός είναι ο τύπος φρέοντος?');
+                    }else{
+                        $("label.freonacdisplay18000").text('Ένα μεταχειρισμένο κλιματιστικό πιθανόν να χρειαστεί συμπλήρωση φρέον, το κόστος για το φρέον είναι περίπου 15€/300gr και δεν συμπεριλαμβάνεται στην τιμή. Ποιός είναι ο τύπος φρέοντος');
+                    }
+
+                    $(".freonacdisplay18000").css('display','inherit');
+
+
+                });
+                $(".acinstallation24000").on('change',function(){
+                    var rvale = $(this).val();
+                    
+                    if(rvale == "NEW"){
+                        $("label.freonacdisplay24000").text('Κάποια κινέζικα κλιματιστικά θέλουν συμπλήρωση φρέον για να λειτουργήσουν, το κόστος για το φρέον είναι περίπου 15€/300gr και δεν συμπεριλαμβάνεται στην τιμή. Ποιός είναι ο τύπος φρέοντος?');
+                    }else{
+                        $("label.freonacdisplay24000").text('Ένα μεταχειρισμένο κλιματιστικό πιθανόν να χρειαστεί συμπλήρωση φρέον, το κόστος για το φρέον είναι περίπου 15€/300gr και δεν συμπεριλαμβάνεται στην τιμή. Ποιός είναι ο τύπος φρέοντος?');
+                    }
+
+                    $(".freonacdisplay24000").css('display','inherit');
 
 
                 });
