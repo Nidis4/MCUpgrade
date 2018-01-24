@@ -846,6 +846,77 @@ if($catId == "60"){ // Electrical Certificate
         
     </div>
 
+
+    <!-- Do you believe that we are going to need more than 2m of copper tube?  YES   NO  (greek: Πιστεύετε ότι θα χρειαστεί παραπάνω από 2 μέτρα χαλκοσωλήνα? -->
+    <label class="col-lg-3 control-label text-lg-right pt-2 " >Πιστεύετε ότι θα χρειαστεί παραπάνω από 2 μέτρα χαλκοσωλήνα?  </label>
+    <div class="col-lg-9 row " >
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="needmorecopper" type="radio" name="needmorecopper" value="YES" id="needmorecopperyes">
+                    YES
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="needmorecopper" type="radio" name="needmorecopper" value="NO" id="needmorecopperno">
+                    NO
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-12 pt-2 needmorecopperinfo"></div>
+    </div>
+
+    <!-- How many meters of copper tube are we going to use (greek:Πόσα μέτρα χαλκοσωλήνα πρόκειται να χρησιμοποιήσουμε για την εγκατάσταση του κλιματιστικού;)?  default value in box 2 (as 2meters are the minimum) -(box) + -->
+    <label class="col-lg-3 control-label text-lg-right pt-2 coppertubemeteryes" style="display: none" >Πόσα μέτρα χαλκοσωλήνα πρόκειται να χρησιμοποιήσουμε για την εγκατάσταση του κλιματιστικού;</label>
+    <div class="col-lg-5 coppertubemeteryes" style="display: none">
+        <div data-plugin-spinner data-plugin-options='{ "value":2, "step": 1, "min": 2, "max": 200 }'>
+            <div class="input-group" id='coppertubemeter'>
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-down">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <input type="text" class="spinner-input form-control coppertubemeter coppertubemeteryes" value="2" maxlength="3" readonly name="coppertubemeter">
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-up">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 coppertubemeteryes" style="display: none">
+        
+    </div>
+
+    <!--the aircondtion for installation is new or used? New Old (greek: Το κλιματιστικό που θα εγκατασταθεί είναι καινούργιο ή μεταχειρισμένο? -->
+    <label class="col-lg-3 control-label text-lg-right pt-2 " >Το κλιματιστικό που θα εγκατασταθεί είναι καινούργιο ή μεταχειρισμένο?  </label>
+    <div class="col-lg-9 row " >
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="acinstallation" type="radio" name="acinstallation" value="NEW" id="acinstallationNEW">
+                    NEW
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="acinstallation" type="radio" name="acinstallation" value="OLD" id="acinstallationOLD">
+                    OLD
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-12 pt-2 acinstallationinfo"></div>
+    </div>
+
+    <label class="col-lg-3 control-label text-lg-right pt-2 freonacdisplay" style="display: none"></label>
+    <div class="col-lg-9 freonacdisplay" style="display: none"><input class="form-control" type="text" name="freonac" id="freonac" /></div>
+
     <script type="text/javascript">
 
             function update_comment(){
@@ -871,6 +942,14 @@ if($catId == "60"){ // Electrical Certificate
                     var manval = parseInt($(".installac").val());
                     if(manval >= 1){
                         cmt = cmt +" "+ manval +" κλιματιστικα 9000 ή 12000 btu για εγκατασταση";
+                    }
+                }
+
+
+                if($(".coppertubemeter").length){ 
+                    manval = parseInt($(".coppertubemeter").val());
+                    if(manval >= 2){
+                         cmt = cmt +" "+ manval +" μέτρα χαλκοσωλήνα για κλιματιστικο 9000 ή 12000btu";
                     }
                 }
 
@@ -917,7 +996,15 @@ if($catId == "60"){ // Electrical Certificate
                         totalbud = totalbud + parseFloat(mbud);
                     }
                 }
-                
+
+                //1ciA
+                if($(".coppertubemeter").length){ 
+                    manval = parseInt($(".coppertubemeter").val());
+                    if(manval >= 3){
+                        mbud = (manval - 2) * 15;
+                        totalbud = totalbud + parseFloat(mbud);
+                    }
+                }
 
                 
                 var samecatebud = $("#samecatebud").val();
@@ -936,7 +1023,9 @@ if($catId == "60"){ // Electrical Certificate
 
                     var valu = parseInt($("#"+sid+" input."+sid).val());
 
-                    if(valu >= 1){
+                    if((valu >= 3) && (sid == "coppertubemeter")){
+                        $("#"+sid+" input."+sid).val(valu - 1);    
+                    }else if((valu >= 1) && (sid != "coppertubemeter")){
                         $("#"+sid+" input."+sid).val(valu - 1);    
                     }
                     
@@ -957,6 +1046,39 @@ if($catId == "60"){ // Electrical Certificate
                     update_budget();
                     update_comment();
                     
+                });
+
+
+                //
+                $('.needmorecopper').on('change',function(){
+                    $('.needmorecopperinfo').text('Σας ενημερώνουμε οτι στην τιμή περιλαμβάνεται 2 μέτρα χαλκοσωλήνα,3 μέτρα υδροσωλήνα και 3 μέτρα καλώδιο.Για κάθε επιπλέον μέτρο χαλκοσωλήνα το κοστος ανέρχεται στα 15€/μέτρο ,για κάθε επιπλέον μέτρο υδροσωλήνα το κοστος ανέρχεται στα 3€/μέτρο και για κάθε επιπλέον μετρο καλώδιο το κόστος ανέρχεται στα 3€/μέτρο.');
+
+                     var rvale = $(this).val(); 
+                     
+                     if(rvale == "YES"){
+                        $('.coppertubemeteryes').css('display','inherit');
+                     }else{
+                        $('.coppertubemeteryes').css('display','none');
+                        $(".coppertubemeter").val('2');
+                     }
+
+                    update_budget();
+                    update_comment();
+
+                });
+
+                $(".acinstallation").on('change',function(){
+                    var rvale = $(this).val();
+                    
+                    if(rvale == "NEW"){
+                        $("label.freonacdisplay").text('Κάποια κινέζικα κλιματιστικά θέλουν συμπλήρωση φρέον για να λειτουργήσουν, το κόστος για το φρέον είναι περίπου 15€/300gr και δεν συμπεριλαμβάνεται στην τιμή. Ποιός είναι ο τύπος φρέοντος?');
+                    }else{
+                        $("label.freonacdisplay").text('Ένα μεταχειρισμένο κλιματιστικό πιθανόν να χρειαστεί συμπλήρωση φρέον, το κόστος για το φρέον είναι περίπου 15€/300gr και δεν συμπεριλαμβάνεται στην τιμή. Ποιός είναι ο τύπος φρέοντος?');
+                    }
+
+                    $(".freonacdisplay").css('display','inherit');
+
+
                 });
             });
 
