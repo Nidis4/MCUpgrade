@@ -1244,7 +1244,104 @@ if($catId == "60"){ // Electrical Certificate
     <label class="col-lg-3 control-label text-lg-right pt-2 freonacdisplay24000" style="display: none"></label>
     <div class="col-lg-9 freonacdisplay24000" style="display: none"><input class="form-control" type="text" name="freonac24000" id="freonac24000" /></div>
 
+<!-- 4)Do you have cradles(greek:Έχετε βάσεις για το κλιματιστικο;)?   YES   NO  I DONT KNOW -->
+    <label class="col-lg-3 control-label text-lg-right pt-2 " >Έχετε βάσεις για το κλιματιστικο;</label>
+    <div class="col-lg-9 row " >
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="cradlesstatus" type="radio" name="cradlesstatus" value="YES" id="cradlesstatusYes">
+                    YES
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="cradlesstatus" type="radio" name="cradlesstatus" value="NO" id="cradlesstatusNo">
+                    NO
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="cradlesstatus" type="radio" name="cradlesstatus" value="I DONT KNOW" id="cradlesstatusNo">
+                    I DONT KNOW
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-12 cradlesstatusinfo"></div>
+    </div>
 
+    <!-- How many cradles do yo want to to buy the tecnician(greek:Πόσες βάσεις θα χρειαστείτε ;)? -(box)+-->
+    <label class="col-lg-3 control-label text-lg-right pt-2 cradlesstatusNo" style="display: none" >Πόσες βάσεις θα χρειαστείτε;</label>
+    <div class="col-lg-5 cradlesstatusNo" style="display: none">
+        <div data-plugin-spinner data-plugin-options='{ "value":0, "step": 1, "min": 0, "max": 200 }'>
+            <div class="input-group" id='cradlesstatusNost'>
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-down">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <input type="text" class="spinner-input form-control cradlesstatusNost cradlesstatusNo" value="0" maxlength="3" readonly name="cradlesstatusNost" style="display: none">
+                <div class="spinner-buttons input-group-btn">
+                    <button type="button" class="btn btn-default spinner-up">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 cradlesstatusNo" style="display: none">
+        
+    </div>
+
+    <!-- 5) Do we have tο make holes in building pillars or building beams(Πρέπει να τρυπήσουμε σε κολώνες ή δοκάρια για να γίνει η εγκατάσταση)YES NO-->
+    <label class="col-lg-3 control-label text-lg-right pt-2 " >Πρέπει να τρυπήσουμε σε κολώνες ή δοκάρια για να γίνει η εγκατάσταση;</label>
+    <div class="col-lg-9 row " >
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="holeinpillars" type="radio" name="holeinpillars" value="YES" id="holeinpillarsYes">
+                    YES
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="holeinpillars" type="radio" name="holeinpillars" value="NO" id="holeinpillarsNo">
+                    NO
+                </label>
+            </div>
+        </div>
+        
+        <div class="col-lg-12 holeinpillarsinfo"></div>
+    </div>
+
+    <!-- 6)Does the external unit in order to be installed need scaffolding(greek:Ο τεχνικός μας θα πρέπει να κρεμαστεί απο κάποιο παράθυρο (δεν υπάρχει μπαλκόνι ή κάπου να πατήσει το τεχνικός για να βάλει την εξωτερική μονάδα;)?  YES  NO-->
+    <label class="col-lg-3 control-label text-lg-right pt-2 " >Ο τεχνικός μας θα πρέπει να κρεμαστεί απο κάποιο παράθυρο (δεν υπάρχει μπαλκόνι ή κάπου να πατήσει το τεχνικός για να βάλει την εξωτερική μονάδα;</label>
+    <div class="col-lg-9 row " >
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="scaffoldingstatus" type="radio" name="scaffoldingstatus" value="YES" id="scaffoldingstatusYes">
+                    YES
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-3">            
+            <div class="radio">
+                <label class="pt-3">
+                    <input class="scaffoldingstatus" type="radio" name="scaffoldingstatus" value="NO" id="scaffoldingstatusNo">
+                    NO
+                </label>
+            </div>
+        </div>
+        
+        <div class="col-lg-12 scaffoldingstatusinfo"></div>
+    </div>
 
     <script type="text/javascript">
 
@@ -1596,6 +1693,40 @@ if($catId == "60"){ // Electrical Certificate
 
 
                 });
+
+                $(".cradlesstatus").on('change',function(){
+                    var rvale = $(this).val();
+                    if(rvale == "YES"){
+                        $(".cradlesstatusNo").css('display','none');
+                        $(".cradlesstatusNost").val('0');
+                    }else{
+                        $(".cradlesstatusNo").css('display','inherit');
+                    }
+
+                    $(".cradlesstatusinfo").text('Σας ενημερώνουμε ότι το κόστος της βάσης είναι +6€ και δεν συμπεριλαμβάνεται στην τιμή της εγκατάστασης.');
+                });
+
+                $(".holeinpillars").on('change',function(){
+                    var rvale = $(this).val();
+                    if(rvale == "YES"){
+                        $(".holeinpillarsinfo").text('Σας ενημερώνουμε ότι σε αυτή την περίπτωση δεν μπορούμε να αναλάβουμε την τοποθέτηση του κλιματιστικού καθότι μπορέι να προκληθεί σημαντικό πρόβλημα στην στατικότητα του κτιρίου και μπορούμε να σας προτείνουμε την τοποθέτηση του σε κάποια άλλη θέση.');
+                    }else{
+                        $(".holeinpillarsinfo").text('');
+                    }
+                });
+
+                $(".scaffoldingstatus").on('change',function(){
+                    var rvale = $(this).val();
+                    if(rvale == "YES"){
+                        $(".scaffoldingstatusinfo").text('Σας ενημερώνουμε οτι αυτή η εργασία δεν μπορεί να πραγματοποιηθεί χωρίς τη χρήση σκαλωσιάς ή γερανού.Εναλλακτικά πρέπει να επιλέξετε κάποιο άλλο σημείο για την τοποθέτηση του κλιματιστικού.');
+                    }else{
+                        $(".scaffoldingstatusinfo").text('');
+                    }
+                });
+                
+
+                
+
             });
 
 <?php } ?>
