@@ -248,6 +248,20 @@ include('config/core.php');
 							</div>
 						</section>
 
+						<section class="card">
+							<header class="card-header">
+								<div class="card-actions">
+									<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+									<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
+								</div>
+						
+								<h2 class="card-title">Professional's Balance</h2>
+							</header>
+							<div class="card-body">
+								
+							</div>
+						</section>
+
 					<!-- end: page -->
 				</section>
 			</div>
