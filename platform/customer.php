@@ -177,7 +177,8 @@ include('config/core.php');
 									</thead>
 									<tbody>
 										<?php
-										foreach ($appointmentsPag['records'] as $field => $value) {
+										if (!empty($appointmentsPag['records'])) {
+											foreach ($appointmentsPag['records'] as $field => $value) {
 											$id = $appointmentsPag['records'][$field]['id'];
 											$submission_date = $appointmentsPag['records'][$field]['datetimeCreated'];
 											$prof_id = $appointmentsPag['records'][$field]['prof_member_id'];
@@ -203,7 +204,12 @@ include('config/core.php');
 														<a href="#" class="on-editing cancel-row"><i class="fa fa-times"></i></a>
 													  </td>
 												  </tr>';
+											}
 										}
+										else{
+											echo "<td>No Appointments</td>";
+										}
+										
 										?>										
 									</tbody>
 								</table>

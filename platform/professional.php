@@ -197,6 +197,14 @@ include('config/core.php');
 								<h2 class="card-title">Professional's Balance</h2>
 							</header>
 							<div class="card-body">
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="mb-3">
+											<a href='#'><button id="addToTable" class="btn btn-primary">Add Payment <i class="fa fa-plus"></i></button></a>
+										</div>
+									</div>
+								</div>
+
 								<table class="table table-bordered table-striped mb-0" id="datatable-editable">
 									<thead>
 										<tr>
@@ -255,7 +263,7 @@ include('config/core.php');
 									<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
 								</div>
 						
-								<h2 class="card-title">Professional's Balance</h2>
+								<h2 class="card-title">Professional's Statistics</h2>
 							</header>
 							<div class="card-body">
 								
