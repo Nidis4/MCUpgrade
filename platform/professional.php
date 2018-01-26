@@ -64,9 +64,6 @@ include('config/core.php');
 				$professional = file_get_contents($api_url.'webservices/api/professional/read_one.php?id='.$id);
 				$professional = json_decode($professional, true); // decode the JSON into an associative array	
 
-				$appointments = file_get_contents($api_url.'webservices/api/appointment/read_paging.php?prof_id='.$id);
-				$appointmentsPag = json_decode($appointments, true); // decode the JSON into an associative array
-
 				$applications = file_get_contents($api_url.'webservices/api/professional/getApplications.php?id='.$id);
 				$applications = json_decode($applications, true);		
 			?>
@@ -197,49 +194,52 @@ include('config/core.php');
 									<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
 								</div>
 						
-								<h2 class="card-title">Professional's Appointments</h2>
+								<h2 class="card-title">Professional's Balance</h2>
 							</header>
 							<div class="card-body">
 								<table class="table table-bordered table-striped mb-0" id="datatable-editable">
 									<thead>
 										<tr>
-											<th>Date</th>
-											<th>Professional</th>
-											<th>Customer</th>
+											<th>Date/Time</th>
+											<th>Category</th>
+											<th>Appointment Info</th>
 											<th>Comments</th>
 											<th>Budget</th>
 											<th>Commision</th>
-											<th>Actions</th>
+											<th>Payment</th>
+											<th>Balance</th>
 										</tr>
 									</thead>
 									<tbody>
 										<?php
-										foreach ($appointmentsPag['records'] as $field => $value) {
-											$id = $appointmentsPag['records'][$field]['id'];
-											$submission_date = $appointmentsPag['records'][$field]['datetimeCreated'];
-											$prof_id = $appointmentsPag['records'][$field]['prof_member_id'];
-											$prof_name = $appointmentsPag['records'][$field]['prof_member_name'];
-											$cust_id = $appointmentsPag['records'][$field]['cust_member_id'];
-											$cust_name = $appointmentsPag['records'][$field]['cust_member_name'];
-											$date = $appointmentsPag['records'][$field]['date']." ".$appointmentsPag['records'][$field]['time'];
-											$budget = $appointmentsPag['records'][$field]['budget'];
-											$commission = $appointmentsPag['records'][$field]['commision'];
-											$comment = $appointmentsPag['records'][$field]['comment'];
-											$status = $appointmentsPag['records'][$field]['status'];
+										//$appointments = file_get_contents($api_url.'webservices/api/appointment/read_paging.php?prof_id='.$id);
+										//$appointmentsPag = json_decode($appointments, true); // decode the JSON into an associative array
 
-											echo '<tr data-item-id="'.$id.'" class="status-'.$status.'">
+										$payments = file_get_contents($api_url.'webservices/api/payment/paymentByProf.php?prof_id='.$id);
+										$paymentsPag = json_decode($payments, true); // decode the JSON into an associative array
+
+										foreach ($paymentsPag as $payment) {
+											$submission_date = $payment['datetime_added'];
+											$category_id = $payment['category_id'];
+											$appointment_details = $payment['appointment_details'];
+											$paymentDone = $payment['payment'];
+											$agent_id = $payment['agent_id'];
+											$date = $payment['datetime_added'];
+											$budget = $payment['budget'];
+											$commission =$payment['commision'];
+											$comment = $payment['comment'];
+											$status = $payment['status'];
+											$balance = $payment['balance'];
+
+											echo '<tr data-item-id="" class="status-'.$status.'">
 													  <td>'.$date.'</td>
-													  <td><a href="professional.php?id='.$prof_id.'">'.$prof_name.'</a></td>
-													  <td><a href="customer.php?id='.$cust_id.'">'.$cust_name.'</a></td>
+													  <td>'.$category_id.'</td>
+													  <td>'.$appointment_details.'</td>
 													  <td>'.$comment.'</td>
 													  <td>'.$budget.'</td>
 													  <td>'.$commission.'</td>
-													  <td class="actions">
-														<a href="#" class="on-editing copy-row"><i class="fa fa-copy"></i></a>
-														<a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
-														<a href="#" class="hidden on-default remove-row"><i class="fa fa-trash-o"></i></a>
-														<a href="#" class="on-editing cancel-row"><i class="fa fa-times"></i></a>
-													  </td>
+													  <td>'.$paymentDone.'</td>
+													  <td>'.$balance.'</td>
 												  </tr>';
 										}
 										?>										
