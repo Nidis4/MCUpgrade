@@ -54,7 +54,7 @@ if($catId == "60"){ // Electrical Certificate
         </div>
     </div>    
 
-    <!-- Display if Yes -->
+    <!-- Display if Yes  -->
     <label class="col-lg-3 control-label text-lg-right pt-2 ElectricalPanelsecondNewInputNameYes" style="display: none">Συνήθως κάθε όροφος έχει ξεχωριστό πίνακα, πόσους πίνακες έχετε?</label>
     <div class="col-lg-9 row ElectricalPanelsecondNewInputNameYes" style="display: none">
         <div data-plugin-spinner data-plugin-options='{ "value":1, "step": 1, "min": 1, "max": 200 }'>
