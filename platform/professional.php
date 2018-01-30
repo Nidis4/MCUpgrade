@@ -32,6 +32,7 @@ include('config/core.php');
 		<link rel="stylesheet" href="vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
 		<link rel="stylesheet" href="vendor/datatables/media/css/dataTables.bootstrap4.css" />
 
+		<link rel="stylesheet" href="vendor/bootstrap-fileupload/bootstrap-fileupload.min.css" />
 		<!-- Theme CSS -->
 		<link rel="stylesheet" href="css/theme.css" />
 
@@ -104,86 +105,275 @@ include('config/core.php');
 						
 								<h2 class="card-title">Professional Information #<?php echo $professional['id']; ?></h2>
 							</header>
-							<div class="card-body">
-								<div class="form-group row">
-									<label class="col-sm-3 control-label text-sm-right pt-2">Name <span class="required">*</span></label>
-									<div class="col-sm-4">
-										<input type="text" name="first_name" class="form-control" value="<?php echo $professional['first_name']; ?>" required />
+							<div class="card-body col-sm-12 col-md-12 row">
+								<div class="col-sm-12 col-md-5"><!-- Left-->
+									<div class="form-group row">
+										<label class="col-sm-4 control-label text-sm-right pt-2">Name <span class="required">*</span></label>
+										<div class="col-sm-8">
+											<input type="text" name="first_name" class="form-control" value="<?php echo $professional['first_name']; ?>" required />
+										</div>
+										
 									</div>
-									<div class="col-sm-3 offset-sm-1">
+									<div class="form-group row">
+										<label class="col-sm-4 control-label text-sm-right pt-2">Surname <span class="required">*</span></label>
+										<div class="col-sm-8">
+											<input type="text" name="last_name" id="last_name" class="form-control" value="<?php echo $professional['last_name']; ?>" required />
+										</div>										
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-4 control-label text-sm-right pt-2">Sex <span class="required">*</span></label>
+										<div class="col-sm-8">
+											<input type="text" name="sex" id="sex" class="form-control" value="<?php echo $professional['sex']; ?>" required />
+										</div>										
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-4 control-label text-sm-right pt-2">Address <span class="required">*</span></label>
+										<div class="col-sm-8">
+											<input type="text" name="address" id="pac-input-address" class="form-control" value="<?php echo $professional['address']; ?>" required />
+										</div>										
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-4 control-label text-sm-right pt-2">Mobile <span class="required">*</span></label>
+										<div class="col-sm-8">
+											<input type="text" name="mobile" id="mobile" class="form-control" value="<?php echo $professional['mobile']; ?>" required />
+										</div>										
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-4 control-label text-sm-right pt-2">Landline <span class="required">*</span></label>
+										<div class="col-sm-8">
+											<input type="text" name="phone" id="phone" class="form-control" value="<?php echo $professional['phone']; ?>" required />
+										</div>										
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-4 control-label text-sm-right pt-2">E-mail <span class="required">*</span></label>
+										<div class="col-sm-8">
+											<input type="text" name="email" id="email" class="form-control" value="<?php echo $professional['email']; ?>" required />
+										</div>										
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-4 control-label text-sm-right pt-2">Status <span class="required">*</span></label>
+										<div class="col-sm-8">
+											<input type="text" name="profile_status" id="profile_status" class="form-control" value="<?php echo $professional['profile_status']; ?>" required />
+										</div>										
+									</div>
+									<!-- <div class="form-group row">
+										<label class="col-sm-3 control-label text-sm-right pt-2">Category <span class="required">*</span></label>
+										<div class="col-sm-4">
+											<input type="text" name="profile_status" id="profile_status" class="form-control" value="<?php echo $professional['profile_status']; ?>" required />
+										</div>										
+									</div> -->
+									<div class="form-group row">
+										<label class="col-sm-4 control-label text-sm-right pt-2">Applications <span class="required">*</span></label>
+										<div class="col-sm-8">
+											<?php
+												foreach ($applications as $application) {
+													echo $application['category'].": ".$application['application']."<br>";
+												}
+											?>
+										</div>										
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-4 control-label text-sm-right pt-2">Google Calendar ID <span class="required">*</span></label>
+										<div class="col-sm-8">
+											<input type="text" name="profile_status" id="profile_status" class="form-control" value="<?php echo $professional['calendar_id']; ?>" required />
+										</div>										
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-4 control-label text-sm-right pt-2">Admin Comments <span class="required">*</span></label>
+										<div class="col-sm-8">
+											<input type="text" name="profile_status" id="profile_status" class="form-control" value="<?php echo $professional['admin_comments']; ?>" required />
+										</div>										
+									</div>
+									
+								</div>
+								<div class="col-sm-12 col-md-7"><!-- Right-->
+									<div class="form-group row">								
+										<div class="form-group col-md-12 row">
+											<label class="col-lg-3 control-label text-lg-right pt-2">Attached Files</label>
+											<div class="col-lg-8">
+												<div class="fileupload fileupload-new" data-provides="fileupload">
+													<div class="input-append">
+														<div class="uneditable-input">
+															<i class="fa fa-file fileupload-exists"></i>
+															<span class="fileupload-preview"></span>
+														</div>
+														<span class="btn btn-default btn-file">
+															<span class="fileupload-exists">Change</span>
+															<span class="fileupload-new">Select file</span>
+															<input type="file" name="profile_image1" />
+														</span>
+														<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+													</div>
+												</div>
+											</div><br>
+											<div class="offset-md-3 col-lg-8 pt-2">
+												<div class="fileupload fileupload-new" data-provides="fileupload">
+													<div class="input-append">
+														<div class="uneditable-input">
+															<i class="fa fa-file fileupload-exists"></i>
+															<span class="fileupload-preview"></span>
+														</div>
+														<span class="btn btn-default btn-file">
+															<span class="fileupload-exists">Change</span>
+															<span class="fileupload-new">Select file</span>
+															<input type="file" name="profile_image2" />
+														</span>
+														<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+													</div>
+												</div>
+											</div>
+											<div class="offset-md-3 col-lg-8 pt-2">
+												<div class="fileupload fileupload-new" data-provides="fileupload">
+													<div class="input-append">
+														<div class="uneditable-input">
+															<i class="fa fa-file fileupload-exists"></i>
+															<span class="fileupload-preview"></span>
+														</div>
+														<span class="btn btn-default btn-file">
+															<span class="fileupload-exists">Change</span>
+															<span class="fileupload-new">Select file</span>
+															<input type="file" name="profile_image3" />
+														</span>
+														<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group col-md-12 row">
+											<label class="col-lg-3 control-label text-lg-right pt-2">Personal ID</label>
+											<div class="col-lg-8">
+												<div class="fileupload fileupload-new" data-provides="fileupload">
+													<div class="input-append">
+														<div class="uneditable-input">
+															<i class="fa fa-file fileupload-exists"></i>
+															<span class="fileupload-preview"></span>
+														</div>
+														<span class="btn btn-default btn-file">
+															<span class="fileupload-exists">Change</span>
+															<span class="fileupload-new">Select file</span>
+															<input type="file" name="profile_perid1" />
+														</span>
+														<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+													</div>
+												</div>
+											</div><br>
+											<div class="offset-md-3 col-lg-8 pt-2">
+												<div class="fileupload fileupload-new" data-provides="fileupload">
+													<div class="input-append">
+														<div class="uneditable-input">
+															<i class="fa fa-file fileupload-exists"></i>
+															<span class="fileupload-preview"></span>
+														</div>
+														<span class="btn btn-default btn-file">
+															<span class="fileupload-exists">Change</span>
+															<span class="fileupload-new">Select file</span>
+															<input type="file" name="profile_perid2" />
+														</span>
+														<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+													</div>
+												</div>
+												<input type="checkbox" name="approve_per" value="1">
+											</div>
+											
+											
+										</div>
+										<div class="form-group col-md-12 row">
+											<label class="col-lg-3 control-label text-lg-right pt-2">Agreement</label>
+											<div class="col-lg-8">
+												<div class="fileupload fileupload-new" data-provides="fileupload">
+													<div class="input-append">
+														<div class="uneditable-input">
+															<i class="fa fa-file fileupload-exists"></i>
+															<span class="fileupload-preview"></span>
+														</div>
+														<span class="btn btn-default btn-file">
+															<span class="fileupload-exists">Change</span>
+															<span class="fileupload-new">Select file</span>
+															<input type="file" name="profile_agreement1" />
+														</span>
+														<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+													</div>
+												</div>
+											</div>
+											<div class=" offset-md-3 col-lg-8 pt-2">
+												<div class="fileupload fileupload-new" data-provides="fileupload">
+													<div class="input-append">
+														<div class="uneditable-input">
+															<i class="fa fa-file fileupload-exists"></i>
+															<span class="fileupload-preview"></span>
+														</div>
+														<span class="btn btn-default btn-file">
+															<span class="fileupload-exists">Change</span>
+															<span class="fileupload-new">Select file</span>
+															<input type="file" name="profile_agreement2" />
+														</span>
+														<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+													</div>
+												</div>
+											</div>
+											<div class=" offset-md-3 col-lg-8 pt-2">
+												<div class="fileupload fileupload-new" data-provides="fileupload">
+													<div class="input-append">
+														<div class="uneditable-input">
+															<i class="fa fa-file fileupload-exists"></i>
+															<span class="fileupload-preview"></span>
+														</div>
+														<span class="btn btn-default btn-file">
+															<span class="fileupload-exists">Change</span>
+															<span class="fileupload-new">Select file</span>
+															<input type="file" name="profile_agreement3" />
+														</span>
+														<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+													</div>
+												</div>
+											</div>
+											<div class=" offset-md-3 col-lg-8 pt-2">
+												<div class="fileupload fileupload-new" data-provides="fileupload">
+													<div class="input-append">
+														<div class="uneditable-input">
+															<i class="fa fa-file fileupload-exists"></i>
+															<span class="fileupload-preview"></span>
+														</div>
+														<span class="btn btn-default btn-file">
+															<span class="fileupload-exists">Change</span>
+															<span class="fileupload-new">Select file</span>
+															<input type="file" name="profile_agreement4" />
+														</span>
+														<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+													</div>
+												</div>
+											</div>
+											<div class="offset-md-3 col-lg-8 pt-2">
+												<div class="fileupload fileupload-new" data-provides="fileupload">
+													<div class="input-append">
+														<div class="uneditable-input">
+															<i class="fa fa-file fileupload-exists"></i>
+															<span class="fileupload-preview"></span>
+														</div>
+														<span class="btn btn-default btn-file">
+															<span class="fileupload-exists">Change</span>
+															<span class="fileupload-new">Select file</span>
+															<input type="file" name="profile_agreement5" />
+														</span>
+														<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+													</div>
+												</div>
+												<input class="pt-2" type="checkbox" name="approve_doc" value="1">
+											</div>
+											
+											
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-12 col-md-12 pt-2">
+									<div class="col-sm-3 offset-md-5">
 										<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning" id="updateProfessional">Update Details</button>
 									</div>
 								</div>
-								<div class="form-group row">
-									<label class="col-sm-3 control-label text-sm-right pt-2">Surname <span class="required">*</span></label>
-									<div class="col-sm-4">
-										<input type="text" name="last_name" id="last_name" class="form-control" value="<?php echo $professional['last_name']; ?>" required />
-									</div>										
-								</div>
-								<div class="form-group row">
-									<label class="col-sm-3 control-label text-sm-right pt-2">Sex <span class="required">*</span></label>
-									<div class="col-sm-4">
-										<input type="text" name="sex" id="sex" class="form-control" value="<?php echo $professional['sex']; ?>" required />
-									</div>										
-								</div>
-								<div class="form-group row">
-									<label class="col-sm-3 control-label text-sm-right pt-2">Address <span class="required">*</span></label>
-									<div class="col-sm-4">
-										<input type="text" name="address" id="pac-input-address" class="form-control" value="<?php echo $professional['address']; ?>" required />
-									</div>										
-								</div>
-								<div class="form-group row">
-									<label class="col-sm-3 control-label text-sm-right pt-2">Mobile <span class="required">*</span></label>
-									<div class="col-sm-4">
-										<input type="text" name="mobile" id="mobile" class="form-control" value="<?php echo $professional['mobile']; ?>" required />
-									</div>										
-								</div>
-								<div class="form-group row">
-									<label class="col-sm-3 control-label text-sm-right pt-2">Landline <span class="required">*</span></label>
-									<div class="col-sm-4">
-										<input type="text" name="phone" id="phone" class="form-control" value="<?php echo $professional['phone']; ?>" required />
-									</div>										
-								</div>
-								<div class="form-group row">
-									<label class="col-sm-3 control-label text-sm-right pt-2">E-mail <span class="required">*</span></label>
-									<div class="col-sm-4">
-										<input type="text" name="email" id="email" class="form-control" value="<?php echo $professional['email']; ?>" required />
-									</div>										
-								</div>
-								<div class="form-group row">
-									<label class="col-sm-3 control-label text-sm-right pt-2">Status <span class="required">*</span></label>
-									<div class="col-sm-4">
-										<input type="text" name="profile_status" id="profile_status" class="form-control" value="<?php echo $professional['profile_status']; ?>" required />
-									</div>										
-								</div>
-								<!-- <div class="form-group row">
-									<label class="col-sm-3 control-label text-sm-right pt-2">Category <span class="required">*</span></label>
-									<div class="col-sm-4">
-										<input type="text" name="profile_status" id="profile_status" class="form-control" value="<?php echo $professional['profile_status']; ?>" required />
-									</div>										
-								</div> -->
-								<div class="form-group row">
-									<label class="col-sm-3 control-label text-sm-right pt-2">Applications <span class="required">*</span></label>
-									<div class="col-sm-6">
-										<?php
-											foreach ($applications as $application) {
-												echo $application['category'].": ".$application['application']."<br>";
-											}
-										?>
-									</div>										
-								</div>
-								<div class="form-group row">
-									<label class="col-sm-3 control-label text-sm-right pt-2">Google Calendar ID <span class="required">*</span></label>
-									<div class="col-sm-4">
-										<input type="text" name="profile_status" id="profile_status" class="form-control" value="<?php echo $professional['calendar_id']; ?>" required />
-									</div>										
-								</div>
-								<div class="form-group row">
-									<label class="col-sm-3 control-label text-sm-right pt-2">Admin Comments <span class="required">*</span></label>
-									<div class="col-sm-4">
-										<input type="text" name="profile_status" id="profile_status" class="form-control" value="<?php echo $professional['admin_comments']; ?>" required />
-									</div>										
-								</div>
+								
+
 							</div>
 						</section>
 
@@ -381,7 +571,7 @@ include('config/core.php');
 		<script src="vendor/select2/js/select2.js"></script>
 		<script src="vendor/datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="vendor/datatables/media/js/dataTables.bootstrap4.min.js"></script>
-		
+		<script src="vendor/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
 		<!-- Theme Base, Components and Settings -->
 		<script src="js/theme.js"></script>
 		
