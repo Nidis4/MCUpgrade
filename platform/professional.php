@@ -112,7 +112,7 @@ include('config/core.php');
 										<div class="form-group row">
 											<label class="col-sm-4 control-label text-sm-right pt-2">Name <span class="required">*</span></label>
 											<div class="col-sm-8">
-												<input type="text" name="first_name" class="form-control" value="<?php echo $professional['first_name']; ?>" required />
+												<input type="text" name="first_name" class="form-control" value="<?php echo $professional['first_name']; ?>" id="first_name" required />
 											</div>
 										</div>
 										<div class="form-group row">
@@ -130,7 +130,7 @@ include('config/core.php');
 										<div class="form-group row">
 											<label class="col-sm-4 control-label text-sm-right pt-2">Address <span class="required">*</span></label>
 											<div class="col-sm-8">
-												<input type="text" name="address" id="pac-input-address" class="form-control" value="<?php echo $professional['address']; ?>" required />
+												<input type="text" name="address" id="address" class="form-control" value="<?php echo $professional['address']; ?>" required />
 											</div>										
 										</div>
 										<div class="form-group row">
@@ -160,7 +160,7 @@ include('config/core.php');
 										<!-- <div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Category <span class="required">*</span></label>
 											<div class="col-sm-4">
-												<input type="text" name="profile_status" id="profile_status" class="form-control" value="<?php echo $professional['profile_status']; ?>" required />
+												<input type="text" name="profile_status" id="profile_status" class="form-control" value="<?php //echo $professional['profile_status']; ?>" required />
 											</div>										
 										</div> -->
 										<div class="form-group row">
@@ -176,13 +176,13 @@ include('config/core.php');
 										<div class="form-group row">
 											<label class="col-sm-4 control-label text-sm-right pt-2">Google Calendar ID <span class="required">*</span></label>
 											<div class="col-sm-8">
-												<input type="text" name="profile_status" id="profile_status" class="form-control" value="<?php echo $professional['calendar_id']; ?>" required />
+												<input type="text" name="calendar_id" id="calendar_id" class="form-control" value="<?php echo $professional['calendar_id']; ?>" required />
 											</div>										
 										</div>
 										<div class="form-group row">
 											<label class="col-sm-4 control-label text-sm-right pt-2">Admin Comments <span class="required">*</span></label>
 											<div class="col-sm-8">
-												<input type="text" name="profile_status" id="profile_status" class="form-control" value="<?php echo $professional['admin_comments']; ?>" required />
+												<input type="text" name="admin_comments" id="admin_comments" class="form-control" value="<?php echo $professional['admin_comments']; ?>" required />
 											</div>										
 										</div>									
 									</div>
@@ -364,6 +364,7 @@ include('config/core.php');
 									</div>
 									<div class="col-sm-12 col-md-12 pt-2">
 										<div class="col-sm-3 offset-md-5">
+											<input type="hidden" value="<?php echo $professional['id']; ?>" name="professional_id" id="professional_id">
 											<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning" id="updateProfessional">Update Details</button>
 										</div>
 									</div>
@@ -588,9 +589,18 @@ include('config/core.php');
 			$(document).ready(function(){
 				$("#updateProfessional").on('click',function(){
 					var form_data = new FormData(); 
-					var fields_data = $("#updateProfessionalform").serialize();
-					form_data.append('fields_data', fields_data); 
-
+					form_data.append('first_name', $("#first_name").val());
+					form_data.append('last_name', $("#last_name").val());
+					form_data.append('sex', $("#sex").val());
+					form_data.append('address', $("#address").val());
+					form_data.append('mobile', $("#mobile").val());
+					form_data.append('phone', $("#phone").val());
+					form_data.append('email', $("#email").val());
+					form_data.append('profile_status', $("#profile_status").val());
+					form_data.append('calendar_id', $("#calendar_id").val());
+					form_data.append('admin_comments', $("#admin_comments").val());
+					form_data.append('professional_id', $("#professional_id").val());
+					
 					//Attached Files
 					var profile_image1 = $('#profile_image1').prop('files')[0];
 					form_data.append('profile_image1', profile_image1);
@@ -630,7 +640,8 @@ include('config/core.php');
 		                data: form_data,
 			            success: function(data)
 			            {
-			                alert(data);
+			                alert(data.message);
+			                location.reload(); 
 			            }
 			        });
 

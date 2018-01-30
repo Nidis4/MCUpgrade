@@ -11,27 +11,103 @@ include_once '../objects/professional.php';
 $database = new Database();
 $db = $database->getConnection();
 
-echo "<pre>";
-print_r($_FILES);
-print_r($_POST);
-die;
+$target_dir = dirname(dirname(dirname(dirname(__FILE__)))).DIRECTORY_SEPARATOR.'platform'.DIRECTORY_SEPARATOR.'UserFiles'.DIRECTORY_SEPARATOR.'professionals'.DIRECTORY_SEPARATOR;
+
+if(@$_FILES['profile_image1']['name']){
+    $timet = time();
+    $target_file = $target_dir.$timet.'-'.basename($_FILES["profile_image1"]["name"]);
+    if(move_uploaded_file($_FILES["profile_image1"]["tmp_name"], $target_file)){
+        $profile_image1 = $timet.'-'.basename($_FILES["profile_image1"]["name"]);
+    }
+}
+
+if(@$_FILES['profile_image2']['name']){
+    $timet = time();
+    $target_file = $target_dir.$timet.'-'.basename($_FILES["profile_image2"]["name"]);
+    if(move_uploaded_file($_FILES["profile_image2"]["tmp_name"], $target_file)){
+        $profile_image2 = $timet.'-'.basename($_FILES["profile_image2"]["name"]);
+    }
+}
+
+if(@$_FILES['profile_image3']['name']){
+    $timet = time();
+    $target_file = $target_dir.$timet.'-'.basename($_FILES["profile_image3"]["name"]);
+    if(move_uploaded_file($_FILES["profile_image3"]["tmp_name"], $target_file)){
+        $profile_image3 = $timet.'-'.basename($_FILES["profile_image3"]["name"]);
+    }
+}
+
+
+if(@$_FILES['profile_perid1']['name']){
+    $timet = time();
+    $target_file = $target_dir.$timet.'-'.basename($_FILES["profile_perid1"]["name"]);
+    if(move_uploaded_file($_FILES["profile_perid1"]["tmp_name"], $target_file)){
+        $profile_perid1 = $timet.'-'.basename($_FILES["profile_perid1"]["name"]);
+    }
+}
+
+if(@$_FILES['profile_perid2']['name']){
+    $timet = time();
+    $target_file = $target_dir.$timet.'-'.basename($_FILES["profile_perid2"]["name"]);
+    if(move_uploaded_file($_FILES["profile_perid2"]["tmp_name"], $target_file)){
+        $profile_perid2 = $timet.'-'.basename($_FILES["profile_perid2"]["name"]);
+    }
+}
+
+if(@$_FILES['profile_agreement1']['name']){
+    $timet = time();
+    $target_file = $target_dir.$timet.'-'.basename($_FILES["profile_agreement1"]["name"]);
+    if(move_uploaded_file($_FILES["profile_agreement1"]["tmp_name"], $target_file)){
+        $profile_agreement1 = $timet.'-'.basename($_FILES["profile_agreement1"]["name"]);
+    }
+}
+
+if(@$_FILES['profile_agreement2']['name']){
+    $timet = time();
+    $target_file = $target_dir.$timet.'-'.basename($_FILES["profile_agreement2"]["name"]);
+    if(move_uploaded_file($_FILES["profile_agreement2"]["tmp_name"], $target_file)){
+        $profile_agreement2 = $timet.'-'.basename($_FILES["profile_agreement2"]["name"]);
+    }
+}
+
+if(@$_FILES['profile_agreement3']['name']){
+    $timet = time();
+    $target_file = $target_dir.$timet.'-'.basename($_FILES["profile_agreement3"]["name"]);
+    if(move_uploaded_file($_FILES["profile_agreement3"]["tmp_name"], $target_file)){
+        $profile_agreement3 = $timet.'-'.basename($_FILES["profile_agreement3"]["name"]);
+    }
+}
+
+if(@$_FILES['profile_agreement4']['name']){
+    $timet = time();
+    $target_file = $target_dir.$timet.'-'.basename($_FILES["profile_agreement4"]["name"]);
+    if(move_uploaded_file($_FILES["profile_agreement4"]["tmp_name"], $target_file)){
+        $profile_agreement4 = $timet.'-'.basename($_FILES["profile_agreement4"]["name"]);
+    }
+}
+
+if(@$_FILES['profile_agreement5']['name']){
+    $timet = time();
+    $target_file = $target_dir.$timet.'-'.basename($_FILES["profile_agreement5"]["name"]);
+    if(move_uploaded_file($_FILES["profile_agreement5"]["tmp_name"], $target_file)){
+        $profile_agreement5 = $timet.'-'.basename($_FILES["profile_agreement5"]["name"]);
+    }
+}
+
+
+
+
 
 // initialize object
 $professional = new Professional($db);
  
-// get keywords
-$name = isset($_GET["n"]) ? $_GET["n"] : "";
-$surname = isset($_GET["s"]) ? $_GET["s"] : "";
-$mobile = isset($_GET["m"]) ? $_GET["m"] : "";
-$address = isset($_GET["e"]) ? $_GET["e"] : "";
- 
 // query products
-$stmt = $professional->save($name, $surname, $mobile, $address);
+$stmt = $professional->update($_POST['professional_id'], $_POST['first_name'], $_POST['last_name'], $_POST['address'], $_POST['sex'], $_POST['profile_status'], $_POST['admin_comments'], $_POST['mobile'], $_POST['phone'], $_POST['email'], $_POST['calendar_id']);
 //$stmt = $customer->search($keywords);
-$num = $stmt->rowCount();
+//$num = $stmt->rowCount();
  
 // check if more than 0 record found
-if($num>0){
+if($stmt){
  
     echo json_encode(
         array("message" => "Professional updated successfully.")

@@ -225,5 +225,31 @@ class Professional{
         $this->email = $row['email'];
         $this->calendar_id = $row['calendar_id'];
     } // Read One
+
+
+
+    function update($id, $first_name, $last_name, $address, $sex, $profile_status, $admin_comments, $mobile, $phone, $email, $calendar_id){
+
+        
+        $query = "UPDATE " . $this->table_name . "
+                    SET
+                    `first_name`=:first_name, `last_name`=:last_name
+                WHERE
+                    id = :id";
+
+        $stmt = $this->conn->prepare( $query );
+
+       
+        // bind id of product to be updated
+        $stmt->bindParam(':id',  $id, PDO::PARAM_INT);
+        $stmt->bindParam(':first_name',  $first_name);
+        $stmt->bindParam(':last_name',  $last_name);
+     
+        if ($stmt->execute()) { 
+           return 1;
+        } else {
+           return 0;
+        }
+    } // CancelAppointment
 }
 ?>
