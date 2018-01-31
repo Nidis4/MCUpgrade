@@ -182,7 +182,7 @@ class Professional{
      
         // query to read single record
         $query = "SELECT
-                 p.`id`, p.`first_name`, p.`last_name`, p.`sex`, p.`profile_status`, p.`admin_comments`, co.`address`, co.`mobile`, co.`phone`, ca.`email`, ca.`calendar_id`
+                 p.`id`, p.`first_name`, p.`last_name`, p.`sex`, p.`profile_status`, p.`admin_comments`, p.`image1`, p.`image2`, p.`image3`, p.`perid1`, p.`perid2`, p.`agreement1`, p.`agreement2`, p.`agreement3`, p.`agreement4`, p.`agreement5`, p.`approve_per`, p.`approve_doc`, co.`address`, co.`mobile`, co.`phone`, ca.`email`, ca.`calendar_id`
             FROM
                 " . $this->table_name . " p
                 LEFT JOIN ". $this->contact_table_name." co
@@ -224,18 +224,65 @@ class Professional{
         $this->phone = $row['phone'];
         $this->email = $row['email'];
         $this->calendar_id = $row['calendar_id'];
+
+        $this->image1 = $row['image1'];
+        $this->image2 = $row['image2'];
+        $this->image3 = $row['image3'];
+        $this->perid1 = $row['perid1'];
+        $this->perid2 = $row['perid2'];
+
+        $this->agreement1 = $row['agreement1'];
+        $this->agreement2 = $row['agreement2'];
+        $this->agreement3 = $row['agreement3'];
+        $this->agreement4 = $row['agreement4'];
+        $this->agreement5 = $row['agreement5'];
+
+        $this->approve_per = $row['approve_per'];
+        $this->approve_doc = $row['approve_doc'];
     } // Read One
 
 
 
-    function update($id, $first_name, $last_name, $address, $sex, $profile_status, $admin_comments, $mobile, $phone, $email, $calendar_id){
-
+    function update($id, $first_name, $last_name, $address, $sex, $profile_status, $admin_comments, $mobile, $phone, $email, $calendar_id, $profile_image1, $profile_image2, $profile_image3, $profile_perid1, $profile_perid2, $profile_agreement1, $profile_agreement2, $profile_agreement3, $profile_agreement4, $profile_agreement5, $approve_per, $approve_doc ){
+        
         
         $query = "UPDATE " . $this->table_name . "
                     SET
-                    `first_name`=:first_name, `last_name`=:last_name
-                WHERE
-                    id = :id";
+                    `first_name`=:first_name, `last_name`=:last_name, `sex`=:sex, `profile_status`=:profile_status, `admin_comments`=:admin_comments";
+        if(@$profile_image1){
+            $query .= ", `image1`= '".$profile_image1."'";
+        }
+        if(@$profile_image2){
+            $query .= ", `image2`= '".$profile_image2."'";
+        }
+        if(@$profile_image3){
+            $query .= ", `image3`= '".$profile_image3."'";
+        }
+
+        if(@$profile_perid1){
+            $query .= ", `perid1`= '".$profile_perid1."'";
+        }
+        if(@$profile_perid2){
+            $query .= ", `perid2`= '".$profile_perid2."'";
+        }
+
+        if(@$profile_agreement1){
+            $query .= ", `agreement1`= '".$profile_agreement1."'";
+        }
+        if(@$profile_agreement2){
+            $query .= ", `agreement2`= '".$profile_agreement2."'";
+        }
+        if(@$profile_agreement3){
+            $query .= ", `agreement3`= '".$profile_agreement3."'";
+        }
+        if(@$profile_agreement4){
+            $query .= ", `agreement4`= '".$profile_agreement4."'";
+        }
+        if(@$profile_agreement5){
+            $query .= ", `agreement5`= '".$profile_agreement5."'";
+        }
+
+        $query .=", `approve_per`=:approve_per, `approve_doc`=:approve_doc WHERE id = :id";
 
         $stmt = $this->conn->prepare( $query );
 
@@ -244,12 +291,81 @@ class Professional{
         $stmt->bindParam(':id',  $id, PDO::PARAM_INT);
         $stmt->bindParam(':first_name',  $first_name);
         $stmt->bindParam(':last_name',  $last_name);
-     
+        $stmt->bindParam(':sex',  $sex);
+        $stmt->bindParam(':profile_status',  $profile_status);
+        $stmt->bindParam(':admin_comments',  $admin_comments);
+
+        //$stmt->bindParam(':profile_image1',  $profile_image1);
+        // $stmt->bindParam(':profile_image2',  $profile_image2);
+        // $stmt->bindParam(':profile_image3',  $profile_image3);
+        // $stmt->bindParam(':profile_perid1',  $profile_perid1);
+        // $stmt->bindParam(':profile_perid2',  $profile_perid2);
+
+        // $stmt->bindParam(':profile_agreement1',  $profile_agreement1);
+        // $stmt->bindParam(':profile_agreement2',  $profile_agreement2);
+        // $stmt->bindParam(':profile_agreement3',  $profile_agreement3);
+        // $stmt->bindParam(':profile_agreement4',  $profile_agreement4);
+        // $stmt->bindParam(':profile_agreement5',  $profile_agreement5);
+        $stmt->bindParam(':approve_per',  $approve_per, PDO::PARAM_INT);
+        $stmt->bindParam(':approve_doc',  $approve_doc, PDO::PARAM_INT);
+        
+        
+        if ($stmt->execute()) { 
+           $this->update_contact($id, $address, $mobile, $phone); 
+           $this->update_account($id, $email, $calendar_id ); 
+           return 1;
+        } else {
+           return 0;
+        }
+    } // Save Professional
+
+    function update_contact($id, $address, $mobile, $phone ){
+        
+        
+        $query = "UPDATE " . $this->contact_table_name . "
+                    SET
+                    `mobile`=:mobile, `phone`=:phone, `address`=:address";
+        
+        $query .=" WHERE professional_id = :id";
+
+        $stmt = $this->conn->prepare( $query );
+
+       
+        // bind id of product to be updated
+        $stmt->bindParam(':id',  $id, PDO::PARAM_INT);
+        $stmt->bindParam(':mobile',  $mobile);
+        $stmt->bindParam(':phone',  $phone);
+        $stmt->bindParam(':address',  $address);
+        
         if ($stmt->execute()) { 
            return 1;
         } else {
            return 0;
         }
-    } // CancelAppointment
+    } // Save Professional
+
+    function update_account($id, $email, $calendar_id ){
+        
+        
+        $query = "UPDATE " . $this->account_table_name . "
+                    SET
+                    `email`=:email, `calendar_id`=:calendar_id";
+        
+        $query .=" WHERE professional_id = :id";
+
+        $stmt = $this->conn->prepare( $query );
+
+       
+        // bind id of product to be updated
+        $stmt->bindParam(':id',  $id, PDO::PARAM_INT);
+        $stmt->bindParam(':email',  $email);
+        $stmt->bindParam(':calendar_id',  $calendar_id);
+        
+        if ($stmt->execute()) { 
+           return 1;
+        } else {
+           return 0;
+        }
+    } // Save Professional
 }
 ?>

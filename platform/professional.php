@@ -205,7 +205,14 @@ include('config/core.php');
 															<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
 														</div>
 													</div>
-												</div><br>
+													<?php
+														if(@$professional['image1']){
+													?>
+															<a target="_blank" href="<?php echo $home_url.'platform/UserFiles/professionals/'.$professional['image1'];?>">View Details</a>
+													<?php
+														}
+													?>
+												</div>
 												<div class="offset-md-3 col-lg-8 pt-2">
 													<div class="fileupload fileupload-new" data-provides="fileupload">
 														<div class="input-append">
@@ -221,6 +228,13 @@ include('config/core.php');
 															<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
 														</div>
 													</div>
+													<?php
+														if(@$professional['image2']){
+													?>
+															<a target="_blank" href="<?php echo $home_url.'platform/UserFiles/professionals/'.$professional['image2'];?>">View Details</a>
+													<?php
+														}
+													?>
 												</div>
 												<div class="offset-md-3 col-lg-8 pt-2">
 													<div class="fileupload fileupload-new" data-provides="fileupload">
@@ -237,6 +251,13 @@ include('config/core.php');
 															<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
 														</div>
 													</div>
+													<?php
+														if(@$professional['image3']){
+													?>
+															<a target="_blank" href="<?php echo $home_url.'platform/UserFiles/professionals/'.$professional['image3'];?>">View Details</a>
+													<?php
+														}
+													?>
 												</div>
 											</div>
 
@@ -257,6 +278,13 @@ include('config/core.php');
 															<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
 														</div>
 													</div>
+													<?php
+														if(@$professional['perid1']){
+													?>
+															<a target="_blank" href="<?php echo $home_url.'platform/UserFiles/professionals/'.$professional['perid1'];?>">View Details</a>
+													<?php
+														}
+													?>
 												</div><br>
 												<div class="offset-md-3 col-lg-8 pt-2">
 													<div class="fileupload fileupload-new" data-provides="fileupload">
@@ -273,7 +301,16 @@ include('config/core.php');
 															<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
 														</div>
 													</div>
-													<input type="checkbox" name="approve_per" value="1">
+													<input type="checkbox" name="approve_per" id="approve_per" value="1" <?php if(@$professional['approve_per']){ echo "checked='checked'";}?>>
+													<?php
+														if(@$professional['perid2']){
+													?>
+															<a target="_blank" href="<?php echo $home_url.'platform/UserFiles/professionals/'.$professional['perid2'];?>">View Details</a>
+													<?php
+														}
+													?>
+													
+
 												</div>
 											</div>
 											<div class="form-group col-md-12 row">
@@ -293,6 +330,15 @@ include('config/core.php');
 															<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
 														</div>
 													</div>
+													<?php
+														if(@$professional['agreement1']){
+													?>
+															<a target="_blank" href="<?php echo $home_url.'platform/UserFiles/professionals/'.$professional['agreement1'];?>">View Details</a>
+													<?php
+														}
+													?>
+												</div>
+												<div class="col-lg-1">
 												</div>
 												<div class=" offset-md-3 col-lg-8 pt-2">
 													<div class="fileupload fileupload-new" data-provides="fileupload">
@@ -309,6 +355,13 @@ include('config/core.php');
 															<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
 														</div>
 													</div>
+													<?php
+														if(@$professional['agreement2']){
+													?>
+															<a target="_blank" href="<?php echo $home_url.'platform/UserFiles/professionals/'.$professional['agreement2'];?>">View Details</a>
+													<?php
+														}
+													?>
 												</div>
 												<div class=" offset-md-3 col-lg-8 pt-2">
 													<div class="fileupload fileupload-new" data-provides="fileupload">
@@ -325,6 +378,13 @@ include('config/core.php');
 															<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
 														</div>
 													</div>
+													<?php
+														if(@$professional['agreement3']){
+													?>
+															<a target="_blank" href="<?php echo $home_url.'platform/UserFiles/professionals/'.$professional['agreement3'];?>">View Details</a>
+													<?php
+														}
+													?>
 												</div>
 												<div class=" offset-md-3 col-lg-8 pt-2">
 													<div class="fileupload fileupload-new" data-provides="fileupload">
@@ -341,6 +401,13 @@ include('config/core.php');
 															<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
 														</div>
 													</div>
+													<?php
+														if(@$professional['agreement4']){
+													?>
+															<a target="_blank" href="<?php echo $home_url.'platform/UserFiles/professionals/'.$professional['agreement4'];?>">View Details</a>
+													<?php
+														}
+													?>
 												</div>
 												<div class="offset-md-3 col-lg-8 pt-2">
 													<div class="fileupload fileupload-new" data-provides="fileupload">
@@ -357,7 +424,15 @@ include('config/core.php');
 															<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
 														</div>
 													</div>
-													<input class="pt-2" type="checkbox" name="approve_doc" value="1">
+													<input class="pt-2" type="checkbox" name="approve_doc" id="approve_doc" value="1" <?php if(@$professional['approve_doc']){ echo "checked='checked'";}?> >
+													<?php
+														if(@$professional['agreement5']){
+													?>
+															<a target="_blank" href="<?php echo $home_url.'platform/UserFiles/professionals/'.$professional['agreement5'];?>">View Details</a>
+													<?php
+														}
+													?>
+													
 												</div>
 											</div>
 										</div>
@@ -600,7 +675,19 @@ include('config/core.php');
 					form_data.append('calendar_id', $("#calendar_id").val());
 					form_data.append('admin_comments', $("#admin_comments").val());
 					form_data.append('professional_id', $("#professional_id").val());
-					
+
+					if ($('#approve_per').prop('checked') == true){
+    					form_data.append('approve_per', 1);
+					} else{
+					    form_data.append('approve_per', 0);
+					}
+
+					if ($('#approve_doc').prop('checked') == true){
+						form_data.append('approve_doc', 1);
+					} else{
+						form_data.append('approve_doc', 0);
+					}
+
 					//Attached Files
 					var profile_image1 = $('#profile_image1').prop('files')[0];
 					form_data.append('profile_image1', profile_image1);

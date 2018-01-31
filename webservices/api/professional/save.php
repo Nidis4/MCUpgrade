@@ -12,6 +12,28 @@ $database = new Database();
 $db = $database->getConnection();
 
 $target_dir = dirname(dirname(dirname(dirname(__FILE__)))).DIRECTORY_SEPARATOR.'platform'.DIRECTORY_SEPARATOR.'UserFiles'.DIRECTORY_SEPARATOR.'professionals'.DIRECTORY_SEPARATOR;
+$profile_image1 = "";
+$profile_image2 = "";
+$profile_image3 = "";
+$profile_perid1 = "";
+$profile_perid2 = "";
+$profile_agreement1 = "";
+$profile_agreement2 = "";
+$profile_agreement3 = "";
+$profile_agreement4 = "";
+$profile_agreement5 = "";
+
+if(@$_POST['approve_per']){
+    $approve_per = 1;
+}else{
+    $approve_per = 0;
+}
+
+if(@$_POST['approve_doc']){
+    $approve_doc = 1;
+}else{
+    $approve_doc = 0;
+}
 
 if(@$_FILES['profile_image1']['name']){
     $timet = time();
@@ -102,7 +124,7 @@ if(@$_FILES['profile_agreement5']['name']){
 $professional = new Professional($db);
  
 // query products
-$stmt = $professional->update($_POST['professional_id'], $_POST['first_name'], $_POST['last_name'], $_POST['address'], $_POST['sex'], $_POST['profile_status'], $_POST['admin_comments'], $_POST['mobile'], $_POST['phone'], $_POST['email'], $_POST['calendar_id']);
+$stmt = $professional->update($_POST['professional_id'], $_POST['first_name'], $_POST['last_name'], $_POST['address'], $_POST['sex'], $_POST['profile_status'], $_POST['admin_comments'], $_POST['mobile'], $_POST['phone'], $_POST['email'], $_POST['calendar_id'], $profile_image1, $profile_image2, $profile_image3, $profile_perid1, $profile_perid2, $profile_agreement1, $profile_agreement2, $profile_agreement3, $profile_agreement4,$profile_agreement5, $approve_per, $approve_doc);
 //$stmt = $customer->search($keywords);
 //$num = $stmt->rowCount();
  
