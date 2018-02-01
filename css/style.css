@@ -119,6 +119,7 @@ li.active.litel a:hover {
   font-size: 94px;
   line-height: 120px;
   font-family: dinbd;
+  text-shadow: 1px 1px 1px #909090;
 }
 .container.container-home-slider p{
     color: #fff;
@@ -178,10 +179,11 @@ li.active.litel a:hover {
   background-color: #ffdc39;
   border: 2px solid #ffdc39;
   color: #161616;
-  font-size:16px;
+  font-size:15px;
   font-family: dinbd;
-  padding: 21px 27px 21px;
+  padding: 17px 16px 17px;
   margin-top: 30px;
+  text-align:center;
 }
 
 .div-wave {
@@ -228,7 +230,9 @@ li.active.litel a:hover {
 
 .idraulika-second-half{
   background:url(../img/home-page/plumber.jpg) no-repeat;
+ 
 }
+
 
 
 .idraulika-first-half {
@@ -258,6 +262,10 @@ li.active.litel a:hover {
   background-position: center;
 }
 
+.idraulika-second-half{
+  background-position: top center;
+}
+
 
 
 .container.cats-container .row{
@@ -280,7 +288,7 @@ li.active.litel a:hover {
 .mover-first-half, .mover-second-half, .cleaning-first-half, .cleaning-second-half,.testimon1-first-half, .testimon1-second-half, .workers-first-half ,.workers-second-half, .painter-first-half, .tiles-second-half, .tiles-first-half, .electr-second-half, .electr-first-half, .idraulika-first-half, .idraulika-second-half, .pistopoihtika-second-half, .pistopoihtika-first-half, .texnikos-second-half, .texnikos-first-half, .aircon-first-half, .aircon-second-half, .kau-first-half, .kau-second-half, .aircon-first-half{
   flex:1;
   width: 50%;
-  padding:100px;
+  padding:60px;
   text-align: center;
 }
 .cleaning-second-half{
@@ -496,4 +504,24 @@ li.active.litel a:hover {
 }
 .aircon-second-half p{
   color:#fff;
+}
+
+.btn-white{
+  background:#fff;
+  border:2px solid #fff;
+}
+
+.btn-yellow{
+  background:#FFC061;
+  border:2px solid #FFC061;
+}
+
+.btn-grey{
+  background:#EEF3F4;
+  border:2px solid #EEF3F4;
+}
+
+.btn-blue{
+  background:#458FFF;
+  border:2px solid #458FFF;
 }
