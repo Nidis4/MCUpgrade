@@ -202,14 +202,14 @@ include('config/core.php');
 											</div>
 										</div>
 									</div>
-									<footer class="card-footer">
+									<!-- <footer class="card-footer">
 										<div class="row justify-content-end">
 											<div class="col-sm-9">
 												<button class="btn btn-primary">Submit</button>
 												<button type="reset" class="btn btn-default">Reset</button>
 											</div>
 										</div>
-									</footer>
+									</footer> -->
 								</section>
 							</form>
 						</div>
@@ -286,30 +286,49 @@ include('config/core.php');
 											</div>
 										</div>
 									</div>
-									<footer class="card-footer">
+									<!-- <footer class="card-footer">
 										<div class="row justify-content-end">
 											<div class="col-sm-9">
 												<button class="btn btn-primary">Submit</button>
 												<button type="reset" class="btn btn-default">Reset</button>
 											</div>
 										</div>
-									</footer>
+									</footer> -->
 								</section>
 							</form>
 						</div>
 						
 					</div>
-					<div class="row" id='available'>
-						
-					</div>
 					<div class="row">
 						<div class="col-sm-6 offset-sm-3 text-center">
-							<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning createAppointment">Save Appointment</button>
+							<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning findProfessionals">Find Professionals</button>
 						</div>
 						<div class="col-sm-3 text-right">
 							<button type="button" class="mb-1 mt-1 mr-1 btn btn-danger cancelAppointment">Cancel</button>
 						</div>
 					</div>
+					<div class="row available">
+						<div class="col-lg-12">
+							<section class="card">
+								<header class="card-header">
+									<div class="card-actions">
+										<a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
+										<a href="#" class="card-action card-action-dismiss" data-card-dismiss=""></a>
+									</div>
+									<h2 class="card-title">Available Professionals</h2>
+									<p class="card-subtitle">
+										Please fill in the appointment details
+									</p>
+								</header>
+								<div class="card-body" id="available">
+								</div>
+							</section>
+						</div>
+						<div class="col-lg-6">
+						</div>
+						
+					</div>
+					
 			<div id="map"></div>
 					<!-- end: page -->
 				</section>

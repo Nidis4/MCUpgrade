@@ -28,3 +28,14 @@ tr.status-0, .table-striped tbody tr:nth-of-type(odd).status-0 {
     width: 50%;
     float: left;
 }
+.available{
+    display: none;
+}
+.selectedProf.profile {
+    background: #5cb85c;
+    color: white;
+}
+#available .profile{
+    padding: 10px;
+    cursor: pointer;
+}

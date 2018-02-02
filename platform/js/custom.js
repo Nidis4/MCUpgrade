@@ -88,6 +88,7 @@ $('select#applications').on('change', function() {
     var duration = $('select#applications option:selected').attr('dur');
 
     $('#budget').val(minprice);
+    $('#budget').keyup();
     $('#duration').val(duration);
 });
 
@@ -134,9 +135,8 @@ $("input#surname").keyup(function () {
 
 $("input#budget").keyup(function () {
     var commision = $('select#category option:selected').attr('comm');
-    //alert(commision);
-
     var comm = $("#budget").val()*commision/100;
+    comm = Math.round(comm * 100) / 100;
      $("#commision").val(comm);
 });
 
@@ -274,7 +274,36 @@ $( "#searchProfessional" ).click(function() {
 
 });
 
-$( ".createAppointment" ).click(function() {
+$("input#startDate").change(function(){
+    //alert("The text has been changed.");
+    var date = new Date($("#startDate").val()); 
+    var days = 5;
+    //alert(date);
+    if(!isNaN(date.getTime())){
+        date.setDate(date.getDate() + days);
+            
+        $("#endDate").val(date.toInputFormat());
+    } else {
+        alert("Invalid Date");  
+    }
+
+});
+
+Date.prototype.toInputFormat = function() {
+       var yyyy = this.getFullYear().toString();
+       var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based
+       var dd  = this.getDate().toString();
+       return yyyy + "-" + (mm[1]?mm:"0"+mm[0]) + "-" + (dd[1]?dd:"0"+dd[0]); // padding
+    };
+
+$(document).on('click','#available .profile',function() {
+    $('.profile').removeClass('selectedProf');
+    var prof_id = this.id;
+    $( "#"+prof_id ).addClass('selectedProf');
+
+});
+
+$( ".findProfessionals" ).click(function() {
     var agent = $("#agent").attr('agentUser');
     var application = $("#applications").val();
     var county = $("#county").val();
@@ -294,7 +323,7 @@ $( ".createAppointment" ).click(function() {
 
     //alert("email "+email);
     if (address=="" || application == null || county == "" || startDate == "" || endDate == ""){
-        alert("Empty Address");
+        alert("Please check the following fields: Address, Application, County, Start and End Date");
     }
     else{ 
         //alert("County: "+county);
@@ -315,7 +344,12 @@ $( ".createAppointment" ).click(function() {
                  var first = 100000;
                  var second= 100000;
                  var third = 100000;
+                 var firstProf = "";
+                 var secondProf = "";
+                 var thirdProf = "";
                 $.each(data, function(k, v){
+
+
 
                     if (v.distance < third){
                         if (v.distance < second){
@@ -323,14 +357,23 @@ $( ".createAppointment" ).click(function() {
                                 third = second;
                                 second = first;
                                 first = v.distance;
+
+                                thirdProf = secondProf;
+                                secondProf = firstProf;
+                                firstProf = "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='distance'>"+v.distance+"</div> SELECT</div>";
                             }
                             else{
                                 third = second;
                                 second = v.distance;
+
+                                thirdProf = secondProf;
+                                secondProf = "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='distance'>"+v.distance+"</div> SELECT</div>";
                             }
                         }
                         else{
                             third = v.distance;
+
+                            thirdProf = "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='distance'>"+v.distance+"</div> SELECT</div>";
                         }
                     }
 
@@ -347,14 +390,23 @@ $( ".createAppointment" ).click(function() {
                                                 third = second;
                                                 second = first;
                                                 first = x.distance;
+
+                                                thirdProf = secondProf;
+                                                secondProf = firstProf;
+                                                firstProf = "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='distance'>"+x.distance+"</div> SELECT</div>";
                                             }
                                             else{
                                                 third = second;
                                                 second = x.distance;
+
+                                                thirdProf = secondProf;
+                                                secondProf = "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='distance'>"+x.distance+"</div> SELECT</div>";
                                             }
                                         }
                                         else{
                                             third = x.distance;
+
+                                            thirdProf = "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='distance'>"+x.distance+"</div> SELECT</div>";
                                         }
                                     }
                                  });
@@ -362,11 +414,15 @@ $( ".createAppointment" ).click(function() {
                              }
                              htmlStr += "</div>";
                        });
-                $("#available").append(htmlStr);
-
-                alert("First Choice "+first);
-                alert("Second Choice "+second);
-                alert("third Choice "+third);
+                //$("#available").append(htmlStr);
+                $("#available").append(firstProf);
+                $("#available").append(secondProf);
+                $("#available").append(thirdProf);
+                $(".available").show();
+                
+                //alert("First Choice "+first);
+                //alert("Second Choice "+second);
+                //alert("third Choice "+third);
             }
         });
 
