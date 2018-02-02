@@ -303,9 +303,6 @@ include('config/core.php');
 						<div class="col-sm-6 offset-sm-3 text-center">
 							<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning findProfessionals">Find Professionals</button>
 						</div>
-						<div class="col-sm-3 text-right">
-							<button type="button" class="mb-1 mt-1 mr-1 btn btn-danger cancelAppointment">Cancel</button>
-						</div>
 					</div>
 					<div class="row available">
 						<div class="col-lg-12">
@@ -317,10 +314,20 @@ include('config/core.php');
 									</div>
 									<h2 class="card-title">Available Professionals</h2>
 									<p class="card-subtitle">
-										Please fill in the appointment details
+										Choose a professional
 									</p>
 								</header>
-								<div class="card-body" id="available">
+								<div class="card-body">
+									<div class="row" id="available">
+									</div>
+									<div class="row">
+										<div class="col-sm-6 offset-sm-3 text-center">
+											<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning createAppointment">Book Appointment</button>
+										</div>
+										<div class="col-sm-3 text-right">
+											<button type="button" class="mb-1 mt-1 mr-1 btn btn-danger cancelAppointment">Cancel</button>
+										</div>
+									</div>
 								</div>
 							</section>
 						</div>

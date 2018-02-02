@@ -302,6 +302,44 @@ $(document).on('click','#available .profile',function() {
     $( "#"+prof_id ).addClass('selectedProf');
 
 });
+$( ".createAppointment" ).click(function() {
+    alert("Create");
+    var professional = $('.selectedProf').attr('id');
+    alert(professional);
+
+    var agent = $("#agent").attr('agentUser');
+    var application = $("#applications").val();
+    var county = $("#county").val();
+    var budget = $("#budget").val();
+    var commision = $("#commision").val();
+    var startDate = $("#startDate").val();
+    var endDate = $("#endDate").val();
+    var comments = $("#comments").val();
+
+    var surname = $("#surname").val();
+    var firstname = $("#firstname").val();
+    var sex = $("#sex").val();
+    var address = $("#pac-input-address").val();
+    var mobile = $("#mobile").val();
+    var phone = $("#phone").val();
+    var email = $("#email").val();
+    // Check if all fields are correct
+    if (surname==""){
+        alert('Please fill in the Surname');
+    }
+    else if(firstname==""){
+        alert('Please fill in the Name');
+    }
+    else if(address==""){
+        alert('Please fill in the Address');
+    }
+    else if(mobile==""){
+        alert('Please fill in the Mobile');
+    }
+    else{
+        alert("Add the client");
+    }
+});
 
 $( ".findProfessionals" ).click(function() {
     var agent = $("#agent").attr('agentUser');
@@ -360,20 +398,20 @@ $( ".findProfessionals" ).click(function() {
 
                                 thirdProf = secondProf;
                                 secondProf = firstProf;
-                                firstProf = "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='distance'>"+v.distance+"</div> SELECT</div>";
+                                firstProf = "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='appointDate'>"+startDate+" 09:00</div><div class='distance'>"+v.distance+"</div> SELECT</div>";
                             }
                             else{
                                 third = second;
                                 second = v.distance;
 
                                 thirdProf = secondProf;
-                                secondProf = "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='distance'>"+v.distance+"</div> SELECT</div>";
+                                secondProf = "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='appointDate'>"+startDate+" 09:00</div><div class='distance'>"+v.distance+"</div> SELECT</div>";
                             }
                         }
                         else{
                             third = v.distance;
 
-                            thirdProf = "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='distance'>"+v.distance+"</div> SELECT</div>";
+                            thirdProf = "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='appointDate'>"+startDate+" 09:00</div><div class='distance'>"+v.distance+"</div> SELECT</div>";
                         }
                     }
 
@@ -393,20 +431,20 @@ $( ".findProfessionals" ).click(function() {
 
                                                 thirdProf = secondProf;
                                                 secondProf = firstProf;
-                                                firstProf = "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='distance'>"+x.distance+"</div> SELECT</div>";
+                                                firstProf = "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='appointDate'>"+x.date+" "+x.timeslot+"</div><div class='distance'>"+x.distance+"</div> SELECT</div>";
                                             }
                                             else{
                                                 third = second;
                                                 second = x.distance;
 
                                                 thirdProf = secondProf;
-                                                secondProf = "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='distance'>"+x.distance+"</div> SELECT</div>";
+                                                secondProf = "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='appointDate'>"+x.date+" "+x.timeslot+"</div><div class='distance'>"+x.distance+"</div> SELECT</div>";
                                             }
                                         }
                                         else{
                                             third = x.distance;
 
-                                            thirdProf = "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='distance'>"+x.distance+"</div> SELECT</div>";
+                                            thirdProf = "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='appointDate'>"+x.date+" "+x.timeslot+"</div><div class='distance'>"+x.distance+"</div> SELECT</div>";
                                         }
                                     }
                                  });

@@ -16,7 +16,7 @@ tr.status-0, .table-striped tbody tr:nth-of-type(odd).status-0 {
 .profile{
 	width: 100%;
 }
-.profile .name {
+.profile .name, .profile .appointDate {
     width: 30%;
     float: left;
 }
