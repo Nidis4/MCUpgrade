@@ -112,7 +112,7 @@ li.active.litel a:hover {
 }
 
 .container.container-home-slider .row {
-    width: 1170px;
+    max-width: 1170px;
     margin-left:auto;
     margin-right: auto;
     margin-top: 100px;
@@ -125,7 +125,7 @@ li.active.litel a:hover {
   font-size: 94px;
   line-height: 120px;
   font-family: dinbd;
-  text-shadow: 1px 1px 1px #909090;
+  text-shadow: 0px 0px 4px #333;
 }
 .container.container-home-slider p{
     color: #fff;
@@ -133,7 +133,7 @@ li.active.litel a:hover {
     font-size: 40px;
     font-family: dinbd;
     margin-top: 20px;
-    text-shadow: 1px 1px 1px #909090;
+    text-shadow: 0px 0px 4px #333;
 }
 #inputsearch{
     display: block;
@@ -142,7 +142,7 @@ li.active.litel a:hover {
     padding: 24px 12px;
     font-size: 20px;
     line-height: 22px;
-    color: #555;
+    color: #161616;
     background-color: #fff;
     background-image: none;
     border: 1px solid #ccc;
@@ -152,6 +152,8 @@ li.active.litel a:hover {
     -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
     -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    font-family:dinbd;
+
   }
 
   .searcharea {
@@ -253,13 +255,21 @@ li.active.litel a:hover {
 }
 
 .kau-second-half{
-  background:url(../img/home-page/elec-kitchen.jpg) no-repeat;
+  background:url(../img/home-page/repair-wash.jpg) no-repeat;
 }
 
 .aircon-first-half{
   background:url(../img/home-page/aircondition-back.jpg) no-repeat;
 
 }
+
+.newsletter-container{
+  background:url(../img/home-page/newsletter.png) no-repeat;
+  background-size: cover;
+  background-position: center top;
+  width: 100%;
+}
+
  
 
 .mover-first-half, .cleaning-first-half, .testimon1-second-half, .workers-first-half, .painter-first-half, .tiles-second-half, .electr-first-half, .idraulika-first-half, .idraulika-second-half, .electr-second-half, .aircon-first-half, .aircon-second-half, .kau-second-half, .aircon-first-half{
@@ -305,6 +315,11 @@ li.active.litel a:hover {
 
 .mover-second-half{
   background-color:#EEF3F4;
+}
+
+
+.electr-first-half {
+    background-position: center top;
 }
 
 .box-img {
@@ -531,4 +546,307 @@ li.active.litel a:hover {
 .btn-blue{
   background:#458FFF;
   border:2px solid #458FFF;
+}
+
+.footer-container{
+  width: 100%;
+  background: #232323;
+  color: #fff;
+}
+
+.container.footer-container .footer-first-row {
+    padding: 70px 50px;
+}
+
+.container.footer-container .footer-second-row{
+  padding: 50px;
+}
+
+.row-footer-sep {
+  padding: 0px 50px;
+}
+
+.footer-sep {
+    border-bottom: 2px solid #bcbcbc;
+}
+
+.container.footer-container ul li, .container.footer-container p {
+    font-size: 17px;
+    color: #bcbcbc;
+}
+.container.footer-container ul {
+    padding-left: 0px;
+    list-style-type: none;
+}
+
+.offer-footer-btn {
+    border: 1px solid #454545;
+    max-width: 183px;
+    font-size: 18px;
+    letter-spacing: 3px;
+    padding: 15px;
+    text-align: center;
+    font-family: dinbd;
+    margin-top: 23px;
+    background: #454545;
+}
+
+.col-md-6.mydiv {
+    padding: 50px;
+    background: red;
+}
+
+.div-center {
+    background: #fff;
+    max-width: 200px;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+}
+
+.container.newsletter-container h5 {
+    color: #fff;
+    font-size: 50px;
+    text-align: center;
+    font-family: dinbd;
+}
+
+.newsletter-sep {
+    border-bottom: 2px solid #ffdc39;
+    width: 75px;
+    margin: 20px auto;
+}
+
+
+.news-letter-form {
+    max-width: 625px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+    overflow: auto;
+}
+
+.sub-name, .sub-email{
+    background-color: #fff;
+    font-size: 16px;
+    padding: 19px 17px;
+    height: 55px;;
+    float: left;
+    font-family: dinbd;
+  }
+
+  .sub-btn {
+    width: 200px;
+    color: #161616;
+    font-size: 17px;
+    font-family: dinbd;
+    padding: 15px 17px;
+    cursor: pointer;
+    float: left;
+    margin-left: 0;
+    height: 55px;;
+    border-radius: 0;
+    text-align: center;
+    background: #ffdc39;
+}
+
+.col-md-12.sub-outer {
+    margin: 120px 0px;
+}
+
+.container.newsletter-container .row {
+    max-width: 1170px;
+    margin: auto;
+}
+
+.mcr-icon-element{
+  font-size: 70px;
+  color: #fff;
+
+}
+
+.fb-icon {
+    width: 41px;
+    margin: auto;
+}
+
+.instagram-icon {
+    width: 64px;
+    margin: auto;
+}
+
+.twitter-icon {
+    width: 67px;
+    margin: auto;
+}
+
+.youtube-icon {
+    width: 64px;
+    margin: auto;
+}
+
+h5.socials-h5 {
+    font-size: 28px!important;
+    font-family: dinbd;
+    letter-spacing: -1.5px;
+    margin: 25px;
+}
+
+.social-sep {
+    border-bottom: 2px solid #ffdc39;
+    width: 75px;
+    margin: auto;
+}
+
+.col-md-12.socials-outer {
+    margin-bottom: 120px;
+}
+
+
+
+@keyframes bounce {
+  0%, 20%, 60%, 100% {
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+
+  40% {
+    -webkit-transform: translateY(-20px);
+    transform: translateY(-20px);
+  }
+
+
+  
+}
+
+.col-md-12.socials-outer .col-md-3:hover>.fb-icon, .col-md-12.socials-outer .col-md-3:hover>.instagram-icon, .col-md-12.socials-outer .col-md-3:hover>.twitter-icon, .col-md-12.socials-outer .col-md-3:hover>.youtube-icon {
+  animation: bounce 1.2s;
+  cursor: pointer;
+  animation-name: bounce;
+  -moz-animation-name: bounce;
+
+
+}
+
+.col-md-12.socials-outer .col-md-3:hover>.fb-icon .mcr-icon-element, .col-md-12.socials-outer .col-md-3:hover>.socials-h5, .col-md-12.socials-outer .col-md-3:hover>.instagram-icon .mcr-icon-element, .col-md-12.socials-outer .col-md-3:hover>.twitter-icon .mcr-icon-element, .col-md-12.socials-outer .col-md-3:hover>.youtube-icon .mcr-icon-element {
+  color:#ffdc39;
+}
+
+.col-md-3.footer-logo {
+    margin-top: 35px;
+}
+
+
+
+
+.modal-header{
+      border-bottom: 0px solid #e5e5e5;
+}
+
+ .modal-header .close {
+    margin-top: -2px;
+    opacity: 1;
+    font-weight: bold;
+}
+
+p.p-modal {
+    font-size: 20px;
+    font-family: dinRg;
+}
+
+h4.modal-title {
+    font-size: 25px;
+}
+
+.modal-content.sub-modal-body {
+    background: #EEF3F4;
+}
+
+.btn-submit-sub {
+    width: 150px;
+    background: #ffdc39;
+    font-size: 16px;
+    text-align: center;
+    padding: 8px;
+    margin-top: 14px;
+    font-family: dinbd;
+    border: 1px solid #ffdc39;
+}
+
+
+.container-testimonial{
+  background:url(../img/home-page/constructors.jpg) no-repeat;
+   background-size: cover;
+  background-position: center bottom;
+  width: 100%;
+  padding-top:100px;
+  padding-bottom: 160px;
+  position: relative;
+}
+
+.container.container-testimonial .row {
+    max-width: 1170px;
+    margin: auto;
+}
+
+p.p-testimonial {
+    text-align: center;
+    color: #fff;
+    letter-spacing: 5px;
+}
+
+.container.container-testimonial h5 {
+    font-size: 50px;
+    font-family: dinbd;
+    color: #fff;
+    text-align: center;
+    margin-top: 10px;
+    line-height: 70px;
+}
+
+.sep-testimonial-title {
+    max-width: 560px;
+    margin: auto;
+}
+
+.container.container-testimonial .testimonial-outer {
+    margin-bottom: 100px;
+}
+
+.testimonial-content {
+    padding: 30px;
+    background:#fff;
+}
+.testimonial-logo {
+    max-width: 263px;
+    margin: 30px auto;
+}
+
+.testimonial-content p {
+    font-size: 20px;
+    text-align: center;
+}
+.testimonial-footer {
+    padding: 20px;
+    background: #458fff;
+}
+p.testimonial-name, p.testimonial-prop {
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    font-family: dinbd;
+    margin-bottom:5px;
+}
+
+.call-us-sep {
+    max-width: 404px;
+    margin: auto;
+}
+
+.call-us-row .col-md-12{
+  margin-bottom: 0px;
+}
+
+.call-us-outer{
+  background:#fff;
 }

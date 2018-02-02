@@ -21,6 +21,9 @@
   	<link rel="stylesheet" type="text/css" href="css/style.css?version=24">
   	<link rel="stylesheet" type="text/css" href="css/sidenav.css">
 
+  	<script src='https://www.google.com/recaptcha/api.js'></script>
+
+
 
   	<script src="js/home.js"></script>
 </head>
@@ -431,12 +434,227 @@
 				</div>
 			</div>
 		</div>
-		<i class="mkd-icon-font-awesome fa fa-twitter mkd-icon-element" style=""></i>
-
-
 
 
 	</div>
+
+	<div class="container container-testimonial">
+		<div class="row">
+			<div class="col-md-12 testimonial-outer">
+				<p class="p-testimonial">MYCONSTRUCTOR</p>
+				<h5>Τι είπαν οι χρήστες μας</h5>
+				<div class="sep-testimonial-title">
+					<img src="img/home-page/test-separator.png">
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="testimonial-body">
+					<div class="testimonial-content">
+						<div class="testimonial-logo">
+							<img src="img/home-page/taxibeat-logo.png">
+						</div>
+						<p>Το Lorem Ipsum είναι απλά ένα κείμενο χωρίς νόημα για τους επαγγελματίες της τυπογραφίας και στοιχειοθεσίας.</p>
+					</div>
+					<div class="testimonial-footer">
+						<p class="testimonial-name">Dan Brandon</p>
+						<p class="testimonial-prop">CEO</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="testimonial-body">
+					<div class="testimonial-content">
+						<div class="testimonial-logo">
+							<img src="img/home-page/taxibeat-logo.png">
+						</div>
+						<p>Το Lorem Ipsum είναι απλά ένα κείμενο χωρίς νόημα για τους επαγγελματίες της τυπογραφίας και στοιχειοθεσίας.</p>
+					</div>
+					<div class="testimonial-footer">
+						<p class="testimonial-name">Dan Brandon</p>
+						<p class="testimonial-prop">CEO</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="testimonial-body">
+					<div class="testimonial-content">
+						<div class="testimonial-logo">
+							<img src="img/home-page/taxibeat-logo.png">
+						</div>
+						<p>Το Lorem Ipsum είναι απλά ένα κείμενο χωρίς νόημα για τους επαγγελματίες της τυπογραφίας και στοιχειοθεσίας.</p>
+					</div>
+					<div class="testimonial-footer">
+						<p class="testimonial-name">Dan Brandon</p>
+						<p class="testimonial-prop">CEO</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="display: none;" class="row call-us-row">
+			<div class="col-md-12">
+				<div class="call-us-outer">
+					<div class="call-us-sep">
+						<img src="img/home-page/separator-4.png">
+					</div>
+				</div>
+			</div>	
+		</div>
+	</div>
+
+
+
+	<div class="container newsletter-container">
+		<div class="row">
+				<div class="col-md-12 sub-outer">
+					<h5>Εγγραφείτε στο Newsletter μας</h5>
+
+					<div class="newsletter-sep"></div>
+
+					<div class="news-letter-form">
+						<span class="sub-name-span">
+							<input type="text" class="sub-name" placeholder="Όνομα">
+						</span>
+						<span class="sub-email-span">
+							<input type="text" class="sub-email" placeholder="Email">
+						</span>
+							<div class="sub-btn btn btn-primary"  data-toggle="modal" data-target="#sub-modal">ΕΓΓΡΑΦΗ</div>
+							  <!-- Trigger the modal with a button 
+							  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
+
+							  <!-- Modal -->
+							  <div class="modal fade" id="sub-modal" role="dialog">
+							    <div class="modal-dialog">
+							      
+							      <!-- Modal content-->
+							      <div class="modal-content sub-modal-body">
+							      	<div class="modal-header">
+							      		<button type="button" class="close" data-dismiss="modal">&times;</button>
+          								<h4 class="modal-title">Ολοκληρώστε την εγγραφή σας!</h4>
+							      	</div>
+							        <div class="modal-body ">
+							        	
+							          	<p class="p-modal">Επιβεβαιώστε ότι δεν είστε ρομποτ για να ολοκληρώσετε την εγγραφή σας στο Newsletter μας!</p>
+							          	<div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="== xxxxxx =="></div>
+							          	<div class="btn-submit-sub">ΕΓΓΡΑΦΗ</div>
+							        </div>
+							       
+							      </div>
+							      
+							    </div>
+							  </div>
+
+					</div>
+				</div>
+
+				<div class="col-md-12 socials-outer">
+					<div class="col-md-3">
+						<div class="fb-icon">
+							<i class="mkd-icon-font-awesome fa fa-facebook-f mcr-icon-element" style=""></i>
+						</div>
+						<h5 class="socials-h5">Facebook Page</h5>
+						<div class="social-sep"></div>
+						
+					</div>
+					<div class="col-md-3">
+						<div class="instagram-icon">
+							<i class="mkd-icon-font-awesome fa fa-instagram mcr-icon-element" style=""></i>
+						</div>
+						<h5 class="socials-h5">Instagram Page</h5>
+						<div class="social-sep"></div>
+					</div>
+					<div class="col-md-3">
+						<div class="twitter-icon">
+							<i class="mkd-icon-font-awesome fa fa-twitter mcr-icon-element" style=""></i>
+						</div>
+						<h5 class="socials-h5">Twitter Profile</h5>
+						<div class="social-sep"></div>
+					</div>
+					<div class="col-md-3">
+						<div class="youtube-icon">
+							<i class="mkd-icon-font-awesome fa fa-youtube mcr-icon-element" style=""></i>
+						</div>
+						<h5 class="socials-h5">Youtube Channel</h5>
+						<div class="social-sep"></div>
+					</div>
+				</div>
+
+				
+
+			
+			</div>
+	</div>
+
+	
+
+	<footer>
+		<div class="container footer-container">
+			<div class="row footer-first-row">
+				<div class="col-md-3">
+					<h3>Σχετικά με Εμάς</h3>
+					<ul>
+						<li><a href="#">Ποιοί είμαστε</a></li>
+						<li>Πολιτική απορρήτου</li>
+						<li>Τρόποι πληρωμής</li>
+						<li>Όροι χρήσης</li>
+						<li>Επικοινωνήστε μαζί μας</li>
+
+					</ul>
+					
+				</div>
+				<div class="col-md-3">
+
+					<h3>Χρήσιμοι Σύνδεσμοι</h3>
+					<ul>
+						<li>Συχνές ερωτήσεις</li>
+						<li>Γιατί το myConstructor.gr;</li>
+						<li>Είμαι επαγγελματίας, πώς κερδίζω;</li>
+						<li>Σύνδεση</li>
+						<li>Εγγραφή</li>
+
+					</ul>
+					
+				</div>
+				<div class="col-md-3">
+					<h3>Blog MyConstructor</h3>
+					<ul>
+						<li>Ελαιοχρωματισμοί</li>
+						<li>Τοποθέτηση γυψοσανίδων</li>
+						<li>Τοποθέτηση πλακιδίων</li>
+						<li>Απολύμανση απεντόμωση</li>
+						<li>Μετακόμιση</li>
+
+					</ul>
+					
+				</div>
+				<div class="col-md-3">
+					<h3>Επικοινωνία</h3>
+					<ul>
+						<li>Τηλεφωνικό Κέντρο: 210 300 9323</li>
+						<li>Δευτέρα - Παρασκευή 9:00 - 21:30</li>
+						<li>Σάββατο 9:30-18:00</li>
+						
+
+					</ul>
+					
+				</div>				
+			</div>
+			<div class="row-footer-sep"><div class="footer-sep"></div></div>
+			<div class="row footer-second-row">
+				<div class="col-md-3 footer-logo">
+					<img src="img/home-page/logo-white.png"></div>
+				<div class="col-md-6">
+					<h3>Σχετικά με το ΜyConstructor.gr</h3>
+					<p>Lorem ipsum dolor sit amet, ubique dictas in semei tanta argumentum. Mundi eu sea, liber option alidenique sercivi. An duo lorem altera gloriatur. No imperdiet adver sarium pro. No sit sumo lorem. Mei ea eius elitr consequ untur. In mel aeterno facilis option alidenique.</p>
+				</div>
+				<div class="col-md-3">
+					<h3>Δείτε Τις Προσφορές Μας</h3>
+					<div class="offer-footer-btn">ΠΡΟΣΦΟΡΕΣ</div>
+				</div>
+				
+			</div>
+		</div>
+
+	</footer>
 
 
 
@@ -531,12 +749,15 @@
 	</div>-->
 		
 
-		
-
-
 
 </body>
 
+
+<script type="text/javascript">
+	
+
+
+</script>
 
 
 </html>
