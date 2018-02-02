@@ -230,5 +230,84 @@ class Customer{
         $this->mobile = $row['mobile'];
         $this->email = $row['email'];
     } // Read One
+
+
+    function update($id, $first_name, $last_name, $address, $sex, $mobile, $phone, $email){
+        
+         
+        $query = "UPDATE " . $this->table_name . "
+                    SET
+                    `first_name`=:first_name, `last_name`=:last_name, `sex`=:sex";
+        
+        $query .=" WHERE id = :id";
+
+        $stmt = $this->conn->prepare( $query );
+
+       
+        // bind id of product to be updated
+        $stmt->bindParam(':id',  $id, PDO::PARAM_INT);
+        $stmt->bindParam(':first_name',  $first_name);
+        $stmt->bindParam(':last_name',  $last_name);
+        $stmt->bindParam(':sex',  $sex);
+
+
+        
+        
+        if ($stmt->execute()) { 
+           $this->update_contact($id, $address, $mobile, $phone); 
+           $this->update_account($id, $email ); 
+           return 1;
+        } else {
+           return 0;
+        }
+    } // Save Customer
+
+    function update_contact($id, $address, $mobile, $phone ){
+        
+        
+        $query = "UPDATE " . $this->contact_table_name . "
+                    SET
+                    `mobile`=:mobile, `phone`=:phone, `address`=:address";
+        
+        $query .=" WHERE customer_id = :id";
+
+        $stmt = $this->conn->prepare( $query );
+
+       
+        // bind id of product to be updated
+        $stmt->bindParam(':id',  $id, PDO::PARAM_INT);
+        $stmt->bindParam(':mobile',  $mobile);
+        $stmt->bindParam(':phone',  $phone);
+        $stmt->bindParam(':address',  $address);
+        
+        if ($stmt->execute()) { 
+           return 1;
+        } else {
+           return 0;
+        }
+    } // Save Professional
+
+    function update_account($id, $email ){
+        
+        
+        $query = "UPDATE " . $this->account_table_name . "
+                    SET
+                    `email`=:email";
+        
+        $query .=" WHERE customer_id = :id";
+
+        $stmt = $this->conn->prepare( $query );
+
+       
+        // bind id of product to be updated
+        $stmt->bindParam(':id',  $id, PDO::PARAM_INT);
+        $stmt->bindParam(':email',  $email);
+        
+        if ($stmt->execute()) { 
+           return 1;
+        } else {
+           return 0;
+        }
+    } // Save Professional
 }
 ?>

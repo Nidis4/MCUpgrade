@@ -45,28 +45,9 @@ include('config/core.php');
 		<!-- Head Libs -->
 		<script src="vendor/modernizr/modernizr.js"></script>
 		
-		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyA1FK-ipf2Xe0W74fo7nnyufuA0Yh1JMFE&signed_in=true&libraries=places"></script>
-		<script type="text/javascript">
-			var placeSearch, autocomplete, autocomplete2;
-			
-
-
-			function initialize() {
-			  
-			  var options = {
-					componentRestrictions: {country: 'gr'}
-				};
-
-				autocomplete = new google.maps.places.Autocomplete(
-					document.getElementById('googleautocomplete'),
-					options
-				);
-			  
-			}
-		</script>
-
+		
 	</head>
-	<body onload="initialize()">
+	<body>
 		<section class="body">
 
 			<?php
@@ -150,7 +131,7 @@ include('config/core.php');
 										<div class="form-group row">
 											<label class="col-sm-4 control-label text-sm-right pt-2">Address <span class="required">*</span></label>
 											<div class="col-sm-8">
-												<input type="text" name="address" id="googleautocomplete" class="form-control" value="<?php echo $professional['address']; ?>" required />
+												<input type="text" name="address" id="pac-input-address" class="form-control" value="<?php echo $professional['address']; ?>" required />
 											</div>										
 										</div>
 										<div class="form-group row">
@@ -283,6 +264,7 @@ include('config/core.php');
 
 											<div class="form-group col-md-12 row">
 												<label class="col-lg-3 control-label text-lg-right pt-2">Personal ID</label>
+
 												<div class="col-lg-8">
 													<div class="fileupload fileupload-new" data-provides="fileupload">
 														<div class="input-append">
@@ -305,7 +287,10 @@ include('config/core.php');
 													<?php
 														}
 													?>
-												</div><br>
+												</div>
+												<div class="col-lg-1">
+													<input type="checkbox" name="approve_per" id="approve_per" value="1" <?php if(@$professional['approve_per']){ echo "checked='checked'";}?>>
+												</div>
 												<div class="offset-md-3 col-lg-8 pt-2">
 													<div class="fileupload fileupload-new" data-provides="fileupload">
 														<div class="input-append">
@@ -321,7 +306,7 @@ include('config/core.php');
 															<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
 														</div>
 													</div>
-													<input type="checkbox" name="approve_per" id="approve_per" value="1" <?php if(@$professional['approve_per']){ echo "checked='checked'";}?>>
+													
 													<?php
 														if(@$professional['perid2']){
 													?>
@@ -359,6 +344,7 @@ include('config/core.php');
 													?>
 												</div>
 												<div class="col-lg-1">
+													<input class="pt-2" type="checkbox" name="approve_doc" id="approve_doc" value="1" <?php if(@$professional['approve_doc']){ echo "checked='checked'";}?> >
 												</div>
 												<div class=" offset-md-3 col-lg-8 pt-2">
 													<div class="fileupload fileupload-new" data-provides="fileupload">
@@ -444,7 +430,7 @@ include('config/core.php');
 															<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
 														</div>
 													</div>
-													<input class="pt-2" type="checkbox" name="approve_doc" id="approve_doc" value="1" <?php if(@$professional['approve_doc']){ echo "checked='checked'";}?> >
+													
 													<?php
 														if(@$professional['agreement5']){
 													?>
@@ -687,7 +673,7 @@ include('config/core.php');
 					form_data.append('first_name', $("#first_name").val());
 					form_data.append('last_name', $("#last_name").val());
 					form_data.append('sex', $("#sex").val());
-					form_data.append('address', $("#address").val());
+					form_data.append('address', $("#pac-input-address").val());
 					form_data.append('mobile', $("#mobile").val());
 					form_data.append('phone', $("#phone").val());
 					form_data.append('email', $("#email").val());

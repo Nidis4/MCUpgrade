@@ -104,53 +104,65 @@ include('config/core.php');
 						
 								<h2 class="card-title">Customer Information #<?php echo $customer['id']; ?></h2>
 							</header>
-							<div class="card-body">
-								<div class="form-group row">
-									<label class="col-sm-3 control-label text-sm-right pt-2">Name <span class="required">*</span></label>
-									<div class="col-sm-4">
-										<input type="text" name="first_name" class="form-control" value="<?php echo $customer['first_name']; ?>" required />
+							<form action="#" method="POST" id="updateCustomerform">
+								<div class="card-body col-sm-12 col-md-12 row">
+									<div class="col-sm-12 col-md-6"><!-- Left-->
+										<div class="form-group row">
+											<label class="col-sm-4 control-label text-sm-right pt-2">Name <span class="required">*</span></label>
+											<div class="col-sm-8">
+												<input type="text" name="first_name" id="first_name" class="form-control" value="<?php echo $customer['first_name']; ?>" required />
+											</div>
+											
+										</div>
+										<div class="form-group row">
+											<label class="col-sm-4 control-label text-sm-right pt-2">Surname <span class="required">*</span></label>
+											<div class="col-sm-8">
+												<input type="text" name="last_name" id="last_name" class="form-control" value="<?php echo $customer['last_name']; ?>" required />
+											</div>										
+										</div>
+										<div class="form-group row">
+											<label class="col-sm-4 control-label text-sm-right pt-2">Sex <span class="required">*</span></label>
+											<div class="col-sm-8">
+												<input type="text" name="sex" id="sex" class="form-control" value="<?php echo $customer['sex']; ?>" required />
+											</div>										
+										</div>
+										
+										<div class="form-group row">
+											<label class="col-sm-4 control-label text-sm-right pt-2">E-mail <span class="required">*</span></label>
+											<div class="col-sm-8">
+												<input type="text" name="email" id="email" class="form-control" value="<?php echo $customer['email']; ?>" required />
+											</div>										
+										</div>
 									</div>
-									<div class="col-sm-3 offset-sm-1">
-										<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning" id="updateCustomer">Update Details</button>
+									<div class="col-sm-12 col-md-6"><!-- Right-->
+										<div class="form-group row">
+											<label class="col-sm-4 control-label text-sm-right pt-2">Address <span class="required">*</span></label>
+											<div class="col-sm-8">
+												<input type="text" name="address" id="pac-input-address" class="form-control" value="<?php echo $customer['address']; ?>" required />
+											</div>										
+										</div>
+										<div class="form-group row">
+											<label class="col-sm-4 control-label text-sm-right pt-2">Mobile <span class="required">*</span></label>
+											<div class="col-sm-8">
+												<input type="text" name="mobile" id="mobile" class="form-control" value="<?php echo $customer['mobile']; ?>" required />
+											</div>										
+										</div>
+										<div class="form-group row">
+											<label class="col-sm-4 control-label text-sm-right pt-2">Landline <span class="required">*</span></label>
+											<div class="col-sm-8">
+												<input type="text" name="phone" id="phone" class="form-control" value="<?php echo $customer['phone']; ?>" required />
+											</div>										
+										</div>
+										
+									</div>
+									<div class="col-sm-12 col-md-12 pt-2">
+										<div class="col-sm-3 offset-md-5">
+											<input type="hidden" value="<?php echo $customer['id']; ?>" name="customer_id" id="customer_id">
+											<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning" id="updatecustomer">Update Details</button>
+										</div>
 									</div>
 								</div>
-								<div class="form-group row">
-									<label class="col-sm-3 control-label text-sm-right pt-2">Surname <span class="required">*</span></label>
-									<div class="col-sm-4">
-										<input type="text" name="last_name" id="last_name" class="form-control" value="<?php echo $customer['last_name']; ?>" required />
-									</div>										
-								</div>
-								<div class="form-group row">
-									<label class="col-sm-3 control-label text-sm-right pt-2">Sex <span class="required">*</span></label>
-									<div class="col-sm-4">
-										<input type="text" name="sex" id="sex" class="form-control" value="<?php echo $customer['sex']; ?>" required />
-									</div>										
-								</div>
-								<div class="form-group row">
-									<label class="col-sm-3 control-label text-sm-right pt-2">Address <span class="required">*</span></label>
-									<div class="col-sm-4">
-										<input type="text" name="address" id="pac-input-address" class="form-control" value="<?php echo $customer['address']; ?>" required />
-									</div>										
-								</div>
-								<div class="form-group row">
-									<label class="col-sm-3 control-label text-sm-right pt-2">Mobile <span class="required">*</span></label>
-									<div class="col-sm-4">
-										<input type="text" name="mobile" id="mobile" class="form-control" value="<?php echo $customer['mobile']; ?>" required />
-									</div>										
-								</div>
-								<div class="form-group row">
-									<label class="col-sm-3 control-label text-sm-right pt-2">Landline <span class="required">*</span></label>
-									<div class="col-sm-4">
-										<input type="text" name="phone" id="phone" class="form-control" value="<?php echo $customer['phone']; ?>" required />
-									</div>										
-								</div>
-								<div class="form-group row">
-									<label class="col-sm-3 control-label text-sm-right pt-2">E-mail <span class="required">*</span></label>
-									<div class="col-sm-4">
-										<input type="text" name="email" id="email" class="form-control" value="<?php echo $customer['email']; ?>" required />
-									</div>										
-								</div>
-							</div>
+							</form>
 						</section>
 
 						<section class="card">
@@ -351,6 +363,47 @@ include('config/core.php');
 		
 		<!-- Theme Initialization Files -->
 		<script src="js/theme.init.js"></script>
+
+		<!-- Page JS-->
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#updatecustomer").on('click',function(){
+
+					var form_data = new FormData(); 
+					form_data.append('first_name', $("#first_name").val());
+					
+					form_data.append('last_name', $("#last_name").val());
+					form_data.append('sex', $("#sex").val());
+					form_data.append('address', $("#pac-input-address").val());
+					form_data.append('mobile', $("#mobile").val());
+					form_data.append('phone', $("#phone").val());
+					form_data.append('email', $("#email").val());
+					form_data.append('customer_id', $("#customer_id").val());
+					
+
+					
+					var getAvailableAPI = API_LOCATION+'customer/save.php';
+					
+					$.ajax({
+			            type: "POST",
+			            url: getAvailableAPI,
+			            dataType: "JSON",
+			            cache: false,
+		                contentType: false,
+		                processData: false,
+		                data: form_data,
+			            success: function(data)
+			            {
+			                alert(data.message);
+			                location.reload(); 
+			            }
+			        });
+
+
+					return false;
+				});
+			});
+		</script>
 
 		<!-- Examples -->
 		<script src="js/examples/examples.datatables.editable.js"></script>
