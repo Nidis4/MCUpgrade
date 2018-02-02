@@ -44,9 +44,29 @@ include('config/core.php');
 
 		<!-- Head Libs -->
 		<script src="vendor/modernizr/modernizr.js"></script>
+		
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyA1FK-ipf2Xe0W74fo7nnyufuA0Yh1JMFE&signed_in=true&libraries=places"></script>
+		<script type="text/javascript">
+			var placeSearch, autocomplete, autocomplete2;
+			
+
+
+			function initialize() {
+			  
+			  var options = {
+					componentRestrictions: {country: 'gr'}
+				};
+
+				autocomplete = new google.maps.places.Autocomplete(
+					document.getElementById('googleautocomplete'),
+					options
+				);
+			  
+			}
+		</script>
 
 	</head>
-	<body>
+	<body onload="initialize()">
 		<section class="body">
 
 			<?php
@@ -130,7 +150,7 @@ include('config/core.php');
 										<div class="form-group row">
 											<label class="col-sm-4 control-label text-sm-right pt-2">Address <span class="required">*</span></label>
 											<div class="col-sm-8">
-												<input type="text" name="address" id="address" class="form-control" value="<?php echo $professional['address']; ?>" required />
+												<input type="text" name="address" id="googleautocomplete" class="form-control" value="<?php echo $professional['address']; ?>" required />
 											</div>										
 										</div>
 										<div class="form-group row">
