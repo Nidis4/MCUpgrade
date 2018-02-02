@@ -1,0 +1,534 @@
+@font-face {
+  font-family: 'dinRg';
+  src: url('../assets/fonts/DiGrRg__.ttf');
+}
+@font-face {
+  font-family: 'dinMd';
+  src: url('../assets/fonts/DiGrMd__.ttf');
+}
+@font-face {
+  font-family: 'dinMdep';
+  src: url('../assets/fonts/DiGrMdEp.ttf');
+}
+@font-face {
+  font-family: 'dinLt';
+  src: url('../assets/fonts/DiGrLt__.ttf');
+}
+@font-face {
+  font-family: 'dinBk';
+  src: url('../assets/fonts/DiGrBk__.ttf');
+}
+@font-face {
+  font-family: 'dinBd';
+  src: url('../assets/fonts/DiGrBd__.ttf');
+}
+@font-face {
+  font-family: 'dinBdep';
+  src: url('../assets/fonts/DiGrBk__.ttf');
+}
+
+h1, h2, h3, h4, h5{
+  font-family: dinMd;
+}
+
+p, div, ul, li{
+  font-family: dinRg;
+  font-size:14px;
+}
+
+b{
+  font-family: dinbd;
+}
+.navbar{
+  margin-bottom: 0px;
+}
+
+.navbar-header {
+    min-height: 84px;
+}
+
+.navbar-nav {
+    margin-top: 26px;
+}
+
+.navbar-toggle{
+   margin-top: 23px;
+}
+
+.navbar-default {
+    background-color: transparent;
+}
+
+.navbar{
+  border:0px solid;
+}
+
+.navbar-nav>li>a {
+    font-size: 16px;
+    font-family: dinbd;
+}
+
+#myTopnav{
+  min-height: 100px;
+}
+
+li.litel a {
+    background-color: #004A86!important;
+    color: #fff!important;
+    font-size: 20px;
+}
+
+.navbar-default .navbar-nav>li>a{
+   color:#004a86;
+   font-family: dinbd;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    letter-spacing: 1.5px;
+
+
+}
+
+.navbar-default .navbar-nav>.open>a{
+  background-color: #004A86!important;
+  color: #fff!important;
+}
+
+.navbar-nav>li>a:hover{
+  color:#161616!important;
+  background-color:#FFDC39!important;
+}
+
+li.active.litel a:hover {
+    color: #161616!important;
+}
+
+.container.container-home-slider {
+    width: 100%;
+    /*background:url(../img/home-page/main-img.jpg) no-repeat;*/
+    background: url(../img/home-page/renovation-1.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+    /*border-bottom: 2px solid #e1e5e6;*/
+}
+
+.container.container-home-slider .row {
+    width: 1170px;
+    margin-left:auto;
+    margin-right: auto;
+    margin-top: 100px;
+    margin-bottom: 150px;
+}
+
+.container.container-home-slider h1{
+  color: #fff;
+  text-align: center;
+  font-size: 94px;
+  line-height: 120px;
+  font-family: dinbd;
+  text-shadow: 1px 1px 1px #909090;
+}
+.container.container-home-slider p{
+    color: #fff;
+    text-align: center;
+    font-size: 40px;
+    font-family: dinbd;
+    margin-top: 20px;
+    text-shadow: 1px 1px 1px #909090;
+}
+#inputsearch{
+    display: block;
+    width: 100%;
+    height: 44px;
+    padding: 24px 12px;
+    font-size: 20px;
+    line-height: 22px;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  }
+
+  .searcharea {
+    max-width: 500px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 90px;
+   
+}
+
+.container.cats-container {
+    width: 100%;
+}
+
+.first-half{
+  padding: 92px 10% 90px 12%;
+}
+
+.first-half h1 {
+    font-size: 60px;
+    font-family: dinbd;
+}
+
+.first-half p{
+  font-size: 18px;
+}
+
+.btn-cat{
+  min-width: 145px;
+  max-width: 270px;
+  background-color: #ffdc39;
+  border: 2px solid #ffdc39;
+  color: #161616;
+  font-size:14px;
+  font-family: dinbd;
+  padding: 14px 16px 14px;
+  margin-top: 30px;
+  text-align:center;
+}
+
+.div-wave {
+    margin-bottom: 25px;
+}
+
+.cleaning-first-half{
+  background:url(../img/home-page/sunergeio-kath.jpg) no-repeat;
+}
+.mover-first-half{
+  background:url(../img/home-page/mover.jpg) no-repeat;
+}
+
+.testimon1-second-half{
+  background:url(../img/home-page/mover-3.jpg) no-repeat;
+}
+
+.workers-first-half{
+  background:url(../img/home-page/workers.jpg) no-repeat;
+}
+.painter-first-half{
+  background:url(../img/home-page/painters.jpg) no-repeat;
+}
+
+.tiles-second-half{
+  background:url(../img/home-page/tiles.jpg) no-repeat;
+}
+
+.electr-first-half{
+   background:url(../img/home-page/electrecian-2.jpg) no-repeat;
+}
+
+.electr-second-half{
+   background:url(../img/home-page/kalodio-1.jpg) no-repeat;
+   background-size: cover;
+  background-position: left;
+}
+
+.texnikos-outer{
+  background:url(../img/home-page/texnikos-asfaleias-2.jpg) no-repeat;
+   background-size: cover;
+  background-position: left;
+}
+
+.idraulika-second-half{
+  background:url(../img/home-page/plumber.jpg) no-repeat;
+ 
+}
+
+
+
+.idraulika-first-half {
+   background:url(../img/home-page/solines-2.jpg) no-repeat;
+}
+
+.pistopoihtika-outer{
+  background:url(../img/home-page/pistopoihtika-1.jpg) no-repeat;
+    background-size: cover;
+  background-position: top;
+}
+
+.kau-second-half{
+  background:url(../img/home-page/elec-kitchen.jpg) no-repeat;
+}
+
+.aircon-first-half{
+  background:url(../img/home-page/aircondition-back.jpg) no-repeat;
+
+}
+ 
+
+.mover-first-half, .cleaning-first-half, .testimon1-second-half, .workers-first-half, .painter-first-half, .tiles-second-half, .electr-first-half, .idraulika-first-half, .idraulika-second-half, .electr-second-half, .aircon-first-half, .aircon-second-half, .kau-second-half, .aircon-first-half{
+  float: left;
+  width: 50%;
+  background-size: cover;
+  background-position: center;
+}
+
+.idraulika-second-half{
+  background-position: top center;
+}
+
+
+
+.container.cats-container .row{
+   display: flex;
+}
+
+.container.cats-container .row .col-md-6{
+   flex: 1; /* additionally, equal width */
+
+   padding-left: 0px;
+   padding-right: 0px;
+  
+}
+
+.mover-outer, .cleaning-outer, .outer-testimon, .pistopoihtika-outer, .texnikos-outer{
+  display: flex;
+  height: 100%;
+}
+
+.mover-first-half, .mover-second-half, .cleaning-first-half, .cleaning-second-half,.testimon1-first-half, .testimon1-second-half, .workers-first-half ,.workers-second-half, .painter-first-half, .tiles-second-half, .tiles-first-half, .electr-second-half, .electr-first-half, .idraulika-first-half, .idraulika-second-half, .pistopoihtika-second-half, .pistopoihtika-first-half, .texnikos-second-half, .texnikos-first-half, .aircon-first-half, .aircon-second-half, .kau-first-half, .kau-second-half, .aircon-first-half{
+  flex:1;
+  width: 50%;
+  padding:60px;
+  text-align: center;
+}
+.cleaning-second-half{
+  background-color: #EEF3F4;
+}
+
+
+.mover-second-half{
+  background-color:#EEF3F4;
+}
+
+.box-img {
+    max-width: 60px;
+    margin: auto;
+}
+
+.mover-second-half h2, .tiles-first-half h2{
+  font-size:25px;
+  color:#161616;
+  text-align: center;
+  font-family: dinbd;
+  line-height: 32px;
+}
+
+ .workers-second-half h2{
+  font-size:28px;
+  color:#161616;
+  text-align: center;
+  font-family: dinbd;
+  line-height: 32px;
+}
+.cleaning-second-half h2, .electr-second-half h2, .idraulika-first-half h2{
+  font-size:25px;
+  color:#fff;
+  text-align: center;
+  font-family: dinbd;
+  line-height: 32px;
+
+}
+
+.cleaning-second-half p, .electr-second-half p, .idraulika-first-half p{
+  color:#fff;
+  font-size: 14px;
+}
+
+.cleaning-second-half{
+  background-color:#da3a10;
+}
+
+.mover-second-half p {
+  color:#161616;
+  font-size: 14px;
+}
+
+.testimon1-first-half{
+  background:#FFE361;
+}
+
+.testimon1-first-half h3, .texnikos-first-half h3{
+  font-size: 25px;
+    letter-spacing: -1.4px;
+    line-height: 30px;
+    font-family: dinbd;
+}
+.testimon1-first-half p, .texnikos-first-half p {
+  font-family: dinbd;
+  font-size:14px;
+}
+
+
+/*BARS */
+
+
+.skillbar {
+  position:relative;
+  display:block;
+  margin-bottom:3px;
+  width:100%;
+  background:rgba(242,242,242,0.3);
+  height:18px;
+  border-radius:0px;
+  -moz-border-radius:0px;
+  -webkit-border-radius:0px;
+  -webkit-transition:0.4s linear;
+  -moz-transition:0.4s linear;
+  -ms-transition:0.4s linear;
+  -o-transition:0.4s linear;
+  transition:0.4s linear;
+  -webkit-transition-property:width, background-color;
+  -moz-transition-property:width, background-color;
+  -ms-transition-property:width, background-color;
+  -o-transition-property:width, background-color;
+  transition-property:width, background-color;
+}
+
+.skillbar-title { 
+  float: left;
+  width:250px;
+  font-weight:bold;
+  font-size:13px;
+  color:#ffffff;
+  -webkit-border-top-left-radius:3px;
+  -webkit-border-bottom-left-radius:4px;
+  -moz-border-radius-topleft:0px;
+  -moz-border-radius-bottomleft:0px;
+  border-top-left-radius:0px;
+  border-bottom-left-radius:0px;
+}
+
+.skillbar-title span {
+  display:block;
+  height:35px;
+  line-height:35px;
+  -webkit-border-top-left-radius:3px;
+  -webkit-border-bottom-left-radius:3px;
+  -moz-border-radius-topleft:0px;
+  -moz-border-radius-bottomleft:0px;
+  border-top-left-radius:0px;
+  border-bottom-left-radius:0px;
+  font-family: dinbd;
+  font-size:16px;
+}
+
+.skillbar-bar {
+  height:18px;
+  width:0px;
+  background:#6adcfa;
+  border-radius:0px;
+  -moz-border-radius:0px;
+  -webkit-border-radius:0px;
+}
+
+.skill-bar-percent {
+  display:block;
+  float: right;
+  height:35px;
+  line-height:35px;
+  -webkit-border-top-left-radius:3px;
+  -webkit-border-bottom-left-radius:3px;
+  -moz-border-radius-topleft:3px;
+  -moz-border-radius-bottomleft:3px;
+  border-top-left-radius:3px;
+  border-bottom-left-radius:3px;
+  font-family: dinbd;
+  color:#fff;
+  font-size:16px;
+}
+
+.bars{
+  display: block;
+  width: 100%;
+  padding: 92px 10% 90px 12%;
+  background-color: #0A847A;
+}
+
+.scrillbar-content{
+  overflow: auto;
+}
+
+
+/* End BARS*/
+
+.separator {
+    border-top: 1px solid #0A847A;
+    width: 75px;
+    margin-bottom: 20px;
+    margin-top: 14px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tiles-first-half{
+  background:#ffc061;
+}
+
+.tiles-first-half .btn-cat{
+  background:#EEF3F4;
+  border: 2px solid #EEF3F4;
+}
+
+.pistopoihtika-first-half {
+    background: #EEF3F4;
+}
+
+
+.texnikos-first-half{
+  background:#FFE361;
+}
+
+.row-texnikos{
+  background: #eef3f4;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.pistopoihtika-second-half h3, .pistopoihtika-first-half h3, .texnikos-second-half h3, .aircon-second-half h3, .kau-first-half h3{
+    font-size: 25px;
+    color: #161616;
+    text-align: center;
+    font-family: dinbd;
+    line-height: 32px;
+  }
+
+.btn-cat-center{
+  margin: 30px auto 0px auto;
+}
+
+.aircon-second-half{
+  background: #458fff;
+}
+
+.aircon-second-half h3{
+  color:#fff;
+}
+.aircon-second-half p{
+  color:#fff;
+}
+
+.btn-white{
+  background:#fff;
+  border:2px solid #fff;
+}
+
+.btn-yellow{
+  background:#FFC061;
+  border:2px solid #FFC061;
+}
+
+.btn-grey{
+  background:#EEF3F4;
+  border:2px solid #EEF3F4;
+}
+
+.btn-blue{
+  background:#458FFF;
+  border:2px solid #458FFF;
+}
