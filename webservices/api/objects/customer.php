@@ -234,24 +234,22 @@ class Customer{
 
     function update($id, $first_name, $last_name, $address, $sex, $mobile, $phone, $email){
         
-         
-        $query = "UPDATE " . $this->table_name . "
+        /*$query = "UPDATE " . $this->table_name . "
                     SET
                     `first_name`=:first_name, `last_name`=:last_name, `sex`=:sex";
         
-        $query .=" WHERE id = :id";
+        $query .=" WHERE id = :id";*/
+
+
+        $query = "INSERT INTO ". $this->table_name ." (`id`, `first_name`, `last_name`, `sex`) VALUES (:id, :first_name, :last_name, :sex) ON DUPLICATE KEY UPDATE `first_name`=:first_name, `last_name`=:last_name, `sex`=:sex";
 
         $stmt = $this->conn->prepare( $query );
-
        
         // bind id of product to be updated
         $stmt->bindParam(':id',  $id, PDO::PARAM_INT);
         $stmt->bindParam(':first_name',  $first_name);
         $stmt->bindParam(':last_name',  $last_name);
         $stmt->bindParam(':sex',  $sex);
-
-
-        
         
         if ($stmt->execute()) { 
            $this->update_contact($id, $address, $mobile, $phone); 
@@ -263,13 +261,13 @@ class Customer{
     } // Save Customer
 
     function update_contact($id, $address, $mobile, $phone ){
-        
-        
-        $query = "UPDATE " . $this->contact_table_name . "
+        /*$query = "UPDATE " . $this->contact_table_name . "
                     SET
                     `mobile`=:mobile, `phone`=:phone, `address`=:address";
         
-        $query .=" WHERE customer_id = :id";
+        $query .=" WHERE customer_id = :id";*/
+
+        $query = "INSERT INTO ". $this->contact_table_name ." (`customer_id`, `address`, `mobile`, `phone`) VALUES (:id, :address, :mobile, :phone) ON DUPLICATE KEY UPDATE `phone`=:phone, `mobile`=:mobile, `address`=:address";
 
         $stmt = $this->conn->prepare( $query );
 
@@ -289,12 +287,13 @@ class Customer{
 
     function update_account($id, $email ){
         
-        
-        $query = "UPDATE " . $this->account_table_name . "
+        /*$query = "UPDATE " . $this->account_table_name . "
                     SET
                     `email`=:email";
         
-        $query .=" WHERE customer_id = :id";
+        $query .=" WHERE customer_id = :id";*/
+
+        $query = "INSERT INTO ". $this->account_table_name ." (`customer_id`, `email`) VALUES (:id, :email) ON DUPLICATE KEY UPDATE `email`=:email";
 
         $stmt = $this->conn->prepare( $query );
 
