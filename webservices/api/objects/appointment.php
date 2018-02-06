@@ -229,6 +229,15 @@ class Appointment{
         return $row['first_name']." ".$row['last_name'];
     }
 
+    public function create($prof_id, $cust_id, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment){
+        $query = "INSERT INTO `appointments`(`prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`) VALUES ('$prof_id', '$cust_id', '$application_id', '$date', '$time', '$address', '$budget','$commision', '$agent_id','$comment','0','0','0', NOW(),NOW(),'0','1','')";
+
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+
+        //return "INSERT INTO `appointments`(`prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`) VALUES ('$prof_id', '$cust_id', '$application_id', '$date', '$time', '$address', '$budget','$commision', 'agent_id','comment','0','0','0', NOW(),NOW(),'0','0','')";
+        return "1";
+    }
 
 }
 ?>

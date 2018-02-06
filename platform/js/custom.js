@@ -303,18 +303,19 @@ $(document).on('click','#available .profile',function() {
 
 });
 $( ".createAppointment" ).click(function() {
-    alert("Create");
+    //alert("Create");
     var professional = $('.selectedProf').attr('id');
-    alert(professional);
+    //alert(professional);
 
     var agent = $("#agent").attr('agentUser');
+    //alert(agent);
     var application = $("#applications").val();
     var county = $("#county").val();
     var budget = $("#budget").val();
     var commision = $("#commision").val();
     var startDate = $("#startDate").val();
     var endDate = $("#endDate").val();
-    var comments = $("#comments").val();
+    var comments = $("#comment123").val();
 
     var surname = $("#surname").val();
     var firstname = $("#firstname").val();
@@ -337,7 +338,50 @@ $( ".createAppointment" ).click(function() {
         alert('Please fill in the Mobile');
     }
     else{
-        alert("Add the client");
+        alert("Add or Update client");
+
+        var customer_id = "999999";
+        var date = "2018-05-05";
+        var time ="10:00-12:00";
+        var time ="10:00-12:00";
+
+        var createAppointAPI = API_LOCATION+'appointment/create.php';
+        //create($prod_id, $cust_id, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment);
+        $.ajax({
+            type: "POST",
+            url: createAppointAPI,
+            data: {
+                surname: surname,
+                firstname: firstname,
+                address: address,
+                mobile: mobile,
+                sex: sex,
+                phone: phone,
+                email: email,
+                prof_id : professional,
+                cust_id : customer_id,
+                application_id: application,
+                date: date,
+                time: time,
+                address: address,
+                budget: budget,
+                commision: commision,
+                agent_id: agent,
+                comment: comments
+            },
+            dataType: "json",
+            success: function(data)
+            {
+                //alert(data);
+
+                alert("Appointment Booked");
+                window.location.replace('../platform/appointments.php');
+            }
+        });
+
+
+        
+
     }
 });
 
