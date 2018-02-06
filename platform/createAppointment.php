@@ -104,7 +104,7 @@ include('config/core.php');
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Agent <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="agent" id="agent" agentUser="<?php echo $_SESSION['login_user'];?>" class="form-control" value="<?php echo $_SESSION['fullname'];?>" required disabled/>
+												<input type="text" name="agent" id="agent" agentUser="<?php echo $_SESSION['id'];?>" class="form-control" value="<?php echo $_SESSION['fullname'];?>" required disabled/>
 											</div>
 										</div>
 										<div class="form-group row">

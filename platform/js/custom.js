@@ -21,8 +21,9 @@ $("#loginForm").submit(function(){
                 	 var user = data['username'];
                 	 var name = data['first_name'];
                 	 var surname = data['last_name'];
+                     var id = data['id'];
                 	 var fullname = name+" "+surname;
-    				$.post("session.php", {"user": user , "fullname":fullname});
+    				$.post("session.php", {"user": user , "fullname":fullname, "id":id});
 
                     window.location.replace('../platform/index.php');
                 }
