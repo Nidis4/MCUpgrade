@@ -1,0 +1,29 @@
+<!-- Start 6 Feb 2018 Harpreet -->
+<!---------------------->
+
+CREATE TABLE `professionals_documents` (
+  `id` int(11) NOT NULL,
+  `professional_id` int(11) NOT NULL,
+  `image1` varchar(255) DEFAULT NULL,
+  `image2` varchar(255) DEFAULT NULL,
+  `image3` varchar(255) DEFAULT NULL,
+  `perid1` varchar(255) DEFAULT NULL,
+  `perid2` varchar(255) DEFAULT NULL,
+  `agreement1` varchar(255) DEFAULT NULL,
+  `agreement2` varchar(255) DEFAULT NULL,
+  `agreement3` varchar(255) DEFAULT NULL,
+  `agreement4` varchar(255) DEFAULT NULL,
+  `agreement5` varchar(255) DEFAULT NULL,
+  `approve_per` int(1) NOT NULL DEFAULT '0',
+  `approve_doc` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `professionals_documents` ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `professionals_documents` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `professionals` DROP `image1`, DROP `image2`, DROP `image3`, DROP `perid1`, DROP `perid2`, DROP `agreement1`, DROP `agreement2`, DROP `agreement3`, DROP `agreement4`, DROP `agreement5`, DROP `approve_per`, DROP `approve_doc`;
+
+
+<!---------------------->
+<!-- End 6 Feb 2018 Harpreet -->

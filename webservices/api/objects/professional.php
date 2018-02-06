@@ -6,6 +6,7 @@ class Professional{
     private $table_name = "professionals";
     private $contact_table_name = "professionals_contact_details";
     private $account_table_name = "professionals_account_info";
+    private $document_table_name = "professionals_documents";
     private $counties_table_name = "professionals_counties";
     private $applications_table_name = "professionals_applications";
  
@@ -182,13 +183,15 @@ class Professional{
      
         // query to read single record
         $query = "SELECT
-                 p.`id`, p.`first_name`, p.`last_name`, p.`sex`, p.`profile_status`, p.`admin_comments`, p.`image1`, p.`image2`, p.`image3`, p.`perid1`, p.`perid2`, p.`agreement1`, p.`agreement2`, p.`agreement3`, p.`agreement4`, p.`agreement5`, p.`approve_per`, p.`approve_doc`, co.`address`, co.`mobile`, co.`phone`, ca.`email`, ca.`calendar_id`
+                 p.`id`, p.`first_name`, p.`last_name`, p.`sex`, p.`profile_status`, p.`admin_comments`, cd.`image1`, cd.`image2`, cd.`image3`, cd.`perid1`, cd.`perid2`, cd.`agreement1`, cd.`agreement2`, cd.`agreement3`, cd.`agreement4`, cd.`agreement5`, cd.`approve_per`, cd.`approve_doc`, co.`address`, co.`mobile`, co.`phone`, ca.`email`, ca.`calendar_id`
             FROM
                 " . $this->table_name . " p
                 LEFT JOIN ". $this->contact_table_name." co
                     ON p.id = co.professional_id
                 LEFT JOIN ". $this->account_table_name." ca
                     ON p.id = ca.professional_id
+                LEFT JOIN ". $this->document_table_name." cd
+                    ON p.id = cd.professional_id
                 WHERE
                     p.id = :id
                 LIMIT
@@ -249,40 +252,7 @@ class Professional{
         $query = "UPDATE " . $this->table_name . "
                     SET
                     `first_name`=:first_name, `last_name`=:last_name, `sex`=:sex, `profile_status`=:profile_status, `admin_comments`=:admin_comments";
-        if(@$profile_image1){
-            $query .= ", `image1`= '".$profile_image1."'";
-        }
-        if(@$profile_image2){
-            $query .= ", `image2`= '".$profile_image2."'";
-        }
-        if(@$profile_image3){
-            $query .= ", `image3`= '".$profile_image3."'";
-        }
-
-        if(@$profile_perid1){
-            $query .= ", `perid1`= '".$profile_perid1."'";
-        }
-        if(@$profile_perid2){
-            $query .= ", `perid2`= '".$profile_perid2."'";
-        }
-
-        if(@$profile_agreement1){
-            $query .= ", `agreement1`= '".$profile_agreement1."'";
-        }
-        if(@$profile_agreement2){
-            $query .= ", `agreement2`= '".$profile_agreement2."'";
-        }
-        if(@$profile_agreement3){
-            $query .= ", `agreement3`= '".$profile_agreement3."'";
-        }
-        if(@$profile_agreement4){
-            $query .= ", `agreement4`= '".$profile_agreement4."'";
-        }
-        if(@$profile_agreement5){
-            $query .= ", `agreement5`= '".$profile_agreement5."'";
-        }
-
-        $query .=", `approve_per`=:approve_per, `approve_doc`=:approve_doc WHERE id = :id";
+        $query .=" WHERE id = :id";
 
         $stmt = $this->conn->prepare( $query );
 
@@ -294,25 +264,11 @@ class Professional{
         $stmt->bindParam(':sex',  $sex);
         $stmt->bindParam(':profile_status',  $profile_status);
         $stmt->bindParam(':admin_comments',  $admin_comments);
-
-        //$stmt->bindParam(':profile_image1',  $profile_image1);
-        // $stmt->bindParam(':profile_image2',  $profile_image2);
-        // $stmt->bindParam(':profile_image3',  $profile_image3);
-        // $stmt->bindParam(':profile_perid1',  $profile_perid1);
-        // $stmt->bindParam(':profile_perid2',  $profile_perid2);
-
-        // $stmt->bindParam(':profile_agreement1',  $profile_agreement1);
-        // $stmt->bindParam(':profile_agreement2',  $profile_agreement2);
-        // $stmt->bindParam(':profile_agreement3',  $profile_agreement3);
-        // $stmt->bindParam(':profile_agreement4',  $profile_agreement4);
-        // $stmt->bindParam(':profile_agreement5',  $profile_agreement5);
-        $stmt->bindParam(':approve_per',  $approve_per, PDO::PARAM_INT);
-        $stmt->bindParam(':approve_doc',  $approve_doc, PDO::PARAM_INT);
-        
         
         if ($stmt->execute()) { 
            $this->update_contact($id, $address, $mobile, $phone); 
            $this->update_account($id, $email, $calendar_id ); 
+           $this->update_document($id, $profile_image1, $profile_image2, $profile_image3, $profile_perid1, $profile_perid2, $profile_agreement1, $profile_agreement2, $profile_agreement3, $profile_agreement4, $profile_agreement5, $approve_per, $approve_doc ); 
            return 1;
         } else {
            return 0;
@@ -342,7 +298,7 @@ class Professional{
         } else {
            return 0;
         }
-    } // Save Professional
+    } // Save Professional Contact
 
     function update_account($id, $email, $calendar_id ){
         
@@ -366,6 +322,89 @@ class Professional{
         } else {
            return 0;
         }
-    } // Save Professional
+    } // Save Professional Account
+
+    function update_document($id, $profile_image1, $profile_image2, $profile_image3, $profile_perid1, $profile_perid2, $profile_agreement1, $profile_agreement2, $profile_agreement3, $profile_agreement4, $profile_agreement5, $approve_per, $approve_doc  ){
+        
+        // Check Professional document
+        $query = "SELECT count(id) as count  FROM " . $this->document_table_name . " 
+                WHERE
+                    professional_id = :id";
+     
+        //echo $query;
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        //echo $this->id." ------ ";
+
+        $cur_id = $id;
+        // bind id of product to be updated
+        $stmt->bindParam(':id',  $cur_id, PDO::PARAM_INT);
+        //$stmt->bindValue(':id', '$cur_id', PDO::PARAM_STR);
+     
+        // execute query
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if(@$row['count']){ // Update Documents
+            $query = "UPDATE " . $this->document_table_name . "
+                    SET
+                    `approve_per`=:approve_per, `approve_doc`=:approve_doc";
+
+            if(@$profile_image1){
+                $query .= ", `image1`= '".$profile_image1."'";
+            }
+            if(@$profile_image2){
+                $query .= ", `image2`= '".$profile_image2."'";
+            }
+            if(@$profile_image3){
+                $query .= ", `image3`= '".$profile_image3."'";
+            }
+
+            if(@$profile_perid1){
+                $query .= ", `perid1`= '".$profile_perid1."'";
+            }
+            if(@$profile_perid2){
+                $query .= ", `perid2`= '".$profile_perid2."'";
+            }
+
+            if(@$profile_agreement1){
+                $query .= ", `agreement1`= '".$profile_agreement1."'";
+            }
+            if(@$profile_agreement2){
+                $query .= ", `agreement2`= '".$profile_agreement2."'";
+            }
+            if(@$profile_agreement3){
+                $query .= ", `agreement3`= '".$profile_agreement3."'";
+            }
+            if(@$profile_agreement4){
+                $query .= ", `agreement4`= '".$profile_agreement4."'";
+            }
+            if(@$profile_agreement5){
+                $query .= ", `agreement5`= '".$profile_agreement5."'";
+                    }
+                    
+            $query .=" WHERE professional_id = :id";
+            
+            $stmt = $this->conn->prepare( $query );
+            // bind id of product to be updated
+            $stmt->bindParam(':id',  $id, PDO::PARAM_INT);
+        }else{ // Insert New Record
+
+            $query = "INSERT INTO " . $this->document_table_name . " (`professional_id`, `image1`, `image2`, `image3`, `perid1`, `perid2`, `agreement1`, `agreement2`, `agreement3`, `agreement4`, `agreement5`, `approve_per`, `approve_doc`) VALUES ($id, '".$profile_image1."', '".$profile_image2."', '".$profile_image3."', '".$profile_perid1."', '".$profile_perid2."', '".$profile_agreement1."', '".$profile_agreement2."', '".$profile_agreement3."', '".$profile_agreement4."', '".$profile_agreement5."', :approve_per, :approve_doc)";
+
+            $stmt = $this->conn->prepare( $query );
+        }
+        
+        $stmt->bindParam(':approve_per',  $approve_per, PDO::PARAM_INT);
+        $stmt->bindParam(':approve_doc',  $approve_doc, PDO::PARAM_INT);
+        
+        if ($stmt->execute()) { 
+           return 1;
+        } else {
+           return 0;
+        }
+    } // Save Professional Document
 }
 ?>
