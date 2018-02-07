@@ -532,7 +532,41 @@ include('config/core.php');
 								<h2 class="card-title">Professional's Statistics</h2>
 							</header>
 							<div class="card-body">
-								
+								<table class="table table-bordered table-striped mb-0" id="">
+									<thead>
+										<tr>
+											<th>Appointments Booked</th>
+											<th>Appointments Cancelled</th>
+											<th>Reasons for Cancelled</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php
+											$statistics = file_get_contents($api_url.'webservices/api/professional/statistics.php?id='.$id);
+											$statisticsPag = json_decode($statistics, true); // decode the JSON into an associative array
+										?>
+										<tr>
+											<td><?php echo $statisticsPag['updated'];?></td>
+											<td><?php echo $statisticsPag['cancelled'];?></td>
+											<td>
+												<?php 
+													if(@$statisticsPag['cancelByCustomer']){
+														echo "<b>Cancelled By Customer:</b> ". $statisticsPag['cancelByCustomer']."<br>";
+													}
+													if(@$statisticsPag['cancelByProfessional']){
+														echo "<b>Cancelled By Professional:</b> ". $statisticsPag['cancelByProfessional']."<br>";
+													}
+													if(@$statisticsPag['cancelByMistake']){
+														echo "<b>Cancelled By Mistake:</b> ". $statisticsPag['cancelByMistake']."<br>";
+													} 
+													if(@$statisticsPag['cancelDefault']){
+														echo "<b>Cancelled By Default:</b> ". $statisticsPag['cancelDefault']."<br>";
+													} 
+												?>												
+											</td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 						</section>
 

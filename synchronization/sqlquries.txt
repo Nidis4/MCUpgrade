@@ -27,3 +27,12 @@ ALTER TABLE `professionals` DROP `image1`, DROP `image2`, DROP `image3`, DROP `p
 
 <!---------------------->
 <!-- End 6 Feb 2018 Harpreet -->
+
+<!-- Start 7 Feb 2018 Harpreet -->
+<!---------------------->
+
+ALTER TABLE `appointments` ADD `cancelReason` INT(10) NULL DEFAULT '0' COMMENT '0 For default 1 for Customer Cancel And 2 for Professional Couldn\'t And 3 for Mistake' AFTER `status`;
+
+<!---------------------->
+<!-- End 7 Feb 2018 Harpreet -->
+

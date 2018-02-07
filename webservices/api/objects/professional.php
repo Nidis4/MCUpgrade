@@ -406,5 +406,45 @@ class Professional{
            return 0;
         }
     } // Save Professional Document
+
+
+
+    public function statistics(){
+     
+        // query to read single record
+        $query = "SELECT `status`, COUNT(*) AS count FROM appointments WHERE prof_member_id = :id  GROUP BY `status`";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        $cur_id = $this->id;
+
+        $stmt->bindParam(':id',  $cur_id, PDO::PARAM_INT);
+
+        // execute query
+        $stmt->execute();
+
+        return $stmt;
+        
+    } 
+
+    public function cancelStatus(){
+     
+        // query to read single record
+        $query = "SELECT `cancelReason`, COUNT(*) AS count FROM appointments WHERE prof_member_id = :id and status=0  GROUP BY `cancelReason`";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        $cur_id = $this->id;
+
+        $stmt->bindParam(':id',  $cur_id, PDO::PARAM_INT);
+
+        // execute query
+        $stmt->execute();
+
+        return $stmt;
+        
+    }
 }
 ?>
