@@ -36,6 +36,47 @@ class Category{
         return $stmt;
     }
 
+    function readOne(){
+     
+        // query to read single record
+        $query = "SELECT
+                id, title, title_greek, description, description_greek, sequence, modified, commissionRate
+                FROM
+                " . $this->table_name . "                
+                WHERE
+                    id = :id
+                LIMIT
+                    0,1";
+     
+        //echo $query;
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        //echo $this->id." ------ ";
+
+        $cur_id = $this->id;
+        // bind id of product to be updated
+        $stmt->bindParam(':id',  $cur_id, PDO::PARAM_INT);
+        //$stmt->bindValue(':id', '$cur_id', PDO::PARAM_STR);
+     
+        // execute query
+        $stmt->execute();
+
+        $num = $stmt->rowCount();
+     
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+        // set values to object properties
+        $this->title = $row['title'];
+        $this->title_greek = $row['title_greek'];
+        $this->description = $row['description'];
+        $this->description_greek = $row['description_greek'];
+        $this->sequence = $row['sequence'];
+        $this->modified = $row['modified'];
+        $this->commissionRate = $row['commissionRate'];
+    } // Read One
+
     public function readByCategoryPrice(){
         //select all Prices data
         $query = "SELECT

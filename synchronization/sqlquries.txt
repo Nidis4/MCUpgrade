@@ -36,3 +36,24 @@ ALTER TABLE `appointments` ADD `cancelReason` INT(10) NULL DEFAULT '0' COMMENT '
 <!---------------------->
 <!-- End 7 Feb 2018 Harpreet -->
 
+<!-- Start 8 Feb 2018 Harpreet -->
+<!---------------------->
+
+CREATE TABLE `sms_logs` (
+  `id` int(11) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `text` text NOT NULL,
+  `request` text NOT NULL,
+  `response` text NOT NULL,
+  `datetime` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `sms_logs` ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `sms_logs` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `sms_logs` CHANGE `text` `text` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL, CHANGE `request` `request` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL, CHANGE `response` `response` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+
+<!---------------------->
+<!-- End 8 Feb 2018 Harpreet -->
+

@@ -114,7 +114,7 @@ include('config/core.php');
 														$categories = file_get_contents($api_url.'webservices/api/category/read.php');
 														$categories = json_decode($categories, true); // decode the JSON into an associative array
 													?>
-													<select data-plugin-selectTwo class="form-control populate" id="category">
+													<select data-plugin-selectTwo class="form-control populate" name="category" id="category">
 														<?php
 															foreach ($categories as $category) {
 																$cat_id = $category['id'];
@@ -201,6 +201,13 @@ include('config/core.php');
 												<textarea name="comment" id="comment123" class="form-control"></textarea>
 											</div>
 										</div>
+										<div class="form-group row">
+											<label class="col-sm-3 control-label text-sm-right pt-2">Send SMS to Professional</label>
+											<div class="col-sm-2">												
+												<input type="checkbox" class="form-control" id="professionalsms" name="professionalsms">
+											</div>
+										</div>
+										
 									</div>
 									<!-- <footer class="card-footer">
 										<div class="row justify-content-end">
@@ -283,6 +290,13 @@ include('config/core.php');
 											</div>
 											<div class="col-sm-9">
 
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<label class="col-sm-3 control-label text-sm-right pt-2">SMS to Employer</label>
+											<div class="col-sm-2">												
+												<input type="checkbox" class="form-control" name="employersms" id="employersms" checked="checked">
 											</div>
 										</div>
 									</div>

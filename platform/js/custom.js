@@ -311,6 +311,7 @@ $( ".createAppointment" ).click(function() {
     var agent = $("#agent").attr('agentUser');
     //alert(agent);
     var application = $("#applications").val();
+    var category = $("#category").val();
     var county = $("#county").val();
     var budget = $("#budget").val();
     var commision = $("#commision").val();
@@ -325,6 +326,20 @@ $( ".createAppointment" ).click(function() {
     var mobile = $("#mobile").val();
     var phone = $("#phone").val();
     var email = $("#email").val();
+
+    if($("#employersms").is(':checked')){
+        var employersms = 1;
+    }else{
+        var employersms = 0;
+    }
+
+    if($("#professionalsms").is(':checked')){
+        var professionalsms = 1;
+    }else{
+        var professionalsms = 0;
+    }
+
+
     // Check if all fields are correct
     if (surname==""){
         alert('Please fill in the Surname');
@@ -362,13 +377,16 @@ $( ".createAppointment" ).click(function() {
                 prof_id : professional,
                 cust_id : customer_id,
                 application_id: application,
+                category_id: category,
                 date: date,
                 time: time,
                 address: address,
                 budget: budget,
                 commision: commision,
                 agent_id: agent,
-                comment: comments
+                comment: comments,
+                professionalsms: professionalsms,
+                employersms: employersms
             },
             dataType: "json",
             success: function(data)
