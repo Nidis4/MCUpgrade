@@ -93,7 +93,7 @@
 								    <a href="#" class="mk-fullscreen-close" id="mk-fullscreen-close-button"><i class="fa fa-times"></i></a>
 								    <div id="mk-fullscreen-search-wrapper">
 								      <form method="get" id="mk-fullscreen-searchform" action="">
-								        <input id="mk-fullscreen-search-input"  type="text" name="inputsearch" value="" placeholder="Γράψε την εργασία που χρειάζεσαι..." onClick="search()" />
+								        <input id="mk-fullscreen-search-input"  type="text" name="inputsearch" value="" placeholder="Γράψε την εργασία που χρειάζεσαι..." onClick="search()" autocomplete="off" />
 								        <i class="fa fa-search fullscreen-search-icon"></i>
 								      </form>
 								    </div>

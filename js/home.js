@@ -7,17 +7,17 @@ $(document).ready(function(){
 });
 
 
-function search1(){
-	 
-		$('input#inputsearch').keyup(function() {
-				if( this.value.length >= 3){
+$(document).mouseup(function (e)
+{
+    var container = $("#search-results, #mk-fullscreen-searchform");
 
-					var inputval = $('input#inputsearch').delay(10000).val();
-				   	alert(inputval);
-				}
-		});
-	
-}
+    if (!container.is(e.target) // if the target of the click isn't the container...
+        && container.has(e.target).length === 0) // ... nor a descendant of the container
+    {
+        $("div.mk-fullscreen-search-overlay").removeClass("mk-fullscreen-search-overlay-show");
+    }
+});
+
 
 jQuery(document).ready(function($) {
   var wHeight = window.innerHeight;

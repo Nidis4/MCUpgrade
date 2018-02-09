@@ -1146,6 +1146,7 @@ h4.cleaning-hover-title {
 div#search-button {
     background: #fff;
     font-family: dinmd;
+    margin-top:50px;
 }
 
 a#search-button-listener {
@@ -1153,11 +1154,10 @@ a#search-button-listener {
 }
 
 .icon-search {
-    width: 70px;
+    width: 80px;
     float: right;
     background: #da3a10;
     color: #fff;
-   
     padding: 10px;
 }
 
@@ -1197,6 +1197,8 @@ div#mk-fullscreen-search-wrapper {
 
 #search-results{
     max-width: 800px;
+    max-height: 600px;
+    overflow-y:auto;
     margin: auto;
 }
 
