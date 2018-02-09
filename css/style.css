@@ -1154,7 +1154,7 @@ a#search-button-listener {
 }
 
 .icon-search {
-    width: 80px;
+    width: 77px;
     float: right;
     background: #da3a10;
     color: #fff;
@@ -1167,7 +1167,7 @@ div#search-button {
     overflow: auto;
     border-top: 30px solid #da3a10;
     border-bottom: 30px solid #da3a10;
-    border-right: 27px solid #da3a10;
+    border-right: 30px solid #da3a10;
     border-left: 30px solid #da3a10;
 }
 
