@@ -74,6 +74,9 @@ COMMIT;
 <!-- End 9 Feb 2018 G Konstantinidis -->
 
 
+<!-- Start 9 Feb 2018 Harpreet -->
+<!---------------------->
+
 ALTER TABLE `customers_contact_details` CHANGE `phone` `phone` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL;
 
 ALTER TABLE `customers_contact_details` CHANGE `country_id` `country_id` INT(11) NOT NULL DEFAULT '0';
@@ -85,3 +88,6 @@ ALTER TABLE `customers_account_info` CHANGE `password` `password` VARCHAR(300) C
 ALTER TABLE `customers_account_info` CHANGE `created` `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
 
 ALTER TABLE `customers_account_info` CHANGE `status` `status` INT(11) NOT NULL DEFAULT '0' COMMENT '1:Pending, 2:Active, 3: Verified_Subscriber, 4: Deactivate';
+
+<!-- End 9 Feb 2018 Harpreet -->
+<!---------------------->
