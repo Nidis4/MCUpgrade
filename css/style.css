@@ -850,3 +850,69 @@ p.testimonial-name, p.testimonial-prop {
 .call-us-outer{
   background:#fff;
 }
+
+
+.cleaning-first-half{
+  position: relative;
+}
+
+.cleaning-hover {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    right: 0;
+    background: rgba(0,0,0,0.6);
+    width: 100%;
+    padding: 60px;
+    opacity: 1;
+}
+
+.cleaning-hover-inner{
+  color:#fff;
+  height: 100%;
+  
+}
+
+.cleaning-hover{
+  opacity: 0;
+  -moz-transition: all 0.4s ease-in-out 0s;
+  -webkit-transition: all 0.4s ease-in-out 0s;
+  -ms-transition: all 0.4s ease-in-out 0s;
+  transition: all 0.4s ease-in-out 0s;
+  text-align: left;
+
+}
+
+
+.cleaning-second-half:hover > .cleaning-first-half.cleaning-hover:before, .cleaning-first-half:hover .cleaning-hover{
+  opacity: 1;
+  -moz-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0);
+}
+
+.cleaning-hover-inner p,.cleaning-hover-inner ul li {
+  font-size:18px;
+  font-family: dinbd;
+}
+
+.cleaning-hover-inner ul{
+  padding-left:20px;
+}
+
+h4.cleaning-hover-title {
+    font-size: 26px;
+    font-family: dinbd;
+    margin-bottom: 0px;
+}
+
+.cleaning-hover-inner img {
+    width: 100%;
+}
+
+.cleaning-hover-sep {
+    margin-bottom: 10px;
+}
+
+

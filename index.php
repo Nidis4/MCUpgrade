@@ -107,7 +107,24 @@
 			<div class="col-md-6">
 				<div class="cleaning-outer">
 					<div class="cleaning-first-half">
-						
+						<div class="cleaning-hover">
+							<div class="cleaning-hover-inner">
+								<h4 class="cleaning-hover-title">Εργασίες Καθαρισμού</h4>
+									<div class="cleaning-hover-sep">
+										<img src="img/home-page/hover-sep.png">
+									</div>
+								<ul>
+									<li>Καρθσμός Γραφίων</li>
+									<li>Καθραρισμός Σπιτιού</li>
+									<li>Καθαρισμός Καναπέ</li>
+									<li>Καθαρισμός Σρωμάτων</li>
+									<li>Καθραριμός Χαλιών</li>
+									<li>Βιολογικός Καθαρισμός Σπιτου</li>
+									<li>Βιολογικός Καθαρισμός Αυτοκινήτου</li>
+								</ul>
+								
+							</div>
+						</div>
 					</div>
 					<div class="cleaning-second-half">
 						<div class="box-img">
@@ -521,11 +538,11 @@
 							  <!-- Trigger the modal with a button 
 							  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
 
-							  <!-- Modal -->
+							  <!-- Modal
 							  <div class="modal fade" id="sub-modal" role="dialog">
 							    <div class="modal-dialog">
 							      
-							      <!-- Modal content-->
+							     
 							      <div class="modal-content sub-modal-body">
 							      	<div class="modal-header">
 							      		<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -541,7 +558,7 @@
 							      </div>
 							      
 							    </div>
-							  </div>
+							  </div> -->
 
 					</div>
 				</div>
