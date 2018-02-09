@@ -4,6 +4,7 @@ class Application{
     // database connection and table name
     private $conn;
     private $table_name = "applications";
+    private $table_search = "applications_search";
  
     // object properties
     public $id;
@@ -66,6 +67,27 @@ class Application{
         return $stmt;
 
     } // Read One
+
+    function search($term){
+        $query = "SELECT s.`application_id`, a.`title_greek` 
+                FROM
+                    `applications_search` s, `applications` a
+                WHERE
+                    (s.`tags` LIKE '%$term%' OR a.`title_greek` LIKE '%$term%')
+
+                AND
+                    s.`application_id` = a.`id`
+                ORDER BY
+                    a.`title_greek` ASC";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+
+        // execute query
+        $stmt->execute();
+
+        return $stmt;
+    }
 
 }
 ?>
