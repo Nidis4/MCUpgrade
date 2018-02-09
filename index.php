@@ -94,12 +94,10 @@
 								    <div id="mk-fullscreen-search-wrapper">
 								      <form method="get" id="mk-fullscreen-searchform" action="">
 								        <input id="mk-fullscreen-search-input"  type="text" name="inputsearch" value="" placeholder="Γράψε την εργασία που χρειάζεσαι..." onClick="search()" />
-								        <i class="fa fa-search fullscreen-search-icon"><input value="" type="submit"></i>
+								        <i class="fa fa-search fullscreen-search-icon"></i>
 								      </form>
 								    </div>
-								    <div id="search-results" style="min-height: 200px">
-
-								    </div>
+								    <div id="search-results" style="min-height: 200px"><a class="avail-professional" href="application.php?id=39">Εγκατάσταση Μονοφασικού Πίνακα</a><a class="avail-professional" href="application.php?id=132">Εγκατάσταση Ρελέ Διαφυγής σε μονοφασικό πίνακα</a><a class="avail-professional" href="application.php?id=43">Επίσκεψη για Μικροβλάβη</a><a class="avail-professional" href="application.php?id=42">Πιστοποιητικό Ηλεκτρολόγου για χώρο μέχρι 100τμ</a><a class="avail-professional" href="application.php?id=83">Πιστοποιητικό Ηλεκτρολόγου για χώρο μέχρι 150τ</a><a class="avail-professional" href="application.php?id=85">Πιστοποιητικό Ηλεκτρολόγου για χώρο μέχρι 30τμ</a><a class="avail-professional" href="application.php?id=40">Σύνδεση Ηλεκτρικής Κουζίνας</a></div>
 								  </div>
 							</div>
 						</div>

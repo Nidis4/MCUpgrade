@@ -22,12 +22,12 @@ function search1(){
 jQuery(document).ready(function($) {
   var wHeight = window.innerHeight;
   //search bar middle alignment
- $('#mk-fullscreen-searchform').css('top', wHeight / 2);
+ /*$('#mk-fullscreen-searchform').css('top', wHeight / 4);
   //reform search bars
   jQuery(window).resize(function() {
     wHeight = window.innerHeight;
-    $('#mk-fullscreen-searchform').css('top', wHeight / 2);
-  });
+    $('#mk-fullscreen-searchform').css('top', wHeight / 4);
+  });*/
   // Search
   $('#search-button').click(function() {
     console.log("Open Search, Search Centered");
