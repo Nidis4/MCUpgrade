@@ -21,10 +21,7 @@
   	<link rel="stylesheet" type="text/css" href="css/style.css?version=24">
   	<link rel="stylesheet" type="text/css" href="css/sidenav.css">
 
-  	<script src='https://www.google.com/recaptcha/api.js'></script>
 
-
-  	<script type="text/javascript" src="js/home.js?version=2"></script>
 </head>
 <body>
 
@@ -783,7 +780,9 @@
 		        </div>
 		    </div>
 	</div>-->
-		
+	<script src='https://www.google.com/recaptcha/api.js'></script>
+	<script type="text/javascript" src="js/home.js?version=2"></script>
+	<script type="text/javascript" src="platform/js/core.js"></script>
 
 
 </body>

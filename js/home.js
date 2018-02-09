@@ -52,12 +52,50 @@ function search(){
 
 $('input#mk-fullscreen-search-input').keyup(function() {
   //alert('asd');
+  if( this.value.length >= 2){
+
     delay(function(){
-      alert('Time elapsed!');
-    
+      //alert('Time elapsed!');
+      
+      var term = $('input#mk-fullscreen-search-input').val();
+    var getSearchAPI = API_LOCATION+'application/search.php';
+    $("#search-results").empty();
+    //alert (term);
+    //alert (getSearchAPI);
+    $.ajax({
+            type: "POST",
+            url: getSearchAPI,
+            data: {
+                term: term
+            },
+            dataType: "json",
+            success: function(data)
+            {
+                //alert(data.length);
+                 var htmlStr = '';
+                 
+                $.each(data, function(k, v){
+                    //htmlStr += v.id + ' ' + v.name + '<br />';
+                    //alert(v.id);
+
+
+                    if (v.id!=undefined){
+                        htmlStr += "<a class='avail-professional' href='application.php?id="+v.id+"'>"+v.title_greek+"</div>";
+                    }
+                    else{
+
+                    }
+               });
+               
+               $("#search-results").append(htmlStr);
+               
+            }
+        });
 
 
     }, 500 );
+  }
+
 });
 
 }

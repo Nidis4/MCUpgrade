@@ -70,7 +70,6 @@ class Application{
 
     function search($term){
 
-        //addSearchTerm($term);
 
         $query = "SELECT s.`application_id`, a.`title_greek` 
                 FROM

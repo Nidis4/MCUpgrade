@@ -26,7 +26,6 @@ if($num>0){
  
     // products array
     $applications_arr=array();
-    $applications_arr["records"]=array();
  
     // retrieve our table contents
     // fetch() is faster than fetchAll()
@@ -42,7 +41,7 @@ if($num>0){
             "title_greek" => $title_greek,
         );
  
-        array_push($applications_arr["records"], $application_item);
+        array_push($applications_arr, $application_item);
     }
  
     echo json_encode($applications_arr);
