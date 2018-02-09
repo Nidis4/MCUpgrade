@@ -69,6 +69,9 @@ class Application{
     } // Read One
 
     function search($term){
+
+        //addSearchTerm($term);
+
         $query = "SELECT s.`application_id`, a.`title_greek` 
                 FROM
                     `applications_search` s, `applications` a
@@ -87,6 +90,19 @@ class Application{
         $stmt->execute();
 
         return $stmt;
+    }
+
+    function addSearchTerm($term){
+        $query = "INSERT INTO applications_search_terms (term, counts)
+                    VALUES ('$term',1) 
+                    ON DUPLICATE KEY
+                    UPDATE counts=counts+1;";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+
+        // execute query
+        $stmt->execute();
     }
 
 }
