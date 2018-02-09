@@ -17,6 +17,7 @@ $application = new Application($db);
 $term = isset($_POST['term']) ? $_POST['term'] : die();
  
 // query categorys
+$application->addSearchTerm($term);
 $stmt = $application->search($term);
 $num = $stmt->rowCount();
  
