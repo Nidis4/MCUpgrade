@@ -15,6 +15,7 @@ $(document).mouseup(function (e)
         && container.has(e.target).length === 0) // ... nor a descendant of the container
     {
         $("div.mk-fullscreen-search-overlay").removeClass("mk-fullscreen-search-overlay-show");
+        $("body").removeClass("scroll-body");
     }
 });
 
@@ -32,10 +33,12 @@ jQuery(document).ready(function($) {
   $('#search-button').click(function() {
     console.log("Open Search, Search Centered");
     $("div.mk-fullscreen-search-overlay").addClass("mk-fullscreen-search-overlay-show");
+    $("body").addClass("scroll-body");
   });
   $("a.mk-fullscreen-close").click(function() {
     console.log("Closed Search");
     $("div.mk-fullscreen-search-overlay").removeClass("mk-fullscreen-search-overlay-show");
+    $("body").removeClass("scroll-body");
   });
 });
 
@@ -80,7 +83,7 @@ $('input#mk-fullscreen-search-input').keyup(function() {
 
 
                     if (v.id!=undefined){
-                        htmlStr += "<a class='avail-professional' href='application.php?id="+v.id+"'>"+v.title_greek+"</div>";
+                        htmlStr += "<a class='avail-professional' href='application.php?id="+v.id+"'><img src='../img/home-page/hat-icon.png'/> "+v.title_greek+" <i class='fa fa-chevron-right'></i></div>";
                     }
                     else{
 

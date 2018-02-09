@@ -1167,7 +1167,7 @@ div#search-button {
     overflow: auto;
     border-top: 30px solid #da3a10;
     border-bottom: 30px solid #da3a10;
-    border-right: 45px solid #da3a10;
+    border-right: 27px solid #da3a10;
     border-left: 30px solid #da3a10;
 }
 
@@ -1216,3 +1216,13 @@ a.avail-professional {
 a.avail-professional:hover {
     background: rgba(255,255,255,0.2);
 }
+
+.scroll-body{
+  overflow-y: hidden;
+}
+
+#search-results i.fa.fa-chevron-right {
+    float: right;
+    font-size: 33px;
+}
+
