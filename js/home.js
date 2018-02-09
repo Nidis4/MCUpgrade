@@ -7,7 +7,7 @@ $(document).ready(function(){
 });
 
 
-function search(){
+function search1(){
 	 
 		$('input#inputsearch').keyup(function() {
 				if( this.value.length >= 3){
@@ -23,7 +23,7 @@ jQuery(document).ready(function($) {
   var wHeight = window.innerHeight;
   //search bar middle alignment
  $('#mk-fullscreen-searchform').css('top', wHeight / 2);
-  //reform search bar
+  //reform search bars
   jQuery(window).resize(function() {
     wHeight = window.innerHeight;
     $('#mk-fullscreen-searchform').css('top', wHeight / 2);
@@ -38,3 +38,26 @@ jQuery(document).ready(function($) {
     $("div.mk-fullscreen-search-overlay").removeClass("mk-fullscreen-search-overlay-show");
   });
 });
+
+
+
+var delay = (function(){
+  var timer = 0;
+  return function(callback, ms){
+    clearTimeout (timer);
+    timer = setTimeout(callback, ms);
+  };
+})();
+function search(){
+
+$('input#mk-fullscreen-search-input').keyup(function() {
+  //alert('asd');
+    delay(function(){
+      alert('Time elapsed!');
+    
+
+
+    }, 500 );
+});
+
+}
