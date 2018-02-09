@@ -354,18 +354,11 @@ $( ".createAppointment" ).click(function() {
         alert('Please fill in the Mobile');
     }
     else{
-        alert("Add or Update client");
-
-        var customer_id = "999999";
-        var date = "2018-05-05";
-        var time ="10:00-12:00";
-        var time ="10:00-12:00";
-
-        var createAppointAPI = API_LOCATION+'appointment/create.php';
-        //create($prod_id, $cust_id, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment);
+        // Find/Insert Customer data
+        var findCustomerAPI = API_LOCATION+'customer/search_by_mobile.php?mobile='+mobile;
         $.ajax({
             type: "POST",
-            url: createAppointAPI,
+            url: findCustomerAPI,
             data: {
                 surname: surname,
                 firstname: firstname,
@@ -373,30 +366,58 @@ $( ".createAppointment" ).click(function() {
                 mobile: mobile,
                 sex: sex,
                 phone: phone,
-                email: email,
-                prof_id : professional,
-                cust_id : customer_id,
-                application_id: application,
-                category_id: category,
-                date: date,
-                time: time,
-                address: address,
-                budget: budget,
-                commision: commision,
-                agent_id: agent,
-                comment: comments,
-                professionalsms: professionalsms,
-                employersms: employersms
+                email: email
             },
             dataType: "json",
             success: function(data)
             {
-                //alert(data);
+                var customer_id = data;
+                var date = "2018-05-05";
+                var time ="10:00-12:00";
+                var time ="10:00-12:00";
 
-                alert("Appointment Booked");
-                window.location.replace('../platform/appointments.php');
+                var createAppointAPI = API_LOCATION+'appointment/create.php';
+                //create($prod_id, $cust_id, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment);
+                $.ajax({
+                    type: "POST",
+                    url: createAppointAPI,
+                    data: {
+                        surname: surname,
+                        firstname: firstname,
+                        address: address,
+                        mobile: mobile,
+                        sex: sex,
+                        phone: phone,
+                        email: email,
+                        prof_id : professional,
+                        cust_id : customer_id,
+                        application_id: application,
+                        category_id: category,
+                        date: date,
+                        time: time,
+                        address: address,
+                        budget: budget,
+                        commision: commision,
+                        agent_id: agent,
+                        comment: comments,
+                        professionalsms: professionalsms,
+                        employersms: employersms
+                    },
+                    dataType: "json",
+                    success: function(data)
+                    {
+                        //alert(data);
+
+                        alert("Appointment Booked");
+                        window.location.replace('../platform/appointments.php');
+                    }
+                });
+
             }
         });
+        return false;
+
+        
 
 
         

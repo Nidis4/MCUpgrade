@@ -56,6 +56,33 @@ class Customer{
     }
 
     // search products
+    public function searchByMobile($mobile){
+ 
+    // select all query
+    $query = "SELECT
+                    cc.customer_id
+            FROM
+                " . $this->contact_table_name . " cc
+            WHERE
+                 cc.mobile = ?";
+ 
+    // prepare query statement
+    $stmt = $this->conn->prepare($query);
+ 
+    // sanitize
+    $mobile=htmlspecialchars(strip_tags($mobile));
+    
+ 
+    // bind
+    $stmt->bindParam(1, $mobile);
+ 
+    // execute query
+    $stmt->execute();
+ 
+    return $stmt;
+    }
+
+    // search products
     public function searchList($name, $surname, $mobile, $email){
  
     // select all query
@@ -240,21 +267,31 @@ class Customer{
         
         $query .=" WHERE id = :id";*/
 
+        if(@$id){
+            $id = $id;
+        }else{
+            $id = NULL;
+        }
+
 
         $query = "INSERT INTO ". $this->table_name ." (`id`, `first_name`, `last_name`, `sex`) VALUES (:id, :first_name, :last_name, :sex) ON DUPLICATE KEY UPDATE `first_name`=:first_name, `last_name`=:last_name, `sex`=:sex";
 
         $stmt = $this->conn->prepare( $query );
        
         // bind id of product to be updated
-        $stmt->bindParam(':id',  $id, PDO::PARAM_INT);
+        $stmt->bindParam(':id',  $id);
         $stmt->bindParam(':first_name',  $first_name);
         $stmt->bindParam(':last_name',  $last_name);
         $stmt->bindParam(':sex',  $sex);
         
-        if ($stmt->execute()) { 
+        if ($as = $stmt->execute()) {
+           if(empty($id)){ 
+                //$stmt->commit();
+                $id = $this->conn->lastInsertId();
+           }
            $this->update_contact($id, $address, $mobile, $phone); 
            $this->update_account($id, $email ); 
-           return 1;
+           return $id;
         } else {
            return 0;
         }
@@ -271,7 +308,6 @@ class Customer{
 
         $stmt = $this->conn->prepare( $query );
 
-       
         // bind id of product to be updated
         $stmt->bindParam(':id',  $id, PDO::PARAM_INT);
         $stmt->bindParam(':mobile',  $mobile);

@@ -203,7 +203,7 @@ include('config/core.php');
 										</div>
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Send SMS to Professional</label>
-											<div class="col-sm-2">												
+											<div class="col-sm-1">												
 												<input type="checkbox" class="form-control" id="professionalsms" name="professionalsms">
 											</div>
 										</div>
@@ -255,8 +255,8 @@ include('config/core.php');
 												<label class="col-lg-3 control-label text-lg-right pt-2">Sex</label>
 												<div class="col-lg-6">
 													<select data-plugin-selectTwo class="form-control populate" id="sex">
-															<option value="MR">MR</option>
-															<option value="MRS">MRS</option>
+															<option value="Κύριε">MR</option>
+															<option value="Κυρία">MRS</option>
 													</select>
 												</div>
 										</div>
@@ -295,7 +295,7 @@ include('config/core.php');
 										
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">SMS to Employer</label>
-											<div class="col-sm-2">												
+											<div class="col-sm-1">												
 												<input type="checkbox" class="form-control" name="employersms" id="employersms" checked="checked">
 											</div>
 										</div>
