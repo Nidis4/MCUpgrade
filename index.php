@@ -97,7 +97,7 @@
 								        <i class="fa fa-search fullscreen-search-icon"></i>
 								      </form>
 								    </div>
-								    <div id="search-results" style="min-height: 200px"><a class="avail-professional" href="application.php?id=39">Εγκατάσταση Μονοφασικού Πίνακα</a><a class="avail-professional" href="application.php?id=132">Εγκατάσταση Ρελέ Διαφυγής σε μονοφασικό πίνακα</a><a class="avail-professional" href="application.php?id=43">Επίσκεψη για Μικροβλάβη</a><a class="avail-professional" href="application.php?id=42">Πιστοποιητικό Ηλεκτρολόγου για χώρο μέχρι 100τμ</a><a class="avail-professional" href="application.php?id=83">Πιστοποιητικό Ηλεκτρολόγου για χώρο μέχρι 150τ</a><a class="avail-professional" href="application.php?id=85">Πιστοποιητικό Ηλεκτρολόγου για χώρο μέχρι 30τμ</a><a class="avail-professional" href="application.php?id=40">Σύνδεση Ηλεκτρικής Κουζίνας</a></div>
+								    <div id="search-results"></div>
 								  </div>
 							</div>
 						</div>
