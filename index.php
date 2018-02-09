@@ -24,12 +24,15 @@
   	<script src='https://www.google.com/recaptcha/api.js'></script>
 
 
-
-  	<script src="js/home.js"></script>
+  	<script type="text/javascript" src="js/home.js?version=2"></script>
 </head>
 <body>
 
-	<div class="container container-home-slider">
+	<div class="container container-home-slider overlay">
+
+
+
+
 				<nav id="myTopnav" class="navbar navbar-default">
 					
 						  <div class="container-fluid">
@@ -85,10 +88,23 @@
 						<p>Βρες Αξιολογημένους & Οικονομικούς επαγγελματίες για όλες τις εργασίες που αφορούν το σπίτι και την οικοδομή!</p>
 
 						<div class="searcharea">
-							
-							<input id="inputsearch" type="text" name="" placeholder="Γράψε την εργασία που χρειάζεσαι.." onclick="search()">
+							<div class="search-outer">
+								<a class="mk-search-trigger mk-fullscreen-trigger" href="#"  id="search-button-listener">
+								    <div id="search-button"><span class="search-text">Βρες την υπηρεσία που χρειάζεσαι... </span><div class="icon-search"><i class="fa fa-search"></i></div></div>
+								  </a>
+								  <div class="mk-fullscreen-search-overlay" id="mk-search-overlay">
+								    <a href="#" class="mk-fullscreen-close" id="mk-fullscreen-close-button"><i class="fa fa-times"></i></a>
+								    <div id="mk-fullscreen-search-wrapper">
+								      <form method="get" id="mk-fullscreen-searchform" action="">
+								        <input id="mk-fullscreen-search-input"  type="text" name="inputsearch" value="" placeholder="Γράψε την εργασία που χρειάζεσαι..." />
+								        <i class="fa fa-search fullscreen-search-icon"><input value="" type="submit"></i>
+								      </form>
+								    </div>
+								  </div>
+							</div>
 						</div>
 
+					
 					</div>
 					
 				</div>
