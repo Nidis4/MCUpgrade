@@ -74,8 +74,7 @@ include('config/core.php');
 								</li>
 								<li><span>Tables</span></li>
 								<li><span>Editable</span></li>
-							</ol>
-					
+							</ol>					
 							<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
 						</div>
 					</header>
@@ -133,7 +132,7 @@ include('config/core.php');
 													  <td>'.$commission.'</td>
 													  <td class="actions">
 														<a href="#" class="on-editing copy-row"><i class="fa fa-copy"></i></a>
-														<a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
+														<a href="appointment.php?id='.$id.'" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
 														<a href="#" class="hidden on-default remove-row"><i class="fa fa-trash-o"></i></a>
 														<a href="#" class="on-editing cancel-row"><i class="fa fa-times"></i></a>
 													  </td>

@@ -46,7 +46,8 @@ $stmt = $appointment->readOne();
             "datetimeStatusUpdated" => $appointment->datetimeStatusUpdated,
             "sourceAppointmentId" => $appointment->sourceAppointmentId,
             "status" => $appointment->status,
-            "cancelComment" => $appointment->cancelComment
+            "cancelComment" => $appointment->cancelComment,
+            "category_id" => $appointment->category_id
         );
      
  

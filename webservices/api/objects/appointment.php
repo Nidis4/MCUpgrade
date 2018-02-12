@@ -4,6 +4,7 @@ class Appointment{
     // database connection and table name
     private $conn;
     private $table_name = "appointments";
+    private $application_table_name = "applications";
  
     // object properties
     public $id;
@@ -50,11 +51,13 @@ class Appointment{
      
         // query to read single record
         $query = "SELECT
-                    `id`, `prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`
+                    a.`id`, a.`prof_member_id`, a.`cust_member_id`, a.`application_id`, a.`date`, a.`time`, a.`address`, a.`budget`, a.`commision`, a.`agent_id`, a.`comment`, a.`sms`, a.`sms_log_id`, a.`googleEventId`, a.`datetimeCreated`, a.`datetimeStatusUpdated`, a.`sourceAppointmentId`, a.`status`, a.`cancelComment`, ap.`category_id`
                 FROM
-                    " . $this->table_name . "
+                    " . $this->table_name . " a
+                LEFT JOIN ". $this->application_table_name." ap
+                    ON a.application_id = ap.id
                 WHERE
-                    id = :id
+                    a.id = :id
                 LIMIT
                     0,1";
      
@@ -96,6 +99,7 @@ class Appointment{
         $this->sourceAppointmentId = $row['sourceAppointmentId'];
         $this->status = $row['status'];
         $this->cancelComment = $row['cancelComment'];
+        $this->category_id = $row['category_id'];
 
     } // Read One
 
