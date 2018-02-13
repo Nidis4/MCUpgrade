@@ -18,7 +18,9 @@ $professional->application_id = isset($_GET['application_id']) ? $_GET['applicat
 $startDate = isset($_GET['startDate']) ? $_GET['startDate'] : die();
 $endDate = isset($_GET['endDate']) ? $_GET['endDate'] : die();
 $addressAppoint = isset($_GET['address']) ? $_GET['address'] : die();
+$duration = isset($_GET['address']) ? $_GET['address'] : die();
 $addressAppointEn = urlencode($addressAppoint);
+ 
 
 // query categorys
 $stmt = $professional->available();
@@ -29,15 +31,9 @@ $urls = array();
 // check if more than 0 record found
 if($num>0){
  
-    // products array
+    // professional array
     $professionals_arr=array();
-
-    //$busy_arr = array();
-    //$applications_arr["records"]=array();
- 
     
-    
-
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
         extract($row);
@@ -46,19 +42,19 @@ if($num>0){
         $time = "";
         $response = "";
         $response_a = "";
+
         if ($address != ""){
             $addressEn = urlencode($address);
-
             $url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=".$addressEn."&destinations=".$addressAppointEn."&key=AIzaSyA1FK-ipf2Xe0W74fo7nnyufuA0Yh1JMFE";
-
             array_push($urls, $url);
-
         }
         else{
             $dist="Unknown";
         }
-
+        $opening = "09:00";
+        $closing = "20:00";
         $busy_arr = getBusySlots($startDate, $endDate, $id,$professional);
+        $calendar = getCalendarDetails($startDate, $endDate, $opening, $closing, $busy_arr);
         
         $professional_item=array(
             "id" => $id,
@@ -67,7 +63,8 @@ if($num>0){
             "address" => $address,
             "Appointment" => $addressAppoint,
             "distance" => $dist,
-            "busy" => $busy_arr
+            "busy" => $busy_arr,
+            "calendar" => $calendar
         );
  
         array_push($professionals_arr, $professional_item);
@@ -176,5 +173,97 @@ function getBusySlots($startDate, $endDate, $id, $professional){
     
     return $busy_arr;
     //return json_encode($busy_arr);
+}
+
+function getCalendarDetails($startDate, $endDate, $opening, $closing, $busy_arr){
+    $days = dateDiff($startDate, $endDate) + 1;
+    $calendar_arr = array();
+    $busySlots = count($busy_arr);
+    $inBusy = 0;
+    $address = "";
+    if ($busySlots > 0){
+        $x = 0;
+    }
+    else{ 
+        $x = -1;
+    }
+
+    for ( $i = 0;  $i < $days; $i++){
+        $time = $opening;
+        if ($i==0){
+            $date = $startDate;
+        }
+        else if ($i==1){
+            $date = date("Y-m-d", strtotime('+1 day',strtotime($startDate)));
+        }
+        else if ($i==2){
+            $date = date("Y-m-d", strtotime('+2 days',strtotime($startDate)));
+        }
+        else if ($i==3){
+            $date = date("Y-m-d", strtotime('+3 days',strtotime($startDate)));
+        }
+
+        while ($closing != $time){
+
+            //echo $x;
+                $address = "";
+                $distance = "";
+                if ($x >=0 && $x < $busySlots){
+                    $busyDate = $busy_arr[$x]['date'];
+                    $busyTimeSlot = $busy_arr[$x]['timeslot'];
+                    $arr = explode("-", $busyTimeSlot, 2);
+                    $startBusy = $arr[0];
+                    $endBusy = $arr[1];
+                    //$address = $busyDate." ".$startBusy." ".$endBusy;
+                }
+
+                $timefrom = $time;
+                $timeto = date("H:i", strtotime('+30 minutes',strtotime($time)));
+
+
+                if ($x >=0 && $x < $busySlots){
+                    $busyDate = $busy_arr[$x]['date'];
+                    $busyTimeSlot = $busy_arr[$x]['timeslot'];
+                    $arr = explode("-", $busyTimeSlot, 2);
+                    $startBusy = $arr[0];
+                    $endBusy = $arr[1];
+                    //$address = $busyDate." ".$startBusy." ".$endBusy;
+
+                    if ($timefrom == $startBusy){
+                        $inBusy = 1;
+                        $address = $busyTimeSlot = $busy_arr[$x]['address'];
+                    }
+                    if ($timeto == $endBusy){
+                        $inBusy = 0;
+                        $address = $busyTimeSlot = $busy_arr[$x]['address'];
+                        $x++;
+                    }
+                    if ($inBusy == 1){
+                        $address = $busyTimeSlot = $busy_arr[$x]['address'];
+                    }
+                }
+
+            $calendar_item = array(
+                "date" => $date,
+                "timefrom" => $timefrom,
+                "timeto" => $timeto,
+                "address" => $address,
+                "distance" => ""
+            );
+            $time = $timeto;
+            array_push($calendar_arr, $calendar_item);
+        }
+
+    }
+
+     return $calendar_arr;
+
+}
+
+function dateDiff($start, $end) {
+    $start_ts = strtotime($start);
+    $end_ts = strtotime($end);
+    $diff = $end_ts - $start_ts;
+    return round($diff / 86400);
 }
 ?>
