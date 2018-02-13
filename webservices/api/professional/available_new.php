@@ -55,11 +55,13 @@ if($num>0){
         $closing = "20:00";
         $busy_arr = getBusySlots($startDate, $endDate, $id,$professional);
         $calendar = getCalendarDetails($startDate, $endDate, $opening, $closing, $busy_arr);
-        
+        $days = dateDiff($startDate, $endDate) + 1;
+
         $professional_item=array(
             "id" => $id,
             "first_name" => $first_name,
             "last_name" => $last_name,
+            "daysSearch" => $days,
             "address" => $address,
             "Appointment" => $addressAppoint,
             "distance" => $dist,

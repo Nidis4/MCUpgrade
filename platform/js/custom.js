@@ -148,7 +148,8 @@ function selectCustomer(id,first_name,last_name,address, mobile, phone,email){
     //alert(id);
     $("#surname").val(last_name);
     $("#firstname").val(first_name);
-    $("#address").val(address);
+    //alert(address);
+    $("#pac-input-address").val(address);
     $("#mobile").val(mobile);
     $("#phone").val(phone);
     $("#email").val(email);
@@ -299,10 +300,12 @@ Date.prototype.toInputFormat = function() {
 
 $(document).on('click','#available .profile',function() {
     $('.profile').removeClass('selectedProf');
+    $('.calendar').css('display','none');
     var prof_id = this.id;
     $( "#"+prof_id ).addClass('selectedProf');
-
+    $('.calendar'+prof_id).css('display','block');
 });
+
 $( ".createAppointment" ).click(function() {
     //alert("Create");
     var professional = $('.selectedProf').attr('id');
@@ -453,7 +456,7 @@ $( ".findProfessionals" ).click(function() {
         //alert("Start: "+startDate);
         //alert("End: "+endDate);
         //alert("Address: "+address);
-        var getAvailableAPI = API_LOCATION+'professional/available.php?county_id='+county+'&application_id='+application+'&startDate='+startDate+'&endDate='+endDate+'&address='+address;
+        var getAvailableAPI = API_LOCATION+'professional/available_new.php?duration='+duration+'&county_id='+county+'&application_id='+application+'&startDate='+startDate+'&endDate='+endDate+'&address='+address;
 
         $.ajax({
             type: "POST",
@@ -469,11 +472,59 @@ $( ".findProfessionals" ).click(function() {
                  var firstProf = "";
                  var secondProf = "";
                  var thirdProf = "";
+
+
+
                 $.each(data, function(k, v){
 
+                    var profDistance = v.distance;
+                    var profID = v.id;
+                    var profName = v.first_name+" "+v.last_name;
+
+                    var dateAvail = startDate;
+                    var timeAvail = "09:00";
 
 
-                    if (v.distance < third){
+                    if (v.busy!=undefined){
+                        $.each(v.busy, function(z, x){
+
+                            if (x.distance < profDistance){
+                                profDistance = x.distance;
+                                dateAvail = x.date;
+                                timeAvail = x.timeslot;
+                            }
+                        });
+                    } // Busy Slots
+                    
+                    var calendarCode = "";
+                    //alert(v.calendar);
+                    if (v.calendar!=undefined){
+                        calendarCode += "<div class='row'>";
+                        
+                        $.each(v.calendar, function(z, x){
+                            if (x.timefrom=="09:00"){
+                                calendarCode += "<div class='col-md-4'>";
+                            }
+                         
+
+                            if (x.address == ""){
+                                calendarCode += "<li class='free' timefrom='"+x.timefrom+"' timeto='"+x.timeto+"'>"+x.timefrom+":</li>";
+                            }
+                            else{
+                                calendarCode += "<li class='busy' timefrom='"+x.timefrom+"' timeto='"+x.timeto+"'>"+x.timefrom+": "+x.address+" "+x.distance+"</li>";
+                            }
+
+                            if(x.timeto == "20:00"){
+                                calendarCode += "</div>";
+                            }
+
+                        });
+                        calendarCode += "</div>";
+                    } // Calendar Slots
+
+                    htmlStr += "<div class='profile col-md-12' id='"+profID+"'><div class='name'>"+profName+"</div><div class='appointDate'>"+dateAvail+" "+timeAvail+"</div><div class='distance'>"+profDistance+"</div> SELECT</div><div class='col-md-12 calendar calendar"+profID+"'>"+calendarCode+"</div>";
+
+                  /*  if (v.distance < third){
                         if (v.distance < second){
                             if (v.distance < first){
                                 third = second;
@@ -497,10 +548,11 @@ $( ".findProfessionals" ).click(function() {
 
                             thirdProf = "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='appointDate'>"+startDate+" 09:00</div><div class='distance'>"+v.distance+"</div> SELECT</div>";
                         }
-                    }
+                    } */
 
                             //alert(v.first_name+" "+v.last_name+": "+v.distance);
-                            htmlStr += "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='distance'>"+v.distance+"</div>";
+                       
+                       /*    htmlStr += "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='distance'>"+v.distance+"</div>";
                              if (v.busy!=undefined){
                                 htmlStr += "<div class='busy'>";
                                  $.each(v.busy, function(z, x){
@@ -533,13 +585,15 @@ $( ".findProfessionals" ).click(function() {
                                     }
                                  });
                                  htmlStr += "</div>";
-                             }
-                             htmlStr += "</div>";
+                             } // Busy Slots
+
+                             htmlStr += "</div>"; */
                        });
                 //$("#available").append(htmlStr);
                 $("#available").append(firstProf);
                 $("#available").append(secondProf);
                 $("#available").append(thirdProf);
+                $("#available").append(htmlStr);
                 $(".available").show();
                 
                 //alert("First Choice "+first);

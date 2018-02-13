@@ -39,3 +39,17 @@ tr.status-0, .table-striped tbody tr:nth-of-type(odd).status-0 {
     padding: 10px;
     cursor: pointer;
 }
+.calendar li {
+    display: block;
+    height: 23px;
+    border: 1px solid #eee;
+}
+.calendar li.busy {
+    width: 100%;
+    float: none;
+    background: #d2322d;
+    color:white;
+}
+#available .calendar {
+    display: none;
+}
