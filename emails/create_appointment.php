@@ -1,7 +1,7 @@
 <?php include('header.php');?>
 	<tr>
 		<td class="action-content head-content" style="width:100%; display:table;" colspan="2"> 
-			<img class="fullimg" src="mid.jpg" style="width: 100%" />	
+			<img class="fullimg" src="{{URL}}mid.jpg" style="width: 100%" />	
 		</td>
 	</tr>
 	<tr><td colspan="2">&nbsp;</td></tr>
@@ -42,7 +42,7 @@
 		<td><div class="width50" style="width: 50%; float: left; margin-bottom: 15px; padding-left: 20px;"><strong>Σχόλια - Παρατηρήσεις:</strong></div><div class="width50" style="width: 40%; float: left;margin-bottom: 15px; ">Comments comments comments and comments</div></td>
 	</tr>
 	<tr><td colspan="2">&nbsp;</td></tr>
-	<tr style="background-image: url('midbg.jpg');">
+	<tr style="background-image: url('{{URL}}midbg.jpg');">
 		<td style="color: #2b347f; text-align: center; font-size: 20px; ">
 			<div style="padding: 10px; margin-bottom: 10px;">Μην ξεχάσετε να ζητήσετε την εκπτωτική κάρτα <br> MyConstructor από τον επαγγελματία!</div>
 			<div style="padding: 10px; margin-bottom: 10px; color: #f2930a;">Μπήκες... και Βρήκες τον Μάστορα σου!</div>

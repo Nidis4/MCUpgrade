@@ -139,16 +139,15 @@
 	  }
     </style>
 </head>
-
 <body style="padding:15px; margin:0 auto; max-width: 640px; font-family:Arial, Helvetica, sans-serif;">    
 		<table class="table-bordered top1" style="width:100%;">
 			<tr>
 				<td class="logotd" style="width:100%; display:table;">
 					<div style="float: left;">
-						<img src="emaillogo.png"/>
+						<img src="{{URL}}emaillogo.png"/>
 					</div>
 					<div class="tright" style="float: right; padding-top: 5px;">
-					    <img src="contacttop.png"/>
+					    <img src="{{URL}}contacttop.png"/>
 					</div>
 				</td>				
 			</tr>
