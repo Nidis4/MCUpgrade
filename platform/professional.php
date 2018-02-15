@@ -22,30 +22,23 @@ include('config/core.php');
 		<!-- Vendor CSS -->
 		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css" />
 		<link rel="stylesheet" href="vendor/animate/animate.css">
-
 		<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.css" />
 		<link rel="stylesheet" href="vendor/magnific-popup/magnific-popup.css" />
 		<link rel="stylesheet" href="vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
-
 		<!-- Specific Page Vendor CSS -->
 		<link rel="stylesheet" href="vendor/select2/css/select2.css" />
 		<link rel="stylesheet" href="vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
 		<link rel="stylesheet" href="vendor/datatables/media/css/dataTables.bootstrap4.css" />
-
 		<link rel="stylesheet" href="vendor/bootstrap-fileupload/bootstrap-fileupload.min.css" />
 		<!-- Theme CSS -->
 		<link rel="stylesheet" href="css/theme.css" />
-
 		<!-- Skin CSS -->
 		<link rel="stylesheet" href="css/skins/default.css" />
-
 		<!-- Theme Custom CSS -->
 		<link rel="stylesheet" href="css/custom.css">
-
 		<!-- Head Libs -->
 		<script src="vendor/modernizr/modernizr.js"></script>
-		
-		
+		<script src="vendor/jquery/jquery.js"></script>
 	</head>
 	<body>
 		<section class="body">
@@ -67,7 +60,9 @@ include('config/core.php');
 				$professional = json_decode($professional, true); // decode the JSON into an associative array	
 
 				$applications = file_get_contents($api_url.'webservices/api/professional/getApplications.php?id='.$id);
-				$applications = json_decode($applications, true);		
+				$applications = json_decode($applications, true);	
+				
+
 			?>
 
 			<div class="inner-wrapper">
@@ -107,7 +102,7 @@ include('config/core.php');
 								<h2 class="card-title">Professional Information #<?php echo $professional['id']; ?></h2>
 							</header>
 							<form action="#" method="POST" id="updateProfessionalform">
-								<div class="card-body col-sm-12 col-md-12 row">
+								<div class="card-body col-sm-12 col-md-12 row" style="margin: 0">
 								
 									<div class="col-sm-12 col-md-5"><!-- Left-->
 										<div class="form-group row">
@@ -168,8 +163,12 @@ include('config/core.php');
 											<label class="col-sm-4 control-label text-sm-right pt-2">Applications <span class="required">*</span></label>
 											<div class="col-sm-8">
 												<?php
-													foreach ($applications as $application) {
-														echo $application['category'].": ".$application['application']."<br>";
+													if(@$applications['message']){
+													}else if(@$applications){
+
+														foreach ($applications as $application) {
+															echo $application['category'].": ".$application['application']."<br>";
+														}
 													}
 												?>
 											</div>										
@@ -464,9 +463,141 @@ include('config/core.php');
 							</header>
 							<div class="card-body">
 								<div class="row">
+									<div class="col-sm-12">
+									<a class="modal-with-form btn btn-primary" style="float: right;" href="#modalForm">Add Payment <i class="fa fa-plus"></i></a>
+											<!-- Modal Form -->
+											<div id="modalForm" class="modal-block modal-block-primary mfp-hide">
+												<section class="card">
+													<header class="card-header">
+														<h2 class="card-title">Add New Payment</h2>
+													</header>
+													<div class="card-body">
+														<form id="addpaymentform" method="POST">															
+															<div class="form-group">
+																<label for="inputEmail4">Category</label>
+																<select class="form-control" name="categoryId" id="categoryId">
+																	<option value="">Select Category</option>
+																	<?php 
+																		if(@$applications['message']){
+																		}else if(@$applications){
+																			$catsids = array();
+																			foreach ($applications as $application) {
+																				if(!in_array($application['category_id'], $catsids)){
+
+																	?>
+																				<option value="<?php echo $application['category_id'];?>"><?php echo $application['category'];?></option>
+																	<?php
+																				$catsids[] = $application['category_id'];	
+																				}
+																			}
+																		}
+																	?>
+																</select>
+															</div>
+															<div class="form-group">
+																<label for="inputAddress">Type</label>
+																<select class="form-control" name="paytype" id="paytype">
+																	<option value="">Select Type</option>
+																	<option value="Cash">Cash</option>
+																	<option value="Bank Transfer">Bank Transfer</option>
+																</select>
+															</div>
+															<div class="form-group" id="bankselect" style="display: none;">
+																<label for="inputAddress">Select Bank</label>
+																<select class="form-control" name="bank_name" id="bank_name">
+																	<option value="">Select Bank</option>
+																	<option value="Alpha">Alpha</option>
+																	<option value="Eurobank">Eurobank</option>
+																	<option value="Piraeus">Piraeus</option>
+																	<option value="Ethiniki">Ethiniki</option>
+																</select>
+
+															</div>
+															<div class="form-row">
+																<label for="inputCity">Amount</label>
+																<input type="number" class="form-control" value="0" name="amount" id="amount">
+															</div>
+															<div class="form-row">
+																<label for="inputCity">Comment</label>
+																<input type="text" class="form-control" name="comment" id="comment">
+															</div>
+														</form>
+													</div>
+													<footer class="card-footer">
+														<div class="row">
+															<div class="col-md-12 text-right">
+																<button class="btn btn-primary modal-confirm" id="submitpaymentadd">Submit</button>
+																<button class="btn btn-default modal-dismiss">Cancel</button>
+															</div>
+														</div>
+													</footer>
+													<script type="text/javascript">
+														$(document).ready(function(){															
+															$('#paytype').on('change',function(){
+																if($(this).val() == 'Bank Transfer'){
+																	$('#bankselect').show();
+																}
+																else{
+																	$('#bankselect').hide();
+																}
+															});
+															$("#submitpaymentadd").on('click',function(){
+																var error = 0;
+																var message = "";
+																if($("#categoryId").val() == ""){
+																	error = 1;
+																	message += "Please select category!"+'\n'; 
+																}
+
+																if($("#paytype").val() == ""){
+																	error = 1;
+																	message += "Please select type!"+'\n'; 
+																}else if(($("#paytype").val() == "Bank Transfer") && ($("#bank_name").val() == "") ){
+																	error = 1;
+																	message += "Please select Bank!"+'\n';
+																}
+
+																if(($("#amount").val() == 0) || ($("#amount").val() == "")){
+																	error = 1;
+																	message += "Please enter amount!"+'\n'; 
+																}
+
+																if(error == 1){
+																	alert(message);
+																}else{
+																	var savePaymentApi = API_LOCATION+'payment/save.php';
+																	$.ajax({
+																	            type: "POST",
+																	            url: savePaymentApi,
+																	            data: {
+																	                professional_id: "<?php echo $_REQUEST['id']?>",
+																	                agent_id: "<?php echo $_SESSION['id'];?>",
+																	                category_id: $("#categoryId").val(),
+																	                type: $("#paytype").val(),
+																	                bank_name: $("#bank_name").val(),
+																	                amount: $("#amount").val(),
+																	                comment: $("#comment").val(),
+																	            },
+																	            dataType: "json",
+																	            success: function(data)
+																	            {
+																	            	alert(data.message);
+																	            }
+																	        });
+																	location.reload();
+																}
+																return false;
+															});
+														});
+													</script>
+												</section>
+											</div>
+										</div>
 									<div class="col-sm-6">
 										<div class="mb-3">
-											<a href='#'><button id="addToTable" class="btn btn-primary">Add Payment <i class="fa fa-plus"></i></button></a>
+											
+											<!-- <a class="modal-with-form btn btn-primary" href="#modalForm">Add Payment <i class="fa fa-plus"></i></a> -->
+											
 										</div>
 									</div>
 								</div>
@@ -491,30 +622,37 @@ include('config/core.php');
 
 										$payments = file_get_contents($api_url.'webservices/api/payment/paymentByProf.php?prof_id='.$id);
 										$paymentsPag = json_decode($payments, true); // decode the JSON into an associative array
+										
+										if($paymentsPag['message'] != "No Payments found."){
+											foreach ($paymentsPag as $payment) {
 
-										foreach ($paymentsPag as $payment) {
-											$submission_date = $payment['datetime_added'];
-											$category_id = $payment['category_id'];
-											$appointment_details = $payment['appointment_details'];
-											$paymentDone = $payment['payment'];
-											$agent_id = $payment['agent_id'];
-											$date = $payment['datetime_added'];
-											$budget = $payment['budget'];
-											$commission =$payment['commision'];
-											$comment = $payment['comment'];
-											$status = $payment['status'];
-											$balance = $payment['balance'];
+												$submission_date = $payment['datetime_added'];
+												$category_id = $payment['category_id'];
+												$appointment_details = $payment['appointment_details'];
+												$paymentDone = $payment['payment'];
+												$agent_id = $payment['agent_id'];
+												$date = $payment['datetime_added'];
+												$budget = $payment['budget'];
+												$commission =$payment['commision'];
+												$comment = $payment['comment'];
+												$status = $payment['status'];
+												$balance = $payment['balance'];
 
-											echo '<tr data-item-id="" class="status-'.$status.'">
-													  <td>'.$date.'</td>
-													  <td>'.$category_id.'</td>
-													  <td>'.$appointment_details.'</td>
-													  <td>'.$comment.'</td>
-													  <td>'.$budget.'</td>
-													  <td>'.$commission.'</td>
-													  <td>'.$paymentDone.'</td>
-													  <td>'.$balance.'</td>
-												  </tr>';
+												echo '<tr data-item-id="" class="status-'.$status.'">
+														  <td>'.$date.'</td>
+														  <td>'.$category_id.'</td>
+														  <td>'.$appointment_details.'</td>
+														  <td>'.$comment.'</td>
+														  <td>'.$budget.'</td>
+														  <td>'.$commission.'</td>
+														  <td>'.$paymentDone.'</td>
+														  <td>'.$balance.'</td>
+													  </tr>';
+											}
+										}else{
+										?>
+											<tr> <td colspan="8">No data found.</td></tr>
+										<?php	
 										}
 										?>										
 									</tbody>
@@ -667,7 +805,7 @@ include('config/core.php');
 		</div>
 
 		<!-- Vendor -->
-		<script src="vendor/jquery/jquery.js"></script>
+		
 		<script src="vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
 		<script src="vendor/popper/umd/popper.min.js"></script>
 		<script src="vendor/bootstrap/js/bootstrap.js"></script>
@@ -696,12 +834,16 @@ include('config/core.php');
 
 		<!-- Examples -->
 		<script src="js/examples/examples.datatables.editable.js"></script>
+		<script src="js/examples/examples.modals.js"></script>
 
 
 
 		<!-- Page JS-->
 		<script type="text/javascript">
 			$(document).ready(function(){
+					
+
+
 				$("#updateProfessional").on('click',function(){
 					var form_data = new FormData(); 
 					form_data.append('first_name', $("#first_name").val());

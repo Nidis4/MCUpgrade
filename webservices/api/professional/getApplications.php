@@ -41,7 +41,8 @@ if($num>0){
  
         $professional_item=array(
             "category" => $name_greek,
-            "application" => $title_greek
+            "application" => $title_greek,
+            "category_id" => $category_id
         );
  
         array_push($professionals_arr, $professional_item);

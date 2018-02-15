@@ -110,7 +110,7 @@ class Professional{
     public function getApplications(){
      
         // select query
-        $query = "SELECT c.name_greek, a.title_greek FROM `professionals_applications` po, `categories` c, `applications` a WHERE `professional_id`= ? AND po.category_id=c.id AND po.application_id = a.id";
+        $query = "SELECT c.name_greek, po.category_id, a.title_greek FROM `professionals_applications` po, `categories` c, `applications` a WHERE `professional_id`= ? AND po.category_id=c.id AND po.application_id = a.id";
      
         // prepare query statement
         $stmt = $this->conn->prepare( $query );
