@@ -234,11 +234,11 @@ function getCalendarDetails($startDate, $endDate, $opening, $closing, $busy_arr)
                     $endBusy = $arr[1];
                     //$address = $busyDate." ".$startBusy." ".$endBusy;
 
-                    if ($timefrom == $startBusy){
+                    if (($busyDate==$date) && ($timefrom == $startBusy)){
                         $inBusy = 1;
                         $address = $busyTimeSlot = $busy_arr[$x]['address'];
                     }
-                    if ($timeto == $endBusy){
+                    if (($busyDate==$date) && ($timeto == $endBusy)){
                         $inBusy = 0;
                         $address = $busyTimeSlot = $busy_arr[$x]['address'];
                         $x++;
