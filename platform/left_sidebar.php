@@ -322,6 +322,11 @@
 				                                    List of Appointments
 				                                </a>
 				                            </li>
+				                            <li>
+				                                <a class="nav-link" href="appointments_agent.php">
+				                                    List of Agent Appointments
+				                                </a>
+				                            </li>
 				                            
 				                        </ul>
 				                    </li>

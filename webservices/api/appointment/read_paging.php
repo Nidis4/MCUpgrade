@@ -27,6 +27,9 @@ if (isset($_GET['cust_id'])) {
 elseif (isset($_GET['prof_id'])) {
     $prof_id = $_GET['prof_id'];
     $stmt = $appointment->readPagingByProf($from_record_num, $records_per_page, $prof_id);
+}elseif (isset($_GET['agent_id'])) {
+    $agent_id = $_GET['agent_id'];
+    $stmt = $appointment->readPagingByAgent($from_record_num, $records_per_page, $agent_id);
 }
 else {
     $stmt = $appointment->readPaging($from_record_num, $records_per_page);
@@ -76,7 +79,11 @@ if($num>0){
             "status" => $status,
             "cancelComment" => $cancelComment
         );
- 
+        if(@$category_id){
+           $appointment_item['category_id'] = $category_id; 
+        }else{
+            $appointment_item['category_id'] ="";
+        }
         array_push($appointments_arr["records"], $appointment_item);
     }
  

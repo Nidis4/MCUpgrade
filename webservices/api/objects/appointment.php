@@ -5,6 +5,7 @@ class Appointment{
     private $conn;
     private $table_name = "appointments";
     private $application_table_name = "applications";
+    private $ratings_table_name = "directory_ratings";
  
     // object properties
     public $id;
@@ -202,6 +203,33 @@ class Appointment{
         return $stmt;
     }
 
+    // read products with pagination for Agent
+    public function readPagingByAgent($from_record_num, $records_per_page, $agent_id){
+     
+        // select query
+        $query = "SELECT
+                    a.`id`, a.`prof_member_id`, a.`cust_member_id`, ap.`category_id`, a.`application_id`, a.`date`, a.`time`, a.`address`, a.`budget`, a.`commision`, a.`agent_id`, a.`comment`, a.`sms`, a.`sms_log_id`, a.`googleEventId`, a.`datetimeCreated`, a.`datetimeStatusUpdated`, a.`sourceAppointmentId`, a.`status`, a.`cancelComment`
+                FROM
+                    " . $this->table_name . " a 
+                    LEFT JOIN ". $this->application_table_name." ap
+                    ON a.application_id = ap.id WHERE a.`agent_id`= ? And a.`date` < '" .date("Y-m-d")."'  AND a.`status`= 1 and a.`id` NOT IN (SELECT appointment_id FROM `directory_ratings` WHERE appointment_id >=1) 
+                ORDER BY a.`datetimeCreated` DESC
+                LIMIT ?, ?";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind variable values
+        $stmt->bindParam(1, $agent_id, PDO::PARAM_INT);
+        $stmt->bindParam(2, $from_record_num, PDO::PARAM_INT);
+        $stmt->bindParam(3, $records_per_page, PDO::PARAM_INT);
+     
+        // execute query
+        $stmt->execute();
+     
+        // return values from database
+        return $stmt;
+    }
     // used for paging products
     public function count(){
         $query = "SELECT COUNT(*) as total_rows FROM " . $this->table_name . "";
