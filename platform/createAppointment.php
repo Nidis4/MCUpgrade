@@ -145,6 +145,7 @@ include('config/core.php');
 										</div>
 										<div class="form-group row application_questions">
 										</div>
+
 										<div class="form-group row">
 												<label class="col-lg-3 control-label text-lg-right pt-2">Duration in mins</label>
 												<div class="col-lg-9">
@@ -335,7 +336,10 @@ include('config/core.php');
 									<div class="row" id="available">
 									</div>
 									<div class="row">
-										<div class="col-sm-6 offset-sm-3 text-center">
+										<div class="col-sm-3 text-center">
+											<div id='chosen-slot'><strong>Chosen slot:</strong><span id='appDate'></span> <span id='appTime'></span></span></div>
+										</div>
+										<div class="col-sm-6 text-center">
 											<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning createAppointment">Book Appointment</button>
 										</div>
 										<div class="col-sm-3 text-right">
@@ -433,6 +437,7 @@ include('config/core.php');
 		<script src="vendor/jquery-validation/jquery.validate.js"></script>
 		<script src="vendor/select2/js/select2.js"></script>
 		<script src="vendor/fuelux/js/spinner.js"></script>
+
 		<!-- Theme Base, Components and Settings -->
 		<script src="js/theme.js"></script>
 		
@@ -440,6 +445,9 @@ include('config/core.php');
 		<script src="js/core.js"></script>
 		<script src="js/custom.js"></script>
 		<script src="js/searchAddress.js"></script>
+
+		  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOB9VUHID5_exudRHHduRUvCYOu--Lg0w&libraries=places&callback=initAutocomplete" async defer></script>
 
 		

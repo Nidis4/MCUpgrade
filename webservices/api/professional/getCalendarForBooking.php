@@ -204,6 +204,9 @@ function getCalendarDetails($startDate, $endDate, $opening, $closing, $busy_arr)
         else if ($i==3){
             $date = date("Y-m-d", strtotime('+3 days',strtotime($startDate)));
         }
+        else if ($i==4){
+            $date = date("Y-m-d", strtotime('+4 days',strtotime($startDate)));
+        }
 
         while ($closing != $time){
 

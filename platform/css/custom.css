@@ -53,3 +53,7 @@ tr.status-0, .table-striped tbody tr:nth-of-type(odd).status-0 {
 #available .calendar {
     display: none;
 }
+#feedback { font-size: 1.4em; }
+  .selectable .ui-selecting { background: #FECA40; }
+  .selectable .ui-selected { background: #F39814; color: white; }
+  .selectable { list-style-type: none; margin: 0; padding: 0; }

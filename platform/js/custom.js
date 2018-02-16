@@ -279,7 +279,7 @@ $( "#searchProfessional" ).click(function() {
 $("input#startDate").change(function(){
     //alert("The text has been changed.");
     var date = new Date($("#startDate").val()); 
-    var days = 5;
+    var days = 4;
     //alert(date);
     if(!isNaN(date.getTime())){
         date.setDate(date.getDate() + days);
@@ -330,6 +330,9 @@ $( ".createAppointment" ).click(function() {
     var phone = $("#phone").val();
     var email = $("#email").val();
 
+    var date = $("#appDate").html();
+    var time = $("#appTime").html();
+
     if($("#employersms").is(':checked')){
         var employersms = 1;
     }else{
@@ -369,15 +372,17 @@ $( ".createAppointment" ).click(function() {
                 mobile: mobile,
                 sex: sex,
                 phone: phone,
-                email: email
+                email: email,
+                date: date,
+                time: time
             },
             dataType: "json",
             success: function(data)
             {
                 var customer_id = data;
-                var date = "2018-05-05";
-                var time ="10:00-12:00";
-                var time ="10:00-12:00";
+                //var date = "2018-05-05";
+                //var time ="10:00-12:00";
+                
 
                 var createAppointAPI = API_LOCATION+'appointment/create.php';
                 //create($prod_id, $cust_id, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment);
@@ -456,7 +461,7 @@ $( ".findProfessionals" ).click(function() {
         //alert("Start: "+startDate);
         //alert("End: "+endDate);
         //alert("Address: "+address);
-        var getAvailableAPI = API_LOCATION+'professional/available_new.php?duration='+duration+'&county_id='+county+'&application_id='+application+'&startDate='+startDate+'&endDate='+endDate+'&address='+address;
+        var getAvailableAPI = API_LOCATION+'professional/getCalendarForBooking.php?duration='+duration+'&county_id='+county+'&application_id='+application+'&startDate='+startDate+'&endDate='+endDate+'&address='+address;
 
         $.ajax({
             type: "POST",
@@ -503,19 +508,19 @@ $( ".findProfessionals" ).click(function() {
                         
                         $.each(v.calendar, function(z, x){
                             if (x.timefrom=="09:00"){
-                                calendarCode += "<div class='col-md-4'>";
+                                calendarCode += "<div class='col-md-2'><ul class='selectable' id='selectable-"+profID+"'>";
                             }
                          
 
                             if (x.address == ""){
-                                calendarCode += "<li class='free' timefrom='"+x.timefrom+"' timeto='"+x.timeto+"'>"+x.timefrom+":</li>";
+                                calendarCode += "<li class='free slot' timefrom='"+x.timefrom+"' timeto='"+x.timeto+"' data-dateslot='"+x.date+"'>"+x.timefrom+":</li>";
                             }
                             else{
-                                calendarCode += "<li class='busy' timefrom='"+x.timefrom+"' timeto='"+x.timeto+"'>"+x.timefrom+": "+x.address+" "+x.distance+"</li>";
+                                calendarCode += "<li class='busy slot' timefrom='"+x.timefrom+"' timeto='"+x.timeto+"' data-dateslot='"+x.date+"'>"+x.timefrom+": "+x.address+" "+x.distance+"</li>";
                             }
 
                             if(x.timeto == "20:00"){
-                                calendarCode += "</div>";
+                                calendarCode += "</ul></div>";
                             }
 
                         });
@@ -595,6 +600,28 @@ $( ".findProfessionals" ).click(function() {
                 $("#available").append(thirdProf);
                 $("#available").append(htmlStr);
                 $(".available").show();
+                $( ".calendar" ).selectable({
+                        filter: ".slot.free",
+                      stop: function() {
+                        var result = $( "#chosen-slot span" ).empty();
+                        var timeFrom = "";
+                        var timeTo = "";
+                        var dateChoosed ="";
+                        $( ".ui-selected", this ).each(function() {
+                            //alert(this);
+                            if (timeFrom==""){
+                                timeFrom = $( this ).attr('timefrom');
+                            }
+                            timeTo = $( this ).attr('timeto');
+                            dateChoosed = $( this ).attr('data-dateslot');
+                          
+                          //result.append( " #" + ( index + 1 ) );
+                        });
+                        //result.append(dateChoosed+": "+timeFrom+"-"+timeTo);
+                        $( "#appDate").html(dateChoosed);
+                        $( "#appTime").html(timeFrom+"-"+timeTo);
+                      }
+                    });
                 
                 //alert("First Choice "+first);
                 //alert("Second Choice "+second);
