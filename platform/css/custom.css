@@ -48,7 +48,8 @@ tr.status-0, .table-striped tbody tr:nth-of-type(odd).status-0 {
     width: 100%;
     float: none;
     background: #d2322d;
-    color:white;
+    color: white;
+    overflow: hidden;
 }
 #available .calendar {
     display: none;

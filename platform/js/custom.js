@@ -526,8 +526,10 @@ $( ".findProfessionals" ).click(function() {
                         });
                         calendarCode += "</div>";
                     } // Calendar Slots
-
-                    htmlStr += "<div class='profile col-md-12' id='"+profID+"'><div class='name'>"+profName+"</div><div class='appointDate'>"+dateAvail+" "+timeAvail+"</div><div class='distance'>"+profDistance+"</div> SELECT</div><div class='col-md-12 calendar calendar"+profID+"'>"+calendarCode+"</div>";
+                    if (profDistance=="Unknown"){
+                        profDistance=100000;
+                    }
+                    htmlStr += "<div class='col-md-12 availProf' data-listing-distance='"+profDistance+"'><div class='row'><div class='col-md-12'><div class='profile' id='"+profID+"'><div class='name'>"+profName+"</div><div class='appointDate'>"+dateAvail+" "+timeAvail+"</div><div class='distance'>"+profDistance+"</div> SELECT</div></div></div><div class='col-md-12 calendar calendar"+profID+"'>"+calendarCode+"</div></div>";
 
                   /*  if (v.distance < third){
                         if (v.distance < second){
@@ -599,6 +601,13 @@ $( ".findProfessionals" ).click(function() {
                 $("#available").append(secondProf);
                 $("#available").append(thirdProf);
                 $("#available").append(htmlStr);
+
+                                var divList = $(".availProf");
+divList.sort(function(a, b){
+    return $(a).data("listing-distance")-$(b).data("listing-distance")
+});
+$("#available").html(divList);
+
                 $(".available").show();
                 $( ".calendar" ).selectable({
                         filter: ".slot.free",
