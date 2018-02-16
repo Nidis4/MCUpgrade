@@ -91,3 +91,39 @@ ALTER TABLE `customers_account_info` CHANGE `status` `status` INT(11) NOT NULL D
 
 <!-- End 9 Feb 2018 Harpreet -->
 <!---------------------->
+
+
+<!---------------------->
+<!-- Start 16 Feb 2018 Harpreet -->
+
+CREATE TABLE `directory_ratings` (
+  `id` int(11) NOT NULL,
+  `professional_id` int(11) NOT NULL,
+  `customer_id` int(11) DEFAULT NULL,
+  `agent_id` int(11) DEFAULT NULL,
+  `appointment_id` int(11) DEFAULT NULL,
+  `category_id` int(11) NOT NULL,
+  `job_title` text,
+  `quality` int(11) DEFAULT NULL,
+  `reliability` int(11) DEFAULT NULL,
+  `cost` int(11) DEFAULT NULL,
+  `schedule` int(11) DEFAULT NULL,
+  `behaviour` int(11) DEFAULT NULL,
+  `cleanliness` int(11) DEFAULT NULL,
+  `active` varchar(1050) NOT NULL DEFAULT 'no',
+  `comment` text,
+  `recommen` varchar(1050) DEFAULT NULL,
+  `professional_comment` text,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `directory_ratings`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_PROFESSIONAL_CATEGORY` (`professional_id`,`category_id`);
+
+ALTER TABLE `directory_ratings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+  <!---------------------->
+<!-- End 16 Feb 2018 Harpreet -->
