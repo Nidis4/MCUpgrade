@@ -77,6 +77,7 @@ if($num>0){
             "datetimeStatusUpdated" => $datetimeStatusUpdated,
             "sourceAppointmentId" => $sourceAppointmentId,
             "status" => $status,
+            "cancelReason" => $cancelReason,
             "cancelComment" => $cancelComment
         );
         if(@$category_id){

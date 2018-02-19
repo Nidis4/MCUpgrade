@@ -104,24 +104,41 @@ class Appointment{
 
     } // Read One
 
-    function cancelAppointment(){
+    function cancelAppointment($cancelReason = NULL, $cancelComment = NULL){
+
+
+        if(@$cancelReason){
+
+        }else{
+            $cancelReason = 0;
+        }
+
+        if(@$cancelComment){
+
+        }else{
+            $cancelComment = "";
+        }
 
         // query to read single record
         $query = "UPDATE " . $this->table_name . "
                     SET
-                    `status`=0
+                    `status`=0, `cancelReason`= :cancelReason, `cancelComment`= :cancelComment ,`datetimeStatusUpdated` ='".date('Y-m-d H:i:s')."'
                 WHERE
                     id = :id";
      
         $stmt = $this->conn->prepare( $query );
      
-     $cur_id = $this->id;
+        $cur_id = $this->id;
         // bind id of product to be updated
         $stmt->bindParam(':id',  $cur_id, PDO::PARAM_INT);
+        $stmt->bindParam(':cancelReason',  $cancelReason, PDO::PARAM_INT);
+        $stmt->bindParam(':cancelComment',  $cancelComment);
 
         if ($stmt->execute()) { 
+            
            return 1;
         } else {
+            
            return 0;
         }
     } // CancelAppointment
@@ -131,7 +148,7 @@ class Appointment{
      
         // select query
         $query = "SELECT
-                    `id`, `prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`
+                    `id`, `prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelReason`, `cancelComment`
                 FROM
                     " . $this->table_name . " WHERE `status`=1 OR `status`=0
                 ORDER BY `datetimeCreated` DESC
@@ -156,7 +173,7 @@ class Appointment{
      
         // select query
         $query = "SELECT
-                    `id`, `prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`
+                    `id`, `prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelReason`, `cancelComment`
                 FROM
                     " . $this->table_name . " WHERE `cust_member_id`= ? AND (`status`=1 OR `status`=0)
                 ORDER BY `datetimeCreated` DESC
@@ -182,7 +199,7 @@ class Appointment{
      
         // select query
         $query = "SELECT
-                    `id`, `prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`
+                    `id`, `prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelReason`, `cancelComment`
                 FROM
                     " . $this->table_name . " WHERE `prof_member_id`= ? AND (`status`=1 OR `status`=0)
                 ORDER BY `datetimeCreated` DESC
@@ -208,7 +225,7 @@ class Appointment{
      
         // select query
         $query = "SELECT
-                    a.`id`, a.`prof_member_id`, a.`cust_member_id`, ap.`category_id`, a.`application_id`, a.`date`, a.`time`, a.`address`, a.`budget`, a.`commision`, a.`agent_id`, a.`comment`, a.`sms`, a.`sms_log_id`, a.`googleEventId`, a.`datetimeCreated`, a.`datetimeStatusUpdated`, a.`sourceAppointmentId`, a.`status`, a.`cancelComment`
+                    a.`id`, a.`prof_member_id`, a.`cust_member_id`, ap.`category_id`, a.`application_id`, a.`date`, a.`time`, a.`address`, a.`budget`, a.`commision`, a.`agent_id`, a.`comment`, a.`sms`, a.`sms_log_id`, a.`googleEventId`, a.`datetimeCreated`, a.`datetimeStatusUpdated`, a.`sourceAppointmentId`, a.`status`, a.`cancelReason`, a.`cancelComment`
                 FROM
                     " . $this->table_name . " a 
                     LEFT JOIN ". $this->application_table_name." ap

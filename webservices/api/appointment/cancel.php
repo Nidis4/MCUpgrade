@@ -23,14 +23,25 @@ $appointment->id = isset($_GET['id']) ? $_GET['id'] : die();
 
 
 //echo $appointment->id;
+if(@$_POST['cancelReason']){
+	$cancelReason = $_POST['cancelReason'];
+}else{
+	$cancelReason = 0;
+}
+
+if(@$_POST['cancelComment']){
+	$cancelComment = $_POST['cancelComment'];
+}else{
+	$cancelComment = "";
+}
 
 // create array
-$stmt = $appointment->cancelAppointment();
+$stmt = $appointment->cancelAppointment($cancelReason, $cancelComment);
  
-        $appointment_arr=array(
-            "ResultCode" => $stmt
-        );
+$appointment_arr=array(
+    "ResultCode" => $stmt
+);
      
  
-    echo json_encode($appointment_arr);
+echo json_encode($appointment_arr);
 ?>

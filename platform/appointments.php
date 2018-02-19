@@ -43,6 +43,7 @@ include('config/core.php');
 
 		<!-- Head Libs -->
 		<script src="vendor/modernizr/modernizr.js"></script>
+		<script src="vendor/jquery/jquery.js"></script>
 
 	</head>
 	<body>
@@ -111,6 +112,8 @@ include('config/core.php');
 									</thead>
 									<tbody>
 										<?php
+
+
 										foreach ($appointmentsPag['records'] as $field => $value) {
 											$id = $appointmentsPag['records'][$field]['id'];
 											$submission_date = $appointmentsPag['records'][$field]['datetimeCreated'];
@@ -134,9 +137,88 @@ include('config/core.php');
 														<a href="#" class="on-editing copy-row"><i class="fa fa-copy"></i></a>
 														<a href="appointment.php?id='.$id.'" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
 														<a href="#" class="hidden on-default remove-row"><i class="fa fa-trash-o"></i></a>
-														<a href="#" class="on-editing cancel-row"><i class="fa fa-times"></i></a>
-													  </td>
-												  </tr>';
+														<a href="#cancelmodalForm'.$id.'" class="on-editing modal-with-form cancel-row"><i class="fa fa-times"></i></a>
+													  </td>';
+											if($status == 0){
+												$cancelreason = "";
+												if($appointmentsPag['records'][$field]['cancelReason'] == 1){
+													$cancelreason = "Customer Cancel";
+												}elseif($appointmentsPag['records'][$field]['cancelReason'] == 2){
+													$cancelreason = "Professional Couldn't";
+												}elseif ($appointmentsPag['records'][$field]['cancelReason'] == 3) {
+													$cancelreason = "Mistake";
+												}
+
+												echo "<tr><td colspan='7'>Cancelled on: ".date("d/m/Y H:i:s",strtotime($appointmentsPag['records'][$field]['datetimeStatusUpdated']))." by Agent : ".$_SESSION['fullname'].", Type : ".$cancelreason.", Comments : ".$appointmentsPag['records'][$field]['cancelComment']."</td></tr>";
+											}
+											echo 	  '</tr>';
+										?>
+										<!-- Modal Form for Cancel Appointment -->
+										<div id="cancelmodalForm<?php echo $id;?>" class="modal-block modal-block-primary mfp-hide">
+											<section class="card">
+												<header class="card-header">
+													<h2 class="card-title">Submit Reason for Cancel</h2>
+												</header>
+												<div class="card-body">
+													<form id="addcancelform<?php echo $id;?>" method="POST">															
+														<div class="form-group">
+															<label for="inputAddress">Select Option</label>
+															<select class="form-control" name="cancelReason" >
+																<option value="1">Customer Cancel</option>
+																<option value="2">Professional Couldn't</option>
+																<option value="3">Mistake</option>
+															</select>
+														</div>
+														<div class="form-row">
+															<label for="inputCity">Comment</label>
+															<textarea class="form-control" name="cancelComment"></textarea>
+														</div>
+													</form>
+												</div>
+												<footer class="card-footer">
+													<div class="row">
+														<div class="col-md-12 text-right">
+															<button class="btn btn-primary" id="submitpaymentadd<?php echo $id;?>">Submit</button>
+															<button class="btn btn-default modal-dismiss">Cancel</button>
+														</div>
+													</div>
+												</footer>
+												<script type="text/javascript">
+													$(document).ready(function(){															
+														
+														$("#submitpaymentadd<?php echo $id;?>").on('click',function(){
+															
+															var error = 0;
+															var message = "";
+															if(error == 1){
+																alert(message);
+															}else{
+																var savePaymentApi = API_LOCATION+"appointment/cancel.php?id=<?php echo $id;?>";
+																$.ajax({
+																            type: "POST",
+																            url: savePaymentApi,
+																            data: $("#addcancelform<?php echo $id;?>").serialize(),
+																            dataType: "json",
+																            success: function(data)
+																            {	
+																            	if(data.ResultCode == 1){
+																            		alert("Appointment cancelled successfully.");
+																            		location.reload();
+																            	}else{
+																            		alert("Something worng!");
+																            	}
+																            	
+																            }
+																        });
+																//location.reload();
+															}
+															return false;
+														});
+													});
+												</script>
+											</section>
+										</div>
+										<?php
 										}
 										?>										
 									</tbody>
@@ -239,8 +321,10 @@ include('config/core.php');
 			</section>
 		</div>
 
+		
+
 		<!-- Vendor -->
-		<script src="vendor/jquery/jquery.js"></script>
+		
 		<script src="vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
 		<script src="vendor/popper/umd/popper.min.js"></script>
 		<script src="vendor/bootstrap/js/bootstrap.js"></script>
@@ -267,5 +351,6 @@ include('config/core.php');
 
 		<!-- Examples -->
 		<script src="js/examples/examples.datatables.editable.js"></script>
+		<script src="js/examples/examples.modals.js"></script>
 	</body>
 </html>

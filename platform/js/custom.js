@@ -176,26 +176,26 @@ function setNavigation(){
     })
 }
 
-$( ".cancel-row" ).click(function() {
-    var id = $(this).closest('tr').attr('data-item-id');
-    if (confirm('Are you sure you want to cancel this appointment?')) {
-        var getCancelAPI = API_LOCATION+'appointment/cancel.php?id='+id;
-            cancelRequest = $.ajax({
-                type: "POST",
-                url: getCancelAPI,
-                dataType: "json",
-                success: function(data){
-                    var result = data['ResultCode'];
-                    if (result=='1'){
-                         location.reload();
-                    }
-                }
-            });
-    } else {
-        // Do nothing!
-    }
+// $( ".cancel-row" ).click(function() {
+//     var id = $(this).closest('tr').attr('data-item-id');
+//     if (confirm('Are you sure you want to cancel this appointment?')) {
+//         var getCancelAPI = API_LOCATION+'appointment/cancel.php?id='+id;
+//             cancelRequest = $.ajax({
+//                 type: "POST",
+//                 url: getCancelAPI,
+//                 dataType: "json",
+//                 success: function(data){
+//                     var result = data['ResultCode'];
+//                     if (result=='1'){
+//                          location.reload();
+//                     }
+//                 }
+//             });
+//     } else {
+//         // Do nothing!
+//     }
     
-}); // Cancel Appointment 
+// }); // Cancel Appointment 
 
 $( ".copy-row" ).click(function() {
     var id = $(this).closest('tr').attr('data-item-id');
