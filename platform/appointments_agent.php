@@ -106,6 +106,7 @@ include('config/core.php');
 											<th>Professional</th>
 											<th>Customer</th>
 											<th>Date</th>
+											<th width="440px">Comments</th>
 											<th>Budget</th>
 											<th>Commision</th>
 											<th>Actions</th>
@@ -125,12 +126,14 @@ include('config/core.php');
 											$budget = $appointmentsPag['records'][$field]['budget'];
 											$commission = $appointmentsPag['records'][$field]['commision'];
 											$status = $appointmentsPag['records'][$field]['status'];
+											$comment = $appointmentsPag['records'][$field]['comment'];
 
 											echo '<tr data-item-id="'.$id.'" class="status-'.$status.'">
 													  <td>'.$submission_date.'</td>
 													  <td><a href="professional.php?id='.$prof_id.'">'.$prof_name.'</a></td>
 													  <td><a href="customer.php?id='.$cust_id.'">'.$cust_name.'</a></td>
 													  <td>'.$date.'</td>
+													  <td>'.$comment.'</td>
 													  <td>'.$budget.'</td>
 													  <td>'.$commission.'</td>
 													  <td class="actions">
