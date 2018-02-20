@@ -440,6 +440,10 @@ include('config/core.php');
 													
 												</div>
 											</div>
+											<div class="form-group col-md-12 row">
+												<label class="col-lg-3 control-label text-lg-right pt-2">Percentage</label>
+												<div class="col-lg-8 pt-2"><strong><?php echo $professional['percentage']; ?></strong></div>
+											</div>
 										</div>
 									</div>
 									<div class="col-sm-12 col-md-12 pt-2">
