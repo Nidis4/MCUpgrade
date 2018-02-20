@@ -55,5 +55,39 @@ class Payment{
            return 0;
         }
     }
+
+    public function get_percentage($professional_id){
+         // select query
+        $query = "SELECT SUM(amount) AS percentage FROM ".$this->table_name." WHERE professional_id = '".$professional_id."' AND status = '1' AND datetime_added  BETWEEN CURDATE() - INTERVAL 90 DAY AND CURDATE()";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        
+        
+        // execute query
+        $stmt->execute();
+        $percentage = $stmt->fetch();
+        if(@$percentage['percentage']){
+            
+            $query1 = "SELECT SUM(budget) AS percentage FROM appointments WHERE prof_member_id = '".$professional_id."' AND `status` IN('1','0') AND `cancelReason` IN('0','2') AND `date` BETWEEN CURDATE() - INTERVAL 90 DAY AND CURDATE()";
+     
+            // prepare query statement
+            $stmt1 = $this->conn->prepare( $query1 );
+            
+            // execute query
+            $stmt1->execute();
+            $percentage2 = $stmt1->fetch();
+            if(@$percentage2['percentage']){
+                $return = number_format((($percentage['percentage']/$percentage2['percentage'])*100),2)."%";
+                return $return;
+            }else{
+                return '0.0%';
+            }
+        }else{
+            return '0.0%';
+        }
+        
+    }
 }
 ?>
