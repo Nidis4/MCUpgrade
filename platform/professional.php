@@ -627,7 +627,12 @@ include('config/core.php');
 										$payments = file_get_contents($api_url.'webservices/api/payment/paymentByProf.php?prof_id='.$id);
 										$paymentsPag = json_decode($payments, true); // decode the JSON into an associative array
 										
-										if($paymentsPag['message'] != "No Payments found."){
+										if(@$paymentsPag['message'] && ($paymentsPag['message'] == "No Payments found.")){
+										?>
+
+											<tr> <td colspan="8">No data found.</td></tr>
+										<?php
+										}elseif(@$paymentsPag){
 											foreach ($paymentsPag as $payment) {
 
 												$submission_date = $payment['datetime_added'];

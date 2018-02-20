@@ -67,8 +67,9 @@ class Payment{
         
         // execute query
         $stmt->execute();
-        if(@$stmt){
-            $percentage = $stmt->fetch();
+        $percentage = $stmt->fetch();
+        if(@$percentage['percentage']){
+            
             $query1 = "SELECT SUM(budget) AS percentage FROM appointments WHERE prof_member_id = '".$professional_id."' AND `status` IN('1','0') AND `cancelReason` IN('0','2') AND `date` BETWEEN CURDATE() - INTERVAL 90 DAY AND CURDATE()";
      
             // prepare query statement
@@ -77,7 +78,7 @@ class Payment{
             // execute query
             $stmt1->execute();
             $percentage2 = $stmt1->fetch();
-            if(@$stmt1){
+            if(@$percentage2['percentage']){
                 $return = number_format((($percentage['percentage']/$percentage2['percentage'])*100),2)."%";
                 return $return;
             }else{
