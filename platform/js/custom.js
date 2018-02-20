@@ -508,7 +508,8 @@ $( ".findProfessionals" ).click(function() {
                         
                         $.each(v.calendar, function(z, x){
                             if (x.timefrom=="09:00"){
-                                calendarCode += "<div class='col-md-2'><ul class='selectable' id='selectable-"+profID+"'>";
+                                calendarCode += "<div class='col-md-2'><div class='row calDate text-center'><div class='col-md-12'>"+x.date+"</div></div><ul class='selectable' id='selectable-"+profID+"'>";
+                                //calendarCode += "<div class='col-md-2'><ul class='selectable' id='selectable-"+profID+"'>";
                             }
                          
 
