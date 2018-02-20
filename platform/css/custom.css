@@ -73,6 +73,9 @@ tr.status-0, .table-striped tbody tr:nth-of-type(odd).status-0 {
     max-height: 22px;
     overflow: hidden;
 }
+li.slot.disabled {
+    background: #ededed;
+}
 #feedback { font-size: 1.4em; }
   .selectable .ui-selecting { background: #FECA40; }
   .selectable .ui-selected { background: #F39814; color: white; }

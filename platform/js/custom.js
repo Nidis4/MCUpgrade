@@ -93,6 +93,13 @@ $('select#applications').on('change', function() {
     $('#duration').val(duration);
 });
 
+var delay = (function(){
+  var timer = 0;
+  return function(callback, ms){
+    clearTimeout (timer);
+    timer = setTimeout(callback, ms);
+  };
+})();
 
 $("input#surname").keyup(function () {
     var searchRequest = null;
@@ -101,6 +108,9 @@ $("input#surname").keyup(function () {
     value = $(this).val();   
 
     if (value.length >= minlength ) {
+
+        delay(function(){
+
         if (searchRequest != null) 
             searchRequest.abort();
             var getSearchAPI = API_LOCATION+'customer/search.php?s='+value;
@@ -127,7 +137,10 @@ $("input#surname").keyup(function () {
                     $("#suggestions").show();
                 }
             });
-        }
+         
+         }, 500 );
+        
+        } // if length
         else{
             $("#suggestions").empty();
             $("#suggestions").hide();
@@ -513,14 +526,20 @@ $( ".findProfessionals" ).click(function() {
                         //alert("Same");
                         if (v.calendar!=undefined){
                             $.each(v.calendar, function(z, x){
+                                var currentDate = new Date(x.date+" "+x.timefrom);
+                                var today = new Date();
+                                var disabled = "disabled";
+                                if (currentDate > today){
+                                  disabled = "";
+                                }
                                 if (x.timefrom=="09:00"){
                                     singleDay += "<div class='col-md-2 profile availProf' id='"+profID+"' data-listing-distance='"+profDistance+"'><div class='row calName text-center'><div class='col-md-12'><div class='comp'>"+profName+"</div><span>"+profDistance+"</span></div></div><ul class='selectable' id='selectable-"+profID+"'>";
                                 }                         
                                 if (x.address == ""){
-                                    singleDay += "<li class='free slot' timefrom='"+x.timefrom+"' timeto='"+x.timeto+"' data-dateslot='"+x.date+"'>"+x.timefrom+":</li>";
+                                    singleDay += "<li class='free slot "+disabled+"' timefrom='"+x.timefrom+"' timeto='"+x.timeto+"' data-dateslot='"+x.date+"'>"+x.timefrom+":</li>";
                                 }
                                 else{
-                                    singleDay += "<li class='busy slot' timefrom='"+x.timefrom+"' timeto='"+x.timeto+"' data-dateslot='"+x.date+"'>"+x.timefrom+": "+x.address+" "+x.distance+"</li>";
+                                    singleDay += "<li class='busy slot "+disabled+"' timefrom='"+x.timefrom+"' timeto='"+x.timeto+"' data-dateslot='"+x.date+"'>"+x.timefrom+": "+x.address+" "+x.distance+"</li>";
                                 }
                                 if(x.timeto == "20:00"){
                                     singleDay += "</ul></div>";
@@ -534,14 +553,20 @@ $( ".findProfessionals" ).click(function() {
                             calendarCode += "<div class='row'>";
                             
                             $.each(v.calendar, function(z, x){
+                                var currentDate = new Date(x.date+" "+x.timefrom);
+                                var today = new Date();
+                                var disabled = "disabled";
+                                if (currentDate > today){
+                                  disabled = "";
+                                }
                                 if (x.timefrom=="09:00"){
                                     calendarCode += "<div class='col-md-2'><div class='row calDate text-center'><div class='col-md-12'>"+x.date+"</div></div><ul class='selectable' id='selectable-"+profID+"'>";
                                 }                         
                                 if (x.address == ""){
-                                    calendarCode += "<li class='free slot' timefrom='"+x.timefrom+"' timeto='"+x.timeto+"' data-dateslot='"+x.date+"'>"+x.timefrom+":</li>";
+                                    calendarCode += "<li class='free slot "+disabled+"' timefrom='"+x.timefrom+"' timeto='"+x.timeto+"' data-dateslot='"+x.date+"'>"+x.timefrom+":</li>";
                                 }
                                 else{
-                                    calendarCode += "<li class='busy slot' timefrom='"+x.timefrom+"' timeto='"+x.timeto+"' data-dateslot='"+x.date+"'>"+x.timefrom+": "+x.address+" "+x.distance+"</li>";
+                                    calendarCode += "<li class='busy slot "+disabled+"' timefrom='"+x.timefrom+"' timeto='"+x.timeto+"' data-dateslot='"+x.date+"'>"+x.timefrom+": "+x.address+" "+x.distance+"</li>";
                                 }
                                 if(x.timeto == "20:00"){
                                     calendarCode += "</ul></div>";
