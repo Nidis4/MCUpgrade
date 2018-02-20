@@ -478,11 +478,17 @@ $( ".findProfessionals" ).click(function() {
                  var secondProf = "";
                  var thirdProf = "";
 
-
+                 var singleDay = "";
+                 singleDay = "<div class='row singleDay calendar'>";
 
                 $.each(data, function(k, v){
 
                     var profDistance = v.distance;
+                    if (profDistance == "Unknown"){
+                        profDistance = 100000;
+                    }else{
+                        profDistance = v.distance;
+                    }
                     var profID = v.id;
                     var profName = v.first_name+" "+v.last_name;
 
@@ -503,111 +509,80 @@ $( ".findProfessionals" ).click(function() {
                     
                     var calendarCode = "";
                     //alert(v.calendar);
-                    if (v.calendar!=undefined){
-                        calendarCode += "<div class='row'>";
-                        
-                        $.each(v.calendar, function(z, x){
-                            if (x.timefrom=="09:00"){
-                                calendarCode += "<div class='col-md-2'><div class='row calDate text-center'><div class='col-md-12'>"+x.date+"</div></div><ul class='selectable' id='selectable-"+profID+"'>";
-                                //calendarCode += "<div class='col-md-2'><ul class='selectable' id='selectable-"+profID+"'>";
-                            }
-                         
+                    if (startDate == endDate) {
+                        //alert("Same");
+                        if (v.calendar!=undefined){
+                            $.each(v.calendar, function(z, x){
+                                if (x.timefrom=="09:00"){
+                                    singleDay += "<div class='col-md-2 profile availProf' id='"+profID+"' data-listing-distance='"+profDistance+"'><div class='row calName text-center'><div class='col-md-12'><div class='comp'>"+profName+"</div><span>"+profDistance+"</span></div></div><ul class='selectable' id='selectable-"+profID+"'>";
+                                }                         
+                                if (x.address == ""){
+                                    singleDay += "<li class='free slot' timefrom='"+x.timefrom+"' timeto='"+x.timeto+"' data-dateslot='"+x.date+"'>"+x.timefrom+":</li>";
+                                }
+                                else{
+                                    singleDay += "<li class='busy slot' timefrom='"+x.timefrom+"' timeto='"+x.timeto+"' data-dateslot='"+x.date+"'>"+x.timefrom+": "+x.address+" "+x.distance+"</li>";
+                                }
+                                if(x.timeto == "20:00"){
+                                    singleDay += "</ul></div>";
+                                }
 
-                            if (x.address == ""){
-                                calendarCode += "<li class='free slot' timefrom='"+x.timefrom+"' timeto='"+x.timeto+"' data-dateslot='"+x.date+"'>"+x.timefrom+":</li>";
-                            }
-                            else{
-                                calendarCode += "<li class='busy slot' timefrom='"+x.timefrom+"' timeto='"+x.timeto+"' data-dateslot='"+x.date+"'>"+x.timefrom+": "+x.address+" "+x.distance+"</li>";
-                            }
-
-                            if(x.timeto == "20:00"){
-                                calendarCode += "</ul></div>";
-                            }
-
-                        });
-                        calendarCode += "</div>";
-                    } // Calendar Slots
-                    if (profDistance=="Unknown"){
-                        profDistance=100000;
+                            });
+                        }
                     }
-                    htmlStr += "<div class='col-md-12 availProf' data-listing-distance='"+profDistance+"'><div class='row'><div class='col-md-12'><div class='profile' id='"+profID+"'><div class='name'>"+profName+"</div><div class='appointDate'>"+dateAvail+" "+timeAvail+"</div><div class='distance'>"+profDistance+"</div> SELECT</div></div></div><div class='col-md-12 calendar calendar"+profID+"'>"+calendarCode+"</div></div>";
+                    else {
+                        if (v.calendar!=undefined){
+                            calendarCode += "<div class='row'>";
+                            
+                            $.each(v.calendar, function(z, x){
+                                if (x.timefrom=="09:00"){
+                                    calendarCode += "<div class='col-md-2'><div class='row calDate text-center'><div class='col-md-12'>"+x.date+"</div></div><ul class='selectable' id='selectable-"+profID+"'>";
+                                }                         
+                                if (x.address == ""){
+                                    calendarCode += "<li class='free slot' timefrom='"+x.timefrom+"' timeto='"+x.timeto+"' data-dateslot='"+x.date+"'>"+x.timefrom+":</li>";
+                                }
+                                else{
+                                    calendarCode += "<li class='busy slot' timefrom='"+x.timefrom+"' timeto='"+x.timeto+"' data-dateslot='"+x.date+"'>"+x.timefrom+": "+x.address+" "+x.distance+"</li>";
+                                }
+                                if(x.timeto == "20:00"){
+                                    calendarCode += "</ul></div>";
+                                }
 
-                  /*  if (v.distance < third){
-                        if (v.distance < second){
-                            if (v.distance < first){
-                                third = second;
-                                second = first;
-                                first = v.distance;
-
-                                thirdProf = secondProf;
-                                secondProf = firstProf;
-                                firstProf = "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='appointDate'>"+startDate+" 09:00</div><div class='distance'>"+v.distance+"</div> SELECT</div>";
-                            }
-                            else{
-                                third = second;
-                                second = v.distance;
-
-                                thirdProf = secondProf;
-                                secondProf = "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='appointDate'>"+startDate+" 09:00</div><div class='distance'>"+v.distance+"</div> SELECT</div>";
-                            }
-                        }
-                        else{
-                            third = v.distance;
-
-                            thirdProf = "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='appointDate'>"+startDate+" 09:00</div><div class='distance'>"+v.distance+"</div> SELECT</div>";
-                        }
-                    } */
-
-                            //alert(v.first_name+" "+v.last_name+": "+v.distance);
-                       
-                       /*    htmlStr += "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='distance'>"+v.distance+"</div>";
-                             if (v.busy!=undefined){
-                                htmlStr += "<div class='busy'>";
-                                 $.each(v.busy, function(z, x){
-                                    //alert(x.date+" "+x.timeslot);
-                                    htmlStr += "<div class='timeslots'>"+x.date+" "+x.timeslot+" στο "+x.address+" - "+x.distance+"</div>";
-                                    if (x.distance < third){
-                                        if (x.distance < second){
-                                            if (x.distance < first){
-                                                third = second;
-                                                second = first;
-                                                first = x.distance;
-
-                                                thirdProf = secondProf;
-                                                secondProf = firstProf;
-                                                firstProf = "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='appointDate'>"+x.date+" "+x.timeslot+"</div><div class='distance'>"+x.distance+"</div> SELECT</div>";
-                                            }
-                                            else{
-                                                third = second;
-                                                second = x.distance;
-
-                                                thirdProf = secondProf;
-                                                secondProf = "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='appointDate'>"+x.date+" "+x.timeslot+"</div><div class='distance'>"+x.distance+"</div> SELECT</div>";
-                                            }
-                                        }
-                                        else{
-                                            third = x.distance;
-
-                                            thirdProf = "<div class='profile' id='"+v.id+"'><div class='name'>"+v.first_name+" "+v.last_name+"</div><div class='appointDate'>"+x.date+" "+x.timeslot+"</div><div class='distance'>"+x.distance+"</div> SELECT</div>";
-                                        }
-                                    }
-                                 });
-                                 htmlStr += "</div>";
-                             } // Busy Slots
-
-                             htmlStr += "</div>"; */
-                       });
+                            });
+                            calendarCode += "</div>";
+                        } // Calendar Slots
+                        
+                        
+                        htmlStr += "<div class='col-md-12 availProf' data-listing-distance='"+profDistance+"'><div class='row'><div class='col-md-12'><div class='profile' id='"+profID+"'><div class='name'>"+profName+"</div><div class='appointDate'>"+dateAvail+" "+timeAvail+"</div><div class='distance'>"+profDistance+"</div> SELECT</div></div></div><div class='col-md-12 calendar calendar"+profID+"'>"+calendarCode+"</div></div>";
+                    }
+                  
+                });
+                
                 //$("#available").append(htmlStr);
-                $("#available").append(firstProf);
-                $("#available").append(secondProf);
-                $("#available").append(thirdProf);
-                $("#available").append(htmlStr);
+                //$("#available").append(firstProf);
+                //$("#available").append(secondProf);
+                //$("#available").append(thirdProf);
+                if (startDate == endDate) {
+                    singleDay += "</div>";
+                    $("#available").append(singleDay);
 
-                                var divList = $(".availProf");
-divList.sort(function(a, b){
-    return $(a).data("listing-distance")-$(b).data("listing-distance")
-});
-$("#available").html(divList);
+                    var divList = $(".availProf");
+                    divList.sort(function(a, b){
+                        return $(a).data("listing-distance")-$(b).data("listing-distance")
+                    });
+                    $("#available > .row").html(divList);
+
+                }
+                else{
+                    $("#available").append(htmlStr);
+
+                    var divList = $(".availProf");
+                    divList.sort(function(a, b){
+                        return $(a).data("listing-distance")-$(b).data("listing-distance")
+                    });
+                    $("#available").html(divList);
+                }
+
+                
 
                 $(".available").show();
                 $( ".calendar" ).selectable({
@@ -617,6 +592,7 @@ $("#available").html(divList);
                         var timeFrom = "";
                         var timeTo = "";
                         var dateChoosed ="";
+                        var profID = "";
                         $( ".ui-selected", this ).each(function() {
                             //alert(this);
                             if (timeFrom==""){
@@ -624,10 +600,15 @@ $("#available").html(divList);
                             }
                             timeTo = $( this ).attr('timeto');
                             dateChoosed = $( this ).attr('data-dateslot');
-                          
+                            profID = $(this).closest('.col-md-2').attr('id');
                           //result.append( " #" + ( index + 1 ) );
                         });
                         //result.append(dateChoosed+": "+timeFrom+"-"+timeTo);
+                        if (startDate == endDate){
+                            //alert('Do Something: ' +profID);
+                            $('.profile').removeClass('selectedProf');
+                            $( "#"+profID ).addClass('selectedProf');
+                        }
                         $( "#appDate").html(dateChoosed);
                         $( "#appTime").html(timeFrom+"-"+timeTo);
                       }

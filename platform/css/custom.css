@@ -54,9 +54,24 @@ tr.status-0, .table-striped tbody tr:nth-of-type(odd).status-0 {
 #available .calendar {
     display: none;
 }
+#available .singleDay.calendar {
+    display: flex !important;
+}
 .row.calDate {
     text-align: center;
     font-weight: bold;
+}
+.row.calName {
+    text-align: center;
+    font-weight: bold;
+    min-height: 44px;
+}
+.row.calName span {
+    display: block;
+}
+.row.calName .comp {
+    max-height: 22px;
+    overflow: hidden;
 }
 #feedback { font-size: 1.4em; }
   .selectable .ui-selecting { background: #FECA40; }

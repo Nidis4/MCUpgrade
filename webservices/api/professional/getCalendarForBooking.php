@@ -77,7 +77,9 @@ if($num>0){
 
     foreach($professionals_arr as $row => $professional_item){  
 
-        if ($professional_item['distance'] == ""){
+        if ( $professional_item['distance'] == "" ){
+        //if ( ($professional_item['distance'] == "") || !empty($professional_item['busy']) ){
+
             $distance = $distances[$d];
 
             $response_a = json_decode($distance, true);
@@ -90,8 +92,9 @@ if($num>0){
                 $time = $response_a['rows'][0]['elements'][0]['status'];
             }
             $professionals_arr[$row]['distance'] = $dist;
+            
             $d++;
-        
+        }
 
             foreach($professional_item['busy'] as $busy_row => &$busy_item){
 
@@ -112,7 +115,7 @@ if($num>0){
                 $d++;
 
             }
-        }
+        
     }
 
     echo json_encode($professionals_arr);
