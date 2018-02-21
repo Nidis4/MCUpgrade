@@ -332,6 +332,30 @@
 				                    </li>
 				                    <li class="nav-parent">
 				                        <a class="nav-link" href="#">
+				                            <i class="fa fa-list-alt" aria-hidden="true"></i>
+				                            <span>Balance Sheets</span>
+				                        </a>
+				                        <ul class="nav nav-children">
+				                            <li>
+				                                <a class="nav-link" href="balanceOverview.php">
+				                                    Overview
+				                                </a>
+				                            </li>
+				                            <li>
+				                                <a class="nav-link" href="balanceProfessionals.php">
+				                                    Professionals
+				                                </a>
+				                            </li>
+				                            <li>
+				                                <a class="nav-link" href="balancePayments.php">
+				                                    Payments
+				                                </a>
+				                            </li>
+				                            
+				                        </ul>
+				                    </li>
+				                    <li class="nav-parent">
+				                        <a class="nav-link" href="#">
 				                            <i class="fa fa-table" aria-hidden="true"></i>
 				                            <span>Tables</span>
 				                        </a>
