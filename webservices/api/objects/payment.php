@@ -43,10 +43,27 @@ class Payment{
         return $stmt;
     }
 
-    public function save($professional_id, $category_id, $amount, $agent_id, $comment, $type, $bank_name, $datetime_added){
+    public function save($professional_id, $category_id, $amount, $agent_id, $comment, $type, $bank_name, $datetime_added, $issuetype ){
 
-        $query = "INSERT INTO " . $this->table_name . " (`professional_id`, `category_id`, `amount`, `agent_id`, `comment`, `type`, `bank_name`, `datetime_added`) VALUES ('".$professional_id."', '".$category_id."', '".$amount."', '".$agent_id."', '".$comment."', '".$type."', '".$bank_name."', '".$datetime_added."')";
+        $invoice_no = "";
+        $receipt_no = "";
 
+        if(@$issuetype){
+            $q = "Select Count(`id`) as itotal from ". $this->table_name . " where `issuetype` = '".$issuetype."'";
+            $s = $this->conn->prepare( $q );
+            $s->execute();
+            $t = $s->fetch();
+            $count = $t['itotal'];
+            if($issuetype == "Invoice"){
+               $invoice_no =  intval($count) + 1;
+            }else{
+               $receipt_no =  intval($count) + 1; 
+            }
+            
+        }
+
+        $query = "INSERT INTO " . $this->table_name . " (`professional_id`, `category_id`, `amount`, `agent_id`, `comment`, `type`, `bank_name`, `datetime_added`,`issuetype`,`invoice_no`,`receipt_no`) VALUES ('".$professional_id."', '".$category_id."', '".$amount."', '".$agent_id."', '".$comment."', '".$type."', '".$bank_name."', '".$datetime_added."', '".$issuetype."', '".$invoice_no."', '".$receipt_no."')";
+        
         $stmt = $this->conn->prepare( $query );
 
         if ($stmt->execute()) { 

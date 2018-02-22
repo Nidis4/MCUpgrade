@@ -183,7 +183,7 @@ class Professional{
      
         // query to read single record
         $query = "SELECT
-                 p.`id`, p.`first_name`, p.`last_name`, p.`sex`, p.`profile_status`, p.`admin_comments`, cd.`image1`, cd.`image2`, cd.`image3`, cd.`perid1`, cd.`perid2`, cd.`agreement1`, cd.`agreement2`, cd.`agreement3`, cd.`agreement4`, cd.`agreement5`, cd.`approve_per`, cd.`approve_doc`, co.`address`, co.`mobile`, co.`phone`, ca.`email`, ca.`calendar_id`
+                 p.`id`, p.`first_name`, p.`last_name`, p.`sex`, p.`profile_status`, p.`admin_comments`,p.`viewtype`, cd.`image1`, cd.`image2`, cd.`image3`, cd.`perid1`, cd.`perid2`, cd.`agreement1`, cd.`agreement2`, cd.`agreement3`, cd.`agreement4`, cd.`agreement5`, cd.`approve_per`, cd.`approve_doc`, co.`address`, co.`mobile`, co.`phone`, ca.`email`, ca.`calendar_id`
             FROM
                 " . $this->table_name . " p
                 LEFT JOIN ". $this->contact_table_name." co
@@ -223,6 +223,7 @@ class Professional{
         $this->sex = $row['sex'];
         $this->profile_status = $row['profile_status'];
         $this->admin_comments = $row['admin_comments'];
+        $this->viewtype = $row['viewtype'];
         $this->mobile = $row['mobile'];
         $this->phone = $row['phone'];
         $this->email = $row['email'];
@@ -246,12 +247,12 @@ class Professional{
 
 
 
-    function update($id, $first_name, $last_name, $address, $sex, $profile_status, $admin_comments, $mobile, $phone, $email, $calendar_id, $profile_image1, $profile_image2, $profile_image3, $profile_perid1, $profile_perid2, $profile_agreement1, $profile_agreement2, $profile_agreement3, $profile_agreement4, $profile_agreement5, $approve_per, $approve_doc ){
+    function update($id, $first_name, $last_name, $address, $sex, $profile_status, $admin_comments, $mobile, $phone, $email, $calendar_id, $profile_image1, $profile_image2, $profile_image3, $profile_perid1, $profile_perid2, $profile_agreement1, $profile_agreement2, $profile_agreement3, $profile_agreement4, $profile_agreement5, $approve_per, $approve_doc, $viewtype ){
         
         
         $query = "UPDATE " . $this->table_name . "
                     SET
-                    `first_name`=:first_name, `last_name`=:last_name, `sex`=:sex, `profile_status`=:profile_status, `admin_comments`=:admin_comments";
+                    `first_name`=:first_name, `last_name`=:last_name, `sex`=:sex, `profile_status`=:profile_status, `admin_comments`=:admin_comments, `viewtype`=:viewtype";
         $query .=" WHERE id = :id";
 
         $stmt = $this->conn->prepare( $query );
@@ -264,6 +265,7 @@ class Professional{
         $stmt->bindParam(':sex',  $sex);
         $stmt->bindParam(':profile_status',  $profile_status);
         $stmt->bindParam(':admin_comments',  $admin_comments);
+        $stmt->bindParam(':viewtype',  $viewtype);
         
         if ($stmt->execute()) { 
            $this->update_contact($id, $address, $mobile, $phone); 

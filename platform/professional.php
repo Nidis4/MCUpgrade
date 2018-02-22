@@ -444,6 +444,27 @@ include('config/core.php');
 												<label class="col-lg-3 control-label text-lg-right pt-2">Percentage</label>
 												<div class="col-lg-8 pt-2"><strong><?php echo $professional['percentage']; ?></strong></div>
 											</div>
+											<div class="form-group col-md-12 row">
+												<label class="col-lg-3 control-label text-lg-right pt-2">&nbsp;</label>
+												<div class="col-lg-8 pt-2">
+													<div class="col-lg-3" style="float: left;">            
+											            <div class="radio">
+											                <label class="pt-3">
+											                    <input class="" <?php if((@$professional['viewtype'] && ($professional['viewtype'] == "1")) || (empty($professional['viewtype']))){?> checked="checked" <?php }?> type="radio" name="viewtype" value="1" id="viewtype1">
+											                    Invoice
+											                </label>
+											            </div>
+											        </div>
+											        <div class="col-lg-3"  style="float: left;">            
+											            <div class="radio">
+											                <label class="pt-3">
+											                    <input class="" type="radio" <?php if(@$professional['viewtype'] && ($professional['viewtype'] == "2")) {?> checked="checked" <?php }?> name="viewtype" value="2" id="viewtype2">
+											                    Receipt
+											                </label>
+											            </div>
+											        </div>
+												</div>
+											</div>
 										</div>
 									</div>
 									<div class="col-sm-12 col-md-12 pt-2">
@@ -525,6 +546,23 @@ include('config/core.php');
 																<label for="inputCity">Comment</label>
 																<input type="text" class="form-control" name="comment" id="comment">
 															</div>
+															<div class="form-group row">
+																<div class="col-sm-1">												
+																	<input type="checkbox" class="form-control" name="issuetypeval" id="issuetypeval">
+																</div>
+																<label class="col-sm-4 pt-2">Issue Invoice/Receipt</label>
+																
+																<?php
+																	$vtype = "Invoice";
+																	if(@$professional['viewtype']){
+																		if($professional['viewtype'] == "2"){
+																			$vtype = "Receipt";
+																		}
+																		
+																	}
+																?>
+																	<input type="hidden" name="issuetype" id="issuetype" value="<?php echo $vtype;?>">
+															</div>
 														</form>
 													</div>
 													<footer class="card-footer">
@@ -570,6 +608,12 @@ include('config/core.php');
 																	alert(message);
 																}else{
 																	var savePaymentApi = API_LOCATION+'payment/save.php';
+																	var atLeastOneIsChecked = $('input[name="issuetypeval"]:checked').length > 0;
+																	var issuetype = "";
+
+																	if(atLeastOneIsChecked){
+																		issuetype = $("#issuetype").val();
+																	}
 																	$.ajax({
 																	            type: "POST",
 																	            url: savePaymentApi,
@@ -581,14 +625,16 @@ include('config/core.php');
 																	                bank_name: $("#bank_name").val(),
 																	                amount: $("#amount").val(),
 																	                comment: $("#comment").val(),
+																	                issuetype: issuetype,
 																	            },
 																	            dataType: "json",
 																	            success: function(data)
 																	            {
 																	            	alert(data.message);
+																	            	location.reload();
 																	            }
 																	        });
-																	location.reload();
+																	//location.reload();
 																}
 																return false;
 															});
@@ -866,6 +912,7 @@ include('config/core.php');
 					form_data.append('calendar_id', $("#calendar_id").val());
 					form_data.append('admin_comments', $("#admin_comments").val());
 					form_data.append('professional_id', $("#professional_id").val());
+					form_data.append('viewtype', $('input[name=viewtype]:checked').val());
 
 					if ($('#approve_per').prop('checked') == true){
     					form_data.append('approve_per', 1);

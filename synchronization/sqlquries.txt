@@ -136,3 +136,16 @@ ALTER TABLE `appointments` ADD `cancelReason` INT(10) NULL DEFAULT '0' COMMENT '
 
 <!-------------------------------->
 <!-- End 20 Feb 2018 Harpreet -->
+
+
+<!-------------------------------->
+<!-- Start 22 Feb 2018 Harpreet -->
+
+ALTER TABLE `professionals` ADD `viewtype` VARCHAR(1) NULL COMMENT '1=> Invoice, 2=>Receipt' AFTER `sex`;
+
+ALTER TABLE `payments` ADD `issuetype` VARCHAR(20) NULL AFTER `datetime_added`;
+ALTER TABLE `payments` ADD `invoice_no` BIGINT NULL AFTER `issuetype`, ADD `receipt_no` BIGINT NULL AFTER `invoice_no`;
+ALTER TABLE `payments` CHANGE `invoice_no` `invoice_no` VARCHAR(20) NULL DEFAULT NULL, CHANGE `receipt_no` `receipt_no` VARCHAR(20) NULL DEFAULT NULL;
+
+<!-------------------------------->
+<!-- End 22 Feb 2018 Harpreet -->

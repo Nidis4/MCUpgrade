@@ -24,12 +24,13 @@ $agent_id        = $_POST['agent_id'];
 $comment         = $_POST['comment'];
 $type            = $_POST['type'];
 $bank_name       = $_POST['bank_name'];
+
 $datetime_added  = $Pdatetimeadded;
+$issuetype       = $_POST['issuetype'];
 
 
- 
 // query products
-$stmt = $payment->save($professional_id, $category_id, $amount, $agent_id, $comment, $type, $bank_name, $datetime_added);
+$stmt = $payment->save($professional_id, $category_id, $amount, $agent_id, $comment, $type, $bank_name, $datetime_added, $issuetype);
 //$stmt = $customer->search($keywords);
 //$num = $stmt->rowCount();
  
