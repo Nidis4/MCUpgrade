@@ -4,6 +4,7 @@ class Payment{
     // database connection and table name
     private $conn;
     private $table_name = "payments";
+    private $professionals_table_name = "professionals";
  
     // object properties
     public $payment_id;
@@ -106,5 +107,127 @@ class Payment{
         }
         
     }
+
+
+
+        // read products with pagination
+    public function readInvoicePaging($from_record_num, $records_per_page){
+     
+        // select query
+        $query = "SELECT pm.`id`as payment_id, pm.`datetime_added`, pm.`invoice_no`, pm.`comment`, pm.`amount`, pm.`status`
+                FROM
+                    " . $this->table_name . " pm  
+                WHERE (pm.`status`=1 OR pm.`status`=0) and pm.`issuetype` = 'Invoice'
+                ORDER BY `datetime_added` DESC
+                LIMIT ?, ?";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind variable values
+        $stmt->bindParam(1, $from_record_num, PDO::PARAM_INT);
+        $stmt->bindParam(2, $records_per_page, PDO::PARAM_INT);
+     
+        // execute query
+        $stmt->execute();
+     
+        // return values from database
+        return $stmt;
+    }
+
+    public function invoicecount(){
+        $query = "SELECT COUNT(*) as total_rows FROM " . $this->table_name . " where issuetype='Invoice' and (status='1' or status='0')";
+     
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+        return $row['total_rows'];
+    }
+
+        // read products with pagination
+    public function readReceiptPaging($from_record_num, $records_per_page){
+     
+        // select query
+        $query = "SELECT pm.`id`as payment_id, pm.`datetime_added`, pm.`receipt_no`, pm.`comment`, pm.`amount`, pm.`status`
+                FROM
+                    " . $this->table_name . " pm  
+                WHERE (pm.`status`=1 OR pm.`status`=0) and pm.`issuetype` = 'Receipt'
+                ORDER BY `datetime_added` DESC
+                LIMIT ?, ?";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind variable values
+        $stmt->bindParam(1, $from_record_num, PDO::PARAM_INT);
+        $stmt->bindParam(2, $records_per_page, PDO::PARAM_INT);
+     
+        // execute query
+        $stmt->execute();
+     
+        // return values from database
+        return $stmt;
+    }
+
+    public function receiptcount(){
+        $query = "SELECT COUNT(*) as total_rows FROM " . $this->table_name . " where issuetype='Receipt' and (status='1' or status='0')";
+     
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+        return $row['total_rows'];
+    }
+
+    function readOne(){
+     
+        // query to read single record
+        $query = "SELECT pm.*
+                FROM
+                    " . $this->table_name . " pm               
+                WHERE
+                    pm.id = :id
+                LIMIT
+                    0,1";
+    
+     //echo $query;
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+     //echo $this->id." ------ ";
+
+     $cur_id = $this->payment_id;
+        // bind id of product to be updated
+        $stmt->bindParam(':id',  $cur_id, PDO::PARAM_INT);
+        //$stmt->bindValue(':id', '$cur_id', PDO::PARAM_STR);
+     
+        // execute query
+        $stmt->execute();
+
+        $num = $stmt->rowCount();
+     
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+       
+        // set values to object properties
+        $this->id = $row['id'];
+        $this->professional_id = $row['professional_id'];
+        $this->category_id = $row['category_id'];
+        $this->amount = $row['amount'];
+        $this->agent_id = $row['agent_id'];
+        $this->comment = $row['comment'];
+        $this->type = $row['type'];
+        $this->bank_name =$row['bank_name'];
+        $this->datetime_added = $row['datetime_added'];
+        $this->issuetype = $row['issuetype'];
+        $this->invoice_no = $row['invoice_no'];
+        $this->receipt_no = $row['receipt_no'];
+        $this->status = $row['status'];
+        $this->datetimeStatusUpdated = $row['datetimeStatusUpdated'];
+        $this->cancelComment = $row['cancelComment'];
+
+    } // Read One
 }
 ?>
