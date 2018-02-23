@@ -9,6 +9,7 @@ class Professional{
     private $document_table_name = "professionals_documents";
     private $counties_table_name = "professionals_counties";
     private $applications_table_name = "professionals_applications";
+    private $invoicesettings_table_name = "professionals_invoice_settings";
  
     // object properties
     public $professional_id;
@@ -448,5 +449,30 @@ class Professional{
         return $stmt;
         
     }
+
+    
+    function updateInvoiceSettings($professional_id, $company_name, $profession, $address, $tax_id, $tax_office){
+
+
+        $query = "INSERT INTO ". $this->invoicesettings_table_name ." (`professional_id`, `company_name`, `profession`, `address`, `tax_id`, `tax_office`) VALUES (:professional_id, :company_name, :profession, :address, :tax_id, :tax_office) ON DUPLICATE KEY UPDATE `company_name`=:company_name, `profession`=:profession, `address`=:address, `tax_id`=:tax_id, `tax_office`=:tax_office";
+
+        $stmt = $this->conn->prepare( $query );
+       
+        // bind id of product to be updated
+        $stmt->bindParam(':professional_id',  $professional_id);
+        $stmt->bindParam(':company_name',  $company_name);
+        $stmt->bindParam(':profession',  $profession);
+        $stmt->bindParam(':address',  $address);
+        $stmt->bindParam(':tax_id',  $tax_id);
+        $stmt->bindParam(':tax_office',  $tax_office);
+        
+        if ($stmt->execute()) {
+           
+           return 1;
+        } else {
+           return 0;
+        }
+    } // Save Customer
+
 }
 ?>

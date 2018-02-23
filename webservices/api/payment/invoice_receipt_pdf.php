@@ -60,12 +60,13 @@ $tcpdf->setTextShadow(array('enabled' => true, 'depth_w' => 0.2, 'depth_h' => 0.
 
 //if ($invoice_receipt_data['Member']['current_working'] == 'company') {
 
-	$company_name = "";
-	$business_type = '';
-	$company_phone = '';
-	$vat_number = '';
-	$address = '';
-	$text_office = '';
+	$company_name = $payment->company_name;
+	$business_type = $payment->profession;
+	$company_phone = $payment->phone;
+	$vat_number = $payment->tax_id;
+	$address = $payment->legal_address;
+	$text_office = $payment->tax_office;
+	
 	$date = date('m-d-Y');
 	$p_c = '';
 	$amount = $payment->amount;

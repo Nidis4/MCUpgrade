@@ -763,6 +763,68 @@ include('config/core.php');
 							</div>
 						</section>
 
+
+						<!-- -->
+						<section class="card">
+							<header class="card-header">
+								<div class="card-actions">
+									<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+									<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
+								</div>
+						
+								<h2 class="card-title">Professional's Invoice Settings</h2>
+							</header>
+							<div class="card-body">
+								<form action="#" method="POST" id="updateProfessionalInvoice">
+									<div class="card-body col-sm-12 col-md-12 row" style="margin: 0">
+									
+										<div class="col-sm-12 col-md-5"><!-- Left-->
+											<div class="form-group row">
+												<label class="col-sm-4 control-label text-sm-right pt-2">Company Name</label>
+												<div class="col-sm-8">
+													<input type="text" name="company_name" class="form-control" value="<?php if(@$invoicesettings['company_name']){ echo $invoicesettings['company_name']; }?>" id="company_name" required />
+												</div>
+											</div>
+											<div class="form-group row">
+												<label class="col-sm-4 control-label text-sm-right pt-2">Profession</label>
+												<div class="col-sm-8">
+													<input type="text" name="profession" class="form-control" value="<?php if(@$invoicesettings['profession']){ echo $invoicesettings['profession']; }?>" id="profession" required />
+												</div>
+											</div>
+											<div class="form-group row">
+												<label class="col-sm-4 control-label text-sm-right pt-2">Legal Address</label>
+												<div class="col-sm-8">
+													<textarea class="form-control" name="address" id="address"><?php if(@$invoicesettings['address']){echo $invoicesettings['address']; } ?></textarea>
+													
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-12 col-md-5"><!-- Left-->
+											<div class="form-group row">
+												<label class="col-sm-4 control-label text-sm-right pt-2">Tax Id</label>
+												<div class="col-sm-8">
+													<input type="text" name="tax_id" class="form-control" value="<?php if(@$invoicesettings['tax_id']){ echo $invoicesettings['tax_id']; }?>" id="tax_id" required />
+												</div>
+											</div>
+											<div class="form-group row">
+												<label class="col-sm-4 control-label text-sm-right pt-2">Tax Office</label>
+												<div class="col-sm-8">
+													<input type="text" name="tax_office" class="form-control" value="<?php if(@$invoicesettings['tax_office']){ echo $invoicesettings['tax_office']; }?>" id="tax_office" required />
+												</div>
+											</div>
+											
+										</div>
+										<div class="col-sm-12 col-md-12 pt-2">
+										<div class="col-sm-3 offset-md-5">
+											<input type="hidden" value="<?php echo $professional['id']; ?>" name="professional_id" id="professional_id">
+											<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning" id="updateProfessionalInvoiceButton">Update Settings</button>
+										</div>
+									</div>
+									</div>
+								</form>
+							</div>
+						</section>
+
 					<!-- end: page -->
 				</section>
 			</div>
@@ -897,7 +959,24 @@ include('config/core.php');
 		<script type="text/javascript">
 			$(document).ready(function(){
 					
+				$("#updateProfessionalInvoiceButton").on('click',function(){
+					
+					var getAvailableAPI = API_LOCATION+'professional/saveIncoiceSettings.php';
+					var form_data = $("#updateProfessionalInvoice").serialize();
 
+					$.ajax({
+			            type: "POST",
+			            url: getAvailableAPI,
+			            dataType: "JSON",
+		                data: form_data,
+			            success: function(data)
+			            {
+			                alert(data.message);
+			                //location.reload(); 
+			            }
+			        });
+					return false;
+				});
 
 				$("#updateProfessional").on('click',function(){
 					var form_data = new FormData(); 

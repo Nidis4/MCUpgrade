@@ -5,6 +5,8 @@ class Payment{
     private $conn;
     private $table_name = "payments";
     private $professionals_table_name = "professionals";
+    private $invoicesettings_table_name = "professionals_invoice_settings";
+    private $contact_table_name = "professionals_contact_details";
  
     // object properties
     public $payment_id;
@@ -183,9 +185,13 @@ class Payment{
     function readOne(){
      
         // query to read single record
-        $query = "SELECT pm.*
+        $query = "SELECT pm.*, iv.`company_name`, iv.`profession`, iv.`address` as legal_address, iv.`tax_id`, iv.`tax_office`, pc.`phone` 
                 FROM
-                    " . $this->table_name . " pm               
+                    " . $this->table_name . " pm 
+                Left Join ".$this->invoicesettings_table_name." iv 
+                on pm.professional_id = iv.professional_id  
+                Left Join ".$this->contact_table_name." pc 
+                on pm.professional_id = pc.professional_id                
                 WHERE
                     pm.id = :id
                 LIMIT
@@ -227,6 +233,16 @@ class Payment{
         $this->status = $row['status'];
         $this->datetimeStatusUpdated = $row['datetimeStatusUpdated'];
         $this->cancelComment = $row['cancelComment'];
+
+        $this->company_name = $row['company_name'];
+        $this->profession = $row['profession'];
+        $this->legal_address = $row['legal_address'];
+        $this->tax_id = $row['tax_id'];
+        $this->tax_office = $row['tax_office'];
+        
+        $this->phone = $row['phone'];
+
+
 
     } // Read One
 }
