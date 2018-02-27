@@ -47,7 +47,8 @@ p {
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
-    color: #999;
+    color: #3c3c3c;
+    /*color:#999;*/
 }
 
 a, a:hover, a:focus {
@@ -412,8 +413,8 @@ div#content {
 }
 
 .TotalRatingOuter {
-    font-size: 30px;
-    width: 100px;
+    font-size: 35px;
+    width: 115px;
     margin: 0 10px 8px 0;
     color: #fff;
     border-radius: 20px 20px 20px 0;
@@ -426,7 +427,7 @@ div#content {
 
 span.totalRatingReviews {
     color: #fff;
-    font-size: 40px;
+    font-size: 45px;
     font-family: dinbd;
 }
 
@@ -486,3 +487,125 @@ span.totalRatingReviews {
     background:#63b9ff;
 }
 
+.totalScore {
+    width: 150px;
+    float: left;
+}
+
+.totalStars div {
+    background: url(../img/five-stars-full.png);
+    height: 31px;
+    background-repeat: no-repeat;
+}
+
+.totalStars {
+    background: url(../img/five-stars-empty.png);
+    background-repeat: no-repeat;
+    width: 150px;
+    height: 31px;
+}
+
+
+.quality-empty, .reliability-empty, .cost-empty, .schedule-empty, .behaviour-empty, .cleanliness-empty {
+    background: #dedede;
+    height: 13px;
+    float: left;
+    width: 100%;
+    margin-bottom: 4px;
+}
+
+.emplexp {
+    font-size: 17px;
+    color: #333;
+}
+
+.quality-empty div, .reliability-empty div, .cost-empty div, .schedule-empty div, .behaviour-empty div, .cleanliness-empty div {
+    background: #008dff;
+    height: 13px;
+}
+
+.row.total-reviews-row {
+    margin-bottom: 80px;
+}
+
+.col-md-12.page-title-review h2 {
+    margin-bottom: 60px;
+}
+.row.latest-reviews-row h2 {
+    margin-bottom: 35px;
+}
+
+.starsouter {
+    width: 110px;
+    float: left;
+    margin-right: 10px;
+}
+
+.empty-bar {
+    background: url(../img/five-stars-empty.png);
+    background-repeat: no-repeat;
+    width: 110px;
+    height: 23px;
+    background-size: cover;
+}
+
+.empty-bar div {
+    background: url(../img/five-stars-full.png);
+    height: 23px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.rev-score {
+    font-size: 18px;
+    float: left; margin-right: 10px;
+}
+
+
+.col-md-7.review-outer {
+    background: #fff;
+    padding: 25px 25px 25px 25px;
+    border: 1px solid #dedede;
+}
+
+.reviewdate {
+    font-size: 18px;
+}
+
+p.reviewComment {
+    margin-top: 12px;
+}
+
+p.reviewerName {
+    text-align: right;
+    font-size: 18px;
+    font-style: italic;
+}
+
+@media (min-width: 1200px){
+    .container {
+        width: 100%;
+    }
+}
+
+@media (min-width: 992px){
+    .container {
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px){
+    .container {
+        width: 100%;
+    }
+}
+
+.contaier.latest-reviews-row h2 {
+    margin-bottom: 50px;
+}
+
+.row.review-row {
+    margin-right: 0px;
+    margin-left: 0px;
+    margin-bottom: 50px;
+}

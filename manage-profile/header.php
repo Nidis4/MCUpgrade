@@ -10,7 +10,7 @@
          <!-- Bootstrap CSS CDN -->
         <link rel="stylesheet" href="../assets/bootstrap337/css/bootstrap.min.css">
         <!-- Our Custom CSS -->
-        <link rel="stylesheet" href="style/style.css">
+        <link rel="stylesheet" href="style/style.css?version=2">
         <link rel="stylesheet" href="style/timeline.css">
 
          <!-- jQuery CDN -->
