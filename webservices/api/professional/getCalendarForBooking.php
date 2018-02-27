@@ -103,6 +103,7 @@ if($num>0){
 
                 if($response_a['status'] != 'OK' ||  $response_a['rows'][0]['elements'][0]['status'] == "NOT_FOUND") {
                    $dist = "NOT OK";
+                   $professionals_arr[$row]['busy'][$busy_row]['address'] ="Busy";
                 }  
                 else{
                     $dist = $response_a['rows'][0]['elements'][0]['distance']['value'];
@@ -239,15 +240,15 @@ function getCalendarDetails($startDate, $endDate, $opening, $closing, $busy_arr)
 
                     if (($busyDate==$date) && ($timefrom == $startBusy)){
                         $inBusy = 1;
-                        $address = $busyTimeSlot = $busy_arr[$x]['address'];
+                        $address = $busy_arr[$x]['address'];
                     }
                     if (($busyDate==$date) && ($timeto == $endBusy)){
                         $inBusy = 0;
-                        $address = $busyTimeSlot = $busy_arr[$x]['address'];
+                        $address = $busy_arr[$x]['address'];
                         $x++;
                     }
                     if ($inBusy == 1){
-                        $address = $busyTimeSlot = $busy_arr[$x]['address'];
+                        $address = $busy_arr[$x]['address'];
                     }
                 }
 

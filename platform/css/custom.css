@@ -47,7 +47,7 @@ tr.status-0, .table-striped tbody tr:nth-of-type(odd).status-0 {
 .calendar li.busy {
     width: 100%;
     float: none;
-    background: #d2322d;
+    background: #d2322d !important;
     color: white;
     overflow: hidden;
 }

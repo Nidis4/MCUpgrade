@@ -78,7 +78,17 @@ class Professional{
 
 
     public function busySlots($startDate, $endDate, $id){
-        $query ="SELECT `date`,`time`, `address` FROM `appointments` WHERE `prof_member_id`=".$id." AND `status`=1 AND `date` BETWEEN '".$startDate."' AND '".$endDate."'  ORDER BY `date` ASC, `time` ASC";
+       
+        $query = "SELECT  `date`, `time`, `address` 
+FROM
+        (
+            SELECT `date`,`time`, `address` FROM `appointments` WHERE `prof_member_id`=".$id." AND `status`=1 AND `date` BETWEEN '".$startDate."' AND '".$endDate."'
+ UNION   ALL
+            SELECT `DATE` as date, `TIME` as time, 'Busy' as address FROM `professionals_busytimes` WHERE `PROFESSIONAL_ID` = ".$id."  AND `DATE` BETWEEN '".$startDate."' AND '".$endDate."'
+        ) subquery
+ORDER   BY `date` ASC, `time` ASC";
+ //$query ="SELECT `date`,`time`, `address` FROM `appointments` WHERE ( `prof_member_id` = ".$id." ) AND (`status` = 1 ) AND (`date` BETWEEN '".$startDate."' AND '".$endDate."')  ORDER BY `date` ASC, `time` ASC";
+
         $stmt = $this->conn->prepare( $query );
         $stmt->execute();
  
