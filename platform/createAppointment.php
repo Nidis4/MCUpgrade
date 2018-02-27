@@ -80,6 +80,36 @@ include('config/core.php');
 					<!-- start: page -->
 					<div class="row">
 						<!-- col-lg-6 -->
+						<div class="col-lg-12">
+							<section class="card">
+								<header class="card-header">
+									<div class="card-actions">
+										<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+										<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
+									</div>
+
+									<h2 class="card-title">Appointment Status</h2>
+									<p class="card-subtitle">
+										Please fill in the appointment details
+									</p>
+								</header>
+								<div class="card-body">
+									<div class="form-group row">
+										<label class="col-lg-3 control-label text-lg-right pt-2">Status</label>
+										<div class="col-lg-6">
+											<select data-plugin-selectTwo class="form-control populate" name="appointmentStatus" id="appointmentStatus">
+												<option value="1" >Appointment</option>
+												<option value="3" >Offer</option>
+												<option value="4" >Appointment for Offer</option>
+											</select>
+										</div>
+
+												
+									</div>
+								</div>
+							</section>
+						</div>
+						<!-- col-lg-6 -->
 						<div class="col-lg-6">
 							<form id="form" action="forms-validation.html" class="form-horizontal">
 								<section class="card">
@@ -314,9 +344,14 @@ include('config/core.php');
 						</div>
 						
 					</div>
-					<div class="row">
+					<div class="row status-1 status">
 						<div class="col-sm-6 offset-sm-3 text-center">
 							<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning findProfessionals">Find Professionals</button>
+						</div>
+					</div>
+					<div class="row status-3 status-4 status" style='display: none'>
+						<div class="col-sm-6 offset-sm-3 text-center">
+							<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning createOffer">Create Offer</button>
 						</div>
 					</div>
 					<div class="row available">
