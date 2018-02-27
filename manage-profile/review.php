@@ -8,8 +8,8 @@
                         <div class="col-md-12 page-title-review"><h2>Customers Reviews</h2></div>
                             <div class="col-md-5">
                                 <div class="reviewsTitle">
-                                    <div class="TotalRatingOuter"><span class="totalRatingReviews">5</span>/5 </div><div class="total-score">Total score <br>
-                                            Βαθμός από <span class="total-jobs">190</span> Αξιολογήσεις </div>
+                                    <div class="TotalRatingOuter"><span class="totalRatingReviews">4,5</span>/5 </div><div class="total-score">Total score <br>
+                                            Score from <span class="total-jobs">190</span> reviews </div>
                                 </div>
                                 <div class="totalScore">
                                     <div class="totalStars">
@@ -21,29 +21,29 @@
                                             
                             <div class="col-md-7">
                                 <div class="col-md-6 bars-one-half">                         
-                                        <p class="emplexp">Ποιότητα</p>
+                                        <p class="emplexp">Quality</p>
                                            <div class="quality-empty">
                                                 <div style="width:80%;"></div>
                                             </div>
-                                         <p class="emplexp">Αξιοπιστία</p>
+                                         <p class="emplexp">Reliability</p>
                                             <div class="reliability-empty">
                                                 <div style="width:100%;"></div>
                                             </div>
-                                         <p class="emplexp">Κόστος</p>
+                                         <p class="emplexp">Cost</p>
                                             <div class="cost-empty">
                                                 <div style="width:70%;"></div>
                                             </div>
                                 </div>
                                     <div class="col-md-6 bars-one-half">
-                                     <p class="emplexp">Συνέπεια</p>
+                                     <p class="emplexp">Schedule</p>
                                         <div class="schedule-empty">
                                             <div style="width:90%;"></div>
                                         </div>
-                                     <p class="emplexp">Συμπεριφορά</p>
+                                     <p class="emplexp">Behaviour</p>
                                         <div class="behaviour-empty">
                                             <div style="width:100%;"></div>
                                         </div>
-                                     <p class="emplexp">Καθαριότητα</p>
+                                     <p class="emplexp">Cleanliness</p>
                                         <div class="cleanliness-empty">
                                             <div style="width:100%;"></div>
                                         </div>
@@ -78,29 +78,29 @@
                             </div>
                             <div class="col-md-5">
                                 <div class="col-md-6 bars-one-half">                         
-                                        <p class="emplexp">Ποιότητα</p>
+                                        <p class="emplexp">Quality</p>
                                            <div class="quality-empty">
                                                 <div style="width:80%;"></div>
                                             </div>
-                                         <p class="emplexp">Αξιοπιστία</p>
+                                         <p class="emplexp">Reliability</p>
                                             <div class="reliability-empty">
                                                 <div style="width:100%;"></div>
                                             </div>
-                                         <p class="emplexp">Κόστος</p>
+                                         <p class="emplexp">Cost</p>
                                             <div class="cost-empty">
                                                 <div style="width:70%;"></div>
                                             </div>
                                 </div>
                                     <div class="col-md-6 bars-one-half">
-                                     <p class="emplexp">Συνέπεια</p>
+                                     <p class="emplexp">Schedule</p>
                                         <div class="schedule-empty">
                                             <div style="width:90%;"></div>
                                         </div>
-                                     <p class="emplexp">Συμπεριφορά</p>
+                                     <p class="emplexp">Behaviour</p>
                                         <div class="behaviour-empty">
                                             <div style="width:100%;"></div>
                                         </div>
-                                     <p class="emplexp">Καθαριότητα</p>
+                                     <p class="emplexp">Cleanliness</p>
                                         <div class="cleanliness-empty">
                                             <div style="width:100%;"></div>
                                         </div>
@@ -129,33 +129,33 @@
                                 
                             </div>
                             <div class="col-md-5">
-                                <div class="col-md-6 bars-one-half">                         
-                                        <p class="emplexp">Ποιότητα</p>
+                                    <div class="col-md-6 bars-one-half">                         
+                                        <p class="emplexp">Quality</p>
                                            <div class="quality-empty">
                                                 <div style="width:80%;"></div>
                                             </div>
-                                         <p class="emplexp">Αξιοπιστία</p>
+                                         <p class="emplexp">Reliability</p>
                                             <div class="reliability-empty">
                                                 <div style="width:100%;"></div>
                                             </div>
-                                         <p class="emplexp">Κόστος</p>
+                                         <p class="emplexp">Cost</p>
                                             <div class="cost-empty">
                                                 <div style="width:70%;"></div>
                                             </div>
-                                </div>
+                                    </div>
                                     <div class="col-md-6 bars-one-half">
-                                     <p class="emplexp">Συνέπεια</p>
-                                        <div class="schedule-empty">
-                                            <div style="width:90%;"></div>
-                                        </div>
-                                     <p class="emplexp">Συμπεριφορά</p>
-                                        <div class="behaviour-empty">
-                                            <div style="width:100%;"></div>
-                                        </div>
-                                     <p class="emplexp">Καθαριότητα</p>
-                                        <div class="cleanliness-empty">
-                                            <div style="width:100%;"></div>
-                                        </div>
+                                         <p class="emplexp">Schedule</p>
+                                            <div class="schedule-empty">
+                                                <div style="width:90%;"></div>
+                                            </div>
+                                         <p class="emplexp">Behaviour</p>
+                                            <div class="behaviour-empty">
+                                                <div style="width:100%;"></div>
+                                            </div>
+                                         <p class="emplexp">Cleanliness</p>
+                                            <div class="cleanliness-empty">
+                                                <div style="width:100%;"></div>
+                                            </div>
                                     </div>
                                 
                             </div>
@@ -183,32 +183,32 @@
                             </div>
                             <div class="col-md-5">
                                 <div class="col-md-6 bars-one-half">                         
-                                        <p class="emplexp">Ποιότητα</p>
+                                        <p class="emplexp">Quality</p>
                                            <div class="quality-empty">
                                                 <div style="width:80%;"></div>
                                             </div>
-                                         <p class="emplexp">Αξιοπιστία</p>
+                                         <p class="emplexp">Reliability</p>
                                             <div class="reliability-empty">
                                                 <div style="width:100%;"></div>
                                             </div>
-                                         <p class="emplexp">Κόστος</p>
+                                         <p class="emplexp">Cost</p>
                                             <div class="cost-empty">
                                                 <div style="width:70%;"></div>
                                             </div>
-                                </div>
+                                    </div>
                                     <div class="col-md-6 bars-one-half">
-                                     <p class="emplexp">Συνέπεια</p>
-                                        <div class="schedule-empty">
-                                            <div style="width:90%;"></div>
-                                        </div>
-                                     <p class="emplexp">Συμπεριφορά</p>
-                                        <div class="behaviour-empty">
-                                            <div style="width:100%;"></div>
-                                        </div>
-                                     <p class="emplexp">Καθαριότητα</p>
-                                        <div class="cleanliness-empty">
-                                            <div style="width:100%;"></div>
-                                        </div>
+                                         <p class="emplexp">Schedule</p>
+                                            <div class="schedule-empty">
+                                                <div style="width:90%;"></div>
+                                            </div>
+                                         <p class="emplexp">Behaviour</p>
+                                            <div class="behaviour-empty">
+                                                <div style="width:100%;"></div>
+                                            </div>
+                                         <p class="emplexp">Cleanliness</p>
+                                            <div class="cleanliness-empty">
+                                                <div style="width:100%;"></div>
+                                            </div>
                                     </div>
                                 
                             </div>
@@ -235,32 +235,32 @@
                             </div>
                             <div class="col-md-5">
                                 <div class="col-md-6 bars-one-half">                         
-                                        <p class="emplexp">Ποιότητα</p>
+                                        <p class="emplexp">Quality</p>
                                            <div class="quality-empty">
                                                 <div style="width:80%;"></div>
                                             </div>
-                                         <p class="emplexp">Αξιοπιστία</p>
+                                         <p class="emplexp">Reliability</p>
                                             <div class="reliability-empty">
                                                 <div style="width:100%;"></div>
                                             </div>
-                                         <p class="emplexp">Κόστος</p>
+                                         <p class="emplexp">Cost</p>
                                             <div class="cost-empty">
                                                 <div style="width:70%;"></div>
                                             </div>
-                                </div>
+                                    </div>
                                     <div class="col-md-6 bars-one-half">
-                                     <p class="emplexp">Συνέπεια</p>
-                                        <div class="schedule-empty">
-                                            <div style="width:90%;"></div>
-                                        </div>
-                                     <p class="emplexp">Συμπεριφορά</p>
-                                        <div class="behaviour-empty">
-                                            <div style="width:100%;"></div>
-                                        </div>
-                                     <p class="emplexp">Καθαριότητα</p>
-                                        <div class="cleanliness-empty">
-                                            <div style="width:100%;"></div>
-                                        </div>
+                                         <p class="emplexp">Schedule</p>
+                                            <div class="schedule-empty">
+                                                <div style="width:90%;"></div>
+                                            </div>
+                                         <p class="emplexp">Behaviour</p>
+                                            <div class="behaviour-empty">
+                                                <div style="width:100%;"></div>
+                                            </div>
+                                         <p class="emplexp">Cleanliness</p>
+                                            <div class="cleanliness-empty">
+                                                <div style="width:100%;"></div>
+                                            </div>
                                     </div>
                                 
                             </div>
@@ -287,32 +287,32 @@
                             </div>
                             <div class="col-md-5">
                                 <div class="col-md-6 bars-one-half">                         
-                                        <p class="emplexp">Ποιότητα</p>
+                                        <p class="emplexp">Quality</p>
                                            <div class="quality-empty">
                                                 <div style="width:80%;"></div>
                                             </div>
-                                         <p class="emplexp">Αξιοπιστία</p>
+                                         <p class="emplexp">Reliability</p>
                                             <div class="reliability-empty">
                                                 <div style="width:100%;"></div>
                                             </div>
-                                         <p class="emplexp">Κόστος</p>
+                                         <p class="emplexp">Cost</p>
                                             <div class="cost-empty">
                                                 <div style="width:70%;"></div>
                                             </div>
-                                </div>
+                                    </div>
                                     <div class="col-md-6 bars-one-half">
-                                     <p class="emplexp">Συνέπεια</p>
-                                        <div class="schedule-empty">
-                                            <div style="width:90%;"></div>
-                                        </div>
-                                     <p class="emplexp">Συμπεριφορά</p>
-                                        <div class="behaviour-empty">
-                                            <div style="width:100%;"></div>
-                                        </div>
-                                     <p class="emplexp">Καθαριότητα</p>
-                                        <div class="cleanliness-empty">
-                                            <div style="width:100%;"></div>
-                                        </div>
+                                         <p class="emplexp">Schedule</p>
+                                            <div class="schedule-empty">
+                                                <div style="width:90%;"></div>
+                                            </div>
+                                         <p class="emplexp">Behaviour</p>
+                                            <div class="behaviour-empty">
+                                                <div style="width:100%;"></div>
+                                            </div>
+                                         <p class="emplexp">Cleanliness</p>
+                                            <div class="cleanliness-empty">
+                                                <div style="width:100%;"></div>
+                                            </div>
                                     </div>
                                 
                             </div>
