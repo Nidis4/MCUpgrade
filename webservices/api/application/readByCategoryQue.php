@@ -469,6 +469,49 @@ if($catId == "60"){ // Electrical Certificate
 
     }
 ?>
+        <!-- The energy certificate will be used for  ) -->
+        <label class="col-lg-3 control-label text-lg-right pt-2">The energy certificate will be used for  </label>
+        <div class="col-lg-9 row">
+            <div class="col-lg-6">            
+                <div class="radio">
+                    <label class="pt-3">
+                        <input class="usedfor" type="radio" name="usedfor" value="forrent" id="usedforrent">
+                        Renting/Selling the house
+                    </label>
+                </div>
+            </div>
+            <div class="col-lg-6">            
+                <div class="radio">
+                    <label class="pt-3">
+                        <input class="usedfor" type="radio" name="usedfor" value="forsave" id="usedforsave">
+                        Εξοικονομώ
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!-- Do you want to use it for your appartment (bullet) or for the whole block of appartments(bullets)?--> 
+        <label class="col-lg-3 control-label text-lg-right pt-2 forsave" style="display: none;">Do you want to use it for  </label>
+        <div class="col-lg-9 row forsave" style="display: none;">
+            <div class="col-lg-6" style="float: left;">            
+                <div class="radio">
+                    <label class="pt-3">
+                        <input class="usedappartment" type="radio" name="usedappartment" value="forappartment" id="usedappartmentrent">
+                        Your appartment
+                    </label>
+                </div>
+            </div>
+            <div class="col-lg-6" style="float: right;">            
+                <div class="radio">
+                    <label class="pt-3">
+                        <input class="usedappartment" type="radio" name="usedappartment" value="forblock" id="usedwholeblocksave">
+                        The whole block of appartments
+                    </label>
+                </div>
+            </div>
+            <input type="hidden" name="usedforbudget" id="usedforbudget" value="0">
+        </div>
+
+
         <!-- How many m2 are the building ? (greek: Πόσα μ2 είναι το ακινητό σας?) -->
         <label class="col-lg-3 control-label text-lg-right pt-2">Πόσα μ2 είναι το ακινητό σας? </label>
         <div class="col-lg-9"><input class="form-control" type="number" name="buildingmtwo" id="buildingmtwo" /></div>
@@ -567,21 +610,60 @@ if($catId == "60"){ // Electrical Certificate
             function update_budget(){
 
                 //var  bud = $("#budget").val();
+                var  ubud = 0;
                 var  cbud = 0;
                 var  dbud = 0;
                
 
+                if($("#usedforbudget").length){ ubud = $("#usedforbudget").val();}
                 if($("#countrybudget").length){ cbud = $("#countrybudget").val();}
                 if($("#buildingdrawingbudget").length){ dbud = $("#buildingdrawingbudget").val();}
                
-                var totalbud = parseFloat(cbud) + parseFloat(dbud);
+                var totalbud = parseFloat(ubud) + parseFloat(cbud) + parseFloat(dbud);
+
+               
+
                 var samecatebud = $("#samecatebud").val();
                 if(samecatebud >= 2){
-                    totalbud = samecatebud * totalbud;                
+                    totalbud = samecatebud * totalbud;               
                 }
 
                 $("#budget").val(totalbud);
             }
+
+            function usedforbudget(){
+                var vale = $('#buildingmtwo').val();
+                //var rvale = $('.usedfor').val(); 
+                var rvale = $("input[name='usedfor']:checked"). val();
+                var bud = 0;
+                
+                if((vale >= 1 ) && (rvale == "forsave")){
+                    var avale = $('.usedappartment').val();                    
+                    if(vale >= 1 && vale <= 99 && (avale == "forappartment")){
+                        bud = 38 + (vale * 1.20);
+                    }else if(vale >= 100 && vale <= 149 && (avale == "forappartment")){
+                        bud = 60 + (vale * 1.20);
+                    }else if(vale >= 150 && vale <= 1999 && (avale == "forappartment")){
+                        bud = 90 + (vale * 1.20);
+                        if(bud >= 260){
+                            bud = 260;
+                        }
+                    }else if(vale >= 1 && vale <= 999 && (avale == "forblock")){
+                        bud = 50 + (vale * 1);
+                        if(bud >= 565){
+                            bud = 565;
+                        }
+                    }
+                    $("#usedforbudget").val(bud);
+                }else{
+                    $("#usedforbudget").val(0);
+                }
+
+                update_budget();
+                update_comment();
+
+            }
+
             function ElectricalCertificateCountyBudget(){
                 // Add Budget
                     var vale = $('#buildingmtwo').val();
@@ -623,7 +705,9 @@ if($catId == "60"){ // Electrical Certificate
                     var vale = $(this).val();
                     var country = $("#county").val();
                     $("#countrybudget").val('0');
+                    usedforbudget();
                     ElectricalCertificateCountyBudget();
+                    
                 });
 
 
@@ -679,6 +763,18 @@ if($catId == "60"){ // Electrical Certificate
                         $(".availableownerstatusYes").text('Εναλλακτικά με το Ε9 πρέπει να φέρετε το συμβολαιο ιδιοκτησίας, γονική παροχή ή οποιοδήποτε επίσημο έγγραφο που να φαίνεται ο ιδιοκτήτης'); 
                     }
                });
+
+                $(".usedfor").on('change',function(){
+                    var rvale = $(this).val(); 
+                    //alert(rvale);
+                    if(rvale == "forsave"){
+                        $('.forsave').css('display','block');
+                    }else{
+                        $('.forsave').css('display','none');
+                    }
+
+                    usedforbudget();
+                });
 
 
             });
