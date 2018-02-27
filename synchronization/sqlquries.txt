@@ -170,3 +170,38 @@ ALTER TABLE `professionals_invoice_settings`
 
 <!-------------------------------->
 <!-- End 23 Feb 2018 Harpreet -->
+
+<!-------------------------------->
+<!-- Start 27 Feb 2018 G Konstantinidis -->
+
+CREATE TABLE `professionals_busytimes` (
+  `ID` int(11) NOT NULL,
+  `PROFESSIONAL_ID` int(11) NOT NULL,
+  `DATE` date NOT NULL,
+  `TIME` varchar(12) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `professionals_busytimes`
+--
+ALTER TABLE `professionals_busytimes`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `professionals_busytimes`
+--
+ALTER TABLE `professionals_busytimes`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+
+<!-------------------------------->
+<!-- End 23 Feb 2017 G Konstantinidis -->
