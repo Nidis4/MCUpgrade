@@ -344,12 +344,12 @@ include('config/core.php');
 						</div>
 						
 					</div>
-					<div class="row status-1 status">
+					<div class="row status-1 status-4 status">
 						<div class="col-sm-6 offset-sm-3 text-center">
 							<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning findProfessionals">Find Professionals</button>
 						</div>
 					</div>
-					<div class="row status-3 status-4 status" style='display: none'>
+					<div class="row status-3 status" style='display: none'>
 						<div class="col-sm-6 offset-sm-3 text-center">
 							<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning createOffer">Create Offer</button>
 						</div>

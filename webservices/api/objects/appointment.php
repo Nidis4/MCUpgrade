@@ -150,7 +150,7 @@ class Appointment{
         $query = "SELECT
                     `id`, `prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelReason`, `cancelComment`
                 FROM
-                    " . $this->table_name . " WHERE `status`=1 OR `status`=0
+                    " . $this->table_name . " WHERE `status`!=2
                 ORDER BY `datetimeCreated` DESC
                 LIMIT ?, ?";
      
@@ -278,8 +278,8 @@ class Appointment{
         return $row['first_name']." ".$row['last_name'];
     }
 
-    public function create($prof_id, $cust_id, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment){
-        $query = "INSERT INTO `appointments`(`prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`) VALUES ('$prof_id', '$cust_id', '$application_id', '$date', '$time', '$address', '$budget','$commision', '$agent_id','$comment','0','0','0', NOW(),NOW(),'0','1','')";
+    public function create($prof_id, $cust_id, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment, $status){
+        $query = "INSERT INTO `appointments`(`prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `googleEventId`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`) VALUES ('$prof_id', '$cust_id', '$application_id', '$date', '$time', '$address', '$budget','$commision', '$agent_id','$comment','0','0','0', NOW(),NOW(),'0','$status','')";
 
         $stmt = $this->conn->prepare( $query );
         $stmt->execute();

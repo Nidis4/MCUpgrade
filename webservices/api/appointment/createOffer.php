@@ -18,7 +18,6 @@ $appointment = new Appointment($db);
  
 
  $prof_id = isset($_POST['prof_id']) ? $_POST['prof_id'] : die();
- $status = isset($_POST['status']) ? $_POST['status'] : die();
  $cust_id = isset($_POST['cust_id']) ? $_POST['cust_id'] : die();
  $category_id = isset($_POST['category_id']) ? $_POST['category_id'] : die();
  $application_id = isset($_POST['application_id']) ? $_POST['application_id'] : die();
@@ -39,7 +38,7 @@ $appointment = new Appointment($db);
 
 
 // query products
-$stmt = $appointment->create($prof_id, $cust_id, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment, $status);
+$stmt = $appointment->create($prof_id, $cust_id, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment);
 //$stmt = $customer->search($keywords);
 //$num = $stmt->rowCount();
  
