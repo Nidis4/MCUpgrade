@@ -13,11 +13,14 @@ tr.status-0, .table-striped tbody tr:nth-of-type(odd).status-0 {
 .status-0 .copy-row .fa{
     display: initial;
 }
-.status-1 .cancel-row .fa, .status-4 .cancel-row .fa{
+.status-1 .cancel-row .fa, .status-3 .cancel-row .fa, .status-4 .cancel-row .fa{
     display: initial;
 }
-.status-1 .edit-row .fa, .status-4 .edit-row .fa{
+.status-1 .edit-row .fa, .status-3 .edit-row .fa, .status-4 .edit-row .fa, .status-5 .edit-row .fa, .status-6 .edit-row .fa{
     display: initial;
+}
+.table th, .table td {
+    padding: 0.55rem;
 }
 .selectCustomer {
     width: 100%;
@@ -89,3 +92,26 @@ li.slot.disabled {
   .selectable .ui-selecting { background: #FECA40; }
   .selectable .ui-selected { background: #F39814; color: white; }
   .selectable { list-style-type: none; margin: 0; padding: 0; }
+
+.status-4 .status-field, .status-3 .status-field {
+    background: #5bc0de;
+}
+.status-0 .status-field {
+    background: #d2322d;
+}
+.status-1 .status-field{
+    background: #0088cc;
+}
+.status-5 .status-field, .status-6 .status-field, .status-7 .status-field {
+    background: #47a447;
+}
+.status-8 .status-field {
+    background: #2e353e;
+}
+#status-3 .duration, #status-3 .daterange, #status-3 .smsProf, #status-3 .smsEmpl {
+    display: none;
+}
+.status-field {
+    color: white;
+    text-align: center;
+}

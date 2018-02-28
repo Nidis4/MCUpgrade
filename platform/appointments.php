@@ -101,13 +101,14 @@ include('config/core.php');
 								<table class="table table-bordered table-striped mb-0" id="datatable-editable">
 									<thead>
 										<tr>
+											<th>ST</th>
 											<th>Submission Date</th>
 											<th>Professional</th>
 											<th>Customer</th>
 											<th>Date</th>
 											<th width="470px">Comments</th>
 											<th>Budget</th>
-											<th>Commision</th>
+											<th>Comm</th>
 											<th>Actions</th>
 										</tr>
 									</thead>
@@ -126,9 +127,41 @@ include('config/core.php');
 											$budget = $appointmentsPag['records'][$field]['budget'];
 											$commission = $appointmentsPag['records'][$field]['commision'];
 											$status = $appointmentsPag['records'][$field]['status'];
+											if ($status==0){
+												$statusLabel = "CN";
+											
+											}
+											else if($status == 1){
+												$statusLabel = "AP";
+											}
+											else if($status == 2){
+												$statusLabel = "AP";
+											}
+											else if($status==3){
+												$statusLabel = "OF";
+											}
+											else if($status==4){
+												$statusLabel = "AO";
+											}
+											else if($status==5){
+												$statusLabel = "JC";
+											}
+											else if($status==6){
+												$statusLabel = "RE";
+											}
+											else if($status==7){
+												$statusLabel = "AO";
+											}
+											else if($status==8){
+												$statusLabel = "CL";
+											}
+											else{
+												$statusLabel = "";
+											}
 											$comment = $appointmentsPag['records'][$field]['comment'];
 
 											echo '<tr data-item-id="'.$id.'" class="status-'.$status.'">
+													  <td class="status-field">'.$statusLabel.'</td>
 													  <td>'.$submission_date.'</td>
 													  <td><a href="professional.php?id='.$prof_id.'">'.$prof_name.'</a></td>
 													  <td><a href="customer.php?id='.$cust_id.'">'.$cust_name.'</a></td>

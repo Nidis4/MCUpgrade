@@ -176,7 +176,7 @@ include('config/core.php');
 										<div class="form-group row application_questions">
 										</div>
 
-										<div class="form-group row">
+										<div class="form-group row duration">
 												<label class="col-lg-3 control-label text-lg-right pt-2">Duration in mins</label>
 												<div class="col-lg-9">
 													<input class="form-control" id="duration" type="number" min="0" max="900" step="30">
@@ -200,7 +200,7 @@ include('config/core.php');
 													</select>
 											</div>
 										</div>
-										<div class="form-group row">
+										<div class="form-group row daterange">
 												<label class="col-lg-3 control-label text-lg-right pt-2">Date range</label>
 												<div class="col-lg-9">
 													<div class="input-daterange input-group" data-plugin-datepicker="">
@@ -232,7 +232,7 @@ include('config/core.php');
 												<textarea name="comment" id="comment123" class="form-control"></textarea>
 											</div>
 										</div>
-										<div class="form-group row">
+										<div class="form-group row smsProf">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Send SMS to Professional</label>
 											<div class="col-sm-1">												
 												<input type="checkbox" class="form-control" id="professionalsms" name="professionalsms">
@@ -324,7 +324,7 @@ include('config/core.php');
 											</div>
 										</div>
 										
-										<div class="form-group row">
+										<div class="form-group row smsEmpl">
 											<label class="col-sm-3 control-label text-sm-right pt-2">SMS to Employer</label>
 											<div class="col-sm-1">												
 												<input type="checkbox" class="form-control" name="employersms" id="employersms" checked="checked">

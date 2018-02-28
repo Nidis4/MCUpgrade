@@ -17,98 +17,39 @@ $db = $database->getConnection();
 $appointment = new Appointment($db);
  
 
- $prof_id = isset($_POST['prof_id']) ? $_POST['prof_id'] : die();
  $cust_id = isset($_POST['cust_id']) ? $_POST['cust_id'] : die();
  $category_id = isset($_POST['category_id']) ? $_POST['category_id'] : die();
  $application_id = isset($_POST['application_id']) ? $_POST['application_id'] : die();
- $date = isset($_POST['date']) ? $_POST['date'] : die();
- $time = isset($_POST['time']) ? $_POST['time'] : die();
  $address = isset($_POST['address']) ? $_POST['address'] : die();
  $budget = isset($_POST['budget']) ? $_POST['budget'] : die();
  $commision = isset($_POST['commision']) ? $_POST['commision'] : die();
  $agent_id = isset($_POST['agent_id']) ? $_POST['agent_id'] : die();
  $comment = isset($_POST['comment']) ? $_POST['comment'] : die();
- $professionalsms = isset($_POST['professionalsms']) ? $_POST['professionalsms'] : die();
- $employersms = isset($_POST['employersms']) ? $_POST['employersms'] : die();
  $customer_mobile = isset($_POST['mobile']) ? $_POST['mobile'] : die();
  $landline = isset($_POST['phone']) ? $_POST['phone'] : "";
  $firstname = isset($_POST['firstname']) ? $_POST['firstname'] : die();
  $surname = isset($_POST['surname']) ? $_POST['surname'] : die();
 
+$prof_id = "0";
+$date = "0000-00-00";
+$time = "";
+$status = 3;
 
 
 // query products
-$stmt = $appointment->create($prof_id, $cust_id, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment);
+$stmt = $appointment->create($prof_id, $cust_id, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment, $status);
+
+//$stmt = $appointment->create('', $cust_id, $application_id, '', '', $address, $budget, $commision, $agent_id, $comment,'3');
 //$stmt = $customer->search($keywords);
 //$num = $stmt->rowCount();
- 
-// check if more than 0 record found
-if($stmt){ 
-    /*echo json_encode(
-        array("message" => "Appointment updated successfully.")
-    );*/
-
-    if(@$employersms){
-	    	// initialize object
-    		$customer_mobile = '6940589493';
-
-			$category = new Category($db);
-			$category->id = $category_id;
-			$cat = $category->readOne();			
-			$arrtime = explode("-", $time, 2);
-			$FFtime = $arrtime[0];
-			$FLtime = date('H:i', strtotime($FFtime)+7200);
-			$Ftime = $FFtime.'-'.$FLtime;
-			$adate = date_create($date);
-			$fdate = date_format($adate, 'd-m-y');
-			$fcname = $category->title_greek;
-			$smsTexts = implode(' - ', [
-				'Ραντεβού για '.$fcname,
-				'στις '.$Ftime.' ' .$fdate.'.',
-				$address,
-				'Γραμμή εξυπηρέτησης πελατών 2103009325 '
-			]);
-
-			// Viber Connection			
-			$viber = new Viber($db);
-			
-			$viber->send($customer_mobile, $smsTexts);
-
-	}
-	if(@$professionalsms){
-	    	// initialize object
-			$professional_mobile = '6940589493';
-			
-			$defaultTimezone = date_default_timezone_get();
-			date_default_timezone_set('Europe/Athens');
-
-			$times = explode('-', $time);
-			$dateTstampStart = strtotime($date . ' ' . $times[0]);
-			$dateTstampEnd = strtotime($date . ' ' . $times[1]);
-			$smsDate = date('l d/m/y', $dateTstampStart);			
-			$smsText = implode(' - ', [
-						$smsDate,
-						$time,
-						$address,
-						$budget . '€',
-						$firstname . ' ' . $surname,
-						$professional_mobile,
-						$landline,
-						$comment
-					]);
-
-			// Viber Connection			
-			$viber = new Viber($db);			
-			$viber->send($customer_mobile, $smsTexts);
-
-	}
-
-    echo $stmt;
-}
- 
-else{
-    echo json_encode(
+ if($stmt){ 
+ 	echo $stmt;
+ }
+ 	else{
+ 		echo json_encode(
         array("message" => "No Appointment found.")
     );
-}
+ 	}
+// check if more than 0 record found
+
 ?>

@@ -41,7 +41,10 @@ $('select#appointmentStatus').on('change', function() {
     //alert(status_id);
 
     $('.status').css("display", "none");
-    $('.status-'+status_id).css("display", "block"); 
+    $('body').removeAttr('id');
+
+    $('.status-'+status_id).css("display", "block");
+    $('body').attr('id','status-'+status_id);
 
 });
 
@@ -333,13 +336,12 @@ $( ".createOffer" ).click(function() {
     //alert("Create Offer");
     var agent = $("#agent").attr('agentUser');
 
+    var status = $("#appointmentStatus").val();
     var application = $("#applications").val();
     var category = $("#category").val();
     var county = $("#county").val();
     var budget = $("#budget").val();
     var commision = $("#commision").val();
-    var startDate = $("#startDate").val();
-    var endDate = $("#endDate").val();
     var comments = $("#comment123").val();
 
     var surname = $("#surname").val();
@@ -349,21 +351,6 @@ $( ".createOffer" ).click(function() {
     var mobile = $("#mobile").val();
     var phone = $("#phone").val();
     var email = $("#email").val();
-
-    //var date = $("#appDate").html();
-    //var time = $("#appTime").html();
-
-    if($("#employersms").is(':checked')){
-        var employersms = 1;
-    }else{
-        var employersms = 0;
-    }
-
-    if($("#professionalsms").is(':checked')){
-        var professionalsms = 1;
-    }else{
-        var professionalsms = 0;
-    }
 
 
     // Check if all fields are correct
@@ -383,19 +370,20 @@ $( ".createOffer" ).click(function() {
                 mobile: mobile,
                 sex: sex,
                 phone: phone,
-                email: email,
-                date: date,
-                time: time
+                email: email
             },
             dataType: "json",
             success: function(data)
             {
+
                 var customer_id = data;
+                alert(customer_id);
                 //var date = "2018-05-05";
                 //var time ="10:00-12:00";
                 
 
                 var createOfferAPI = API_LOCATION+'appointment/createOffer.php';
+                alert(createOfferAPI);
                 //create($prod_id, $cust_id, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment);
                 $.ajax({
                     type: "POST",
@@ -408,26 +396,22 @@ $( ".createOffer" ).click(function() {
                         sex: sex,
                         phone: phone,
                         email: email,
-                        prof_id : professional,
+                        status: status,
                         cust_id : customer_id,
                         application_id: application,
                         category_id: category,
-                        date: date,
-                        time: time,
                         address: address,
                         budget: budget,
                         commision: commision,
                         agent_id: agent,
-                        comment: comments,
-                        professionalsms: professionalsms,
-                        employersms: employersms
+                        comment: comments
                     },
                     dataType: "json",
                     success: function(data)
                     {
                         //alert(data);
 
-                        alert("Appointment Booked");
+                        alert("Offer Created");
                         window.location.replace('../platform/appointments.php');
                     }
                 });
