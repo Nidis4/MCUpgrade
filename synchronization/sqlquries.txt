@@ -205,3 +205,15 @@ COMMIT;
 
 <!-------------------------------->
 <!-- End 23 Feb 2017 G Konstantinidis -->
+
+
+
+<!-------------------------------->
+<!-- Start 28 Feb 2018 Harpreet -->
+
+ALTER TABLE `payments` ADD `cancelReason` INT(11) NULL AFTER `datetimeStatusUpdated`;
+
+ALTER TABLE `payments` CHANGE `cancelReason` `cancelReason` INT(11) NULL DEFAULT NULL COMMENT '0 For default 1 for Customer Cancel And 2 for Professional Couldn\'t And 3 for Mistake';
+
+<!-------------------------------->
+<!-- End 28 Feb 2018 Harpreet -->

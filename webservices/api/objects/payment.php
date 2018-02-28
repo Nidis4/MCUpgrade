@@ -30,7 +30,7 @@ class Payment{
     public function paymentByProf(){
      
         // select query
-        $query = "SELECT `id`,`category_id`, `amount`, `agent_id`, `comment`, `datetime_added`, `status` FROM ".$this->table_name." WHERE `professional_id` = ? ORDER BY `id` DESC";
+        $query = "SELECT `id`,`category_id`, `amount`,`type`, `agent_id`, `comment`, `datetime_added`, `status`,`cancelReason`,`datetimeStatusUpdated`,`cancelComment` FROM ".$this->table_name." WHERE `professional_id` = ? ORDER BY `id` DESC";
      
         // prepare query statement
         $stmt = $this->conn->prepare( $query );
@@ -75,6 +75,62 @@ class Payment{
            return 0;
         }
     }
+
+    public function edit($id, $professional_id, $category_id, $amount, $agent_id, $comment, $type, $bank_name, $datetime_added, $issuetype ){
+        $invoice_no = "";
+        $receipt_no = "";
+
+
+
+        $query = "UPDATE ".$this->table_name." SET `category_id` = '".$category_id."', `type` = '".$type."', `bank_name` = '".$bank_name."', `amount` = '".$amount."', `comment` = '".$comment."' WHERE `id` = '".$id."';";
+        
+        $stmt = $this->conn->prepare( $query );
+
+        if ($stmt->execute()) { 
+           return 1;
+        } else {
+           return 0;
+        }
+    }
+
+    function cancelpayment($cancelReason = NULL, $cancelComment = NULL){
+
+
+        if(@$cancelReason){
+
+        }else{
+            $cancelReason = 0;
+        }
+
+        if(@$cancelComment){
+
+        }else{
+            $cancelComment = "";
+        }
+
+        // query to read single record
+        $query = "UPDATE " . $this->table_name . "
+                    SET
+                    `status`=0, `cancelReason`= :cancelReason, `cancelComment`= :cancelComment ,`datetimeStatusUpdated` ='".date('Y-m-d H:i:s')."'
+                WHERE
+                    id = :id";
+     
+        $stmt = $this->conn->prepare( $query );
+     
+        $cur_id = $this->id;
+        // bind id of product to be updated
+        $stmt->bindParam(':id',  $cur_id, PDO::PARAM_INT);
+        $stmt->bindParam(':cancelReason',  $cancelReason, PDO::PARAM_INT);
+        $stmt->bindParam(':cancelComment',  $cancelComment);
+
+        if ($stmt->execute()) { 
+            
+           return 1;
+        } else {
+            
+           return 0;
+        }
+    } // CancelAppointment
 
     public function get_percentage($professional_id){
          // select query

@@ -41,8 +41,10 @@ if($num>0){
         // just $name only
         extract($row);
  
-        $payment_item=array(
+        $payment_item = array(
+            "payment_id" => $id,
             "datetime_added" => $datetime_added,
+            "amount" => $amount,
             "category_id" => $category_id,
             "appointment_details" => "",
             "comment" => $comment,
@@ -50,8 +52,12 @@ if($num>0){
             "commision" => "",
             "payment" => $amount, 
             "agent_id" => $agent_id,
-            "status" => "10",
-            "balance" => "0"
+            "status" => $status,
+            "balance" => "0",
+            "cancelReason" => $cancelReason,
+            "datetimeStatusUpdated" => $datetimeStatusUpdated,
+            "cancelComment" => $cancelComment,            
+            "type" => $type
         );
  
         array_push($payments_arr, $payment_item);
@@ -67,7 +73,7 @@ if($num>0){
         // just $name only
         extract($row);
  
-        $payment_item=array(
+        $payment_item = array(
             "datetime_added" => $date." ".substr($time, 0, 5).":00",
             "category_id" => $application_id,
             "appointment_details" => $address,
@@ -83,6 +89,11 @@ if($num>0){
         array_push($payments_arr, $payment_item);
     }
 
+    // echo "<pre>";
+    // print_r($payments_arr);
+    // die;
+
+
     usort($payments_arr, function($a, $b) {
         return strtotime($a['datetime_added']) - strtotime($b['datetime_added']);
     });
@@ -90,17 +101,24 @@ if($num>0){
     $tolBalance = 0;
     foreach($payments_arr as &$item) {
 
-        if ($item['status']==10){
+
+
+        if ($item['status']==0){
+            //echo "0";
             $item['balance'] = round($tolBalance + $item['payment'],2);
             $tolBalance = $item['balance'];
+                
         }
         else if ($item['status']==1){
+            //echo "1";
             $item['balance'] = round($tolBalance - $item['commision'],2);
             $tolBalance = $item['balance'];
         }
         else{
+            //echo "2";
             $item['balance'] = $tolBalance;
         }
+
 
     }
 

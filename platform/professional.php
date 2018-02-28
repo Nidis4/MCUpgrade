@@ -663,6 +663,7 @@ include('config/core.php');
 											<th>Commision</th>
 											<th>Payment</th>
 											<th>Balance</th>
+											<th>Actions</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -681,6 +682,7 @@ include('config/core.php');
 										}elseif(@$paymentsPag){
 											foreach ($paymentsPag as $payment) {
 
+
 												$submission_date = $payment['datetime_added'];
 												$category_id = $payment['category_id'];
 												$appointment_details = $payment['appointment_details'];
@@ -692,8 +694,10 @@ include('config/core.php');
 												$comment = $payment['comment'];
 												$status = $payment['status'];
 												$balance = $payment['balance'];
+												$type = $payment['type'];
+												$id = $payment['payment_id'];
 
-												echo '<tr data-item-id="" class="status-'.$status.'">
+												echo '<tr data-item-id="'.$id.'" class="status-'.$status.'">
 														  <td>'.$date.'</td>
 														  <td>'.$category_id.'</td>
 														  <td>'.$appointment_details.'</td>
@@ -702,11 +706,248 @@ include('config/core.php');
 														  <td>'.$commission.'</td>
 														  <td>'.$paymentDone.'</td>
 														  <td>'.$balance.'</td>
-													  </tr>';
+														  <td class="actions">
+															<a href="#editmodalForm'.$payment['payment_id'].'" class="on-default modal-with-form edit-row"><i class="fa fa-pencil"></i></a>
+															<a href="#cancelmodalForm'.$payment['payment_id'].'" class="on-editing modal-with-form cancel-row"><i class="fa fa-times"></i></a>
+														  </td>';
+														if($status == 0){
+															$cancelreason = "";
+															if($payment['cancelReason'] == 1){
+																$cancelreason = "Customer Cancel";
+															}elseif($payment['cancelReason'] == 2){
+																$cancelreason = "Professional Couldn't";
+															}elseif ($payment['cancelReason'] == 3) {
+																$cancelreason = "Mistake";
+															}
+
+															echo "<tr><td colspan='7'>Cancelled on: ".date("d/m/Y H:i:s",strtotime($payment['datetimeStatusUpdated']))." by Agent : ".$_SESSION['fullname'].", Type : ".$cancelreason.", Comments : ".$payment['cancelComment']."</td></tr>";
+														}
+														echo 	  '</tr>';
+												?>
+												<!-- Modal Form For Edit Payment -->
+											<div id="editmodalForm<?php echo $payment['payment_id'];?>" class="modal-block modal-block-primary mfp-hide">
+												<section class="card">
+													<header class="card-header">
+														<h2 class="card-title">Edit Payment</h2>
+													</header>
+													<div class="card-body">
+														<form id="editpaymentform<?php echo $payment['payment_id'];?>" method="POST">															
+															<div class="form-group">
+																<label for="inputEmail4">Category</label>
+																<select class="form-control" name="categoryId" id="categoryId<?php echo $payment['payment_id'];?>">
+																	<option value="">Select Category</option>
+																	<?php 
+																		if(@$applications['message']){
+																		}else if(@$applications){
+																			$catsids = array();
+																			foreach ($applications as $application) {
+																				if(!in_array($application['category_id'], $catsids)){
+																	?>
+																					<option <?php if($category_id == $application['category_id']){?> selected="selected" <?php }?> value="<?php echo $application['category_id'];?>"><?php echo $application['category'];?></option>
+																	<?php
+																				$catsids[] = $application['category_id'];	
+																				}
+																			}
+																		}
+																	?>
+																</select>
+															</div>
+															<div class="form-group">
+																<label for="inputAddress">Type</label>
+																<select class="form-control" name="paytype" id="paytype<?php echo $payment['payment_id'];?>">
+																	<option value="">Select Type</option>
+																	<option <?php if($type == 'Cash'){?> selected="selected" <?php }?> value="Cash">Cash</option>
+																	<option <?php if($type == 'Bank Transfer'){?> selected="selected" <?php }?> value="Bank Transfer">Bank Transfer</option>
+																</select>
+															</div>
+															<div class="form-group" id="bankselect<?php echo $payment['payment_id'];?>" <?php if($type == 'Bank Transfer'){?> style="display: block;" <?php } else{?> style="display: none;" <?php }?>>
+																<label for="inputAddress">Select Bank</label>
+																<select class="form-control" name="bank_name" id="bank_name<?php echo $payment['payment_id'];?>">
+																	<option value="">Select Bank</option>
+																	<option value="Alpha">Alpha</option>
+																	<option value="Eurobank">Eurobank</option>
+																	<option value="Piraeus">Piraeus</option>
+																	<option value="Ethiniki">Ethiniki</option>
+																</select>
+
+															</div>
+															<div class="form-row">
+																<label for="inputCity">Amount</label>
+																<input type="number" class="form-control" value="<?php echo $payment['amount'];?>" name="amount" id="amount<?php echo $payment['payment_id'];?>">
+															</div>
+															<div class="form-row">
+																<label for="inputCity">Comment</label>
+																<input type="text" class="form-control" value="<?php echo $comment;?>" name="comment" id="comment<?php echo $payment['payment_id'];?>">
+															</div>
+															<!-- <div class="form-group row">
+																<div class="col-sm-1">												
+																	<input type="checkbox" class="form-control" name="issuetypeval" id="issuetypeval<?php echo $payment['payment_id'];?>">
+																</div>
+																<label class="col-sm-4 pt-2">Issue Invoice/Receipt</label>
+																
+																<?php
+																	$vtype = "Invoice";
+																	if(@$professional['viewtype']){
+																		if($professional['viewtype'] == "2"){
+																			$vtype = "Receipt";
+																		}
+																		
+																	}
+																?>
+
+															</div> -->
+															<input type="hidden" name="issuetype" id="issuetype<?php echo $payment['payment_id'];?>" value="<?php echo $vtype;?>">
+															<input type="hidden" name="payment_id" id="payment_id<?php echo $payment['payment_id'];?>" value="<?php echo $payment['payment_id'];?>">
+														</form>
+													</div>
+													<footer class="card-footer">
+														<div class="row">
+															<div class="col-md-12 text-right">
+																<button class="btn btn-primary modal-confirm" id="submitpaymentedit<?php echo $payment['payment_id'];?>">Submit</button>
+																<button class="btn btn-default modal-dismiss">Cancel</button>
+															</div>
+														</div>
+													</footer>
+													<script type="text/javascript">
+														$(document).ready(function(){															
+															$('#paytype<?php echo $payment['payment_id'];?>').on('change',function(){
+																if($(this).val() == 'Bank Transfer'){
+																	$('#bankselect<?php echo $payment['payment_id'];?>').show();
+																}
+																else{
+																	$('#bankselect<?php echo $payment['payment_id'];?>').hide();
+																}
+															});
+															$("#submitpaymentedit<?php echo $payment['payment_id'];?>").on('click',function(){
+																var error = 0;
+																var message = "";
+																if($("#categoryId<?php echo $payment['payment_id'];?>").val() == ""){
+																	error = 1;
+																	message += "Please select category!"+'\n'; 
+																}
+
+																if($("#paytype<?php echo $payment['payment_id'];?>").val() == ""){
+																	error = 1;
+																	message += "Please select type!"+'\n'; 
+																}else if(($("#paytype<?php echo $payment['payment_id'];?>").val() == "Bank Transfer") && ($("#bank_name<?php echo $payment['payment_id'];?>").val() == "") ){
+																	error = 1;
+																	message += "Please select Bank!"+'\n';
+																}
+
+																if(($("#amount<?php echo $payment['payment_id'];?>").val() == 0) || ($("#amount<?php echo $payment['payment_id'];?>").val() == "")){
+																	error = 1;
+																	message += "Please enter amount!"+'\n'; 
+																}
+
+																if(error == 1){
+																	alert(message);
+																}else{
+																	var editPaymentApi = API_LOCATION+'payment/edit.php';
+																	var atLeastOneIsChecked = $('#issuetypeval<?php echo $payment['payment_id'];?>:checked').length > 0;
+																	var issuetype = "";
+
+																	if(atLeastOneIsChecked){
+																		issuetype = $("#issuetype").val();
+																	}
+																	$.ajax({
+																	            type: "POST",
+																	            url: editPaymentApi,
+																	            data: {
+																	                professional_id: "<?php echo $_REQUEST['id']?>",
+																	                agent_id: "<?php echo $_SESSION['id'];?>",
+																	                category_id: $("#categoryId<?php echo $payment['payment_id'];?>").val(),
+																	                type: $("#paytype<?php echo $payment['payment_id'];?>").val(),
+																	                bank_name: $("#bank_name<?php echo $payment['payment_id'];?>").val(),
+																	                amount: $("#amount<?php echo $payment['payment_id'];?>").val(),
+																	                comment: $("#comment<?php echo $payment['payment_id'];?>").val(),
+																	                issuetype: issuetype,
+																	                payment_id: $("#payment_id<?php echo $payment['payment_id'];?>").val(),
+																	            },
+																	            dataType: "json",
+																	            success: function(data)
+																	            {
+																	            	alert(data.message);
+																	            	location.reload();
+																	            }
+																	        });
+																	//location.reload();
+																}
+																return false;
+															});
+														});
+													</script>
+												</section>
+											</div>
+											<!-- Modal Form for Cancel Payment -->
+										<div id="cancelmodalForm<?php echo $id;?>" class="modal-block modal-block-primary mfp-hide">
+											<section class="card">
+												<header class="card-header">
+													<h2 class="card-title">Submit Reason for Cancel</h2>
+												</header>
+												<div class="card-body">
+													<form id="addcancelform<?php echo $id;?>" method="POST">															
+														<div class="form-group">
+															<label for="inputAddress">Select Option</label>
+															<select class="form-control" name="cancelReason" >
+																<option value="1">Customer Cancel</option>
+																<option value="2">Professional Couldn't</option>
+																<option value="3">Mistake</option>
+															</select>
+														</div>
+														<div class="form-row">
+															<label for="inputCity">Comment</label>
+															<textarea class="form-control" name="cancelComment"></textarea>
+														</div>
+													</form>
+												</div>
+												<footer class="card-footer">
+													<div class="row">
+														<div class="col-md-12 text-right">
+															<button class="btn btn-primary" id="cancelpayment<?php echo $id;?>">Submit</button>
+															<button class="btn btn-default modal-dismiss">Cancel</button>
+														</div>
+													</div>
+												</footer>
+												<script type="text/javascript">
+													$(document).ready(function(){															
+														
+														$("#cancelpayment<?php echo $id;?>").on('click',function(){
+															
+															var error = 0;
+															var message = "";
+															if(error == 1){
+																alert(message);
+															}else{
+																var cancelPaymentApi = API_LOCATION+"payment/cancel.php?id=<?php echo $id;?>";
+																$.ajax({
+																            type: "POST",
+																            url: cancelPaymentApi,
+																            data: $("#addcancelform<?php echo $id;?>").serialize(),
+																            dataType: "json",
+																            success: function(data)
+																            {	
+																            	if(data.ResultCode == 1){
+																            		alert("Payment cancelled successfully.");
+																            		location.reload();
+																            	}else{
+																            		alert("Something worng!");
+																            	}
+																            	
+																            }
+																        });
+																//location.reload();
+															}
+															return false;
+														});
+													});
+												</script>
+											</section>
+										</div>
+												<?php
 											}
 										}else{
 										?>
-											<tr> <td colspan="8">No data found.</td></tr>
+											<tr> <td colspan="9">No data found.</td></tr>
 										<?php	
 										}
 										?>										
