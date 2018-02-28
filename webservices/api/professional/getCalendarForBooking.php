@@ -18,7 +18,7 @@ $professional->application_id = isset($_GET['application_id']) ? $_GET['applicat
 $startDate = isset($_GET['startDate']) ? $_GET['startDate'] : die();
 $endDate = isset($_GET['endDate']) ? $_GET['endDate'] : die();
 $addressAppoint = isset($_GET['address']) ? $_GET['address'] : die();
-$duration = isset($_GET['address']) ? $_GET['address'] : die();
+$duration = isset($_GET['duration']) ? $_GET['duration'] : die();
 $addressAppointEn = urlencode($addressAppoint);
  
 

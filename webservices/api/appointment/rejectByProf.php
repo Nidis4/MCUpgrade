@@ -22,11 +22,21 @@ $return = array();
 
 if(isset($_REQUEST['id']) && isset($_REQUEST['type']) && isset($_REQUEST['member_id'])){
 
-	$appointment_id = $_REQUEST['id'];
+	$appointment->id = $_REQUEST['id'];
 	$type = $_REQUEST['type'];
 	$prof_member_id = $_REQUEST['member_id'];
+	include_once '../objects/professional.php';
+	$stmt = $appointment->readOne();
+	$professional = new Professional($db);
 
-	$stmt = $appointment->rejectByProf($appointment_id, $prof_member_id);
+	// set ID property of product to be edited
+	$professional->id = $_REQUEST['member_id'];
+	$professionalstmt = $professional->readOne();
+
+	echo $professional->county_id;
+	die;
+
+	//$stmt = $appointment->rejectByProf($appointment_id, $prof_member_id);
 
 
 }else{

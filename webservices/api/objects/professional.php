@@ -194,7 +194,7 @@ ORDER   BY `date` ASC, `time` ASC";
      
         // query to read single record
         $query = "SELECT
-                 p.`id`, p.`first_name`, p.`last_name`, p.`sex`, p.`profile_status`, p.`admin_comments`,p.`viewtype`, cd.`image1`, cd.`image2`, cd.`image3`, cd.`perid1`, cd.`perid2`, cd.`agreement1`, cd.`agreement2`, cd.`agreement3`, cd.`agreement4`, cd.`agreement5`, cd.`approve_per`, cd.`approve_doc`, co.`address`, co.`mobile`, co.`phone`, ca.`email`, ca.`calendar_id`
+                 p.`id`, p.`first_name`, p.`last_name`, p.`sex`, p.`profile_status`, p.`admin_comments`,p.`viewtype`, cd.`image1`, cd.`image2`, cd.`image3`, cd.`perid1`, cd.`perid2`, cd.`agreement1`, cd.`agreement2`, cd.`agreement3`, cd.`agreement4`, cd.`agreement5`, cd.`approve_per`, cd.`approve_doc`, co.`address`, co.`mobile`, co.`phone`, ca.`email`, ca.`calendar_id`, ct.`county_id`
             FROM
                 " . $this->table_name . " p
                 LEFT JOIN ". $this->contact_table_name." co
@@ -203,6 +203,8 @@ ORDER   BY `date` ASC, `time` ASC";
                     ON p.id = ca.professional_id
                 LEFT JOIN ". $this->document_table_name." cd
                     ON p.id = cd.professional_id
+                LEFT JOIN ". $this->counties_table_name." ct
+                    ON p.id = ct.professional_id
                 WHERE
                     p.id = :id
                 LIMIT
