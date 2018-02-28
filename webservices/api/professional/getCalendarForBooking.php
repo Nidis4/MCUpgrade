@@ -196,6 +196,28 @@ function getCalendarDetails($startDate, $endDate, $opening, $closing, $busy_arr)
 
     for ( $i = 0;  $i < $days; $i++){
         $time = $opening;
+
+        $add_days = $i;
+        $date = date('Y-m-d',strtotime($startDate) + (24*3600*$add_days));
+
+        /*if ($i==0){
+            $date = $startDate;
+        }
+        else if ($i==1){
+            $date = date("Y-m-d", strtotime('+1 day',strtotime($startDate)));
+        }
+        else if ($i==2){
+            $date = date("Y-m-d", strtotime('+2 days',strtotime($startDate)));
+        }
+        else if ($i==3){
+            $date = date("Y-m-d", strtotime('+3 days',strtotime($startDate)));
+        }
+        else if ($i==4){
+            $date = date("Y-m-d", strtotime('+4 days',strtotime($startDate)));
+        }*/
+
+        
+        /*
         if ($i==0){
             $date = $startDate;
         }
@@ -211,6 +233,7 @@ function getCalendarDetails($startDate, $endDate, $opening, $closing, $busy_arr)
         else if ($i==4){
             $date = date("Y-m-d", strtotime('+4 days',strtotime($startDate)));
         }
+        */
 
         while ($closing != $time){
 
