@@ -18,7 +18,7 @@ $professional->professional_id = isset($_GET['prof_id']) ? $_GET['prof_id'] : di
 if (!isset($_GET['startDate']) || !isset($_GET['endDate']) ){
     $today = date("Y-m-d");
     $startDate = date("Y-m-d", strtotime('-7 day',strtotime($today)));
-    $endDate = date("Y-m-d", strtotime('+7 day',strtotime($today)));
+    $endDate = date("Y-m-d", strtotime('+14 day',strtotime($today)));
 }
 else{
     $startDate = $_GET['startDate'];

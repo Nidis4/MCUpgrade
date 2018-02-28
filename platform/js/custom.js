@@ -41,7 +41,7 @@ $('select#appointmentStatus').on('change', function() {
     //alert(status_id);
 
     $('.status').css("display", "none");
-    $('.status-'+status_id).css("display", "block");
+    $('.status-'+status_id).css("display", "block"); 
 
 });
 
