@@ -288,5 +288,12 @@ class Appointment{
         return "1";
     }
 
+    public function rejectByProf($id, $prof_member_id){
+
+
+        //var getAvailableAPI = API_LOCATION+'professional/getCalendarForBooking.php?duration='+duration+'&county_id='+county+'&application_id='+application+'&startDate='+startDate+'&endDate='+endDate+'&address='+address;
+    }
+
+
 }
 ?>

@@ -215,5 +215,6 @@ ALTER TABLE `payments` ADD `cancelReason` INT(11) NULL AFTER `datetimeStatusUpda
 
 ALTER TABLE `payments` CHANGE `cancelReason` `cancelReason` INT(11) NULL DEFAULT NULL COMMENT '0 For default 1 for Customer Cancel And 2 for Professional Couldn\'t And 3 for Mistake';
 
+ALTER TABLE `appointments` ADD `reject_status` INT(2) NOT NULL DEFAULT '0' COMMENT '0: Not reject, 1: reject and get new prof., 2: reject but not get prof.' AFTER `cancelComment`, ADD `reject_datetime` DATETIME NULL AFTER `reject_status`, ADD `reject_comment` TEXT NULL AFTER `reject_datetime`;
 <!-------------------------------->
 <!-- End 28 Feb 2018 Harpreet -->
