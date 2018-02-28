@@ -17,17 +17,18 @@ $balance = new Balance($db);
 // query categorys
 $stmt = $balance->professionals($_GET['fromdate'],$_GET['todate']);
 $num = $stmt->rowCount();
- 
+
+
+
+
+
 // check if more than 0 record found
 if($num>0){
  
-    // products array
-    $appointments_arr=array();
-    $appointments_arr["records"]=array();
- 
-    // retrieve our table contents
-    // fetch() is faster than fetchAll()
-    // http://stackoverflow.com/questions/2770630/pdofetchall-vs-pdofetch-in-a-loop
+
+    $appointments_arr = array();
+    $appointments_arr["records"] = array(); 
+
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
         // extract row
         // this will make $row['name'] to
@@ -35,17 +36,21 @@ if($num>0){
         extract($row);
  
         $appointment_item = array(
-                                "professionalId" => $professionalId,
+                                "professional_id" => $professional_id,
                                 "professionalName" => $professionalName,                                
-                                "Appointments_totalCommission" => $Appointments_totalCommission                                
+                                "amount" => $amount                                
                             );
+
+        $paymentstmt = $balance->payments($_GET['fromdate'],$_GET['todate']);
+
         array_push($appointments_arr["records"], $appointment_item);
+
  
     }
- 
+    
     echo json_encode($appointments_arr);
-}
- 
+    
+} 
 else{
     echo json_encode(
         array("message" => "No Record found.")

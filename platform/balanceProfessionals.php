@@ -54,6 +54,7 @@ include('config/core.php');
 
 				$fromdate = !empty($_GET['fromdate']) ? $_GET['fromdate'] : date('Y-m-01');
 				$todate = !empty($_GET['todate']) ? $_GET['todate'] : date('Y-m-d');
+				$api_url.'webservices/api/balance/professionals.php?fromdate='.$fromdate.'&todate='.$todate;
 				$balanceprofessionals = file_get_contents($api_url.'webservices/api/balance/professionals.php?fromdate='.$fromdate.'&todate='.$todate);
 				$balancePag = json_decode($balanceprofessionals, true); // decode the JSON into an associative array				
 			?>
@@ -120,7 +121,7 @@ include('config/core.php');
 									<thead>
 										<tr>
 											<th>Name</th>
-											<th>Total commissions</th>
+											<th>Total Amount</th>
 											
 										</tr>
 									</thead>
@@ -131,10 +132,10 @@ include('config/core.php');
 											$total_com = 0.00;
 											foreach ($balancePag['records'] as $field => $value) {	
 																					
-												$total_com = $total_com + $value['Appointments_totalCommission'];
-												echo '<tr data-item-id="'.$value['professionalId'].'">												  
-														  <td><a href="professional.php?id='.$value['professionalId'].'">'.$value['professionalName'].'</a></td>
-														  <td>'."€".number_format($value['Appointments_totalCommission'],2).'</td>
+												$total_com = $total_com + $value['amount'];
+												echo '<tr data-item-id="'.$value['professional_id'].'">												  
+														  <td><a href="professional.php?id='.$value['professional_id'].'">'.$value['professionalName'].'</a></td>
+														  <td>'."€".number_format($value['amount'],2).'</td>
 													  </tr>';
 										
 											}

@@ -33,16 +33,40 @@ class Balance{
 
     public function professionals($from, $to){
 
+        // $query = "SELECT
+        //             a.`prof_member_id` AS professionalId,CONCAT(p.`last_name`,' ', p.`first_name`) AS professionalName, SUM(a.`commision`) AS Appointments_totalCommission
+        //         FROM
+        //             " . $this->appointment_table_name . " a
+        //         INNER JOIN ". $this->professionals_table_name." p
+        //             ON a.prof_member_id = p.id 
+        //         Where a.date >= '".$from."' and a.date <= '".$to."' and a.status=1
+        //         Group By a.prof_member_id
+        //         ";
+        $query = "SELECT
+                    a.`professional_id` AS professional_id,CONCAT(p.`last_name`,' ', p.`first_name`) AS professionalName, SUM(a.`amount`) AS amount
+                FROM
+                    " . $this->payments_table_name . " a
+                INNER JOIN ". $this->professionals_table_name." p
+                    ON a.professional_id = p.id 
+                Where a.datetime_added >= '".$from."' and a.datetime_added <= '".$to."' and a.status=1
+                Group By a.professional_id
+                ";
+ 
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+ 
+        return $stmt;
+    }
+
+
+    public function professionalspayments($from, $to){
 
         $query = "SELECT
-                    a.`prof_member_id` AS professionalId,CONCAT(p.`last_name`,' ', p.`first_name`) AS professionalName, SUM(a.`commision`) AS Appointments_totalCommission
+                    a.`professional_id` AS member_id, SUM(a.`amount`) AS ProfessionalsPayments__totalPaid
                 FROM
-                    " . $this->appointment_table_name . " a
-                INNER JOIN ". $this->professionals_table_name." p
-                    ON a.prof_member_id = p.id 
-                Where a.date >= '".$from."' and a.date <= '".$to."' and a.status=1
-                Group By a.prof_member_id
-                ";
+                    " . $this->payments_table_name . " a 
+                Where a.datetime_added >= '".$from."' and a.datetime_added <= '".$to."' and a.status=1
+                Group By a.professional_id";
  
         $stmt = $this->conn->prepare( $query );
         $stmt->execute();
