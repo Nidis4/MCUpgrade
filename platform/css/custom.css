@@ -8,7 +8,7 @@ tr.status-0, .table-striped tbody tr:nth-of-type(odd).status-0 {
     background-color: #f8d7da;
 }
 .cancel-row .fa, .edit-row .fa ,.copy-row .fa  {
-    display: none;
+   /* display: none;*/
 }
 .status-0 .copy-row .fa{
     display: initial;

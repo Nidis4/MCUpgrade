@@ -26,13 +26,12 @@ if(isset($_REQUEST['id']) && isset($_REQUEST['type']) && isset($_REQUEST['member
 	$type = $_REQUEST['type'];
 	$prof_member_id = $_REQUEST['member_id'];
 	include_once '../objects/professional.php';
-	$stmt = $appointment->readOne();
+	//$stmt = $appointment->readOne();
 	$professional = new Professional($db);
 
 	// set ID property of product to be edited
 	$professional->id = $_REQUEST['member_id'];
 	$professionalstmt = $professional->readOne();
-
 	echo $professional->county_id;
 	die;
 

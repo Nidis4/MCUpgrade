@@ -52,10 +52,10 @@ include('config/core.php');
 			<?php
 				include('header.php');
 
-				$fromdate = !empty($_GET['fromdate']) ? $_GET['fromdate'] : date('Y-m-01');
-				$todate = !empty($_GET['todate']) ? $_GET['todate'] : date('Y-m-d');
-				$api_url.'webservices/api/balance/professionals.php?fromdate='.$fromdate.'&todate='.$todate;
-				$balanceprofessionals = file_get_contents($api_url.'webservices/api/balance/professionals.php?fromdate='.$fromdate.'&todate='.$todate);
+				// $fromdate = !empty($_GET['fromdate']) ? $_GET['fromdate'] : date('Y-m-01');
+				// $todate = !empty($_GET['todate']) ? $_GET['todate'] : date('Y-m-d');
+				// $api_url.'webservices/api/balance/professionals.php?fromdate='.$fromdate.'&todate='.$todate;
+				$balanceprofessionals = file_get_contents($api_url.'webservices/api/balance/professionals.php');
 				$balancePag = json_decode($balanceprofessionals, true); // decode the JSON into an associative array				
 			?>
 
@@ -95,7 +95,7 @@ include('config/core.php');
 								<h2 class="card-title">Balance per professional</h2>
 							</header>
 							<div class="card-body">
-								<form action="balanceProfessionals.php" method="GET" id="">
+								<!-- <form action="balanceProfessionals.php" method="GET" id="">
 								<div class="row">
 									<div class="col-sm-5">
 									</div>
@@ -116,7 +116,7 @@ include('config/core.php');
 									</div>
 									
 								</div>
-								</form>
+								</form> -->
 								<table class="table table-bordered table-striped mb-0" id="datatable-editable">
 									<thead>
 										<tr>
@@ -128,15 +128,17 @@ include('config/core.php');
 									<tbody>
 										<?php
 
-										if(@$balancePag['records']){
+										if(@$balancePag){
 											$total_com = 0.00;
-											foreach ($balancePag['records'] as $field => $value) {	
-																					
-												$total_com = $total_com + $value['amount'];
-												echo '<tr data-item-id="'.$value['professional_id'].'">												  
-														  <td><a href="professional.php?id='.$value['professional_id'].'">'.$value['professionalName'].'</a></td>
-														  <td>'."€".number_format($value['amount'],2).'</td>
-													  </tr>';
+											foreach ($balancePag as $field => $value) {	
+												
+												if(@$value['total_balance'] && ($value['total_balance'] >= 10)){							
+													$total_com = $total_com + $value['total_balance'];
+													echo '<tr data-item-id="'.$field.'">												  
+															  <td><a href="professional.php?id='.$field.'">'.$value['name'].'</a></td>
+															  <td>'."€".number_format($value['total_balance'],2).'</td>
+														  </tr>';
+												}
 										
 											}
 										?>
