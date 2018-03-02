@@ -1943,3 +1943,7 @@ p.font-offer-tel .fa {
 a.btn-book-online {
     text-decoration: none;
 }
+
+.container.container-reviews {
+    margin-bottom: 80px;
+}
