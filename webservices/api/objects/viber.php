@@ -7,7 +7,7 @@ class Viber{
     private $table_name = "sms_logs";
  
     // object properties
-    const API_KEY = "7E528ED7-01C4-476F-AFE1-9732306312E2";
+    const API_KEY = "C48DF017-B52D-4EB4-AD16-E966EFC42D56";
     const VIBER_SENDER = "MyConstructor.gr";
     const SMS_SENDER = "constructor";
  
