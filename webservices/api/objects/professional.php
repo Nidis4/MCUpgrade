@@ -241,6 +241,7 @@ ORDER   BY `date` ASC, `time` ASC";
         $this->phone = $row['phone'];
         $this->email = $row['email'];
         $this->calendar_id = $row['calendar_id'];
+        $this->county_id = $row['county_id'];
 
         $this->image1 = $row['image1'];
         $this->image2 = $row['image2'];

@@ -6,6 +6,9 @@ class Appointment{
     private $table_name = "appointments";
     private $application_table_name = "applications";
     private $ratings_table_name = "directory_ratings";
+    private $customers_table_name = "customers";
+    private $customers_contact_table_name = "customers_contact_details";
+    private $customers_account_table_name = "customers_account_info";
  
     // object properties
     public $id;
@@ -27,6 +30,9 @@ class Appointment{
     public $sourceAppointmentId;
     public $status;
     public $cancelComment;
+    public $customer_first_name;
+    public $customer_last_name;
+    public $category_id;
  
     public function __construct($db){
         $this->conn = $db;
@@ -52,11 +58,17 @@ class Appointment{
      
         // query to read single record
         $query = "SELECT
-                    a.`id`, a.`prof_member_id`, a.`cust_member_id`, a.`application_id`, a.`date`, a.`time`, a.`address`, a.`budget`, a.`commision`, a.`agent_id`, a.`comment`, a.`sms`, a.`sms_log_id`, a.`googleEventId`, a.`datetimeCreated`, a.`datetimeStatusUpdated`, a.`sourceAppointmentId`, a.`status`, a.`cancelComment`, ap.`category_id`
+                    a.`id`, a.`prof_member_id`, a.`cust_member_id`, a.`application_id`, a.`date`, a.`time`, a.`address`, a.`budget`, a.`commision`, a.`agent_id`, a.`comment`, a.`sms`, a.`sms_log_id`, a.`googleEventId`, a.`datetimeCreated`, a.`datetimeStatusUpdated`, a.`sourceAppointmentId`, a.`status`, a.`cancelComment`, ap.`category_id`, ac.`first_name` as customer_first_name, ac.`last_name` as customer_last_name, ac.`sex` as customer_sex, cc.`address` as customer_address, cc.`phone` as customer_phone, cc.`mobile` as customer_mobile, ca.`email` as customer_email
                 FROM
                     " . $this->table_name . " a
-                LEFT JOIN ". $this->application_table_name." ap
+                LEFT JOIN ". $this->application_table_name." ap 
                     ON a.application_id = ap.id
+                LEFT JOIN ". $this->customers_table_name." ac 
+                    ON a.cust_member_id = ac.id
+                LEFT JOIN ". $this->customers_contact_table_name." cc 
+                    ON a.cust_member_id = cc.customer_id
+                LEFT JOIN ". $this->customers_account_table_name." ca 
+                    ON a.cust_member_id = ca.customer_id
                 WHERE
                     a.id = :id
                 LIMIT
@@ -101,6 +113,13 @@ class Appointment{
         $this->status = $row['status'];
         $this->cancelComment = $row['cancelComment'];
         $this->category_id = $row['category_id'];
+        $this->customer_first_name = $row['customer_first_name'];
+        $this->customer_last_name = $row['customer_last_name'];
+        $this->customer_sex = $row['customer_sex'];
+        $this->customer_address = $row['customer_address'];
+        $this->customer_phone = $row['customer_phone'];
+        $this->customer_mobile = $row['customer_mobile'];
+        $this->customer_email = $row['customer_email'];
 
     } // Read One
 

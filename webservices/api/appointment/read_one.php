@@ -47,7 +47,14 @@ $stmt = $appointment->readOne();
             "sourceAppointmentId" => $appointment->sourceAppointmentId,
             "status" => $appointment->status,
             "cancelComment" => $appointment->cancelComment,
-            "category_id" => $appointment->category_id
+            "category_id" => $appointment->category_id,
+            "customer_first_name" => $appointment->customer_first_name,
+            "customer_last_name" => $appointment->customer_last_name,
+            "customer_sex" => $appointment->customer_sex,
+            "customer_address" => $appointment->customer_address,
+            "customer_phone" => $appointment->customer_phone,
+            "customer_mobile" => $appointment->customer_mobile,
+            "customer_email" => $appointment->customer_email,
         );
      
  

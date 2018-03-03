@@ -78,6 +78,9 @@ li.litel a {
     font-size: 20px;
 }
 
+img{
+  width:100%;
+}
 .navbar-default .navbar-nav>li>a{
    color:#004a86;
    font-family: dinbd;
@@ -1248,3 +1251,699 @@ a.avail-professional:hover {
   background-color: #004A86;
 }
 
+@media screen and (max-width:720px){
+  #sidebar{
+
+  }
+  div#sidebarCollapse {
+    display: none;
+}
+
+}
+
+.mobile-menu {
+    /* left: 171px; */
+    color: red;
+    font-size: 42px;
+    z-index: 10;
+    position: absolute;
+    margin-left: 114px;
+}
+
+
+
+/*Main menu*/
+
+.container.container-nav-menu.overlay {
+    background: #fff;
+    border-bottom: 1px solid #004A86;
+}
+
+
+/*PROFFESSIONAL PROFILE */
+
+
+.container.container-proffesional-profile {
+    width: 100%;
+    padding: 20px 20px 0px 20px;
+    background: #f7f7f7;
+    border-bottom: 1px solid #90c4ef;
+}
+
+.main-container .row, .container-proffesional-profile .row{
+  max-width: 1170px;
+  margin: auto;
+}
+
+.col-md-3.profile-img img {
+    border-radius: 50%;
+    border: 2px solid #e0e0e0;
+}
+
+.profile-img{
+  position: relative;
+  
+}
+
+.total-rating-num-outer{
+  position: absolute;
+  background: #ff6600;
+  font-size: 17px;
+  color:#fff;
+}
+
+.total-rating-num-outer {
+  
+    font-size: 14px;
+    left: 41%;
+    width: 57px;
+    height: 57px;
+    padding-top: 13px;
+    text-align: center;
+    border-radius: 50%;
+    bottom: -18px;
+    font-family: dinbd;
+}
+
+.profile-img-inner {
+    max-width: 292px;
+    margin: auto;
+}
+
+
+span.total-rating-num {
+    font-size: 21px;
+}
+
+h3.h3-offer-title {
+    font-size: 20px;
+    line-height: 1.4;
+    font-family: dinbd;
+}
+
+p.font-offer-tel .fa {
+    color: #ff6600;
+    font-size: 50px;
+    vertical-align: middle;
+}
+
+
+p.font-offer-tel {
+    font-size: 30px;
+}
+
+h3.h3-offer-title {
+    color: #008dff;
+}
+
+.container.container-proffesional-profile .row {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.save-btn {
+    cursor: pointer;
+}
+
+
+.btn-prosfora-prof {
+    width: 100%;
+    background: #FF5722;
+    overflow: hidden;
+    text-align: center;
+    padding: 8px;
+    font-size: 20px;
+    color: #fff;
+    max-width: 180px;
+    font-family: dinmd;
+    border-radius: 6px;
+}
+
+
+.btn-prosfora-prof:hover {
+    background: #ff5722cf;
+}
+
+.col-md-12.proffesionalTotalReviews {
+    padding-left: 0px;
+    margin-bottom: 10px;
+    padding-right: 0px;
+}
+
+.total-jobs{
+  color: #ff6600;
+    font-family: dinbd;
+}
+.total-score {
+    font-size: 18px;
+    float: left;
+    margin-right: 10px;
+}
+
+p.front-proffesional-address .fa, p.front-professional-tel .fa  {
+    font-size: 20px;
+    vertical-align: top;
+}
+.container.container-proffesional-profile .row {
+    
+}
+
+.container-fluid.main-container {
+    padding: 20px;
+    background: #fff;
+    font-size: 16px;
+}
+
+
+.profile-side-menu ul {
+    list-style: none;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-bottom: 0px;
+}
+
+.row.proffesional-row-content{
+  margin-top: 80px;
+  margin-bottom:80px;
+}
+
+.profile-side-menu {
+    background: #f6f6f6;
+}
+
+.profile-side-menu ul li{
+  padding: 10px 20px;
+  background: #fff;
+  border-top:  1px solid #90c4ef;
+    border-right: 1px solid #90c4ef;
+    display: inline-block;
+}
+
+.profile-side-menu li.active{
+  background: #008dff;
+    color: #fff;
+    
+}
+
+
+
+.container .row.row-profile-nav {
+    padding-bottom: 0px;
+  
+}
+
+.profile-side-menu li.first{
+  border-left: 1px solid #90c4ef;
+}
+
+.col-md-4.applications-tabs .nav a[aria-expanded="false"]::before,.col-md-4.applications-tabs .nav a[aria-expanded="true"]::before{
+  display: none;
+}
+
+
+
+
+.col-md-4.applications-tabs .nav a[aria-expanded="true"] {
+    color: #fff;
+    background: #008dff;
+}
+
+.col-md-4.applications-tabs ul {
+    max-width: 300px;
+    background:#F7F7F7;
+}
+
+
+.title-app-tabs {
+  width: 100%;
+    max-width: 300px;
+    margin-bottom: 20px;
+}
+
+.title-app-tabs h3 {
+    margin-top: 8px;
+    margin-bottom: 0px;
+    line-height: 30px;
+    font-size: 26px;
+    padding-left: 10px;
+    color: #004a86;
+}
+
+.tab-content.clearfix {
+    background: #f7f7f7;
+  
+}
+
+ul.ul-app-info{
+  padding-top: 0px;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+    list-style: none;
+}
+
+ul.ul-app-info li{
+  padding-top: 10px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    padding-right: 20px;
+
+}
+
+ ul.ul-app-info h3 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 22px;
+    color: #fff;
+} 
+
+ul.ul-app-info .app-description-title {
+    background: #008dff;
+}
+
+ul.ul-app-info li h4{
+  display: inline-block;
+}
+
+span.app-price {
+    font-size: 21px;
+    color: #ff6600;
+    font-family: dinbd;
+}
+
+.app-seper {
+    border-bottom: 1px dashed #333333;
+}
+
+li.app-more-info .app-seper {
+    border-bottom: 0px;
+}
+
+.container.container-lightbox {
+    background: #f7f7f7;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom:80px;
+}
+
+.row.proffessional-photos-row {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 30px;
+}
+
+.profile-reviews-row .TotalRatingOuter{
+  background: #008DFF;
+}
+
+.row.profile-reviews-row .prof-total-score{
+  margin-top: 20px;
+}
+
+.row.profile-reviews-row .total-score{
+  font-size: 21px;
+      color: #004A86;
+}
+
+.col-md-12.review-outer {
+    background: #fff;
+    padding: 25px 25px 25px 25px;
+    border: 1px solid #dedede;
+}
+
+.row.row-profile-review {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.row.row-profile-review {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+
+/* MODAL LIGHT BOX */
+
+.row > .column {
+  padding: 0 8px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Create four equal columns that floats next to eachother */
+.column {
+  float: left;
+  width: 25%;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: black;
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  width: 90%;
+  max-width: 1200px;
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #999;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Hide the slides by default */
+.mySlides {
+  display: none;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Caption text */
+.caption-container {
+  text-align: center;
+  background-color: black;
+  padding: 2px 16px;
+  color: white;
+}
+
+img.demo {
+  opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+  opacity: 1;
+}
+
+img.hover-shadow {
+  transition: 0.3s;
+}
+
+.hover-shadow:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+div#myLightbox {
+    background: rgba(0,0,0, 0.9);
+}
+
+
+.column {
+    cursor: pointer;
+}
+/* END MODAL LIGHT BOX */
+
+
+.container-fluid.main-container{
+    padding: 0px; 
+}
+
+.profile-img {
+    position: relative;
+}
+
+.profile-img-inner {
+    max-width: 292px;
+    margin: auto;
+}
+
+.col-md-3.profile-img img {
+    border-radius: 50%;
+    border: 2px solid #e0e0e0;
+}
+
+.col-md-12.proffesionalTotalReviews {
+    padding-left: 0px;
+    margin-bottom: 10px;
+    padding-right: 0px;
+
+}
+.starsouter {
+    width: 110px;
+    float: left;
+    margin-right: 10px;
+}
+.rev-score {
+    font-size: 18px;
+    float: left;
+    margin-right: 10px;
+    font-family: dinmd;
+}
+.total-score {
+    font-size: 18px;
+    float: left;
+    margin-right: 10px;
+    font-family: dinmd;
+}
+
+.empty-bar {
+    background: url(../img/five-stars-empty.png);
+    background-repeat: no-repeat;
+    width: 110px;
+    height: 23px;
+    background-size: cover;
+}
+.empty-bar div {
+    background: url(../img/five-stars-full.png);
+    height: 23px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.rev-score {
+    
+}
+
+.container.container-lightbox {
+    width: 100%;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.rev-score {
+    font-size: 18px;
+    float: left;
+    margin-right: 10px;
+}
+
+.reviewdate {
+    font-size: 18px;
+}
+
+p.reviewComment {
+    margin-top: 12px;
+}
+
+p.reviewerName {
+    text-align: right;
+    font-size: 18px;
+    font-style: italic;
+}
+
+.profile-reviews-row .TotalRatingOuter {
+    background: #008DFF;
+}
+
+.TotalRatingOuter {
+    font-size: 35px;
+    width: 130px;
+    margin: 0 10px 8px 0;
+    color: #fff;
+    border-radius: 20px 20px 20px 0;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    float: left;
+}
+
+.totalScore {
+    width: 150px;
+    float: left;
+}
+
+.totalStars {
+    background: url(../img/five-stars-empty.png);
+    background-repeat: no-repeat;
+    width: 150px;
+    height: 31px;
+}
+
+.totalStars div {
+    background: url(../img/five-stars-full.png);
+    height: 31px;
+    background-repeat: no-repeat;
+}
+
+.quality-empty, .reliability-empty, .cost-empty, .schedule-empty, .behaviour-empty, .cleanliness-empty {
+    background: #dedede;
+    height: 13px;
+    float: left;
+    width: 100%;
+    margin-bottom: 4px;
+}
+
+.quality-empty div, .reliability-empty div, .cost-empty div, .schedule-empty div, .behaviour-empty div, .cleanliness-empty div {
+    background: #008dff;
+    height: 13px;
+}
+
+span.totalRatingReviews {
+    color: #fff;
+    font-size: 42px;
+    font-family: dinbd;
+}
+
+.main-container-profile p{
+  font-size: 16px;
+}
+
+.row.proffessional-photos-row {
+    max-width: 1170px;
+    margin: auto;
+}
+
+
+ul.nav.nav-pills-vertical.mytabs.tab-app-profile li a{
+  text-decoration: none;
+  color:#004a86;
+}
+ul.nav.nav-pills-vertical.mytabs.tab-app-profile li.active a {
+    color: #fff;
+}
+
+ul.nav.nav-pills-vertical.mytabs.tab-app-profile>li>a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+}
+
+ul.nav.nav-pills-vertical.mytabs.tab-app-profile li {
+    font-size: 17px;
+    line-height: 24px;
+    font-family: dinmd;
+}
+
+ul.ul-app-info li span {
+      line-height: 26px;
+    font-size: 16px;
+}
+li.app-price-li span.app-price {
+    font-size: 21px;
+}
+
+p.reviewerName {
+    font-size: 18px;
+}
+
+li.app-more-info span {
+    display: block;
+    padding-bottom: 15px;
+}
+
+.profile-side-menu li {
+    font-size: 16px;
+    font-family: dinmd;
+}
+
+a{
+  text-decoration: none;
+}
+
+
+p.emplexp {
+    margin-bottom: 3px;
+    line-height: 25px;
+}
+
+a.a-offer-tel {
+    text-decoration: none;
+}
+
+p.font-offer-tel {
+    font-size: 30px;
+    font-family: dinmd;
+    color: #004a86;
+}
+p.font-offer-tel .fa {
+    color: #ff6600;
+    font-size: 50px;
+    vertical-align: middle;
+}
+
+a.btn-book-online {
+    text-decoration: none;
+}
+
+.container.container-reviews {
+    margin-bottom: 80px;
+}

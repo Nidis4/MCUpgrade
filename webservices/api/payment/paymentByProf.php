@@ -52,7 +52,7 @@ if($num>0){
             "commision" => "",
             "payment" => $amount, 
             "agent_id" => $agent_id,
-            "status" => $status,
+            "payment_status" => $status,
             "balance" => "0",
             "cancelReason" => $cancelReason,
             "datetimeStatusUpdated" => $datetimeStatusUpdated,
@@ -82,7 +82,7 @@ if($num>0){
             "commision" => $commision,
             "payment" => "",
             "agent_id" => $agent_id,
-            "status" => $status,
+            "appointment_status" => $status,
             "balance" => "0"
         );
  
@@ -101,23 +101,29 @@ if($num>0){
     $tolBalance = 0;
     foreach($payments_arr as &$item) {
 
+        if(@$item['payment_id']){
+             if ($item['payment_status'] == 1){
+                //echo "1";
+                $item['balance'] = round($tolBalance + $item['amount'],2);
+                $tolBalance = $item['balance'];
+            }
+            else{
+                //echo "2";
+                $item['balance'] = $tolBalance;
+            }
+        }else{
+            if ($item['appointment_status']==1){
+                //echo "1";
+                $item['balance'] = round($tolBalance - $item['commision'],2);
+                $tolBalance = $item['balance'];
+            }
+            else{
+                //echo "2";
+                $item['balance'] = $tolBalance;
+            }
+        }
 
-
-        if ($item['status']==0){
-            //echo "0";
-            $item['balance'] = round($tolBalance + $item['payment'],2);
-            $tolBalance = $item['balance'];
-                
-        }
-        else if ($item['status']==1){
-            //echo "1";
-            $item['balance'] = round($tolBalance - $item['commision'],2);
-            $tolBalance = $item['balance'];
-        }
-        else{
-            //echo "2";
-            $item['balance'] = $tolBalance;
-        }
+        
 
 
     }

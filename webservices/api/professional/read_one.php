@@ -35,6 +35,7 @@ $professional_arr=array(
     "last_name" => $professional->last_name,
     "sex" => $professional->sex,
     "address" => $professional->address,
+    "county_id" => $professional->county_id,
     "profile_status" => $professional->profile_status,
     "mobile" => $professional->mobile,
     "phone" => $professional->phone,

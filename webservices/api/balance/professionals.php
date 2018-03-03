@@ -15,40 +15,17 @@ $db = $database->getConnection();
 $balance = new Balance($db);
  
 // query categorys
-$stmt = $balance->professionals($_GET['fromdate'],$_GET['todate']);
-$num = $stmt->rowCount();
+$stmt = $balance->professionals();
+
 
 
 
 
 
 // check if more than 0 record found
-if($num>0){
- 
-
-    $appointments_arr = array();
-    $appointments_arr["records"] = array(); 
-
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-        // extract row
-        // this will make $row['name'] to
-        // just $name only
-        extract($row);
- 
-        $appointment_item = array(
-                                "professional_id" => $professional_id,
-                                "professionalName" => $professionalName,                                
-                                "amount" => $amount                                
-                            );
-
-        $paymentstmt = $balance->payments($_GET['fromdate'],$_GET['todate']);
-
-        array_push($appointments_arr["records"], $appointment_item);
-
- 
-    }
+if(count($stmt)){
     
-    echo json_encode($appointments_arr);
+    echo json_encode($stmt);
     
 } 
 else{

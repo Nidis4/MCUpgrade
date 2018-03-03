@@ -213,9 +213,9 @@ include('config/core.php');
 														<span class="input-group-addon">
 															<i class="fa fa-calendar"></i>
 														</span>
-														<input type="text" class="form-control" name="start" id='startDate'>
+														<input type="text" class="form-control" name="start" value="<?php echo $appointment['date'];?>" id='startDate'>
 														<span class="input-group-addon">to</span>
-														<input type="text" class="form-control" name="end" id='endDate'>
+														<input type="text" class="form-control" value="<?php echo date('Y-m-d',strtotime($appointment['date']." +5 days"));?>" name="end" id='endDate'>
 													</div>
 												</div>
 										</div>
@@ -276,7 +276,7 @@ include('config/core.php');
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Surname <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="surname" id="surname" class="form-control" placeholder="eg.: Doe" required/>
+												<input type="text" name="surname" id="surname" value="<?php echo $appointment['customer_last_name'];?>" class="form-control" placeholder="eg.: Doe" required/>
 											</div>
 										</div>
 										<div class="row col-sm-9 offset-sm-3" id='suggestions'>
@@ -285,34 +285,34 @@ include('config/core.php');
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Firstname <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="firstname" id="firstname" class="form-control" placeholder="eg.: John" required/>
+												<input type="text" name="firstname" id="firstname" value="<?php echo $appointment['customer_first_name'];?>" class="form-control" placeholder="eg.: John" required/>
 											</div>
 										</div>
 										<div class="form-group row">
 												<label class="col-lg-3 control-label text-lg-right pt-2">Sex</label>
 												<div class="col-lg-6">
 													<select data-plugin-selectTwo class="form-control populate" id="sex">
-															<option value="Κύριε">MR</option>
-															<option value="Κυρία">MRS</option>
+															<option <?php if($appointment['customer_sex'] == "Κύριε"){?> selected="selected" <?php }?> value="Κύριε">MR</option>
+															<option <?php if($appointment['customer_sex'] == "Κυρία"){?> selected="selected" <?php }?> value="Κυρία">MRS</option>
 													</select>
 												</div>
 										</div>
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Address <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="address" id="pac-input-address" class="form-control" placeholder="eg.: Gonata 7, 152 12, Athens" required/>
+												<input type="text" name="address" id="pac-input-address" value="<?php echo $appointment['customer_address'];?>" class="form-control" placeholder="eg.: Gonata 7, 152 12, Athens" required/>
 											</div>
 										</div>
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Mobile <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="tel" name="mobile" id="mobile" class="form-control" placeholder="eg.: 6971231231" required/>
+												<input type="tel" name="mobile" id="mobile" value="<?php echo $appointment['customer_mobile'];?>" class="form-control" placeholder="eg.: 6971231231" required/>
 											</div>
 										</div>
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Landline <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="tel" name="landline" id="phone" class="form-control" placeholder="eg.: 2106412123" required/>
+												<input type="tel" name="landline" id="phone" value="<?php echo $appointment['customer_phone'];?>" class="form-control" placeholder="eg.: 2106412123" required/>
 											</div>
 										</div>
 										<div class="form-group row">
@@ -322,7 +322,7 @@ include('config/core.php');
 													<span class="input-group-addon">
 														<i class="fa fa-envelope"></i>
 													</span>
-													<input type="email" name="email" id="email" class="form-control" placeholder="eg.: email@email.com" required/>
+													<input type="email" name="email" id="email" class="form-control" value="<?php echo $appointment['customer_email'];?>" placeholder="eg.: email@email.com" required/>
 												</div>
 											</div>
 											<div class="col-sm-9">

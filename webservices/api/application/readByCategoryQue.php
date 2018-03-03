@@ -613,14 +613,19 @@ if($catId == "60"){ // Electrical Certificate
                 var  ubud = 0;
                 var  cbud = 0;
                 var  dbud = 0;
-               
-
+                
                 if($("#usedforbudget").length){ ubud = $("#usedforbudget").val();}
+
+
                 if($("#countrybudget").length){ cbud = $("#countrybudget").val();}
                 if($("#buildingdrawingbudget").length){ dbud = $("#buildingdrawingbudget").val();}
-               
-                var totalbud = parseFloat(ubud) + parseFloat(cbud) + parseFloat(dbud);
 
+                var rvale = $("input[name='usedfor']:checked"). val();
+                if(rvale == "forsave"){
+                    var totalbud = parseFloat(ubud);
+                }else{
+                    var totalbud = parseFloat(cbud) + parseFloat(dbud);
+                }
                
 
                 var samecatebud = $("#samecatebud").val();
@@ -637,19 +642,15 @@ if($catId == "60"){ // Electrical Certificate
                 var rvale = $("input[name='usedfor']:checked"). val();
                 var bud = 0;
                 
-                if((vale >= 1 ) && (rvale == "forsave")){
-                    var avale = $('.usedappartment').val();                    
-                    if(vale >= 1 && vale <= 99 && (avale == "forappartment")){
-                        bud = 38 + (vale * 1.20);
-                    }else if(vale >= 100 && vale <= 149 && (avale == "forappartment")){
-                        bud = 60 + (vale * 1.20);
-                    }else if(vale >= 150 && vale <= 1999 && (avale == "forappartment")){
-                        bud = 90 + (vale * 1.20);
-                        if(bud >= 260){
-                            bud = 260;
+                if(rvale == "forsave"){
+                    var avale = $("input[name='usedappartment']:checked").val();                    
+                    if(avale == "forappartment"){
+                        bud = 38 + (vale * 1.25);
+                        if(bud >= 250){
+                            bud = 250;
                         }
-                    }else if(vale >= 1 && vale <= 999 && (avale == "forblock")){
-                        bud = 50 + (vale * 1);
+                    }else if(avale == "forblock"){
+                        bud = 38 + (vale * 0.9);
                         if(bud >= 565){
                             bud = 565;
                         }
