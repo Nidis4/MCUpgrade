@@ -1,5 +1,6 @@
         <?php include('header.php'); ?>
         <?php include('menu.php'); ?>
+        <?php include('search.php'); ?>
 
                 <div class="container-fluid main-container-profile">
                     <div class="container container-proffesional-profile">

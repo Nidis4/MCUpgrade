@@ -87,7 +87,7 @@
 						<div class="searcharea">
 							<div class="search-outer">
 								<a class="mk-search-trigger mk-fullscreen-trigger" href="#"  id="search-button-listener">
-								    <div id="search-button"><span class="search-text">Βρες την υπηρεσία που χρειάζεσαι... </span><div class="icon-search"><i class="fa fa-search"></i></div></div>
+								    <div id="search-button" class="search-btn-style-home"><span class="search-text">Βρες την υπηρεσία που χρειάζεσαι... </span><div class="icon-search"><i class="fa fa-search"></i></div></div>
 								  </a>
 								  <div class="mk-fullscreen-search-overlay" id="mk-search-overlay">
 								    <a href="#" class="mk-fullscreen-close" id="mk-fullscreen-close-button"><i class="fa fa-times"></i></a>
