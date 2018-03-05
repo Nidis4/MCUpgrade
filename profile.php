@@ -9,9 +9,10 @@
                             <div class="col-md-3 profile-img">
                                 <div class="profile-img-inner">
                                     <img src="img/matzouranis.jpg">
+                                    <div class="total-rating-num-outer"><span class="total-rating-num">4.9</span>/5</div>
                                 </div>
 
-                                <div class="total-rating-num-outer"><span class="total-rating-num">4.9</span>/5</div>
+                                
                             </div>
 
                             <div class="col-md-5">
@@ -397,14 +398,18 @@
                                 </div>
                                     <div class="col-md-5 prof-total-score">
                                         <div class="reviewsTitle">
-                                            <div class="TotalRatingOuter"><span class="totalRatingReviews">4,9</span>/5 </div><div class="total-score">Συνολικό σκορ <br>
-                                                    Σκορ από <span class="total-jobs">190</span> αξιολογήσεις</div>
-                                        </div>
-                                        <div class="totalScore">
-                                            <div class="totalStars">
-                                                <div style="width: 90%;"></div>
+                                            <div class="TotalRatingOuter col-md-5"><span class="totalRatingReviews">4,9</span>/5 </div>
+                                            <div class="total-score col-md-7"><p>Συνολικό σκορ</p> 
+                                                    <p>Σκορ από <span class="total-jobs">190</span> αξιολογήσεις</p>
+                                                <div class="totalScore">
+                                                    <div class="totalStars">
+                                                        <div style="width: 90%;"></div>
+                                                    </div>
+                                                </div>
                                             </div>
+
                                         </div>
+                                       
                                     </div>
                                                         
                                                     
