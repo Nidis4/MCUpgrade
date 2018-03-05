@@ -10,8 +10,9 @@
          <!-- Bootstrap CSS CDN -->
         <link rel="stylesheet" href="../assets/bootstrap337/css/bootstrap.min.css">
         <!-- Our Custom CSS -->
-        <link rel="stylesheet" href="style/style.css?version=2">
-        <link rel="stylesheet" href="style/timeline.css">
+        <link rel="stylesheet" type="text/css" href="style/style.css?version=2">
+        <link rel="stylesheet" type="text/css" href="style/timeline.css">
+        <link rel="stylesheet" type="text/css" href="style/editprofile.css">
 
          <!-- jQuery CDN -->
          <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
