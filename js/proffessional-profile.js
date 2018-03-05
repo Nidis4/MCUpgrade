@@ -5,6 +5,15 @@
               $(this).find('li').addClass("active");
             });
 
+            
+
+            $('.profile-side-menu a').click(function(){
+              $('html, body').animate({
+                  scrollTop: $( $(this).attr('href') ).offset().top
+              }, 1000);
+              return false;
+            });
+
 
 
             $(document).mouseup(function (e){

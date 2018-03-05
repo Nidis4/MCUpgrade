@@ -1947,3 +1947,8 @@ a.btn-book-online {
 .container.container-reviews {
     margin-bottom: 80px;
 }
+
+.container-fluid.main-container-profile {
+    padding-right: 0px;
+    padding-left: 0px;
+}
