@@ -34,6 +34,10 @@ jQuery(document).ready(function($) {
     console.log("Open Search, Search Centered");
     $("div.mk-fullscreen-search-overlay").addClass("mk-fullscreen-search-overlay-show");
     $("body").addClass("scroll-body");
+    setTimeout(function() {
+    $('input#mk-fullscreen-search-input').focus();
+    }, 300);
+    
   });
   $("a.mk-fullscreen-close").click(function() {
     console.log("Closed Search");
@@ -53,6 +57,8 @@ var delay = (function(){
 })();
 function search(){
 
+   
+
 $('input#mk-fullscreen-search-input').keyup(function() {
   //alert('asd');
   if( this.value.length >= 2){
@@ -60,7 +66,7 @@ $('input#mk-fullscreen-search-input').keyup(function() {
     delay(function(){
       //alert('Time elapsed!');
       
-      var term = $('input#mk-fullscreen-search-input').val();
+    var term = $('input#mk-fullscreen-search-input').val();
     var getSearchAPI = API_LOCATION+'application/search.php';
     $("#search-results").empty();
     //alert (term);

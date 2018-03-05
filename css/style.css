@@ -2246,6 +2246,10 @@ div#mk-fullscreen-search-wrapper {
   .mk-fullscreen-search-overlay #mk-fullscreen-search-wrapper #mk-fullscreen-searchform #mk-fullscreen-search-input{
         font-size: 18px;
   }
+
+  .search-results-icon{
+    display: none;
+  }
   
 }
 
