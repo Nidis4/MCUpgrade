@@ -2026,6 +2026,8 @@ a.btn-book-online {
 
 .search-results-icon{
   width:42px;
+  float: left;
+  margin-right: 5px;
 }
 
 
@@ -2121,7 +2123,15 @@ a.btn-book-online {
 
   .col-md-6.bars-one-half {
     padding-left: 0px;
-}
+  }
+
+  a.avail-professional{
+    font-size: 26px;
+  }
+
+  #search-results i.fa.fa-chevron-right {
+    font-size: 22px;
+  }
 
 
 }
@@ -2145,8 +2155,16 @@ a.btn-book-online {
 
   .mk-fullscreen-search-overlay #mk-fullscreen-search-wrapper #mk-fullscreen-searchform #mk-fullscreen-search-input{
     width: 100%;
-   
   }
+
+  a.avail-professional{
+    font-size: 24px;
+  }
+
+  #search-results i.fa.fa-chevron-right {
+    font-size: 20px;
+  }
+
 
 }
 
@@ -2170,6 +2188,14 @@ a.btn-book-online {
     right:30px;
   }
 
+  a.avail-professional{
+    font-size: 22px;
+  }
+
+  #search-results i.fa.fa-chevron-right {
+    font-size: 18px;
+  }
+
   
 }
 
@@ -2184,6 +2210,9 @@ div#mk-fullscreen-search-wrapper {
 
   .mk-fullscreen-search-overlay #mk-fullscreen-search-wrapper #mk-fullscreen-searchform #mk-fullscreen-search-input{
         font-size: 20px;
+  }
+  a.avail-professional{
+    font-size: 20px;
   }
 
 }
