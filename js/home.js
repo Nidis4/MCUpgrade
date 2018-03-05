@@ -83,7 +83,7 @@ $('input#mk-fullscreen-search-input').keyup(function() {
 
 
                     if (v.id!=undefined){
-                        htmlStr += "<a class='avail-professional' href='application.php?id="+v.id+"'><img src='../img/home-page/hat-icon.png'/> "+v.title_greek+" <i class='fa fa-chevron-right'></i></div>";
+                        htmlStr += "<a class='avail-professional' href='application.php?id="+v.id+"'><div class='search-results-icon'><img src='../img/home-page/hat-icon.png'/></div> "+v.title_greek+" <i class='fa fa-chevron-right'></i></div>";
                     }
                     else{
 

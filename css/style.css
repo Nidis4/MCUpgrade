@@ -1031,6 +1031,8 @@ h4.cleaning-hover-title {
   -ms-transition: all ease-in-out .25s;
   -o-transition: all ease-in-out .25s;
   transition: all ease-in-out .25s;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .mk-animate-element,
@@ -1053,7 +1055,7 @@ h4.cleaning-hover-title {
 .mk-fullscreen-search-overlay .mk-fullscreen-close {
   position: absolute;
   right: 50px;
-  top: 70px;
+  top: 30px;
   font-size: 26px;
   -webkit-transition: transform ease-out .2s;
   -moz-transition: transform ease-out .2s;
@@ -2022,6 +2024,11 @@ a.btn-book-online {
 }
 
 
+.search-results-icon{
+  width:42px;
+}
+
+
 @media screen and (max-width: 1398px){
   #myTopnav .navbar-brand img {
       width: 210px;
@@ -2067,6 +2074,8 @@ a.btn-book-online {
 
 
 
+
+
 @media screen and (max-width: 1398px){
 
   #myTopnav .navbar-nav>li>a {
@@ -2087,6 +2096,11 @@ a.btn-book-online {
 }
 
 @media screen and (max-width: 991px){
+
+  .mk-fullscreen-search-overlay #mk-fullscreen-search-wrapper #mk-fullscreen-searchform #mk-fullscreen-search-input{
+    width: 600px;
+    font-size: 26px;
+  }
 
   .profile-img-inner {
     max-width: 240px;
@@ -2120,9 +2134,56 @@ a.btn-book-online {
 
 }
 
+
+@media screen and (max-width:780px){
+ 
+
+ .mk-fullscreen-search-overlay #mk-fullscreen-search-wrapper{
+    max-width: none;
+    width:100%;
+  }
+
+  .mk-fullscreen-search-overlay #mk-fullscreen-search-wrapper #mk-fullscreen-searchform #mk-fullscreen-search-input{
+    width: 100%;
+   
+  }
+
+}
+
+@media screen and (max-width: 570px){
+  
+
+  .mk-fullscreen-search-overlay #mk-fullscreen-search-wrapper #mk-fullscreen-searchform .fullscreen-search-icon{
+    font-size: 27px;
+     right: 0px;
+     display: none;
+  }
+
+  .mk-fullscreen-search-overlay #mk-fullscreen-search-wrapper #mk-fullscreen-searchform .fullscreen-search-icon{
+    font-size: 27px;
+    right: 5px;
+    width: 25px;
+    top: 20px;
+
+  }
+  .mk-fullscreen-search-overlay .mk-fullscreen-close{
+    right:30px;
+  }
+
+  
+}
+
+div#mk-fullscreen-search-wrapper {
+    margin-top: 75px;
+}
+
 @media screen and (max-width: 480px){
   .search-btn-style span.search-text{
     font-size:14px;
+  }
+
+  .mk-fullscreen-search-overlay #mk-fullscreen-search-wrapper #mk-fullscreen-searchform #mk-fullscreen-search-input{
+        font-size: 20px;
   }
 
 }
@@ -2153,10 +2214,16 @@ a.btn-book-online {
     padding-top: 11px;
     padding-bottom: 11px;
   }
+  .mk-fullscreen-search-overlay #mk-fullscreen-search-wrapper #mk-fullscreen-searchform #mk-fullscreen-search-input{
+        font-size: 18px;
+  }
   
 }
 
 
-@media screen and (max-width: 330px){
+@media screen and (max-width: 358px){
+  .mk-fullscreen-search-overlay #mk-fullscreen-search-wrapper #mk-fullscreen-searchform #mk-fullscreen-search-input{
+        font-size: 16px;
+  }
   
 }
