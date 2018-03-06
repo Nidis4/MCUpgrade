@@ -72,6 +72,14 @@ include('config/core.php');
 				}else{
 					$application_disable = "disabled";
 				}
+				$statuses = '';
+				if (@$appointment['status']){
+					$statuses = file_get_contents($api_url.'webservices/api/appointment/getStatusInfo.php?id='.$appointment['status']);
+					$statuses = json_decode($statuses, true); // decode the JSON into an associative array
+					//echo $statuses; 
+					$activeStatusName = $statuses['name'];
+					$activeStatusID = $statuses['id'];
+				}
 			?>
 			<div class="inner-wrapper">				
 				<!-- Sidebar Position -->
@@ -117,9 +125,12 @@ include('config/core.php');
 										<label class="col-lg-3 control-label text-lg-right pt-2">Status</label>
 										<div class="col-lg-6">
 											<select data-plugin-selectTwo class="form-control populate" name="appointmentStatus" id="appointmentStatus">
-												<option value="1" >Appointment</option>
-												<option value="3" >Offer</option>
-												<option value="4" >Appointment for Offer</option>
+												<option value="<?php echo $activeStatusID ?>"><?php echo $activeStatusName ?></option>
+												<?php
+												foreach ($statuses['to_status'] as $status) {
+													echo "<option value='".$status['id']."'>".$status['name']."</option>";
+												}
+												?>
 											</select>
 										</div>
 
@@ -411,7 +422,7 @@ include('config/core.php');
 						
 					</div>
 					
-			<div id="map"></div>
+					<div id="map"></div>
 					<!-- end: page -->
 				</section>
 			</div>

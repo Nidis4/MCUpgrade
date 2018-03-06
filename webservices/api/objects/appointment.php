@@ -327,6 +327,16 @@ class Appointment{
 
     }
 
+    public function getStatusName($id){
+
+        $query = "SELECT `NAME` FROM `appointments_status` WHERE `ID` = $id ";
+        $stmt = $this->conn->prepare( $query );
+
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['NAME'];
+    }
+
 
 }
 ?>

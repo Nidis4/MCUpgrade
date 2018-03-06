@@ -102,9 +102,7 @@ include('config/core.php');
 												<option value="3" >Offer</option>
 												<option value="4" >Appointment for Offer</option>
 											</select>
-										</div>
-
-												
+										</div>			
 									</div>
 								</div>
 							</section>
