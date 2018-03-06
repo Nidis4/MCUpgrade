@@ -37,8 +37,8 @@ $id = $professional->professional_id;
         $response = "";
         $response_a = "";
 
-        $opening = "09:00";
-        $closing = "20:00";
+        $opening = "06:00";
+        $closing = "22:00";
         $busy_arr = getBusySlots($startDate, $endDate, $id,$professional);
         $calendar = getCalendarDetails($startDate, $endDate, $opening, $closing, $busy_arr);
         $days = dateDiff($startDate, $endDate) + 1;

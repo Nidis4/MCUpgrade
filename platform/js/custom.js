@@ -617,7 +617,7 @@ $( ".findProfessionals" ).click(function() {
                     var profName = v.first_name+" "+v.last_name;
 
                     var dateAvail = startDate;
-                    var timeAvail = "09:00";
+                    var timeAvail = "06:00";
 
 
                     if (v.busy!=undefined){
@@ -643,7 +643,7 @@ $( ".findProfessionals" ).click(function() {
                                 if (currentDate > today){
                                   disabled = "";
                                 }
-                                if (x.timefrom=="09:00"){
+                                if (x.timefrom=="06:00"){
                                     singleDay += "<div class='col-md-2 profile availProf' id='"+profID+"' data-listing-distance='"+profDistance+"'><div class='row calName text-center'><div class='col-md-12'><div class='comp'>"+profName+"</div><span>"+profDistance+"</span></div></div><ul class='selectable' id='selectable-"+profID+"'>";
                                 }                         
                                 if (x.address == ""){
@@ -652,7 +652,7 @@ $( ".findProfessionals" ).click(function() {
                                 else{
                                     singleDay += "<li class='busy slot "+disabled+"' timefrom='"+x.timefrom+"' timeto='"+x.timeto+"' data-dateslot='"+x.date+"'>"+x.timefrom+": "+x.address+" "+x.distance+"</li>";
                                 }
-                                if(x.timeto == "20:00"){
+                                if(x.timeto == "22:00"){
                                     singleDay += "</ul></div>";
                                 }
 
@@ -670,7 +670,7 @@ $( ".findProfessionals" ).click(function() {
                                 if (currentDate > today){
                                   disabled = "";
                                 }
-                                if (x.timefrom=="09:00"){
+                                if (x.timefrom=="06:00"){
                                     calendarCode += "<div class='col-md-2'><div class='row calDate text-center'><div class='col-md-12'>"+x.date+"</div></div><ul class='selectable' id='selectable-"+profID+"'>";
                                 }                         
                                 if (x.address == ""){
@@ -679,7 +679,7 @@ $( ".findProfessionals" ).click(function() {
                                 else{
                                     calendarCode += "<li class='busy slot "+disabled+"' timefrom='"+x.timefrom+"' timeto='"+x.timeto+"' data-dateslot='"+x.date+"'>"+x.timefrom+": "+x.address+" "+x.distance+"</li>";
                                 }
-                                if(x.timeto == "20:00"){
+                                if(x.timeto == "22:00"){
                                     calendarCode += "</ul></div>";
                                 }
 
