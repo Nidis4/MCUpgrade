@@ -35,17 +35,18 @@ $("#loginForm").submit(function(){
         });
     return false;
 });
+$( document ).ready(function() {
+    $('select#appointmentStatus').on('change', function() {
+        var status_id = this.value;
+        //alert(status_id);
 
-$('select#appointmentStatus').on('change', function() {
-    var status_id = this.value;
-    //alert(status_id);
+        $('.status').css("display", "none");
+        $('body').removeAttr('id');
 
-    $('.status').css("display", "none");
-    $('body').removeAttr('id');
+        $('.status-'+status_id).css("display", "block");
+        $('body').attr('id','status-'+status_id);
 
-    $('.status-'+status_id).css("display", "block");
-    $('body').attr('id','status-'+status_id);
-
+    });
 });
 
 $('select#category').on('change', function() {

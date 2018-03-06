@@ -220,7 +220,7 @@ ALTER TABLE `appointments` ADD `reject_status` INT(2) NOT NULL DEFAULT '0' COMME
 <!-- End 28 Feb 2018 Harpreet -->
 
 <!-------------------------------->
-<!-- Start 06 Mar 2018 Harpreet -->
+<!-- Start 06 Mar 2018 G Konstantinidis -->
 
 CREATE TABLE `appointments_status` (
   `ID` int(11) NOT NULL,
@@ -230,4 +230,4 @@ CREATE TABLE `appointments_status` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 <!-------------------------------->
-<!-- End 06 Mar 2018 Harpreet -->
+<!-- End 06 Mar 2018 G Konstantinidis -->

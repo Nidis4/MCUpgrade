@@ -386,8 +386,13 @@ include('config/core.php');
 						
 					</div>
 					<div class="row">
-						<div class="col-sm-6 offset-sm-3 text-center">
+						<div class="col-sm-6 offset-sm-3 text-center" style='display: none'>
 							<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning findProfessionals">Find Professionals</button>
+						</div>
+					</div>
+					<div class="row status-3 status">
+						<div class="col-sm-6 offset-sm-3 text-center">
+							<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning updateAppointment">Update Appointment</button>
 						</div>
 					</div>
 					<div class="row available">
