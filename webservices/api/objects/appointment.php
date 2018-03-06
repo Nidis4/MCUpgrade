@@ -313,6 +313,20 @@ class Appointment{
         //var getAvailableAPI = API_LOCATION+'professional/getCalendarForBooking.php?duration='+duration+'&county_id='+county+'&application_id='+application+'&startDate='+startDate+'&endDate='+endDate+'&address='+address;
     }
 
+    function getStatusInfo(){
+
+        $query = "SELECT * FROM `appointments_status` WHERE `ID` = :id ";
+        $stmt = $this->conn->prepare( $query );
+        $status_id = $this->status;
+        $stmt->bindParam(':id',  $status_id, PDO::PARAM_INT);
+
+        $stmt->execute();
+        //$row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $stmt;
+
+    }
+
 
 }
 ?>

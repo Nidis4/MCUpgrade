@@ -79,7 +79,7 @@ include('config/core.php');
 
 					<!-- start: page -->
 					<div class="row">
-						<!-- col-lg-6 -->
+						<!-- col-lg-12 -->
 						<div class="col-lg-12">
 							<section class="card">
 								<header class="card-header">
@@ -125,12 +125,12 @@ include('config/core.php');
 										</p>
 									</header>
 									<div class="card-body">
-										<div class="form-group row">
+										<!--<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Status <span class="required">*</span></label>
 											<div class="col-sm-9">
 												<input type="text" name="status" class="form-control" value="New" disabled required />
 											</div>
-										</div>
+										</div>-->
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Agent <span class="required">*</span></label>
 											<div class="col-sm-9">

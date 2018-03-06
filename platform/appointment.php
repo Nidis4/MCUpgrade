@@ -81,7 +81,7 @@ include('config/core.php');
 
 				<section role="main" class="content-body card-margin">
 					<header class="page-header">
-						<h2>Create New Appointment</h2>					
+						<h2>Edit Appointment #<?php echo $id ?></h2>					
 						<div class="right-wrapper text-right">
 							<ol class="breadcrumbs">
 								<li>
@@ -90,7 +90,7 @@ include('config/core.php');
 									</a>
 								</li>
 								<li><span>Appointment</span></li>
-								<li><span>New</span></li>
+								<li><span>Edit</span></li>
 							</ol>					
 							<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
 						</div>
@@ -98,6 +98,36 @@ include('config/core.php');
 
 					<!-- start: page -->
 					<div class="row">
+						<!-- col-lg-12 -->
+						<div class="col-lg-12">
+							<section class="card">
+								<header class="card-header">
+									<div class="card-actions">
+										<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+										<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
+									</div>
+
+									<h2 class="card-title">Appointment Status</h2>
+									<p class="card-subtitle">
+										Please fill in the appointment details
+									</p>
+								</header>
+								<div class="card-body">
+									<div class="form-group row">
+										<label class="col-lg-3 control-label text-lg-right pt-2">Status</label>
+										<div class="col-lg-6">
+											<select data-plugin-selectTwo class="form-control populate" name="appointmentStatus" id="appointmentStatus">
+												<option value="1" >Appointment</option>
+												<option value="3" >Offer</option>
+												<option value="4" >Appointment for Offer</option>
+											</select>
+										</div>
+
+												
+									</div>
+								</div>
+							</section>
+						</div>
 						<!-- col-lg-6 -->
 						<div class="col-lg-6">
 							<form id="form" action="forms-validation.html" class="form-horizontal">
@@ -114,12 +144,6 @@ include('config/core.php');
 										</p>
 									</header>
 									<div class="card-body">
-										<div class="form-group row">
-											<label class="col-sm-3 control-label text-sm-right pt-2">Status <span class="required">*</span></label>
-											<div class="col-sm-9">
-												<input type="text" name="status" class="form-control" value="New" disabled required />
-											</div>
-										</div>
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Agent <span class="required">*</span></label>
 											<div class="col-sm-9">
@@ -477,6 +501,9 @@ include('config/core.php');
 		<script src="js/core.js"></script>
 		<script src="js/custom.js"></script>
 		<script src="js/searchAddress.js"></script>
+
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOB9VUHID5_exudRHHduRUvCYOu--Lg0w&libraries=places&callback=initAutocomplete" async defer></script>
 
 		
