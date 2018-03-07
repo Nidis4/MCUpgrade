@@ -43,6 +43,7 @@ $professional_arr=array(
     "calendar_id" => $professional->calendar_id,
     "admin_comments" => $professional->admin_comments,
     "viewtype" => $professional->viewtype,
+    "verified" => $professional->verified,
     "image1" => $professional->image1,
     "image2" => $professional->image2,
     "image3" => $professional->image3,

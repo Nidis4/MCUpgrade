@@ -95,11 +95,11 @@ ORDER   BY `date` ASC, `time` ASC";
         return $stmt;
     }
 
-     public function readPaging($from_record_num, $records_per_page){
+     public function readPaging($from_record_num, $records_per_page, $verified){
      
         // select query
         $query = "SELECT
-                p.`id`, p.`first_name`, p.`last_name`, p.`profile_status`, p.`admin_comments`, co.`address`, co.`mobile`, co.`phone` FROM `professionals` p,  `professionals_contact_details` co WHERE co.professional_id=p.id 
+                p.`id`, p.`first_name`, p.`last_name`, p.`profile_status`, p.`admin_comments`, co.`address`, co.`mobile`, co.`phone` FROM `professionals` p,  `professionals_contact_details` co WHERE co.professional_id=p.id and p.`verified`='".$verified."'  
                 ORDER BY
                     p.`id` DESC
                 LIMIT ?, ?";
@@ -194,7 +194,7 @@ ORDER   BY `date` ASC, `time` ASC";
      
         // query to read single record
         $query = "SELECT
-                 p.`id`, p.`first_name`, p.`last_name`, p.`sex`, p.`profile_status`, p.`admin_comments`,p.`viewtype`, cd.`image1`, cd.`image2`, cd.`image3`, cd.`perid1`, cd.`perid2`, cd.`agreement1`, cd.`agreement2`, cd.`agreement3`, cd.`agreement4`, cd.`agreement5`, cd.`approve_per`, cd.`approve_doc`, co.`address`, co.`mobile`, co.`phone`, ca.`email`, ca.`calendar_id`, ct.`county_id`
+                 p.`id`, p.`first_name`, p.`last_name`, p.`sex`, p.`profile_status`, p.`admin_comments`,p.`viewtype`,p.`verified`, cd.`image1`, cd.`image2`, cd.`image3`, cd.`perid1`, cd.`perid2`, cd.`agreement1`, cd.`agreement2`, cd.`agreement3`, cd.`agreement4`, cd.`agreement5`, cd.`approve_per`, cd.`approve_doc`, co.`address`, co.`mobile`, co.`phone`, ca.`email`, ca.`calendar_id`, ct.`county_id`
             FROM
                 " . $this->table_name . " p
                 LEFT JOIN ". $this->contact_table_name." co
@@ -237,6 +237,7 @@ ORDER   BY `date` ASC, `time` ASC";
         $this->profile_status = $row['profile_status'];
         $this->admin_comments = $row['admin_comments'];
         $this->viewtype = $row['viewtype'];
+        $this->verified = $row['verified'];
         $this->mobile = $row['mobile'];
         $this->phone = $row['phone'];
         $this->email = $row['email'];
@@ -261,12 +262,12 @@ ORDER   BY `date` ASC, `time` ASC";
 
 
 
-    function update($id, $first_name, $last_name, $address, $sex, $profile_status, $admin_comments, $mobile, $phone, $email, $calendar_id, $profile_image1, $profile_image2, $profile_image3, $profile_perid1, $profile_perid2, $profile_agreement1, $profile_agreement2, $profile_agreement3, $profile_agreement4, $profile_agreement5, $approve_per, $approve_doc, $viewtype ){
+    function update($id, $first_name, $last_name, $address, $sex, $profile_status, $admin_comments, $mobile, $phone, $email, $calendar_id, $profile_image1, $profile_image2, $profile_image3, $profile_perid1, $profile_perid2, $profile_agreement1, $profile_agreement2, $profile_agreement3, $profile_agreement4, $profile_agreement5, $approve_per, $approve_doc, $viewtype, $verified ){
         
         
         $query = "UPDATE " . $this->table_name . "
                     SET
-                    `first_name`=:first_name, `last_name`=:last_name, `sex`=:sex, `profile_status`=:profile_status, `admin_comments`=:admin_comments, `viewtype`=:viewtype";
+                    `first_name`=:first_name, `last_name`=:last_name, `sex`=:sex, `profile_status`=:profile_status, `admin_comments`=:admin_comments, `viewtype`=:viewtype, `verified`=:verified";
         $query .=" WHERE id = :id";
 
         $stmt = $this->conn->prepare( $query );
@@ -280,6 +281,7 @@ ORDER   BY `date` ASC, `time` ASC";
         $stmt->bindParam(':profile_status',  $profile_status);
         $stmt->bindParam(':admin_comments',  $admin_comments);
         $stmt->bindParam(':viewtype',  $viewtype);
+        $stmt->bindParam(':verified',  $verified);
         
         if ($stmt->execute()) { 
            $this->update_contact($id, $address, $mobile, $phone); 

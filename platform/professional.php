@@ -445,6 +445,10 @@ include('config/core.php');
 												<div class="col-lg-8 pt-2"><strong><?php echo $professional['percentage']; ?></strong></div>
 											</div>
 											<div class="form-group col-md-12 row">
+												<label class="col-lg-3 control-label text-lg-right pt-2">Verified</label>
+												<div class="col-lg-1"><input type="checkbox" class="form-control" name="verified" id="verified" value="1" <?php if(@$professional['verified']){ echo "checked='checked'";}?> ></div>
+											</div>
+											<div class="form-group col-md-12 row">
 												<label class="col-lg-3 control-label text-lg-right pt-2">&nbsp;</label>
 												<div class="col-lg-8 pt-2">
 													<div class="col-lg-3" style="float: left;">            
@@ -1257,11 +1261,20 @@ include('config/core.php');
 					    form_data.append('approve_per', 0);
 					}
 
+
+
 					if ($('#approve_doc').prop('checked') == true){
 						form_data.append('approve_doc', 1);
 					} else{
 						form_data.append('approve_doc', 0);
 					}
+
+					if ($('#verified').prop('checked') == true){
+						form_data.append('verified', 1);
+					} else{
+						form_data.append('verified', 0);
+					}
+
 
 					//Attached Files
 					var profile_image1 = $('#profile_image1').prop('files')[0];

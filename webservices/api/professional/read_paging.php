@@ -18,9 +18,15 @@ $db = $database->getConnection();
  
 // initialize object
 $professional = new Professional($db);
- 
+
+if(isset($_GET['verified']) && ($_GET['verified'] == '0')){
+    $verified = 0;
+}else{
+    $verified = 1;
+}
+
 // query products
-$stmt = $professional->readPaging($from_record_num, $records_per_page);
+$stmt = $professional->readPaging($from_record_num, $records_per_page, $verified);
 $num = $stmt->rowCount();
  
 // check if more than 0 record found

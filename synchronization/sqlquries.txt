@@ -231,3 +231,12 @@ CREATE TABLE `appointments_status` (
 
 <!-------------------------------->
 <!-- End 06 Mar 2018 G Konstantinidis -->
+
+
+<!-------------------------------->
+<!-- Start 7 Mar 2018 Harpreet -->
+
+ALTER TABLE `professionals` ADD `verified` INT(1) NOT NULL DEFAULT '0' AFTER `viewtype`;
+
+<!-------------------------------->
+<!-- End 7 Mar 2018 Harpreet -->
