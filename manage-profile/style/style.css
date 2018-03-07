@@ -877,6 +877,7 @@ button.btn.btn-default.btn-choose {
 .container.container-profile-home {
     background: #fff;
     padding: 25px;
+    padding-bottom: 60px;
 }
 
 .card-body {
@@ -1017,6 +1018,14 @@ ul.ul-how-to-best li {
   background:  #ff7f2a;
 }
 
+
+.drag-and-drop-area {
+    background: #fff;
+    text-align: center;
+    padding: 74px;
+    max-width: 700px;
+    margin: auto;
+}
 
 @media screen and (max-width:1120px){
     .row.display-table {
