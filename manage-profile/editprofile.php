@@ -11,8 +11,14 @@
 
 
                 <div class="container-fluid main-container">
+                    <div class="row">
+                        <div class="col-md-12">
+                                <div class="save-btn" onclick="editprofile()">Save</div>
+                            </div>
+                    </div>
                     <div class="container container-proffesional-profile">
                         <div class="row">
+                            
 
                             <div class="col-md-3 profile-img">
                                 <div class="profile-img-inner">
@@ -35,7 +41,7 @@
                                 </div>
                                 <p class="front-professional-desc">Εξυπηρετούμε όλη την Αττική, Έδρα Νότια Προάστια.</p>
                                 <p class="front-professional-oneline-desc">Άμεσα, οικονομικά και υπεύθυνα αναλαμβάνουμε κάθε μεταφορά σας!</p>
-                                <p class="front-proffesional-address"><i class="fa fa-map-marker"></i> Στυλ. Γονατά και Θεσπιέων, Περιστέρι</p>
+                                <p class="front-proffesional-address"><i class="fa fa-map-marker"></i> <span class="spanAddress">Στυλ. Γονατά και Θεσπιέων, Περιστέρι</span></p>
                                 <p class="front-professional-tel"><i class="fa fa-phone"></i> <span class="front-tel-span">698 004 3090</span></p>
 
                                 
@@ -52,7 +58,7 @@
                         </div>
 
                         <div class="row row-profile-nav">
-                                <div class="col-md-3"></div>
+                                <div class="col-md-3"><input class="profile-img" type="file"></div>
                                 <div class="col-md-9 col-sm-12">
                                     <div class="profile-side-menu">
                                         <ul>
@@ -371,26 +377,28 @@
                     </div>
 
                     <div class="container container-lightbox">
-                        <div class="row proffessional-photos-row">
-                            <div class="title-app-tabs">
-                                <h3>Εικόνες Επαγγελματία</h3>
-                                <img src="img/separator-4.png">
-                            </div>
+                                        <div class="row proffessional-photos-row">
+                                            <div class="title-app-tabs">
+                                                <h3>Εικόνες Επαγγελματία</h3>
+                                                <img src="img/separator-4.png">
+                                            </div>
 
-                            <div class="column">
-                                <img src="img/matzouranis-1.jpg" onclick="openLightbox();currentSlide(1)" class="hover-shadow">
-                            </div>
-                            <div class="column">
-                                <img src="img/matzouranis-2.jpg" onclick="openLightbox();currentSlide(2)" class="hover-shadow">
-                            </div>
-                            <div class="column">
-                                <img src="img/matzouranis-3.jpg" onclick="openLightbox();currentSlide(3)" class="hover-shadow">
-                            </div>
-                            <div class="column">
-                                <img src="img/matzouranis-4.jpg" onclick="openLightbox();currentSlide(4)" class="hover-shadow">
-                            </div>
-                            
-                        </div>
+                                            <a href="img/matzouranis-1.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
+                                                        <img src="img/matzouranis-1.jpg" class="img-fluid">
+                                            </a>
+                                            <a href="img/matzouranis-2.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
+                                                        <img src="img/matzouranis-3.jpg" class="img-fluid">
+                                            </a>
+                                            <a href="img/matzouranis-3.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
+                                                        <img src="img/matzouranis-4.jpg" class="img-fluid">
+                                            </a>
+                                            <a href="img/matzouranis-4.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
+                                                        <img src="img/matzouranis-4.jpg" class="img-fluid">
+                                            </a>
+                                            
+                                        </div>
+
+
                     </div>
 
                     <div class="container container-reviews">
@@ -541,70 +549,16 @@
                     </div>
 
                 
-                    <div class="col-md-12">
-                         <div class="save-btn" onclick="editprofile()">Save</div>
-                    </div>
+                    
                 </div>
 
             </div>
         </div>
        
         <script src="js/professional-edit-profile.js"></script>
-        <script src="js/lightbox.js"></script>
-        
-
-        <!-- The Modal/Lightbox -->
-            <div id="myLightbox" class="modal">
-              <span class="close cursor" onclick="closeModal()">&times;</span>
-              <div class="modal-content">
-
-                <div class="mySlides">
-                  <div class="numbertext">1 / 4</div>
-                  <img src="img/matzouranis-1.jpg" style="width:100%">
-                </div>
-
-                <div class="mySlides">
-                  <div class="numbertext">2 / 4</div>
-                  <img src="img/matzouranis-2.jpg" style="width:100%">
-                </div>
-
-                <div class="mySlides">
-                  <div class="numbertext">3 / 4</div>
-                  <img src="img/matzouranis-3.jpg" style="width:100%">
-                </div>
-
-                <div class="mySlides">
-                  <div class="numbertext">4 / 4</div>
-                  <img src="img/matzouranis-4.jpg" style="width:100%">
-                </div>
-
-                <!-- Next/previous controls -->
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-                <!-- Caption text -->
-                <div class="caption-container">
-                  <p id="caption"></p>
-                </div>
-
-                <!-- Thumbnail image controls -->
-                <div class="column">
-                  <img class="demo" src="img/matzouranis-1.jpg" onclick="currentSlide(1)" alt="">
-                </div>
-
-                <div class="column">
-                  <img class="demo" src="img/matzouranis-2.jpg" onclick="currentSlide(2)" alt="">
-                </div>
-
-                <div class="column">
-                  <img class="demo" src="img/matzouranis-3.jpg" onclick="currentSlide(3)" alt="">
-                </div>
-
-                <div class="column">
-                  <img class="demo" src="img/matzouranis-4.jpg" onclick="currentSlide(4)" alt="">
-                </div>
-              </div>
-            </div>
+        <link href="../lightbox/dist/ekko-lightbox.css" rel="stylesheet">
+        <script src="../lightbox/dist/ekko-lightbox.js"></script>
+     
 
 
     </body>
