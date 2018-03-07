@@ -15,23 +15,15 @@
                             <div class="col-md-12">
                                  <div class="alert alert-danger">
                                     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                                    <strong>Attention!</strong> Υou have unpaid debts. Your account will be frozen! <a href="/mcr/manage-profile/index.php" class="alert-link">read more</a>.
+                                    <strong>Attention!</strong> Υou have unpaid debts. Your account will be frozen! <a href="/manage-profile/payments.php" class="alert-link">read more</a>.
                                   </div>
 
                                   <div class="alert alert-info">
                                     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                                    <strong>Info!</strong> 1500 Users viewed your category and 300 users viewed your profile at the past month. <a href="#" class="alert-link">read more</a>.
+                                    <strong>Info!</strong> 1500 Users viewed your category and 300 users viewed your profile at the past month.
                                   </div>
                                     
-                                <div class="alert alert-success" style="display: none;">
-                                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                                    <strong>Last Payment!</strong> 300€ at 10 FEB 2018. <a href="#" class="alert-link">read more</a>.
-                                  </div>
-                                  
-                                  <div class="alert alert-warning"  style="display: none;">
-                                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                                    <strong>Next Appointment!</strong> Energy Certificate 1 MAR 9:30 Thespion 2, Peristeri, Greece. <a href="/mcr/manage-profile/timeline.php" class="alert-link">read more</a>.
-                                  </div>
+                                
                                  
                                 </div>
                             </div>
@@ -178,7 +170,7 @@
                                                 <p class="appointement-commission">Commission: <span class="customer-commission">24€</span></p>
                                                 
                                             </div>
-                                            <div class="col-md-12 read-timeline-btn">Read More</div>
+                                            <a href="/professional-profile/timeline.php"><div class="col-md-12 read-timeline-btn">Read More</div></a>
                                     </div>
                                 </div>
 
@@ -196,7 +188,7 @@
                                                     <p class="reviewComment">Έμεινα πάρα πολύ ικανοποιημένος με τον κ.Παναγιωτακόπουλο Βασίλη.Προσεχτικός &amp; Συνεπής στην ώρα του.</p>
                                                     <p class="reviewerName">Σωτήρης Μανόφης</p>
                                             </div>
-                                            <div class="col-md-12 read-timeline-btn">Read More</div>
+                                            <a href="/professional-profile/review.php"><div class="col-md-12 read-timeline-btn">Read More</div></a>
                                         </div>
                                         
                                     </div>
