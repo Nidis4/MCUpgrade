@@ -1,9 +1,9 @@
 
 var editArray =[];
 
-$(".front-professional-name, .front-professional-desc, .front-professional-oneline-desc,  span.front-tel-span, span.front-offer-tel-span").attr('contentEditable',true);
+$(".front-professional-name, .front-professional-desc, .front-professional-oneline-desc,  span.front-tel-span, span.front-offer-tel-span, p span.spanAddress").attr('contentEditable',true);
 
-$(".front-professional-name, .front-professional-desc, .front-professional-oneline-desc,  span.front-tel-span, span.front-offer-tel-span").click(function(){
+$(".front-professional-name, .front-professional-desc, .front-professional-oneline-desc,  span.front-tel-span, span.front-offer-tel-span, p span.spanAddress").click(function(){
 
 	var classes= $(this).attr('class');
 	editArray.push(classes);
@@ -14,12 +14,13 @@ function editprofile(){
 
 
 	var arrayNewInfos;
-	var edits = editArray.length;
+	var edits= editArray.length;
 	var name= $('.front-professional-name').text();
 	var professionalDesc= $('.front-professional-desc').text();
 	var onelineProfessionalDesc= $('.front-professional-oneline-desc').text();
 	var professionalTel= $('span.front-tel-span').text();
 	var professionalOfferTel= $('span.front-offer-tel-span').text();
+	var frontProffesionalAddress = $('p span.spanAddress').text();
 
 	for (i=0; i<edits; i++){
 
@@ -36,11 +37,13 @@ function editprofile(){
 			var professionalTel = $('.'+editArray[i]).text();
 		}else if('span.front-offer-tel-span'){
 			var professionalOfferTel = $('.'+editArray[i]).text();
+		}else if('span.spanAddress'){
+			var frontProffesionalAddress = $('.'+editArray[i]).text();
 		}
 
 	}
 
-	arrayNewInfos = {'ProfessionalName':name, 'ProffessionalDescription': professionalDesc, 'ProffessionalOnline':onelineProfessionalDesc, 'ProffessionalPhone':professionalTel, 'OfferPhone':professionalOfferTel };
+	arrayNewInfos = {'ProfessionalName':name, 'ProffessionalDescription': professionalDesc, 'ProffessionalOnline':onelineProfessionalDesc, 'ProffessionalPhone':professionalTel, 'OfferPhone':professionalOfferTel, 'ProffesionalAddress': frontProffesionalAddress };
 
 	/*alert(arrayNewInfos.ProfessionalName);
 	alert(arrayNewInfos.ProffessionalDescription);
