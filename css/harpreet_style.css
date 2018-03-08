@@ -1,0 +1,62 @@
+.post-form-title{
+  text-align: center;
+}
+.post-form-title h3{
+    margin-top: 8px;
+    margin-bottom: 0px;
+    line-height: 30px;
+    font-size: 26px;
+    color: #004a86;
+}
+.post-form-title p{
+  line-height: 26px;
+  font-size: 16px;
+}
+.pad20{
+  padding: 20px;
+}
+.titlesep{
+  width: 100%;
+  max-width: 700px;
+}
+.post-project-menu, .select-project-type-main{
+  max-width: 700px;
+  width: 100%;
+  margin: 0 auto;
+}
+.select-project-type-main{
+  padding-bottom: 30px;
+ 
+
+
+}
+.post-project-menu img{
+  margin-bottom: 20px;
+}
+.post-your-project-main{
+  margin-bottom: 30px;
+}
+.form-group{
+  float: left;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.form-questions{
+  float: left;
+  width: 100%;
+  border: 1px solid #004a86;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  padding: 20px 10px;
+}
+.radio-group{
+  float: left;
+  margin-right: 20px;
+  font-weight: normal; 
+}
+.btn-prosfora-prof{
+  border:none;
+}
+.modal{
+  background: none;
+}

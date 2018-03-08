@@ -5,6 +5,8 @@ class Category{
     // database connection and table name
     private $conn;
     private $table_name = "categories";
+    private $question_table_name = "categories_questions";
+    private $question_answer_table_name = "categories_questions_answers";
  
     // object properties
     public $id;
@@ -99,5 +101,48 @@ class Category{
  
         return $stmt;
     }
+
+    public function questions(){
+        //select all data
+        $query = "SELECT * 
+                FROM
+                    " . $this->question_table_name . " 
+                WHERE
+                    category_id = :cat_id
+                ORDER BY
+                    seuqence ASC";
+ 
+        $stmt = $this->conn->prepare( $query );
+
+        $cur_id = $this->category_id;
+        // bind id of product to be updated
+        $stmt->bindParam(':cat_id',  $cur_id, PDO::PARAM_INT);
+
+        $stmt->execute();
+ 
+        return $stmt;
+    }
+
+    public function answers($questionid){
+        //select all data
+        $query = "SELECT * 
+                FROM
+                    " . $this->question_answer_table_name . " 
+                WHERE
+                    question_id = :que_id
+                ORDER BY
+                    id ASC";
+ 
+        $stmt = $this->conn->prepare( $query );
+
+        $cur_id = $questionid;
+        // bind id of product to be updated
+        $stmt->bindParam(':que_id',  $cur_id, PDO::PARAM_INT);
+
+        $stmt->execute();
+ 
+        return $stmt;
+    }
+
 }
 ?>
