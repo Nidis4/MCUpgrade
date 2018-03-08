@@ -35,18 +35,17 @@ $("#loginForm").submit(function(){
         });
     return false;
 });
-$( document ).ready(function() {
-    $('select#appointmentStatus').on('change', function() {
-        var status_id = this.value;
-        //alert(status_id);
 
-        $('.status').css("display", "none");
-        $('body').removeAttr('id');
+$('select#appointmentStatus').on('change', function() {
+    var status_id = this.value;
+    //alert(status_id);
 
-        $('.status-'+status_id).css("display", "block");
-        $('body').attr('id','status-'+status_id);
+    $('.status').css("display", "none");
+    $('body').removeAttr('id');
 
-    });
+    $('.status-'+status_id).css("display", "block");
+    $('body').attr('id','status-'+status_id);
+
 });
 
 $('select#category').on('change', function() {
@@ -557,7 +556,26 @@ $( ".createAppointment" ).click(function() {
 
     }
 });
-
+$( ".createCall" ).click(function() {
+    var CallId = $("#CallId").val();
+    var commentcall = $("#commentcall").val();
+    var createCallintAPI = API_LOCATION+'call/create.php';
+        $.ajax({
+            type: "POST",
+            url: createCallintAPI,
+            data: {
+                CallId: CallId,
+                commentcall: commentcall,
+                
+            },
+            dataType: "json",
+            success: function(data)
+            {
+                alert("Call saved");
+                window.location.replace('../platform/calls.php');
+            }
+        });
+});
 $( ".findProfessionals" ).click(function() {
     var agent = $("#agent").attr('agentUser');
     var application = $("#applications").val();
@@ -618,7 +636,7 @@ $( ".findProfessionals" ).click(function() {
                     var profName = v.first_name+" "+v.last_name;
 
                     var dateAvail = startDate;
-                    var timeAvail = "06:00";
+                    var timeAvail = "09:00";
 
 
                     if (v.busy!=undefined){
@@ -644,7 +662,7 @@ $( ".findProfessionals" ).click(function() {
                                 if (currentDate > today){
                                   disabled = "";
                                 }
-                                if (x.timefrom=="06:00"){
+                                if (x.timefrom=="09:00"){
                                     singleDay += "<div class='col-md-2 profile availProf' id='"+profID+"' data-listing-distance='"+profDistance+"'><div class='row calName text-center'><div class='col-md-12'><div class='comp'>"+profName+"</div><span>"+profDistance+"</span></div></div><ul class='selectable' id='selectable-"+profID+"'>";
                                 }                         
                                 if (x.address == ""){
@@ -653,7 +671,7 @@ $( ".findProfessionals" ).click(function() {
                                 else{
                                     singleDay += "<li class='busy slot "+disabled+"' timefrom='"+x.timefrom+"' timeto='"+x.timeto+"' data-dateslot='"+x.date+"'>"+x.timefrom+": "+x.address+" "+x.distance+"</li>";
                                 }
-                                if(x.timeto == "22:00"){
+                                if(x.timeto == "20:00"){
                                     singleDay += "</ul></div>";
                                 }
 
@@ -671,7 +689,7 @@ $( ".findProfessionals" ).click(function() {
                                 if (currentDate > today){
                                   disabled = "";
                                 }
-                                if (x.timefrom=="06:00"){
+                                if (x.timefrom=="09:00"){
                                     calendarCode += "<div class='col-md-2'><div class='row calDate text-center'><div class='col-md-12'>"+x.date+"</div></div><ul class='selectable' id='selectable-"+profID+"'>";
                                 }                         
                                 if (x.address == ""){
@@ -680,7 +698,7 @@ $( ".findProfessionals" ).click(function() {
                                 else{
                                     calendarCode += "<li class='busy slot "+disabled+"' timefrom='"+x.timefrom+"' timeto='"+x.timeto+"' data-dateslot='"+x.date+"'>"+x.timefrom+": "+x.address+" "+x.distance+"</li>";
                                 }
-                                if(x.timeto == "22:00"){
+                                if(x.timeto == "20:00"){
                                     calendarCode += "</ul></div>";
                                 }
 

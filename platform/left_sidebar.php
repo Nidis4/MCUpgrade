@@ -333,6 +333,20 @@
 				                    <li class="nav-parent">
 				                        <a class="nav-link" href="#">
 				                            <i class="fa fa-list-alt" aria-hidden="true"></i>
+				                            <span>Calls</span>
+				                        </a>
+				                        <ul class="nav nav-children">
+				                            <li>
+				                                <a class="nav-link" href="calls.php">
+				                                    List of Calls
+				                                </a>
+				                            </li>
+				                            
+				                        </ul>
+				                    </li>
+				                    <li class="nav-parent">
+				                        <a class="nav-link" href="#">
+				                            <i class="fa fa-list-alt" aria-hidden="true"></i>
 				                            <span>Balance Sheets</span>
 				                        </a>
 				                        <ul class="nav nav-children">
@@ -373,24 +387,6 @@
 				                            
 				                        </ul>
 				                    </li>
-
-				                    <li class="nav-parent">
-				                        <a class="nav-link" href="#">
-				                            <i class="fa fa-table" aria-hidden="true"></i>
-				                            <span>Agent actions</span>
-				                        </a>
-				                        <ul class="nav nav-children">
-				                            <li>
-				                                <a class="nav-link" href="pending_professionals.php">
-				                                    Pending Agent Verification
-				                                </a>
-				                            </li>
-				                            
-				                           
-				                            
-				                        </ul>
-				                    </li>
-
 				                    <li class="nav-parent">
 				                        <a class="nav-link" href="#">
 				                            <i class="fa fa-table" aria-hidden="true"></i>

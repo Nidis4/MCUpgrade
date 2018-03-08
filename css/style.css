@@ -1360,7 +1360,7 @@ h3.h3-offer-title {
 
 .btn-prosfora-prof {
     width: 100%;
-    background: #FF5722;
+    background: #ff6600;
     overflow: hidden;
     text-align: center;
     padding: 8px;
@@ -1373,7 +1373,7 @@ h3.h3-offer-title {
 
 
 .btn-prosfora-prof:hover {
-    background: #ff5722cf;
+    background: #ff812c;
 }
 
 .col-md-12.proffesionalTotalReviews {
@@ -2028,6 +2028,26 @@ a.btn-book-online {
   float: left;
   margin-right: 5px;
 }
+
+a.go-to-reviews {
+    color: #333;
+}
+
+
+.prev, .next{
+  background:#333;
+}
+
+.modal-backdrop.fade.in {
+    z-index: 0;
+}
+
+
+.ekko-lightbox-nav-overlay a:last-child span, .ekko-lightbox-nav-overlay a span {
+    font-size: 70px;
+}
+
+
 
 
 @media screen and (max-width: 1398px){

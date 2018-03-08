@@ -7,7 +7,7 @@
     <link rel="icon" href="../../favicon.ico">
 	<title>ΜyConstructor</title>
 
-	<link href="assets/bootstrap337/css/bootstrap.min.css" rel="stylesheet">
+	  <link href="assets/bootstrap337/css/bootstrap.min.css" rel="stylesheet">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!-- <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
