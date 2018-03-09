@@ -7,6 +7,9 @@
 tr.status-0, .table-striped tbody tr:nth-of-type(odd).status-0 {
     background-color: #f8d7da;
 }
+tr.status-0 .cancel-row, tr.status-8 .cancel-row, tr.status-7 .cancel-row, tr.status-6 .cancel-row, tr.status-5 .cancel-row {
+    display: none;
+}
 .cancel-row .fa, .edit-row .fa ,.copy-row .fa  {
    /* display: none;*/
 }
@@ -114,4 +117,73 @@ li.slot.disabled {
 .status-field {
     color: white;
     text-align: center;
+}
+.starsouter {
+    width: 110px;
+    float: left;
+    margin-right: 10px;
+}
+
+.empty-bar {
+    background: url(../img/five-stars-empty.png);
+    background-repeat: no-repeat;
+    width: 110px;
+    height: 23px;
+    background-size: cover;
+}
+
+.empty-bar div {
+    background: url(../img/five-stars-full.png);
+    height: 23px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.rev-score {
+    font-size: 18px;
+    float: left; margin-right: 10px;
+}
+
+
+.col-md-7.review-outer {
+    background: #fff;
+    padding: 25px 25px 25px 25px;
+    border: 1px solid #dedede;
+}
+
+.reviewdate {
+    font-size: 18px;
+}
+
+p.reviewComment {
+    margin-top: 12px;
+}
+
+p.reviewerName {
+    text-align: right;
+    font-size: 18px;
+    font-style: italic;
+}
+.quality-empty, .reliability-empty, .cost-empty, .schedule-empty, .behaviour-empty, .cleanliness-empty {
+    background: #dedede;
+    height: 13px;
+    float: left;
+    width: 100%;
+    margin-bottom: 4px;
+}
+
+.emplexp {
+    font-size: 17px;
+    color: #333;
+}
+
+.quality-empty div, .reliability-empty div, .cost-empty div, .schedule-empty div, .behaviour-empty div, .cleanliness-empty div {
+    background: #008dff;
+    height: 13px;
+}
+#reviewDetails{
+    display: none;
+}
+#status-8.app-status #reviewDetails, #status-6.app-status #reviewDetails, #status-5.app-status #reviewDetails{
+    display: block;
 }

@@ -73,10 +73,12 @@ include('config/core.php');
 					$application_disable = "disabled";
 				}
 				$statuses = '';
-				if (@$appointment['status']){
+				$activeStatusName ='';
+
+				if ($appointment['status']!=''){
+					//echo "----".$api_url.'webservices/api/appointment/getStatusInfo.php?id='.$appointment['status']."---";
 					$statuses = file_get_contents($api_url.'webservices/api/appointment/getStatusInfo.php?id='.$appointment['status']);
 					$statuses = json_decode($statuses, true); // decode the JSON into an associative array
-					//echo $statuses; 
 					$activeStatusName = $statuses['name'];
 					$activeStatusID = $statuses['id'];
 				}
@@ -105,7 +107,7 @@ include('config/core.php');
 					</header>
 
 					<!-- start: page -->
-					<div class="row">
+					<div class="row app-status" id='<?php echo "status-".$appointment['status']; ?>'>
 						<!-- col-lg-12 -->
 						<div class="col-lg-12">
 							<section class="card">
@@ -130,6 +132,7 @@ include('config/core.php');
 												foreach ($statuses['to_status'] as $status) {
 													echo "<option value='".$status['id']."'>".$status['name']."</option>";
 												}
+												//echo $appointment['status'];
 												?>
 											</select>
 										</div>
@@ -140,7 +143,7 @@ include('config/core.php');
 							</section>
 						</div>
 						<!-- col-lg-6 -->
-						<div class="col-lg-6">
+						<div class="col-lg-6" id='appointmentDetails'>
 							<form id="form" action="forms-validation.html" class="form-horizontal">
 								<section class="card">
 									<header class="card-header">
@@ -293,7 +296,7 @@ include('config/core.php');
 							</form>
 						</div>
 						
-						<div class="col-lg-6">
+						<div class="col-lg-6" id='customerDetails'>
 							<form id="form" action="forms-validation.html" class="form-horizontal">
 								<section class="card">
 									<header class="card-header">
@@ -382,6 +385,76 @@ include('config/core.php');
 									</footer> -->
 								</section>
 							</form>
+						</div>
+
+						<div class="col-lg-12" id='reviewDetails'>
+							<section class="card">
+								<header class="card-header">
+									<div class="card-actions">
+										<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+										<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
+									</div>
+
+									<h2 class="card-title">Appointment Review</h2>
+									<p class="card-subtitle">
+										Please fill in the appointment review
+									</p>
+								</header>
+								<div class="card-body">
+									<div class="row review-row">
+			                            <div class="col-md-7 review-outer">
+			                                <div class="col-review">
+			                                    
+			                                    
+			                                        <div class="starsouter">
+			                                            <div class="empty-bar">
+			                                                 <div style="width:80%;"></div>
+			                                             </div>
+			                                        </div>
+			                                    
+			                                    <div class="rev-score">5.0/5</div>
+			                                    <div class="reviewdate">Φεβρουάριος 16, 2018</div>
+			                                    <p class="reviewComment">Έμεινα πάρα πολύ ικανοποιημένος με τον κ.Παναγιωτακόπουλο Βασίλη.Προσεχτικός &amp; Συνεπής στην ώρα του.</p>
+			                                    <p class="reviewerName">Σωτήρης Μανόφης</p>
+			                                </div>
+
+			                                
+			                            </div>
+			                            <div class="col-md-5">
+			                                <div class="col-md-6 bars-one-half">                         
+			                                        <p class="emplexp">Quality</p>
+			                                           <div class="quality-empty">
+			                                                <div style="width:80%;"></div>
+			                                            </div>
+			                                         <p class="emplexp">Reliability</p>
+			                                            <div class="reliability-empty">
+			                                                <div style="width:100%;"></div>
+			                                            </div>
+			                                         <p class="emplexp">Cost</p>
+			                                            <div class="cost-empty">
+			                                                <div style="width:70%;"></div>
+			                                            </div>
+			                                </div>
+			                                    <div class="col-md-6 bars-one-half">
+			                                     <p class="emplexp">Schedule</p>
+			                                        <div class="schedule-empty">
+			                                            <div style="width:90%;"></div>
+			                                        </div>
+			                                     <p class="emplexp">Behaviour</p>
+			                                        <div class="behaviour-empty">
+			                                            <div style="width:100%;"></div>
+			                                        </div>
+			                                     <p class="emplexp">Cleanliness</p>
+			                                        <div class="cleanliness-empty">
+			                                            <div style="width:100%;"></div>
+			                                        </div>
+			                                    </div>
+			                                
+			                            </div>
+                        			</div>
+
+								</div>
+							</section>
 						</div>
 						
 					</div>

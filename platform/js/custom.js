@@ -777,3 +777,74 @@ $( ".findProfessionals" ).click(function() {
 
     }
 });
+
+
+$( document ).ready(function() {
+     var status = $( '.app-status' ).attr('id');
+     if (status != undefined ){
+        //alert(status);
+
+        if (status == "status-0"){
+            //$( "#appointmentDetails section.card" ).addClass('card-collapsed');
+            //$( "#appointmentDetails .card-body" ).css('display','none');
+            $( "#appointmentDetails select" ).attr('disabled',true);
+            $( "#appointmentDetails input" ).attr('disabled',true);
+            $( "#appointmentDetails textarea" ).attr('disabled',true);
+
+            //$( "#customerDetails section.card" ).addClass('card-collapsed');
+            //$( "#customerDetails .card-body" ).css('display','none');
+            $( "#customerDetails select" ).attr('disabled',true);
+            $( "#customerDetails input" ).attr('disabled',true);
+            $( "#customerDetails textarea" ).attr('disabled',true);
+
+            $( ".updateAppointment" ).css('display', 'none');
+
+        }
+        else if (status == "status-8"){
+            //$( "#appointmentDetails section.card" ).addClass('card-collapsed');
+            //$( "#appointmentDetails .card-body" ).css('display','none');
+            $( "#appointmentDetails select" ).attr('disabled',true);
+            $( "#appointmentDetails input" ).attr('disabled',true);
+            $( "#appointmentDetails textarea" ).attr('disabled',true);
+
+            //$( "#customerDetails section.card" ).addClass('card-collapsed');
+            //$( "#customerDetails .card-body" ).css('display','none');
+            $( "#customerDetails select" ).attr('disabled',true);
+            $( "#customerDetails input" ).attr('disabled',true);
+            $( "#customerDetails textarea" ).attr('disabled',true);
+
+            $( ".updateAppointment" ).css('display', 'none');
+
+        }
+        else if (status == "status-5"){
+            $( "#appointmentDetails section.card" ).addClass('card-collapsed');
+            $( "#appointmentDetails .card-body" ).css('display','none');
+            $( "#appointmentDetails select" ).attr('disabled',true);
+            $( "#appointmentDetails input" ).attr('disabled',true);
+            $( "#appointmentDetails textarea" ).attr('disabled',true);
+
+            $( "#customerDetails section.card" ).addClass('card-collapsed');
+            $( "#customerDetails .card-body" ).css('display','none');
+            $( "#customerDetails select" ).attr('disabled',true);
+            $( "#customerDetails input" ).attr('disabled',true);
+            $( "#customerDetails textarea" ).attr('disabled',true);
+            //$( ".updateAppointment" ).css('display', 'none');
+        }
+        else if (status == "status-6"){
+            $( "#appointmentDetails section.card" ).addClass('card-collapsed');
+            $( "#appointmentDetails .card-body" ).css('display','none');
+            $( "#appointmentDetails select" ).attr('disabled',true);
+            $( "#appointmentDetails input" ).attr('disabled',true);
+            $( "#appointmentDetails textarea" ).attr('disabled',true);
+
+            $( "#customerDetails section.card" ).addClass('card-collapsed');
+            $( "#customerDetails .card-body" ).css('display','none');
+            $( "#customerDetails select" ).attr('disabled',true);
+            $( "#customerDetails input" ).attr('disabled',true);
+            $( "#customerDetails textarea" ).attr('disabled',true);
+            
+            //$( ".updateAppointment" ).css('display', 'none');
+        }
+    }
+
+});
