@@ -15,6 +15,7 @@ class Appointment{
     public $prof_member_id;
     public $cust_member_id;
     public $application_id;
+    public $county_id;
     public $date;
     public $time;
     public $address;
@@ -57,7 +58,7 @@ class Appointment{
      
         // query to read single record
         $query = "SELECT
-                    a.`id`, a.`prof_member_id`, a.`cust_member_id`, a.`application_id`, a.`date`, a.`time`, a.`address`, a.`budget`, a.`commision`, a.`agent_id`, a.`comment`, a.`sms`, a.`sms_log_id`,  a.`datetimeCreated`, a.`datetimeStatusUpdated`, a.`sourceAppointmentId`, a.`status`, a.`cancelComment`, ap.`category_id`, ac.`first_name` as customer_first_name, ac.`last_name` as customer_last_name, ac.`sex` as customer_sex, cc.`address` as customer_address, cc.`phone` as customer_phone, cc.`mobile` as customer_mobile, ca.`email` as customer_email
+                    a.`id`, a.`prof_member_id`, a.`cust_member_id`, a.`application_id`,a.`county_id`, a.`date`, a.`time`, a.`address`, a.`budget`, a.`commision`, a.`agent_id`, a.`comment`, a.`sms`, a.`sms_log_id`,  a.`datetimeCreated`, a.`datetimeStatusUpdated`, a.`sourceAppointmentId`, a.`status`, a.`cancelComment`, ap.`category_id`, ac.`first_name` as customer_first_name, ac.`last_name` as customer_last_name, ac.`sex` as customer_sex, cc.`address` as customer_address, cc.`phone` as customer_phone, cc.`mobile` as customer_mobile, ca.`email` as customer_email
                 FROM
                     " . $this->table_name . " a
                 LEFT JOIN ". $this->application_table_name." ap 
@@ -96,6 +97,7 @@ class Appointment{
         $this->prof_member_id = $row['prof_member_id'];
         $this->cust_member_id = $row['cust_member_id'];
         $this->application_id = $row['application_id'];
+        $this->county_id = $row['county_id'];
         $this->date = $row['date'];
         $this->time = $row['time'];
         $this->address = $row['address'];

@@ -75,6 +75,21 @@ class Professional{
         return $stmt;
     }
 
+    public function restAvailable($date, $time, $address){
+        $query = "SELECT p.`id`, p.`first_name`, p.`last_name`, p.`profile_status`, co.`address` FROM `professionals` p, `professionals_counties` c, `professionals_applications` a, `professionals_contact_details` co WHERE c.professional_id=p.id AND a.professional_id=p.id AND co.professional_id=p.id  AND c.county_id= :county AND a.application_id= :application AND p.`id` NOT IN (SELECT `prof_member_id` FROM `appointments` WHERE `date` = '$date' AND `time` = '$time' AND `address`= '$address' )";
+
+        $stmt = $this->conn->prepare( $query );
+
+        $county_id = $this->county_id;
+        $application_id = $this->application_id;
+        $stmt->bindParam(':county',  $county_id, PDO::PARAM_INT);
+        $stmt->bindParam(':application',  $application_id, PDO::PARAM_INT);
+
+        $stmt->execute();
+ 
+        return $stmt;
+    }
+
 
 
     public function busySlots($startDate, $endDate, $id){
