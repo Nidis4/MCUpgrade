@@ -12,7 +12,7 @@
                 </div>
                 <div class="post-your-project-main">                    
                     <div class="post-project-menu">
-                        <img src="<?php echo SITE_URL;?>/img/back_ground-image_english_step1.png" alt="image">                
+                        <img src="<?php echo SITE_URL;?>/img/back_ground-image_english_step2.png" alt="image">                
                     </div>
                     <form id="jobformone">
                         <div class="select-project-type-main">
@@ -23,7 +23,7 @@
                                         $categories = file_get_contents(SITE_URL.'webservices/api/category/read.php');
                                         $categories = json_decode($categories, true); // decode the JSON into an associative array
                                     ?>
-                                    <select class="form-control" name="category" id="category">
+                                    <select class="form-control" name="job_category" id="category">
                                         <?php
                                             $currentCatId = "31";
                                             foreach ($categories as $category) {
@@ -65,7 +65,7 @@
                                                     ?>
                                                                <div class="col-lg-4">
                                                                     <label class="pt-3">
-                                                                        <input class="" type="radio" name="viewtype" value="1" id="viewtype1">
+                                                                        <input class="" type="radio" name="job_question[<?php echo $qvalue['id'];?>]" value="<?php echo $avalue['id'];?>" id="">
                                                                         <?php echo $avalue['answer'];?>
                                                                     </label>
                                                                 </div> 
@@ -101,7 +101,7 @@
                                 <div class="form-group">
                                     <label class="col-lg-5 control-label">Comments</label>
                                     <div class="col-lg-7">
-                                        <textarea name="job_comment" class="form-control"></textarea>
+                                        <textarea name="job_comment" id="job_comment" class="form-control"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -176,6 +176,28 @@
             if(joberror == 1){
                 $(".modal-body").html(errormessage);
                 $('#myalertbox').modal('show');
+            }else{
+
+                var getAvailableAPI = "<?php echo API_URL;?>job/save.php";
+                    
+                $.ajax({
+                    type: "POST",
+                    url: getAvailableAPI,
+                    dataType: "JSON",
+                    data: $('#jobformone').serialize(),
+                    success: function(data)
+                    {
+                        if(data.error){
+                            alert(data.message);
+                        }else{
+
+                            window.location = "<?php echo SITE_URL;?>jobaddress.php?jid="+data.job_id;
+                            //alert(data.job_id);
+                        }
+                    }
+                });
+
+                alert("Yes");
             }
 
             return false;
