@@ -52,7 +52,9 @@ include('config/core.php');
 			<?php
 				include('header.php');
 				$appointments = file_get_contents($api_url.'webservices/api/appointment/read_paging.php');
-				$appointmentsPag = json_decode($appointments, true); // decode the JSON into an associative array				
+
+				$appointmentsPag = json_decode($appointments, true); // decode the JSON into an associative array	
+				//echo $api_url.'webservices/api/appointment/read_paging.php';			
 			?>
 
 			<div class="inner-wrapper">
@@ -114,7 +116,6 @@ include('config/core.php');
 									</thead>
 									<tbody>
 										<?php
-
 
 										foreach ($appointmentsPag['records'] as $field => $value) {
 											$id = $appointmentsPag['records'][$field]['id'];

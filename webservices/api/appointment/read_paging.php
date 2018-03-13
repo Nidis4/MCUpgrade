@@ -72,7 +72,6 @@ if($num>0){
             "comment" => $comment,
             "sms" => $sms,
             "sms_log_id" => $sms_log_id,
-            "googleEventId" => $googleEventId,
             "datetimeCreated" => $datetimeCreated,
             "datetimeStatusUpdated" => $datetimeStatusUpdated,
             "sourceAppointmentId" => $sourceAppointmentId,
@@ -100,7 +99,7 @@ if($num>0){
  
 else{
     echo json_encode(
-        array("message" => "No products found.")
+        array("message" => "No appointments found.")
     );
 }
 ?>

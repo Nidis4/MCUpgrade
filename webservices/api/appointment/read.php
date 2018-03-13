@@ -48,7 +48,6 @@ if($num>0){
             "comment" => $comment,
             "sms" => $sms,
             "sms_log_id" => $sms_log_id,
-            "googleEventId" => $googleEventId,
             "datetimeCreated" => $datetimeCreated,
             "datetimeStatusUpdated" => $datetimeStatusUpdated,
             "sourceAppointmentId" => $sourceAppointmentId,

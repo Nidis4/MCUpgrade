@@ -41,7 +41,6 @@ $stmt = $appointment->readOne();
             "comment" => $appointment->comment,
             "sms" => $appointment->sms,
             "sms_log_id" => $appointment->sms_log_id,
-            "googleEventId" => $appointment->googleEventId,
             "datetimeCreated" => $appointment->datetimeCreated,
             "datetimeStatusUpdated" => $appointment->datetimeStatusUpdated,
             "sourceAppointmentId" => $appointment->sourceAppointmentId,

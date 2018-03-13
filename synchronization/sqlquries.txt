@@ -240,3 +240,12 @@ ALTER TABLE `professionals` ADD `verified` INT(1) NOT NULL DEFAULT '0' AFTER `vi
 
 <!-------------------------------->
 <!-- End 7 Mar 2018 Harpreet -->
+
+<!-------------------------------->
+<!-- Start 13 Mar 2018 G Konstantinidis -->
+
+ALTER TABLE `appointments` DROP `googleEventId`;
+ALTER TABLE `appointments` ADD `county_id` INT NOT NULL AFTER `application_id`;
+
+<!-------------------------------->
+<!-- End 13 Mar 2018 G Konstantinidis -->
