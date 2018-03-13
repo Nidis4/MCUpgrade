@@ -402,7 +402,7 @@ include('config/core.php');
 								</header>
 								<div class="card-body">
 									<div class="row review-row">
-			                            <div class="col-md-7 review-outer">
+			                            <div class="col-md-6 review-outer">
 			                                <div class="col-review">
 			                                    
 			                                    
@@ -420,43 +420,42 @@ include('config/core.php');
 
 			                                
 			                            </div>
-			                            <div class="col-md-5">
-			                                <div class="col-md-6 bars-one-half">                         
-			                                        <p class="emplexp">Quality</p>
-			                                           <div class="quality-empty">
-			                                                <div style="width:80%;"></div>
-			                                            </div>
-			                                         <p class="emplexp">Reliability</p>
-			                                            <div class="reliability-empty">
-			                                                <div style="width:100%;"></div>
-			                                            </div>
-			                                         <p class="emplexp">Cost</p>
-			                                            <div class="cost-empty">
-			                                                <div style="width:70%;"></div>
-			                                            </div>
-			                                </div>
-			                                    <div class="col-md-6 bars-one-half">
-			                                     <p class="emplexp">Schedule</p>
+			                            <div class="col-md-6">
+			                            	<div class="row">
+				                                <div class="col-md-6 bars-one-half">                         
+				                                    <p class="emplexp">Quality</p>
+				                                    <div class="quality-empty">
+				                                        <div style="width:80%;"></div>
+				                                    </div>
+				                                    <p class="emplexp">Reliability</p>
+				                                    <div class="reliability-empty">
+				                                        <div style="width:100%;"></div>
+				                                    </div>
+				                                    <p class="emplexp">Cost</p>
+			                                        <div class="cost-empty">
+		                                                <div style="width:70%;"></div>
+		                                            </div>
+				                                </div>
+			                                	<div class="col-md-6 bars-one-half">
+			                                     	<p class="emplexp">Schedule</p>
 			                                        <div class="schedule-empty">
 			                                            <div style="width:90%;"></div>
 			                                        </div>
-			                                     <p class="emplexp">Behaviour</p>
+			                                     	<p class="emplexp">Behaviour</p>
 			                                        <div class="behaviour-empty">
 			                                            <div style="width:100%;"></div>
 			                                        </div>
-			                                     <p class="emplexp">Cleanliness</p>
+			                                     	<p class="emplexp">Cleanliness</p>
 			                                        <div class="cleanliness-empty">
 			                                            <div style="width:100%;"></div>
 			                                        </div>
-			                                    </div>
-			                                
+			                                	</div>
+			                            	</div>
 			                            </div>
                         			</div>
-
 								</div>
 							</section>
-						</div>
-						
+						</div>	
 					</div>
 					<div class="row">
 						<div class="col-sm-6 offset-sm-3 text-center" style='display: none'>

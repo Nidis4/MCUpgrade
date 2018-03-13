@@ -169,12 +169,14 @@ p.reviewerName {
     height: 13px;
     float: left;
     width: 100%;
-    margin-bottom: 4px;
+    margin-bottom: 10px;
 }
 
 .emplexp {
-    font-size: 17px;
+    font-size: 14px;
     color: #333;
+    font-weight: bold;
+    margin-bottom: 0px;
 }
 
 .quality-empty div, .reliability-empty div, .cost-empty div, .schedule-empty div, .behaviour-empty div, .cleanliness-empty div {
