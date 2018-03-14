@@ -1,14 +1,16 @@
 <?php
-class County{
+class Country{
  
     // database connection and table name
     private $conn;
-    private $table_name = "counties";
+    private $table_name = "countries";
  
     // object properties
     public $id;
-    public $county_name;
-    public $county_name_gr;
+    public $country_name;
+    public $country_name_greek;
+    public $countries_iso_code_2;
+    public $countries_iso_code_3;
  
     public function __construct($db){
         $this->conn = $db;
@@ -18,11 +20,11 @@ class County{
     public function read(){
         //select all data
         $query = "SELECT
-                    id, county_name, county_name_gr
+                    id, country_name, country_name_greek, countries_iso_code_2, countries_iso_code_3
                 FROM
                     " . $this->table_name . "
                 ORDER BY
-                    county_name ASC";
+                    country_name ASC";
  
         $stmt = $this->conn->prepare( $query );
         $stmt->execute();

@@ -14,113 +14,72 @@
                     <div class="post-project-menu">
                         <img src="<?php echo SITE_URL;?>/img/back_ground-image_english_step2.png" alt="image">                
                     </div>
-                    <form id="jobformone">
+                    <form id="jobformtwo">
                         <div class="select-project-type-main">
-                            <div class="form-group">
-                                <label class="col-lg-3 control-label">Select Category</label>
-                                <div class="col-lg-6">
-                                    <?php
-                                        $categories = file_get_contents(SITE_URL.'webservices/api/category/read.php');
-                                        $categories = json_decode($categories, true); // decode the JSON into an associative array
-                                    ?>
-                                    <select class="form-control" name="job_category" id="category">
-                                        <?php
-                                            $currentCatId = "31";
-                                            foreach ($categories as $category) {
-                                                $cat_id = $category['id'];
-                                                $cat_name = $category['title'];
-                                                $commision = $category['commissionRate'];
-                                        ?>
-                                            <option value="<?php echo $cat_id;?>" <?php if($cat_id == $currentCatId){?> selected="selected" <?php }?>><?php echo $cat_name;?></option>
-                                        <?php
-                                            }
-                                        ?>
-                                    </select>
-                                </div>
-                            </div>
+                            
                             <div class="form-questions">
                                 <div class="form-group">
-                                    <label class="col-lg-5 control-label">Job Title</label>
+                                    <label class="col-lg-5 control-label">City</label>
                                     <div class="col-lg-7">
-                                        <input name="job_title" value="" class="form-control" id="job_title" type="text">
+                                        <input name="job_city" value="" class="form-control" id="job_city" type="text">
                                     </div>
                                 </div>
-                                <?php
-                                    $questions = file_get_contents(SITE_URL.'webservices/api/category/questions.php?catid='.$currentCatId);
-                                    $questions = json_decode($questions, true); // decode the JSON into an associative array
-
-                                    if(@$questions){
-                                        foreach ($questions as $qvalue) {
-                                            
-                                            $answers = file_get_contents(SITE_URL.'webservices/api/category/answers.php?questionid='.$qvalue['id']);
-                                            $answers = json_decode($answers, true); // decode the JSON into an associative array
-
-                                ?>
-                                            <div class="form-group">
-                                                <label class="col-lg-5 control-label"><?php echo $qvalue['question'];?></label>
-                                                <div class="col-lg-7">
-                                                    <?php
-                                                        if(@$answers){
-                                                            foreach ($answers as $avalue) {
-                                                    ?>
-                                                               <div class="col-lg-4">
-                                                                    <label class="pt-3">
-                                                                        <input class="" type="radio" name="job_question[<?php echo $qvalue['id'];?>]" value="<?php echo $avalue['id'];?>" id="">
-                                                                        <?php echo $avalue['answer'];?>
-                                                                    </label>
-                                                                </div> 
-                                                    <?php   
-                                                            }
-                                                        }
-                                                    ?>
-                                                </div>
-                                            </div>    
-                                <?php   
-                                        }     
-                                    }
-                                ?>
                                 <div class="form-group">
-                                    <label class="col-lg-5 control-label">How many offers do you want to receive?</label>
+                                    <label class="col-lg-5 control-label">County</label>
                                     <div class="col-lg-7">
-                                        <select class="form-control" name="job_offers" id="job_offers">
-                                            <option value="">Select</option>
-                                            <option value="1">1</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                            <option value="7">7</option>
+                                        <?php
+                                            $counties = file_get_contents(SITE_URL.'webservices/api/county/read.php');
+                                            $counties = json_decode($counties, true); // decode the JSON into an associative array
+                                        ?>
+                                        <select class="form-control" name="job_county" id="county">
+                                            <?php
+                                                
+                                                foreach ($counties as $county) {
+                                                    $cut_id = $county['id'];
+                                                    $cat_name = $county['county_name'];
+                                            ?>
+                                                <option value="<?php echo $cut_id;?>"><?php echo $cat_name;?></option>
+                                            <?php
+                                                }
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-5 control-label">How much is your maximum budget, for the whole job?</label>
+                                    <label class="col-lg-5 control-label">Country</label>
                                     <div class="col-lg-7">
-                                        <input name="job_budget" value="" class="form-control" id="job_budget" type="number">
+                                        <?php
+
+                                            $counties = file_get_contents(SITE_URL.'webservices/api/country/read.php');
+                                            $counties = json_decode($counties, true); // decode the JSON into an associative array
+                                        ?>
+                                        <select class="form-control" name="job_country" id="job_country">
+                                            <?php
+                                                
+                                                foreach ($counties as $county) {
+                                                    $cut_id = $county['id'];
+                                                    $cat_name = $county['country_name'];
+                                            ?>
+                                                <option value="<?php echo $cut_id;?>"><?php echo $cat_name;?></option>
+                                            <?php
+                                                }
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-5 control-label">Comments</label>
+                                    <label class="col-lg-5 control-label">Post Code</label>
                                     <div class="col-lg-7">
-                                        <textarea name="job_comment" id="job_comment" class="form-control"></textarea>
+                                        <input name="job_postcode" value="" class="form-control" id="job_postcode" type="text">
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-lg-5 control-label">Email</label>
-                                    <div class="col-lg-7">
-                                        <input name="job_email" value="" class="form-control" id="job_email" type="email">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-5 control-label">Mobile phone number</label>
-                                    <div class="col-lg-7">
-                                        <input name="job_phone" value="" class="form-control" id="job_phone" type="text">
-                                    </div>
-                                </div>
-                                <div class="form-group"></div>
+
+
+                                <div class="form-group"><input type="hidden" name="job_id" value="<?php echo $_REQUEST['jid'];?>"></div>
                                 <div class="form-group">
                                     <label class="col-lg-5 control-label"></label>
                                     <div class="col-lg-7">
-                                        <button class="btn-prosfora-prof jobstepone">Continue</button>
+                                        <button class="btn-prosfora-prof jobsteptwo">Continue</button>
                                     </div>
                                 </div>
                             </div>
@@ -152,52 +111,36 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function(){
-        $(".jobstepone").on('click',function(){
+        $(".jobsteptwo").on('click',function(){
             var joberror = 0;
             var errormessage = "";
 
-            if($("#job_title").val() == ""){
-                errormessage = errormessage + "<p class=''>Please enter job title.</p>";
-                joberror = 1;
-            }
-            if($("#job_offers").val() == ""){
-                errormessage = errormessage + "<p class=''>Please enter number of offers.</p>";
-                joberror = 1;
-            }
-            if($("#job_email").val() == ""){
-                errormessage = errormessage + "<p class=''>Please enter email.</p>";
-                joberror = 1;
-            }
-            if($("#job_phone").val() == ""){
-                errormessage = errormessage + "<p class=''>Please enter phone number.</p>";
-                joberror = 1;
-            }
-
+            
             if(joberror == 1){
                 $(".modal-body").html(errormessage);
                 $('#myalertbox').modal('show');
             }else{
 
-                var getAvailableAPI = "<?php echo API_URL;?>job/save.php";
+                var getAvailableAPI = "<?php echo API_URL;?>job/saveaddress.php";
                     
                 $.ajax({
                     type: "POST",
                     url: getAvailableAPI,
                     dataType: "JSON",
-                    data: $('#jobformone').serialize(),
+                    data: $('#jobformtwo').serialize(),
                     success: function(data)
                     {
                         if(data.error){
                             alert(data.message);
                         }else{
 
-                            window.location = "<?php echo SITE_URL;?>jobaddress.php?jid="+data.job_id;
+                            window.location = "<?php echo SITE_URL;?>jobmember.php?jid="+data.job_id;
                             //alert(data.job_id);
                         }
                     }
                 });
 
-                alert("Yes");
+                //alert("Yes");
             }
 
             return false;

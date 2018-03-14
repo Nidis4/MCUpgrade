@@ -197,7 +197,7 @@
                     }
                 });
 
-                alert("Yes");
+                //alert("Yes");
             }
 
             return false;
