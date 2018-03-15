@@ -266,9 +266,21 @@ class Customer{
                     `first_name`=:first_name, `last_name`=:last_name, `sex`=:sex";
         
         $query .=" WHERE id = :id";*/
-
+        
         if(@$id){
             $id = $id;
+        }elseif(@$mobile){
+            $query = "Select customer_id from ".$this->contact_table_name." where mobile='".$mobile."'";        
+            $stmt = $this->conn->prepare( $query );
+            $stmt->execute();
+            $num = $stmt->rowCount();
+            if($num >= 1){
+                // get retrieved row
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);  
+                $id = $row['customer_id'];            
+            }else{
+                $id = NULL;
+            }
         }else{
             $id = NULL;
         }
@@ -291,6 +303,7 @@ class Customer{
            }
            $this->update_contact($id, $address, $mobile, $phone); 
            $this->update_account($id, $email ); 
+
            return $id;
         } else {
            return 0;

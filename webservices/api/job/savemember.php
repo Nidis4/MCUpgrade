@@ -6,6 +6,7 @@ header("Content-Type: application/json; charset=UTF-8");
 // include database and object files
 include_once '../config/database.php';
 include_once '../objects/job.php';
+include_once '../objects/customer.php';
 
 include_once '../../../functions.php';
  
@@ -14,14 +15,57 @@ $database = new Database();
 $db = $database->getConnection();
 
 
+$customer_id      = "";
+$job_id           = isset($_POST['job_id']) ? $_POST['job_id'] : die();
+$first_name       = isset($_POST['first_name']) ? $_POST['first_name'] : "";
+$last_name        = isset($_POST['last_name']) ? $_POST['last_name'] : "";
+
 // initialize object
 $job = new Job($db);
+$job->id = mcdecode($job_id);
 
-$id            = isset($_POST['job_id']) ? $_POST['job_id'] : die();
-$city          = isset($_POST['job_city']) ? $_POST['job_city'] : "";
-$county_id        = isset($_POST['job_county']) ? $_POST['job_county'] : "";
-$country_id       = isset($_POST['job_country']) ? $_POST['job_country'] : "";
-$postcode      = isset($_POST['job_postcode']) ? $_POST['job_postcode'] : "";
+$jobstmt = $job->readOne();
+
+if(@$job->title){
+
+	// initialize object
+	$customer = new Customer($db);	 
+	// query products
+	$stmt = $customer->update($customer_id, $first_name, $last_name, "", "Κύριε", $job->phone, '',  $job->email);
+
+	$job->customer_id = $stmt;
+
+	$job_customer = $job->update_customer();
+
+	if($job_customer){
+		echo json_encode(
+	        array("message" => "Job added successfully.","error"=>0)
+	    );
+	    die;
+	}else{
+		echo json_encode(
+	        array("message" => "Something went wrong.","error"=>0)
+	    );
+	    die;
+	}
+
+	echo "<pre>";
+	print_r($stmt);
+	die('customer_id');
+
+
+
+}else{
+	echo json_encode(
+        array("message" => "Something went wrong.","error"=>1)
+    );
+    die;
+}
+echo "<pre>";
+print_r($job);
+die;
+
+
 
 
 

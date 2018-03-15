@@ -8,6 +8,16 @@ class Job{
  
     // object properties
     public $id;
+    public $customer_id;
+    public $category_id;
+    public $email;
+    public $title;
+    public $budget;
+    public $offers;
+    public $offer_balance;
+    public $questions;
+    public $phone;
+    public $datetimeCreated;
 
     public function __construct($db){
         $this->conn = $db;
@@ -61,5 +71,83 @@ class Job{
         }
 
     }
+
+
+    function readOne(){
+     
+        // query to read single record
+        $query = "SELECT
+                id, customer_id, category_id, email, title, budget, offers, offer_balance, questions, phone, datetimeCreated
+                FROM
+                " . $this->table_name . "                
+                WHERE
+                    id = :id
+                LIMIT
+                    0,1";
+     
+        //echo $query;
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        //echo $this->id." ------ ";
+
+        $cur_id = $this->id;
+        // bind id of product to be updated
+        $stmt->bindParam(':id',  $cur_id, PDO::PARAM_INT);
+        //$stmt->bindValue(':id', '$cur_id', PDO::PARAM_STR);
+     
+        // execute query
+        $stmt->execute();
+
+        $num = $stmt->rowCount();
+     
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // set values to object properties
+        $this->id = $row['id'];
+        $this->customer_id = $row['customer_id'];
+        $this->category_id = $row['category_id'];
+        $this->email = $row['email'];
+        $this->title = $row['title'];
+        $this->budget = $row['budget'];
+        $this->offers = $row['offers'];
+        $this->offer_balance = $row['offer_balance'];
+        $this->questions = $row['questions'];
+        $this->phone = $row['phone'];
+        $this->datetimeCreated = $row['datetimeCreated'];
+    } // Read One
+
+
+    function update_customer(){
+
+        $query = "UPDATE " . $this->table_name . " set customer_id = :customer_id                
+                WHERE id = :id";
+     
+        //echo $query;
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        //echo $this->id." ------ ";
+
+        $cur_id = $this->id;
+        $customer_id = $this->customer_id;
+        // bind id of product to be updated
+        $stmt->bindParam(':id',  $cur_id, PDO::PARAM_INT);
+        $stmt->bindParam(':customer_id',  $customer_id, PDO::PARAM_INT);
+
+
+        $stmt->execute();
+
+        if($stmt){
+            return 1;
+        }else{
+            return 0;
+        }
+
+    }
+
+
+
 }
 ?>
