@@ -2307,7 +2307,7 @@ div#mk-fullscreen-search-wrapper {
     background: #fff;
     padding: 5px;
     box-shadow: 0px 0px 0px 0px #333;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     border: 1px solid #efeeee;
     overflow: hidden;
   }
@@ -2407,6 +2407,8 @@ div#mk-fullscreen-search-wrapper {
     float: left;
     width: 100%;
     margin-top:3px;
+    border-bottom-right-radius: 9px;
+    border-bottom: 2px solid #ff5722;
  
 }
 
@@ -2716,7 +2718,7 @@ h3.h3-small-desc-title {
 }
 
 .btn-prosfora:hover {
-    background: #FF794E;
+    background: #006ec7;
 }
 
 .search-btn-style .icon-search:hover{
@@ -2740,16 +2742,20 @@ p.price-for {
     font-size: 21px;
     margin-bottom: 0px;
     padding: 4px;
-    background: #0e4997;
+    /*background: #0e4997;*/
     color: #fff;
     font-family: dinbd;
-    border-radius: 4px;
+   /* border-radius: 4px;*/
+    background: #ff5722;
 }
 
 .price-box {
     float: right;
     font-size: 20px;
     border-radius: 4px;
+    margin-top:-2px;
+    min-width: 235px;
+    text-align: center;
 }
 
 
@@ -2794,13 +2800,11 @@ p.price-for {
      right: 4px;
      top: 47px; 
     font-size: 20px;
-   
-    background: #ff5722;
+    background: #0e4997;
     color: #fff;
     font-family: dinmd;
     padding: 5px 13px 5px 10px;
     float: right;
-  
     border-radius: 4px;
 }
 
@@ -2810,9 +2814,5 @@ p.price-for {
     margin-bottom: 0px;
     padding-right: 0px;
     max-width: 269px;
-    margin-top: 8px;
-}
-.price-box{
-  min-width:143px;
-  text-align: center;
+    margin-top: 6px;
 }
