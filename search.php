@@ -6,7 +6,9 @@
 								<div id="search-button" class="search-btn-style">
 									<span class="search-text">Βρες την υπηρεσία που χρειάζεσαι... </span>
 									<div class="icon-search">
-										<i class="fa fa-search"></i>
+										<div class="fa-outer">
+											<i class="fa fa-search"></i>
+										</div>
 									</div>
 								</div>
 							</a>
