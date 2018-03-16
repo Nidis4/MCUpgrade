@@ -38,7 +38,7 @@
                                                     $cut_id = $county['id'];
                                                     $cat_name = $county['county_name'];
                                             ?>
-                                                <option value="<?php echo $cut_id;?>"><?php echo $cat_name;?></option>
+                                                <option  <?php if($cut_id == "1"){?> selected="selected" <?php }?> value="<?php echo $cut_id;?>"><?php echo $cat_name;?></option>
                                             <?php
                                                 }
                                             ?>
@@ -60,7 +60,7 @@
                                                     $cut_id = $county['id'];
                                                     $cat_name = $county['country_name'];
                                             ?>
-                                                <option value="<?php echo $cut_id;?>"><?php echo $cat_name;?></option>
+                                                <option <?php if($cut_id == "84"){?> selected="selected" <?php }?> value="<?php echo $cut_id;?>"><?php echo $cat_name;?></option>
                                             <?php
                                                 }
                                             ?>

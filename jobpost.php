@@ -25,7 +25,11 @@
                                     ?>
                                     <select class="form-control" name="job_category" id="category">
                                         <?php
-                                            $currentCatId = "31";
+                                            if(@$_REQUEST['catid']){
+                                                $currentCatId = $_REQUEST['catid']; 
+                                            }else{
+                                                $currentCatId = "31";   
+                                            }
                                             foreach ($categories as $category) {
                                                 $cat_id = $category['id'];
                                                 $cat_name = $category['title'];
@@ -49,8 +53,8 @@
                                     $questions = file_get_contents(SITE_URL.'webservices/api/category/questions.php?catid='.$currentCatId);
                                     $questions = json_decode($questions, true); // decode the JSON into an associative array
 
-                                    if(@$questions){
-                                        foreach ($questions as $qvalue) {
+                                    if(@$questions['records']){
+                                        foreach ($questions['records'] as $qvalue) {
                                             
                                             $answers = file_get_contents(SITE_URL.'webservices/api/category/answers.php?questionid='.$qvalue['id']);
                                             $answers = json_decode($answers, true); // decode the JSON into an associative array
@@ -152,6 +156,12 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function(){
+        $("#category").on('change',function(){
+            var catid = $(this).val();
+            window.location = "<?php echo SITE_URL;?>jobpost.php?catid="+catid;
+        });
+
+
         $(".jobstepone").on('click',function(){
             var joberror = 0;
             var errormessage = "";

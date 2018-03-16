@@ -44,16 +44,16 @@ if($num>0){
             "seuqence" => $seuqence,
             "option" => $option
         );
- 
-        array_push($question_arr, $question_item);
+        $question_arr['records'][] = $question_item;
+        //array_push($question_arr, $question_item);
     }
- 
+    $question_arr['error'] = 0;
     echo json_encode($question_arr);
 }
  
 else{
     echo json_encode(
-        array("message" => "No products found.")
+        array("message" => "No question found.","error" => 1)
     );
 }
 ?>

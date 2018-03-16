@@ -5,6 +5,7 @@ class Job{
     private $conn;
     private $table_name = "jobs";
     private $address_table_name = "jobs_address";
+    private $customer_table_name = "customers";
  
     // object properties
     public $id;
@@ -145,6 +146,96 @@ class Job{
             return 0;
         }
 
+    }
+
+    public function readPaging($from_record_num, $records_per_page){
+     
+        // select query
+        $query = "SELECT 
+                j.id, j.customer_id, j.email, j.category_id, j.title, j.budget, j.offers, j.offer_balance, j.questions, j.phone, j.datetimeCreated, c.first_name, c.last_name    
+            FROM 
+                " . $this->table_name . " j 
+                Join ".$this->customer_table_name." c 
+                on c.id = j.customer_id  
+                WHERE  j.customer_id != ''  
+                ORDER BY j.id DESC LIMIT ?, ?";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind variable values
+        $stmt->bindParam(1, $from_record_num, PDO::PARAM_INT);
+        $stmt->bindParam(2, $records_per_page, PDO::PARAM_INT);
+     
+        // execute query
+        $stmt->execute();
+     
+        // return values from database
+        return $stmt;
+    }
+
+
+    // used for paging 
+    public function count(){
+        $query = "SELECT COUNT(`id`) as total_rows FROM " . $this->table_name . " where customer_id != ''";
+     
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+        return $row['total_rows'];
+    }
+
+
+    public function searchList($title, $name, $surname, $email){
+ 
+    // select all query
+     $query = "SELECT 
+                j.id, j.customer_id, j.email, j.category_id, j.title, j.budget, j.offers, j.offer_balance, j.questions, j.phone, j.datetimeCreated, c.first_name, c.last_name 
+            FROM 
+                " . $this->table_name . " j 
+                Join ".$this->customer_table_name." c 
+                on c.id = j.customer_id  
+            WHERE
+                j.customer_id != '' ";
+
+    if(@$title){
+        $title=htmlspecialchars(strip_tags($title));
+        $title = "%{$title}%";
+        $query .= " AND j.title LIKE '".$title ."'";
+    }
+
+    if(@$email){
+        $email=htmlspecialchars(strip_tags($email));        
+        $query .= " AND j.email = '".$email ."'";
+    }
+    
+    if(@$name){
+        $name=htmlspecialchars(strip_tags($name));
+        $name = "%{$name}%";
+        $query .= " AND c.first_name LIKE '".$name ."'";
+    }
+
+    if(@$surname){
+        $surname=htmlspecialchars(strip_tags($surname));
+        $surname = "%{$surname}%";
+        $query .= " AND c.last_name LIKE '".$surname ."'";
+    }
+    
+    $query .= " ORDER BY
+                    j.`id` DESC
+                LIMIT 0, 30";
+
+    //echo $query;
+ 
+    // prepare query statement
+    $stmt = $this->conn->prepare($query);
+ 
+    
+    // execute query
+    $stmt->execute();
+ 
+    return $stmt;
     }
 
 
