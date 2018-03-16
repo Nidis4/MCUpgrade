@@ -28,7 +28,7 @@ if(isset($_GET['verified']) && ($_GET['verified'] == '0')){
 // query products
 $stmt = $professional->readPaging($from_record_num, $records_per_page, $verified);
 $num = $stmt->rowCount();
- 
+
 // check if more than 0 record found
 if($num>0){
  
@@ -70,7 +70,7 @@ if($num>0){
 }
 else{
     echo json_encode(
-        array("message" => "No products found.")
+        array("message" => "No Professionals found.")
     );
 }
 ?>

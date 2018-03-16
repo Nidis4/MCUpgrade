@@ -57,14 +57,13 @@ $availProfessional = json_decode($availProfessionals, true);
 $prof_new_id = $availProfessional['prof_id'];
  
 $appointment_arr=array(
-	"previous" => $prof_id,
-	"next" => $availProfessional['prof_id'],
-	"county" => $county_id,
-    "ResultCode" => $stmt
+	"previous_prof" => $prof_id,
+	"next_prof" => $availProfessional['prof_id']
 );
 
-$appointment->create($prof_new_id, $cust_id, $application_id, $county_id, $date, $time, $address, $budget, $commision, $agent_id, $comment, $status);
-     
+if ($status!=0){
+	$appointment->create($prof_new_id, $cust_id, $application_id, $county_id, $date, $time, $address, $budget, $commision, $agent_id, $comment, $status);
+} 
  
 echo json_encode($appointment_arr);
 ?>

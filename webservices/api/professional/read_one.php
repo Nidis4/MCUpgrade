@@ -28,6 +28,25 @@ $professional->id = isset($_GET['id']) ? $_GET['id'] : die();
 
 // create array
 $stmt = $professional->readOne();
+
+$stmtApplications = $professional->getApplications();
+
+$applications_arr = array();
+
+while ($row = $stmtApplications->fetch(PDO::FETCH_ASSOC)){
+    extract($row);
+    $application_item=array(
+        "category_name" => $name_greek,
+        "category_id" => $category_id,
+        "application_name" => $title_greek,
+        "price" => $price
+    );
+    array_push($applications_arr, $application_item);
+}
+
+$payment = new Payment($db);
+$percentage = $payment->get_percentage($_GET['id']);
+//$professional_arr['percentage'] = $percentage;
  
 $professional_arr=array(
     "id" => $professional->id,
@@ -56,11 +75,11 @@ $professional_arr=array(
     "agreement5" => $professional->agreement5,
     "approve_per" => $professional->approve_per,
     "approve_doc" => $professional->approve_doc,
+    "percentage" => $percentage,
+    "applications" => $applications_arr
 );
    
-    $payment = new Payment($db);
-    $percentage = $payment->get_percentage($_GET['id']);
-    $professional_arr['percentage'] = $percentage;
     
+
     echo json_encode($professional_arr);
 ?>
