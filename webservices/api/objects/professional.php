@@ -24,9 +24,43 @@ class Professional{
     public $postcode;
     public $county_id;
     public $calendar_id;
+    public $username;
+    public $password;
  
     public function __construct($db){
         $this->conn = $db;
+    }
+
+    function loginUser($id){
+        $query = "UPDATE ".$account_table_name." SET `last_login`=now() WHERE `professional_id`='".$id."'";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+
+    }
+    function login(){
+     
+        // select all query
+        $query = "SELECT  a.professional_id as id, a.email, a.password,  a.status
+                FROM `" . $this->account_table_name . "` a 
+                WHERE email = :username AND password = :password
+                ORDER BY a.professional_id ASC";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+
+        $username = $this->username;
+        $password = $this->password;
+        $password = md5($password);
+
+        // bind id of product to be updated
+        $stmt->bindParam(':username',  $username, PDO::PARAM_STR);
+        $stmt->bindParam(':password',  $password, PDO::PARAM_STR);
+     
+        // execute query
+        $stmt->execute();
+     
+        return $stmt;
     }
  
     // used by select drop-down list

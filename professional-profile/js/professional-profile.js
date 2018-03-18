@@ -1,5 +1,6 @@
 $("#loginForm").submit(function(){
     
+    
     var getLoginAPI = API_LOCATION+'admin/login.php';
 
     $.ajax({
