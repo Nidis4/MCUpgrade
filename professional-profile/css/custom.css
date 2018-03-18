@@ -1,0 +1,191 @@
+/* Add here all your CSS customizations */
+#suggestions {
+    max-height: 100px;
+    overflow-y: scroll;
+    margin-bottom: 10px;
+}
+tr.status-0, .table-striped tbody tr:nth-of-type(odd).status-0 {
+    background-color: #f8d7da;
+}
+tr.status-0 .cancel-row, tr.status-8 .cancel-row, tr.status-7 .cancel-row, tr.status-6 .cancel-row, tr.status-5 .cancel-row {
+    display: none;
+}
+.cancel-row .fa, .edit-row .fa ,.copy-row .fa  {
+   /* display: none;*/
+}
+.status-0 .copy-row .fa{
+    display: initial;
+}
+.status-1 .cancel-row .fa, .status-3 .cancel-row .fa, .status-4 .cancel-row .fa{
+    display: initial;
+}
+.status-1 .edit-row .fa, .status-3 .edit-row .fa, .status-4 .edit-row .fa, .status-5 .edit-row .fa, .status-6 .edit-row .fa{
+    display: initial;
+}
+.table th, .table td {
+    padding: 0.55rem;
+}
+.selectCustomer {
+    width: 100%;
+}
+.profile{
+	width: 100%;
+}
+.profile .name, .profile .appointDate {
+    width: 30%;
+    float: left;
+}
+.profile .distance{
+    width: 20%;
+    float: left;
+}
+.busy {
+    width: 50%;
+    float: left;
+}
+.available{
+    display: none;
+}
+.selectedProf.profile {
+    background: #5cb85c;
+    color: white;
+}
+#available .profile{
+    padding: 10px;
+    cursor: pointer;
+}
+.calendar li {
+    display: block;
+    height: 23px;
+    border: 1px solid #eee;
+}
+.calendar li.busy {
+    width: 100%;
+    float: none;
+    background: #d2322d !important;
+    color: white;
+    overflow: hidden;
+}
+#available .calendar {
+    display: none;
+}
+#available .singleDay.calendar {
+    display: flex !important;
+}
+.row.calDate {
+    text-align: center;
+    font-weight: bold;
+}
+.row.calName {
+    text-align: center;
+    font-weight: bold;
+    min-height: 44px;
+}
+.row.calName span {
+    display: block;
+}
+.row.calName .comp {
+    max-height: 22px;
+    overflow: hidden;
+}
+li.slot.disabled {
+    background: #ededed;
+}
+#feedback { font-size: 1.4em; }
+  .selectable .ui-selecting { background: #FECA40; }
+  .selectable .ui-selected { background: #F39814; color: white; }
+  .selectable { list-style-type: none; margin: 0; padding: 0; }
+
+.status-4 .status-field, .status-3 .status-field {
+    background: #5bc0de;
+}
+.status-0 .status-field {
+    background: #d2322d;
+}
+.status-1 .status-field{
+    background: #0088cc;
+}
+.status-5 .status-field, .status-6 .status-field, .status-7 .status-field {
+    background: #47a447;
+}
+.status-8 .status-field {
+    background: #2e353e;
+}
+#status-3 .duration, #status-3 .daterange, #status-3 .smsProf, #status-3 .smsEmpl {
+    display: none;
+}
+.status-field {
+    color: white;
+    text-align: center;
+}
+.starsouter {
+    width: 110px;
+    float: left;
+    margin-right: 10px;
+}
+
+.empty-bar {
+    background: url(../img/five-stars-empty.png);
+    background-repeat: no-repeat;
+    width: 110px;
+    height: 23px;
+    background-size: cover;
+}
+
+.empty-bar div {
+    background: url(../img/five-stars-full.png);
+    height: 23px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.rev-score {
+    font-size: 18px;
+    float: left; margin-right: 10px;
+}
+
+
+.col-md-7.review-outer {
+    background: #fff;
+    padding: 25px 25px 25px 25px;
+    border: 1px solid #dedede;
+}
+
+.reviewdate {
+    font-size: 18px;
+}
+
+p.reviewComment {
+    margin-top: 12px;
+}
+
+p.reviewerName {
+    text-align: right;
+    font-size: 18px;
+    font-style: italic;
+}
+.quality-empty, .reliability-empty, .cost-empty, .schedule-empty, .behaviour-empty, .cleanliness-empty {
+    background: #dedede;
+    height: 13px;
+    float: left;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.emplexp {
+    font-size: 14px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+
+.quality-empty div, .reliability-empty div, .cost-empty div, .schedule-empty div, .behaviour-empty div, .cleanliness-empty div {
+    background: #008dff;
+    height: 13px;
+}
+#reviewDetails{
+    display: none;
+}
+#status-8.app-status #reviewDetails, #status-6.app-status #reviewDetails, #status-5.app-status #reviewDetails{
+    display: block;
+}
