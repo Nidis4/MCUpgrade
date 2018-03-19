@@ -56,6 +56,12 @@
                             Payments
                         </a>
                     </li>
+                    <li class="">
+                        <a href="logout.php">
+                            <i class="glyphicon glyphicon-log-out"></i>
+                            Logout
+                        </a>
+                    </li>
                 </ul>
 
               

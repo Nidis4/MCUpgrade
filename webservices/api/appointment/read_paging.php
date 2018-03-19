@@ -18,24 +18,44 @@ $db = $database->getConnection();
  
 // initialize object
 $appointment = new Appointment($db);
+
+if(isset($_GET['from_record_num']) && !empty($_GET['from_record_num'])){
+    $from_record_num = (int)$_GET['from_record_num'];
+}
+
+if(isset($_GET['records_per_page']) && !empty($_GET['records_per_page'])){
+    $records_per_page = (int)$_GET['records_per_page'];
+}
+
  
 // query products
 if (isset($_GET['cust_id'])) {
     $cust_id = $_GET['cust_id'];
     $stmt = $appointment->readPagingByCust($from_record_num, $records_per_page, $cust_id);
+    $total_rows = $appointment->countCust($cust_id); 
 } 
 elseif (isset($_GET['prof_id'])) {
     $prof_id = $_GET['prof_id'];
-    $stmt = $appointment->readPagingByProf($from_record_num, $records_per_page, $prof_id);
+    if(@$_GET['latest']){
+       $stmt = $appointment->readPagingByProfLatest($from_record_num,$records_per_page, $prof_id);
+       $total_rows = $appointment->countProfLatest($prof_id);
+    }else{
+       $stmt = $appointment->readPagingByProf($from_record_num, $records_per_page, $prof_id);
+       $total_rows = $appointment->countProf($prof_id); 
+    }
+    
 }elseif (isset($_GET['agent_id'])) {
     $agent_id = $_GET['agent_id'];
     $stmt = $appointment->readPagingByAgent($from_record_num, $records_per_page, $agent_id);
+    $total_rows = $appointment->countAgent($agent_id);
 }
 else {
     $stmt = $appointment->readPaging($from_record_num, $records_per_page);
+    $total_rows = $appointment->count();
 }
+
 $num = $stmt->rowCount();
- 
+
 // check if more than 0 record found
 if($num>0){
  
@@ -55,6 +75,7 @@ if($num>0){
 
         $professionalName = $appointment->getProfessionalNameByID($prof_member_id);
         $customerName = $appointment->getCustomerNameByID($cust_member_id);
+        $agentName = $appointment->getAgentNameByID($agent_id);
  
         $appointment_item=array(
             "id" => $id,
@@ -77,7 +98,8 @@ if($num>0){
             "sourceAppointmentId" => $sourceAppointmentId,
             "status" => $status,
             "cancelReason" => $cancelReason,
-            "cancelComment" => $cancelComment
+            "cancelComment" => $cancelComment,
+            "agent_name" => $agentName
         );
         if(@$category_id){
            $appointment_item['category_id'] = $category_id; 
@@ -89,7 +111,7 @@ if($num>0){
  
  
     // include paging
-    $total_rows=$appointment->count();
+    
     $page_url="{$home_url}appointment/read_paging.php?";
     $paging=$utilities->getPaging($page, $total_rows, $records_per_page, $page_url);
     $appointments_arr["paging"]=$paging;

@@ -6,258 +6,81 @@
  ?>
         <div class="col-md-12 page-title" ><h2>Latest Appointments</h2></div>
         <section id="cd-timeline" class="cd-container">
+                <?php
+                    $latest = 1;
+                    $appointments = file_get_contents(SITE_URL.'webservices/api/appointment/read_paging.php?prof_id='.$_SESSION['id'].'&latest='.$latest.'&from_record_num=0&records_per_page=5');
+                    $appointmentsPag = json_decode($appointments, true);
 
-                <div class="cd-timeline-block">
-                        <div class="cd-timeline-img cd-date-today">
-                            <div class="appointment-day">28</div>
-                            <div class="appointment-month">FEB</div>
-                            <div class="appointment-time">08:30</div>
-                        </div> <!-- cd-timeline-img -->
+                    if(@$appointmentsPag['records'][0]['id']){
+                        foreach ($appointmentsPag['records'] as $appointment) {
+                            $appointment_date = $appointment['date'];
+                            $appointment_time = str_replace(" ", '', $appointment['time']);
+                            if(@$appointment_time){
+                                $atime = explode('-', $appointment_time);
+                            }else{
+                                $atime[0] = "";
+                            }
 
-                        <div class="cd-timeline-content">
-                            <div class="col-md-12"><h2 class="appointment-cat-title">Energy Certificate</h2></div>
-                                <div class="col-md-6">
-                                    <p class="appointment-customer-name">Name: <span class="custormer-name">Giannis Pragias</span></p>
-                                  
-                                    <p class="appointment-address">Address: <a class="customer-address" target="_blank" href="https://www.google.gr/maps/dir//Thespieon+2-8,+Peristeri/@38.0104074,23.6788927,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14a1a3273e0e3a83:0x64da0d0ad313a4d9!2m2!1d23.713998!2d38.010345">Thespion 2, Peristeri, Greece</a></p>
+                            $appointment_budget = $appointment['budget'];
+                            $appointment_commision = $appointment['commision'];
+                            $appointment_address = $appointment['address'];
+                            $appointment_cust_member_name = $appointment['cust_member_name'];
+                            $appointment_comment = $appointment['comment'];
+                            $appointment_agent_name = $appointment['agent_name'];
 
-                                </div>
-                                <div class="col-md-6">
-                                    <p class="appointement-budget">Budget: <span class="customer-budget">60€</span></p>
-                                    <p class="appointement-commission">Commission: <span class="customer-commission">24€</span></p>
-                                     <p class="appointement-agent-name">Agent Name: <span class="agent-name">Chris Fragoulakis</span></p>
-                                    
-                                </div>
-                                <div class="read-more-btn">Read more</div>
-                                <div class="read-more-txt">
-                                    <div class="col-md-6">
-                                        <p class="appointement-delivery-adress">Delivery Address: <span class="customer-delivery-adress"></span></p>
-                                        <p class="appointement-distance">Distance: <span class="customer-distance"></span></p>
 
-                                    </div>
-                                    <div class="col-md-6"> 
-                                        <a href="tel:6942657824"><div class="call-btn"><i class="fa fa-phone"></i> 6942657824</div></a>
-                                    </div>
-                                    <div class="col-md-12">
+                    ?>
+                            <div class="cd-timeline-block">
+                                <div class="cd-timeline-img <?php if(date('d',strtotime($appointment_date)) == date('d')){ echo "cd-date-today"; } else{ echo "cd-date-next-days";} ?>">
+                                    <div class="appointment-day"><?php echo date('d',strtotime($appointment_date));?></div>
+                                    <div class="appointment-month"><?php echo date('M',strtotime($appointment_date));?></div>
+                                    <div class="appointment-time"><?php echo $atime[0];?></div>
+                                </div> <!-- cd-timeline-img -->
 
-                                        <p>Comments: <span class="appointment-comments">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</span></p>
-                                        
-                                         
-                                    </div>
-                                    <div class="col-md-12 read-less-btn">Read less</div>
-                                </div>
-                           
-                        </div> <!-- cd-timeline-content -->
-                    </div> <!-- cd-timeline-block -->
+                                <div class="cd-timeline-content">
+                                    <div class="col-md-12"><h2 class="appointment-cat-title">Energy Certificate</h2></div>
+                                        <div class="col-md-6">
+                                            <p class="appointment-customer-name">Name: <span class="custormer-name"><?php echo $appointment_cust_member_name; ?></span></p>
+                                            <p class="appointment-address">Address: <a class="customer-address" target="_blank" href="https://www.google.gr/maps/dir//<?php echo $appointment_address;?>"><?php echo $appointment_address;?></a></p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p class="appointement-budget">Budget: <span class="customer-budget"><?php echo $appointment_budget;?>€</span></p>
+                                            <p class="appointement-commission">Commission: <span class="customer-commission"><?php echo $appointment_commision;?>€</span></p>
+                                             <p class="appointement-agent-name">Agent Name: <span class="agent-name"><?php echo $appointment_agent_name;?></span></p>
+                                            
+                                        </div>
+                                        <div class="read-more-btn">Read more</div>
+                                        <div class="read-more-txt">
+                                            <div class="col-md-6">
+                                                <p class="appointement-delivery-adress">Delivery Address: <span class="customer-delivery-adress"></span></p>
+                                                <p class="appointement-distance">Distance: <span class="customer-distance"></span></p>
 
-                    <div class="cd-timeline-block">
-                        <div class="cd-timeline-img cd-date-today">
-                            <div class="appointment-day">28</div>
-                            <div class="appointment-month">FEB</div>
-                            <div class="appointment-time">13:00</div>
-                        </div> <!-- cd-timeline-img -->
+                                            </div>
+                                            <div class="col-md-6"> 
+                                                <a href="tel:6942657824"><div class="call-btn"><i class="fa fa-phone"></i> 6942657824</div></a>
+                                            </div>
+                                            <div class="col-md-12">
 
-                        <div class="cd-timeline-content">
-                                <div class="col-md-12"><h2 class="appointment-cat-title">Energy Certificate</h2></div>
-                                <div class="col-md-6">
-                                    <p class="appointment-customer-name">Name: <span class="custormer-name">Giannis Pragias</span></p>
-                                  
-                                    <p class="appointment-address">Address: <a class="customer-address" target="_blank" href="https://www.google.gr/maps/dir//Thespieon+2-8,+Peristeri/@38.0104074,23.6788927,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14a1a3273e0e3a83:0x64da0d0ad313a4d9!2m2!1d23.713998!2d38.010345">Thespion 2, Peristeri, Greece</a></p>
+                                                <p>Comments: <span class="appointment-comments"><?php echo $appointment_comment;?></span></p>
+                                                
+                                                 
+                                            </div>
+                                            <div class="col-md-12 read-less-btn">Read less</div>
+                                        </div>
+                                   
+                                </div> <!-- cd-timeline-content -->
+                        </div> <!-- cd-timeline-block -->    
+                    <?php
+                            # code...
+                        }
+                    }else{
+                ?>
+                        No Upcoming Appoinment.      
+                <?php        
+                    }
 
-                                </div>
-                                <div class="col-md-6">
-                                    <p class="appointement-budget">Budget: <span class="customer-budget">60€</span></p>
-                                    <p class="appointement-commission">Commission: <span class="customer-commission">24€</span></p>
-                                     <p class="appointement-agent-name">Agent Name: <span class="agent-name">Chris Fragoulakis</span></p>
-                                    
-                                </div>
-                                <div class="read-more-btn">Read more</div>
-                                <div class="read-more-txt">
-                                    <div class="col-md-6">
-                                        <p class="appointement-delivery-adress">Delivery Address: <span class="customer-delivery-adress"></span></p>
-                                        <p class="appointement-distance">Distance: <span class="customer-distance"></span></p>
+                ?>
 
-                                    </div>
-                                      <div class="col-md-6"> 
-                                        <a href="tel:6942657824"><div class="call-btn"><i class="fa fa-phone"></i> 6942657824</div></a>
-                                    </div>
-                                    <div class="col-md-12">
-
-                                        <p>Comments: <span class="appointment-comments">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</span></p>
-                                        
-                                         
-                                    </div>
-                                    <div class="col-md-12 read-less-btn">Read less</div>
-                                </div>
-                        </div> <!-- cd-timeline-content -->
-                    </div> <!-- cd-timeline-block -->
-
-                    <div class="cd-timeline-block">
-                        <div class="cd-timeline-img cd-date-today">
-                            <div class="appointment-day">28</div>
-                            <div class="appointment-month">FEB</div>
-                            <div class="appointment-time">15:30</div>
-                        </div> <!-- cd-timeline-img -->
-
-                        <div class="cd-timeline-content">
-                               <div class="col-md-12"><h2 class="appointment-cat-title">Energy Certificate</h2></div>
-                                <div class="col-md-6">
-                                    <p class="appointment-customer-name">Name: <span class="custormer-name">Giannis Pragias</span></p>
-                                  
-                                    <p class="appointment-address">Address: <a class="customer-address" target="_blank" href="https://www.google.gr/maps/dir//Thespieon+2-8,+Peristeri/@38.0104074,23.6788927,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14a1a3273e0e3a83:0x64da0d0ad313a4d9!2m2!1d23.713998!2d38.010345">Thespion 2, Peristeri, Greece</a></p>
-
-                                </div>
-                                <div class="col-md-6">
-                                    <p class="appointement-budget">Budget: <span class="customer-budget">60€</span></p>
-                                    <p class="appointement-commission">Commission: <span class="customer-commission">24€</span></p>
-                                     <p class="appointement-agent-name">Agent Name: <span class="agent-name">Chris Fragoulakis</span></p>
-                                    
-                                </div>
-                                <div class="read-more-btn">Read more</div>
-                                <div class="read-more-txt">
-                                    <div class="col-md-6">
-                                        <p class="appointement-delivery-adress">Delivery Address: <span class="customer-delivery-adress"></span></p>
-                                        <p class="appointement-distance">Distance: <span class="customer-distance"></span></p>
-
-                                    </div>
-                                    <div class="col-md-6"> 
-                                        <a href="tel:6942657824"><div class="call-btn"><i class="fa fa-phone"></i> 6942657824</div></a>
-                                    </div>
-                                    <div class="col-md-12">
-
-                                        <p>Comments: <span class="appointment-comments">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</span></p>
-                                        
-                                         
-                                    </div>
-                                    <div class="col-md-12 read-less-btn">Read less</div>
-                                </div>
-                            </div> <!-- cd-timeline-content -->
-                    </div> <!-- cd-timeline-block -->
-
-                    <div class="cd-timeline-block">
-                        <div class="cd-timeline-img cd-date-next-days">
-                            <div class="appointment-day">1</div>
-                            <div class="appointment-month">MAR</div>
-                            <div class="appointment-time">9:30</div>
-                          
-                        </div> <!-- cd-timeline-img -->
-
-                        <div class="cd-timeline-content">
-                               <div class="col-md-12"><h2 class="appointment-cat-title">Energy Certificate</h2></div>
-                                <div class="col-md-6">
-                                    <p class="appointment-customer-name">Name: <span class="custormer-name">Giannis Pragias</span></p>
-                                  
-                                    <p class="appointment-address">Address: <a class="customer-address" target="_blank" href="https://www.google.gr/maps/dir//Thespieon+2-8,+Peristeri/@38.0104074,23.6788927,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14a1a3273e0e3a83:0x64da0d0ad313a4d9!2m2!1d23.713998!2d38.010345">Thespion 2, Peristeri, Greece</a></p>
-
-                                </div>
-                                <div class="col-md-6">
-                                    <p class="appointement-budget">Budget: <span class="customer-budget">60€</span></p>
-                                    <p class="appointement-commission">Commission: <span class="customer-commission">24€</span></p>
-                                     <p class="appointement-agent-name">Agent Name: <span class="agent-name">Chris Fragoulakis</span></p>
-                                    
-                                </div>
-                                <div class="read-more-btn">Read more</div>
-                                <div class="read-more-txt">
-                                    <div class="col-md-6">
-                                        <p class="appointement-delivery-adress">Delivery Address: <span class="customer-delivery-adress"></span></p>
-                                        <p class="appointement-distance">Distance: <span class="customer-distance"></span></p>
-
-                                    </div>
-                                    <div class="col-md-6"> 
-                                        <a href="tel:6942657824"><div class="call-btn"><i class="fa fa-phone"></i> 6942657824</div></a>
-                                    </div>
-                                    <div class="col-md-12">
-
-                                        <p>Comments: <span class="appointment-comments">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</span></p>
-                                        
-                                         
-                                    </div>
-                                    <div class="col-md-12 read-less-btn">Read less</div>
-                                </div>
-                        </div> <!-- cd-timeline-content -->
-                    </div> <!-- cd-timeline-block -->
-
-                    <div class="cd-timeline-block">
-                        <div class="cd-timeline-img cd-date-next-days">
-                           <div class="appointment-day">2</div>
-                            <div class="appointment-month">MAR</div>
-                            <div class="appointment-time">12:30</div>
-                        </div> <!-- cd-timeline-img -->
-
-                        <div class="cd-timeline-content">
-                               <div class="col-md-12"><h2 class="appointment-cat-title">Energy Certificate</h2></div>
-                                <div class="col-md-6">
-                                    <p class="appointment-customer-name">Name: <span class="custormer-name">Giannis Pragias</span></p>
-                                  
-                                    <p class="appointment-address">Address: <a class="customer-address" target="_blank" href="https://www.google.gr/maps/dir//Thespieon+2-8,+Peristeri/@38.0104074,23.6788927,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14a1a3273e0e3a83:0x64da0d0ad313a4d9!2m2!1d23.713998!2d38.010345">Thespion 2, Peristeri, Greece</a></p>
-                                </div>
-                                <div class="col-md-6">
-                                    <p class="appointement-budget">Budget: <span class="customer-budget">60€</span></p>
-                                    <p class="appointement-commission">Commission: <span class="customer-commission">24€</span></p>
-                                     <p class="appointement-agent-name">Agent Name: <span class="agent-name">Chris Fragoulakis</span></p>
-                                    
-                                </div>
-                                <div class="read-more-btn">Read more</div>
-                                <div class="read-more-txt">
-                                    <div class="col-md-6">
-                                        <p class="appointement-delivery-adress">Delivery Address: <span class="customer-delivery-adress"></span></p>
-                                        <p class="appointement-distance">Distance: <span class="customer-distance"></span></p>
-
-                                    </div>
-                                    <div class="col-md-6"> 
-                                        <a href="tel:6942657824"><div class="call-btn"><i class="fa fa-phone"></i> 6942657824</div></a>
-                                    </div>
-                                    <div class="col-md-12">
-
-                                        <p>Comments: <span class="appointment-comments">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</span></p>
-                                        
-                                         
-                                    </div>
-                                    <div class="col-md-12 read-less-btn">Read less</div>
-                                </div>
-                        </div> <!-- cd-timeline-content -->
-                    </div> <!-- cd-timeline-block -->
-
-                    <div class="cd-timeline-block">
-                        <div class="cd-timeline-img cd-date-next-days">
-                            <div class="appointment-day">4</div>
-                            <div class="appointment-month">MAR</div>
-                            <div class="appointment-time">10:30</div>
-                        </div> <!-- cd-timeline-img -->
-
-                        <div class="cd-timeline-content">
-                                <div class="col-md-12"><h2 class="appointment-cat-title">Energy Certificate</h2></div>
-                                <div class="col-md-6">
-                                    <p class="appointment-customer-name">Name: <span class="custormer-name">Giannis Pragias</span></p>
-                                  
-                                    <p class="appointment-address">Address: <a class="customer-address" target="_blank" href="https://www.google.gr/maps/dir//Thespieon+2-8,+Peristeri/@38.0104074,23.6788927,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14a1a3273e0e3a83:0x64da0d0ad313a4d9!2m2!1d23.713998!2d38.010345">Thespion 2, Peristeri, Greece</a></p>
-                                </div>
-                                <div class="col-md-6">
-                                    <p class="appointement-budget">Budget: <span class="customer-budget">60€</span></p>
-                                    <p class="appointement-commission">Commission: <span class="customer-commission">24€</span></p>
-                                     <p class="appointement-agent-name">Agent Name: <span class="agent-name">Chris Fragoulakis</span></p>
-                                    
-                                </div>
-                                <div class="read-more-btn">Read more</div>
-                                <div class="read-more-txt">
-                                    <div class="col-md-6">
-                                        <p class="appointement-delivery-adress">Delivery Address: <span class="customer-delivery-adress"></span></p>
-                                        <p class="appointement-distance">Distance: <span class="customer-distance"></span></p>
-
-                                    </div>
-                                    <div class="col-md-6"> 
-                                        <a href="tel:6942657824"><div class="call-btn"><i class="fa fa-phone"></i> 6942657824</div></a>
-                                    </div>
-                                    <div class="col-md-12">
-
-                                        <p>Comments: <span class="appointment-comments">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</span></p>
-                                        
-                                         
-                                    </div>
-                                    <div class="col-md-12 read-less-btn">Read less</div>
-                                </div>
-                        </div> <!-- cd-timeline-content -->
-                    </div> <!-- cd-timeline-block -->
               </section>
 
               <div class="container">

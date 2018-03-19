@@ -7,6 +7,7 @@ class Appointment{
     private $application_table_name = "applications";
     private $ratings_table_name = "directory_ratings";
     private $customers_table_name = "customers";
+    private $admin_table_name = "admin";
     private $customers_contact_table_name = "customers_contact_details";
     private $customers_account_table_name = "customers_account_info";
  
@@ -240,6 +241,31 @@ class Appointment{
         return $stmt;
     }
 
+    public function readPagingByProfLatest($from_record_num, $records_per_page, $prof_id){
+
+        // select query
+        $query = "SELECT
+                    a.`id`, a.`prof_member_id`, a.`cust_member_id`, a.`application_id`, a.`date`, a.`time`, a.`address`, a.`budget`, a.`commision`, a.`agent_id`, a.`comment`, a.`sms`, a.`sms_log_id`,  a.`datetimeCreated`, a.`datetimeStatusUpdated`, a.`sourceAppointmentId`, a.`status`, a.`cancelReason`, a.`cancelComment`, ap.`category_id` 
+                FROM " . $this->table_name . " a 
+                JOIN ". $this->application_table_name." ap ON a.application_id = ap.id
+                WHERE a.`prof_member_id`= ? AND a.`status`=1 AND a.`date` >= '".date('Y-m-d')."' ORDER BY a.`date`, a.`time`
+                LIMIT ?, ?";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind variable values
+        $stmt->bindParam(1, $prof_id, PDO::PARAM_INT);
+        $stmt->bindParam(2, $from_record_num, PDO::PARAM_INT);
+        $stmt->bindParam(3, $records_per_page, PDO::PARAM_INT);
+     
+        // execute query
+        $stmt->execute();
+     
+        // return values from database
+        return $stmt;
+    }
+
     // read products with pagination for Agent
     public function readPagingByAgent($from_record_num, $records_per_page, $agent_id){
      
@@ -278,6 +304,43 @@ class Appointment{
         return $row['total_rows'];
     }
 
+    public function countAgent($agent_id){
+        $query = "SELECT COUNT(*) as total_rows FROM " . $this->table_name . " where agent_id = '".$agent_id."'";
+     
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+        return $row['total_rows'];
+    }
+    public function countProf($prof_id){
+        $query = "SELECT COUNT(*) as total_rows FROM " . $this->table_name . " where prof_member_id = '".$prof_id."'";
+     
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+        return $row['total_rows'];
+    }
+    public function countProfLatest($prof_id){
+        $query = "SELECT COUNT(*) as total_rows FROM " . $this->table_name . " where prof_member_id = '".$prof_id."' AND `status`=1 AND `date` >= '".date('Y-m-d')."' ORDER BY `date`, `time`";
+     
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+        return $row['total_rows'];
+    }
+    public function countCust($cust_id){
+        $query = "SELECT COUNT(*) as total_rows FROM " . $this->table_name . " where cust_member_id = '".$cust_id."'";
+     
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+        return $row['total_rows'];
+    }
+
     public function getProfessionalNameByID($id){
         $query = "SELECT first_name, last_name FROM professionals WHERE `id`=".$id."";
      
@@ -290,6 +353,16 @@ class Appointment{
 
     public function getCustomerNameByID($id){
         $query = "SELECT first_name, last_name FROM customers WHERE `id`=".$id."";
+     
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+        return $row['first_name']." ".$row['last_name'];
+    }
+
+    public function getAgentNameByID($id){
+        $query = "SELECT first_name, last_name FROM admin WHERE `id`=".$id."";
      
         $stmt = $this->conn->prepare( $query );
         $stmt->execute();

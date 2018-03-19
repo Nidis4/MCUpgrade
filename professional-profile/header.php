@@ -26,3 +26,4 @@
 
     </head>
     <body>
+    <?php include('../constants.php'); ?>
