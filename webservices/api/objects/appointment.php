@@ -361,6 +361,16 @@ class Appointment{
         return $row['first_name']." ".$row['last_name'];
     }
 
+    public function getCustomerMobileByID($id){
+        $query = "SELECT mobile FROM customers_contact_details WHERE `customer_id`=".$id."";
+     
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+        return $row['mobile'];
+    }
+
     public function getAgentNameByID($id){
         $query = "SELECT first_name, last_name FROM admin WHERE `id`=".$id."";
      
@@ -369,6 +379,15 @@ class Appointment{
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
      
         return $row['first_name']." ".$row['last_name'];
+    }
+    public function getCategoryByID($id){
+        $query = "SELECT * FROM categories WHERE `id`=".$id."";
+     
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+        return $row;
     }
 
     public function create($prof_id, $cust_id, $application_id, $county_id, $date, $time, $address, $budget, $commision, $agent_id, $comment, $status){

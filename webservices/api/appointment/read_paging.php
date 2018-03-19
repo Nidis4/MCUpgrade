@@ -75,7 +75,16 @@ if($num>0){
 
         $professionalName = $appointment->getProfessionalNameByID($prof_member_id);
         $customerName = $appointment->getCustomerNameByID($cust_member_id);
+        $customerMobile = $appointment->getCustomerMobileByID($cust_member_id);
         $agentName = $appointment->getAgentNameByID($agent_id);
+        if(@$category_id){
+            $categoryN = $appointment->getCategoryByID($category_id);
+            $categoryName = $categoryN['title'];
+            
+        }else{
+            $categoryName = "";
+        }
+        
  
         $appointment_item=array(
             "id" => $id,
@@ -99,7 +108,9 @@ if($num>0){
             "status" => $status,
             "cancelReason" => $cancelReason,
             "cancelComment" => $cancelComment,
-            "agent_name" => $agentName
+            "agent_name" => $agentName,
+            "mobile" => $customerMobile,
+            "category_name" => $categoryName,
         );
         if(@$category_id){
            $appointment_item['category_id'] = $category_id; 

@@ -27,6 +27,9 @@
                             $appointment_cust_member_name = $appointment['cust_member_name'];
                             $appointment_comment = $appointment['comment'];
                             $appointment_agent_name = $appointment['agent_name'];
+                            $appointment_mobile = $appointment['mobile'];
+                            $appointment_category = $appointment['category_name'];
+                            //$appointment_category = "";
 
 
                     ?>
@@ -38,7 +41,7 @@
                                 </div> <!-- cd-timeline-img -->
 
                                 <div class="cd-timeline-content">
-                                    <div class="col-md-12"><h2 class="appointment-cat-title">Energy Certificate</h2></div>
+                                    <div class="col-md-12"><h2 class="appointment-cat-title"><?php echo $appointment_category;?></h2></div>
                                         <div class="col-md-6">
                                             <p class="appointment-customer-name">Name: <span class="custormer-name"><?php echo $appointment_cust_member_name; ?></span></p>
                                             <p class="appointment-address">Address: <a class="customer-address" target="_blank" href="https://www.google.gr/maps/dir//<?php echo $appointment_address;?>"><?php echo $appointment_address;?></a></p>
@@ -57,7 +60,7 @@
 
                                             </div>
                                             <div class="col-md-6"> 
-                                                <a href="tel:6942657824"><div class="call-btn"><i class="fa fa-phone"></i> 6942657824</div></a>
+                                                <a href="tel:<?php echo $appointment_mobile;?>"><div class="call-btn"><i class="fa fa-phone"></i> <?php echo $appointment_mobile;?></div></a>
                                             </div>
                                             <div class="col-md-12">
 
