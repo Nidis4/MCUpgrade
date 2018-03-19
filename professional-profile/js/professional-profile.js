@@ -1,7 +1,7 @@
 $("#loginForm").submit(function(){
     
     
-    var getLoginAPI = API_LOCATION+'admin/login.php';
+    var getLoginAPI = API_LOCATION+'professional/login.php';
 
     $.ajax({
             type: "POST",
@@ -23,12 +23,21 @@ $("#loginForm").submit(function(){
                      var surname = data['last_name'];
                      var id = data['id'];
                      var fullname = name+" "+surname;
-                    $.post("session.php", {"user": user , "fullname":fullname, "id":id});
+                     //alert(user);
+                     //return false;
+                     $.post(
+                                "session.php", 
+                                {"user": user , "fullname":fullname, "id":id},
+                                function(result){
+                                    window.location.replace('../professional-profile/index.php');
+                                }
+                            );
+                            
 
-                    window.location.replace('../platform/index.php');
+                    //window.location.replace('../professional-profile/index.php');
                 }
                 else {
-                    alert("Έχετε πληκτρολογήσει λάθος στοιχεία. Παρακαλώ προσπαθήστε ξανά!");
+                    alert(data['message']);
                     location.reload();
                 }
             }

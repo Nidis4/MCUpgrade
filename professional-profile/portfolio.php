@@ -1,4 +1,5 @@
 <?php 
+    include('session.php');
     include('header.php');
     $currentPage = 'portfolio';
     include('menu.php');

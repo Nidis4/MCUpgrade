@@ -32,8 +32,7 @@ class Professional{
     }
 
     function loginUser($id){
-        $query = "UPDATE ".$account_table_name." SET `last_login`=now() WHERE `professional_id`='".$id."'";
-
+        $query = "UPDATE ". $this->account_table_name." SET `last_login`=now(), `last_login_ip`= '".$_SERVER['REMOTE_ADDR']."' WHERE `professional_id`='".$id."'";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
 
@@ -41,9 +40,11 @@ class Professional{
     function login(){
      
         // select all query
-        $query = "SELECT  a.professional_id as id, a.email, a.password,  a.status
+        $query = "SELECT  a.professional_id as id, a.email, a.password,a.last_login,  a.status, p.first_name, p.last_name
                 FROM `" . $this->account_table_name . "` a 
-                WHERE email = :username AND password = :password
+                LEFT JOIN ". $this->table_name." p
+                    ON p.id = a.professional_id
+                WHERE a.email = :username AND a.password = :password
                 ORDER BY a.professional_id ASC";
      
         // prepare query statement

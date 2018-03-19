@@ -1,4 +1,5 @@
 <?php 
+    include('session.php');
     include('header.php');
     $currentPage = 'review';
     include('menu.php');

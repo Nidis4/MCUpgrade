@@ -38,30 +38,45 @@ if($num>0){
         // just $name only
         extract($row);
 
-        $professional->loginUser($id);
- 
-        $admin_item=array(
-            "ResultCode" => "1",
-            "id" => $id,
-            "username" => $username,
-            "first_name" => $first_name,
-            "last_name" => $last_name,
-            "email" => $email,
-            "type" => $type,
-            "last_login" => $last_login,
-            "active" => $active
-        );
+        if($status == "2"){
+            $professional->loginUser($id); 
+            $admin_item=array(
+                "ResultCode" => "1",
+                "id" => $id,
+                "username" => $email,
+                "first_name" => $first_name,
+                "last_name" => $last_name,
+                "email" => $email,
+                "last_login" => $last_login,
+                "status" => $status
+            );
+            echo json_encode($admin_item);
+
+        }elseif($status == "0" || $status == "1"){
+            echo json_encode(
+                array("ResultCode" => "0",'message' => 'Your account is pending.')
+            );
+        }elseif($status == "3"){
+            echo json_encode(
+                array("ResultCode" => "0",'message' => 'Your account is deactivate.')
+            );
+        }else{
+            echo json_encode(
+                array("ResultCode" => "0",'message' => 'Έχετε πληκτρολογήσει λάθος στοιχεία. Παρακαλώ προσπαθήστε ξανά!')
+            );
+        }
+        
  
         //admin_array
         //array_push($admin_arr, $admin_item);
     }
  
-    echo json_encode($admin_item);
+    
 }
  
 else{
     echo json_encode(
-        array("ResultCode" => "0")
+        array("ResultCode" => "0",'message' => 'Έχετε πληκτρολογήσει λάθος στοιχεία. Παρακαλώ προσπαθήστε ξανά!')
     );
 }
 ?>
