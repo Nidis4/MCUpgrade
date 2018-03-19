@@ -4,10 +4,11 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();// Starting Session
 
-if (isset($_POST['user']) && isset($_POST['user'])!=""){
+if (isset($_POST['user']) && isset($_POST['user'])!="" && ($_POST['type'] == "Admin" || $_POST['type'] == "Agent" || $_POST['type'] == "Manager")){
 	$_SESSION['login_user'] = $_POST['user'];
 	$_SESSION['fullname'] = $_POST['fullname'];
 	$_SESSION['id'] = $_POST['id'];
+	$_SESSION['usertype'] = $_POST['type'];
 }
 else {	
 	if(!isset($_SESSION['login_user'])){
@@ -15,6 +16,13 @@ else {
 		exit();
 	}else{
 		$user_check=$_SESSION['login_user'];
+
+		if(@$_SESSION['usertype'] && ($_SESSION['usertype'] == "Admin" || $_SESSION['usertype'] == "Agent" || $_SESSION['usertype'] == "Manager")){
+			$user_check=$_SESSION['login_user'];
+		}else{
+			header('Location: login.html'); // Redirecting To Home Page
+			exit();
+		}
 	}
 }
 ?>

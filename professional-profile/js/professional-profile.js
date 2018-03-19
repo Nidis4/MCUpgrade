@@ -23,11 +23,12 @@ $("#loginForm").submit(function(){
                      var surname = data['last_name'];
                      var id = data['id'];
                      var fullname = name+" "+surname;
+                     var type = data['type'];
                      //alert(user);
                      //return false;
                      $.post(
                                 "session.php", 
-                                {"user": user , "fullname":fullname, "id":id},
+                                {"user": user , "fullname":fullname, "id":id, "type":type},
                                 function(result){
                                     window.location.replace('../professional-profile/index.php');
                                 }

@@ -60,6 +60,7 @@ class Admin{
         $password = $this->password;
         $password = md5($password);
 
+        
         // bind id of product to be updated
         $stmt->bindParam(':username',  $username, PDO::PARAM_STR);
         $stmt->bindParam(':password',  $password, PDO::PARAM_STR);

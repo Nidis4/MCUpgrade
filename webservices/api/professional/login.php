@@ -48,6 +48,7 @@ if($num>0){
                 "last_name" => $last_name,
                 "email" => $email,
                 "last_login" => $last_login,
+                "type" => 'Professional',
                 "status" => $status
             );
             echo json_encode($admin_item);

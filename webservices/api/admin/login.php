@@ -37,8 +37,22 @@ if($num>0){
         // just $name only
         extract($row);
 
+
         $admin->loginUser($id);
- 
+     
+        if($type == 1){
+            $usertype = "Admin";
+        }else if($type == 2){
+            $usertype = "Manager";
+        }else if($type == 3){
+            $usertype = "Agent";
+        }else{
+            $usertype = "";
+        }
+
+
+       
+
         $admin_item=array(
             "ResultCode" => "1",
             "id" => $id,
@@ -46,11 +60,12 @@ if($num>0){
             "first_name" => $first_name,
             "last_name" => $last_name,
             "email" => $email,
-            "type" => $type,
+            "type" => $usertype,
             "last_login" => $last_login,
             "active" => $active
         );
  
+        
         //admin_array
         //array_push($admin_arr, $admin_item);
     }

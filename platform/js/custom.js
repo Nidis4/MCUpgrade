@@ -22,10 +22,18 @@ $("#loginForm").submit(function(){
                 	 var name = data['first_name'];
                 	 var surname = data['last_name'];
                      var id = data['id'];
-                	 var fullname = name+" "+surname;
-    				$.post("session.php", {"user": user , "fullname":fullname, "id":id});
+                     var fullname = name+" "+surname;
+                	 var type = data['type'];
+                     // $.post("session.php", {"user": user , "fullname":fullname, "id":id "type":type});
 
-                    window.location.replace('../platform/index.php');
+        //             window.location.replace('../platform/index.php');
+                    $.post(
+                                "session.php", 
+                                {"user": user , "fullname":fullname, "id":id, "type":type},
+                                function(result){
+                                    window.location.replace('../platform/index.php');
+                                }
+                            );
                 }
                 else {
                     alert("Έχετε πληκτρολογήσει λάθος στοιχεία. Παρακαλώ προσπαθήστε ξανά!");
