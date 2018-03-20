@@ -1,7 +1,6 @@
 <?php 
     include('session.php');
     include('header.php');
-
     $currentPage = 'index';
     include('menu.php');
 ?>
@@ -156,21 +155,57 @@
                                 <div class="col-md-6">
                                     <div class="card-body">
                                         <h3>Next Appointment </h3>
-                                          <div class="col-md-12 "><h2 class="appointment-cat-title">Energy Certificate</h2>
-                                            
-                                          </div>
-                                            <div class="home-app-date">15 MAR 09:30</div>
-                                            <div class="col-md-6">
-                                                <p class="appointment-customer-name">Name: <span class="custormer-name">Giannis Pragias</span></p>
-                                              
-                                                <p class="appointment-address">Address: <a class="customer-address" target="_blank" href="https://www.google.gr/maps/dir//Thespieon+2-8,+Peristeri/@38.0104074,23.6788927,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14a1a3273e0e3a83:0x64da0d0ad313a4d9!2m2!1d23.713998!2d38.010345">Thespion 2, Peristeri, Greece</a></p>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p class="appointement-budget">Budget: <span class="customer-budget">60€</span></p>
-                                                <p class="appointement-commission">Commission: <span class="customer-commission">24€</span></p>
-                                                
-                                            </div>
-                                            <a href="/professional-profile/timeline.php"><div class="col-md-12 read-timeline-btn">Read More</div></a>
+                                            <?php
+                                                $latest = 1;
+                                                $appointments = file_get_contents(SITE_URL.'webservices/api/appointment/read_paging.php?prof_id='.$_SESSION['id'].'&latest='.$latest.'&from_record_num=0&records_per_page=1');
+                                                $appointmentsPag = json_decode($appointments, true);
+
+                                                if(@$appointmentsPag['records'][0]['id']){
+                                                    foreach ($appointmentsPag['records'] as $appointment) {
+                                                        $appointment_date = $appointment['date'];
+                                                        $appointment_time = str_replace(" ", '', $appointment['time']);
+                                                        if(@$appointment_time){
+                                                            $atime = explode('-', $appointment_time);
+                                                        }else{
+                                                            $atime[0] = "";
+                                                        }
+
+                                                        $appointment_budget = $appointment['budget'];
+                                                        $appointment_commision = $appointment['commision'];
+                                                        $appointment_address = $appointment['address'];
+                                                        $appointment_cust_member_name = $appointment['cust_member_name'];
+                                                        $appointment_comment = $appointment['comment'];
+                                                        $appointment_agent_name = $appointment['agent_name'];
+                                                        $appointment_mobile = $appointment['mobile'];
+                                                        $appointment_category = $appointment['category_name'];
+                                                        //$appointment_category = "";
+
+
+                                                ?>
+                                                        <div class="col-md-12 ">
+                                                            <h2 class="appointment-cat-title"><?php echo $appointment_category;?></h2>                                            
+                                                        </div>
+                                                        <div class="home-app-date"><?php echo date("d M",strtotime($appointment_date))." ".$atime[0];?></div>
+                                                        <div class="col-md-6">
+                                                            <p class="appointment-customer-name">Name: <span class="custormer-name"><?php echo $appointment_cust_member_name;?></span></p>
+                                                          
+                                                            <p class="appointment-address">Address: <a class="customer-address" target="_blank" href="https://www.google.gr/maps/dir//<?php echo $appointment_address;?>"><?php echo $appointment_address;?></a></p>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <p class="appointement-budget">Budget: <span class="customer-budget"><?php echo $appointment_budget;?>€</span></p>
+                                                            <p class="appointement-commission">Commission: <span class="customer-commission"><?php echo $appointment_commision;?>€</span></p>
+                                                            
+                                                        </div>
+                                                        <a href="<?php echo SITE_URL;?>professional-profile/timeline.php"><div class="col-md-12 read-timeline-btn">Read More</div></a>
+                                    <?php           }
+                                                }else{
+                                    ?>
+                                                    <div class="col-md-12 ">
+                                                            <p>No Upcoming Appointment.</p>                                            
+                                                    </div>
+                                    <?php                
+                                                }
+                                    ?>
                                     </div>
                                 </div>
 
