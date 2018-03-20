@@ -41,6 +41,63 @@ class Application{
         return $stmt;
     }
 
+
+
+    function readOne(){
+     
+        // query to read single recordALTER TABLE `professionals` ADD `service_area` VARCHAR(200) NOT NULL AFTER `description`;
+
+        $query = "SELECT
+                    a.id, a.category_id, c.name_greek, a.title, a.title_greek, a.short_description, a.short_description_gr, a.detail_description, a.detail_description_gr, a.unit, a.min_price, a.sequence, a.modified
+                FROM
+                    " . $this->table_name . " a,
+                    `categories` c
+                WHERE
+                    a.id = :app_id AND
+                    a.`category_id`=c.`id`
+                ORDER BY
+                    title_greek ASC";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        $cur_id = $this->id;
+        // bind id of product to be updated
+        $stmt->bindParam(':app_id',  $cur_id, PDO::PARAM_INT);
+        //$stmt->bindValue(':id', '$cur_id', PDO::PARAM_STR);
+     
+        // execute query
+        $stmt->execute();
+
+        return $stmt;
+
+    } 
+
+    function getProfessionalsByApplication($id){
+     
+        // query to read single record
+        $query = "SELECT p.id, p.first_name, p.last_name, p.image,p.service_area, pa.description, pa.budget, pa.price, pc.city
+                    FROM `professionals` p
+                    LEFT JOIN `professionals_applications` pa ON p.`id`=pa.`professional_id`
+                    LEFT JOIN `professionals_contact_details` pc ON p.`id`=pc.`professional_id` AND pa.`professional_id`=pc.`professional_id`
+                    WHERE pa.`application_id`=:app_id AND pa.`price` > 0 
+                    ORDER BY pa.`price` ASC";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        $cur_id = $this->id;
+        // bind id of product to be updated
+        $stmt->bindParam(':app_id',  $cur_id, PDO::PARAM_INT);
+        //$stmt->bindValue(':id', '$cur_id', PDO::PARAM_STR);
+     
+        // execute query
+        $stmt->execute();
+
+        return $stmt;
+
+    } 
+
     function readByCategory(){
      
         // query to read single record

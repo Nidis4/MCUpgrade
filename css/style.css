@@ -2581,7 +2581,7 @@ div#MainMenu .list-group a.main-cat {
 .results-title h1 {
     font-size: 24px;
     font-family: dinmd;
-    margin-bottom: 22px;
+    margin-bottom: 10px;
 }
 
 span.stin-color {
@@ -2609,7 +2609,7 @@ h3.h3-small-desc-title {
     background: white;
     margin-top: 0px;
   
-    padding:4px 13px;
+    padding:3px 13px;
 }
 
 
@@ -2739,12 +2739,12 @@ p.price-for {
 }
 
 .price-box p {
-    font-size: 21px;
+    font-size: 24px;
     margin-bottom: 0px;
     padding: 4px;
     /*background: #0e4997;*/
     color: #fff;
-    font-family: dinbd;
+    font-family: dinmd;
    /* border-radius: 4px;*/
     background: #ff5722;
 }
@@ -2756,6 +2756,10 @@ p.price-for {
     margin-top:-2px;
     min-width: 235px;
     text-align: center;
+}
+
+.price-box p span.tax-fpa{
+  font-size: 20px;
 }
 
 
@@ -2815,4 +2819,95 @@ p.price-for {
     padding-right: 0px;
     max-width: 269px;
     margin-top: 6px;
+}
+
+
+
+
+/*DIRECTORY FILTERS MENU*/
+
+ul.nav.navbar-nav.filters-menu {
+    margin: 3px 0px 9px 0px;
+    float: right;
+   
+}
+
+ul.navbar-nav.filters-menu>li>a {
+    color: #333;
+    font-family: dinbd;
+    letter-spacing: 1px;
+    font-size: 14px;
+    padding: 3px 7px;
+
+}
+
+nav.navbar.navbar-default.directory-filters {
+    min-height: 0px;
+}
+
+nav.navbar.navbar-default.directory-filters .container-fluid {
+    padding-right: 0px;
+}
+
+nav.navbar.navbar-default.directory-filters div#bs-megadropdown-tabs {
+    padding-right: 0px;
+}
+
+.mega-dropdown { position: static !important; }
+.mega-dropdown-menu {
+  padding: 20px 15px 15px;
+  text-align: center;
+  width: 100%;
+}
+
+
+ul.navbar-nav.filters-menu>li>a:hover {
+    color: #fff!important;
+    background-color: #004A86!important;
+}
+
+ul.nav.navbar-nav.filters-menu li.dropdown.mega-dropdown {
+    width: 103px;
+    float:right;
+}
+
+nav.navbar.navbar-default.directory-filters div#bs-megadropdown-tabs{
+  border-top: 0px solid;
+}
+
+div#filters {
+    display: none;
+}
+
+li.close-filters a{
+  display: none;
+}
+li.close-filters {
+    float: right;
+    cursor: pointer;
+}
+div#filters label {
+    float: left;
+    padding-left: 2px;
+    width: 100%;
+    text-align: left;
+    font-family: dinmd;
+    font-weight: normal;
+
+}
+
+div#filters-area .col-md-3 select {
+    float: left;
+    max-width: 160px;
+}
+div#filters {
+    padding-bottom: 25px;
+}
+
+#open-close-filters{
+  cursor:pointer;
+}
+
+nav.navbar.navbar-default.directory-filters div#bs-megadropdown-tabs {
+    margin-right: 0px;
 }

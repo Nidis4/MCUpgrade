@@ -571,3 +571,12 @@ ALTER TABLE `jobs` ADD `customer_id` BIGINT NULL AFTER `id`;
 <!-------------------------------->
 <!-- End 15 Mar 2018 Harpreet -->
 
+
+
+<!-------------------------------->
+<!-- Start 20 Mar 2018 G Konstantinidis -->
+
+ALTER TABLE `professionals` ADD `service_area` VARCHAR(200) NOT NULL AFTER `description`;
+
+<!-------------------------------->
+<!-- End 20 Mar 2018 G Konstantinidis -->
