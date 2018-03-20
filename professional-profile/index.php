@@ -212,18 +212,56 @@
                                 <div class="col-md-6">
                                     <div class="card-body">
                                          <h3>Last Review</h3>
-                                            <div class="col-review">
-                                                    <div class="starsouter">
-                                                        <div class="empty-bar">
-                                                             <div style="width:80%;"></div>
-                                                         </div>
+                                         <?php
+                                            //echo SITE_URL.'webservices/api/review/read_paging.php?prof_id='.$_SESSION['id'].'&from_record_num=0&records_per_page=5';
+
+                                            $reviews = file_get_contents(SITE_URL.'webservices/api/review/read_paging.php?prof_id='.$_SESSION['id'].'&from_record_num=0&records_per_page=1');
+                                            $reviewsPag = json_decode($reviews, true);
+
+                                            if(@$reviewsPag['records'][0]['id']){
+                                                foreach ($reviewsPag['records'] as $review) {
+                                                    $quality = $review['quality'];
+                                                    $quality_per = round(($review['quality'] / 5) * 100);
+
+                                                    $reliability = $review['reliability'];
+                                                    $reliability_per = round(($review['reliability'] / 5) * 100);
+
+                                                    $cost = $review['cost'];
+                                                    $cost_per = round(($review['cost'] / 5) * 100);
+
+                                                    $schedule = $review['schedule'];
+                                                    $schedule_per = round(($review['schedule'] / 5) * 100);
+
+                                                    $behaviour = $review['behaviour'];
+                                                    $behaviour_per = round(($review['behaviour'] / 5) * 100);
+
+                                                    $cleanliness = $review['cleanliness'];
+                                                    $cleanliness_per = round(($review['cleanliness'] / 5) * 100);
+
+                                                    $total_rating = $quality + $reliability +  $cost + $schedule + $behaviour + $cleanliness;
+                                                    $total_rating_per = number_format(($total_rating / 6) * 20,1) ;
+                                                    
+                                        ?>
+
+                                                    <div class="col-review">
+                                                            <div class="starsouter">
+                                                                <div class="empty-bar">
+                                                                     <div style="width:<?php echo $total_rating_per;?>%;"></div>
+                                                                 </div>
+                                                            </div>
+                                                            <div class="rev-score"><?php echo number_format(($total_rating / 6),1)?>/5</div>
+                                                            <div class="reviewdate"><?php echo date('F, d Y',strtotime($review['created']));?></div>
+                                                            <p class="reviewComment"><?php echo $review['comment'];?></p>
+                                                            <p class="reviewerName"><?php echo $review['cust_member_name'];?></p>
                                                     </div>
-                                                    <div class="rev-score">5.0/5</div>
-                                                    <div class="reviewdate">Φεβρουάριος 16, 2018</div>
-                                                    <p class="reviewComment">Έμεινα πάρα πολύ ικανοποιημένος με τον κ.Παναγιωτακόπουλο Βασίλη.Προσεχτικός &amp; Συνεπής στην ώρα του.</p>
-                                                    <p class="reviewerName">Σωτήρης Μανόφης</p>
-                                            </div>
-                                            <a href="/professional-profile/review.php"><div class="col-md-12 read-timeline-btn">Read More</div></a>
+                                                    <a href="<?php echo SITE_URL;?>/professional-profile/review.php"><div class="col-md-12 read-timeline-btn">Read More</div></a>
+                                        <?php   } 
+                                            }else{
+                                        ?>
+                                                    <div class="col-review">N/A</div>          
+                                        <?php        
+                                            }
+                                        ?>
                                         </div>
                                         
                                     </div>
