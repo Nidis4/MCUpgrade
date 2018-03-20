@@ -45,13 +45,16 @@ class Application{
 
     function readOne(){
      
-        // query to read single record
+        // query to read single recordALTER TABLE `professionals` ADD `service_area` VARCHAR(200) NOT NULL AFTER `description`;
+
         $query = "SELECT
-                    id, category_id, title, title_greek, short_description, short_description_gr, detail_description, detail_description_gr, unit, min_price, sequence, modified
+                    a.id, a.category_id, c.name_greek, a.title, a.title_greek, a.short_description, a.short_description_gr, a.detail_description, a.detail_description_gr, a.unit, a.min_price, a.sequence, a.modified
                 FROM
-                    " . $this->table_name . "
+                    " . $this->table_name . " a,
+                    `categories` c
                 WHERE
-                    id = :app_id
+                    a.id = :app_id AND
+                    a.`category_id`=c.`id`
                 ORDER BY
                     title_greek ASC";
      

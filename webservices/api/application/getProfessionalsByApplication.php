@@ -51,6 +51,7 @@ if($num>0){
     $application_item=array(
             "id" => $id,
             "category_id" => $category_id,
+            "category_name" =>$name_greek,
             //"title" => $title,
             "title_greek" => $title_greek,
             //"short_description" => html_entity_decode($short_description),
