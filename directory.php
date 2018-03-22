@@ -11,116 +11,76 @@
 			<div class="title-catelog">Κατηγορίες</div>
 			<div id="MainMenu">
 			        <div class="list-group panel">
-			        <a href="#demo2" class="list-group-item main-cat collapsed" data-toggle="collapse" data-parent="#MainMenu" aria-expanded="false">Συχνές ηλεκτρολογικές εργασίες  <i class="fa fa-caret-down"></i></a>
-			          <div class="collapse" id="demo2" aria-expanded="false" style="height: 0px;">
-			          	<a href="" class="list-group-item">Αλλαγή πρίζας</a>
-			            <a href="" class="list-group-item">Αλλαγή διακόπτη</a>
-			            <a href="" class="list-group-item">Θερμοσίφωνας</a>
-			            <a href="" class="list-group-item">Τιμοκατάλογος</a>
-			          </div>
-			          
-			          	
+				        <?php    
+				        	$categories = file_get_contents($api_url .'webservices/api/category/read.php');
+              				$categories = json_decode($categories, true); // decode the JSON into an associative array
 
 
+	              				foreach ($categories as $category) {
+	              					if (!empty($category['applications'])){
+								            $cat_id = $category['id'];
+								            $cat_title = $category['title_greek'];
+								           	$apps = $category['applications'];
 
-			         <a href="#demo3" class="list-group-item main-cat collapsed" data-toggle="collapse" data-parent="#MainMenu" aria-expanded="false">Ηλεκτρολογικός Πίνακας <i class="fa fa-caret-down"></i></a>
-			          
+						?>
+						<a href="#<?php echo $cat_id; ?>" class="list-group-item main-cat collapsed" data-toggle="collapse" data-parent="#MainMenu" aria-expanded="false"><?php echo $cat_title; ?>  <i class="fa fa-caret-down"></i></a> <!-- Sidebar Categories names --> 
 
-			          <div class="collapse" id="demo3" aria-expanded="false">
-			            <!--<a href="#SubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubMenu1"  >Subitem 1 <i class="fa fa-caret-down"></i></a>
-			            <div class="collapse list-group-submenu" id="SubMenu1">
-			              <a href="#" class="list-group-item" data-parent="#SubMenu1">Subitem 1 a</a>
-			              <a href="#" class="list-group-item" data-parent="#SubMenu1">Subitem 2 b</a>
-			              <a href="#SubSubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubSubMenu1">Subitem 3 c <i class="fa fa-caret-down"></i></a>
-			              <div class="collapse list-group-submenu list-group-submenu-1" id="SubSubMenu1">
-			                <a href="#" class="list-group-item" data-parent="#SubSubMenu1">Sub sub item 1</a>
-			                <a href="#" class="list-group-item" data-parent="#SubSubMenu1">Sub sub item 2</a>
-			              </div>
-			              <a href="#" class="list-group-item" data-parent="#SubMenu1">Subitem 4 d</a>
-			            </div>-->
-			            <a href="" class="list-group-item " data-parent="#MainMenu">Εγκατάσταση Ηλεκτρολογικού Πίνακα</a>
-			          	<a href="" class="list-group-item " data-parent="#MainMenu">Εγκατάση Ρελέ</a>
-			         	<a href="" class="list-group-item " data-parent="#MainMenu">Αλλαγή Ασφάλειας</a>
-			          	<a href="" class="list-group-item " data-parent="#MainMenu">Τράβηγμα Γραμμής από Πίνακα</a>
-			          	<a href="" class="list-group-item " data-parent="#MainMenu">Τιμοκατάλογος</a>
-			          </div>
+						<div class="collapse" id="<?php echo $cat_id; ?>" aria-expanded="false" >
+							<?php 
+										foreach ($apps as $app ) {
+										    $app_id = $app['id'];
+										    $app_title = $app['title_greek'];
+							?>	
+											<a href="<?php echo $directory_url . '?cat_id=' . $cat_id . '&app_id=' . $app_id  ?>" class="list-group-item"><?php echo $app_title; ?></a>
+								 <?php  } ?>
+						</div>
+							<?php
 
-			          <a href="#demo4" class="list-group-item main-cat collapsed" data-toggle="collapse" data-parent="#MainMenu" aria-expanded="false">Συχνές ηλεκτρολογικές εργασίες  <i class="fa fa-caret-down"></i></a>
-			          <div class="collapse" id="demo4" aria-expanded="false" style="height: 0px;">
-			          	<a href="" class="list-group-item">Αλλαγή πρίζας</a>
-			            <a href="" class="list-group-item">Αλλαγή διακόπτη</a>
-			            <a href="" class="list-group-item">Θερμοσίφωνας</a>
-			            <a href="" class="list-group-item">Τιμοκατάλογος</a>
-			          </div>
-			          <a href="#demo5" class="list-group-item main-cat collapsed" data-toggle="collapse" data-parent="#MainMenu" aria-expanded="true">Φωτισμός <i class="fa fa-caret-down"></i></a>
-			          <div class="collapse in" id="demo5" aria-expanded="false" style="">
-			          	<a href="" class="list-group-item">Άπεγκατάσταση &amp; εγκατάσταση φωτιστικού</a>
-			           	<a href="" class="list-group-item">Αλλαγή λαμπών σποτ σε led</a>
-			            <a href="" class="list-group-item">Κρυφός φωτισμός με led</a>
-			            <a href="" class="list-group-item">Φωτισμός led</a>
-			            <a href="" class="list-group-item">Κρυφός φωτισμός σε γυψοσανίδα</a>
-			            <a href="" class="list-group-item">Τιμοκατάλογος</a>
-			            
-			          </div>
-			          <a href="#demo6" class="list-group-item main-cat collapsed" data-toggle="collapse" data-parent="#MainMenu" aria-expanded="false">Εγκατάσταση δικτύων <i class="fa fa-caret-down"></i></a>
-			          <div class="collapse" id="demo6" aria-expanded="false">
-			          	
-			            <a href="" class="list-group-item">Αλλαγή γραμμής τηλεφώνου</a>
-			            <a href="" class="list-group-item">Εξωτερική γραμμή Ethernet</a>
-			            <a href="" class="list-group-item">Δίκτυο Infotainment</a>
-			            <a href="" class="list-group-item">Σύνδεση ανεξάρτητης γραμμής κεραίας </a>
-			            <a href="" class="list-group-item">Τιμοκατάλογος</a>
-			          </div>
-			          <a href="#demo7" class="list-group-item main-cat collapsed" data-toggle="collapse" data-parent="#MainMenu" aria-expanded="false">Θυροτηλέφωνο <i class="fa fa-caret-down"></i></a>
-			          <div class="collapse" id="demo7" aria-expanded="false">
-			            <a href="" class="list-group-item">Εγκατάσταση θυροτηλέφωνου</a>
-			            <a href="" class="list-group-item">Εγκατάσταση θυροτηλεόρασης</a>
-			            <a href="" class="list-group-item">Τιμοκατάλογος</a>
-			          </div>
-			          <a href="#demo8" class="list-group-item main-cat collapsed" data-toggle="collapse" data-parent="#MainMenu" aria-expanded="false">Συστήματα Ασφαλείας <i class="fa fa-caret-down"></i></a>
-			          <div class="collapse" id="demo8" aria-expanded="false">
-			            <a href="" class="list-group-item">Κάμερες</a>
-			            <a href="" class="list-group-item">Συναγερμοί</a>
-			            <a href="" class="list-group-item">Τιμοκατάλογος</a>
-			          
-			          </div>
-			          <a href="#demo9" class="list-group-item main-cat collapsed" data-toggle="collapse" data-parent="#MainMenu" aria-expanded="false">Πιστοποιητικά <i class="fa fa-caret-down"></i></a>
-			          <div class="collapse" id="demo9" aria-expanded="false">
-			            <a href="" class="list-group-item">Ενεργειακό πιστοποιητικό ΠΕΑ</a>
-			          	<a href="" class="list-group-item">Πιστοποιητικό ΔΕΗ</a>
-			          	<a href="" class="list-group-item">Τιμοκατάλογος</a>
-			          </div>
-			        </div>
-      			</div>	
-		</div>
+								     }
+			              		}
+		              		?>
+		            </div>          
+			</div>
+      	</div>	
+
+      	<div class="col-md-9">
+	
+				<?php 
+					if (isset($_GET['app_id'])) {
+						//echo $_GET['app_id'];
+						$application = file_get_contents( $api_url .'webservices/api/application/getProfessionalsByApplication.php?app_id='. $_GET['app_id']);
+						$application = json_decode($application, true);
+						$cat_app_name= $application['category_name'];
+						$app_name= $application['title_greek'];
+						$category_id = $application['category_id'];
+						$application_id = $application['id'];
+						$app_short_desc_gr = $application['short_description_gr'];
+						$app_professionals = $application['professionals'];
 		
-
-		<div class="col-md-9">
-			<div class="directory-breadcrumb">
-				<ul class="ul-breadcrumb">
-					<li>Αρχική</li>
-					<li>Μετακομίσεις</li>
-					<li>Μετακόμιση Γκαρσονιέρας</li>
-					<li>Αττική</li>
-				</ul>
-
-			</div>
-
-			<div class="app-small-description-outer">
-				<div class="app-small-desc-title">
-					<h3 class="h3-small-desc-title"><span class="span-small-desc-title">Μετακόμιση Γκαρσονιέρας</span></h3>
+				?>
+				<div class="directory-breadcrumb">
+					<ul class="ul-breadcrumb">
+						<li><a class="a-breadcrumb" href="<?php echo $api_url; ?>">Αρχική</a></li>
+						<li><a class="a-breadcrumb" href="<?php echo $directory_url .'?cat_id='. $category_id; ?>"><?php echo $cat_app_name; ?></a></li>
+						<li><a class="a-breadcrumb" href="<?php echo $directory_url .'?cat_id='. $category_id . '&app_id=' .$application_id; ?>"><?php echo $app_name; ?></a></li>
+						<li>Αττική</li>
+					</ul>
 				</div>
-				<div class="offer-details">H προσφορά περιλαμβάνει:</div>
-				
-			</div>
-			<div class="app-small-description">
-					<p>Γκαρσονιέρας έως 30τμ. Η τιμή περιλαμβάνει την μετακόμιση των αντικειμένων με φορτηγό, μεταφορά για οικοσυσκευές και έπιπλά. (π.χ. πλυντήριο, στεγνωτήριο, ψυγείο, κουζίνα, τραπεζαρία, συνθετο, κ.α.), 10-15 κούτες, μέχρι 5 κανονικές γλάστρες. Εφόσον χρειαστούν επιπλέον άτομα για την μετακόμιση ή ανυψωτικό, χρεώνονται επιπλέον.</p>
-			</div>
 
-			<div class="results-title">
-					<h1>6 Μεταφορικές <span class="stin-color">στην</span> Αττική</h1>
-			</div>
+				<div class="app-small-description-outer">
+					<div class="app-small-desc-title">
+						<h3 class="h3-small-desc-title"><span class="span-small-desc-title"><?php echo $app_name; ?></span></h3>
+					</div>
+					<div class="offer-details">H προσφορά περιλαμβάνει:</div>
+				</div>
 
+				<div class="app-small-description">
+					<p><?php echo $app_short_desc_gr; ?></p>
+				</div>
+
+				<div class="results-title">
+					<h1 id="directory-top"><?php echo sizeof($app_professionals); ?> Συνεργεία για <?php echo $app_name; ?> <span class="stin-color">στην</span> Αττική</h1>
+				</div>
 
 				<nav class="navbar navbar-default directory-filters" role="navigation">
 				  <div class="container-fluid">
@@ -143,59 +103,7 @@
 				                          <div class="tab-pane active" id="filters-area">
 				                          	<div class="col-md-3">
 				                          		<label>Νομός</label>
-				                                	<select>																							<option value="1" selected="selected">Νομός Αττικής</option>
-														<option value="2">Νομός Θεσσαλονίκης</option>
-														<option value="3">Νομός Αχαΐας</option>
-														<option value="4">Νομός Αιτωλοακαρνανίας</option>
-														<option value="5">Νομός Αργολίδας</option>
-														<option value="6">Νομός Αρκαδίας</option>
-														<option value="7">Νομός Άρτας</option>
-														<option value="8">Νομός Βοιωτίας</option>
-														<option value="9">Νομός Γρεβενών</option>
-														<option value="10">Νομός Δράμας</option>
-														<option value="11">Νομός Δωδεκανήσου</option>
-														<option value="12">Νομός Έβρου</option>
-														<option value="13">Νομός Εύβοιας</option>
-														<option value="14">Νομός Ευρυτανίας</option>
-														<option value="15">Νομός Ζακύνθου</option>
-														<option value="16">Νομός Ηλείας</option>
-														<option value="17">Νομός Ημαθίας</option>
-														<option value="18">Νομός Ηρακλείου</option>
-														<option value="19">Νομός Θεσπρωτίας</option>
-														<option value="20">Νομός Ιωαννίνων</option>
-														<option value="21">Νομός Καβάλας</option>
-														<option value="22">Νομός Καρδίτσας</option>
-														<option value="23">Νομός Καστοριάς</option>
-														<option value="24">Νομός Κέρκυρας</option>
-														<option value="25">Νομός Κεφαλληνίας</option>
-														<option value="26">Νομός Κιλκίς</option>
-														<option value="27">Νομός Κοζάνης</option>
-														<option value="28">Νομός Κορινθίας</option>
-														<option value="29">Νομός Κυκλάδων</option>
-														<option value="30">Νομός Λακωνίας</option>
-														<option value="31">Νομός Λάρισας</option>
-														<option value="32">Νομός Λασιθίου</option>
-														<option value="33">Νομός Λέσβου</option>
-														<option value="34">Νομός Λευκάδας</option>
-														<option value="35">Νομός Μαγνησίας</option>
-														<option value="36">Νομός Μεσσηνίας</option>
-														<option value="37">Νομός Ξάνθης</option>
-														<option value="38">Νομός Πέλλας</option>
-														<option value="39">Νομός Πιερίας</option>
-														<option value="40">Νομός Πρέβεζας</option>
-														<option value="41">Νομός Ρεθύμνης</option>
-														<option value="42">Νομός Ροδόπης</option>
-														<option value="43">Νομός Σάμου</option>
-														<option value="44">Νομός Σερρών</option>
-														<option value="45">Νομός Τρικάλων</option>
-														<option value="46">Νομός Φθιώτιδας</option>
-														<option value="47">Νομός Φλώρινας</option>
-														<option value="48">Νομός Φωκίδας</option>
-														<option value="49">Νομός Χαλκιδικής</option>
-														<option value="50">Νομός Χανίων</option>
-														<option value="51">Νομός Χίου</option>
-														<option value="52">Άγιο Όρος</option>
-				                                	</select>
+				                                	<?php echo $select_counties; ?> <!-- front_end_config/core.php  -->
 				                          	</div>
 
 				                          	<div class="col-md-3">
@@ -238,13 +146,31 @@
 				  </div><!-- /.container-fluid -->
 				</nav>
 
+
+				<?php 
+
+					foreach ($app_professionals as $professionals) {
+
+						$professional_first_name = $professionals['first_name'];
+						$professional_last_name = $professionals['last_name'];
+						$profile_img = $professionals['image'];
+						$professional_id = $professionals['id'];
+						$professional_price = $professionals['price'];
+						$professional_budget = $professionals['budget'];
+						$professional_description = $professionals['description'];
+						$professional_city = $professionals['city'];
+						$professional_servicearea = $professionals['servicearea'];
+
 						
+				?>
+
 
 						<div class="prof-main-col">
 					  		<div class="col-md-3 col-sm-12 professional-img-con">
 					  			<div class="professional-img">
-					  				<a target="_blank" style="font-size: 17px;float: left;color: #2b347f;font-weight: bold;" href="https://myconstructor.gr/Homes/directoryProfile/JSxDLFMtM0BgCmAK">
-					  					<img src="img/matzouranis-1.jpg" style="float: left;" alt="">
+					  				<a target="_blank" style="font-size: 17px;float: left;color: #2b347f;font-weight: bold;" href="<?php echo $profile_url .'?prof_id='. $professional_id; ?>" >
+					  					<img src="<?php echo 'img/professional-imgs/'.$profile_img ?>" onerror="this.src='img/professional-imgs/default-img-4.jpg';" alt="" />
+					  					
 					  				</a>
 					  			</div>
 					  		</div>
@@ -253,23 +179,23 @@
 									<div class="professional-details-box">
 										<div class="professional-info-text">
 											<div class="professional-info-text-name">
-												<p class="professional-name"><span class="newmemname"><a target="_blank" class="con-name" href="https://myconstructor.gr/Homes/directoryProfile/JSxDLFMtM0BgCmAK">Παναγιώτης Ιωάννατος</a></span></p>
+												<p class="professional-name"><span class="newmemname"><a target="_blank" class="con-name" href="<?php echo $profile_url .'?prof_id='. $professional_id; ?>"><?php echo $professional_first_name . ' ' . $professional_last_name; ?></a></span></p>
 											</div>
 											
 
 											<div class="professional-info-text-box">
 												<div class="professional-service-area">
-													<p><i class="fa fa-map-marker"></i><span> Έδρα Δυτικά Προάστια</span> Εξυπηρετούμε όλη την Αττική </p>
+													<p><i class="fa fa-map-marker"></i><span> <?php echo $professional_city; ?></span> <?php echo $professional_servicearea; ?></p>
 												</div>
 												
 												<div class="professional-extra-infos">
-														<p class="small-description">Εμπειρία 15 ετών σε μεταφορές-μετακομίσεις οικονομικά και άμεσα!</p>
+														<p class="small-description"><?php echo $professional_description; ?></p>
 														<div class="price-info">
-															<p class="price-for"><span class="professional-cat-labels">Τιμή για: </span>Μετακόμιση Γκαρσονιέρας</p>
+															<p class="price-for"><span class="professional-cat-labels">Τιμή για: </span><?php echo $app_name; ?></p>
 														</div>
 														<div class="price-info" >
 															<p class="price-for"> <span class="professional-cat-labels">Πληροφορίες Χρέωσης:</span>
-																<span>Εργάτες +40€, Αναβατόριο +50 για κάθε σπίτι  Δε-Κυ 09:00-22:00</span>
+																<span><?php echo $professional_budget; ?></span>
 															</p>
 														</div>
 														
@@ -284,7 +210,7 @@
 							</div>
 
 
-							<a target="_blank" href="https://myconstructor.gr/Homes/directoryProfile/JSxDLFMtM0BgCmAK">
+							<a target="_blank" href="<?php echo $profile_url .'?prof_id='. $professional_id; ?>">
 								<div class="professional-phone-number"><img src="img/new-tel-white.png">Τηλέφωνο</div>
 							</a>
 							
@@ -303,95 +229,308 @@
                                     		</div>
 
 									<div class="price-box">
-											<p>49<span class="tax-fpa">€ + φπα</span></p>
+											<p><?php echo $professional_price; ?><span class="tax-fpa">€ + φπα</span></p>
 									</div>
-										<a href="https://myconstructor.gr/transport/?catid=103&amp;memid=18876&amp;appid=69&amp;name=Λευτέρης&amp;surname=Ματζουράνης" target="_blank">
+									<?php if( $application_id == '69' || $application_id == '70' || $application_id == '71' || $application_id == '72' || $application_id == '196' || $application_id == '219' || $application_id == '218' ||  $application_id == '216'  ){ ?>
+									<a href="https://myconstructor.gr/transport/?catid=103&amp;memid=18876&amp;appid=69&amp;name=Λευτέρης&amp;surname=Ματζουράνης" target="_blank">
 										<div class="btn-prosfora">Κλείσε online</div>
 									</a>
-
-										
+									<?php } ?>
 								</div>
 							</div>
 
 
+				<?php } ?>
 
-							<div class="prof-main-col">
-					  		<div class="col-md-3 col-sm-12 professional-img-con">
-					  			<div class="professional-img">
-					  				<a target="_blank" style="font-size: 17px;float: left;color: #2b347f;font-weight: bold;" href="https://myconstructor.gr/Homes/directoryProfile/JSxDLFMtM0BgCmAK">
-					  					<img src="img/matzouranis-1.jpg" style="float: left;" alt="">
-					  				</a>
-					  			</div>
-					  		</div>
+				<?php
+					}else if(!isset($_GET['app_id']) && isset($_GET['cat_id'])){
 
-					  		<div class="col-md-9 col-sm-12 professional-details-box-con">
-									<div class="professional-details-box">
-										<div class="professional-info-text">
-											<div class="professional-info-text-name">
-												<p class="professional-name"><span class="newmemname"><a target="_blank" class="con-name" href="https://myconstructor.gr/Homes/directoryProfile/JSxDLFMtM0BgCmAK">Παναγιώτης Ιωάννατος</a></span></p>
-											</div>
-											
+						//$applications = file_get_contents($api_url .'webservices/api/application/readByCategory.php?cat_id='. $_GET['cat_id'];);
+              			//$applications = json_decode($applications, true); // decode the JSON into an associative array
 
-											<div class="professional-info-text-box">
-												<div class="professional-service-area">
-													<p><i class="fa fa-map-marker"></i><span> Έδρα Δυτικά Προάστια</span> Εξυπηρετούμε όλη την Αττική </p>
-												</div>
-												
-												<div class="professional-extra-infos">
-														<p class="small-description">Εμπειρία 15 ετών σε μεταφορές-μετακομίσεις οικονομικά και άμεσα!</p>
-														<div class="price-info">
-															<p class="price-for"><span class="professional-cat-labels">Τιμή για: </span>Μετακόμιση Γκαρσονιέρας</p>
-														</div>
-														<div class="price-info" >
-															<p class="price-for"> <span class="professional-cat-labels">Πληροφορίες Χρέωσης:</span>
-																<span>Εργάτες +40€, Αναβατόριο +50 για κάθε σπίτι  Δε-Κυ 09:00-22:00</span>
-															</p>
-														</div>
-														
+						$directory_cat = file_get_contents($api_url .'webservices/api/application/readByCategory.php?cat_id='. $_GET['cat_id'] );
+						$directory_cat = json_decode($directory_cat, true)
+						
+              		
+						/*$directory_= $directory_cat['category_name'];
+						$app_name= $directory_cat['title_greek'];
+						$category_id = $directory_cat['category_id'];
+						$application_id = $directory_cat['id'];
+						$app_short_desc_gr = $directory_cat['short_description_gr'];*/
 
-														<div class="Techinical-data"></div>
-												</div>
-											</div>
-										</div>
-									</div>
+				?>
+					<div class="directory-breadcrumb">
+						<ul class="ul-breadcrumb">
+							<li><a href="<?php echo $api_url; ?>">Αρχική</a></li>
+							<li><a href="<?php echo $directory_url .'?cat_id='.  $_GET['cat_id']; ?>"><?php echo $cat_title; ?></a></li>
+							
+						</ul>
+					</div>
 
-									
+
+					<div class="app-small-description-outer">
+						<div class="app-small-desc-title">
+							<h3 class="h3-small-desc-title"><span class="span-small-desc-title"><?php echo $cat_title; ?></span></h3>
+						</div>
+						<div class="offer-details"> Υπηρεσίες σε προσφορά:</div>
+					</div>
+
+					<?php foreach ($directory_cat as $cat_apps) {
+						
+						$application_name = $cat_apps['title_greek'];
+						$application_min_price = $cat_apps['min_price'];
+						$application_unit= $cat_apps['unit'];
+						$short_description_gr = $cat_apps['short_description_gr'];
+						$cat_id = $cat_apps['category_id'];
+						$app_id = $cat_apps['id'];
+
+					 ?>
+					
+					<div style="display: none;" class="col-md-4 cat-application-outer">
+						<div class="col-application">
+							<div class="app-img">
+								<img src="img/directory-photos/metafores-metakomisis.jpg"/>
 							</div>
+							<h3 class="app-h3"><?php echo $application_name; ?></h3>
 
-
-							<a target="_blank" href="https://myconstructor.gr/Homes/directoryProfile/JSxDLFMtM0BgCmAK">
-								<div class="professional-phone-number"><img src="img/new-tel-white.png">Τηλέφωνο</div>
-							</a>
-							
-							
-
-								<div class="professional-address-contact">
-									<div class="col-md-12 proffesionalDirectoryReviews">
-
-		                                        <div class="directoryStarsOuter">
-		                                            <div class="directoryEmptyBar">
-		                                                <div style="width:98%;"></div>
-		                                            </div>
-		                                        </div>
-		                                        <div class="directory-rev-score"><span class="rating-num">4,9</span>/5</div>
-		                                       	<div class="directory-total-score"><span class="total-jobs">190</span> Αξιολογήσεις</div>
-                                    		</div>
-
-									<div class="price-box">
-											<p>49<span class="tax-fpa">€ + φπα</span></p>
-									</div>
-										<a href="https://myconstructor.gr/transport/?catid=103&amp;memid=18876&amp;appid=69&amp;name=Λευτέρης&amp;surname=Ματζουράνης" target="_blank">
-										<div class="btn-prosfora">Κλείσε online</div>
-									</a>
-
-										
-								</div>
-							</div>
-
-
-							
+							<div class="app-price"><span class="price-start">από</span> <?php echo $application_min_price; ?><span class="app-units"><?php echo $application_unit; ?></span></div>
+							<div class="professionals-num">10 διαθέσιμα συνεργεία</div>
 
 						</div>
+					</div>
+
+					<a class="a-app" href="<?php echo $directory_url.'?cat_id='. $cat_id .'&app_id='.$app_id ?>">
+						<div class="col-md-12 applications_outer">
+							<div class="col-application">
+								<div class="col-md-2">
+									<div class="app-img">								
+										<i class="fa fa-truck fa-4x icon-bg"></i>
+									</div>
+								</div>
+								<div class="col-md-7 app-details">
+									<h3 class="h3-app-title"><?php echo $application_name; ?></h3>
+									<div><?php echo $short_description_gr; ?></div>
+									
+								</div>
+								<div class="col-md-3 col-app-prices">
+									<div class="price-start">από</div>
+									<div class="app-price"><?php echo $application_min_price; ?><span class="app-units"><?php echo $application_unit; ?></span>
+									</div>
+									<div class="professionals-num">10 διαθέσιμα συνεργεία</div>
+								</div>
+							</div>
+
+						</div>
+					</a>
+
+					<?php } ?>
+
+					
+
+
+
+
+
+				<?php
+					}else{
+						$application = file_get_contents( $api_url .'webservices/api/application/getProfessionalsByApplication.php?app_id=177');
+						$application = json_decode($application, true);
+
+						$cat_app_name= $application['category_name'];
+						$app_name= $application['title_greek'];
+						$category_id = $application['category_id'];
+						$application_id = $application['id'];
+						$app_short_desc_gr = $application['short_description_gr'];
+						$app_professionals = $application['professionals'];
+
+					?>		
+					<div class="directory-breadcrumb">
+						<ul class="ul-breadcrumb">
+							<li><a class="a-breadcrumb" href="<?php echo $api_url; ?>">Αρχική</a></li>
+							<li><a class="a-breadcrumb" href="<?php echo $directory_url .'?cat_id='. $category_id; ?>"><?php echo $cat_app_name; ?></a></li>
+							<li><a class="a-breadcrumb" href="<?php echo $directory_url .'?cat_id='. $category_id . '&app_id='. $application_id; ?>"><?php echo $app_name; ?></a></li>
+							<li>Αττική</li>
+						</ul>
+					</div>
+
+					<div class="app-small-description-outer">
+					<div class="app-small-desc-title">
+						<h3 class="h3-small-desc-title"><span class="span-small-desc-title"><?php echo $app_name; ?></span></h3>
+					</div>
+					<div class="offer-details">H προσφορά περιλαμβάνει:</div>
+				</div>
+
+				<div class="app-small-description">
+					<p><?php echo $app_short_desc_gr; ?></p>
+				</div>
+
+				<div class="results-title">
+					<h1 id="directory-top"><?php echo sizeof($app_professionals); ?> Συνεργεία για <?php echo $app_name; ?> <span class="stin-color">στην</span> Αττική</h1>
+				</div>
+
+				<nav class="navbar navbar-default directory-filters" role="navigation">
+				  <div class="container-fluid">
+				    <!-- Brand and toggle get grouped for better mobile display -->
+				   
+				    <!-- Collect the nav links, forms, and other content for toggling -->
+				    <div class="navbar-collapse style= collapse in" id="bs-megadropdown-tabs" style="padding-left: 0px;">
+				        <ul class="nav navbar-nav filters-menu">
+
+				        	
+
+				            <li class="dropdown mega-dropdown">
+							   <a id="open-close-filters" > <i class="fa fa-filter"></i> ΦΙΛΤΡΑ <span class="caret"></span></a>				
+								<div id="filters" class="dropdown-menu mega-dropdown-menu">
+				                    <div class="container-fluid2">
+				    				    <!-- Tab panes -->
+				                        <div class="tab-content">
+				                         
+				                          
+				                          <div class="tab-pane active" id="filters-area">
+				                          	<div class="col-md-3">
+				                          		<label>Νομός</label>
+				                                	<?php echo $select_counties; ?> <!-- front_end_config/core.php  -->
+				                          	</div>
+
+				                          	<div class="col-md-3">
+				                          		<label>Τιμή ή βαθμολογία</label>
+				                          		<select>
+				                          			<option>χαμηλότερη → υψηλότερη τιμή</option>
+				                          			<option>υψηλότερη → χαμηλότερη αξιολόγηση</option>
+				                          		</select>
+				                          	</div>
+
+				                          	<div class="col-md-3">
+				                          		<label>Συνολική βαθμολογία</label>
+				                          		<select>
+				                          			<option>Τουλάχιστον 5/5 αστέρια</option>
+				                          			<option>Τουλάχιστον 4,5/5 αστέρια</option>
+				                          			<option>Τουλάχιστον 4/5 αστέρια</option>
+				                          		</select>
+				                          	</div>
+
+				                          	<div class="col-md-3">
+				                          		<label>Αριθμό αξιολογήσεων</label>
+				                          		<select>
+				                          			<option>Τουλάχιστον 5 αξιολογήσεις</option>
+				                          			<option>Τουλάχιστον 10 αξιολογήσεις</option>
+				                          			<option>Τουλάχιστον 15 αξιολογήσεις</option>
+				                          		</select>
+				                          	</div>
+				                          </div>
+				                          
+				                        </div>
+				                    </div>
+				                    <!-- Nav tabs -->
+				                                       
+								</div>				
+							</li>
+							<li class="close-filters"><a><i class="fa fa-times"></i> ΚΛΕΙΣΕ</a></li>
+				        </ul>
+				       
+				    </div><!-- /.navbar-collapse -->
+				  </div><!-- /.container-fluid -->
+				</nav>
+				<?php 
+
+					foreach ($app_professionals as $professionals) {
+
+						$professional_first_name = $professionals['first_name'];
+						$professional_last_name = $professionals['last_name'];
+						$profile_img = $professionals['image'];
+						$professional_id = $professionals['id'];
+						$professional_price = $professionals['price'];
+						$professional_budget = $professionals['budget'];
+						$professional_description = $professionals['description'];
+						$professional_city = $professionals['city'];
+						$professional_servicearea = $professionals['servicearea'];
+
+						
+				?>
+
+
+						<div class="prof-main-col">
+					  		<div class="col-md-3 col-sm-12 professional-img-con">
+					  			<div class="professional-img">
+					  				<a target="_blank" href="<?php echo $profile_url .'?prof_id='. $professional_id; ?>" >
+					  					<img src="<?php echo 'img/professional-imgs/'.$profile_img ?>" onerror="this.src='img/professional-imgs/default-img-4.jpg';" alt="" />
+					  					
+					  				</a>
+					  			</div>
+					  		</div>
+
+					  		<div class="col-md-9 col-sm-12 professional-details-box-con">
+									<div class="professional-details-box">
+										<div class="professional-info-text">
+											<div class="professional-info-text-name">
+												<p class="professional-name"><span class="newmemname"><a target="_blank" class="con-name" href="<?php echo $profile_url .'?prof_id='. $professional_id; ?>"><?php echo $professional_first_name . ' ' . $professional_last_name; ?></a></span></p>
+											</div>
+											
+
+											<div class="professional-info-text-box">
+												<div class="professional-service-area">
+													<p><i class="fa fa-map-marker"></i><span> <?php echo $professional_city; ?></span> <?php echo $professional_servicearea; ?></p>
+												</div>
+												
+												<div class="professional-extra-infos">
+														<p class="small-description"><?php echo $professional_description; ?></p>
+														<div class="price-info">
+															<p class="price-for"><span class="professional-cat-labels">Τιμή για: </span><?php echo $app_name; ?></p>
+														</div>
+														<div class="price-info" >
+															<p class="price-for"> <span class="professional-cat-labels">Πληροφορίες Χρέωσης:</span>
+																<span><?php echo $professional_budget; ?></span>
+															</p>
+														</div>
+														
+
+														<div class="Techinical-data"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									
+							</div>
+
+
+							<a target="_blank" href="<?php echo $profile_url .'?prof_id='. $professional_id; ?>">
+								<div class="professional-phone-number"><img src="img/new-tel-white.png">Τηλέφωνο</div>
+							</a>
+							
+							
+
+								<div class="professional-address-contact">
+									<div class="col-md-12 proffesionalDirectoryReviews">
+
+		                                        <div class="directoryStarsOuter">
+		                                            <div class="directoryEmptyBar">
+		                                                <div style="width:98%;"></div>
+		                                            </div>
+		                                        </div>
+		                                        <div class="directory-rev-score"><span class="rating-num">4,9</span>/5</div>
+		                                       	<div class="directory-total-score"><span class="total-jobs">190</span> Αξιολογήσεις</div>
+                                    		</div>
+
+									<div class="price-box">
+											<p><?php echo $professional_price; ?><span class="tax-fpa">€ + φπα</span></p>
+									</div>
+									<?php if( $application_id == '69' || $application_id == '70' || $application_id == '71' || $application_id == '72' || $application_id == '196' || $application_id == '219' || $application_id == '218' ||  $application_id == '216'  ){ ?>
+									<a href="https://myconstructor.gr/transport/?catid=103&amp;memid=18876&amp;appid=69&amp;name=Λευτέρης&amp;surname=Ματζουράνης" target="_blank">
+										<div class="btn-prosfora">Κλείσε online</div>
+									</a>
+									<?php } ?>
+								</div>
+							</div>
+
+					<?php } ?>
+			  <?php } ?>
+
+
+
+			  <div id="loadmore">Εμφάνισε Περισσότερους</div>
+			  <a class="a-showless" href="#directory-top"><div id="showless">Εμφάνισε Λιγότερους</div></a>
+		</div>
 
 						
 

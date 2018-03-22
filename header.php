@@ -23,5 +23,9 @@
 
     <script src="js/directory.js"></script> 
 
+
 </head>
-<?php include('constants.php'); ?>
+<?php 
+    include('constants.php'); 
+    include('front_end_config/core.php');
+?>

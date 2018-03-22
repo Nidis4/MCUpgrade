@@ -36,7 +36,7 @@ p, div, ul, li{
   font-size:14px;
 }
 
-b{
+b, strong{
   font-family: dinbd;
 }
 .navbar{
@@ -1522,7 +1522,7 @@ ul.ul-app-info li h4{
 }
 
 span.app-price {
-    font-size: 21px;
+    font-size: 22px;
     color: #ff6600;
     font-family: dinbd;
 }
@@ -2911,3 +2911,144 @@ div#filters {
 nav.navbar.navbar-default.directory-filters div#bs-megadropdown-tabs {
     margin-right: 0px;
 }
+
+a.a-breadcrumb {
+    color: #333;
+}
+
+h2.app-title-h2 {
+    display: none;
+}
+
+span.more_text {
+    display: none;
+}
+
+a.read-more-desc, a.read-less-desc{
+    font-family: dinbd;
+}
+
+h3.title-desc-h3 {
+    font-size: 21px;
+}
+
+div#loadmore, div#showless {
+    font-size: 18px;
+    padding: 8px;
+    border: 3px solid #ff5722;
+    font-family: dinbd;
+    color: #ffffff;
+    max-width: 260px;
+    text-align: center;
+    background: #ff5722;
+    border-radius: 0px;
+    margin: auto;
+    opacity: 0.8;
+}
+
+
+div#loadmore:hover, div#showless:hover{
+   opacity: 1;
+   cursor:pointer;
+}
+a.a-showless{
+  text-decoration: none;
+}
+
+.col-application{
+    box-shadow: 0px 0px 0px 0px #333;
+    border: 1px solid #efeeee;
+    padding: 20px;
+    overflow: auto;
+    
+  }
+
+  .col-md-4.cat-application-outer{
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .app-img {
+    max-width: 110px;
+    margin: auto;
+  }
+
+  .app-img img{
+    border: 2px solid #f4f4f4;
+    border-radius: 50%;
+  }
+  .col-application:hover{
+    border: 1px solid #f2930a;
+    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.2);
+
+  }
+
+  .col-application h3.app-h3{ 
+    font-size: 18px;
+    text-align: center;
+    line-height: 20px;
+  }
+
+  .app-price {
+    color: #333;
+    font-size: 21px;
+    font-family: dinbd;
+    width: auto;
+}
+
+div.price-start{
+  color:#333;
+  font-size: 14px;
+  font-family:dinmd;
+      margin-top: 14px; 
+}
+
+span.app-units {
+    font-size: 15px;
+    color:#333;
+    font-family:dinbd;
+}
+
+
+
+.professionals-num {
+    font-family: dinmd;
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+
+h3.h3-app-title {
+    margin-top: 0px;
+}
+
+
+i.fa.fa-truck.icon-bg {
+    background: #2230CB;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 100px;
+    vertical-align: middle;
+    color:#fff;
+  }
+
+  .col-md-12.applications_outer {
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+
+
+.col-md-7.app-details {
+    min-height: 109px;
+    border-right: 1px solid #d4d4d4;
+}
+
+a.a-app {
+    color: #333;
+    text-decoration: none;
+}
+
