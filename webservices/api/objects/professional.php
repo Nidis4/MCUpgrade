@@ -563,7 +563,9 @@ ORDER   BY `date` ASC, `time` ASC";
     public function getCategories(){
      
         // select query
-        $query = "SELECT * FROM ". $this->categories_table_name ." WHERE `professional_id`= ?";
+        $query = "SELECT pc.`category_id`, pc.`is_main`, c.`title` FROM ". $this->categories_table_name ." pc 
+                  Join categories c ON pc.category_id = c.id
+                WHERE pc.`professional_id`= ? order by pc.is_main desc";
      
         // prepare query statement
         $stmt = $this->conn->prepare( $query );
@@ -575,9 +577,44 @@ ORDER   BY `date` ASC, `time` ASC";
         // execute query
         $stmt->execute();
         
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
         // return values from database
-        return $row;
+        return $stmt;
+    }
+
+
+    public function getApplicationsPrices(){
+     
+        // select query
+        //$query = "SELECT c.name_greek, po.category_id, a.title_greek, po.price FROM `professionals_applications` po, `categories` c, `applications` a WHERE `professional_id`= ? AND po.category_id=c.id AND po.application_id = a.id";
+
+        $categories = $this->getCategories();
+        $num = $categories->rowCount();
+        if($num >= 1){
+
+            while ($rowCat = $categories->fetch(PDO::FETCH_ASSOC)){
+                $cids[] = $rowCat['category_id'];                
+            }
+                
+            $query = "Select a.id as application_id, a.category_id, c.name as category_name, a.title as application_title from applications a 
+                        LEFT JOIN professionals_applications pa ON a.id = pa.application_id and pa.professional_id= ? 
+                        JOIN categories c ON a.category_id = c.id
+                        WHERE a.category_id IN ('".implode("','", $cids)."')  ORDER BY a.category_id, a.title";
+
+            $stmt = $this->conn->prepare( $query );
+
+            $id = $this->id;
+            $stmt->bindParam(1, $id, PDO::PARAM_INT);
+
+            $stmt->execute();
+        
+            // return values from database
+            return $stmt;
+            
+        }else{
+            return 0;
+        }
+        
+     
     }
 
 }
