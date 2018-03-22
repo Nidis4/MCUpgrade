@@ -12,7 +12,6 @@ $database = new Database();
 $db = $database->getConnection();
 
 
-
 $target_dir = dirname(dirname(dirname(dirname(__FILE__)))).DIRECTORY_SEPARATOR.'platform'.DIRECTORY_SEPARATOR.'UserFiles'.DIRECTORY_SEPARATOR.'professionals'.DIRECTORY_SEPARATOR;
 $profile_image1 = "";
 $profile_image2 = "";
@@ -132,6 +131,12 @@ $stmt = $professional->update($_POST['professional_id'], $_POST['first_name'], $
  
 // check if more than 0 record found
 if($stmt){
+    if(isset($_POST['profile_categories'])){
+        $professional->update_categories($_POST['professional_id'],$_POST['profile_categories']);
+    }
+    // if(isset($_POST['profile_counties'])){
+    //     $professional->update_counties($_POST['profile_counties']);
+    // }
  
     echo json_encode(
         array("message" => "Professional updated successfully.")

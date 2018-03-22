@@ -30,6 +30,7 @@ $professional->id = isset($_GET['id']) ? $_GET['id'] : die();
 $stmt = $professional->readOne();
 
 $stmtApplications = $professional->getApplications();
+$getCategories = $professional->getCategories();
 
 $applications_arr = array();
 
@@ -76,7 +77,8 @@ $professional_arr=array(
     "approve_per" => $professional->approve_per,
     "approve_doc" => $professional->approve_doc,
     "percentage" => $percentage,
-    "applications" => $applications_arr
+    "applications" => $applications_arr,
+    "categories"   => $getCategories
 );
    
     

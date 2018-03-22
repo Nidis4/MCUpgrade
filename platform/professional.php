@@ -39,6 +39,12 @@ include('config/core.php');
 		<!-- Head Libs -->
 		<script src="vendor/modernizr/modernizr.js"></script>
 		<script src="vendor/jquery/jquery.js"></script>
+		<style type="text/css">
+			.select2-selection.select2-selection--multiple{
+				height: auto;
+				padding-bottom: 10px;
+			}
+		</style>
 	</head>
 	<body>
 		<section class="body">
@@ -55,7 +61,6 @@ include('config/core.php');
 					die();
 				}
 				include('header.php');
-
 				$professional = file_get_contents($api_url.'webservices/api/professional/read_one.php?id='.$id);
 				$professional = json_decode($professional, true); // decode the JSON into an associative array	
 
@@ -438,6 +443,54 @@ include('config/core.php');
 														}
 													?>
 													
+												</div>
+											</div>
+											<div class="form-group col-md-12 row">
+												<?php
+														$categories = file_get_contents($api_url.'webservices/api/category/read.php');
+														$categories = json_decode($categories, true); // decode the JSON into an associative array
+													?>
+												<label class="col-lg-3 control-label text-lg-right pt-2">Select Trades</label>
+												<div class="col-lg-8 pt-2"> 
+													<select multiple data-plugin-selectTwo class="form-control populate" id="profile_categories" name="profile_categories[]">
+														<?php
+															$selected_categories = $professional['categories'];
+															if(@$selected_categories['categories']){
+																$cids = json_decode($selected_categories['categories']);
+															}else{
+																$cids = array();
+															}
+															foreach ($categories as $category) {
+																$cat_id = $category['id'];
+																$cat_name = $category['title'];
+																$commision = $category['commissionRate'];
+																$selected = "";
+																if(in_array($cat_id, $cids)){
+																	$selected = " selected='selected' ";	
+																}
+
+																echo '<option value="'.$cat_id.'" '.$selected.' >'.$cat_name.'</option>';
+															}
+														?>
+													</select>
+												</div>
+											</div>
+											<div class="form-group col-md-12 row">
+												<?php
+													$counties = file_get_contents($api_url.'webservices/api/county/read.php');
+													$counties = json_decode($counties, true); // decode the JSON into an associative array
+												?>
+												<label class="col-lg-3 control-label text-lg-right pt-2">Select County</label>
+												<div class="col-lg-8 pt-2"> 
+													<select multiple data-plugin-selectTwo class="form-control populate" id="profile_counties" name="profile_counties[]">
+														<?php
+															foreach ($counties as $county) {
+																$cat_id = $county['id'];
+																$cat_name = $county['county_name'];
+																echo '<option value="'.$cat_id.'">'.$cat_name.'</option>';
+															}
+														?>
+													</select>
 												</div>
 											</div>
 											<div class="form-group col-md-12 row">
@@ -1254,6 +1307,8 @@ include('config/core.php');
 					form_data.append('admin_comments', $("#admin_comments").val());
 					form_data.append('professional_id', $("#professional_id").val());
 					form_data.append('viewtype', $('input[name=viewtype]:checked').val());
+					form_data.append('profile_categories', $('#profile_categories').val());
+					form_data.append('profile_counties', $('#profile_counties').val());
 
 					if ($('#approve_per').prop('checked') == true){
     					form_data.append('approve_per', 1);

@@ -8,6 +8,7 @@ class Professional{
     private $account_table_name = "professionals_account_info";
     private $document_table_name = "professionals_documents";
     private $counties_table_name = "professionals_counties";
+    private $categories_table_name = "professionals_categories";
     private $applications_table_name = "professionals_applications";
     private $invoicesettings_table_name = "professionals_invoice_settings";
  
@@ -539,6 +540,45 @@ ORDER   BY `date` ASC, `time` ASC";
            return 0;
         }
     } // Save Customer
+
+    function update_categories($id, $categories ){
+
+        $cids = explode(',',$categories);
+
+        $query = "INSERT INTO ". $this->categories_table_name ." (`professional_id`, `categories`) VALUES (:id, '".json_encode($cids)."') ON DUPLICATE KEY UPDATE `categories`= '".json_encode($cids)."'";
+
+        $stmt = $this->conn->prepare( $query );
+
+        // bind id of product to be updated
+        $stmt->bindParam(':id',  $id, PDO::PARAM_INT);
+        
+        if ($stmt->execute()) { 
+           return 1;
+        } else {
+           return 0;
+        }
+    } // Save Professional Contact
+
+
+    public function getCategories(){
+     
+        // select query
+        $query = "SELECT * FROM ". $this->categories_table_name ." WHERE `professional_id`= ?";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind variable values
+        $id = $this->id;
+        $stmt->bindParam(1, $id, PDO::PARAM_INT);
+        
+        // execute query
+        $stmt->execute();
+        
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        // return values from database
+        return $row;
+    }
 
 }
 ?>
