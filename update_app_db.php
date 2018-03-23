@@ -13,10 +13,10 @@ if($_POST){
     $detail_description_gr= $_POST['detail_description_gr'];
 
 
-    $short_description=  str_replace("'","/'","$short_description");
-    $short_description_gr=  str_replace("'","/'","$short_description_gr");
-    $detail_description=  str_replace("'","/'","$detail_description");
-    $detail_description_gr=  str_replace("'","/'","$detail_description_gr");
+    $short_description=  str_replace("'","/'",$short_description);
+    $short_description_gr=  str_replace("'","/'",$short_description_gr);
+    $detail_description=  str_replace("'","/'",$detail_description);
+    $detail_description_gr=  str_replace("'","/'",$detail_description_gr);
 
             $server='127.0.0.1';
             $userdb='upgradem_super';
