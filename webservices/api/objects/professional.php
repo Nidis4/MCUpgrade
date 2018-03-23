@@ -796,5 +796,20 @@ ORDER   BY `date` ASC, `time` ASC";
 
     }
 
+    public function getProfile(){
+        $query = "Select id, first_name, last_name, description, service_area, image  from ".$this->table_name." 
+                  where id = :id";
+
+        $stmt = $this->conn->prepare( $query );
+        $id = $this->id;
+        $stmt->bindParam(':id',  $id, PDO::PARAM_INT);
+        
+        $stmt->execute();
+
+        // return values from database
+        return $stmt;
+
+    }
+
 }
 ?>

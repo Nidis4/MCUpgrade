@@ -45,11 +45,11 @@ function editprofile(){
 
 	arrayNewInfos = {'ProfessionalName':name, 'ProffessionalDescription': professionalDesc, 'ProffessionalOnline':onelineProfessionalDesc, 'ProffessionalPhone':professionalTel, 'OfferPhone':professionalOfferTel, 'ProffesionalAddress': frontProffesionalAddress };
 
-	/*alert(arrayNewInfos.ProfessionalName);
-	alert(arrayNewInfos.ProffessionalDescription);
-	alert(arrayNewInfos.ProffessionalOnline);
-	alert(arrayNewInfos.ProffessionalPhone);
-	alert(arrayNewInfos.OfferPhone);*/
+	// alert(arrayNewInfos.ProfessionalName);
+	// alert(arrayNewInfos.ProffessionalDescription);
+	// alert(arrayNewInfos.ProffessionalOnline);
+	// alert(arrayNewInfos.ProffessionalPhone);
+	// alert(arrayNewInfos.OfferPhone);
 
 
 }

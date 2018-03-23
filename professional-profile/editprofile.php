@@ -9,8 +9,69 @@
         background:#fff;
     }
 </style>
+                <?php
+                            //echo SITE_URL.'webservices/api/review/read_paging.php?prof_id='.$_SESSION['id'].'&from_record_num=0&records_per_page=5';
 
+                    $reviews = file_get_contents(SITE_URL.'webservices/api/review/read_avg.php?prof_id='.$_SESSION['id'].'&from_record_num=0&records_per_page=5');
+                    $reviewsPag = json_decode($reviews, true);
 
+                    if(@$reviewsPag['records'][0]['total']){
+
+                        $quality = $reviewsPag['records'][0]['quality_avg'];
+                        $quality_per = round(($reviewsPag['records'][0]['quality_avg'] / 5) * 100);
+
+                        $reliability = $reviewsPag['records'][0]['reliability_avg'];
+                        $reliability_per = round(($reviewsPag['records'][0]['reliability_avg'] / 5) * 100);
+
+                        $cost = $reviewsPag['records'][0]['cost_avg'];
+                        $cost_per = round(($reviewsPag['records'][0]['cost_avg'] / 5) * 100);
+
+                        $schedule = $reviewsPag['records'][0]['schedule_avg'];
+                        $schedule_per = round(($reviewsPag['records'][0]['schedule_avg'] / 5) * 100);
+
+                        $behaviour = $reviewsPag['records'][0]['behaviour_avg'];
+                        $behaviour_per = round(($reviewsPag['records'][0]['behaviour_avg'] / 5) * 100);
+
+                        $cleanliness = $reviewsPag['records'][0]['cleanliness_avg'];
+                        $cleanliness_per = round(($reviewsPag['records'][0]['cleanliness_avg'] / 5) * 100);
+
+                        $total_rating = $quality + $reliability +  $cost + $schedule + $behaviour + $cleanliness;
+                        $total_rating_per = number_format(($total_rating / 6) * 20,1) ;
+                    }
+
+                ?>
+
+                <?php 
+                    $profile = file_get_contents(SITE_URL.'webservices/api/professional/getProfile.php?id='.$_SESSION['id']);
+                    $profile = json_decode($profile, true); // decode the JSON into an associative array
+                    // echo "<pre>";
+                    // print_r($profile['record']['first_name']);
+                    // die;
+                    $first_name = "";
+                    if(@$profile['record']['first_name']){
+                        $first_name = $profile['record']['first_name'];
+                    }
+                    $last_name = "";
+                    if(@$profile['record']['last_name']){
+                        $last_name = $profile['record']['last_name'];
+                    }
+
+                    $description = "&nbsp;";
+                    if(@$profile['record']['description']){
+                        $description = $profile['record']['description'];
+                    }
+
+                    $service_area = "&nbsp;";
+                    if(@$profile['record']['service_area']){
+                        $service_area = $profile['record']['service_area'];
+                    }
+
+                    $address = "&nbsp;";
+                    if(@$profile['record']['address']){
+                        $address = $profile['record']['address'];
+                    }
+                    
+                ?>
                 <div class="container-fluid main-container">
                     <div class="row">
                         <div class="col-md-12">
@@ -26,26 +87,24 @@
                                     <img src="img/matzouranis.jpg">
                                 </div>
 
-                                <div class="total-rating-num-outer"><span class="total-rating-num">4.9</span>/5</div>
+                                <div class="total-rating-num-outer"><span class="total-rating-num"><?php echo number_format(($total_rating / 6),1);?></span>/5</div>
                             </div>
 
                             <div class="col-md-5">
-                                <h2 class="front-professional-name">Λευτέρης Ματζουράνης</h2>
+                                <h2 class="front-professional-name"><?php echo $first_name. " ".$last_name;?></h2>
                                 <div class="col-md-12 proffesionalTotalReviews">
                                     <div class="starsouter">
                                         <div class="empty-bar">
-                                            <div style="width:98%;"></div>
+                                            <div style="width:<?php echo $total_rating_per;?>%;"></div>
                                         </div>
                                     </div>
-                                    <div class="rev-score"><span class="rating-num">4,9</span>/5</div>
-                                    <div class="total-score"><span class="total-jobs">190</span> Αξιολογήσεις</div>
+                                    <div class="rev-score"><span class="rating-num"><?php echo number_format(($total_rating / 6),1);?></span>/5</div>
+                                    <div class="total-score"><span class="total-jobs"><?php echo $reviewsPag['records'][0]['total'];?></span> Αξιολογήσεις</div>
                                 </div>
-                                <p class="front-professional-desc">Εξυπηρετούμε όλη την Αττική, Έδρα Νότια Προάστια.</p>
-                                <p class="front-professional-oneline-desc">Άμεσα, οικονομικά και υπεύθυνα αναλαμβάνουμε κάθε μεταφορά σας!</p>
-                                <p class="front-proffesional-address"><i class="fa fa-map-marker"></i> <span class="spanAddress">Στυλ. Γονατά και Θεσπιέων, Περιστέρι</span></p>
-                                <p class="front-professional-tel"><i class="fa fa-phone"></i> <span class="front-tel-span">698 004 3090</span></p>
-
-                                
+                                <p class="front-professional-desc"><?php echo $service_area;?></p>
+                                <p class="front-professional-oneline-desc"><?php echo $description;?></p>
+                                <p class="front-proffesional-address"><i class="fa fa-map-marker"></i> <span class="spanAddress"><?php echo $address;?></span></p>
+                                <p class="front-professional-tel"><i class="fa fa-phone"></i> <span class="front-tel-span">698 004 3090</span></p>                                
                             </div>
 
                             <div class="col-md-3">
