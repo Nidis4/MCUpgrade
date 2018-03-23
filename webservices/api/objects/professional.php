@@ -138,7 +138,32 @@ FROM
             SELECT `DATE` as date, `TIME` as time, 'Busy' as address FROM `professionals_busytimes` WHERE `PROFESSIONAL_ID` = ".$id."  AND `DATE` BETWEEN '".$startDate."' AND '".$endDate."'
         ) subquery
 ORDER   BY `date` ASC, `time` ASC";
- //$query ="SELECT `date`,`time`, `address` FROM `appointments` WHERE ( `prof_member_id` = ".$id." ) AND (`status` = 1 ) AND (`date` BETWEEN '".$startDate."' AND '".$endDate."')  ORDER BY `date` ASC, `time` ASC";
+ 
+ $query ="SELECT `type`,
+       `date`,
+       `time`,
+       `address`,
+       `id`
+FROM
+  ( SELECT 'Appointment' AS TYPE,
+           `date`,
+           `time`,
+           `address`,
+           `id`
+   FROM `appointments`
+   WHERE `prof_member_id`=".$id."
+     AND `status`NOT IN (0)
+     AND `date` BETWEEN '".$startDate."' AND '".$endDate."'
+     UNION   ALL
+     SELECT 'Busy' AS TYPE,
+            `DATE` AS date,
+            `TIME` AS TIME,
+            'Busy' AS address,
+            `ID`
+     FROM `professionals_busytimes` WHERE `PROFESSIONAL_ID` = ".$id."
+     AND `DATE` BETWEEN '".$startDate."' AND '".$endDate."' ) subquery
+ORDER BY `date` ASC,
+         `time` ASC";
 
         $stmt = $this->conn->prepare( $query );
         $stmt->execute();
