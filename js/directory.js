@@ -48,7 +48,7 @@ $(document).ready(function(){
 $(document).ready(function(){
 
 	var count_professionals = $('.prof-main-col').length;
-	var count = 7;
+	var count = 10;
 
 	$('.prof-main-col').hide();
 	$('.prof-main-col:lt(' + count + ')').show();
@@ -79,7 +79,7 @@ $(document).ready(function(){
 		$('#showless').click(function () {
 		    $('#loadmore').show();
 		    $('#showless').hide();
-		    count = 7;
+		    count = 10;
 		   	$('.prof-main-col').slideToggle( "slow" );
 		   	$('.prof-main-col:lt(' + count + ')').slideDown( "slow" );
 

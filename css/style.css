@@ -2595,7 +2595,7 @@ span.stin-color {
     border-bottom-right-radius: 5px;*/
 }
 
-h3.h3-small-desc-title {
+h1.h3-small-desc-title {
     margin-top: 9px;
     font-size: 21px;
 }
@@ -3052,3 +3052,18 @@ a.a-app {
     text-decoration: none;
 }
 
+div#loadmore, div#showless{
+  display: none,
+}
+
+.col-md-12.app_detail_description {
+    border: 1px solid #efeeee;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 20px;
+    background: #f9f9f9;
+}
+
+.col-md-12.app_detail_description h3 {
+    margin-top: 0px;
+}

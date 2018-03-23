@@ -56,6 +56,8 @@
 						$application_id = $application['id'];
 						$app_short_desc_gr = $application['short_description_gr'];
 						$app_professionals = $application['professionals'];
+						$app_unit = $application['unit'];
+						$app_detail_description_gr = $application['detail_description_gr'];
 		
 				?>
 				<div class="directory-breadcrumb">
@@ -69,7 +71,7 @@
 
 				<div class="app-small-description-outer">
 					<div class="app-small-desc-title">
-						<h3 class="h3-small-desc-title"><span class="span-small-desc-title"><?php echo $app_name; ?></span></h3>
+						<h1 class="h3-small-desc-title"><span class="span-small-desc-title"><?php echo $app_name; ?></span></h1>
 					</div>
 					<div class="offer-details">H προσφορά περιλαμβάνει:</div>
 				</div>
@@ -229,10 +231,10 @@
                                     		</div>
 
 									<div class="price-box">
-											<p><?php echo $professional_price; ?><span class="tax-fpa">€ + φπα</span></p>
+											<p><?php echo $professional_price; ?><span class="tax-fpa"><?php echo $app_unit ?></span></p>
 									</div>
 									<?php if( $application_id == '69' || $application_id == '70' || $application_id == '71' || $application_id == '72' || $application_id == '196' || $application_id == '219' || $application_id == '218' ||  $application_id == '216'  ){ ?>
-									<a href="https://myconstructor.gr/transport/?catid=103&amp;memid=18876&amp;appid=69&amp;name=Λευτέρης&amp;surname=Ματζουράνης" target="_blank">
+									<a href="https://myconstructor.gr/transport/?catid=<?php echo $category_id; ?>&amp;memid=<?php echo $professional_id; ?>&amp;appid=<?php echo $application_id; ?>&amp;name=<?php echo $professional_first_name; ?>&amp;surname=<?php echo $professional_last_name; ?>" target="_blank">
 										<div class="btn-prosfora">Κλείσε online</div>
 									</a>
 									<?php } ?>
@@ -249,9 +251,10 @@
               			//$applications = json_decode($applications, true); // decode the JSON into an associative array
 
 						$directory_cat = file_get_contents($api_url .'webservices/api/application/readByCategory.php?cat_id='. $_GET['cat_id'] );
-						$directory_cat = json_decode($directory_cat, true)
+						$directory_cat = json_decode($directory_cat, true);
 						
-              		
+              			$category_title = $directory_cat[0]['category_name'];
+              			$category_id = $directory_cat[0]['category_id'];
 						/*$directory_= $directory_cat['category_name'];
 						$app_name= $directory_cat['title_greek'];
 						$category_id = $directory_cat['category_id'];
@@ -262,7 +265,7 @@
 					<div class="directory-breadcrumb">
 						<ul class="ul-breadcrumb">
 							<li><a href="<?php echo $api_url; ?>">Αρχική</a></li>
-							<li><a href="<?php echo $directory_url .'?cat_id='.  $_GET['cat_id']; ?>"><?php echo $cat_title; ?></a></li>
+							<li><a href="<?php echo $directory_url .'?cat_id='. $category_id; ?>"><?php echo $category_title; ?></a></li>
 							
 						</ul>
 					</div>
@@ -270,7 +273,7 @@
 
 					<div class="app-small-description-outer">
 						<div class="app-small-desc-title">
-							<h3 class="h3-small-desc-title"><span class="span-small-desc-title"><?php echo $cat_title; ?></span></h3>
+							<h1 class="h3-small-desc-title"><span class="span-small-desc-title"><?php echo $category_title; ?></span></h1>
 						</div>
 						<div class="offer-details"> Υπηρεσίες σε προσφορά:</div>
 					</div>
@@ -283,6 +286,7 @@
 						$short_description_gr = $cat_apps['short_description_gr'];
 						$cat_id = $cat_apps['category_id'];
 						$app_id = $cat_apps['id'];
+						$sum_professionals = $cat_apps['professionals'];
 
 					 ?>
 					
@@ -294,13 +298,13 @@
 							<h3 class="app-h3"><?php echo $application_name; ?></h3>
 
 							<div class="app-price"><span class="price-start">από</span> <?php echo $application_min_price; ?><span class="app-units"><?php echo $application_unit; ?></span></div>
-							<div class="professionals-num">10 διαθέσιμα συνεργεία</div>
+							<div class="professionals-num"><?php echo $sum_professionals; ?> διαθέσιμα συνεργεία</div>
 
 						</div>
 					</div>
 
-					<a class="a-app" href="<?php echo $directory_url.'?cat_id='. $cat_id .'&app_id='.$app_id ?>">
-						<div class="col-md-12 applications_outer">
+					<a  class="a-app" href="<?php echo $directory_url.'?cat_id='. $cat_id .'&app_id='.$app_id ?>">
+						<div  class="col-md-12 applications_outer">
 							<div class="col-application">
 								<div class="col-md-2">
 									<div class="app-img">								
@@ -316,7 +320,7 @@
 									<div class="price-start">από</div>
 									<div class="app-price"><?php echo $application_min_price; ?><span class="app-units"><?php echo $application_unit; ?></span>
 									</div>
-									<div class="professionals-num">10 διαθέσιμα συνεργεία</div>
+									<div class="professionals-num"><?php echo $sum_professionals; ?> διαθέσιμα συνεργεία</div>
 								</div>
 							</div>
 
@@ -324,12 +328,6 @@
 					</a>
 
 					<?php } ?>
-
-					
-
-
-
-
 
 				<?php
 					}else{
@@ -342,6 +340,8 @@
 						$application_id = $application['id'];
 						$app_short_desc_gr = $application['short_description_gr'];
 						$app_professionals = $application['professionals'];
+						$app_detail_description_gr = $application['detail_description_gr'];
+
 
 					?>		
 					<div class="directory-breadcrumb">
@@ -355,7 +355,7 @@
 
 					<div class="app-small-description-outer">
 					<div class="app-small-desc-title">
-						<h3 class="h3-small-desc-title"><span class="span-small-desc-title"><?php echo $app_name; ?></span></h3>
+						<h1 class="h3-small-desc-title"><span class="span-small-desc-title"><?php echo $app_name; ?></span></h1>
 					</div>
 					<div class="offer-details">H προσφορά περιλαμβάνει:</div>
 				</div>
@@ -516,20 +516,31 @@
 											<p><?php echo $professional_price; ?><span class="tax-fpa">€ + φπα</span></p>
 									</div>
 									<?php if( $application_id == '69' || $application_id == '70' || $application_id == '71' || $application_id == '72' || $application_id == '196' || $application_id == '219' || $application_id == '218' ||  $application_id == '216'  ){ ?>
-									<a href="https://myconstructor.gr/transport/?catid=103&amp;memid=18876&amp;appid=69&amp;name=Λευτέρης&amp;surname=Ματζουράνης" target="_blank">
+									<a href="https://myconstructor.gr/transport/?catid=<?php echo $category_id; ?>&amp;memid=<?php echo $professional_id; ?>&amp;appid=<?php echo $application_id; ?>&amp;name=<?php echo $professional_first_name; ?>&amp;surname=<?php echo $professional_last_name; ?>" target="_blank">
 										<div class="btn-prosfora">Κλείσε online</div>
 									</a>
 									<?php } ?>
 								</div>
 							</div>
 
+
 					<?php } ?>
 			  <?php } ?>
 
-
+			 <?php if ((isset($_GET['app_id'])) || (!isset($_GET['app_id']) && !isset($_GET['cat_id']))) { ?>
 
 			  <div id="loadmore">Εμφάνισε Περισσότερους</div>
 			  <a class="a-showless" href="#directory-top"><div id="showless">Εμφάνισε Λιγότερους</div></a>
+
+			  <div class="col-md-12 app_detail_description">
+			  	<p><?php echo $app_detail_description_gr; ?></p>
+			  </div>
+
+
+			  <?php } ?>
+
+
+			 
 		</div>
 
 						
