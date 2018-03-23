@@ -19,7 +19,7 @@ $db = $database->getConnection();
 $appointment = new Appointment($db);
 
 // set ID property of product to be edited
-$appointment->id = isset($_GET['id']) ? $_GET['id'] : die();
+$appointment->id = isset($_POST['id']) ? $_POST['id'] : die();
 
 
 $cancelReason = 2;
@@ -29,6 +29,15 @@ if(@$_POST['cancelComment']){
 	$cancelComment = $_POST['cancelComment'];
 }else{
 	$cancelComment = "Rejected";
+}
+if(@$_POST['type']){
+	if ($_POST['type']==2){
+		$type = "Reject";
+		$cancelComment = "Reject Reason: ".$cancelComment;
+	}
+	else{
+		$type = "Cancel";
+	}
 }
 
 // create array
@@ -49,21 +58,27 @@ $comment =  $appointment->comment;
 $status =  $appointment->status;
 
 $prof_id = $appointment->prof_member_id;
+$prof_new_id = "";
 
+if ($status!=0 && $type == "Reject"){
 $addressEn = urlencode($address);
 $availProfessionals = file_get_contents($home_url.'professional/getProfAfterReject.php?county_id='.$county_id.'&application_id='.$application_id.'&date='.$date.'&time='.$time.'&address='.$addressEn);
 $availProfessional = json_decode($availProfessionals, true);
 
 $prof_new_id = $availProfessional['prof_id'];
- 
+
+$appointment->create($prof_new_id, $cust_id, $application_id, $county_id, $date, $time, $address, $budget, $commision, $agent_id, $comment, $status);
+
+}else{
+
+}
+
 $appointment_arr=array(
 	"previous_prof" => $prof_id,
-	"next_prof" => $availProfessional['prof_id']
+	"next_prof" => $prof_new_id,
+	"cancel" => $cancelComment,
+	"type" => $type
 );
-
-if ($status!=0){
-	$appointment->create($prof_new_id, $cust_id, $application_id, $county_id, $date, $time, $address, $budget, $commision, $agent_id, $comment, $status);
-} 
  
 echo json_encode($appointment_arr);
 ?>
