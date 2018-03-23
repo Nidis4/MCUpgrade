@@ -134,9 +134,9 @@ if($stmt){
     if(isset($_POST['profile_categories'])){
         $professional->update_categories($_POST['professional_id'],$_POST['profile_categories']);
     }
-    // if(isset($_POST['profile_counties'])){
-    //     $professional->update_counties($_POST['profile_counties']);
-    // }
+    if(isset($_POST['profile_counties'])){
+        $professional->update_counties($_POST['professional_id'],$_POST['profile_counties']);
+    }
  
     echo json_encode(
         array("message" => "Professional updated successfully.")

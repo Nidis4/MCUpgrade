@@ -30,7 +30,45 @@ $professional->id = isset($_GET['id']) ? $_GET['id'] : die();
 $stmt = $professional->readOne();
 
 $stmtApplications = $professional->getApplications();
-$getCategories = $professional->getCategories();
+
+$stmtCategories = $professional->getCategories();
+$numCat = $stmtCategories->rowCount();
+if($numCat >= 1){
+    $categories_arr = array();
+
+    while ($row = $stmtCategories->fetch(PDO::FETCH_ASSOC)){
+        
+        $category_item=array(
+            "category_name" => $row['title'],
+            "category_id" => $row['category_id'],
+            "is_main" => $row['is_main']
+        );
+        array_push($categories_arr, $category_item);
+    }
+    $getCategories = $categories_arr; 
+}else{
+   $getCategories = array(); 
+}
+
+
+$stmtCounties = $professional->getCounties();
+$numCat = $stmtCounties->rowCount();
+if($numCat >= 1){
+    $counties_arr = array();
+
+    while ($row = $stmtCounties->fetch(PDO::FETCH_ASSOC)){
+        
+        $county_item=array(
+            "county_name" => $row['county_name'],
+            "county_id" => $row['county_id'],
+            "is_main" => $row['is_main']
+        );
+        array_push($counties_arr, $county_item);
+    }
+    $getConties = $counties_arr; 
+}else{
+   $getConties = array(); 
+}
 
 $applications_arr = array();
 
@@ -78,7 +116,8 @@ $professional_arr=array(
     "approve_doc" => $professional->approve_doc,
     "percentage" => $percentage,
     "applications" => $applications_arr,
-    "categories"   => $getCategories
+    "categories"   => $getCategories,
+    "counties"   => $getConties
 );
    
     

@@ -607,3 +607,18 @@ ALTER TABLE `professionals_categories`
 
 <!-------------------------------->
 <!-- End 22 Mar 2018 Harpreet ---->
+
+
+<!-------------------------------->
+<!-- Start 23 Mar 2018 Harpreet -->
+
+ALTER TABLE `professionals_counties` ADD `is_main` INT(1) NOT NULL DEFAULT '0' AFTER `county_id`;
+
+ALTER TABLE `professionals_applications` ADD `free_distance` VARCHAR(255) NULL AFTER `price`, ADD `extra_price_km` VARCHAR(255) NULL AFTER `free_distance`;
+
+ALTER TABLE `professionals_applications` CHANGE `description` `description` VARCHAR(1255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL;
+ALTER TABLE `professionals_applications` CHANGE `techdata` `techdata` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL;
+ALTER TABLE `professionals_applications` CHANGE `campaign_status` `campaign_status` TINYINT(4) NULL DEFAULT '1';
+
+<!-------------------------------->
+<!-- End 23 Mar 2018 Harpreet ---->

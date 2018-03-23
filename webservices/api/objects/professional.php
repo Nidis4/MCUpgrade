@@ -545,19 +545,101 @@ ORDER   BY `date` ASC, `time` ASC";
 
         $cids = explode(',',$categories);
 
-        $query = "INSERT INTO ". $this->categories_table_name ." (`professional_id`, `categories`) VALUES (:id, '".json_encode($cids)."') ON DUPLICATE KEY UPDATE `categories`= '".json_encode($cids)."'";
-
-        $stmt = $this->conn->prepare( $query );
-
-        // bind id of product to be updated
-        $stmt->bindParam(':id',  $id, PDO::PARAM_INT);
-        
-        if ($stmt->execute()) { 
-           return 1;
-        } else {
-           return 0;
+        // select query for main category
+        $query = "SELECT category_id FROM ". $this->categories_table_name ." WHERE `professional_id`= ? and is_main='1'";     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );     
+        // bind variable values
+        $stmt->bindParam(1, $id, PDO::PARAM_INT);        
+        // execute query
+        $stmt->execute();
+        $num = $stmt->rowCount();
+        if($num >= 1){
+            $rowCat = $stmt->fetch(PDO::FETCH_ASSOC);
+            $main_cid = $rowCat['category_id'];
+        }else{
+            $main_cid = 0;
         }
-    } // Save Professional Contact
+
+        // Delete query
+        $query = "Delete FROM ". $this->categories_table_name ." WHERE `professional_id`= ?";     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );     
+        // bind variable values
+        $stmt->bindParam(1, $id, PDO::PARAM_INT);        
+        // execute query
+        $stmt->execute();
+
+        if(@$cids){
+            $iquery = "";
+            foreach ($cids as  $cvalue) {
+
+               if($cvalue == $main_cid){
+                    $is_main = 1;
+               }else{
+                    $is_main = 0;
+               }
+               $query = "INSERT INTO ". $this->categories_table_name ." (`professional_id`, `category_id`,`is_main`) VALUES (:id, '".$cvalue."',$is_main)";
+               $stmt = $this->conn->prepare( $query );
+               $stmt->bindParam(':id',  $id, PDO::PARAM_INT);
+               $stmt->execute();
+
+            }
+        }
+
+        return 1;
+
+    } // Save Professional Categories
+
+     function update_counties($id, $categories ){
+
+        $cids = explode(',',$categories);
+
+        // select query for main category
+        $query = "SELECT county_id FROM ". $this->counties_table_name ." WHERE `professional_id`= ? and is_main='1'";     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );     
+        // bind variable values
+        $stmt->bindParam(1, $id, PDO::PARAM_INT);        
+        // execute query
+        $stmt->execute();
+        $num = $stmt->rowCount();
+        if($num >= 1){
+            $rowCat = $stmt->fetch(PDO::FETCH_ASSOC);
+            $main_cid = $rowCat['county_id'];
+        }else{
+            $main_cid = 0;
+        }
+
+        // Delete query
+        $query = "Delete FROM ". $this->counties_table_name ." WHERE `professional_id`= ?";     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );     
+        // bind variable values
+        $stmt->bindParam(1, $id, PDO::PARAM_INT);        
+        // execute query
+        $stmt->execute();
+
+        if(@$cids){
+            $iquery = "";
+            foreach ($cids as  $cvalue) {
+
+               if($cvalue == $main_cid){
+                    $is_main = 1;
+               }else{
+                    $is_main = 0;
+               }
+               $query = "INSERT INTO ". $this->counties_table_name ." (`professional_id`, `county_id`,`is_main`) VALUES (:id, '".$cvalue."',$is_main)";
+               $stmt = $this->conn->prepare( $query );
+               $stmt->bindParam(':id',  $id, PDO::PARAM_INT);
+               $stmt->execute();
+
+            }
+        }
+
+        return 1;
+
+    } // Save Professional Counties
 
 
     public function getCategories(){
@@ -595,10 +677,10 @@ ORDER   BY `date` ASC, `time` ASC";
                 $cids[] = $rowCat['category_id'];                
             }
                 
-            $query = "Select a.id as application_id, a.category_id, c.name as category_name, a.title as application_title from applications a 
-                        LEFT JOIN professionals_applications pa ON a.id = pa.application_id and pa.professional_id= ? 
+            $query = "Select a.id as application_id, a.category_id, c.name as category_name, a.title as application_title, a.short_description as application_short_description, a.detail_description as application_detail_description, a.unit as application_unit, pa.price as application_price, pa.free_distance as application_free_distance, pa.extra_price_km as application_extra_price_km, pa.description as application_description, pa.tec_description as application_tec_description from applications a  
+                LEFT JOIN professionals_applications pa ON a.id = pa.application_id and pa.professional_id= ? 
                         JOIN categories c ON a.category_id = c.id
-                        WHERE a.category_id IN ('".implode("','", $cids)."')  ORDER BY a.category_id, a.title";
+                        WHERE a.category_id IN ('".implode("','", $cids)."')  ORDER BY a.category_id, a.sequence";
 
             $stmt = $this->conn->prepare( $query );
 
@@ -615,6 +697,103 @@ ORDER   BY `date` ASC, `time` ASC";
         }
         
      
+    }
+
+
+    public function getCounties(){
+     
+        // select query
+        $query = "SELECT pc.`county_id`, pc.`is_main`, c.`county_name` FROM ". $this->counties_table_name ." pc 
+                  Join counties c ON pc.county_id = c.id
+                WHERE pc.`professional_id`= ? order by pc.is_main desc";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind variable values
+        $id = $this->id;
+        $stmt->bindParam(1, $id, PDO::PARAM_INT);
+        
+        // execute query
+        $stmt->execute();
+        
+        // return values from database
+        return $stmt;
+    }
+
+    public function updateApplications($professional_id,$applications){
+        
+        if(@$applications){
+            foreach ($applications as $value) {
+                $price = (float)$value['price'];
+                $free_distance = $value['free_distance'];
+                $extra_price_km = $value['extra_price_km'];
+                $description = $value['description'];
+                $tec_description = $value['tec_description'];
+                $application_id = $value['application_id'];
+                $category_id = $value['category_id'];
+
+                $query = "Select id from ".$this->applications_table_name." WHERE professional_id='".$professional_id."' and application_id='".$application_id."' and category_id='".$category_id."'";
+                // prepare query statement
+                $stmt = $this->conn->prepare( $query );
+                // execute query
+                $stmt->execute();
+                $num = $stmt->rowCount();
+                if($num >= 1){
+                    // Update
+                    $row = $stmt->fetch(PDO::FETCH_ASSOC);   
+                    $uquery = "Update ".$this->applications_table_name." set price='".$price."',  free_distance='".$free_distance."', extra_price_km='".$extra_price_km."', description='".$description."', tec_description='".$tec_description."',modified='".date('Y-m-d H:i:s')."' WHERE id='".$row['id']."'"; 
+                    $ustmt = $this->conn->prepare( $uquery ); 
+                    $ustmt->execute();
+                    
+                }else{
+                    // Insert
+                    $iquery = "INSERT INTO " . $this->applications_table_name . " (`professional_id`, `application_id`, `category_id`, `price`, `free_distance`, `extra_price_km`, `description`,  `tec_description`, `status`,`created`, `modified`) VALUES ($professional_id, '".$application_id."', '".$category_id."', '".$price."', '".$free_distance."', '".$extra_price_km."', '".$description."', '".$tec_description."', 'Active', '".date('Y-m-d')."', '".date('Y-m-d H:i:s')."')";
+
+                    $istmt = $this->conn->prepare($iquery); 
+                    $istmt->execute(); 
+
+                }
+                
+            }
+
+            return 1;
+            
+        }else{
+            return 0;
+        }
+    }
+
+    public function updateMainCategory($professional_id,$main_category){
+        $query = "Update ".$this->categories_table_name." set is_main='0' where professional_id ='".$professional_id."'";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+
+        $query = "Update ".$this->categories_table_name." set is_main='1' where professional_id ='".$professional_id."' and category_id='".$main_category."'";
+        $stmt = $this->conn->prepare( $query );
+        // execute query
+        if($stmt->execute()){
+            return 1;
+        }else{
+            return 0;
+        }
+
+    }
+
+    public function updateMainCounty($professional_id,$county_id){
+        $query = "Update ".$this->counties_table_name." set is_main='0' where professional_id ='".$professional_id."'";
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+
+        $query = "Update ".$this->counties_table_name." set is_main='1' where professional_id ='".$professional_id."' and county_id='".$county_id."'";
+        $stmt = $this->conn->prepare( $query );
+        // execute query
+        if($stmt->execute()){
+            return 1;
+        }else{
+            return 0;
+        }
+
     }
 
 }

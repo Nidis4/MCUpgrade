@@ -61,6 +61,7 @@ include('config/core.php');
 					die();
 				}
 				include('header.php');
+
 				$professional = file_get_contents($api_url.'webservices/api/professional/read_one.php?id='.$id);
 				$professional = json_decode($professional, true); // decode the JSON into an associative array	
 
@@ -449,17 +450,30 @@ include('config/core.php');
 												<?php
 														$categories = file_get_contents($api_url.'webservices/api/category/read.php');
 														$categories = json_decode($categories, true); // decode the JSON into an associative array
+														if(@$professional['categories']){
+															foreach ($professional['categories'] as $cvalue) {
+																$cids[] = $cvalue['category_id'];
+															}
+														}else{
+															$cids = array();
+														}
+
+														if(@$professional['counties']){
+															foreach ($professional['counties'] as $cvalue) {
+																$ctids[] = $cvalue['county_id'];
+															}
+														}else{
+															$ctids = array();
+														}
+
+														
+														
 													?>
 												<label class="col-lg-3 control-label text-lg-right pt-2">Select Trades</label>
 												<div class="col-lg-8 pt-2"> 
 													<select multiple data-plugin-selectTwo class="form-control populate" id="profile_categories" name="profile_categories[]">
 														<?php
-															$selected_categories = $professional['categories'];
-															if(@$selected_categories['categories']){
-																$cids = json_decode($selected_categories['categories']);
-															}else{
-																$cids = array();
-															}
+															
 															foreach ($categories as $category) {
 																$cat_id = $category['id'];
 																$cat_name = $category['title'];
@@ -479,6 +493,7 @@ include('config/core.php');
 												<?php
 													$counties = file_get_contents($api_url.'webservices/api/county/read.php');
 													$counties = json_decode($counties, true); // decode the JSON into an associative array
+
 												?>
 												<label class="col-lg-3 control-label text-lg-right pt-2">Select County</label>
 												<div class="col-lg-8 pt-2"> 
@@ -487,7 +502,11 @@ include('config/core.php');
 															foreach ($counties as $county) {
 																$cat_id = $county['id'];
 																$cat_name = $county['county_name'];
-																echo '<option value="'.$cat_id.'">'.$cat_name.'</option>';
+																$selected = "";
+																if(in_array($cat_id, $ctids)){
+																	$selected = " selected='selected' ";	
+																}
+																echo '<option value="'.$cat_id.'" '.$selected.' >'.$cat_name.'</option>';
 															}
 														?>
 													</select>

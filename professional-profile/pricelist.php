@@ -5,6 +5,9 @@
     include('menu.php');
 ?>
              <div class="container">
+                    <form id="pricelistform" method="post">
+                        
+                    
                         <div class="row pricelist-row">
                             <div class="col-md-12 page-title ">
                                 <h2>Pricelist</h2>
@@ -18,7 +21,7 @@
                                     $categories = json_decode($categories, true); // decode the JSON into an associative array
                                     
                                 ?>
-                                <select class="select_trade">
+                                <select class="select_trade" name="profile_main_category" id="profile_main_category">
                                     <option class="0" value="">Select</option>
                                     <?php 
                                         if(@$categories){
@@ -37,61 +40,26 @@
                             <div class="col-md-6">
 
                                 <p>County:*</p>
-                                <select class="select_counties">
+                                <?php 
+                                    //echo SITE_URL.'webservices/api/professional/getCategories.php?prof_id='.$_SESSION['id'];
+
+                                    $counties = file_get_contents(SITE_URL.'webservices/api/professional/getCounties.php?prof_id='.$_SESSION['id']);
+                                    $counties = json_decode($counties, true); // decode the JSON into an associative array
+                                    
+                                    
+                                ?>
+
+                                <select class="select_counties" name="profile_main_county" id="profile_main_county">
                                     <option value="">Select</option>
-                                    <option value="3">Achaia</option>
-                                    <option value="4">Aitoloakarnania</option>
-                                    <option value="6">Arcadia</option>
-                                    <option value="5">Argolida</option>
-                                    <option value="7">Arta</option>
-                                    <option selected="selected" value="1">Attica</option>
-                                    <option value="8">Boeotia Prefecture</option>
-                                    <option value="50">Chania</option>
-                                    <option value="51">Chios</option>
-                                    <option value="24">Corfu</option>
-                                    <option value="28">Corinth</option>
-                                    <option value="29">Cyclades</option>
-                                    <option value="11">Dodecanese</option>
-                                    <option value="10">Drama</option>
-                                    <option value="13">Euvias</option>
-                                    <option value="14">Evritania</option>
-                                    <option value="12">Evros</option>
-                                    <option value="47">Florina</option>
-                                    <option value="48">Fokida</option>
-                                    <option value="46">Fthiotida</option>
-                                    <option value="53">Greece</option>
-                                    <option value="9">Grevena</option>
-                                    <option value="49">Halkidiki</option>
-                                    <option value="18">Heraklion</option>
-                                    <option value="16">Ilia</option>
-                                    <option value="17">Imathia</option>
-                                    <option value="20">Ioannina</option>
-                                    <option value="22">Karditsa</option>
-                                    <option value="23">Kastoria</option>
-                                    <option value="21">Kavala</option>
-                                    <option value="25">Kefalonia</option>
-                                    <option value="26">Kilkis</option>
-                                    <option value="27">Kozani</option>
-                                    <option value="30">Laconia</option>
-                                    <option value="31">Larissa Prefecture</option>
-                                    <option value="34">Lefkada</option>
-                                    <option value="33">Lesvos</option>
-                                    <option value="35">Magnesia</option>
-                                    <option value="36">Messinia</option>
-                                    <option value="52">Mount Athos</option>
-                                    <option value="38">Pella</option>
-                                    <option value="32">Prefecture of Lasithi</option>
-                                    <option value="39">Prefecture of Pieria</option>
-                                    <option value="2">Prefecture of Thessaloniki</option>
-                                    <option value="40">Preveza</option>
-                                    <option value="41">Rethymno</option>
-                                    <option value="42">Rodopi</option>
-                                    <option value="43">Samos</option>
-                                    <option value="44">Serres</option>
-                                    <option value="19">Thesprotia</option>
-                                    <option value="45">Trikala</option>
-                                    <option value="37">Xanthi</option>
-                                    <option value="15">Zakynthos</option>
+                                   <?php 
+                                        if(@$counties){
+                                            foreach ($counties as $value) {
+                                    ?>
+                                               <option <?php if($value['is_main'] == 1){?> selected <?php }?> value="<?php echo $value['county_id']?>"><?php echo $value['county_name']?></option> 
+                                    <?php
+                                            }
+                                        }
+                                    ?>
                                 </select>
 
                                 <div class="addcountie">ADD ANOTHER COUNTY</div>
@@ -102,6 +70,9 @@
                                 <?php 
                                     $applications = file_get_contents(SITE_URL.'webservices/api/professional/getApplicationsPrices.php?id='.$_SESSION['id']);
                                     $applications = json_decode($applications, true); // decode the JSON into an associative array
+                                    // echo "<pre>";
+                                    // print_r($applications);
+                                    // die;
                                     
                                     if(@$applications['records'][0]['application_id']){
                                         $cats = array();
@@ -127,7 +98,7 @@
                                 ?>
                                                         </div>
                                                     </div>
-                                                    <div class="panel-footer"><?php echo $value['category_name']?></div>
+                                                    <div class="panel-footer">&nbsp;</div>
                                                   </div>
                                                 </div>
 
@@ -152,54 +123,47 @@
                                                               <div class="panel-heading">
                                                                 <a data-toggle="collapse" data-parent="#accordion<?php echo $value['application_id']?>" href="#collapse<?php echo $value['application_id']?>">
                                                                     <h4 class="panel-title">
-                                                                     <?php echo $value['application_title']?> <i class="fa fa-angle-down inner-angel-style"></i>
+                                                                     <?php echo $value['application_title'];?> <i class="fa fa-angle-down inner-angel-style"></i>
                                                                     </h4>
                                                                 </a>
                                                               </div>
                                                               <div id="collapse<?php echo $value['application_id']?>" class="panel-collapse collapse in">
                                                                 <div class="panel-body">
-                                                                    <h4>Moving up 30tm² studios</h4>
+                                                                    <?php //echo $value['application_short_description'];?>
                                                                     <div class="app-description col-md-12">
-                                                                        <p>The price includes the moving of objects with truck. If there will be needed extra men or lift, there is extra charge. Moreover, for routes over 10kms , there is diferrent charge.</p>
+                                                                        <?php echo $value['application_short_description'];?>
                                                                         <div class="read-more-btn">Read more</div>
                                                                         <div class="read-more-txt">
-                                                                            <p>
-                                                                                Moving up 30tm² studios. The price refers to moving with truck only, lift and workers are charged extra.
-
-                                                                                Price includes moving for up to 5 normal pots,10-15 boxes, house appliances and furniture.
-
-                                                                                Workers are charged 20€ each.
-
-                                                                                If there is not elevator at the building, there is extra charge.Price refers to 2-2,5 hours. If else, the extra charge is 15€/hour.
-                                                                            </p>
+                                                                            <?php echo $value['application_detail_description'];?>
                                                                             <div class="col-md-12 read-less-btn">Read less</div>
                                                                         </div>
                                                                     </div>
-
                                                                     
                                                                     <div class="app-cols col-md-4">
                                                                         <label class="app-label" name="app_price">Price:</label>
-                                                                        <input type="number" name="app_price" class="app_price" value="49" > <span class="app-span">€ + φπα</span>
+                                                                        <input type="number" name="profile_application[<?php echo $value['application_id'];?>][price]" class="app_price" value="<?php echo $value['application_price'];?>" > <span class="app-span"><?php echo $value['application_unit'];?> </span>
                                                                     </div>
                                                                     <div class="app-cols col-md-4">
-                                                                        <label class="app-label" name="free_distance">Free distance:</label>
-                                                                        <input type="number" name="free_distance" class="free-distance" value="10"> <span class="app-span">km</span>
+                                                                        <label class="app-label">Free distance:</label>
+                                                                        <input type="number" name="profile_application[<?php echo $value['application_id'];?>][free_distance]" class="free-distance" value="<?php echo $value['application_free_distance'];?>"> <span class="app-span">km</span>
                                                                     </div>
 
                                                                     <div class="app-cols col-md-4">
-                                                                        <label class="app-label" name="extra_price_km">Extra price/km:</label>
-                                                                        <input type="number" name="extra_price_km" class="extra-price-km" value=""> <span class="app-span">€</span>
+                                                                        <label class="app-label">Extra price/km:</label>
+                                                                        <input type="number" name="profile_application[<?php echo $value['application_id'];?>][extra_price_km]" class="extra-price-km" value="<?php echo $value['application_extra_price_km'];?>"> <span class="app-span">€</span>
                                                                     </div>
 
                                                                     <div class="app-cols">
-                                                                        <label class="app-label" name="app_one_line_desc">One line description:</label>
-                                                                        <input type="text" name="app_one_line_desc" class="app-one-line-desc" value="Πολύχρονη Πείρα στις μεταφορές και τις μετακομίσεις">
+                                                                        <label class="app-label">One line description:</label>
+                                                                        <input type="text" name="profile_application[<?php echo $value['application_id'];?>][description]" class="app-one-line-desc" value="<?php echo $value['application_description'];?>">
                                                                     </div>
 
                                                                     <div class="app-cols">
-                                                                        <label class="app-label" name="charge_info">Charge info:</label>
-                                                                        <input type="text" name="charge_info" class="app-one-line-desc" value="Εργάτες +40€, Αναβατόριο +50 για κάθε σπίτι  Δε-Κυ 09:00-22:00">
+                                                                        <label class="app-label">Charge info:</label>
+                                                                        <input type="text" name="profile_application[<?php echo $value['application_id'];?>][tec_description]" class="app-one-line-desc" value="<?php echo $value['application_tec_description'];?>">
                                                                     </div>
+                                                                    <input type="hidden" name="profile_application[<?php echo $value['application_id'];?>][application_id]" value="<?php echo $value['application_id'];?>">
+                                                                    <input type="hidden" name="profile_application[<?php echo $value['application_id'];?>][category_id]" value="<?php echo $value['category_id'];?>">
 
                                                                 </div>
                                                               </div>
@@ -211,7 +175,7 @@
                                 ?>
                                                         </div>
                                                     </div>
-                                                    <div class="panel-footer"><?php echo $value['category_name']?></div>
+                                                    <div class="panel-footer">&nbsp;</div>
                                                   </div>
                                                 </div>      
                                 <?php
@@ -220,18 +184,38 @@
                                     }
                                 ?>
 
-                                
-
-                                <div class="save-pricelist">SAVE</div>
+                                <input type="hidden" name="professional_id" value="<?php echo $_SESSION['id'];?>">
+                                <div class="save-pricelist" id="pricesave">SAVE</div>
 
                             </div>  
 
                             
                     </div>
-                </div>
+                    </form>
+            </div>
+<script src="../js/core.js"></script> 
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#pricesave").on('click',function(){ 
+                var getSaveAPI = API_LOCATION+'professional/saveApplications.php';
+                
+                $.ajax({
+                        type: "POST",
+                        url: getSaveAPI,
+                        data: $("#pricelistform").serialize(),
+                        dataType: "json",
+                        success: function(data)
+                        {
+                            alert(data['message']);
+                            location.reload();
+                        }
+                    });
+                return false;
+           
+        });
+    });
 
-          
-
+</script>
             
           
             </div>
