@@ -102,13 +102,27 @@ class Application{
      
         // query to read single record
         $query = "SELECT
-                    id, category_id, title, title_greek, short_description, short_description_gr, detail_description, detail_description_gr, unit, min_price, sequence, modified
-                FROM
-                    " . $this->table_name . "
-                WHERE
-                    category_id = :cat_id
-                ORDER BY
-                    title_greek ASC";
+  applications.id,
+  applications.category_id,
+  categories.name_greek,
+  applications.`title`,
+  applications.`title_greek`,
+  applications.`short_description`,
+  applications.`short_description_gr`,
+  applications.`detail_description`,
+  applications.`detail_description_gr`,
+  applications.`unit`,
+  applications.`min_price`,
+  applications.`sequence`,
+  applications.`modified`,
+  COUNT(professionals_applications.application_id) AS total
+FROM
+  applications
+LEFT JOIN professionals_applications ON applications.id = professionals_applications.application_id
+LEFT JOIN categories ON categories.id = applications.category_id
+WHERE professionals_applications.price >0 AND applications.category_id=:cat_id
+GROUP BY applications.id
+ORDER BY applications.sequence ASC";
      
         // prepare query statement
         $stmt = $this->conn->prepare( $query );
