@@ -72,9 +72,11 @@ function getBusySlots($startDate, $endDate, $id, $professional){
         //array_push($urls, $url);
 
         $busy_item = array(
+            "type" => $type,
             "date" => $date,
             "timeslot" => $time,
             "address" => $address,
+            "id" => $id
             //"distance" => $url
         );
         array_push($busy_arr, $busy_item);
@@ -124,6 +126,8 @@ function getCalendarDetails($startDate, $endDate, $opening, $closing, $busy_arr)
 
             //echo $x;
                 $address = "";
+                $type = "";
+                $id = "";
                 $distance = "";
                 if ($x >=0 && $x < $busySlots){
                     $busyDate = $busy_arr[$x]['date'];
@@ -149,14 +153,20 @@ function getCalendarDetails($startDate, $endDate, $opening, $closing, $busy_arr)
                     if (($busyDate==$date) && ($timefrom == $startBusy)){
                         $inBusy = 1;
                         $address = $busy_arr[$x]['address'];
+                        $type = $busy_arr[$x]['type'];
+                        $id = $busy_arr[$x]['id'];
                     }
                     if (($busyDate==$date) && ($timeto == $endBusy)){
                         $inBusy = 0;
                         $address = $busy_arr[$x]['address'];
+                        $type = $busy_arr[$x]['type'];
+                        $id = $busy_arr[$x]['id'];
                         $x++;
                     }
                     if ($inBusy == 1){
                         $address = $busy_arr[$x]['address'];
+                        $type = $busy_arr[$x]['type'];
+                        $id = $busy_arr[$x]['id'];
                     }
                 }
 
@@ -164,8 +174,9 @@ function getCalendarDetails($startDate, $endDate, $opening, $closing, $busy_arr)
                 "date" => $date,
                 "timefrom" => $timefrom,
                 "timeto" => $timeto,
-                "address" => $address,
-                "distance" => ""
+                "type" => $type,
+                "id" => $id,
+                "address" => $address
             );
             $time = $timeto;
             array_push($calendar_arr, $calendar_item);
