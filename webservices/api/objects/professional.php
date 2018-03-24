@@ -11,6 +11,7 @@ class Professional{
     private $categories_table_name = "professionals_categories";
     private $applications_table_name = "professionals_applications";
     private $invoicesettings_table_name = "professionals_invoice_settings";
+    private $photos_table_name = "professionals_photos";
  
     // object properties
     public $professional_id;
@@ -833,6 +834,37 @@ ORDER BY `date` ASC,
 
         // return values from database
         return $stmt;
+
+    }
+
+    public function uploadPhotos($prof_id,$images){
+
+        if(@$images){
+            $uploadimages = array();
+            foreach ($images as $key => $value) {
+                # code...
+                if(is_uploaded_file($images[$key]['tmp_name'])) {
+                    $sourcePath = $images[$key]['tmp_name'];
+                    $filename = time().$images[$key]['name'];
+                    $uploadimages[] = $filename;
+                    $targetPath = "../../../img/professional-imgs/portfolio/".$filename;
+                    if(move_uploaded_file($sourcePath,$targetPath)) {
+                        //$img .= "<a href='".$targetPath."' data-toggle='lightbox' data-gallery='example-gallery' class='col-sm-3'><img src='".$targetPath."' class='img-fluid' /></a>"; 
+                        $query = "INSERT INTO " . $this->photos_table_name . " (`professional_id`, `image_name`) VALUES ($prof_id, '".$filename."')";
+                        $stmt = $this->conn->prepare( $query );
+                        $stmt->execute();
+
+                    }
+                }
+            }
+
+            return $uploadimages;
+
+        }else{
+
+            return 0;
+
+        }
 
     }
 
