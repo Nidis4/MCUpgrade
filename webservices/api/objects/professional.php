@@ -823,8 +823,9 @@ ORDER BY `date` ASC,
     }
 
     public function getProfile(){
-        $query = "Select id, first_name, last_name, description, service_area, image  from ".$this->table_name." 
-                  where id = :id";
+        $query = "Select p.id, p.first_name, p.last_name, p.description, p.service_area, p.image, pc.address, pc.mobile  from ".$this->table_name." p 
+                  LEFT JOIN ".$this->contact_table_name." pc on p.id = pc.professional_id 
+                  where p.id = :id";
 
         $stmt = $this->conn->prepare( $query );
         $id = $this->id;
@@ -866,6 +867,54 @@ ORDER BY `date` ASC,
 
         }
 
+    }
+
+    public function getPhotos(){
+        // select query
+        $query = "SELECT pc.`id`, pc.`image_name` FROM ". $this->photos_table_name ." pc                   
+                WHERE pc.`professional_id`= ? order by pc.id";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind variable values
+        $id = $this->id;
+        $stmt->bindParam(1, $id, PDO::PARAM_INT);
+        
+        // execute query
+        $stmt->execute();
+        
+        // return values from database
+        return $stmt;      
+    }
+
+    public function updateProfile($prof_id, $first_name, $last_name, $service_area, $description, $address, $mobile, $profile_img){
+
+        $query = "UPDATE " . $this->table_name . "
+                    SET `first_name`=:first_name, `last_name`=:last_name, `description`=:description, `service_area`=:service_area ";
+
+        
+        if(@$profile_img){
+
+        }  
+
+        $query .=" WHERE id = :id";
+
+        $stmt = $this->conn->prepare( $query );
+       
+        // bind id of product to be updated
+        $stmt->bindParam(':id',  $prof_id, PDO::PARAM_INT);
+        $stmt->bindParam(':first_name',  $first_name);
+        $stmt->bindParam(':last_name',  $last_name);
+        $stmt->bindParam(':description',  $description);
+        $stmt->bindParam(':service_area',  $service_area);
+        
+        if ($stmt->execute()) { 
+           $this->update_contact($prof_id, $address, $mobile, ""); 
+           return 1;
+        } else {
+           return 0;
+        }    
     }
 
 }

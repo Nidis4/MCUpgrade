@@ -6,8 +6,8 @@
 ?>
 <style type="text/css">
     .img-fluid{
-        width: 218px;
-        height: 218px;
+        /*width: 218px;
+        height: 218px;*/
         margin-bottom: 20px;
     }
 </style>
@@ -16,19 +16,24 @@
                                 <div class="title-app-tabs">
                                     <h3>Portfolio</h3>
                                 </div>
+                                <?php 
+                                    //echo SITE_URL.'webservices/api/professional/getPhotos.php?prof_id='.$_SESSION['id'];
+                                    $photos = file_get_contents(SITE_URL.'webservices/api/professional/getPhotos.php?prof_id='.$_SESSION['id']);
+                                    $photos = json_decode($photos, true); // decode the JSON into an associative array
 
-                                <a href="img/matzouranis-1.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
-                                    <img src="img/matzouranis-1.jpg" class="img-fluid">
-                                </a>
-                                <a href="img/matzouranis-2.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
-                                    <img src="img/matzouranis-3.jpg" class="img-fluid">
-                                </a>
-                                <a href="img/matzouranis-3.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
-                                    <img src="img/matzouranis-4.jpg" class="img-fluid">
-                                </a>
-                                <a href="img/matzouranis-4.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
-                                    <img src="img/matzouranis-4.jpg" class="img-fluid">
-                                </a>
+                                    if(@$photos['records']){
+                                        foreach ($photos['records'] as $value) {
+                                ?>
+                                            <a href="<?php echo SITE_URL."img/professional-imgs/portfolio/".$value['image_name'];?>" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
+                                                <img src="<?php echo SITE_URL."img/professional-imgs/portfolio/".$value['image_name'];?>" class="img-fluid">
+                                            </a>   
+                                <?php            
+                                        }
+                                    }
+                                    
+                                ?>
+
+                                
                             </div>
 
                             <div class="row">

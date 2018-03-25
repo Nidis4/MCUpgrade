@@ -45,7 +45,7 @@
                     $profile = file_get_contents(SITE_URL.'webservices/api/professional/getProfile.php?id='.$_SESSION['id']);
                     $profile = json_decode($profile, true); // decode the JSON into an associative array
                     // echo "<pre>";
-                    // print_r($profile['record']['first_name']);
+                    // print_r($profile['record']);
                     // die;
                     $first_name = "";
                     if(@$profile['record']['first_name']){
@@ -56,82 +56,114 @@
                         $last_name = $profile['record']['last_name'];
                     }
 
-                    $description = "&nbsp;";
+                    $description = "";
                     if(@$profile['record']['description']){
                         $description = $profile['record']['description'];
                     }
 
-                    $service_area = "&nbsp;";
+                    $service_area = "";
                     if(@$profile['record']['service_area']){
                         $service_area = $profile['record']['service_area'];
                     }
 
-                    $address = "&nbsp;";
+                    $address = "";
                     if(@$profile['record']['address']){
                         $address = $profile['record']['address'];
                     }
-                    
+
+                    $mobile = "";
+                    if(@$profile['record']['mobile']){
+                        $mobile = $profile['record']['mobile'];
+                    }
+                    $image = "";
+                    if(@$profile['record']['image']){
+                        $image = $profile['record']['image'];
+                    }
+
                 ?>
                 <div class="container-fluid main-container">
                     <div class="row">
                         <div class="col-md-12">
-                                <div class="save-btn" onclick="editprofile()">Save</div>
+                                <div class="save-btn" id="editprofile" >Save</div>
                             </div>
                     </div>
-                    <div class="container container-proffesional-profile">
-                        <div class="row">
-                            
-
-                            <div class="col-md-3 profile-img">
-                                <div class="profile-img-inner">
-                                    <img src="img/matzouranis.jpg">
+                    <form id="profileEditForm">
+                        <div class="container container-proffesional-profile">
+                            <div class="row">
+                                <div class="col-md-3 profile-img">
+                                    <?php 
+                                        if(@$image){
+                                    ?>
+                                            <div class="profile-img-inner">
+                                                <img src="<?php echo SITE_URL.'img/professional-imgs/'.$image;?>">
+                                            </div>
+                                    <?php         
+                                        }
+                                    ?>
+                                    <div class="total-rating-num-outer"><span class="total-rating-num"><?php echo number_format(($total_rating / 6),1);?></span>/5</div>
+                                    <br><br>
+                                    <div class="col-md-3"><input class="profile-img" name="profile_img" type="file"></div>
                                 </div>
 
-                                <div class="total-rating-num-outer"><span class="total-rating-num"><?php echo number_format(($total_rating / 6),1);?></span>/5</div>
+                                <div class="col-md-5">
+                                    <div class="col-md-6 col-sm-12" style="padding-left: 0px;">
+                                        <input type="text" name="first_name" value="<?php echo $first_name;?>" class="form-control" placeholder="First Name">
+                                    </div>
+                                    <div class="col-md-6 col-sm-12" style="padding-left: 0px; padding-right: 0px;">
+                                        <input type="text" name="last_name" value="<?php echo $last_name;?>" class="form-control" placeholder="Last Name">
+                                    </div>
+                                    <!-- <h2 class="front-professional-name"><?php //echo $first_name. " ".$last_name;?></h2> -->
+                                    <div class="col-md-12 proffesionalTotalReviews">
+                                        <div class="starsouter">
+                                            <div class="empty-bar">
+                                                <div style="width:<?php echo $total_rating_per;?>%;"></div>
+                                            </div>
+                                        </div>
+                                        <div class="rev-score"><span class="rating-num"><?php echo number_format(($total_rating / 6),1);?></span>/5</div>
+                                        <div class="total-score"><span class="total-jobs"><?php echo $reviewsPag['records'][0]['total'];?></span> Αξιολογήσεις</div>
+                                    </div>
+                                    <textarea class="form-control" name="service_area" placeholder="Service Area"><?php echo $service_area;?></textarea>
+                                    <br>
+                                    <textarea class="form-control" name="description" placeholder="Description"><?php echo $description;?></textarea>
+                                    <br>
+                                    <input type="text" name="address" class="form-control" placeholder="Address" value="<?php echo $address;?>">
+                                    <br>
+                                    <input type="text" name="mobile" class="form-control" placeholder="Mobile" value="<?php echo $mobile;?>">
+                                    <!-- <p class="front-professional-desc"><?php //echo $service_area;?></p> -->
+                                    <!-- <p class="front-professional-oneline-desc"><?php //echo $description;?></p> -->
+                                    <!-- <p class="front-proffesional-address"><i class="fa fa-map-marker"></i> <span class="spanAddress"><?php //echo $address;?></span></p>
+                                    <p class="front-professional-tel"><i class="fa fa-phone"></i> <span class="front-tel-span">698 004 3090</span></p> -->                                
+                                </div>
+
+                                <div class="col-md-3">
+                                    <h3 class="h3-offer-title">Καλέστε για την συγκεκριμένη προσφορά:</h3>
+                                    <a href="tel:6942657824"><p class="font-offer-tel"><i class="fa fa-phone-square"></i> <span class="front-offer-tel-span">6980043090</span></p></a>
+
+                                    <p class="offer-mcr-txt">*Ενημερώστε τους ότι καλείτε για την προσφορά του myConstructor.</p>
+
+                                    <a href="https://myconstructor.gr/transport/?catid=103&amp;memid=19365&amp;name=Βασίλης&amp;surname=Παναγιωτακόπουλος" target="_blank"><div class="btn-prosfora-prof">Κλείσε online</div></a>
+                                </div>
                             </div>
 
-                            <div class="col-md-5">
-                                <h2 class="front-professional-name"><?php echo $first_name. " ".$last_name;?></h2>
-                                <div class="col-md-12 proffesionalTotalReviews">
-                                    <div class="starsouter">
-                                        <div class="empty-bar">
-                                            <div style="width:<?php echo $total_rating_per;?>%;"></div>
+                            <div class="row row-profile-nav">
+                                    <div class="col-md-3 col-sm-12">
+                                        &nbsp;
+                                    </div>
+                                    <div class="col-md-9 col-sm-12">
+                                        <div class="profile-side-menu">
+                                            <ul>
+                                                <a href="#"><li class="first active">Στοιχεία Επαγγελματία</li></a><!--
+                                             --><a href="#"><li>Υπηρεσίες</li></a><!--
+                                             --><a href="#"><li>Τιμές</li></a><!--
+                                             --><a href="#"><li>Εικόνες Επαγγελματία</li></a><!--
+                                             --><a href="#"><li>Αξιολογήσεις</li></a>
+                                            </ul>
                                         </div>
                                     </div>
-                                    <div class="rev-score"><span class="rating-num"><?php echo number_format(($total_rating / 6),1);?></span>/5</div>
-                                    <div class="total-score"><span class="total-jobs"><?php echo $reviewsPag['records'][0]['total'];?></span> Αξιολογήσεις</div>
                                 </div>
-                                <p class="front-professional-desc"><?php echo $service_area;?></p>
-                                <p class="front-professional-oneline-desc"><?php echo $description;?></p>
-                                <p class="front-proffesional-address"><i class="fa fa-map-marker"></i> <span class="spanAddress"><?php echo $address;?></span></p>
-                                <p class="front-professional-tel"><i class="fa fa-phone"></i> <span class="front-tel-span">698 004 3090</span></p>                                
-                            </div>
-
-                            <div class="col-md-3">
-                                <h3 class="h3-offer-title">Καλέστε για την συγκεκριμένη προσφορά:</h3>
-                                <a href="tel:6942657824"><p class="font-offer-tel"><i class="fa fa-phone-square"></i> <span class="front-offer-tel-span">6980043090</span></p></a>
-
-                                <p class="offer-mcr-txt">*Ενημερώστε τους ότι καλείτε για την προσφορά του myConstructor.</p>
-
-                                <a href="https://myconstructor.gr/transport/?catid=103&amp;memid=19365&amp;name=Βασίλης&amp;surname=Παναγιωτακόπουλος" target="_blank"><div class="btn-prosfora-prof">Κλείσε online</div></a>
-                            </div>
                         </div>
-
-                        <div class="row row-profile-nav">
-                                <div class="col-md-3"><input class="profile-img" type="file"></div>
-                                <div class="col-md-9 col-sm-12">
-                                    <div class="profile-side-menu">
-                                        <ul>
-                                            <a href="#"><li class="first active">Στοιχεία Επαγγελματία</li></a><!--
-                                         --><a href="#"><li>Υπηρεσίες</li></a><!--
-                                         --><a href="#"><li>Τιμές</li></a><!--
-                                         --><a href="#"><li>Εικόνες Επαγγελματία</li></a><!--
-                                         --><a href="#"><li>Αξιολογήσεις</li></a>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
+                        <input type="hidden" name="prof_id" value="<?php echo $_SESSION['id'];?>">
+                    </form>
 
                     <div class="container">
                         <div class="row proffesional-row-content">
@@ -618,6 +650,27 @@
         <script src="js/professional-edit-profile.js"></script>
         <link href="../lightbox/dist/ekko-lightbox.css" rel="stylesheet">
         <script src="../lightbox/dist/ekko-lightbox.js"></script>
+        <script src="../js/core.js"></script>
+        <script>
+            $(document).ready(function() {
+                $("#editprofile").on('click',function(){
+                    var getSaveAPI = API_LOCATION+'professional/updateProfile.php';
+                
+                    $.ajax({
+                            type: "POST",
+                            url: getSaveAPI,
+                            data: $("#profileEditForm").serialize(),
+                            dataType: "json",
+                            success: function(data)
+                            {
+                                alert(data['message']);
+                                location.reload();
+                            }
+                        });
+                    return false;
+                });
+            });
+        </script>    
      
 
 

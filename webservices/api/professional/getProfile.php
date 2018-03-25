@@ -30,6 +30,9 @@ if($num >= 1){
                     'last_name' => $row['last_name'],
                     'description' => $row['description'],
                     'service_area' => $row['service_area'],
+                    'image' => $row['image'],
+                    'address' => $row['address'],
+                    'mobile' => $row['mobile'],
                 );
     echo json_encode(
             array("record" => $return)
