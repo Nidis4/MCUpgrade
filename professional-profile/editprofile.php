@@ -137,11 +137,11 @@
 
                                 <div class="col-md-3">
                                     <h3 class="h3-offer-title">Καλέστε για την συγκεκριμένη προσφορά:</h3>
-                                    <a href="tel:6942657824"><p class="font-offer-tel"><i class="fa fa-phone-square"></i> <span class="front-offer-tel-span">6980043090</span></p></a>
+                                    <a href="tel:<?php echo $mobile;?>"><p class="font-offer-tel"><i class="fa fa-phone-square"></i> <span class="front-offer-tel-span"><?php echo $mobile;?></span></p></a>
 
                                     <p class="offer-mcr-txt">*Ενημερώστε τους ότι καλείτε για την προσφορά του myConstructor.</p>
 
-                                    <a href="https://myconstructor.gr/transport/?catid=103&amp;memid=19365&amp;name=Βασίλης&amp;surname=Παναγιωτακόπουλος" target="_blank"><div class="btn-prosfora-prof">Κλείσε online</div></a>
+                                    <a href="#" target="_blank"><div class="btn-prosfora-prof">Κλείσε online</div></a>
                                 </div>
                             </div>
 
@@ -474,19 +474,22 @@
                                                 <h3>Εικόνες Επαγγελματία</h3>
                                                 <img src="img/separator-4.png">
                                             </div>
+                                            <?php 
+                                                //echo SITE_URL.'webservices/api/professional/getPhotos.php?prof_id='.$_SESSION['id'];
+                                                $photos = file_get_contents(SITE_URL.'webservices/api/professional/getPhotos.php?prof_id='.$_SESSION['id']);
+                                                $photos = json_decode($photos, true); // decode the JSON into an associative array
 
-                                            <a href="img/matzouranis-1.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
-                                                        <img src="img/matzouranis-1.jpg" class="img-fluid">
-                                            </a>
-                                            <a href="img/matzouranis-2.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
-                                                        <img src="img/matzouranis-3.jpg" class="img-fluid">
-                                            </a>
-                                            <a href="img/matzouranis-3.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
-                                                        <img src="img/matzouranis-4.jpg" class="img-fluid">
-                                            </a>
-                                            <a href="img/matzouranis-4.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
-                                                        <img src="img/matzouranis-4.jpg" class="img-fluid">
-                                            </a>
+                                                if(@$photos['records']){
+                                                    foreach ($photos['records'] as $value) {
+                                            ?>
+                                                        <a href="<?php echo SITE_URL."img/professional-imgs/portfolio/".$value['image_name'];?>" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
+                                                            <img src="<?php echo SITE_URL."img/professional-imgs/portfolio/".$value['image_name'];?>" class="img-fluid">
+                                                        </a>   
+                                            <?php            
+                                                    }
+                                                }
+                                                
+                                            ?>
                                             
                                         </div>
 
@@ -505,12 +508,12 @@
                                 </div>
                                     <div class="col-md-5 prof-total-score">
                                         <div class="reviewsTitle">
-                                            <div class="TotalRatingOuter"><span class="totalRatingReviews">4,9</span>/5 </div><div class="total-score">Συνολικό σκορ <br>
-                                                    Σκορ από <span class="total-jobs">190</span> αξιολογήσεις</div>
+                                            <div class="TotalRatingOuter"><span class="totalRatingReviews"><?php echo number_format(($total_rating / 6),1);?></span>/5 </div><div class="total-score">Συνολικό σκορ <br>
+                                                    Σκορ από <span class="total-jobs"><?php echo $reviewsPag['records'][0]['total'];?></span> αξιολογήσεις</div>
                                         </div>
                                         <div class="totalScore">
                                             <div class="totalStars">
-                                                <div style="width: 90%;"></div>
+                                                <div style="width: <?php echo $total_rating_per;?>%;"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -518,126 +521,88 @@
                                                     
                                     <div class="col-md-7">
                                         <div class="col-md-6 bars-one-half">                         
-                                                <p class="emplexp">Quality</p>
-                                                   <div class="quality-empty">
-                                                        <div style="width:100%;"></div>
-                                                    </div>
-                                                 <p class="emplexp">Reliability</p>
-                                                    <div class="reliability-empty">
-                                                        <div style="width:100%;"></div>
-                                                    </div>
-                                                 <p class="emplexp">Cost</p>
-                                                    <div class="cost-empty">
-                                                        <div style="width:70%;"></div>
-                                                    </div>
-                                        </div>
-                                            <div class="col-md-6 bars-one-half">
-                                             <p class="emplexp">Schedule</p>
-                                                <div class="schedule-empty">
-                                                    <div style="width:100%;"></div>
-                                                </div>
-                                             <p class="emplexp">Behaviour</p>
-                                                <div class="behaviour-empty">
-                                                    <div style="width:100%;"></div>
-                                                </div>
-                                             <p class="emplexp">Cleanliness</p>
-                                                <div class="cleanliness-empty">
-                                                    <div style="width:80%;"></div>
-                                                </div>
+                                            <p class="emplexp">Quality</p>
+                                            <div class="quality-empty">
+                                                <div style="width:<?php echo $quality_per;?>%;"></div>
                                             </div>
+                                             <p class="emplexp">Reliability</p>
+                                            <div class="reliability-empty">
+                                                <div style="width:<?php echo $reliability_per;?>%;"></div>
+                                            </div>
+                                             <p class="emplexp">Cost</p>
+                                            <div class="cost-empty">
+                                                <div style="width:<?php echo $cost_per;?>%;"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 bars-one-half">
+                                            <p class="emplexp">Schedule</p>
+                                            <div class="schedule-empty">
+                                                <div style="width:<?php echo $schedule_per;?>%;"></div>
+                                            </div>
+                                            <p class="emplexp">Behaviour</p>
+                                            <div class="behaviour-empty">
+                                                <div style="width:<?php echo $behaviour_per;?>%;"></div>
+                                            </div>
+                                            <p class="emplexp">Cleanliness</p>
+                                            <div class="cleanliness-empty">
+                                                <div style="width:<?php echo $cleanliness_per;?>%;"></div>
+                                            </div>
+                                        </div>
                                      </div>
                             </div>
+                            <?php
+                            //echo SITE_URL.'webservices/api/review/read_paging.php?prof_id='.$_SESSION['id'].'&from_record_num=0&records_per_page=5';
 
-                            <div class="row row-profile-review">
+                            $reviews = file_get_contents(SITE_URL.'webservices/api/review/read_paging.php?prof_id='.$_SESSION['id'].'&from_record_num=0&records_per_page=5');
+                            $reviewsPag = json_decode($reviews, true);
+
+                            if(@$reviewsPag['records'][0]['id']){
+                                foreach ($reviewsPag['records'] as $review) {
+                                    // echo "<pre>";
+                                    // print_r($review);
+                                    // die;
+                                    $quality = $review['quality'];
+                                    $quality_per = round(($review['quality'] / 5) * 100);
+
+                                    $reliability = $review['reliability'];
+                                    $reliability_per = round(($review['reliability'] / 5) * 100);
+
+                                    $cost = $review['cost'];
+                                    $cost_per = round(($review['cost'] / 5) * 100);
+
+                                    $schedule = $review['schedule'];
+                                    $schedule_per = round(($review['schedule'] / 5) * 100);
+
+                                    $behaviour = $review['behaviour'];
+                                    $behaviour_per = round(($review['behaviour'] / 5) * 100);
+
+                                    $cleanliness = $review['cleanliness'];
+                                    $cleanliness_per = round(($review['cleanliness'] / 5) * 100);
+
+                                    $total_rating = $quality + $reliability +  $cost + $schedule + $behaviour + $cleanliness;
+                                    $total_rating_per = number_format(($total_rating / 6) * 20,1) ;
+                            ?>
+
+                                <div class="row row-profile-review">
                                     <div class="col-md-12 review-outer">
                                         <div class="col-review">
-                                            
-                                            
-                                                <div class="starsouter">
-                                                    <div class="empty-bar">
-                                                         <div style="width:80%;"></div>
-                                                     </div>
-                                                </div>
-                                            
-                                            <div class="rev-score">5.0/5</div>
-                                            <div class="reviewdate">Φεβρουάριος 16, 2018</div>
-                                            <p class="reviewComment">Έμεινα πάρα πολύ ικανοποιημένος με τον κ.Παναγιωτακόπουλο Βασίλη.Προσεχτικός &amp; Συνεπής στην ώρα του.</p>
-                                            <p class="reviewerName">Σωτήρης Μανόφης</p>
+                                            <div class="starsouter">
+                                                <div class="empty-bar">
+                                                     <div style="width:<?php echo $total_rating_per;?>%;"></div>
+                                                 </div>
+                                            </div>
+                                            <div class="rev-score"><?php echo number_format(($total_rating / 6),1)?>/5</div>
+                                            <div class="reviewdate"><?php echo date('F, d Y',strtotime($review['created']));?></div>
+                                            <p class="reviewComment"><?php echo $review['comment'];?></p>
+                                            <p class="reviewerName"><?php echo $review['cust_member_name'];?></p>
                                         </div>
                                     </div>
-                            </div>
-                            <div class="row row-profile-review">
-                                    <div class="col-md-12 review-outer">
-                                        <div class="col-review">
-                                            
-                                            
-                                                <div class="starsouter">
-                                                    <div class="empty-bar">
-                                                         <div style="width:80%;"></div>
-                                                     </div>
-                                                </div>
-                                            
-                                            <div class="rev-score">5.0/5</div>
-                                            <div class="reviewdate">Φεβρουάριος 16, 2018</div>
-                                            <p class="reviewComment">Έμεινα πάρα πολύ ικανοποιημένος με τον κ.Παναγιωτακόπουλο Βασίλη.Προσεχτικός &amp; Συνεπής στην ώρα του.</p>
-                                            <p class="reviewerName">Σωτήρης Μανόφης</p>
-                                        </div>
-                                    </div>
-                            </div>
-                            <div class="row row-profile-review">
-                                    <div class="col-md-12 review-outer">
-                                        <div class="col-review">
-                                            
-                                            
-                                                <div class="starsouter">
-                                                    <div class="empty-bar">
-                                                         <div style="width:80%;"></div>
-                                                     </div>
-                                                </div>
-                                            
-                                            <div class="rev-score">5.0/5</div>
-                                            <div class="reviewdate">Φεβρουάριος 16, 2018</div>
-                                            <p class="reviewComment">Έμεινα πάρα πολύ ικανοποιημένος με τον κ.Παναγιωτακόπουλο Βασίλη.Προσεχτικός &amp; Συνεπής στην ώρα του.</p>
-                                            <p class="reviewerName">Σωτήρης Μανόφης</p>
-                                        </div>
-                                    </div>
-                            </div>
-                            <div class="row row-profile-review">
-                                    <div class="col-md-12 review-outer">
-                                        <div class="col-review">
-                                            
-                                            
-                                                <div class="starsouter">
-                                                    <div class="empty-bar">
-                                                         <div style="width:80%;"></div>
-                                                     </div>
-                                                </div>
-                                            
-                                            <div class="rev-score">5.0/5</div>
-                                            <div class="reviewdate">Φεβρουάριος 16, 2018</div>
-                                            <p class="reviewComment">Έμεινα πάρα πολύ ικανοποιημένος με τον κ.Παναγιωτακόπουλο Βασίλη.Προσεχτικός &amp; Συνεπής στην ώρα του.</p>
-                                            <p class="reviewerName">Σωτήρης Μανόφης</p>
-                                        </div>
-                                    </div>
-                            </div>
-                            <div class="row row-profile-review">
-                                    <div class="col-md-12 review-outer">
-                                        <div class="col-review">
-                                            
-                                            
-                                                <div class="starsouter">
-                                                    <div class="empty-bar">
-                                                         <div style="width:80%;"></div>
-                                                     </div>
-                                                </div>
-                                            
-                                            <div class="rev-score">5.0/5</div>
-                                            <div class="reviewdate">Φεβρουάριος 16, 2018</div>
-                                            <p class="reviewComment">Έμεινα πάρα πολύ ικανοποιημένος με τον κ.Παναγιωτακόπουλο Βασίλη.Προσεχτικός &amp; Συνεπής στην ώρα του.</p>
-                                            <p class="reviewerName">Σωτήρης Μανόφης</p>
-                                        </div>
-                                    </div>
-                            </div>
+                                </div>
+                            
+                        <?php        
+                                }
+                            }
+                        ?>
                     </div>
 
                 

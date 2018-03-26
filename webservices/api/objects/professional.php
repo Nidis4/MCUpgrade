@@ -544,10 +544,10 @@ ORDER BY `date` ASC,
     }
 
     
-    function updateInvoiceSettings($professional_id, $company_name, $profession, $address, $tax_id, $tax_office){
+    function updateInvoiceSettings($professional_id, $company_name, $profession, $address, $tax_id, $tax_office, $business_type, $vat_number,$country, $pc, $land_line, $mobile_phone, $receipt_email, $id_card_number, $personal_vat_id, $website, $directory_link){
 
 
-        $query = "INSERT INTO ". $this->invoicesettings_table_name ." (`professional_id`, `company_name`, `profession`, `address`, `tax_id`, `tax_office`) VALUES (:professional_id, :company_name, :profession, :address, :tax_id, :tax_office) ON DUPLICATE KEY UPDATE `company_name`=:company_name, `profession`=:profession, `address`=:address, `tax_id`=:tax_id, `tax_office`=:tax_office";
+        $query = "INSERT INTO ". $this->invoicesettings_table_name ." (`professional_id`, `company_name`, `profession`, `address`, `tax_id`, `tax_office`, `business_type`, `vat_number`, `country`, `pc`, `land_line`, `mobile_phone`, `receipt_email`, `id_card_number`, `personal_vat_id`, `website`, `directory_link`) VALUES (:professional_id, :company_name, :profession, :address, :tax_id, :tax_office, :business_type, :vat_number, :country, :pc, :land_line, :mobile_phone, :receipt_email, :id_card_number, :personal_vat_id, :website, :directory_link) ON DUPLICATE KEY UPDATE `company_name`=:company_name, `profession`=:profession, `address`=:address, `tax_id`=:tax_id, `tax_office`=:tax_office, `business_type`=:business_type, `vat_number`=:vat_number, `country`=:country, `pc`=:pc, `land_line`=:land_line, `mobile_phone`=:mobile_phone, `receipt_email`=:receipt_email, `id_card_number`=:id_card_number, `personal_vat_id`=:personal_vat_id, `website`=:website, `directory_link`=:directory_link";
 
         $stmt = $this->conn->prepare( $query );
        
@@ -558,6 +558,17 @@ ORDER BY `date` ASC,
         $stmt->bindParam(':address',  $address);
         $stmt->bindParam(':tax_id',  $tax_id);
         $stmt->bindParam(':tax_office',  $tax_office);
+        $stmt->bindParam(':business_type',  $business_type);
+        $stmt->bindParam(':vat_number',  $vat_number);
+        $stmt->bindParam(':country',  $country);
+        $stmt->bindParam(':pc',  $pc);
+        $stmt->bindParam(':land_line',  $land_line);
+        $stmt->bindParam(':mobile_phone',  $mobile_phone);
+        $stmt->bindParam(':receipt_email',  $receipt_email);
+        $stmt->bindParam(':id_card_number',  $id_card_number);
+        $stmt->bindParam(':personal_vat_id',  $personal_vat_id);
+        $stmt->bindParam(':website',  $website);
+        $stmt->bindParam(':directory_link',  $directory_link);
         
         if ($stmt->execute()) {
            
@@ -852,6 +863,7 @@ ORDER BY `date` ASC,
                     if(move_uploaded_file($sourcePath,$targetPath)) {
                         //$img .= "<a href='".$targetPath."' data-toggle='lightbox' data-gallery='example-gallery' class='col-sm-3'><img src='".$targetPath."' class='img-fluid' /></a>"; 
                         $query = "INSERT INTO " . $this->photos_table_name . " (`professional_id`, `image_name`) VALUES ($prof_id, '".$filename."')";
+
                         $stmt = $this->conn->prepare( $query );
                         $stmt->execute();
 
