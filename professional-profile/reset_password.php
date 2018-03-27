@@ -38,6 +38,7 @@
 
 	</head>
 	<body>
+		<?php include('../constants.php'); ?>
 		<!-- start: page -->
 		<section class="body-sign">
 			<div class="center-sign">
@@ -47,29 +48,14 @@
 
 				<div class="panel card-sign">
 					<div class="card-title-sign mt-3 text-right">
-						<h2 class="title text-uppercase font-weight-bold m-0"><i class="fa fa-user mr-1"></i> Sign In</h2>
+						<h2 class="title text-uppercase font-weight-bold m-0"><i class="fa fa-user mr-1"></i>Reset Password</h2>
 					</div>
 					<div class="card-body">
-						<form id="loginForm">
+						<form id="resetForm">
 							<div class="form-group mb-3">
-								<label>Email</label>
+								<label>Enter Password</label>
 								<div class="input-group input-group-icon">
-									<input name="username" type="text" class="form-control form-control-lg" id='username' />
-									<span class="input-group-addon">
-										<span class="icon icon-lg">
-											<i class="fa fa-user"></i>
-										</span>
-									</span>
-								</div>
-							</div>
-
-							<div class="form-group mb-3">
-								<div class="clearfix">
-									<label class="float-left">Password</label>
-									<a href="forget_password.html" class="float-right">Lost Password?</a>
-								</div>
-								<div class="input-group input-group-icon">
-									<input name="pwd" type="password" class="form-control form-control-lg" id='password'/>
+									<input name="password" type="password"  class="form-control form-control-lg" id='password' />
 									<span class="input-group-addon">
 										<span class="icon icon-lg">
 											<i class="fa fa-lock"></i>
@@ -78,28 +64,26 @@
 								</div>
 							</div>
 
+							<div class="form-group mb-3">
+								<label>Confirm Password</label>
+								<div class="input-group input-group-icon">
+									<input name="cpassword" type="password"  class="form-control form-control-lg" id='cpassword' />
+									<span class="input-group-addon">
+										<span class="icon icon-lg">
+											<i class="fa fa-lock"></i>
+										</span>
+									</span>
+								</div>
+							</div>							
+
 							<div class="row">
-								<div class="col-sm-8">
-									<div class="checkbox-custom checkbox-default">
-										<input id="RememberMe" name="rememberme" type="checkbox"/>
-										<label for="RememberMe">Remember Me</label>
-									</div>
-								</div>
+								<input type="hidden" name="key" id="resetkey" value="<?php echo $_GET['key'];?>">
 								<div class="col-sm-4 text-right">
-									<button type="submit" class="btn btn-primary mt-2">Sign In</button>
+									<button type="submit" class="btn btn-primary mt-2">Reset Password</button>
 								</div>
 							</div>
 
-							<span class="mt-3 mb-3 line-thru text-center text-uppercase">
-								<span>or</span>
-							</span>
-
-							<div class="mb-1 text-center">
-								<a class="btn btn-facebook mb-3 ml-1 mr-1" href="#">Connect with <i class="fa fa-facebook"></i></a>
-								<a class="btn btn-twitter mb-3 ml-1 mr-1" href="#">Connect with <i class="fa fa-twitter"></i></a>
-							</div>
-
-							<p class="text-center">Don't have an account yet? <a href="pages-signup.html">Sign Up!</a></p>
+							
 
 						</form>
 					</div>
@@ -124,6 +108,18 @@
 		<!-- Theme Custom -->
 		<script src="../js/core.js"></script>
 		<script src="js/professional-profile.js"></script>
+
+		<?php
+			if(@$_GET['key']){
+
+			}else{
+		?>
+				<script type="text/javascript">
+					window.location = "<?php echo SITE_URL.'professional-profile/login.html';?>";
+				</script>
+		<?php
+			}
+		?>
 
 	</body>
 </html>

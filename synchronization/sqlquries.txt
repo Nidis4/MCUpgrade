@@ -659,3 +659,13 @@ ALTER TABLE `professionals_invoice_settings` CHANGE `tax_office` `tax_office` VA
 
 <!-------------------------------->
 <!-- End 26 Mar 2018 Harpreet ---->
+
+
+<!-------------------------------->
+<!-- Start 27 Mar 2018 Harpreet -->
+
+ALTER TABLE `professionals_account_info` ADD `resetkey` VARCHAR(255) NULL AFTER `last_login_ip`;
+ALTER TABLE `professionals_account_info` ADD `resettime` DATETIME NULL AFTER `resetkey`;
+
+<!-------------------------------->
+<!-- End 27 Mar 2018 Harpreet ---->

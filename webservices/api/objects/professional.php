@@ -28,6 +28,7 @@ class Professional{
     public $calendar_id;
     public $username;
     public $password;
+    public $email;
  
     public function __construct($db){
         $this->conn = $db;
@@ -64,6 +65,80 @@ class Professional{
         $stmt->execute();
      
         return $stmt;
+    }
+
+    public function forgetPassword(){
+        // select all query
+        $query = "SELECT  professional_id 
+                FROM `" . $this->account_table_name . "` a 
+                WHERE a.email = :email";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+
+        $email = $this->email;
+
+        // bind id of product to be updated
+        $stmt->bindParam(':email',  $email, PDO::PARAM_STR);        
+        // execute query
+        $stmt->execute();
+
+        $num = $stmt->rowCount();
+        if( $num >= 1){
+            $key = base64_encode($email.time()); 
+            $time = date("Y-m-d H:i:s",strtotime("+5 minutes"));
+
+            $query1 = "UPDATE " . $this->account_table_name . "
+                    SET `resetkey`='".$key."', `resettime`='".$time."'";
+            $query1 .=" WHERE email = '".$email."'";
+
+            $stmt1 = $this->conn->prepare( $query1 );
+            $stmt1->execute();
+            
+            $return = array('email'=>$email,'key'=>$key);
+
+            return $return;
+
+        }else{
+            return 0;
+        }
+     
+        
+    }
+
+    public function resetPassword($password,$resetkey){
+        // select all query
+        $query = "SELECT  professional_id 
+                FROM `" . $this->account_table_name . "` a 
+                WHERE a.resetkey = :resetkey and resettime <='".date("Y-m-d H:i:s")."'";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+
+        // bind id of product to be updated
+        $stmt->bindParam(':resetkey',  $resetkey, PDO::PARAM_STR);        
+        // execute query
+        $stmt->execute();
+
+        $num = $stmt->rowCount();
+        if( $num >= 1){
+            
+            $pass = md5($password);
+
+            $query1 = "UPDATE " . $this->account_table_name . "
+                    SET `password`='".$pass."', `resetkey`='', `resettime`=''";
+            $query1 .=" WHERE email = '".$email."'";
+
+            $stmt1 = $this->conn->prepare( $query1 );
+            $stmt1->execute();
+            
+            $return = array('email'=>$email,'key'=>$key);
+
+            return $return;
+
+        }else{
+            return 0;
+        }   
     }
  
     // used by select drop-down list

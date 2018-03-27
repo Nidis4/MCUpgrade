@@ -46,6 +46,98 @@ $("#loginForm").submit(function(){
     return false;
 });
 
+$("#forgetForm").submit(function(){   
+    
+    var getLoginAPI = API_LOCATION+'professional/forget_password.php';
+
+    $.ajax({
+            type: "POST",
+            url: getLoginAPI,
+            data: {
+                email: $("#email").val()
+            },
+            dataType: "json",
+            success: function(data)
+            {
+                var result = data['ResultCode'];
+                //alert(data[0]);
+                //alert (result);
+                if (result == '1') {
+                     // Send Ajax request to backend.php, with src set as "img" in the POST data
+                    alert(data['message']);
+                    //location.reload();
+                            
+
+                    //window.location.replace('../professional-profile/index.php');
+                }
+                else {
+                    alert(data['message']);
+                    location.reload();
+                }
+            }
+        });
+    return false;
+});
+
+$("#resetForm").submit(function(){   
+    
+    var getLoginAPI = API_LOCATION+'professional/reset_password.php';
+
+    var pass = $("#password").val();
+    var cpass = $("#cpassword").val();
+    var resetkey = $("#resetkey").val();
+
+    if(pass == ""){
+        alert('Please enter password');
+        return false;
+    }
+
+    if(cpass == ""){
+        alert('Please enter confirm password');
+        return false;
+    }
+
+    if(cpass != pass){
+        alert('Password and confirm password should be same.');
+        return false;
+    }
+
+    if(resetkey == ""){
+        alert('Invalid key!');
+        return false;
+    }
+
+    $.ajax({
+            type: "POST",
+            url: getLoginAPI,
+            data: {
+                password: pass,
+                resetkey: resetkey
+            },
+            dataType: "json",
+            success: function(data)
+            {
+                var result = data['ResultCode'];
+                //alert(data[0]);
+                //alert (result);
+                if (result == '1') {
+                     // Send Ajax request to backend.php, with src set as "img" in the POST data
+                    alert(data['message']);
+                    //location.reload();
+                            
+
+                    window.location.replace('../professional-profile/login.html');
+                }
+                else {
+                    alert(data['message']);
+                    window.location.replace('../professional-profile/login.html');
+                    location.reload();
+                }
+            }
+        });
+    return false;
+});
+
     $(document).ready(function () {
         $('.mobile-menu').click(function(){
             $('#sidebar').toggleClass('hide-menu');
