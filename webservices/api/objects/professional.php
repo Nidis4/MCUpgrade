@@ -544,7 +544,7 @@ ORDER BY `date` ASC,
     }
 
     
-    function updateInvoiceSettings($professional_id, $company_name, $profession, $address, $tax_id, $tax_office, $business_type, $vat_number,$country, $pc, $land_line, $mobile_phone, $receipt_email, $id_card_number, $personal_vat_id, $website, $directory_link){
+    function updateInvoiceSettings($professional_id, $company_name, $profession, $address, $tax_id, $tax_office, $business_type, $vat_number,$country, $pc, $land_line, $mobile_phone, $receipt_email, $id_card_number, $personal_vat_id, $website, $directory_link, $viewtype){
 
 
         $query = "INSERT INTO ". $this->invoicesettings_table_name ." (`professional_id`, `company_name`, `profession`, `address`, `tax_id`, `tax_office`, `business_type`, `vat_number`, `country`, `pc`, `land_line`, `mobile_phone`, `receipt_email`, `id_card_number`, `personal_vat_id`, `website`, `directory_link`) VALUES (:professional_id, :company_name, :profession, :address, :tax_id, :tax_office, :business_type, :vat_number, :country, :pc, :land_line, :mobile_phone, :receipt_email, :id_card_number, :personal_vat_id, :website, :directory_link) ON DUPLICATE KEY UPDATE `company_name`=:company_name, `profession`=:profession, `address`=:address, `tax_id`=:tax_id, `tax_office`=:tax_office, `business_type`=:business_type, `vat_number`=:vat_number, `country`=:country, `pc`=:pc, `land_line`=:land_line, `mobile_phone`=:mobile_phone, `receipt_email`=:receipt_email, `id_card_number`=:id_card_number, `personal_vat_id`=:personal_vat_id, `website`=:website, `directory_link`=:directory_link";
@@ -552,7 +552,7 @@ ORDER BY `date` ASC,
         $stmt = $this->conn->prepare( $query );
        
         // bind id of product to be updated
-        $stmt->bindParam(':professional_id',  $professional_id);
+        $stmt->bindParam(':professional_id', $professional_id, PDO::PARAM_INT);
         $stmt->bindParam(':company_name',  $company_name);
         $stmt->bindParam(':profession',  $profession);
         $stmt->bindParam(':address',  $address);
@@ -569,12 +569,28 @@ ORDER BY `date` ASC,
         $stmt->bindParam(':personal_vat_id',  $personal_vat_id);
         $stmt->bindParam(':website',  $website);
         $stmt->bindParam(':directory_link',  $directory_link);
+        //$stmt->execute();
+        //$stmt->debugDumpParams();
+        //die($professional_id);
         
         if ($stmt->execute()) {
-           
+            $query1 = "UPDATE " . $this->table_name . "
+                    SET `viewtype`=:viewtype ";
+
+            $query1 .=" WHERE id = :id";
+
+            $stmt1 = $this->conn->prepare( $query1 ); 
+
+            $stmt1->bindParam(':id', $professional_id, PDO::PARAM_INT);
+            $stmt1->bindParam(':viewtype',  $viewtype);
+            $stmt1->execute();
+           //die('sdf');
            return 1;
+           
         } else {
+           //die('0');
            return 0;
+
         }
     } // Save Customer
 
@@ -907,7 +923,7 @@ ORDER BY `date` ASC,
 
         
         if(@$profile_img){
-
+            $query .= " ,`image`='".$profile_img."'";
         }  
 
         $query .=" WHERE id = :id";
@@ -927,6 +943,109 @@ ORDER BY `date` ASC,
         } else {
            return 0;
         }    
+    }
+
+
+    public function getIncoiceSettings(){
+        $query = "Select pi.*,p.viewtype, pd.perid1 as company_stamp, pd.perid2 as id_card from ".$this->invoicesettings_table_name." pi 
+                  JOIN ".$this->table_name." p on pi.professional_id = p.id 
+                  LEFT JOIN ".$this->document_table_name." pd ON p.id = pd.professional_id
+                  where pi.professional_id = :id";
+
+        $stmt = $this->conn->prepare( $query );
+        $id = $this->id;
+        $stmt->bindParam(':id',  $id, PDO::PARAM_INT);
+        
+        $stmt->execute();
+
+        // return values from database
+        return $stmt;
+
+    }
+
+    public function updateCompanyStamp($prof_id,$company_stamp){
+        // Check Professional document
+        $query = "SELECT count(id) as count  FROM " . $this->document_table_name . " 
+                WHERE
+                    professional_id = :id";
+     
+        //echo $query;
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        //echo $this->id." ------ ";
+
+        $cur_id = $prof_id;
+        // bind id of product to be updated
+        $stmt->bindParam(':id',  $cur_id, PDO::PARAM_INT);
+        //$stmt->bindValue(':id', '$cur_id', PDO::PARAM_STR);
+     
+        // execute query
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if(@$row['count']){ // Update Documents
+            $query = "UPDATE " . $this->document_table_name . "
+                    SET perid1='".$company_stamp."'";
+            $query .=" WHERE professional_id = :id";
+            
+            $stmt = $this->conn->prepare( $query );
+            // bind id of product to be updated
+            $stmt->bindParam(':id',  $prof_id, PDO::PARAM_INT);
+        }else{ // Insert New Record
+
+            $query = "INSERT INTO " . $this->document_table_name . " (`professional_id`, `perid1`) VALUES ($id, '".$company_stamp."')";
+
+            $stmt = $this->conn->prepare( $query );
+        } 
+
+        $stmt->execute();
+
+        return 1;
+    }
+
+
+    public function updateIdCard($prof_id,$id_card){
+        // Check Professional document
+        $query = "SELECT count(id) as count  FROM " . $this->document_table_name . " 
+                WHERE
+                    professional_id = :id";
+     
+        //echo $query;
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        //echo $this->id." ------ ";
+
+        $cur_id = $prof_id;
+        // bind id of product to be updated
+        $stmt->bindParam(':id',  $cur_id, PDO::PARAM_INT);
+        //$stmt->bindValue(':id', '$cur_id', PDO::PARAM_STR);
+     
+        // execute query
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if(@$row['count']){ // Update Documents
+            $query = "UPDATE " . $this->document_table_name . "
+                    SET perid2='".$id_card."'";
+            $query .=" WHERE professional_id = :id";
+            
+            $stmt = $this->conn->prepare( $query );
+            // bind id of product to be updated
+            $stmt->bindParam(':id',  $prof_id, PDO::PARAM_INT);
+        }else{ // Insert New Record
+
+            $query = "INSERT INTO " . $this->document_table_name . " (`professional_id`, `perid2`) VALUES ($id, '".$id_card."')";
+
+            $stmt = $this->conn->prepare( $query );
+        } 
+
+        $stmt->execute();
+
+        return 1;
     }
 
 }

@@ -102,7 +102,7 @@
                                     ?>
                                     <div class="total-rating-num-outer"><span class="total-rating-num"><?php echo number_format(($total_rating / 6),1);?></span>/5</div>
                                     <br><br>
-                                    <div class="col-md-3"><input class="profile-img" name="profile_img" type="file"></div>
+                                    <div class="col-md-3"><input class="profile-img" id="profile_img" name="profile_img" type="file"></div>
                                 </div>
 
                                 <div class="col-md-5">
@@ -620,12 +620,26 @@
             $(document).ready(function() {
                 $("#editprofile").on('click',function(){
                     var getSaveAPI = API_LOCATION+'professional/updateProfile.php';
+
+                    var form_data = new FormData(); 
+
+                    //Form data
+                    var input_data = $('#profileEditForm').serializeArray();
+                    $.each(input_data, function (key, input) {
+                        form_data.append(input.name, input.value);
+                    });
+
+                    var profile_img = $('#profile_img').prop('files')[0];
+                    form_data.append('profile_img', profile_img);
                 
                     $.ajax({
                             type: "POST",
                             url: getSaveAPI,
-                            data: $("#profileEditForm").serialize(),
-                            dataType: "json",
+                            dataType: "JSON",
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            data: form_data,
                             success: function(data)
                             {
                                 alert(data['message']);

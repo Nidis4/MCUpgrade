@@ -649,5 +649,13 @@ ALTER TABLE `professionals_photos`
 
 ALTER TABLE `professionals_invoice_settings` ADD `business_type` VARCHAR(255) NULL AFTER `tax_office`, ADD `vat_number` VARCHAR(255) NULL AFTER `business_type`, ADD `country` VARCHAR(255) NULL AFTER `vat_number`, ADD `pc` VARCHAR(255) NULL AFTER `country`, ADD `land_line` VARCHAR(255) NULL AFTER `pc`, ADD `mobile_phone` VARCHAR(255) NULL AFTER `land_line`, ADD `receipt_email` VARCHAR(255) NULL AFTER `mobile_phone`, ADD `id_card_number` VARCHAR(255) NULL AFTER `receipt_email`, ADD `personal_vat_id` VARCHAR(255) NULL AFTER `id_card_number`, ADD `website` VARCHAR(255) NULL AFTER `personal_vat_id`, ADD `directory_link` VARCHAR(255) NULL AFTER `website`;
 
+ALTER TABLE `professionals_invoice_settings` CHANGE `company_name` `company_name` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+ALTER TABLE `professionals_invoice_settings` CHANGE `profession` `profession` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+
+ALTER TABLE `professionals_invoice_settings` CHANGE `address` `address` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+ALTER TABLE `professionals_invoice_settings` CHANGE `business_type` `business_type` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+
+ALTER TABLE `professionals_invoice_settings` CHANGE `tax_office` `tax_office` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+
 <!-------------------------------->
-<!-- End 25 Mar 2018 Harpreet ---->
+<!-- End 26 Mar 2018 Harpreet ---->
