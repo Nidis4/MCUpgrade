@@ -90,7 +90,7 @@ if($stmt){
 			$smsDate = date('l d/m/y', $dateTstampStart);			
 			$smsText = implode(' - ', [
 						$smsDate,
-						$time,
+						$times[0],
 						$address,
 						$budget . '€',
 						$firstname . ' ' . $surname,
