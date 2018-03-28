@@ -669,3 +669,11 @@ ALTER TABLE `professionals_account_info` ADD `resettime` DATETIME NULL AFTER `re
 
 <!-------------------------------->
 <!-- End 27 Mar 2018 Harpreet ---->
+
+<!-------------------------------->
+<!-- Start 28 Mar 2018 Harpreet -->
+
+ALTER TABLE `professionals_account_info` CHANGE `resettime` `resettime` INT(11) NULL DEFAULT NULL;
+
+<!-------------------------------->
+<!-- End 28 Mar 2018 Harpreet ---->

@@ -65,6 +65,7 @@ $("#forgetForm").submit(function(){
                 if (result == '1') {
                      // Send Ajax request to backend.php, with src set as "img" in the POST data
                     alert(data['message']);
+                    window.location.replace('../professional-profile/login.html');
                     //location.reload();
                             
 

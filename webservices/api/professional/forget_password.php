@@ -31,7 +31,7 @@ if($stmt){
     $message = str_replace('{{URL}}', SITE_URL, $body );
     $message = str_replace('{{KEY}}', $stmt['key'], $message );
     
-    $to = "er.hpreetsingh@gmail.com";
+    $to = $stmt['email'];
     $subject = "Reset Password - MyConstructor";
     // Always set content-type when sending HTML email
     $headers = "MIME-Version: 1.0" . "\r\n";
