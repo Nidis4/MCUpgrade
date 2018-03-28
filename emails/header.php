@@ -144,10 +144,10 @@
 			<tr>
 				<td class="logotd" style="width:100%; display:table;">
 					<div style="float: left;">
-						<img src="{{URL}}emaillogo.png"/>
+						<img src="{{URL}}emails/emaillogo.png"/>
 					</div>
 					<div class="tright" style="float: right; padding-top: 5px;">
-					    <img src="{{URL}}contacttop.png"/>
+					    <img src="{{URL}}emails/contacttop.png"/>
 					</div>
 				</td>				
 			</tr>

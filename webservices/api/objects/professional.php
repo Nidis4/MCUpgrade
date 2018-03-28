@@ -86,16 +86,17 @@ class Professional{
         $num = $stmt->rowCount();
         if( $num >= 1){
             $key = base64_encode($email.time()); 
-            $time = date("Y-m-d H:i:s",strtotime("+5 minutes"));
+            $time = strtotime("+5 minutes");
 
             $query1 = "UPDATE " . $this->account_table_name . "
                     SET `resetkey`='".$key."', `resettime`='".$time."'";
-            $query1 .=" WHERE email = '".$email."'";
-
+            $query1 .=" WHERE `email` = '".$email."'";
+            
             $stmt1 = $this->conn->prepare( $query1 );
             $stmt1->execute();
             
             $return = array('email'=>$email,'key'=>$key);
+
 
             return $return;
 
@@ -110,8 +111,8 @@ class Professional{
         // select all query
         $query = "SELECT  professional_id 
                 FROM `" . $this->account_table_name . "` a 
-                WHERE a.resetkey = :resetkey and resettime <='".date("Y-m-d H:i:s")."'";
-     
+                WHERE a.`resetkey` = :resetkey and `resettime` >='".time()."'";
+        
         // prepare query statement
         $stmt = $this->conn->prepare($query);
 
@@ -123,16 +124,18 @@ class Professional{
         $num = $stmt->rowCount();
         if( $num >= 1){
             
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
             $pass = md5($password);
 
             $query1 = "UPDATE " . $this->account_table_name . "
-                    SET `password`='".$pass."', `resetkey`='', `resettime`=''";
-            $query1 .=" WHERE email = '".$email."'";
-
+                    SET `password`='".$pass."', `resetkey`=''";
+            $query1 .=" WHERE professional_id = '".$row['professional_id']."'";
+        
             $stmt1 = $this->conn->prepare( $query1 );
             $stmt1->execute();
             
-            $return = array('email'=>$email,'key'=>$key);
+            $return = array('professional_id'=>$row['professional_id']);
 
             return $return;
 

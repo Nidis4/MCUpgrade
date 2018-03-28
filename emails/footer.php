@@ -1,5 +1,5 @@
 
-				<tr style='background-image: url("{{URL}}bgbottom.jpg");'>
+				<tr style='background-image: url("{{URL}}emails/bgbottom.jpg");'>
 
 					<td style="color: #ffffff; text-align: center; font-size: 20px; ">
 						<div style="padding: 10px; margin-top: 10px;">Για οποιαδήποτε αλλαγή ή για επικοινωνία με τον </div>
@@ -13,11 +13,11 @@
 					<td style="text-align: center; font-size: 20px; font-weight: bold;">
 						<div style="color: #000000; width: 100%; float: left; ">Ακολουθήστε μας στα Social Media</div>
 						<div style=" margin-top: 20px; width: 100%; float: left;">
-							<a href="#"><img style="width: 30px; margin-right: 5px;" src="{{URL}}fb.jpg"></a>
-							<a href="#"><img style="width: 30px; margin-right: 5px;" src="{{URL}}twitter.jpg"></a>
-							<a href="#"><img style="width: 30px; margin-right: 5px;" src="{{URL}}gplus.jpg"></a>
-							<a href="#"><img style="width: 30px; margin-right: 5px;" src="{{URL}}pin.jpg"></a>
-							<a href="#"><img style="width: 30px;" src="{{URL}}linked.jpg"></a>
+							<a href="#"><img style="width: 30px; margin-right: 5px;" src="{{URL}}emails/fb.jpg"></a>
+							<a href="#"><img style="width: 30px; margin-right: 5px;" src="{{URL}}emails/twitter.jpg"></a>
+							<a href="#"><img style="width: 30px; margin-right: 5px;" src="{{URL}}emails/gplus.jpg"></a>
+							<a href="#"><img style="width: 30px; margin-right: 5px;" src="{{URL}}emails/pin.jpg"></a>
+							<a href="#"><img style="width: 30px;" src="{{URL}}emails/linked.jpg"></a>
 						</div>
 					</td>
 				</tr>
