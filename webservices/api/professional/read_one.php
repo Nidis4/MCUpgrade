@@ -28,10 +28,10 @@ $professional->id = isset($_GET['id']) ? $_GET['id'] : die();
 
 // create array
 $stmt = $professional->readOne();
-
 $stmtApplications = $professional->getApplications();
-
 $stmtCategories = $professional->getCategories();
+$stmtReviews = $professional->getAllReviews();
+
 $numCat = $stmtCategories->rowCount();
 if($numCat >= 1){
     $categories_arr = array();
@@ -70,15 +70,68 @@ if($numCat >= 1){
    $getConties = array(); 
 }
 
-$applications_arr = array();
 
+$numRev = $stmtReviews->rowCount();
+if($numRev >= 1){
+    $reviews_arr = array();
+
+    while ($row = $stmtReviews->fetch(PDO::FETCH_ASSOC)){
+        
+        $reviews_item=array(
+            "quality" => $row['quality'],
+            "reliability" => $row['reliability'],
+            "cost" => $row['cost'],
+            "schedule" => $row['schedule'],
+            "behaviour" => $row['behaviour'],
+            "cleaniness" => $row['cleanliness'],
+            "comment" => $row['comment'],
+            "created" => $row['created']
+
+        );
+        array_push($reviews_arr, $reviews_item);
+    }
+   
+}else{
+   $reviews_arr = array(); 
+}
+
+
+$stmtReviews = $professional->getReviewStats();
+$numRev = $stmtReviews->rowCount();
+if($numRev >= 1){
+    //$reviewsStat_arr = array();
+
+    while ($row = $stmtReviews->fetch(PDO::FETCH_ASSOC)){
+        
+        $reviewsStat_arr=array(
+        	"total" => $row['TOTAL'],
+        	"average_total" => $row['AVE_TOTAL'],
+            "quality" => $row['quality'],
+            "reliability" => $row['reliability'],
+            "cost" => $row['cost'],
+            "schedule" => $row['schedule'],
+            "behaviour" => $row['behaviour'],
+            "cleaniness" => $row['cleanliness']
+        );
+        //array_push($reviewsStat_arr, $reviews_item);
+    }
+   
+}else{
+   $reviewsStat_arr = array(); 
+}
+
+
+$applications_arr = array();
 while ($row = $stmtApplications->fetch(PDO::FETCH_ASSOC)){
     extract($row);
     $application_item=array(
         "category_name" => $name_greek,
         "category_id" => $category_id,
         "application_name" => $title_greek,
-        "price" => $price
+        "price" => $price,
+        "unit" => $unit,
+        "description" => $description,
+        "budget" => $budget
     );
     array_push($applications_arr, $application_item);
 }
@@ -93,6 +146,9 @@ $professional_arr=array(
     "last_name" => $professional->last_name,
     "sex" => $professional->sex,
     "address" => $professional->address,
+    "city" => $professional->city,
+    "image" => $professional->image,
+    "description" => $professional->description,
     "county_id" => $professional->county_id,
     "profile_status" => $professional->profile_status,
     "mobile" => $professional->mobile,
@@ -117,7 +173,9 @@ $professional_arr=array(
     "percentage" => $percentage,
     "applications" => $applications_arr,
     "categories"   => $getCategories,
-    "counties"   => $getConties
+    "counties"   => $getConties,
+    "reviews_stats" => $reviewsStat_arr,
+    "reviews" => $reviews_arr
 );
    
     
