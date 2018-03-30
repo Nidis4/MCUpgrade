@@ -241,6 +241,7 @@ FROM
             SELECT `DATE` as date, `TIME` as time, 'Busy' as address FROM `professionals_busytimes` WHERE `PROFESSIONAL_ID` = ".$id."  AND `DATE` BETWEEN '".$startDate."' AND '".$endDate."'
         ) subquery
 ORDER   BY `date` ASC, `time` ASC";
+
  
  $query ="SELECT `type`,
        `date`,

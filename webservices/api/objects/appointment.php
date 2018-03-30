@@ -189,6 +189,24 @@ class Appointment{
         return $stmt;
     }
 
+    public function getAppointnmentsByProf($prof_id, $status){
+        // select query
+        $query = "SELECT
+                    `id`, `prof_member_id`, `cust_member_id`, `application_id`, `county_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelReason`, `cancelComment`
+                FROM
+                    " . $this->table_name . " 
+                WHERE `status` LIKE '%$status%' AND `prof_member_id` = '$prof_id'
+                ORDER BY `datetimeCreated` DESC";
+         $stmt = $this->conn->prepare( $query );
+    
+
+        // execute query
+        $stmt->execute();
+     
+        // return values from database
+        return $stmt;
+    }
+
     // read products with pagination for Customer
     public function readPagingByCust($from_record_num, $records_per_page, $cust_id){
      
