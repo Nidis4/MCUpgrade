@@ -54,6 +54,7 @@ $(document).ready(function(){
 	$('.prof-main-col:lt(' + count + ')').show();
 	$('#showless').hide();
 
+
 	if(count >= count_professionals){
 		$('div#loadmore').hide();
 	}else{
@@ -161,6 +162,5 @@ $(document).ready(function(){
 
 	}
 	
-
-
 });
+

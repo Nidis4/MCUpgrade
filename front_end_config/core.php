@@ -65,7 +65,74 @@
 														<option value="51">Νομός Χίου</option>
 														<option value="52">Άγιο Όρος</option>
 														<option value="53">Ελλάδα</option>
-				                                	</select>';
+				                                	</select>';	
+
+
+	$select_job = '<select class="select-job">
+							<option selected="selected" value="-1">Ειδικότητα</option>
+							<option value="126">Προσφορές</option>
+							<option value="31">Γενική Φόρμα</option>
+							<option value="41">Ανακαίνιση</option>
+							<option value="132">Αποθήκευση Επίπλων</option>
+							<option value="71">Οικοδομική Άδεια</option>
+							<option value="72">Αρχιτεκτονικά Σχέδια</option>
+							<option value="105">Άδεια Μικρής Κλίμακας</option>
+							<option value="56">Ασανσέρ</option>
+							<option value="102">Απολυμάνσεις</option>
+							<option value="116">Αποφράξεις</option>
+							<option value="54">Βάψιμο</option>
+							<option value="104">Βεβαίωση Μηχανικού</option>
+							<option value="133">Βιολογικός Καθαρισμός Αυτοκινήτου</option>
+							<option value="111">Γέμισμα Τσιμεντοκονίας</option>
+							<option value="55">Γυψοσανίδες Τσιμεντοσανίδες</option>
+							<option value="64">Ενδοδαπέδια Θέρμανση</option>
+							<option value="62">Δάπεδα Μπετού</option>
+							<option value="43">Ενεργειακό Πιστοποιητικό</option>
+							<option value="100">Επισκευή Λευκών Συσκευών</option>
+							<option value="125">Θερμογραφία</option>
+							<option value="32">Θερμομόνωση τοίχων</option>
+							<option value="58">Ηλεκτρολόγος</option>
+							<option value="117">Ηλεκτρονικός</option>
+							<option value="134">Ηλεκτρολογική Ανακαίνιση</option>
+							<option value="68">Κάδοι για Μπάζα</option>
+							<option value="66">Ενεργειακά Τζάκια</option>
+							<option value="101">Καθαρισμός Στρωμάτων</option>
+							<option value="110">Καθαρισμός Τζακιού</option>
+							<option value="112">Καθαρισμός Σαλονιού</option>
+							<option value="114">Καθαρισμός Χαλιών</option>
+							<option value="122">Κλειδαράς</option>
+							<option value="57">Κλιματιστικό</option>
+							<option value="42">Κουφώματα</option>
+							<option value="109">Μάρμαρα</option>
+							<option value="33">Μόνωση Ταράτσας</option>
+							<option value="103">Μεταφορές - Μετακομίσεις</option>
+							<option value="115">Ξύλινα Δάπεδα</option>
+							<option value="73">Νομιμοποίηση Αυθαιρέτων</option>
+							<option value="120">Ντουλάπες</option>
+							<option value="63">Πατητή Τσιμεντοκονία</option>
+							<option value="121">Ντουλάπια Κουζίνας</option>
+							<option value="60">Πιστοποιητικό ΔΕΗ</option>
+							<option value="44">Προκατασκευασμένα Σπίτια</option>
+							<option value="128">Πλήρης Ανακαίνιση Κουζίνας</option>
+							<option value="130">Πόρτες</option>
+							<option value="136">Πετρέλαιο Θέρμανσης </option>
+							<option value="67">Σκαλωσιές</option>
+							<option value="65">Σοβάτισμα</option>
+							<option value="119">Τεχνικός Ασφαλείας για επαγγελματικούς χώρους Α &amp; Β Κατηγορίας</option>
+							<option value="129">Συναγερμοί- Κάμερες Ασφαλείας</option>
+							<option value="118">Τεχνικός Ασφαλείας </option>
+							<option value="123">Τέντες</option>
+							<option value="127">Τεχνικός Υπολογιστών</option>
+							<option value="137">Τοποθέτηση Δαπέδου PVC</option>
+							<option value="113">Τοποθέτηση Δαπέδου Τύπου Laminate</option>
+							<option value="135">Τοποθέτηση Ταπετσαρίας Τοίχου</option>
+							<option value="70">Τοπογραφικό</option>
+							<option value="61">Τοποθέτηση Πλακιδίων</option>
+							<option value="59">Υδραυλικός</option>
+							<option value="69">Χωματουργικές Εργασίες</option>
+							<option value="106">Συντήρηση Καυστήρα</option>
+							<option value="107">Συνεργεία καθαρισμού</option>
+					</select>';
 
 
 ?>
