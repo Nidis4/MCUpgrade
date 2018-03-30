@@ -191,7 +191,9 @@ class Professional{
     }
 
     public function restAvailable($date, $time, $address){
-        $query = "SELECT p.`id`, p.`first_name`, p.`last_name`, p.`profile_status`, co.`address` FROM `professionals` p, `professionals_counties` c, `professionals_applications` a, `professionals_contact_details` co WHERE c.professional_id=p.id AND a.professional_id=p.id AND co.professional_id=p.id  AND c.county_id= :county AND a.application_id= :application AND p.`id` NOT IN (SELECT `prof_member_id` FROM `appointments` WHERE `date` = '$date' AND `time` = '$time' AND `address`= '$address' )";
+        $query = "SELECT p.`id`, p.`first_name`, p.`last_name`, p.`profile_status`, co.`address` 
+                FROM `professionals` p, `professionals_counties` c, `professionals_applications` a, `professionals_contact_details` co 
+                WHERE c.professional_id=p.id AND a.professional_id=p.id AND co.professional_id=p.id  AND c.county_id= :county AND a.application_id= :application AND p.`id` NOT IN (SELECT `prof_member_id` FROM `appointments` WHERE `date` = '$date' AND `time` = '$time' AND `address`= '$address' )";
 
         $stmt = $this->conn->prepare( $query );
 
@@ -205,7 +207,29 @@ class Professional{
         return $stmt;
     }
 
+    public function addBusy($id, $bdate, $btime){
+        $query = "INSERT INTO `professionals_busytimes` (`ID`, `PROFESSIONAL_ID`, `DATE`, `TIME`) VALUES (NULL, '".$id."', '".$bdate."', '".$btime."');";
+        //echo $query;
+        $stmt = $this->conn->prepare( $query );
+        //$stmt->bindParam(':id',  $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt;
+    }
 
+    public function deleteBusy($id, $prof_id, $busy_date, $busy_time){
+        if ($id!=""){
+            $query = "DELETE FROM `professionals_busytimes` WHERE `ID` = $id";
+        }
+        else{
+            $query = "DELETE FROM `professionals_busytimes` WHERE `PROFESSIONAL_ID` = $prof_id AND `DATE`='$busy_date' AND `TIME`='$busy_time' ";
+        }
+        
+        //echo $query;
+        $stmt = $this->conn->prepare( $query );
+        //$stmt->bindParam(':id',  $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt;
+    }
 
     public function busySlots($startDate, $endDate, $id){
        
