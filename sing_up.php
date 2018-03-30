@@ -44,7 +44,8 @@
 								    <p><input placeholder="Όνομα.." class="fname" name="fname"></p>
 								    <p><input placeholder="Επίθετο.." class="lname" name="lname"></p>
 								    <p><input placeholder="Εmail.." class="sing_up_email" name="sing_up_email" type="email"></p>
-								    <p><input placeholder="Κινητό Τηλέφωνο.." class="sing_up_til" name="sing_up_til" type="number"></p>
+								    <p class="p-outer-tel"><input placeholder="Κινητό Τηλέφωνο.." class="sing_up_til" name="sing_up_til" type="tel"></p>
+								    <p class="sms-msg">*Θα λάβετε δωρεάν μήνυμα επιβεβαίωσης.</p>
 								    <input type="button" onclick="validateFirstStep();"  name="next" class="nextstep action-button" value="Επόμενο" />
 								</fieldset>
 
@@ -54,6 +55,7 @@
 								    <p><select class="select-idiotita">
 								    	<option>Ελεύθερος επαγγελματίας</option>
 								    	<option>Εταιρεία</option>
+								    	<option>Άλλο</option>
 								    </select></p>
 
 								    <p><?php echo $select_job; ?></p>

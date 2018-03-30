@@ -3472,3 +3472,13 @@ h1.h1-sing-up {
     font-size: 48px;
     line-height: 55px;
 }
+
+
+p.p-outer-tel {
+    margin-bottom: 5px;
+}
+
+p.sms-msg {
+    text-align: left;
+    font-size: 13px;
+}
