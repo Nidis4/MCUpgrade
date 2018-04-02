@@ -16,6 +16,8 @@
 
          <!-- jQuery CDN -->
          <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
          <!-- Bootstrap Js CDN -->
          <script src="../assets/bootstrap337/js/bootstrap.min.js"></script>
          <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">

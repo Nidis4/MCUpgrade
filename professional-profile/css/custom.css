@@ -66,6 +66,12 @@ tr.status-0 .cancel-row, tr.status-8 .cancel-row, tr.status-7 .cancel-row, tr.st
     color: white;
     overflow: hidden;
 }
+.calendar li.busy.ui-selecting, .calendar li.busy.ui-selected{
+    color: #000 !important;
+}
+.calendar li.busy.ui-selecting, .calendar li.busy.ui-selected{
+   background: #ffffff !important; 
+}
 #available .calendar {
     display: none;
 }

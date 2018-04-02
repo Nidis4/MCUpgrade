@@ -4,6 +4,7 @@
     $currentPage = 'timeline';
     include('menu.php'); 
  ?>
+ <link href="css/custom.css" rel="stylesheet">
         <div class="col-md-12 page-title" ><h2>Latest Appointments</h2></div>
         <section id="cd-timeline" class="cd-container">
                 <?php
@@ -88,13 +89,120 @@
 
               <div class="container">
                  
-                      <div style="background: #fff; padding: 50px;" class="col-md-12 proffessional-calendar">
-                            <h1 style="text-align: center;">HERE IS THE CALENDAR</h1>
-                      </div>
+                  <div style="background: #fff; padding: 50px;" class="col-md-12 proffessional-calendar">
+                    <h1 style="text-align: center;">HERE IS THE CALENDAR</h1>
+                    <?php
+                        //$startDate = date("Y-m-d");
+                        $startDate = "2018-03-31";
+                        $endDate = date("Y-m-d",strtotime($startDate ." +5 Days"));
+                        
+                        $calendar = file_get_contents(SITE_URL.'webservices/api/professional/getCalendar.php?prof_id='.$_SESSION['id'].'&startDate='.$startDate.'&endDate='.$endDate);
+                        $calendar = json_decode($calendar, true);
+
+                        // echo "<pre>";
+                        // print_r($calendar);
+                        // die;
+                    ?>
+
+                    <div class="row" id="available">
+                        <div class="col-md-12 availProf" data-listing-distance="100000">
+                            <div class="col-md-12 calendar calendar18273 ui-selectable" style="display: block;">
+                                <div class="row">
+                                    <?php 
+                                        $dates = array();
+                                        if(@$calendar['calendar']){
+                                            $i = 1;
+                                            foreach ($calendar['calendar'] as $value) {
+                                                if($i == 1 ){
+                                                    
+                                                    $dates[] = $value['date'];
+                                    ?>
+                                                <div class="col-md-2">
+                                                        <div class="row calDate text-center">
+                                                            <div class="col-md-12"><?php echo $value['date'];?></div>
+                                                        </div> 
+                                                        <ul class="selectable" id="selectable-18273">   
+                                    <?php
+
+                                                }else if(!in_array($value['date'], $dates)){
+
+                                                    $dates[] = $value['date'];
+                                    ?>
+                                                        </ul>
+                                                    </div><!-- Close col-md-2--> 
+                                                    <div class="col-md-2">
+                                                        <div class="row calDate text-center">
+                                                            <div class="col-md-12"><?php echo $value['date'];?></div>
+                                                        </div>
+                                                        <ul class="selectable" id="selectable-18273">
+                                                    
+                                    <?php
+                                                
+                                                }
+
+                                    ?>
+                                                        <li class="<?php if($value['type'] == 'Busy'){?>busy <?php }else{?> free <?php }?> slot ui-selectee" timefrom="<?php echo $value['timefrom'];?>" timeto="<?php echo $value['timeto'];?>" data-dateslot="<?php echo $value['date'];?>">
+                                                            
+                                                            <?php echo $value['timefrom'];?>
+                                                                
+                                                        </li>
+                                    <?php            
+
+                                                if($i == count($calendar['calendar'])){
+                                    ?>
+                                                  </ul>
+                                                </div><!-- Close col-md-2-->  
+                                    <?php                
+                                                }
+                                    ?>
+                                                
+                                    <?php 
+                                            $i++;
+                                            } 
+                                        }?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
                   
               </div>
         </div>
     </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            $( ".calendar" ).selectable({
+                  filter: ".slot.free",
+                  stop: function() {
+                    var result = $( "#chosen-slot span" ).empty();
+                    var timeFrom = "";
+                    var timeTo = "";
+                    var dateChoosed ="";
+                    var profID = "";
+                    $( ".ui-selected", this ).each(function() {
+                        //alert($( this ).attr('timefrom'));
+                        if (timeFrom==""){
+                            timeFrom = $( this ).attr('timefrom');
+                        }
+                        timeTo = $( this ).attr('timeto');
+                        dateChoosed = $( this ).attr('data-dateslot');
+                        profID = $(this).closest('.col-md-2').attr('id');
+                      //result.append( " #" + ( index + 1 ) );
+                    });
+                    //result.append(dateChoosed+": "+timeFrom+"-"+timeTo);
+                    if (startDate == endDate){
+                        //alert('Do Something: ' +profID);
+                        $('.profile').removeClass('selectedProf');
+                        $( "#"+profID ).addClass('selectedProf');
+                    }
+                    $( "#appDate").html(dateChoosed);
+                    $( "#appTime").html(timeFrom+"-"+timeTo);
+                  }
+            });
+            
+        });
+    </script>
     </body>
     
 
