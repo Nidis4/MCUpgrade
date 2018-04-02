@@ -92,8 +92,8 @@
                   <div style="background: #fff; padding: 50px;" class="col-md-12 proffessional-calendar">
                     <h1 style="text-align: center;">HERE IS THE CALENDAR</h1>
                     <?php
-                        //$startDate = date("Y-m-d");
-                        $startDate = "2018-03-31";
+                        $startDate = date("Y-m-d");
+                        //$startDate = "2018-03-31";
                         $endDate = date("Y-m-d",strtotime($startDate ." +5 Days"));
                         
                         $calendar = file_get_contents(SITE_URL.'webservices/api/professional/getCalendar.php?prof_id='.$_SESSION['id'].'&startDate='.$startDate.'&endDate='.$endDate);
@@ -161,7 +161,13 @@
                                             } 
                                         }?>
                                 </div>
+                                
                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12"><br>
+                            <div class="save-btn" id="savetime" >Save</div>
                         </div>
                     </div>
                   </div>
@@ -169,36 +175,70 @@
               </div>
         </div>
     </div>
+    <script src="../js/core.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
 
             $( ".calendar" ).selectable({
                   filter: ".slot.free",
                   stop: function() {
-                    var result = $( "#chosen-slot span" ).empty();
-                    var timeFrom = "";
-                    var timeTo = "";
-                    var dateChoosed ="";
-                    var profID = "";
-                    $( ".ui-selected", this ).each(function() {
-                        //alert($( this ).attr('timefrom'));
-                        if (timeFrom==""){
-                            timeFrom = $( this ).attr('timefrom');
-                        }
-                        timeTo = $( this ).attr('timeto');
-                        dateChoosed = $( this ).attr('data-dateslot');
-                        profID = $(this).closest('.col-md-2').attr('id');
-                      //result.append( " #" + ( index + 1 ) );
-                    });
-                    //result.append(dateChoosed+": "+timeFrom+"-"+timeTo);
-                    if (startDate == endDate){
-                        //alert('Do Something: ' +profID);
-                        $('.profile').removeClass('selectedProf');
-                        $( "#"+profID ).addClass('selectedProf');
-                    }
-                    $( "#appDate").html(dateChoosed);
-                    $( "#appTime").html(timeFrom+"-"+timeTo);
+                    // var result = $( "#chosen-slot span" ).empty();
+                    // var timeFrom = "";
+                    // var timeTo = "";
+                    // var dateChoosed ="";
+                    // var profID = "";
+                    // $( ".ui-selected", this ).each(function() {
+                    //     //alert($( this ).attr('timefrom'));
+                    //     if (timeFrom==""){
+                    //         timeFrom = $( this ).attr('timefrom');
+                    //     }
+                    //     timeTo = $( this ).attr('timeto');
+                    //     dateChoosed = $( this ).attr('data-dateslot');
+                    //     profID = $(this).closest('.col-md-2').attr('id');
+                    //   //result.append( " #" + ( index + 1 ) );
+                    // });
+                    // //result.append(dateChoosed+": "+timeFrom+"-"+timeTo);
+                    // if (startDate == endDate){
+                    //     //alert('Do Something: ' +profID);
+                    //     $('.profile').removeClass('selectedProf');
+                    //     $( "#"+profID ).addClass('selectedProf');
+                    // }
+                    // $( "#appDate").html(dateChoosed);
+                    // $( "#appTime").html(timeFrom+"-"+timeTo);
+
+                    //alert("fd");
                   }
+            });
+
+            $("#savetime").on('click',function(){
+                var getSaveAPI ="";
+                var form_data = "";
+                $( ".calendar .ui-selected").each(function() {
+                    
+                    timeFrom = $( this ).attr('timefrom');
+                    timeTo = $( this ).attr('timeto');
+                    dateChoosed = $( this ).attr('data-dateslot');
+                    profID = '<?php echo $_SESSION['id'];?>';
+                    getSaveAPI = API_LOCATION+'professional/addBusyTimes.php';
+                    //form_data = "{prof_id:'"+profID+"'busy_date:"+dateChoosed+",busy_time:"+timeFrom+'-'+timeTo+"}"
+                    //form_data: { field1: "hello", field2 : "hello2"} ,
+                    //alert(getSaveAPI);
+                    
+                    $.ajax({
+                            type: "POST",
+                            url: getSaveAPI,
+                            dataType: "JSON",
+                            data: { prof_id: profID, busy_date :dateChoosed, busy_time : "+timeFrom+'-'+timeTo+"},
+                            success: function(data)
+                            {
+                                //alert(data['message']);
+                                //location.reload();
+                            }
+                        });
+                  //result.append( " #" + ( index + 1 ) );
+                });
+
+
             });
             
         });
