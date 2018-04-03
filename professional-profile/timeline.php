@@ -93,7 +93,7 @@
                     <h1 style="text-align: center;">HERE IS THE CALENDAR</h1>
                     <?php
                         $startDate = date("Y-m-d");
-                        //$startDate = "2018-03-31";
+                        //$startDate = "2018-04-01";
                         $endDate = date("Y-m-d",strtotime($startDate ." +5 Days"));
                         
                         $calendar = file_get_contents(SITE_URL.'webservices/api/professional/getCalendar.php?prof_id='.$_SESSION['id'].'&startDate='.$startDate.'&endDate='.$endDate);
