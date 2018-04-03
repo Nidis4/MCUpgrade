@@ -123,15 +123,15 @@ if($numRev >= 1){
 $stmtProfPhotos = $professional->getPhotos();
 $numPhotos = $stmtProfPhotos->rowCount();
 if($numPhotos >= 1){
-    //$reviewsStat_arr = array();
+    $photos_arr = array();
 
     while ($row = $stmtProfPhotos->fetch(PDO::FETCH_ASSOC)){
         
-        $photos_arr=array(
+        $photos_item=array(
         	"id" => $row['id'],
         	"image_name" => $row['image_name']
         );
-        //array_push($reviewsStat_arr, $reviews_item);
+        array_push($photos_arr, $photos_item);
     }
    
 }else{

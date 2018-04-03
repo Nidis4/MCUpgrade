@@ -80,6 +80,7 @@ if($num>0){
             "cancelComment" => $cancelComment,
             "agent_name" => $agentName,
             "mobile" => $customerMobile,
+            "country" => "Greece",
             "category_name" => $categoryName,
         );
         if(@$category_id){
