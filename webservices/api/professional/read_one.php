@@ -125,12 +125,14 @@ $applications_arr = array();
 while ($row = $stmtApplications->fetch(PDO::FETCH_ASSOC)){
     extract($row);
     $application_item=array(
+    	"id" => $id,
+    	"application_name" => $title_greek,
         "category_name" => $name_greek,
         "category_id" => $category_id,
-        "application_name" => $title_greek,
         "price" => $price,
         "unit" => $unit,
-        "description" => $description,
+        "prof_description" => $description,
+        "app_description" => $detail_description_gr,
         "budget" => $budget
     );
     array_push($applications_arr, $application_item);

@@ -302,7 +302,7 @@ ORDER BY `date` ASC,
     public function getApplications(){
      
         // select query
-        $query = "SELECT c.name_greek, po.category_id, a.title_greek, po.price, a.unit, po.description, po.budget 
+        $query = "SELECT a.id, c.name_greek, po.category_id, a.title_greek, po.price, a.unit, po.description, a.detail_description_gr, po.budget 
                     FROM `professionals_applications` po, `categories` c, `applications` a 
                     WHERE `professional_id`= ? AND po.category_id=c.id AND po.application_id = a.id AND po.price >0  
                     ORDER BY po.price";
