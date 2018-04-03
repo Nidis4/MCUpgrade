@@ -10,6 +10,26 @@
         height: 218px;*/
         margin-bottom: 20px;
     }
+
+    #sortable{
+        float: left;
+        width: 840px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    #sortable li {
+    margin: 10px 10px 10px 0;
+    padding: 1px;
+    float: left;
+    width: 200px;
+    height: 200px;
+    /*font-size: 4em;*/
+    text-align: center;
+}
+ #sortable li a{
+    cursor: move;
+    }
 </style>
                     <div class="container">
                             <div class="row proffessional-photos-row">
@@ -22,13 +42,22 @@
                                     $photos = json_decode($photos, true); // decode the JSON into an associative array
 
                                     if(@$photos['records']){
+                                ?>      
+                                        <ul id="sortable">
+                                <?php        
                                         foreach ($photos['records'] as $value) {
                                 ?>
-                                            <a href="<?php echo SITE_URL."img/professional-imgs/portfolio/".$value['image_name'];?>" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
-                                                <img src="<?php echo SITE_URL."img/professional-imgs/portfolio/".$value['image_name'];?>" class="img-fluid">
-                                            </a>   
+                                            <li class="ui-state-default" rel="<?php echo $value['id']?>"><?php //echo $value['image_name'];?>
+                                                <a href="<?php echo SITE_URL."img/professional-imgs/portfolio/".$value['image_name'];?>" data-toggle="lightbox" data-gallery="example-gallery" class="">
+                                                    <img src="<?php echo SITE_URL."img/professional-imgs/portfolio/".$value['image_name'];?>" class="img-fluid">
+                                                </a>
+                                                <span></span>
+                                            </li>   
                                 <?php            
                                         }
+                                ?>
+                                        </ul>
+                                <?php
                                     }
                                     
                                 ?>
@@ -52,6 +81,35 @@
         <script src="../lightbox/dist/ekko-lightbox.js"></script>
         <script src="../js/core.js"></script>
         <script>
+              $( function() {
+                $( "#sortable" ).sortable({
+                    stop: function( event, ui ) {
+                        var odr = 1;
+                        var id = 0;
+                        var photos = {};
+                        $( "#sortable li").each(function() {
+                            id = $(this).attr('rel');
+                            photos[id] = odr;
+                            odr++;
+                        });
+
+                        var getSaveAPI = API_LOCATION+'professional/orderPhoto.php';
+                        var profID = '<?php echo $_SESSION['id'];?>';
+                        $.ajax({
+                            type: "POST",
+                            url: getSaveAPI,
+                            dataType: "JSON",
+                            data: { photos: photos,prof_id:profID},
+                            success: function(data)
+                            {
+                                //alert(data['message']);
+                                //location.reload();
+                            }
+                        });
+                    }
+                });
+                $( "#sortable" ).disableSelection();
+              } );
             $(document).ready(function() {
                 $("#drop-area").on('dragenter', function (e){
                     e.preventDefault();
@@ -101,9 +159,10 @@
                             for(var i=1; i<=data.images.length;i++){
                                 j = i-1;
                                 img_name = "<?php echo SITE_URL;?>img/professional-imgs/portfolio/"+data.images[j];
-                                $('.proffessional-photos-row').append("<a href='"+img_name+"' data-toggle='lightbox' data-gallery='example-gallery' class='col-sm-3'><img src='"+img_name+"' class='img-fluid' /></a>");
+                                $('#sortable').append("<li class='ui-state-default'><a href='"+img_name+"' data-toggle='lightbox' data-gallery='example-gallery' class=''><img src='"+img_name+"' class='img-fluid' /></a></li>");
                             }
                             alert(data.message);
+                            location.reload();
                             return false;    
                         }
                         

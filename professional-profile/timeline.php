@@ -209,11 +209,12 @@
                     //alert("fd");
                   }
             });
+            
 
             $("#savetime").on('click',function(){
                 var getSaveAPI ="";
                 var form_data = "";
-                $( ".calendar .ui-selected").each(function() {
+                $( ".calendar .free.ui-selected").each(function() {
                     
                     timeFrom = $( this ).attr('timefrom');
                     timeTo = $( this ).attr('timeto');

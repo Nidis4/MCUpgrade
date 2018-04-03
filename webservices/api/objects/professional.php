@@ -1051,7 +1051,7 @@ ORDER BY `date` ASC,
     public function getPhotos(){
         // select query
         $query = "SELECT pc.`id`, pc.`image_name` FROM ". $this->photos_table_name ." pc                   
-                WHERE pc.`professional_id`= ? order by pc.id";
+                WHERE pc.`professional_id`= ? order by pc.image_order";
      
         // prepare query statement
         $stmt = $this->conn->prepare( $query );
@@ -1197,6 +1197,21 @@ ORDER BY `date` ASC,
         $stmt->execute();
 
         return 1;
+    }
+
+    public function orderPhoto($id, $order){
+
+           $query = "UPDATE " . $this->photos_table_name . "
+                    SET image_order='".$order."'";
+           $query .=" WHERE id = '".$id."'";
+            
+           $stmt = $this->conn->prepare( $query );
+            // bind id of product to be updated
+           if($stmt->execute()){
+                return 1;
+           }else{
+                return 0;
+           }
     }
 
 }
