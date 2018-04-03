@@ -149,6 +149,7 @@ $professional_arr=array(
     "sex" => $professional->sex,
     "address" => $professional->address,
     "city" => $professional->city,
+    "service_area" => $professional->service_area,
     "image" => $professional->image,
     "description" => $professional->description,
     "county_id" => $professional->county_id,

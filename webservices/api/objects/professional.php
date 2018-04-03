@@ -18,6 +18,7 @@ class Professional{
     public $address;
     public $area;
     public $city;
+    public $service_area;
     public $country_id;
     public $latitude;
     public $longtitude;
@@ -378,7 +379,7 @@ ORDER BY `date` ASC,
      
         // query to read single record
         $query = "SELECT
-                 p.`id`, p.`first_name`, p.`last_name`, p.`sex`, p.`description`, p.`image`, p.`profile_status`, p.`admin_comments`,p.`viewtype`,p.`verified`, cd.`image1`, cd.`image2`, cd.`image3`, cd.`perid1`, cd.`perid2`, cd.`agreement1`, cd.`agreement2`, cd.`agreement3`, cd.`agreement4`, cd.`agreement5`, cd.`approve_per`, cd.`approve_doc`, co.`address`, co.`city`, co.`mobile`, co.`phone`, ca.`email`, ca.`calendar_id`, ct.`county_id`
+                 p.`id`, p.`first_name`, p.`last_name`, p.`sex`, p.`description`, p.`image`, p.`profile_status`, p.`admin_comments`,p.`viewtype`,p.`verified`, p.`service_area`, cd.`image1`, cd.`image2`, cd.`image3`, cd.`perid1`, cd.`perid2`, cd.`agreement1`, cd.`agreement2`, cd.`agreement3`, cd.`agreement4`, cd.`agreement5`, cd.`approve_per`, cd.`approve_doc`, co.`address`, co.`city`, co.`mobile`, co.`phone`, ca.`email`, ca.`calendar_id`, ct.`county_id`
             FROM
                 " . $this->table_name . " p
                 LEFT JOIN ". $this->contact_table_name." co
@@ -417,6 +418,8 @@ ORDER BY `date` ASC,
         $this->first_name = $row['first_name'];
         $this->last_name = $row['last_name'];
         $this->address = $row['address'];
+        $this->city = $row['city'];
+        $this->service_area = $row['service_area'];
         $this->sex = $row['sex'];
         $this->image = $row['image'];
         $this->description = $row['description'];
