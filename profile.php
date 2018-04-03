@@ -1,6 +1,57 @@
+              
+
+                <?php        
+                    include('front_end_config/core.php');
+
+                        if (isset($_GET['id'])) {
+                            $professional = file_get_contents($api_url .'/webservices/api/professional/read_one.php?id='. $_GET['id']);
+                            $professional = json_decode($professional, true); // decode the JSON into an associative array
+
+                            $first_name = $professional['first_name'];
+                            $last_name = $professional['last_name'];
+                            $sex = $professional['sex'];
+                            $address = $professional['address'];
+                            $city= $professional['city'];
+                            $service_area = $professional['service_area'];
+                            $image = $professional['image'];
+                            $description = $professional['description'];
+                            $county_id = $professional['county_id'];
+                            $profile_status = $professional['profile_status'];
+                            $mobile = $professional['mobile'];
+                            $phone = $professional['phone'];
+                            $email =$professional['email'];
+                            $calendar_id=$professional['calendar_id'];
+                            $admin_comments=$professional['admin_comments'];
+                            $viewtype= $professional['viewtype'];
+                            $verified= $professional['verified'];
+                            $image1= $professional['image1'];
+                            $image2 = $professional['image2'];
+                            $image3 = $professional['image3'];
+                            $perid1 = $professional['perid1'];
+                            $perid2 = $professional['perid2'];
+                            $agreement1 = $professional['agreement1'];
+                            $agreement2 = $professional['agreement2'];
+                            $agreement3 = $professional['agreement3'];
+                            $agreement4 = $professional['agreement4'];
+                            $agreement5 = $professional['agreement5'];
+                            $approve_per = $professional['approve_per'];
+                            $approve_doc = $professional['approve_doc'];
+                            $percentage = $professional['percentage'];
+                            $applications = $professional['applications'];
+                            $portfolio_photos = $professional['photos'];
+
+                        }else{
+                              exit(header("Location: index.php"));
+                        }
+                 ?>
+
+
+
         <?php include('header.php'); ?>
         <?php include('menu.php'); ?>
         <?php include('search.php'); ?>
+
+
 
                 <div class="container-fluid main-container-profile">
                     <div class="container container-proffesional-profile">
@@ -8,7 +59,7 @@
 
                             <div class="col-md-3 profile-img">
                                 <div class="profile-img-inner">
-                                    <img src="img/matzouranis.jpg">
+                                    <img src="<?php echo 'img/professional-imgs/'.$image ?>" onerror="this.src='img/professional-imgs/default-img-4.jpg';" alt="" />
                                     <div class="total-rating-num-outer"><span class="total-rating-num">4.9</span>/5</div>
                                 </div>
 
@@ -16,7 +67,7 @@
                             </div>
 
                             <div class="col-md-5">
-                                <h2 class="front-professional-name">Λευτέρης Ματζουράνης</h2>
+                                <h3 class="front-professional-name"><?php echo  $first_name . " " . $last_name; ?></h3>
                                 <a class="go-to-reviews" href="#proffessionalRiviews">
                                     <div class="col-md-12 proffesionalTotalReviews">
                                         <div class="starsouter">
@@ -29,16 +80,16 @@
                                     </div>
                                 </a>
                                 <p class="front-professional-desc">Εξυπηρετούμε όλη την Αττική, Έδρα Νότια Προάστια.</p>
-                                <p class="front-professional-oneline-desc">Άμεσα, οικονομικά και υπεύθυνα αναλαμβάνουμε κάθε μεταφορά σας!</p>
-                                <p class="front-proffesional-address"><i class="fa fa-map-marker"></i> Στυλ. Γονατά και Θεσπιέων, Περιστέρι</p>
-                                <p class="front-professional-tel"><i class="fa fa-phone"></i> <span class="front-tel-span">698 004 3090</span></p>
+                                <p class="front-professional-oneline-desc"><?php echo $description; ?></p>
+                                <p class="front-proffesional-address"><i class="fa fa-map-marker"></i> <?php echo $address; ?></p>
+                                <p class="front-professional-tel"><i class="fa fa-phone"></i> <span class="front-tel-span"><?php echo $mobile; ?></span></p>
 
                                 
                             </div>
 
                             <div class="col-md-3">
                                 <h3 class="h3-offer-title">Καλέστε για την συγκεκριμένη προσφορά:</h3>
-                                <a class="a-offer-tel" href="tel:6942657824"><p class="font-offer-tel"><i class="fa fa-phone-square"></i> <span class="front-offer-tel-span">6980043090</span></p></a>
+                                <a class="a-offer-tel" href="tel:<?php echo $mobile; ?>"><p class="font-offer-tel"><i class="fa fa-phone-square"></i> <span class="front-offer-tel-span"><?php echo $mobile; ?></span></p></a>
 
                                 <p class="offer-mcr-txt">*Ενημερώστε τους ότι καλείτε για την προσφορά του myConstructor.</p>
 
@@ -62,328 +113,153 @@
                             </div>
                     </div>
 
-                    <div class="container">
+                    <div class="container-fluid">
+                    
                         <div class="row proffesional-row-content">
                             <div id="services" class="col-md-4 applications-tabs">
-                                <div class="title-app-tabs">
-                                    <h3>Υπηρεσίες</h3>
-                                    <img src="img/separator-4.png">
+                               <div class="tabs-menu-outer">
+                                    <div class="title-app-tabs">
+                                        <h3>Υπηρεσίες</h3>
+                                        
+                                    </div>
+                                     
+                                    <ul class="nav nav-pills-vertical mytabs tab-app-profile">
+                                        <?php 
+                                            if (isset($_GET['app_id'])) {
+                                                $active_tab = $_GET['app_id'];
+                                            }else{
+                                                $active_tab = $applications[0]['id'];
+                                            }
+                                            foreach ($applications as $application) {
+                                                 $application_id = $application['id'];
+                                                 $application_name = $application['application_name'];
+                                                 $price = $application['price'];
+                                                 $unit = $application['unit'];
+                                                 $app_description = $application['app_description'];
+
+                                                 if($active_tab == $application_id){
+                                            ?>          
+                                                 <li class="active"><a href="#app-<?php echo $application_id; ?>" data-toggle="tab" aria-expanded="true"><?php echo $application_name; ?></a></li>
+                                            <?php }else{ ?>
+                                                <li class=""><a href="#app-<?php echo $application_id; ?>" data-toggle="tab" aria-expanded="false"><?php echo $application_name; ?></a></li>
+                                            <?php } 
+                                            }
+                                        ?>
+                                    </ul>
                                 </div>
-                                <ul class="nav nav-pills-vertical mytabs tab-app-profile">
-                                    <li class="active"><a href="#1a" data-toggle="tab" aria-expanded="true">Μετακόμιση Γκαρσονιέρας</a></li>
-                                    <li><a href="#2a" data-toggle="tab" aria-expanded="false">Μετακόμιση Δυάρι</a></li>
-                                    <li><a href="#3a" data-toggle="tab" aria-expanded="false">Μετακόμιση Τριάρι</a></li>
-                                    <li><a href="#4a" data-toggle="tab">Μετακόμιση Τεσσάρι</a></li>
-                                    <li><a href="#5a" data-toggle="tab">Μεταφορική Αθήνα Θεσσαλονίκη-Κατερίνη-Βέροια-Κιλκίς</a></li>
-                                    <li><a href="#6a" data-toggle="tab">Μεταφορική Αθήνα-Ξάνθη-Κομοτηνή-Αλεξανδρούπολη</a></li>
-                                    <li><a href="#7a" data-toggle="tab">Μεταφορική Αθήνα-Χαλκιδική-Σέρρες-Δράμα-Καβάλα</a></li>
-                                    <li><a href="#8a" data-toggle="tab">Μεταφορική Αθήνα Πάτρα</a></li>
-                                    <li><a href="#9a" data-toggle="tab">Ενοικίαση Ανυψωτικού Μηχανήματος</a></li>
-                                    <li><a href="#10a" data-toggle="tab">Συναρμολόγηση Επίπλων</a></li>
-                                </ul>
+                                
                             </div>
                             <div id="prices" class="col-md-8">
-                                 <div class="title-app-tabs">
-                                    <h3>Περιγραφή υπηρεσιών</h3>
-                                    <img src="img/separator-4.png">
-                                </div>
-
+                                 
                                 <div class="tab-content clearfix">
-                                            <div class="tab-pane active" id="1a">
+
+                                    <?php 
+                                        if (isset($_GET['app_id'])) {
+                                            $active_tab = $_GET['app_id'];
+                                        }else{
+                                            $active_tab = $applications[0]['id'];
+                                        }
+                                        foreach ($applications as $application) {
+                                             $application_id = $application['id'];
+                                             $application_name = $application['application_name'];
+                                             $price = $application['price'];
+                                             $unit = $application['unit'];
+                                             $app_description = $application['app_description'];
+                                             $budget = $application['budget'];
+
+                                             if($active_tab == $application['id']){
+                                    ?>
+                                            <div class="tab-pane active" id="app-<?php echo $application['id']; ?>">
+                                                <div class="title-app-tabs-content">
+                                                    <h3><?php echo $application_name; ?></h3>
+                                                    <div class="img-sep-1"><img src="img/separator-4.png"></div>
+                                                </div>
                                                 <ul class="ul-app-info">
-                                                        <li class="app-description-title">
-                                                            <h3>Μετακόμιση Γκαρσονιέρας</h3>
-                                                        </li>
+                                                        
                                                         <li class="app-pricing-info">
                                                             <div class="app-seper">
                                                                 <h4>Πληροφορίες Χρέωσης:</h4>
-                                                                <span>Εργάτες +40€, Αναβατόριο +50 για κάθε σπίτι Δε-Κυ 09:00-22:00</span>
+                                                                <span><?php echo $budget; ?></span>
                                                             </div>
                                                         </li>
                                                         <li class="app-price-li">
                                                             <div class="app-seper">
-                                                                <h4>Κόστος:</h4> 
-                                                                <span class="app-price"> 49</span><span>€ + φπα</span>
+                                                                <h4>Τιμή:</h4> 
+                                                                <span class="app-price"> <?php echo $price; ?> </span><span><?php echo $unit; ?></span>
                                                             </div>
                                                         </li>
                                                         <li class="app-more-info">
                                                             <div class="app-seper">
                                                                 <h4>Περισσότερες Πληροφορίες:</h4> 
-                                                                <span>Μετακόμιση Γκαρσονιέρας έως 30τμ Η τιμή αφορά μόνο την μετακόμιση με φορτηγό, ανυψωτικό μηχάνημα και εργάτες χρεώνονται έξτρα. Η τιμή αυτή περιλαμβάνει μεταφορά για οικοσυσκευές και έπιπλά. (π.χ. πλυντήριο, στεγνωτήριο, ψυγείο, κουζίνα, τραπεζαρία, συνθετο, κ.α.), 10-15 κούτες, μέχρι 5 κανονικές γλάστρες. Το μέγεθος της κούτας που αναφέρεται παραπάνω είναι 55cm x45cm x35cm (MxΠxY) και το μέγιστο βάρος της κούτας είναι 10 κιλά. Για οτιδήποτε διαφορετικό , υπάρχει μεγαλύτερη χρέωση ανα κούτα.  Για ογκώδη και βαριά αντικείμενα όπως μεγάλες ντουλάπες , μεγάλες βιβλιοθήκες, μεγάλες τραπεζαρίες , διάδρομους και όργανα γυμναστικής, μπιλιάρδο, πιάνα, έργα τέχνης ,πήλινες γλάστρες κ.ά. υπάρχει επιπλέον χρέωση. Εφόσον για την μετακόμιση χρειαστεί αναβατόριο, κοστίζει 50€ για το κάθε σπιτι. Οι εργάτες χρεώνονται 20€/άτομο. Εάν δεν υπάρχει ανσασέρ και η μεταφορά θα γίνει από σκάλες υπάρχει έξτρα επιβάρυνση.Η τιμή αυτή αφορά μόνο φορτηγό μέχρι 2-2,5 ώρες φόρτωμα-ξεφόρτωμα.Διαφορετικά υπάρχει έξτρα επιβάρυνση +15€/ώρα. Επίσης, για διαδρομές άνω των 10 χλμ. από σημείο σε σημείο , υπάρχει διαφορετική χρέωση.</span>
+                                                                <span><?php echo $app_description; ?></span>
                                                             </div>
                                                         </li>
                                                 </ul>
                                                
                                             </div>
-                                            <div class="tab-pane" id="2a">
-
-                                                <ul class="ul-app-info">
-                                                    <li class="app-description-title">
-                                                        <h3>Μετακόμιση Δυάρι</h3>
-                                                    </li>
+                                            <?php }else{ ?>
+                                            <div class="tab-pane" id="app-<?php echo $application['id']; ?>">
+                                                <div class="title-app-tabs-content">
+                                                    <h3><?php echo $application_name; ?></h3>
+                                                    <div class="img-sep-1"><img src="img/separator-4.png"></div>
+                                                </div>
+                                                <ul class="ul-app-info"> 
                                                     <li class="app-pricing-info">
                                                         <div class="app-seper">
                                                             <h4>Πληροφορίες Χρέωσης:</h4>
-                                                            <span>Εργάτες +60€, Αναβατόριο +50 για κάθε σπίτι Δε-Κυ 09:00-22:00</span>
+                                                            <span><?php echo $budget; ?></span>
                                                         </div>
                                                     </li>
                                                     <li class="app-price-li">
                                                         <div class="app-seper">
-                                                            <h4>Κόστος:</h4> 
-                                                            <span class="app-price"> 70</span><span>€ + φπα</span>
+                                                            <h4>Τιμή:</h4> 
+                                                            <span class="app-price"> <?php echo $price; ?> </span><span><?php echo $unit; ?></span>
                                                         </div>
                                                     </li>
                                                     <li class="app-more-info">
                                                         <div class="app-seper">
                                                             <h4>Περισσότερες Πληροφορίες:</h4> 
-                                                            <span>Μετακόμιση Δυάρι έως 55τμ Η τιμή αφορά μόνο την μετακόμιση με φορτηγό, ανυψωτικό μηχάνημα και εργάτες χρεώνονται έξτρα. Η τιμή περιλαμβάνει μετακόμιση για οικοσυσκευές και έπιπλά. (π.χ. πλυντήριο, στεγνωτήριο, ψυγείο, κουζίνα, τραπεζαρία, συνθετο, κ.α.), 15 κούτες, μέχρι 5 κανονικές γλάστρες. Το μέγεθος της κούτας που αναφέρεται παραπάνω είναι 55cm x45cm x35cm (MxΠxY) και το μέγιστο βάρος της κούτας είναι 10 κιλά. Για οτιδήποτε διαφορετικό , υπάρχει μεγαλύτερη χρέωση ανα κούτα.  Για ογκώδη και βαριά αντικείμενα όπως μεγάλες ντουλάπες , μεγάλες βιβλιοθήκες, μεγάλες τραπεζαρίες , διάδρομους και όργανα γυμναστικής, μπιλιάρδο, πιάνα, έργα τέχνης ,πήλινες γλάστρες κ.ά. υπάρχει επιπλέον χρέωση. Εφόσον χρειαστεί αναβατόριο,κοστίζει 50€ για το κάθε σπιτι. Οι εργάτες χρεωνόνται  20€/άτομο Εάν δεν υπάρχει ασανσέρ και η μεταφορά θα γίνει από σκάλες υπάρχει έξτρα επιβάρυνση.Η τιμή αυτή αφορά μόνο φορτηγό μέχρι 2-2,5 ώρες φόρτωμα-ξεφόρτωμα.Διοφορετικά υπάρχει έξτρα επιβάρυνση +15€/ώρα. Επίσης, για διαδρομές άνω των 10 χλμ. από σημείο σε σημείο , υπάρχει διαφορετική χρέωση.</span>
+                                                            <span><?php echo $app_description; ?></span>
                                                         </div>
                                                     </li>
                                                 </ul>
-                                                
                                             </div>
+                                            <?php }
+                                        } ?>
                                        
-                                            <div class="tab-pane" id="3a">
-                                                <ul class="ul-app-info">
-                                                    <li class="app-description-title">
-                                                        <h3>Μετακόμιση Τριάρι</h3>
-                                                    </li>
-                                                    <li class="app-pricing-info">
-                                                        <div class="app-seper">
-                                                            <h4>Πληροφορίες Χρέωσης:</h4>
-                                                            <span>Εργάτες +90€, Αναβατόριο +50 για κάθε σπίτι Δε-Κυ 09:00-22:00</span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="app-price-li">
-                                                        <div class="app-seper">
-                                                            <h4>Κόστος:</h4> 
-                                                            <span class="app-price"> 90</span><span>€ + φπα</span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="app-more-info">
-                                                        <div class="app-seper">
-                                                            <h4>Περισσότερες Πληροφορίες:</h4> 
-                                                            <span>Μετακόμιση Τριάρι έως 85τμ Η τιμή αφορά μόνο την μετακόμιση με φορτηγό, ανυψωτικό μηχάνημα και εργάτες χρεώνονται έξτρα. Η τιμή περιλαμβάνει μετακόμιση για οικοσυσκευές και έπιπλά. (π.χ. πλυντήριο, στεγνωτήριο, ψυγείο, κουζίνα, τραπεζαρία, συνθετο, κ.α.), μέχρι 25 κούτες, μέχρι 10 κανονικές γλάστρες. Το μέγεθος της κούτας που αναφέρεται παραπάνω είναι 55cm x45cm x35cm (MxΠxY) και το μέγιστο βάρος της κούτας είναι 10 κιλά. Για οτιδήποτε διαφορετικό , υπάρχει μεγαλύτερη χρέωση ανα κούτα.  Για ογκώδη και βαριά αντικείμενα όπως μεγάλες ντουλάπες , μεγάλες βιβλιοθήκες, μεγάλες τραπεζαρίες , διάδρομους και όργανα γυμναστικής, μπιλιάρδο, πιάνα, έργα τέχνης ,πήλινες γλάστρες κ.ά. υπάρχει επιπλέον χρέωση. Εφόσον χρειαστεί αναβατόριο,κοστίζει 50€ για το κάθε σπιτι. Οι εργάτες χρεωνόνται  20€/άτομο. Εάν δεν υπάρχει ανσασέρ και η μεταφορά θα γίνει από σκάλες υπάρχει έξτρα επιβάρυνση. Η τιμή αυτή αφορά μόνο φορτηγό μέχρι 2-2,5 ώρες φόρτωμα-ξεφόρτωμα.Διοφορετικά υπάρχει έξτρα επιβάρυνση +15€/ώρα.</span>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                              
-                                               
-                                            </div>
-                                            <div class="tab-pane" id="4a">
-                                                <ul class="ul-app-info">
-                                                    <li class="app-description-title">
-                                                        <h3>Μετακόμιση Τεσσάρι</h3>
-                                                    </li>
-                                                    <li class="app-pricing-info">
-                                                        <div class="app-seper">
-                                                            <h4>Πληροφορίες Χρέωσης:</h4>
-                                                            <span>Εργάτες +100€, Αναβατόριο +100€ (50€ για κάθε σπίτι) Δε-Κυ 09:00-22:00</span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="app-price-li">
-                                                        <div class="app-seper">
-                                                            <h4>Κόστος:</h4> 
-                                                            <span class="app-price"> 120</span><span>€ + φπα</span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="app-more-info">
-                                                        <div class="app-seper">
-                                                            <h4>Περισσότερες Πληροφορίες:</h4> 
-                                                            <span>Μετακόμιση Τεσσάρι έως 120τμ. Η τιμή αφορά μόνο την μετακόμιση με φορτηγό, ανυψωτικό μηχάνημα και εργάτες χρεώνονται έξτρα. Η τιμή περιλαμβάνει μετακόμιση για οικοσυσκευές και έπιπλά. (π.χ. πλυντήριο, στεγνωτήριο, ψυγείο, κουζίνα, τραπεζαρία, συνθετο, κ.α.), μέχρι 40 κούτες, μέχρι 20 κανονικές γλάστρες. Το μέγεθος της κούτας που αναφέρεται παραπάνω είναι 55cm x45cm x35cm (MxΠxY) και το μέγιστο βάρος της κούτας είναι 10 κιλά. Για οτιδήποτε διαφορετικό, υπάρχει μεγαλύτερη χρέωση ανα κούτα.  Για ογκώδη και βαριά αντικείμενα όπως μεγάλες ντουλάπες, μεγάλες βιβλιοθήκες, μεγάλες τραπεζαρίες, διάδρομους και όργανα γυμναστικής, μπιλιάρδο, πιάνα, έργα τέχνης, πήλινες γλάστρες κ.ά. υπάρχει επιπλέον χρέωση. Εφόσον χρειαστεί αναβατόριο,κοστίζει 50€ για το κάθε σπιτι. Οι εργάτες χρεωνόνται  20€/άτομο. Εάν δεν υπάρχει ανσασέρ και η μεταφορά θα γίνει από σκάλες υπάρχει έξτρα επιβάρυνση. Η τιμή αυτή αφορά μόνο φορτηγό μέχρι 2-2,5 ώρες φόρτωμα-ξεφόρτωμα.Διοφορετικά υπάρχει έξτρα επιβάρυνση +15€/ώρα.</span>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                              
-                                               
-                                            </div>
-                                            <div class="tab-pane" id="5a">
-                                                <ul class="ul-app-info">
-                                                    <li class="app-description-title">
-                                                        <h3>Μεταφορική Αθήνα Θεσσαλονίκη-Κατερίνη-Βέροια-Κιλκίς</h3>
-                                                    </li>
-                                                    <li class="app-pricing-info">
-                                                        <div class="app-seper">
-                                                            <h4>Πληροφορίες Χρέωσης:</h4>
-                                                            <span>Εργάτες +100€, Αναβατόριο +100€ (50€ για κάθε σπίτι) Δε-Κυ 09:00-22:00</span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="app-price-li">
-                                                        <div class="app-seper">
-                                                            <h4>Κόστος:</h4> 
-                                                            <span class="app-price"></span><span>€ + φπα</span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="app-more-info">
-                                                        <div class="app-seper">
-                                                            <h4>Περισσότερες Πληροφορίες:</h4> 
-                                                            <span>Μεταφορική Αθήνα Θεσσαλονίκη - Κατερίνη - Βέροια - Κιλκίς Οι αξιολογημένοι επαγγελματίες της πλατφόρμας αναλαμβάνουν υπεύθυνα οποιαδήποτε μεταφορά από και προς Αθήνα και Θεσσαλονίκη - Κατερίνη - Βέροια -Κιλκίς.</span>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-
-                                            <div class="tab-pane" id="6a">
-                                                <ul class="ul-app-info">
-                                                    <li class="app-description-title">
-                                                        <h3>Μεταφορική Αθήνα-Ξάνθη-Κομοτηνή-Αλεξανδρούπολη</h3>
-                                                    </li>
-                                                    <li class="app-pricing-info">
-                                                        <div class="app-seper">
-                                                            <h4>Πληροφορίες Χρέωσης:</h4>
-                                                            <span></span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="app-price-li">
-                                                        <div class="app-seper">
-                                                            <h4>Κόστος:</h4> 
-                                                            <span class="app-price"></span><span>€ + φπα</span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="app-more-info">
-                                                        <div class="app-seper">
-                                                            <h4>Περισσότερες Πληροφορίες:</h4> 
-                                                            <span>Μεταφορική Αθήνα - Ξάνθη - Κομοτηνή - Αλεξανδρούπολη  Οι αξιολογημένοι επαγγελματίες της πλατφόρμας αναλαμβάνουν υπεύθυνα οποιαδήποτε μεταφορά από και προς Αθήνα και Ξάνθη - Κομοτηνή - Αλεξανδρούπολη .</span>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                              
-                                                
-                                            </div>
-
-                                            <div class="tab-pane" id="7a">
-                                                <ul class="ul-app-info">
-                                                    <li class="app-description-title">
-                                                        <h3>Μεταφορική Αθήνα-Χαλκιδική-Σέρρες-Δράμα-Καβάλα</h3>
-                                                    </li>
-                                                    <li class="app-pricing-info">
-                                                        <div class="app-seper">
-                                                            <h4>Πληροφορίες Χρέωσης:</h4>
-                                                            <span></span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="app-price-li">
-                                                        <div class="app-seper">
-                                                            <h4>Κόστος:</h4> 
-                                                            <span class="app-price"></span><span>€ + φπα</span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="app-more-info">
-                                                        <div class="app-seper">
-                                                            <h4>Περισσότερες Πληροφορίες:</h4> 
-                                                            <span> Μεταφορική Αθήνα - Χαλκιδική - Σέρρες - Δράμα - Καβάλα Οι αξιολογημένοι επαγγελματίες της πλατφόρμας αναλαμβάνουν υπεύθυνα οποιαδήποτε μεταφορά από και προς Αθήνα και Χαλκιδική - Σέρρες - Δράμα - Καβάλα.</span>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                              
-                                                
-                                            </div>
-                                            <div class="tab-pane" id="8a">
-                                               <ul class="ul-app-info">
-                                                    <li class="app-description-title">
-                                                        <h3>Μεταφορική Αθήνα Πάτρα</h3>
-                                                    </li>
-                                                    <li class="app-pricing-info">
-                                                        <div class="app-seper">
-                                                            <h4>Πληροφορίες Χρέωσης:</h4>
-                                                            <span></span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="app-price-li">
-                                                        <div class="app-seper">
-                                                            <h4>Κόστος:</h4> 
-                                                            <span class="app-price"></span><span>€ + φπα</span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="app-more-info">
-                                                        <div class="app-seper">
-                                                            <h4>Περισσότερες Πληροφορίες:</h4> 
-                                                            <span>Αναλαμβάνουμε μεταφορές - μετακομίσεις από Αθήνα προς Πάτρα και από Πάτρα προς Αθήνα. Μεταφέρουμε οικοσυσκευές, κούτες, έπιπλα, στρώματα κ.ά.</span>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="tab-pane" id="9a">
-                                               <ul class="ul-app-info">
-                                                    <li class="app-description-title">
-                                                        <h3>Ενοικίαση Ανυψωτικού Μηχανήματος</h3>
-                                                    </li>
-                                                    <li class="app-pricing-info">
-                                                        <div class="app-seper">
-                                                            <h4>Πληροφορίες Χρέωσης:</h4>
-                                                            <span> +15€/ έξτρα ώρα ενοικίασης</span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="app-price-li">
-                                                        <div class="app-seper">
-                                                            <h4>Κόστος:</h4> 
-                                                            <span class="app-price">70</span><span>€ + φπα</span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="app-more-info">
-                                                        <div class="app-seper">
-                                                            <h4>Περισσότερες Πληροφορίες:</h4> 
-                                                            <span>Ενοικίαση Ανυψωτικού Μηχανήματος Μπορείτε πλέον να ενοικιάσετε μόνο το ανυψωτικό μηχάνημα με χρονοχρέωση.  Οι τιμές είναι ενδεικτικές και μπορεί να διαφοροποιηθούν σε ιδιαίτερες περιπτώσεις.</span>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="tab-pane" id="10a">
-                                               <ul class="ul-app-info">
-                                                    <li class="app-description-title">
-                                                        <h3>Συναρμολόγηση Επίπλων</h3>
-                                                    </li>
-                                                    <li class="app-pricing-info">
-                                                        <div class="app-seper">
-                                                            <h4>Πληροφορίες Χρέωσης:</h4>
-                                                            <span> +15€/ έξτρα ώρα ενοικίασης</span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="app-price-li">
-                                                        <div class="app-seper">
-                                                            <h4>Κόστος:</h4> 
-                                                            <span class="app-price">30</span><span>€ + φπα</span>
-                                                        </div>
-                                                    </li>
-                                                    <li class="app-more-info">
-                                                        <div class="app-seper">
-                                                            <h4>Περισσότερες Πληροφορίες:</h4> 
-                                                            <span>Συναρμολόγηση Επίπλων   Οι έμπειροι επαγγελματίες συναρμολογούν πολύ γρήγορα τα έπιπλα σας κατα τη διάρκεια μιας μετακόμισης σε χρόνο ρεκόρ. Οι χρεώσεις για κάθε έπιπλο διαμορφώνονται συνήθως ως εξής: Κρεβάτι Απλό 30€ Κρεβάτι με μηχανισμό ή ντουλάπια 60€ Γραφείο απλό 30€ Ντουλάπια ράφια γραφείου 20€ Ντουλαπάκι 20-30€ Ντουλάπες(απαιτούνται 2 άτομα) 60€ ( 2 φύλλα & 2 m ύψος) ,τα 3 φύλλα 75€ Σύνθετο 50€ (μέχρι 2 m πλάτος) και +20€/τρέχον μέτρο (πέραν των 2 μέτρων). Οι παραπάνω τιμές είναι ενδεικτικές και μπορεί να έχουν μια μικρή απόκλιση ανά περίπτωση.</span>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
                                     </div>
                                 
                             </div>
-                            
-                            
 
-                            
-                        </div>    
+                        </div>
+
                     </div>
+
 
                     <div class="container container-lightbox">
                         <div id="proffessionalImages" class="row proffessional-photos-row">
-                            <div class="title-app-tabs">
+                            <div class="title-prof-photos">
                                 <h3>Εικόνες Επαγγελματία</h3>
                                 <img src="img/separator-4.png">
                             </div>
-
-                             <a href="img/matzouranis-1.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
-                                    <img src="img/matzouranis-1.jpg" class="img-fluid">
-                            </a>
-                            <a href="img/matzouranis-2.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
-                                    <img src="img/matzouranis-3.jpg" class="img-fluid">
-                            </a>
-                            <a href="img/matzouranis-3.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
-                                    <img src="img/matzouranis-4.jpg" class="img-fluid">
-                            </a>
-                            <a href="img/matzouranis-4.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
-                                    <img src="img/matzouranis-4.jpg" class="img-fluid">
-                            </a>
+                            <?php foreach ($portfolio_photos as $photos) {
+                                
+                                $photo_name = $photos['image_name'];
+                             ?>
+                            
+                                <a href="<?php echo $portfolio_url . $photo_name; ?>" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
+                                        <img src="<?php echo $portfolio_url . $photo_name; ?>" class="img-fluid">
+                                </a>
+                            <?php } ?>
+                              <!--  <a href="img/matzouranis-2.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
+                                        <img src="img/matzouranis-3.jpg" class="img-fluid">
+                                </a>
+                                <a href="img/matzouranis-3.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
+                                        <img src="img/matzouranis-4.jpg" class="img-fluid">
+                                </a>
+                                <a href="img/matzouranis-4.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
+                                        <img src="img/matzouranis-4.jpg" class="img-fluid">
+                                </a> -->
                             
                         </div>
                     </div>
@@ -393,7 +269,7 @@
 
                             <div id="proffessionalRiviews" class="row profile-reviews-row">
                                 <div class="col-md-12">
-                                    <div class="title-app-tabs">
+                                    <div class="title-prof-reviews">
                                         <h3>Αξιολογήσεις πελατών</h3>
                                         <img src="img/separator-4.png">
                                     </div>

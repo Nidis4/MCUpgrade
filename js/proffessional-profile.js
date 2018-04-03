@@ -15,6 +15,28 @@
             });
 
 
+            $(document).ready(function(){
+              var prices_height = $('.row.proffesional-row-content').height();
+              $('div#services').height(prices_height);
+            });
+
+
+            $('ul.nav.nav-pills-vertical.mytabs.tab-app-profile li').click(function(){
+
+                var prices_height = $('.row.proffesional-row-content').height();
+                $('div#services').height(prices_height);
+
+            });
+
+
+
+
+
+
+
+
+
+
 
             $(document).mouseup(function (e){
                 var container = $(".mySlides img, .column, .prev, .next");
@@ -24,6 +46,7 @@
                     closeModal();
                 }
             });
+
 
 
 

@@ -170,7 +170,7 @@
 						<div class="prof-main-col">
 					  		<div class="col-md-3 col-sm-12 professional-img-con">
 					  			<div class="professional-img">
-					  				<a target="_blank" style="font-size: 17px;float: left;color: #2b347f;font-weight: bold;" href="<?php echo $profile_url .'?prof_id='. $professional_id; ?>" >
+					  				<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id . '&app_id=' . $application_id; ?>" >
 					  					<img src="<?php echo 'img/professional-imgs/'.$profile_img ?>" onerror="this.src='img/professional-imgs/default-img-4.jpg';" alt="" />
 					  					
 					  				</a>
@@ -181,7 +181,7 @@
 									<div class="professional-details-box">
 										<div class="professional-info-text">
 											<div class="professional-info-text-name">
-												<p class="professional-name"><span class="newmemname"><a target="_blank" class="con-name" href="<?php echo $profile_url .'?prof_id='. $professional_id; ?>"><?php echo $professional_first_name . ' ' . $professional_last_name; ?></a></span></p>
+												<p class="professional-name"><span class="newmemname"><a target="_blank" class="con-name" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id; ?>"><?php echo $professional_first_name . ' ' . $professional_last_name; ?></a></span></p>
 											</div>
 											
 
@@ -212,7 +212,7 @@
 							</div>
 
 
-							<a target="_blank" href="<?php echo $profile_url .'?prof_id='. $professional_id; ?>">
+							<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id; ; ?>">
 								<div class="professional-phone-number"><img src="img/new-tel-white.png">Τηλέφωνο</div>
 							</a>
 							
@@ -452,7 +452,7 @@
 						<div class="prof-main-col">
 					  		<div class="col-md-3 col-sm-12 professional-img-con">
 					  			<div class="professional-img">
-					  				<a target="_blank" href="<?php echo $profile_url .'?prof_id='. $professional_id; ?>" >
+					  				<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id. '&app_id='. $application_id; ?>" >
 					  					<img src="<?php echo 'img/professional-imgs/'.$profile_img ?>" onerror="this.src='img/professional-imgs/default-img-4.jpg';" alt="" />
 					  					
 					  				</a>
@@ -463,7 +463,7 @@
 									<div class="professional-details-box">
 										<div class="professional-info-text">
 											<div class="professional-info-text-name">
-												<p class="professional-name"><span class="newmemname"><a target="_blank" class="con-name" href="<?php echo $profile_url .'?prof_id='. $professional_id; ?>"><?php echo $professional_first_name . ' ' . $professional_last_name; ?></a></span></p>
+												<p class="professional-name"><span class="newmemname"><a target="_blank" class="con-name" href="<?php echo $profile_url .'?id='. $professional_id . '&app_id=' . $application_id; ?>"><?php echo $professional_first_name . ' ' . $professional_last_name; ?></a></span></p>
 											</div>
 											
 
@@ -494,7 +494,7 @@
 							</div>
 
 
-							<a target="_blank" href="<?php echo $profile_url .'?prof_id='. $professional_id; ?>">
+							<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id . '&app_id=' . $application_id; ?>">
 								<div class="professional-phone-number"><img src="img/new-tel-white.png">Τηλέφωνο</div>
 							</a>
 							

@@ -6,7 +6,9 @@
 	$directory_url = $api_url . $directory_url;
 
 	$profile_url = "profile.php";
-	$profile_url =$api_url . $profile_url;
+	$profile_url = $api_url . $profile_url;
+
+	$portfolio_url = $api_url . 'img/professional-imgs/portfolio/';
 
 	
 
