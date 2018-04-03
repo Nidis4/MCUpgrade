@@ -1024,7 +1024,7 @@ ORDER BY `date` ASC,
                 # code...
                 if(is_uploaded_file($images[$key]['tmp_name'])) {
                     $sourcePath = $images[$key]['tmp_name'];
-                    $filename = time().$images[$key]['name'];
+                    $filename = time().str_replace(" ", '_', $images[$key]['name']);
                     $uploadimages[] = $filename;
                     $targetPath = "../../../img/professional-imgs/portfolio/".$filename;
                     if(move_uploaded_file($sourcePath,$targetPath)) {
