@@ -97,10 +97,10 @@
                         $endDate = date("Y-m-d",strtotime($startDate ." +5 Days"));
                         
                         $calendar = file_get_contents(SITE_URL.'webservices/api/professional/getCalendar.php?prof_id='.$_SESSION['id'].'&startDate='.$startDate.'&endDate='.$endDate);
-                        $calendar = json_decode($calendar, true);
+                        $calendarlist = json_decode($calendar, true);
 
                         // echo "<pre>";
-                        // print_r($calendar);
+                        // print_r(count($calendarlist['calendar']));
                         // die;
                     ?>
 
@@ -110,9 +110,9 @@
                                 <div class="row">
                                     <?php 
                                         $dates = array();
-                                        if(@$calendar['calendar']){
+                                        if(count($calendarlist['calendar'])>=1){
                                             $i = 1;
-                                            foreach ($calendar['calendar'] as $value) {
+                                            foreach ($calendarlist['calendar'] as $value) {
                                                 if($i == 1 ){
                                                     
                                                     $dates[] = $value['date'];
@@ -148,7 +148,7 @@
                                                         </li>
                                     <?php            
 
-                                                if($i == count($calendar['calendar'])){
+                                                if($i == count($calendarlist['calendar'])){
                                     ?>
                                                   </ul>
                                                 </div><!-- Close col-md-2-->  
