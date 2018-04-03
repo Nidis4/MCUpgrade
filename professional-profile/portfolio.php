@@ -28,7 +28,16 @@
     text-align: center;
 }
  #sortable li a{
-    cursor: move;
+   cursor: move;
+    margin-top: -20px;
+    float: left;
+}
+#sortable li span{
+        width: 20px;
+        margin-bottom: 0;
+        float: none;
+        margin-left: 178px;
+        cursor: pointer;
     }
 </style>
                     <div class="container">
@@ -48,10 +57,11 @@
                                         foreach ($photos['records'] as $value) {
                                 ?>
                                             <li class="ui-state-default" rel="<?php echo $value['id']?>"><?php //echo $value['image_name'];?>
+                                                <span rel="<?php echo $value['id']?>"><img src="img/close-image.png"></span>
                                                 <a href="<?php echo SITE_URL."img/professional-imgs/portfolio/".$value['image_name'];?>" data-toggle="lightbox" data-gallery="example-gallery" class="">
                                                     <img src="<?php echo SITE_URL."img/professional-imgs/portfolio/".$value['image_name'];?>" class="img-fluid">
                                                 </a>
-                                                <span></span>
+                                                
                                             </li>   
                                 <?php            
                                         }
@@ -111,6 +121,35 @@
                 $( "#sortable" ).disableSelection();
               } );
             $(document).ready(function() {
+                $("#sortable li span").on('click', function(){
+                    var pid = $(this).attr('rel');
+                    var getDeleteAPI = API_LOCATION+'professional/deletePhoto.php';
+                    var profID = '<?php echo $_SESSION['id'];?>';
+
+                    if (!confirm('Are you sure want to delete this image?')) {
+                        return false;
+                    }else{
+                        $.ajax({
+                            type: "POST",
+                            url: getDeleteAPI,
+                            dataType: "JSON",
+                            data: { id: pid, prof_id:profID},
+                            success: function(data)
+                            {
+                                alert(data['message']);
+                                location.reload();
+                            }
+                        });
+
+                        return false;
+                    }                   
+                    
+                    
+
+                    
+                });
+
+
                 $("#drop-area").on('dragenter', function (e){
                     e.preventDefault();
                     $(this).css('background', '#BBD5B8');

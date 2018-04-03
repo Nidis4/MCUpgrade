@@ -1214,5 +1214,22 @@ ORDER BY `date` ASC,
            }
     }
 
+    public function deletePhoto($id){
+
+        $query = "DELETE from " . $this->photos_table_name;
+        $query .=" WHERE id = '".$id."' and professional_id = :prof_id";
+        
+        $stmt = $this->conn->prepare( $query );
+        
+        // bind id of product to be updated
+        $prof_id = $this->professional_id;
+        $stmt->bindParam(':prof_id',  $prof_id, PDO::PARAM_INT);
+        if($stmt->execute()){
+            return 1;
+       }else{
+            return 0;
+       }
+}
+
 }
 ?>
