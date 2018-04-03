@@ -120,6 +120,23 @@ if($numRev >= 1){
    $reviewsStat_arr = array(); 
 }
 
+$stmtProfPhotos = $professional->getPhotos();
+$numPhotos = $stmtProfPhotos->rowCount();
+if($numPhotos >= 1){
+    //$reviewsStat_arr = array();
+
+    while ($row = $stmtProfPhotos->fetch(PDO::FETCH_ASSOC)){
+        
+        $photos_arr=array(
+        	"id" => $row['id'],
+        	"image_name" => $row['image_name']
+        );
+        //array_push($reviewsStat_arr, $reviews_item);
+    }
+   
+}else{
+   $photos_arr = array(); 
+}
 
 $applications_arr = array();
 while ($row = $stmtApplications->fetch(PDO::FETCH_ASSOC)){
@@ -174,6 +191,7 @@ $professional_arr=array(
     "approve_per" => $professional->approve_per,
     "approve_doc" => $professional->approve_doc,
     "percentage" => $percentage,
+    "photos" => $photos_arr,
     "applications" => $applications_arr,
     "categories"   => $getCategories,
     "counties"   => $getConties,
