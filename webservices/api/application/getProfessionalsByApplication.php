@@ -42,6 +42,8 @@ if($num>0){
             "description" => $rowProf['description'],
             "city" => $rowProf['city'],
             "servicearea" => $rowProf['service_area'],
+            "county_id" => $rowProf['county_id'],
+            "county_name_gr" => $rowProf['county_name_gr']
         );
 
         array_push($professionals_arr, $prof_item);
