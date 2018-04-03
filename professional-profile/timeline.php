@@ -228,7 +228,7 @@
                             type: "POST",
                             url: getSaveAPI,
                             dataType: "JSON",
-                            data: { prof_id: profID, busy_date :dateChoosed, busy_time : "+timeFrom+'-'+timeTo+"},
+                            data: { prof_id: profID, busy_date :dateChoosed, busy_time : timeFrom+'-'+timeTo},
                             success: function(data)
                             {
                                 //alert(data['message']);
@@ -237,6 +237,10 @@
                         });
                   //result.append( " #" + ( index + 1 ) );
                 });
+
+                alert('Busy time updated successfully');
+                location.reload();
+
 
 
             });

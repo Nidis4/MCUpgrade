@@ -677,3 +677,12 @@ ALTER TABLE `professionals_account_info` CHANGE `resettime` `resettime` INT(11) 
 
 <!-------------------------------->
 <!-- End 28 Mar 2018 Harpreet ---->
+
+
+<!-------------------------------->
+<!-- Start 3 April 2018 Harpreet -->
+
+ALTER TABLE `professionals_busytimes` CHANGE `TIME` `TIME` VARCHAR(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+
+<!-------------------------------->
+<!-- End 3 April 2018 Harpreet ---->
