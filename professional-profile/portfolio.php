@@ -170,16 +170,27 @@
             function createFormData(image) {
                 var formImage = new FormData();
                 var j = 0;
+                var ms = '';
                 formImage.append('prof_id',"<?php echo $_SESSION['id'];?>");
                 for(var i=1; i<=image.length;i++){
                     j = i-1;
-                    formImage.append('userImage'+j, image[j]);
+
+                    if (image[j].type.indexOf("image") == 0 && image[j].size < 500000) {
+                        formImage.append('userImage'+j, image[j]);
+                    }else if(image[j].type.indexOf("image") != 0){
+                        ms += '\n'+image[j].name+ " should be image.";
+                    }else if(image[j].size > 500000){
+                        ms += '\n'+image[j].name+ " size should be less than 500KB.";
+                    }
+
+                    
+                    
                 }                
                 //formImage.append('userImage', image[0]);
-                uploadFormData(formImage);
+                uploadFormData(formImage,ms);
             }
 
-            function uploadFormData(formData) {
+            function uploadFormData(formData,ms) {
                 var getPhotosAPI = API_LOCATION+'professional/uploadPhoto.php';
                 $.ajax({
                     url: getPhotosAPI,
@@ -190,7 +201,7 @@
                     processData: false,
                     success: function(data){
                         if(data.error){
-                            alert(data.message);
+                            alert(data.message + ms);
                             return false;
                         }else{
                             //$('.proffessional-photos-row').append(data);
@@ -200,7 +211,7 @@
                                 img_name = "<?php echo SITE_URL;?>img/professional-imgs/portfolio/"+data.images[j];
                                 $('#sortable').append("<li class='ui-state-default'><a href='"+img_name+"' data-toggle='lightbox' data-gallery='example-gallery' class=''><img src='"+img_name+"' class='img-fluid' /></a></li>");
                             }
-                            alert(data.message);
+                            alert(data.message + ms);
                             location.reload();
                             return false;    
                         }
