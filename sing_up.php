@@ -78,6 +78,7 @@
 									<h4 class="fieldset-h4">Ολοκλήρωση Εγγραφής</h4>
 									<div id="error_header" class="alert alert-danger"><ul></ul></div>
 								   	<p><input placeholder="Κωδικός επιβεβαίωσης που λάβατε με SMS.." class="validationCode" name="validationCode"></p>
+								   	<input  class="smsCode" name="smsCode" value="" type="hidden">
 								   	<p><input placeholder="Προσωπικός Κωδικός" class="your_pass" name="your_pass" type="password"></p>
 								   	<p><input placeholder="Επαναλάβετε τον Κωδικό σας" class="repeat_pass" name="repeat_pass" type="password"></p>
 								   	<p><input type="checkbox" class="terms-conditions" name="terms-conditions"> Συμφωνώ με τους <a href="https://myconstructor.gr/cms_pages/view_cms/terms_of_use">Όρους Χρήσης</a> του myConstructor</p>
@@ -117,6 +118,7 @@
 
 </script>
 
+<script src="js/core.js" type="text/javascript"></script>
 <script src="js/sing-up-form.js" type="text/javascript"></script>
 
 <?php 

@@ -485,11 +485,13 @@ ORDER BY `date` ASC,
     function update_contact($id, $address, $mobile, $phone ){
         
         
-        $query = "UPDATE " . $this->contact_table_name . "
-                    SET
-                    `mobile`=:mobile, `phone`=:phone, `address`=:address";
+        //$query = "UPDATE " . $this->contact_table_name . "
+                    // SET
+                    // `mobile`=:mobile, `phone`=:phone, `address`=:address";
+
+        $query = "INSERT INTO ". $this->contact_table_name ." (`professional_id`, `mobile`, `phone`, `address`) VALUES (:id, :mobile, :phone, :address) ON DUPLICATE KEY UPDATE `mobile`=:mobile, `phone`=:phone, `address`=:address";
         
-        $query .=" WHERE professional_id = :id";
+        //$query .=" WHERE professional_id = :id";
 
         $stmt = $this->conn->prepare( $query );
 
@@ -510,11 +512,14 @@ ORDER BY `date` ASC,
     function update_account($id, $email, $calendar_id ){
         
         
-        $query = "UPDATE " . $this->account_table_name . "
-                    SET
-                    `email`=:email, `calendar_id`=:calendar_id";
+        // $query = "UPDATE " . $this->account_table_name . "
+        //             SET
+        //             `email`=:email, `calendar_id`=:calendar_id";
         
-        $query .=" WHERE professional_id = :id";
+        // $query .=" WHERE professional_id = :id";
+
+
+         $query = "INSERT INTO ". $this->account_table_name ." (`professional_id`, `email`, `calendar_id`) VALUES (:id, :email, :calendar_id, :address) ON DUPLICATE KEY UPDATE `email`=:email, `calendar_id`=:calendar_id";
 
         $stmt = $this->conn->prepare( $query );
 
@@ -1230,6 +1235,75 @@ ORDER BY `date` ASC,
             return 0;
        }
 }
+
+    public function checkProf($email, $mobile){
+        $message = "";
+        $error = 0;
+        $return = array('message' => $message,'error' => $error );
+
+        // Check Email
+        $query = "SELECT professional_id FROM " . $this->account_table_name . " 
+                WHERE email = '".$email."'";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+        // execute query
+        $stmt->execute();
+
+        $num = $stmt->rowCount();
+
+        if($num >= 1){
+            $message = "Email already exist!";
+            $error = 1;
+            $return = array('message' => $message,'error' => $error );
+            return $return; 
+        }
+
+        // Check mobile
+        $query = "SELECT professional_id FROM " . $this->contact_table_name . " 
+                WHERE mobile = '".$mobile."'";
+        
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+        // execute query
+        $stmt->execute();
+
+        $num = $stmt->rowCount();
+
+        if($num >= 1){
+            $message = "Mobile number already exist!";
+            $error = 1;
+            $return = array('message' => $message,'error' => $error );
+            return $return; 
+        }
+
+        return $return;
+
+    }
+
+    public function signup($first_name, $last_name, $email, $mobile, $companyName, $select_idiotita, $select_job, $hear_us, $password){
+        
+        $query = "INSERT INTO ". $this->table_name ." (`first_name`, `last_name`,`current_working`) VALUES ('".$first_name."', '".$last_name."','individual')";        
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+
+        $professional_id = $this->conn->lastInsertId();
+
+        $this->update_contact($professional_id, '', $mobile, '');
+
+        $this->update_account($id, $email, '');
+
+
+        $query = "UPDATE ". $this->account_table_name ." set password ='".md5($password)."' where professional_id = '".$professional_id."'";        
+        $stmt = $this->conn->prepare( $query );
+        if($stmt->execute()){
+            return 1;
+        }else{
+            return 0;
+        }
+
+
+    }
 
 }
 ?>

@@ -97,7 +97,7 @@ $(".submit").click(function(){
 
 
 function validateFirstStep(){
-
+	//alert(API_LOCATION);
 	var doneName= false;
 	var doneLastname = false;
 	var doneEmail= false;
@@ -151,9 +151,39 @@ function validateFirstStep(){
 
 
     if(doneName & doneLastname & doneEmail & doneTel){
-    	current_fs = $('fieldset.first');
-		next_fs = $('fieldset.second');
-		nextstep(current_fs , next_fs);
+    	// Check Mobile number exists and Send SMS through Viber
+    	var getSaveAPI = API_LOCATION +'professional/signupConfirmation.php';
+    	//alert(getSaveAPI);
+    	
+    	$.ajax({
+                type: "POST",
+                url: getSaveAPI,
+                dataType: "JSON",
+                data: { email: valEmail, mobile :tel},
+                success: function(data)
+                {
+                	if(data['error']){
+                		if(data['message'] == "Mobile number already exist!"){
+                			$('input.sing_up_til').css('background','#f2dede');
+                		}else if(data['message'] == "Email already exist!"){
+                			$('input.sing_up_email').css('background','#f2dede');
+                		}
+                		alert(data['message']);
+                	}else{
+                		//alert("yes");
+                		//alert(data['smsTexts']);
+                		// return false;
+                		$(".smsCode").val(data['smsTexts']);
+      					current_fs = $('fieldset.first');
+						next_fs = $('fieldset.second');
+						nextstep(current_fs , next_fs);
+                	}
+                    
+                    //location.reload();
+                }
+            });
+    	return false;
+    	
 
     }
 
@@ -202,7 +232,7 @@ function validateSecondStep(){
 
 }
 
-function validateLastStep(smsValidationCode){
+function validateLastStep(){
 
 	$('#error_header ul li').remove();
 	$('#error_header').css('display','none');
@@ -211,7 +241,7 @@ function validateLastStep(smsValidationCode){
 	var doneYour_pass= false;
 	var doneRepeat_pass= false;
 	var doneTerms = false;
-
+	var smsValidationCode = $('.smsCode').val();
 	var validationCode = $('input.validationCode').val();
 	var your_pass = $('input.your_pass').val();
 	var repeat_pass = $('input.repeat_pass').val();
@@ -270,21 +300,27 @@ function validateLastStep(smsValidationCode){
 		var select_job = $(".select-job option:selected").val();
 		var hear_us = $(".hear_us option:selected").val();
 
-		current_fs = $('fieldset.third');
-		next_fs = $('fieldset.fieldset-thank-you');
-		nextstep(current_fs , next_fs);
-		/*$.ajax({
+		//current_fs = $('fieldset.third');
+		//next_fs = $('fieldset.fieldset-thank-you');
+		//nextstep(current_fs , next_fs);
+		var getSaveAPI = API_LOCATION +'professional/signup.php';
+		$.ajax({
                   type:"POST",
-                  url:"",
+                  url:getSaveAPI,
                   data:{first_name,last_name,valEmail,tel,companyName,select_idiotita,select_job,hear_us,validationCode,your_pass},
                   success: function(data){
-                     console.log(data);
-                     current_fs = $('fieldset.third');
-					 next_fs = $('fieldset.fieldset-thank-you');
-                     nextstep(current_fs , next_fs);
+                  	 if(data.error){
+                  	 	alert(data.message);
+                  	 }else{
+                  	 	console.log(data);
+		                 current_fs = $('fieldset.third');
+						 next_fs = $('fieldset.fieldset-thank-you');
+		                 nextstep(current_fs , next_fs);	
+                  	 }
+                     
                      
                   }
-             })*/
+             })
 
 	}else{
 		$('#error_header').css('display','block');
