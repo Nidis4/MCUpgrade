@@ -519,7 +519,7 @@ ORDER BY `date` ASC,
         // $query .=" WHERE professional_id = :id";
 
 
-         $query = "INSERT INTO ". $this->account_table_name ." (`professional_id`, `email`, `calendar_id`) VALUES (:id, :email, :calendar_id, :address) ON DUPLICATE KEY UPDATE `email`=:email, `calendar_id`=:calendar_id";
+         $query = "INSERT INTO ". $this->account_table_name ." (`professional_id`, `email`, `calendar_id`,`password`,`created`,`modified`,`status`) VALUES (:id, :email, :calendar_id,'','".date('Y-m-d H:i:s')."','".date('Y-m-d H:i:s')."','2') ON DUPLICATE KEY UPDATE `email`=:email, `calendar_id`=:calendar_id, `modified`='".date('Y-m-d H:i:s')."'";
 
         $stmt = $this->conn->prepare( $query );
 
@@ -1291,7 +1291,7 @@ ORDER BY `date` ASC,
 
         $this->update_contact($professional_id, '', $mobile, '');
 
-        $this->update_account($id, $email, '');
+        $this->update_account($professional_id, $email, '');
 
 
         $query = "UPDATE ". $this->account_table_name ." set password ='".md5($password)."' where professional_id = '".$professional_id."'";        

@@ -30,7 +30,7 @@ if($stmt['error'] == 0){
     // Viber Connection         
     $viber = new Viber($db);
     
-    //$viber->send($customer_mobile, $smsTexts);
+    $viber->send($customer_mobile, $smsTexts);
     $stmt['smsTexts'] = $rand;
 }
 echo json_encode($stmt );
