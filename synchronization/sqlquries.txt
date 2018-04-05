@@ -701,3 +701,12 @@ ALTER TABLE `professionals_contact_details` CHANGE `address` `address` VARCHAR(3
 
 <!-------------------------------->
 <!-- End 4 April 2018 Harpreet ---->
+
+
+<!-------------------------------->
+<!-- Start 5 April 2018 Harpreet -->
+
+ALTER TABLE `professionals` ADD `defaultsms` INT(1) NOT NULL DEFAULT '0' AFTER `verified`;
+
+<!-------------------------------->
+<!-- End 5 April 2018 Harpreet ---->

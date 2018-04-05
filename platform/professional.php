@@ -61,7 +61,7 @@ include('config/core.php');
 					die();
 				}
 				include('header.php');
-
+				
 				$professional = file_get_contents($api_url.'webservices/api/professional/read_one.php?id='.$id);
 				$professional = json_decode($professional, true); // decode the JSON into an associative array	
 
@@ -190,7 +190,11 @@ include('config/core.php');
 											<div class="col-sm-8">
 												<input type="text" name="admin_comments" id="admin_comments" class="form-control" value="<?php echo $professional['admin_comments']; ?>" required />
 											</div>										
-										</div>									
+										</div>	
+										<div class="form-group col-md-12 row">
+											<label class="col-lg-3 control-label text-lg-right pt-2">Default SMS</label>
+											<div class="col-lg-1"><input type="checkbox" class="form-control" name="defaultsms" id="defaultsms" value="1" <?php if(@$professional['defaultsms']){ echo "checked='checked'";}?> ></div>
+										</div>								
 									</div>
 									<div class="col-sm-12 col-md-7"><!-- Right-->
 										<div class="form-group row">								
@@ -1347,6 +1351,12 @@ include('config/core.php');
 						form_data.append('verified', 1);
 					} else{
 						form_data.append('verified', 0);
+					}
+
+					if ($('#defaultsms').prop('checked') == true){
+						form_data.append('defaultsms', 1);
+					} else{
+						form_data.append('defaultsms', 0);
 					}
 
 

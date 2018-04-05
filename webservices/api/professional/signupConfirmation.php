@@ -22,8 +22,8 @@ $professional = new Professional($db);
 // query products
 $stmt = $professional->checkProf($email, $mobile);
 if($stmt['error'] == 0){
-    $customer_mobile = '6940589493';
-    //$customer_mobile = $mobile;
+    //$customer_mobile = '6940589493';
+    $customer_mobile = $mobile;
     $rand = mt_rand(100000,999999);
     $smsTexts = "Κωδικός επιβεβαίωσης ".$rand." για την εγγραφή σας. Παρακαλώ εισάγεται τον κωδικό στο πεδίο «κωδικός επιβεβαίωσης»";
 
