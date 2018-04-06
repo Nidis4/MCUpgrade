@@ -3232,6 +3232,9 @@ padding-bottom: 90px;
 .top-sign-in-container .login-btn input:hover, .top-sign-in-container .login-btnfb .fb-login-btn:hover {
     background: #f2930a;
 }
+.login-btnfb{
+  margin-left: 15px;
+}
 
 .ticker-headline {
   overflow: hidden;
