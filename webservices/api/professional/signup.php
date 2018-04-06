@@ -34,7 +34,7 @@ $professional = new Professional($db);
 $stmt = $professional->signup($first_name, $last_name, $email, $mobile, $companyName, $select_idiotita, $select_job, $hear_us, $password);
 if($stmt){
     echo json_encode(
-        array("message" => "Registration successfully","error"=>0)
+        array("message" => "Registration successfully","error"=>0,'id'=>$stmt)
     );
 }else{
 	echo json_encode(

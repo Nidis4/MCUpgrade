@@ -87,7 +87,7 @@
 								</fieldset>
 								<fieldset class="fieldset-thank-you">
 								    <p class="success-msg-sing-up"><i class="fa fa-check-circle-o"></i><br/>Συγχαρητήρια! Ο λογαριασμός σας δημιουργήθηκε επιτυχώς!</p>
-								    <a href="#"><div class="submit-btn nextstep action-button"><span class="glyphicon glyphicon-log-in"></span> Σύνδεση</div></a>
+								    <a href="<?php echo SITE_URL;?>professional-profile"><div class="submit-btn nextstep action-button"><span class="glyphicon glyphicon-log-in"></span> Σύνδεση</div></a>
 								</fieldset>
 							</form>
 

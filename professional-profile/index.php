@@ -10,8 +10,20 @@
                             <div class="col-md-12 page-title">
                                 <h2>Overview</h2>
                             </div>
+                            <?php 
+                                //echo SITE_URL.'webservices/api/professional/getProfile.php?id='.$_SESSION['id'];
 
+                                $profile = file_get_contents(SITE_URL.'webservices/api/professional/getProfile.php?id='.$_SESSION['id']);
+                                $profile = json_decode($profile, true); // decode the JSON into an associative array
+                            ?>
                             <div class="col-md-12">
+                                <?php if($profile['record']['verified']==0){?>    
+                                 <div class="alert alert-danger">
+                                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                                    <strong>Attention!</strong> Your profile is under verification.
+                                  </div>
+                                <?php }?>
+
                                  <div class="alert alert-danger">
                                     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                                     <strong>Attention!</strong> Υou have unpaid debts. Your account will be frozen! <a href="/manage-profile/payments.php" class="alert-link">read more</a>.

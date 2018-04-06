@@ -312,10 +312,24 @@ function validateLastStep(){
                   	 if(data.error){
                   	 	alert(data.message);
                   	 }else{
-                  	 	console.log(data);
-		                 current_fs = $('fieldset.third');
-						 next_fs = $('fieldset.fieldset-thank-you');
-		                 nextstep(current_fs , next_fs);	
+                  	 	var user = valEmail;
+	                    var name = first_name;
+	                    var surname = last_name;
+	                    var id = data.id;
+	                    var fullname = name+" "+surname;
+	                    var type = 'Professional';
+                  	 	$.post(
+                                "session.php", 
+                                {"user": user , "fullname":fullname, "id":id, "type":type},
+                                function(result){
+                                    console.log(data);
+					                 current_fs = $('fieldset.third');
+									 next_fs = $('fieldset.fieldset-thank-you');
+					                 nextstep(current_fs , next_fs);
+                                }
+                            );
+
+                  	 		
                   	 }
                      
                      

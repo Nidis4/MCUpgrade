@@ -1008,7 +1008,7 @@ ORDER BY `date` ASC,
     }
 
     public function getProfile(){
-        $query = "Select p.id, p.first_name, p.last_name, p.description, p.service_area, p.image, pc.address, pc.mobile  from ".$this->table_name." p 
+        $query = "Select p.id, p.first_name, p.last_name, p.description, p.service_area, p.image, p.verified, pc.address, pc.mobile  from ".$this->table_name." p 
                   LEFT JOIN ".$this->contact_table_name." pc on p.id = pc.professional_id 
                   where p.id = :id";
 
@@ -1299,7 +1299,8 @@ ORDER BY `date` ASC,
         $query = "UPDATE ". $this->account_table_name ." set password ='".md5($password)."' where professional_id = '".$professional_id."'";        
         $stmt = $this->conn->prepare( $query );
         if($stmt->execute()){
-            return 1;
+
+            return $professional_id;
         }else{
             return 0;
         }
