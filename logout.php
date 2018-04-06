@@ -1,5 +1,5 @@
 <?php
 include('session.php');
 session_unset();
-header('Location: ../login.php');
+header('Location: login.php');
 ?>

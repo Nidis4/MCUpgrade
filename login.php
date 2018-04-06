@@ -9,7 +9,7 @@
 			<div class="col-sm-12">
 				<p class="Sign-In">Συνδεθείτε στο<span> my</span><span class="mysign">Constructor</span><span>.gr</span></p>
 				<div class="new-sign-in-form">
-					<form id="loginForm">
+					<form id="loginForm" method="POST">
 						<div style="display:none;"><input name="_method" value="POST" type="hidden"></div>
 						<div class="sign-in-from">
 							<div class="form-group">
@@ -46,12 +46,11 @@
 			</div>
 		</div>
 	</div><!-- top-sign-in-container-->
-</div>
 
 
 
 <script src="js/core.js" type="text/javascript"></script>
-<script src="professional-profile/js/professional-profile.js" type="text/javascript"></script>
+<script src="js/proffessional-profile.js" type="text/javascript"></script>
 
 <?php 
 	include('footer.php');

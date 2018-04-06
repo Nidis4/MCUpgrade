@@ -12,13 +12,13 @@ if (isset($_POST['user']) && isset($_POST['user'])!="" && (isset($_POST['type'])
 }
 else {	
 	if(!isset($_SESSION['login_user'])){
-		header('Location: ../login.php'); // Redirecting To Login Page
+		header('Location: login.html'); // Redirecting To Home Page
 		exit();
 	}else{
 		if(@$_SESSION['usertype'] && $_SESSION['usertype'] == "Professional" ){
 			$user_check=$_SESSION['login_user'];
 		}else{
-			header('Location: ../login.php'); // Redirecting To Login Page
+			header('Location: login.html'); // Redirecting To Home Page
 			exit();
 		}
 		
