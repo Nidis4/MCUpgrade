@@ -200,13 +200,14 @@ li.active.litel a:hover {
 
 .div-wave {
     margin-bottom: 25px;
+    max-width: 172px;
 }
 
 .cleaning-first-half{
   background:url(../img/home-page/sunergeio-kath.jpg) no-repeat;
 }
 .mover-first-half{
-  background:url(../img/home-page/mover.jpg) no-repeat;
+  background:url(../img/home-page/transport-boxes.jpg) no-repeat;
 }
 
 .testimon1-second-half{
@@ -217,7 +218,7 @@ li.active.litel a:hover {
   background:url(../img/home-page/workers.jpg) no-repeat;
 }
 .painter-first-half{
-  background:url(../img/home-page/painters.jpg) no-repeat;
+  background:url(../img/home-page/paint-wall.jpg) no-repeat;
 }
 
 .tiles-second-half{
@@ -2992,14 +2993,21 @@ a.a-showless{
   }
 
   .app-img {
-    max-width: 110px;
+    max-width: 100px;
     margin: auto;
+    border-radius: 50%;
+    background: #ccc;
   }
 
-  .app-img img{
-    border: 2px solid #f4f4f4;
-    border-radius: 50%;
+  .app-img-inner {
+    width: 65px;
+    margin: auto;
+    padding-top: 18px;
+    padding-bottom: 18px;
   }
+
+
+
   .col-application:hover{
     border: 1px solid #f2930a;
     box-shadow: 0 0px 15px rgba(0, 0, 0, 0.2);
@@ -3574,6 +3582,14 @@ div#prices {
     padding-left: 0px;
 }
 
+a.col-sm-3.portfolio-img {
+    margin-bottom: 30px;
+}
+
+.col-md-12.outer-porfolio-btns {
+    margin-top: 35px;
+}
+
 
 @media screen and (max-width: 991px){
   .col-md-4.applications-tabs{
@@ -3595,7 +3611,11 @@ div#prices {
     width: 100%;
     max-width: none;
     padding-right: 0px;
+    margin-bottom: 30px;
 
+  }
+  .tabs-menu-outer{
+        border-bottom: 1px solid #e0e0e0;
   }
 
   div#prices.col-md-8{
@@ -3613,3 +3633,4 @@ div#prices {
   }
 
 }
+

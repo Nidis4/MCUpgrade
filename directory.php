@@ -65,7 +65,7 @@
 						<li><a class="a-breadcrumb" href="<?php echo $api_url; ?>">Αρχική</a></li>
 						<li><a class="a-breadcrumb" href="<?php echo $directory_url .'?cat_id='. $category_id; ?>"><?php echo $cat_app_name; ?></a></li>
 						<li><a class="a-breadcrumb" href="<?php echo $directory_url .'?cat_id='. $category_id . '&app_id=' .$application_id; ?>"><?php echo $app_name; ?></a></li>
-						<li>Αττική</li>
+						<li class="breadcrumb-county">Αττική</li>
 					</ul>
 				</div>
 
@@ -81,7 +81,7 @@
 				</div>
 
 				<div class="results-title">
-					<h1 id="directory-top"><?php echo sizeof($app_professionals); ?> Συνεργεία για <?php echo $app_name; ?> <span class="stin-color">στην</span> Αττική</h1>
+					<h1 id="directory-top"><span class="span-count-professionals"><?php echo sizeof($app_professionals); ?></span> Συνεργεία για <?php echo $app_name; ?> <span class="stin-color">στην</span> Αττική</h1>
 				</div>
 
 				<nav class="navbar navbar-default directory-filters" role="navigation">
@@ -162,12 +162,14 @@
 						$professional_description = $professionals['description'];
 						$professional_city = $professionals['city'];
 						$professional_servicearea = $professionals['servicearea'];
+						$professional_county = $professionals['county_id'];
+						$professional_county_name_gr= $professionals['county_name_gr'];
 
 						
 				?>
 
 
-						<div class="prof-main-col">
+						<div class="prof-main-col" data-county="<?php echo $professional_county; ?>" data-price="<?php echo $professional_price; ?>">
 					  		<div class="col-md-3 col-sm-12 professional-img-con">
 					  			<div class="professional-img">
 					  				<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id . '&app_id=' . $application_id; ?>" >
@@ -307,8 +309,11 @@
 						<div  class="col-md-12 applications_outer">
 							<div class="col-application">
 								<div class="col-md-2">
-									<div class="app-img">								
-										<i class="fa fa-truck fa-4x icon-bg"></i>
+									<div class="app-img">
+										<div class="app-img-inner">
+												<img src="img/plintirio.png">	
+										</div>							
+										<i style="display: none;" class="fa fa-truck fa-4x icon-bg"></i>
 									</div>
 								</div>
 								<div class="col-md-7 app-details">
@@ -543,17 +548,7 @@
 			 
 		</div>
 
-						
-
-
-
-
-
-
-
 		</div>
-
-
 
 	</div>
 </div>

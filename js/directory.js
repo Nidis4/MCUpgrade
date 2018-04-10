@@ -93,13 +93,34 @@ $(document).ready(function(){
 	var color = ['546E7A','757575', '6D4C41', 'F4511E','FB8C00', 'FFB300', 'FDD835', 'C0CA33', '7CB342', '43A047', '00897B', '00ACC1', '039BE5', '1E88E5', '3949AB', '5E35B1', '8E24AA', 'D81B60', 'e53935' ];
 
 
-	$('.applications_outer .app-img i.icon-bg').each(function( i ) {
+	$('.applications_outer .app-img').each(function( i ) {
 
 		if(i <= 18) {
 			$(this).css('background', '#'+color[i] );
 		}else{
 			$(this).css('background', '#'+color[i-18] );
 		}
+
+	});
+});
+
+
+$(document).ready(function(){
+	$('select.counties').change(function(){
+		var county = $('select.counties option:selected').val();
+		var county_name =  $('select.counties option:selected').text();
+		$('li.breadcrumb-county').html(county_name);
+		var i= 0;
+		$("div.prof-main-col").each(function(){
+			//alert($(this).attr('data-county'));
+			if($(this).attr('data-county') == county){
+				i++;
+				$(this).show();
+			}else{
+				$(this).hide();
+			} 
+		});
+		$('span.span-count-professionals').html(i);
 
 	});
 });
@@ -157,9 +178,7 @@ $(document).ready(function(){
 
 	   $('#MainMenu').find('div#'+cat_id).addClass('in');
 	   $('#MainMenu').find('[href$="#'+cat_id+'"]').addClass('selected-cat');
-
-	  
-
+ 
 	}
 	
 });

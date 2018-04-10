@@ -1,4 +1,50 @@
  // Open the Modal
+
+    $(document).ready(function(){
+
+      var count_porfolio_img = $('a.col-sm-3.portfolio-img').length;
+      var count_img = 4;
+
+      $('a.col-sm-3.portfolio-img').hide();
+      $('a.col-sm-3.portfolio-img:lt(' + count_img + ')').show();
+      $('#showless').hide();
+
+
+      if(count_img >= count_porfolio_img){
+        $('div#loadmore').hide();
+      }else{
+        $('div#loadmore').show();
+      }
+
+      $('#loadmore').click(function () {
+        //$('#showLess').show();
+           count_img=count_img+4;
+           if(count_porfolio_img > count_img ){
+              $('a.col-sm-3.portfolio-img:lt(' + count_img + ')').slideDown( "slow" );  
+                 // $(this).hide();
+          }else if(count_porfolio_img == count_img){
+            $('a.col-sm-3.portfolio-img:lt(' + count_img + ')').slideDown( "slow" );
+            $(this).hide();
+            $('#showless').show();
+          }else{
+            $('a.col-sm-3.portfolio-img:lt(' + count_porfolio_img + ')').slideDown( "slow" );
+            $(this).hide();
+            $('#showless').show();
+          }
+        });
+        $('#showless').click(function () {
+            $('#loadmore').show();
+            $('#showless').hide();
+            count_img = 4;
+            $('a.col-sm-3.portfolio-img').slideToggle( "slow" );
+            $('a.col-sm-3.portfolio-img:lt(' + count_img + ')').slideDown( "slow" );
+
+        });
+
+    });
+
+
+
             
             $(".profile-side-menu ul a").on("click", function() {
               $(".profile-side-menu ul ").find(".active").removeClass("active");
@@ -17,15 +63,20 @@
 
             $(document).ready(function(){
               var prices_height = $('.row.proffesional-row-content').height();
-              $('div#services').height(prices_height);
+             if ($(window).width() >= prices_height){
+                $('div#services').height(prices_height);
+              }
+
+
             });
 
 
             $('ul.nav.nav-pills-vertical.mytabs.tab-app-profile li').click(function(){
 
                 var prices_height = $('.row.proffesional-row-content').height();
-                $('div#services').height(prices_height);
-
+                if ($(window).width() >= prices_height){
+                  $('div#services').height(prices_height);
+                }
             });
 
 

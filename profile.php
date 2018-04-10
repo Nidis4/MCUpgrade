@@ -93,7 +93,21 @@
 
                                 <p class="offer-mcr-txt">*Ενημερώστε τους ότι καλείτε για την προσφορά του myConstructor.</p>
 
-                                <a class="btn-book-online" href="https://myconstructor.gr/transport/?catid=103&amp;memid=19365&amp;name=Βασίλης&amp;surname=Παναγιωτακόπουλος" target="_blank"><div class="btn-prosfora-prof">Κλείσε online</div></a>
+                                <?php 
+                                if (isset($_GET['app_id'])) {
+                                    $app= $_GET['app_id'];
+
+                                    if( $app == '69' || $app == '70' || $app == '71' || $app == '72' || $app == '196' || $app == '219' || $app == '218' ||  $app == '216'  ){ ?>
+                                        <a href="https://myconstructor.gr/transport/?memid=<?php echo $_GET['id']; ?>&amp;appid=<?php echo $app; ?>&amp;name=<?php echo $first_name; ?>&amp;surname=<?php echo $last_name; ?>" target="_blank">
+
+                                            <div class="btn-prosfora-prof">Κλείσε online</div>
+                                        </a>
+
+                                         
+                                        <?php } 
+                                }?>
+
+                                
                             </div>
                         </div>
 
@@ -234,8 +248,9 @@
                         </div>
 
                     </div>
-
-
+                    <h1>  
+               
+                <?php if(sizeof($portfolio_photos) > 0){ ?>
                     <div class="container container-lightbox">
                         <div id="proffessionalImages" class="row proffessional-photos-row">
                             <div class="title-prof-photos">
@@ -247,7 +262,7 @@
                                 $photo_name = $photos['image_name'];
                              ?>
                             
-                                <a href="<?php echo $portfolio_url . $photo_name; ?>" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
+                                <a href="<?php echo $portfolio_url . $photo_name; ?>" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3 portfolio-img">
                                         <img src="<?php echo $portfolio_url . $photo_name; ?>" class="img-fluid">
                                 </a>
                             <?php } ?>
@@ -260,9 +275,14 @@
                                 <a href="img/matzouranis-4.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
                                         <img src="img/matzouranis-4.jpg" class="img-fluid">
                                 </a> -->
+                            <div class="col-md-12 outer-porfolio-btns">
+                                <div id="loadmore">Εμφάνισε Περισσότερες</div>
+                                <div id="showless">Εμφάνισε Λιγότερες</div>
+                            </div>
                             
                         </div>
                     </div>
+                <?php } ?>
 
                     <div class="container container-reviews">
                         
