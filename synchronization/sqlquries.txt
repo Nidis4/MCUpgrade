@@ -733,5 +733,55 @@ ALTER TABLE `appointments_offers_details`
   ADD PRIMARY KEY (`appointment_id`);
 COMMIT;
 
+CREATE TABLE `appointments_status` (
+  `ID` int(11) NOT NULL,
+  `NAME` varchar(30) NOT NULL,
+  `FROM_STATUS` varchar(20) NOT NULL,
+  `TO_STATUS` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `appointments_status`
+  ADD PRIMARY KEY (`ID`);
+COMMIT;
+
+INSERT INTO `appointments_status` (`ID`, `NAME`, `FROM_STATUS`, `TO_STATUS`) VALUES
+(0, 'Cancelled', '', '8'),
+(1, 'Appointment', '', '5:0'),
+(2, 'Updated', '', ''),
+(3, 'Offer', '', '1:0'),
+(4, 'Appointment for Offer', '', '1:0'),
+(5, 'Job Completed', '', '6'),
+(6, 'Reviewed', '', '7'),
+(7, 'Completed', '', '8'),
+(8, 'Closed', '', '');
+COMMIT;
+
+
+CREATE TABLE `appointments_status_updates` (
+  `ID` int(11) NOT NULL,
+  `APPOINTMENT_ID` int(11) NOT NULL,
+  `FROM_STATUS` int(11) NOT NULL,
+  `TO_STATUS` int(11) NOT NULL,
+  `CHANGED BY` varchar(200) NOT NULL,
+  `UPDATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `appointments_status_updates`
+  ADD PRIMARY KEY (`ID`);
+
+--
+ALTER TABLE `appointments_status_updates`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+CREATE TABLE `applications_search_terms` (
+  `term` varchar(200) NOT NULL,
+  `counts` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `applications_search_terms`
+  ADD PRIMARY KEY (`term`),
+  ADD UNIQUE KEY `term` (`term`);
+
 <!-------------------------------->
 <!-- End 10 April 2018 G Konstantinidis ---->
