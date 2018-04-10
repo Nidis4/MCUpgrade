@@ -718,3 +718,20 @@ ALTER TABLE `jobs` ADD `status` INT(1) NOT NULL DEFAULT '0' COMMENT '0->Pending,
 
 <!-------------------------------->
 <!-- End 9 April 2018 Harpreet ---->
+
+<!-------------------------------->
+<!-- Start 10 April 2018 G Konstantinidis -->
+
+CREATE TABLE `appointments_offers_details` (
+  `appointment_id` int(11) NOT NULL,
+  `offer_json` text NOT NULL,
+  `close_times` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE `appointments_offers_details`
+  ADD PRIMARY KEY (`appointment_id`);
+COMMIT;
+
+<!-------------------------------->
+<!-- End 10 April 2018 G Konstantinidis ---->
