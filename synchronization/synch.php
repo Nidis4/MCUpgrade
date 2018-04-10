@@ -45,7 +45,7 @@ function insertReview($professional_id, $employer_id, $agent_id, $appointment_id
 
 	$upgrade = UpgradeDB();
 
-	$query = "INSERT INTO `directory_ratings`( `professional_id`, `customer_id`, `agent_id`, `appointment_id`, `category_id`, `job_title`, `quality`, `reliability`, `cost`, `schedule`, `behaviour`, `cleanliness`, `active`, `comment`,  `professional_comment`, `created`, `modified`) VALUES ('".$professional_id."', '".$employer_id."', '".$agent_id."', '".$appointment_id."', '".$category_id."', '".$job_title."', '".$quality."', '".$reliability."', '".$cost."', '".$schedule."', '".$behaviour."', '".$cleanliness."', '".$active."', '".$comment."', '".$professional_comment."', '".$created."', '".$modified."') ";
+	$query = "INSERT INTO `directory_ratings`( `professional_id`, `customer_id`, `agent_id`, `appointment_id`, `category_id`, `job_title`, `quality`, `reliability`, `cost`, `schedule`, `behaviour`, `cleanliness`, `active`, `comment`,  `professional_comment`, `created`, `modified`) VALUES ('".$professional_id."', '".$employer_id."', '".$agent_id."', '".$appointment_id."', '".$category_id."', '".$job_title."', '".$quality."', '".$reliability."', '".$cost."', '".$schedule."', '".$behaviour."', '".$cleanliness."', '".$active."', \"".$comment."\", '".$professional_comment."', '".$created."', '".$modified."') ";
 	
 	if (!$upgrade->query($query)) {
 	    echo $query."<br>";

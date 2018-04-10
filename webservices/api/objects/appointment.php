@@ -4,6 +4,7 @@ class Appointment{
     // database connection and table name
     private $conn;
     private $table_name = "appointments";
+    private $offer_details = "appointments_offers_details";
     private $application_table_name = "applications";
     private $ratings_table_name = "directory_ratings";
     private $customers_table_name = "customers";
@@ -126,7 +127,6 @@ class Appointment{
 
     function cancelAppointment($cancelReason = NULL, $cancelComment = NULL){
 
-
         if(@$cancelReason){
 
         }else{
@@ -153,6 +153,25 @@ class Appointment{
         $stmt->bindParam(':id',  $cur_id, PDO::PARAM_INT);
         $stmt->bindParam(':cancelReason',  $cancelReason, PDO::PARAM_INT);
         $stmt->bindParam(':cancelComment',  $cancelComment);
+
+        if ($stmt->execute()) { 
+            
+           return 1;
+        } else {
+            
+           return 0;
+        }
+    } // CancelAppointment
+
+    function updateCloseTimes($id, $close_times){
+
+
+        // query to read single record
+        $query = "INSERT INTO `appointments_offers_details`(`appointment_id`, `close_times`) 
+                    VALUES ('$id','$close_times')
+                    ON DUPLICATE KEY UPDATE `close_times`='$close_times'";
+     
+        $stmt = $this->conn->prepare( $query );
 
         if ($stmt->execute()) { 
             
