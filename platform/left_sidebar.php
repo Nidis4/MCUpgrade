@@ -21,7 +21,7 @@
 				                            <span>Dashboard</span>
 				                        </a>                        
 				                    </li>
-				                    <li class="nav-parent">
+				                    <!--<li class="nav-parent">
 				                        <a class="nav-link" href="#">
 				                            <i class="fa fa-columns" aria-hidden="true"></i>
 				                            <span>Layouts</span>
@@ -190,8 +190,8 @@
 				                                </a>
 				                            </li>
 				                        </ul>
-				                    </li>
-				                    <li class="nav-parent">
+				                    </li>-->
+				                    <!--<li class="nav-parent">
 				                        <a class="nav-link" href="#">
 				                            <i class="fa fa-copy" aria-hidden="true"></i>
 				                            <span>Pages</span>
@@ -273,7 +273,7 @@
 				                                </a>
 				                            </li>
 				                        </ul>
-				                    </li>
+				                    </li>-->
 				                    <li class="nav-parent">
 				                        <a class="nav-link" href="#">
 				                            <i class="fa fa-table" aria-hidden="true"></i>
@@ -419,7 +419,7 @@
 				                            
 				                        </ul>
 				                    </li>
-				                    <li class="nav-parent">
+				                    <!--<li class="nav-parent">
 				                        <a class="nav-link" href="#">
 				                            <i class="fa fa-table" aria-hidden="true"></i>
 				                            <span>Tables</span>
@@ -456,15 +456,15 @@
 				                                </a>
 				                            </li>
 				                        </ul>
-				                    </li>
-				                    <li>
+				                    </li>-->
+				                    <!--<li>
 				                        <a class="nav-link" href="mailbox-folder.html">
 				                            <span class="float-right badge badge-primary">182</span>
 				                            <i class="fa fa-envelope" aria-hidden="true"></i>
 				                            <span>Mailbox</span>
 				                        </a>                        
-				                    </li>
-				                    <li class="nav-parent">
+				                    </li>-->
+				                    <!--<li class="nav-parent">
 				                        <a class="nav-link" href="#">
 				                            <i class="fa fa-map-marker" aria-hidden="true"></i>
 				                            <span>Maps</span>
@@ -486,16 +486,16 @@
 				                                </a>
 				                            </li>
 				                        </ul>
-				                    </li>
+				                    </li>-->
 				                    <li class="nav-parent">
 				                        <a class="nav-link" href="#">
 				                            <i class="fa fa-asterisk" aria-hidden="true"></i>
-				                            <span>Extra</span>
+				                            <span>Tools</span>
 				                        </a>
 				                        <ul class="nav nav-children">
 				                            <li>
-				                                <a class="nav-link" href="extra-changelog.html">
-				                                    Changelog
+				                                <a class="nav-link" href="applications.php">
+				                                    Applications
 				                                </a>
 				                            </li>
 				                            <li>
@@ -505,12 +505,12 @@
 				                            </li>
 				                        </ul>
 				                    </li>
-				                    <li>
+				                    <!--<li>
 				                        <a class="nav-link" href="http://themeforest.net/item/porto-responsive-html5-template/4106987?ref=Okler">
 				                            <i class="fa fa-external-link" aria-hidden="true"></i>
 				                            <span>Front-End <em class="not-included">(Not Included)</em></span>
 				                        </a>                        
-				                    </li>
+				                    </li>-->
 				                    <li class="nav-parent">
 				                        <a class="nav-link" href="#">
 				                            <i class="fa fa-align-left" aria-hidden="true"></i>
@@ -564,7 +564,7 @@
 				
 				            <hr class="separator" />
 				
-				            <div class="sidebar-widget widget-tasks">
+				            <!--<div class="sidebar-widget widget-tasks">
 				                <div class="widget-header">
 				                    <h6>Projects</h6>
 				                    <div class="widget-toggle">+</div>
@@ -576,9 +576,9 @@
 				                        <li><a href="#">Porto Admin</a></li>
 				                    </ul>
 				                </div>
-				            </div>
+				            </div>-->
 				
-				            <hr class="separator" />
+				            <!--<hr class="separator" />
 				
 				            <div class="sidebar-widget widget-stats">
 				                <div class="widget-header">
@@ -616,7 +616,7 @@
 				                        </li>
 				                    </ul>
 				                </div>
-				            </div>
+				            </div>-->
 				        </div>
 				
 				        <script>

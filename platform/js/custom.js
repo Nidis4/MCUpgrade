@@ -309,6 +309,30 @@ $( "#searchProfessional" ).click(function() {
 
 });
 
+$( ".updateTag" ).click(function() {
+    var tagId = $(this).attr('id');
+    var id = tagId.substring(9);
+    
+    var text = $('textarea#textarea'+id).val();
+    //alert("Should be Implemented:"+id+" "+text);
+
+    var updateTagsAPI = API_LOCATION+'application/updateTags.php';
+    //alert(updateTagsAPI);
+    $.ajax({
+        type: "POST",
+        url: updateTagsAPI,
+        data: {
+            id: id,
+            tags: text    
+        },
+        success: function(data)
+        {
+            alert("Tag saved!");
+        }
+    });
+    
+});
+
 $("input#startDate").change(function(){
     //alert("The text has been changed.");
     var date = new Date($("#startDate").val()); 
