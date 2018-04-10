@@ -60,7 +60,12 @@ if($stmt){
 			$arrtime = explode("-", $time, 2);
 			$FFtime = $arrtime[0];
 			$FLtime = date('H:i', strtotime($FFtime)+7200);
-			$Ftime = $FFtime.'-'.$FLtime;
+			//$Ftime = $FFtime.'-'.$FLtime;
+			if(($category_id == '57') || ($category_id == '106')){
+				$Ftime = $FFtime.'-'.$FLtime;
+			}else{
+				$Ftime = $FFtime;
+			}
 			$adate = date_create($date);
 			$fdate = date_format($adate, 'd-m-y');
 			$fcname = $category->title_greek;

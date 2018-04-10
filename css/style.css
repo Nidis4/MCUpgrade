@@ -3118,7 +3118,131 @@ div#loadmore, div#showless{
     color: #fff;
 }
 
+.container-fluid.top-sign-in-container {
+   background:url(../img/signin_bg.jpg) no-repeat;
+   background-position: center;
+background-size: cover;
+width: 100%;
+padding-top: 90px;
+padding-bottom: 90px;
+ 
+    
+    
+}
 
+.container-fluid.top-sign-in-container .row {
+    max-width: 1170px;
+    margin: auto;
+}
+
+.container-fluid.top-sign-in-container h1 {
+    color: #fff;
+}
+
+.container-fluid.top-sign-in-container p.Sign-In {
+    float: none;
+    text-align: center;
+    margin: 0 auto 41px;
+    color: #fff;
+    font-size: 36.97px;
+    line-height: 50px;
+    font-family: dinmd;
+    padding: 0 0 15px;
+}
+
+.container-fluid.top-sign-in-container p.Sign-In span {
+    color: #f2930a;
+    font-size: 43.14px;
+    font-family: segoe print;
+}
+
+.container-fluid.top-sign-in-container p.Sign-In .mysign {
+    font-size: 43.14px;
+    font-family: dinmd;
+    color: #fff;
+    font-weight: 700;
+}
+
+.new-sign-in-form {
+    max-width: 300px;
+    margin: auto;
+}
+
+.sign-in-from {
+    width: 270px;
+    float: none;
+    text-align: center;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.sign-in-from .form-group {
+    margin: 20px 0 1px !important;
+    width: 100%;
+    float: left;
+}
+
+#exampleInputEmail1 {
+    background: #eaeaea;
+    padding: 12px 0 12px 4px;
+    height: 43px;
+    font-size: 16px;
+    font-family: dinmd;
+}
+
+#exampleInputPassword1 {
+    background: #eaeaea;
+    padding: 12px 0 12px 4px;
+    height: 43px;
+    font-size: 16px;
+    margin: 0;
+    font-family: dinmd;
+}
+
+.top-sign-in-container .form-field-inner-part {
+    max-width: 299px;
+    margin: 20px auto;
+    overflow: auto;
+}
+
+.top-sign-in-container .login-btn {
+    max-width: 115px;
+    margin: 30px auto;
+    overflow: auto;
+}
+
+.top-sign-in-container .login-btn input, .login-btnfb .fb-login-btn {
+    padding: 10px 16px;
+    background: rgba(0,0,0,.1);
+    border: 0;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 15px;
+    float: left;
+    border: 1px solid #fff;
+    font-weight: 700;
+}
+
+.top-sign-in-container label {
+    float: left;
+    margin: 1px 0 0 !important;
+    font-family: dinmd;
+    color: #f69b19;
+}
+.top-sign-in-container .Forgot_your a {
+    width: 100%;
+    float: left;
+    text-align: left;
+    color: #ed900a;
+    font-size: 15px;font-family: dinmd;
+}
+
+.top-sign-in-container .login-btn input:hover, .top-sign-in-container .login-btnfb .fb-login-btn:hover {
+    background: #f2930a;
+}
+.login-btnfb{
+  margin-left: 15px;
+}
 
 .ticker-headline {
   overflow: hidden;
@@ -3130,6 +3254,7 @@ div#loadmore, div#showless{
   font-family:dinbd;
 
 }
+
 
 .carousel.vertical .carousel-inner {
   height: 100%;

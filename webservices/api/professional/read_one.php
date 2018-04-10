@@ -178,6 +178,7 @@ $professional_arr=array(
     "admin_comments" => $professional->admin_comments,
     "viewtype" => $professional->viewtype,
     "verified" => $professional->verified,
+    "defaultsms" => $professional->defaultsms,
     "image1" => $professional->image1,
     "image2" => $professional->image2,
     "image3" => $professional->image3,

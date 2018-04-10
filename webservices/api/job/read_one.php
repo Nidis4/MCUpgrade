@@ -39,6 +39,7 @@ $job->id = isset($_GET['id']) ? $_GET['id'] : die();
         "phone" => $job->phone,
         "datetimeCreated" => $job->datetimeCreated,
         "offer_balance" => $job->offer_balance,
+        "status" => $job->status,
     );
      
  

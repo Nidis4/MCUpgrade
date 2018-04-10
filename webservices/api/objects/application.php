@@ -19,6 +19,7 @@ class Application{
     public $min_price;
     public $sequence;
     public $modified;
+    public $tags;
 
  
     public function __construct($db){
@@ -29,9 +30,10 @@ class Application{
     public function read(){
         //select all data
         $query = "SELECT
-                    id, category_id, title, title_greek, short_description, short_description_gr, detail_description, detail_description_gr, unit, min_price, sequence, modified
+                    a.id, a.category_id, a.title, a.title_greek, a.short_description, a.short_description_gr, a.detail_description, a.detail_description_gr, a.unit, a.min_price, a.sequence, a.modified, ast.tags
                 FROM
-                    " . $this->table_name . "
+                    " . $this->table_name . " a,  " . $this->table_search . " ast 
+                WHERE a.id = ast.application_id
                 ORDER BY
                     id ASC";
  
@@ -175,6 +177,17 @@ ORDER BY applications.sequence ASC";
 
         // execute query
         $stmt->execute();
+    }
+
+    function updateTag($id, $tags){
+        $query = "UPDATE `applications_search` SET `tags`='$tags' WHERE `application_id` = $id";
+        //echo $query;
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+
+        // execute query
+        $stmt->execute();
+        return $stmt;
     }
 
 }

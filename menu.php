@@ -25,7 +25,13 @@
 						      </ul>
 						      <ul class="nav navbar-nav navbar-right">
 						        <li><a href="https://myconstructor.gr/members/chooseUserType"><span class="glyphicon glyphicon-user"></span> ΕΓΓΡΑΦΗ</a></li>
-						        <li><a href="https://myconstructor.gr/members/login"><span class="glyphicon glyphicon-log-in"></span> ΣΥΝΔΕΣΗ</a></li>
+						        <li>
+						        	<?php if(@$_SESSION['login_user']){?>
+						        			<a href="<?php echo SITE_URL.'logout.php';?>"><span class="glyphicon glyphicon-log-out"></span> Αποσυνδέση</a>
+						        	<?php }else{?>
+						        			<a href="<?php echo SITE_URL.'login.php';?>"><span class="glyphicon glyphicon-log-in"></span> ΣΥΝΔΕΣΗ</a>
+						        	<?php }?>
+						        </li>
 						      </ul>
 						    </div><!-- /.navbar-collapse -->
 						  </div><!-- /.container-fluid -->					

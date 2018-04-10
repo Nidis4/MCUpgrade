@@ -78,7 +78,7 @@ class Job{
      
         // query to read single record
         $query = "SELECT
-                id, customer_id, category_id, email, title, budget, offers, offer_balance, questions, phone, datetimeCreated
+                id, customer_id, category_id, email, title, budget, offers, offer_balance, questions, phone, status, datetimeCreated
                 FROM
                 " . $this->table_name . "                
                 WHERE
@@ -116,6 +116,7 @@ class Job{
         $this->offer_balance = $row['offer_balance'];
         $this->questions = $row['questions'];
         $this->phone = $row['phone'];
+        $this->status = $row['status'];
         $this->datetimeCreated = $row['datetimeCreated'];
     } // Read One
 

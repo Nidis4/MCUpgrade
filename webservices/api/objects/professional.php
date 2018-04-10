@@ -379,7 +379,7 @@ ORDER BY `date` ASC,
      
         // query to read single record
         $query = "SELECT
-                 p.`id`, p.`first_name`, p.`last_name`, p.`sex`, p.`description`, p.`image`, p.`profile_status`, p.`admin_comments`,p.`viewtype`,p.`verified`, p.`service_area`, cd.`image1`, cd.`image2`, cd.`image3`, cd.`perid1`, cd.`perid2`, cd.`agreement1`, cd.`agreement2`, cd.`agreement3`, cd.`agreement4`, cd.`agreement5`, cd.`approve_per`, cd.`approve_doc`, co.`address`, co.`city`, co.`mobile`, co.`phone`, ca.`email`, ca.`calendar_id`, ct.`county_id`
+                 p.`id`, p.`first_name`, p.`last_name`, p.`sex`, p.`description`, p.`image`, p.`profile_status`, p.`admin_comments`,p.`viewtype`,p.`verified`,p.`defaultsms`, p.`service_area`, cd.`image1`, cd.`image2`, cd.`image3`, cd.`perid1`, cd.`perid2`, cd.`agreement1`, cd.`agreement2`, cd.`agreement3`, cd.`agreement4`, cd.`agreement5`, cd.`approve_per`, cd.`approve_doc`, co.`address`, co.`city`, co.`mobile`, co.`phone`, ca.`email`, ca.`calendar_id`, ct.`county_id`
             FROM
                 " . $this->table_name . " p
                 LEFT JOIN ". $this->contact_table_name." co
@@ -427,6 +427,7 @@ ORDER BY `date` ASC,
         $this->admin_comments = $row['admin_comments'];
         $this->viewtype = $row['viewtype'];
         $this->verified = $row['verified'];
+        $this->defaultsms = $row['defaultsms'];
         $this->mobile = $row['mobile'];
         $this->phone = $row['phone'];
         $this->email = $row['email'];
@@ -451,12 +452,12 @@ ORDER BY `date` ASC,
 
 
 
-    function update($id, $first_name, $last_name, $address, $sex, $profile_status, $admin_comments, $mobile, $phone, $email, $calendar_id, $profile_image1, $profile_image2, $profile_image3, $profile_perid1, $profile_perid2, $profile_agreement1, $profile_agreement2, $profile_agreement3, $profile_agreement4, $profile_agreement5, $approve_per, $approve_doc, $viewtype, $verified ){
+    function update($id, $first_name, $last_name, $address, $sex, $profile_status, $admin_comments, $mobile, $phone, $email, $calendar_id, $profile_image1, $profile_image2, $profile_image3, $profile_perid1, $profile_perid2, $profile_agreement1, $profile_agreement2, $profile_agreement3, $profile_agreement4, $profile_agreement5, $approve_per, $approve_doc, $viewtype, $verified, $defaultsms  ){
         
         
         $query = "UPDATE " . $this->table_name . "
                     SET
-                    `first_name`=:first_name, `last_name`=:last_name, `sex`=:sex, `profile_status`=:profile_status, `admin_comments`=:admin_comments, `viewtype`=:viewtype, `verified`=:verified";
+                    `first_name`=:first_name, `last_name`=:last_name, `sex`=:sex, `profile_status`=:profile_status, `admin_comments`=:admin_comments, `viewtype`=:viewtype, `verified`=:verified, `defaultsms`=:defaultsms";
         $query .=" WHERE id = :id";
 
         $stmt = $this->conn->prepare( $query );
@@ -471,6 +472,7 @@ ORDER BY `date` ASC,
         $stmt->bindParam(':admin_comments',  $admin_comments);
         $stmt->bindParam(':viewtype',  $viewtype);
         $stmt->bindParam(':verified',  $verified);
+        $stmt->bindParam(':defaultsms',  $defaultsms);
         
         if ($stmt->execute()) { 
            $this->update_contact($id, $address, $mobile, $phone); 
@@ -485,11 +487,13 @@ ORDER BY `date` ASC,
     function update_contact($id, $address, $mobile, $phone ){
         
         
-        $query = "UPDATE " . $this->contact_table_name . "
-                    SET
-                    `mobile`=:mobile, `phone`=:phone, `address`=:address";
+        //$query = "UPDATE " . $this->contact_table_name . "
+                    // SET
+                    // `mobile`=:mobile, `phone`=:phone, `address`=:address";
+
+        $query = "INSERT INTO ". $this->contact_table_name ." (`professional_id`, `mobile`, `phone`, `address`) VALUES (:id, :mobile, :phone, :address) ON DUPLICATE KEY UPDATE `mobile`=:mobile, `phone`=:phone, `address`=:address";
         
-        $query .=" WHERE professional_id = :id";
+        //$query .=" WHERE professional_id = :id";
 
         $stmt = $this->conn->prepare( $query );
 
@@ -510,11 +514,14 @@ ORDER BY `date` ASC,
     function update_account($id, $email, $calendar_id ){
         
         
-        $query = "UPDATE " . $this->account_table_name . "
-                    SET
-                    `email`=:email, `calendar_id`=:calendar_id";
+        // $query = "UPDATE " . $this->account_table_name . "
+        //             SET
+        //             `email`=:email, `calendar_id`=:calendar_id";
         
-        $query .=" WHERE professional_id = :id";
+        // $query .=" WHERE professional_id = :id";
+
+
+         $query = "INSERT INTO ". $this->account_table_name ." (`professional_id`, `email`, `calendar_id`,`password`,`created`,`modified`,`status`) VALUES (:id, :email, :calendar_id,'','".date('Y-m-d H:i:s')."','".date('Y-m-d H:i:s')."','2') ON DUPLICATE KEY UPDATE `email`=:email, `calendar_id`=:calendar_id, `modified`='".date('Y-m-d H:i:s')."'";
 
         $stmt = $this->conn->prepare( $query );
 
@@ -1001,7 +1008,7 @@ ORDER BY `date` ASC,
     }
 
     public function getProfile(){
-        $query = "Select p.id, p.first_name, p.last_name, p.description, p.service_area, p.image, pc.address, pc.mobile  from ".$this->table_name." p 
+        $query = "Select p.id, p.first_name, p.last_name, p.description, p.service_area, p.image, p.verified, pc.address, pc.mobile  from ".$this->table_name." p 
                   LEFT JOIN ".$this->contact_table_name." pc on p.id = pc.professional_id 
                   where p.id = :id";
 
@@ -1230,6 +1237,76 @@ ORDER BY `date` ASC,
             return 0;
        }
 }
+
+    public function checkProf($email, $mobile){
+        $message = "";
+        $error = 0;
+        $return = array('message' => $message,'error' => $error );
+
+        // Check Email
+        $query = "SELECT professional_id FROM " . $this->account_table_name . " 
+                WHERE email = '".$email."'";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+        // execute query
+        $stmt->execute();
+
+        $num = $stmt->rowCount();
+
+        if($num >= 1){
+            $message = "Email already exist!";
+            $error = 1;
+            $return = array('message' => $message,'error' => $error );
+            return $return; 
+        }
+
+        // Check mobile
+        $query = "SELECT professional_id FROM " . $this->contact_table_name . " 
+                WHERE mobile = '".$mobile."'";
+        
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+        // execute query
+        $stmt->execute();
+
+        $num = $stmt->rowCount();
+
+        if($num >= 1){
+            $message = "Mobile number already exist!";
+            $error = 1;
+            $return = array('message' => $message,'error' => $error );
+            return $return; 
+        }
+
+        return $return;
+
+    }
+
+    public function signup($first_name, $last_name, $email, $mobile, $companyName, $select_idiotita, $select_job, $hear_us, $password){
+        
+        $query = "INSERT INTO ". $this->table_name ." (`first_name`, `last_name`,`current_working`) VALUES ('".$first_name."', '".$last_name."','individual')";        
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+
+        $professional_id = $this->conn->lastInsertId();
+
+        $this->update_contact($professional_id, '', $mobile, '');
+
+        $this->update_account($professional_id, $email, '');
+
+
+        $query = "UPDATE ". $this->account_table_name ." set password ='".md5($password)."' where professional_id = '".$professional_id."'";        
+        $stmt = $this->conn->prepare( $query );
+        if($stmt->execute()){
+
+            return $professional_id;
+        }else{
+            return 0;
+        }
+
+
+    }
 
 }
 ?>

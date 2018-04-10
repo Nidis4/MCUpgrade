@@ -33,6 +33,7 @@ if($num >= 1){
                     'image' => $row['image'],
                     'address' => $row['address'],
                     'mobile' => $row['mobile'],
+                    'verified' => $row['verified'],
                 );
     echo json_encode(
             array("record" => $return)

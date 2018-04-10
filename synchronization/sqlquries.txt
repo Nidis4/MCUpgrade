@@ -688,3 +688,33 @@ ALTER TABLE `professionals_photos` ADD `image_order` INT(11) NOT NULL DEFAULT '0
 
 <!-------------------------------->
 <!-- End 3 April 2018 Harpreet ---->
+
+
+<!-------------------------------->
+<!-- Start 4 April 2018 Harpreet -->
+
+ALTER TABLE `professionals` CHANGE `service_area` `service_area` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL, CHANGE `image` `image` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '';
+
+ALTER TABLE `professionals_account_info` CHANGE `last_login` `last_login` DATETIME NULL, CHANGE `last_login_ip` `last_login_ip` VARCHAR(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL;
+
+ALTER TABLE `professionals_contact_details` CHANGE `address` `address` VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci NULL, CHANGE `area` `area` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL, CHANGE `city` `city` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL, CHANGE `country_id` `country_id` INT(11) NULL, CHANGE `latitude` `latitude` VARCHAR(120) CHARACTER SET utf8 COLLATE utf8_general_ci NULL, CHANGE `longitude` `longitude` VARCHAR(120) CHARACTER SET utf8 COLLATE utf8_general_ci NULL, CHANGE `postcode` `postcode` VARCHAR(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL, CHANGE `phone` `phone` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL;
+
+<!-------------------------------->
+<!-- End 4 April 2018 Harpreet ---->
+
+
+<!-------------------------------->
+<!-- Start 5 April 2018 Harpreet -->
+
+ALTER TABLE `professionals` ADD `defaultsms` INT(1) NOT NULL DEFAULT '0' AFTER `verified`;
+
+<!-------------------------------->
+<!-- End 5 April 2018 Harpreet ---->
+
+<!-------------------------------->
+<!-- Start 9 April 2018 Harpreet -->
+
+ALTER TABLE `jobs` ADD `status` INT(1) NOT NULL DEFAULT '0' COMMENT '0->Pending, 1->Active, 2->Deactive' AFTER `phone`;
+
+<!-------------------------------->
+<!-- End 9 April 2018 Harpreet ---->

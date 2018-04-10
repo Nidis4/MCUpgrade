@@ -14,11 +14,44 @@ $live_db_pass = 'u~,oEFS]5b}I';
 
 
 echo "Synchronization Starts<br>";
-syncCategories();
-syncApplications();
-syncCustomers();
-syncProfessionals();
-syncAppointments();
+//syncCategories();
+//syncApplications();
+//syncCustomers();
+//syncProfessionals();
+//syncAppointments();
+syncReviews();
+
+function syncReviews(){
+	echo "In Sync Reviews<br>";
+
+	$query = "SELECT `id`, `professional_id`, `employer_id`, `agent_id`, `appointment_id`, `category_id`, `job_title`, `quality`, `reliability`, `cost`, `schedule`, `behaviour`, `cleanliness`, `active`, `comment`, `professional_comment`, `created`, `modified` FROM `directory_ratings` ";
+
+	$live = LiveDB();
+	if ($result = $live->query($query)) {
+
+	    /* fetch associative array */
+	    while ($row = $result->fetch_assoc()) {
+	        insertReview($row['professional_id'], $row['employer_id'], $row['agent_id'], $row['appointment_id'], $row['category_id'], $row['job_title'], $row['quality'], $row['reliability'], $row['cost'], $row['schedule'], $row['behaviour'], $row['cleanliness'], $row['active'], $row['comment'], $row['professional_comment'], $row['created'], $row['modified']);
+	    }
+
+	    /* free result set */
+	    $result->free();
+	}
+}
+
+
+function insertReview($professional_id, $employer_id, $agent_id, $appointment_id, $category_id, $job_title, $quality, $reliability, $cost, $schedule, $behaviour, $cleanliness, $active, $comment, $professional_comment, $created, $modified){
+	//echo "Inserting Appointment ".$id."<br>";
+
+	$upgrade = UpgradeDB();
+
+	$query = "INSERT INTO `directory_ratings`( `professional_id`, `customer_id`, `agent_id`, `appointment_id`, `category_id`, `job_title`, `quality`, `reliability`, `cost`, `schedule`, `behaviour`, `cleanliness`, `active`, `comment`,  `professional_comment`, `created`, `modified`) VALUES ('".$professional_id."', '".$employer_id."', '".$agent_id."', '".$appointment_id."', '".$category_id."', '".$job_title."', '".$quality."', '".$reliability."', '".$cost."', '".$schedule."', '".$behaviour."', '".$cleanliness."', '".$active."', '".$comment."', '".$professional_comment."', '".$created."', '".$modified."') ";
+	
+	if (!$upgrade->query($query)) {
+	    echo $query."<br>";
+	    printf("Errormessage: %s\n", $upgrade->error);
+	}
+}
 
 function syncAppointments(){
 	echo "In Sync Appointments<br>";

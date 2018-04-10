@@ -1,3 +1,50 @@
+$("#loginForm").submit(function(){
+    
+    
+    var getLoginAPI = API_LOCATION+'professional/login.php';
+
+    $.ajax({
+            type: "POST",
+            url: getLoginAPI,
+            data: {
+                username: $("#exampleInputEmail1").val(),
+                password: $("#exampleInputPassword1").val()
+            },
+            dataType: "json",
+            success: function(data)
+            {
+                var result = data['ResultCode'];
+                //alert(data[0]);
+                
+                if (result == '1') {
+                     // Send Ajax request to backend.php, with src set as "img" in the POST data
+                     var user = data['username'];
+                     var name = data['first_name'];
+                     var surname = data['last_name'];
+                     var id = data['id'];
+                     var fullname = name+" "+surname;
+                     var type = data['type'];
+                     //alert(user);
+                     //return false;
+                     $.post(
+                                "session.php", 
+                                {"user": user , "fullname":fullname, "id":id, "type":type},
+                                function(result){
+                                    window.location.replace('professional-profile/index.php');
+                                }
+                            );
+                            
+
+                    //window.location.replace('../professional-profile/index.php');
+                }
+                else {
+                    alert(data['message']);
+                    location.reload();
+                }
+            }
+        });
+    return false;
+});
  // Open the Modal
 
     $(document).ready(function(){
