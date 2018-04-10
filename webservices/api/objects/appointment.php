@@ -211,9 +211,10 @@ class Appointment{
     public function getAppointnmentsByProf($prof_id, $status){
         // select query
         $query = "SELECT
-                    `id`, `prof_member_id`, `cust_member_id`, `application_id`, `county_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelReason`, `cancelComment`
+                    a.`id`, a.`prof_member_id`, a.`cust_member_id`, a.`application_id`, a.`county_id`, a.`date`, a.`time`, a.`address`, a.`budget`, a.`commision`, a.`agent_id`, a.`comment`, a.`sms`, a.`sms_log_id`, a.`datetimeCreated`, a.`datetimeStatusUpdated`, a.`sourceAppointmentId`, a.`status`, a.`cancelReason`, a.`cancelComment`, ao.`close_times`
                 FROM
-                    " . $this->table_name . " 
+                    " . $this->table_name . " a
+                LEFT JOIN ".$this->offer_details ." ao ON a.`id`=ao.`appointment_id`
                 WHERE `status` LIKE '%$status%' AND `prof_member_id` = '$prof_id'
                 ORDER BY `datetimeCreated` DESC";
          $stmt = $this->conn->prepare( $query );

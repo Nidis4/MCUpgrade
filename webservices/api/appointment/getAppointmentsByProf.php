@@ -81,7 +81,9 @@ if($num>0){
             "agent_name" => $agentName,
             "mobile" => $customerMobile,
             "country" => "Greece",
+            "close_times" => $close_times,
             "category_name" => $categoryName,
+
         );
         if(@$category_id){
            $appointment_item['category_id'] = $category_id; 
