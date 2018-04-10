@@ -710,3 +710,11 @@ ALTER TABLE `professionals` ADD `defaultsms` INT(1) NOT NULL DEFAULT '0' AFTER `
 
 <!-------------------------------->
 <!-- End 5 April 2018 Harpreet ---->
+
+<!-------------------------------->
+<!-- Start 9 April 2018 Harpreet -->
+
+ALTER TABLE `jobs` ADD `status` INT(1) NOT NULL DEFAULT '0' COMMENT '0->Pending, 1->Active, 2->Deactive' AFTER `phone`;
+
+<!-------------------------------->
+<!-- End 9 April 2018 Harpreet ---->

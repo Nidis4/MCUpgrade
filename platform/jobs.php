@@ -160,7 +160,7 @@ include('config/core.php');
 													  <td>'.$title.'</td>
 													  <td>'.$email.'</td>
 													  <td class="actions">
-														<a href="javascript:void(0);" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
+														<a href="'.$home_url.'platform/job.php?id='.$id.'" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
 													  </td>
 												  </tr>';
 
