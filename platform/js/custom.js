@@ -73,7 +73,7 @@ $('select#category').on('change', function() {
             {
                 //alert(data.length);
                  var htmlStr = '';
-                 htmlStr += '<option value="" disabled selected>Select your option</option>';
+                 //htmlStr += '<option value="" disabled selected>Select your option</option>';
                 $.each(data, function(k, v){
                     //htmlStr += v.id + ' ' + v.name + '<br />';
                     //alert(v.id);
@@ -362,6 +362,11 @@ $(document).on('click','#available .profile',function() {
     $( "#"+prof_id ).addClass('selectedProf');
     $('.calendar'+prof_id).css('display','block');
 });
+
+// $(document).on('click','#available .profile .name span',function() {
+//     var prof_id = this.rel;
+
+// });
 
 
 $( ".createOffer" ).click(function() {
@@ -696,7 +701,7 @@ $( ".findProfessionals" ).click(function() {
                                   disabled = "";
                                 }
                                 if (x.timefrom=="06:00"){
-                                    singleDay += "<div class='col-md-2 profile availProf' id='"+profID+"' data-listing-distance='"+profDistance+"'><div class='row calName text-center'><div class='col-md-12'><div class='comp'>"+profName+"</div><span>"+profDistance+"</span></div></div><ul class='selectable' id='selectable-"+profID+"'>";
+                                    singleDay += "<div class='col-md-2 profile availProf' id='"+profID+"' data-listing-distance='"+profDistance+"'><div class='row calName text-center'><div class='col-md-12'><div class='comp'><span>"+profName+"</span></div><span>"+profDistance+"</span></div></div><ul class='selectable' id='selectable-"+profID+"'>";
                                 }                         
                                 if (x.address == ""){
                                     singleDay += "<li class='free slot "+disabled+"' timefrom='"+x.timefrom+"' timeto='"+x.timeto+"' data-dateslot='"+x.date+"'>"+x.timefrom+":</li>";
@@ -740,7 +745,7 @@ $( ".findProfessionals" ).click(function() {
                         } // Calendar Slots
                         
                         
-                        htmlStr += "<div class='col-md-12 availProf' data-listing-distance='"+profDistance+"'><div class='row'><div class='col-md-12'><div class='profile' id='"+profID+"'><div class='name'>"+profName+"</div><div class='appointDate'>"+dateAvail+" "+timeAvail+"</div><div class='distance'>"+profDistance+"</div> SELECT</div></div></div><div class='col-md-12 calendar calendar"+profID+"'>"+calendarCode+"</div></div>";
+                        htmlStr += "<div class='col-md-12 availProf' data-listing-distance='"+profDistance+"'><div class='row'><div class='col-md-12'><div class='profile' id='"+profID+"'><div class='name'><a href='"+HOME_LOCATION+"platform/professional.php?id="+profID+"' target='blank'>"+profName+"</a></div><div class='appointDate'>"+dateAvail+" "+timeAvail+"</div><div class='distance'>"+profDistance+"</div> SELECT</div></div></div><div class='col-md-12 calendar calendar"+profID+"'>"+calendarCode+"</div></div>";
                     }
                   
                 });

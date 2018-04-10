@@ -181,7 +181,7 @@ include('config/core.php');
 												</div>
 										</div>
 										<div class="form-group row">
-											<label class="col-sm-3 control-label text-sm-right pt-2">County <span class="required">*</span></label>
+											<label class="col-sm-3 control-label text-sm-right pt-2">County<span class="required">*</span></label>
 											<div class="col-sm-9">
 												<?php
 													$counties = file_get_contents($api_url.'webservices/api/county/read.php');
@@ -192,7 +192,12 @@ include('config/core.php');
 															foreach ($counties as $counties) {
 																$county_id = $counties['id'];
 																$county_name = $counties['county_name'];
-																echo '<option value="'.$county_id.'">'.$county_name.'</option>';
+																if($county_id == '1'){
+																	$selected ='selected="selected"';
+																}else{
+																	$selected = '';
+																}
+																echo '<option '.$selected.' value="'.$county_id.'">'.$county_name.'</option>';
 															}
 														?>
 													</select>
@@ -475,7 +480,10 @@ include('config/core.php');
 		<script src="js/theme.js"></script>
 		
 		<!-- Theme Custom -->
-		<script src="js/core.js"></script>
+		<script src="<?php echo $home_url;?>js/core.js"></script>
+		<script type="text/javascript">
+			var HOME_LOCATION = '<?php echo $home_url;?>';
+		</script>
 		<script src="js/custom.js"></script>
 		<script src="js/searchAddress.js"></script>
 

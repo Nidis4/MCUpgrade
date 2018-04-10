@@ -50,7 +50,7 @@ class Admin{
         // select all query
         $query = "SELECT  a.id, a.username, a.password, a.first_name, a.last_name, a.email, a.mobile_nr, a.password_changed, a.type, a.last_login, a.active
                 FROM `" . $this->table_name . "` a 
-                WHERE username LIKE :username AND password LIKE :password
+                WHERE a.username = :username AND a.password = :password
                 ORDER BY a.id ASC";
      
         // prepare query statement

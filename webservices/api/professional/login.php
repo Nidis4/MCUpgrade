@@ -22,7 +22,7 @@ $professional->password = isset($_POST['password']) ? $_POST['password'] : die()
 // query Admins
 $stmt = $professional->login();
 $num = $stmt->rowCount();
- 
+
 // check if more than 0 record found
 if($num>0){
  

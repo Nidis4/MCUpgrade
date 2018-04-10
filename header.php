@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html>
+<?php 
+    include('constants.php'); 
+    include('front_end_config/core.php');
+?>
 <head>
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,14 +22,12 @@
     <!--<link rel="stylesheet" href="social-likes_flat.css">-->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  	<link rel="stylesheet" type="text/css" href="css/style.css?version=24">
-  	<link rel="stylesheet" type="text/css" href="css/sidenav.css">
+  	<link rel="stylesheet" type="text/css" href="<?php echo SITE_URL;?>css/style.css">
+  	<link rel="stylesheet" type="text/css" href="<?php echo SITE_URL;?>css/sidenav.css">
 
-    <script src="js/directory.js"></script> 
+    <script src="<?php echo SITE_URL;?>js/directory.js"></script> 
+
+    <script src="<?php echo SITE_URL;?>js/core.js" type="text/javascript"></script>
 
 
 </head>
-<?php 
-    include('constants.php'); 
-    include('front_end_config/core.php');
-?>

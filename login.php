@@ -49,8 +49,7 @@
 
 
 
-<script src="js/core.js" type="text/javascript"></script>
-<script src="js/proffessional-profile.js" type="text/javascript"></script>
+<script src="<?php echo SITE_URL;?>js/proffessional-profile.js" type="text/javascript"></script>
 
 <?php 
 	include('footer.php');

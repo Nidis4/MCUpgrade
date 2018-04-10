@@ -582,6 +582,43 @@ if($catId == "60"){ // Electrical Certificate
             </div>
             <div class="col-lg-12 pt-2 availableownerstatusYes"></div>            
         </div>
+        <label class="col-lg-3 control-label text-lg-right pt-2">Πληρωμή</label>
+        <div class="col-lg-9 row">
+            <div class="col-lg-3">            
+                <div class="radio">
+                    <label class="pt-3">
+                        <input class="PaymentInfo" type="radio" name="PaymentInfo" value="Επι τόπου" id="">
+                        Επι τόπου
+                    </label>
+                </div>
+            </div>
+            <div class="col-lg-3">            
+                <div class="radio">
+                    <label class="pt-3">
+                        <input class="PaymentInfo" type="radio" name="PaymentInfo" value="Μέσω τραπέζης" id="">
+                        Μέσω τραπέζης
+                    </label>
+                </div>
+            </div>
+            <div class="col-lg-3">            
+                <div class="radio">
+                    <label class="pt-3">
+                        <input class="PaymentInfo" type="radio" name="PaymentInfo" value="Στο γραφείο" id="">
+                        Στο γραφείο
+                    </label>
+                </div>
+            </div>
+            <div class="col-lg-3">            
+                <div class="radio">
+                    <label class="pt-3">
+                        <input class="PaymentInfo" type="radio" name="PaymentInfo" value="Παράδοση στον πελάτη +10€" id="">
+                        Παράδοση στον πελάτη +10€
+                    </label>
+                </div>
+            </div>
+
+        </div>
+
         <div class="col-lg-12">
             <div class="alert alert-info nomargin">
                 <p>Να σας ενημερώσω για την διαδικασία, έρχεται ο μηχανικός κάνει την αυτοψία, φωτογραφίζει τα έγγραφα δεν θα πάρουμε αντίγραφα, θα πληρωθεί επι τόπου και θα σας στείλει με email το πιστοποιητικο σε 1-3 εργάσιμες</p>
@@ -764,6 +801,13 @@ if($catId == "60"){ // Electrical Certificate
                         $(".availableownerstatusYes").text('Εναλλακτικά με το Ε9 πρέπει να φέρετε το συμβολαιο ιδιοκτησίας, γονική παροχή ή οποιοδήποτε επίσημο έγγραφο που να φαίνεται ο ιδιοκτήτης'); 
                     }
                });
+
+                $(".PaymentInfo").on('change',function(){
+                    var rvale = $(this).val(); 
+                    //alert(rvale);
+                    update_comment();
+                    
+                });
 
                 $(".usedfor").on('change',function(){
                     var rvale = $(this).val(); 

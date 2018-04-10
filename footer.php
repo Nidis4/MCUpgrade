@@ -70,7 +70,6 @@
 
 	<script src='https://www.google.com/recaptcha/api.js'></script>
 	<script type="text/javascript" src="js/home.js?version=2"></script>
-	<script type="text/javascript" src="platform/js/core.js"></script>
 
 
 </body>
