@@ -27,7 +27,7 @@ $job->id = isset($_GET['id']) ? $_GET['id'] : die();
     // create array
     $stmt = $job->readOne();
  
-    $job_arr=array(
+    $job_arr = array(
         "id" => $job->id,
         "customer_id" => $job->customer_id,
         "category_id" => $job->category_id,
@@ -40,6 +40,12 @@ $job->id = isset($_GET['id']) ? $_GET['id'] : die();
         "datetimeCreated" => $job->datetimeCreated,
         "offer_balance" => $job->offer_balance,
         "status" => $job->status,
+        "first_name" => $job->first_name,
+        "last_name" => $job->last_name,
+        "city" => $job->city,
+        "county_id" => $job->county_id,
+        "country_id" => $job->country_id,
+        "postcode" => $job->postcode,
     );
      
  

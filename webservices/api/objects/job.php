@@ -78,11 +78,15 @@ class Job{
      
         // query to read single record
         $query = "SELECT
-                id, customer_id, category_id, email, title, budget, offers, offer_balance, questions, phone, status, datetimeCreated
+                j.`id`, j.`customer_id`, j.`category_id`, j.`email`, j.`title`, j.`budget`, j.`offers`, j.`offer_balance`, j.`questions`, j.`phone`, j.`status`, j.`datetimeCreated`, c.`first_name`, c.`last_name`, ja.`city`, ja.`county_id`, ja.`country_id`, ja.`postcode`
                 FROM
-                " . $this->table_name . "                
+                " . $this->table_name . " j 
+                Left Join ".$this->customer_table_name." c 
+                On j.customer_id = c.id 
+                Left Join ".$this->address_table_name." ja 
+                On j.id = ja.job_id                 
                 WHERE
-                    id = :id
+                    j.id = :id
                 LIMIT
                     0,1";
      
@@ -118,6 +122,12 @@ class Job{
         $this->phone = $row['phone'];
         $this->status = $row['status'];
         $this->datetimeCreated = $row['datetimeCreated'];
+        $this->first_name = $row['first_name'];
+        $this->last_name = $row['last_name'];
+        $this->city = $row['city'];
+        $this->county_id = $row['county_id'];
+        $this->country_id = $row['country_id'];
+        $this->postcode = $row['postcode'];
     } // Read One
 
 

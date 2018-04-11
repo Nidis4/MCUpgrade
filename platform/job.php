@@ -126,7 +126,7 @@ include('config/core.php');
 											Please fill in the Job details
 										</p>
 									</header>
-									<div class="card-body ">
+									<div class="card-body row">
 										<div class="col-lg-6">
 											<div class="form-group row ">
 												<label class="col-sm-3 control-label text-sm-right pt-2">Job Title <span class="required">*</span></label>
@@ -146,8 +146,122 @@ include('config/core.php');
 													<input type="text" name="budget" id="budget" class="form-control" value="<?php echo $job['budget'];?>"/>
 												</div>
 											</div>
+											<div class="form-group row">
+												<label class="col-sm-3 control-label text-sm-right pt-2">Charge Credit </label>
+												<div class="col-sm-9">
+													<label class="pt-2">&euro; <?php  $credit = $job['budget'] / 100; echo $credit; ?></label>
+												</div>
+											</div>
+
+											<div class="form-group row">
+												<label class="col-sm-3 control-label text-sm-right pt-2">Commission </label>
+												<div class="col-sm-9">
+													<input type="text" name="commission" id="commission" class="form-control" value="<?php //echo $job['commission'];?>"/>
+												</div>
+											</div>
+
+											<div class="form-group row">
+												<label class="col-sm-3 control-label text-sm-right pt-2">Charge Credit (Admin) </label>
+												<div class="col-sm-9">
+													<input type="text" name="commission" id="commission" class="form-control" value="<?php //echo $job['commission'];?>"/>
+												</div>
+											</div>
+											<div class="form-group row">
+												<label class="col-sm-3 control-label text-sm-right pt-2">How many offers do you want to receive? <span class="required">*</span></label>
+												<div class="col-sm-9">
+													<input type="text" name="offers" id="offers" class="form-control" value="<?php echo $job['offers'];?>"/>
+												</div>
+											</div>
+											<div class="form-group row">
+												<label class="col-sm-3 control-label text-sm-right pt-2">When do you plan to start the job? <span class="required">*</span></label>
+												<div class="col-sm-9">
+													<div class="col-lg-3" style="float: left;">            
+											            <div class="radio">
+											                <label class="pt-3">
+											                    <input class="" <?php if((@$professional['work_done'] && ($professional['work_done'] == "1-3 Months"))){?> checked="checked" <?php }?> type="radio" name="work_done" value="1-3 Months" id="work_done1">
+											                    1-3 Months
+											                </label>
+											            </div>
+											        </div>
+											        <div class="col-lg-3"  style="float: left;">            
+											            <div class="radio">
+											                <label class="pt-3">
+											                    <input class="" <?php if((@$professional['work_done'] && ($professional['work_done'] == "3-6 Months"))){?> checked="checked" <?php }?> type="radio" name="work_done" value="3-6 Months" id="work_done1">
+											                    3-6 Months
+											                </label>
+											            </div>
+											        </div>
+											        <div class="col-lg-3"  style="float: left;">            
+											            <div class="radio">
+											                <label class="pt-3">
+											                    <input class="" <?php if((@$professional['work_done'] && ($professional['work_done'] == "6-12 Months"))){?> checked="checked" <?php }?> type="radio" name="work_done" value="6-12 Months" id="work_done1">
+											                    6-12 Months
+											                </label>
+											            </div>
+											        </div>
+											        <div class="col-lg-3"  style="float: left;">            
+											            <div class="radio">
+											                <label class="pt-3">
+											                    <input class="" <?php if((@$professional['work_done'] && ($professional['work_done'] == "Over 1 year"))){?> checked="checked" <?php }?> type="radio" name="work_done" value="Over 1 year" id="work_done1">
+											                    Over 1 year
+											                </label>
+											            </div>
+											        </div>
+
+												</div>
+											</div>
+
 										</div>
-										
+										<div class="col-lg-6">
+											<div class="form-group row ">
+												<label class="col-sm-3 control-label text-sm-right pt-2">First Name <span class="required">*</span></label>
+												<div class="col-sm-9">
+													<input type="text" name="first_name" id="first_name" class="form-control" value="<?php echo $job['first_name'];?>" required/>
+												</div>
+											</div>
+											<div class="form-group row ">
+												<label class="col-sm-3 control-label text-sm-right pt-2">Last Name <span class="required">*</span></label>
+												<div class="col-sm-9">
+													<input type="text" name="last_name" id="last_name" class="form-control" value="<?php echo $job['last_name'];?>" required/>
+												</div>
+											</div>
+											<div class="form-group row ">
+												<label class="col-sm-3 control-label text-sm-right pt-2">Email<span class="required">*</span></label>
+												<div class="col-sm-9">
+													<input type="text" name="email" id="email" class="form-control" value="<?php echo $job['email'];?>" required/>
+												</div>
+											</div>
+											<div class="form-group row ">
+												<label class="col-sm-3 control-label text-sm-right pt-2">Mobile Number</label>
+												<div class="col-sm-9">
+													<input type="text" name="last_name" id="last_name" class="form-control" value="<?php echo $job['phone'];?>" required/>
+												</div>
+											</div>
+											<div class="form-group row ">
+												<label class="col-sm-3 control-label text-sm-right pt-2">City</label>
+												<div class="col-sm-9">
+													<input type="text" name="city" id="city" class="form-control" value="<?php echo $job['city'];?>" />
+												</div>
+											</div>
+											<div class="form-group row ">
+												<label class="col-sm-3 control-label text-sm-right pt-2">County</label>
+												<div class="col-sm-9">
+													<input type="text" name="last_name" id="last_name" class="form-control" value="<?php //echo $job['last_name'];?>" />
+												</div>
+											</div>
+											<div class="form-group row ">
+												<label class="col-sm-3 control-label text-sm-right pt-2">Country</label>
+												<div class="col-sm-9">
+													<input type="text" name="last_name" id="last_name" class="form-control" value="<?php //echo $job['last_name'];?>" />
+												</div>
+											</div>
+											<div class="form-group row ">
+												<label class="col-sm-3 control-label text-sm-right pt-2">Post Code</label>
+												<div class="col-sm-9">
+													<input type="text" name="postcode" id="postcode" class="form-control" value="<?php echo $job['postcode'];?>" />
+												</div>
+											</div>
+										</div>										
 										
 									</div>
 									<!-- <footer class="card-footer">
