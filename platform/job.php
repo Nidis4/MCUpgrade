@@ -131,48 +131,49 @@ include('config/core.php');
 											<div class="form-group row ">
 												<label class="col-sm-3 control-label text-sm-right pt-2">Job Title <span class="required">*</span></label>
 												<div class="col-sm-9">
-													<input type="text" name="title" id="title" class="form-control" value="<?php echo $job['title'];?>" required/>
+													<input type="text" name="job_title" id="job_title" class="form-control" value="<?php echo $job['title'];?>" required/>
 												</div>
 											</div>
 											<div class="form-group row">
 												<label class="col-sm-3 control-label text-sm-right pt-2">Job Description <span class="required">*</span></label>
 												<div class="col-sm-9">
-													<input type="text" name="description" id="description" class="form-control" value="<?php //echo $job['description'];?>"/>
+													<input type="text" name="job_description" id="job_description" class="form-control" value="<?php echo $job['description'];?>"/>
 												</div>
 											</div>
 											<div class="form-group row">
 												<label class="col-sm-3 control-label text-sm-right pt-2">How much is your maximum budget, for the whole job? <span class="required">*</span></label>
 												<div class="col-sm-9">
-													<input type="text" name="budget" id="budget" class="form-control" value="<?php echo $job['budget'];?>"/>
+													<input type="text" name="job_budget" id="job_budget" class="form-control" value="<?php echo $job['budget'];?>"/>
 												</div>
 											</div>
 											<div class="form-group row">
 												<label class="col-sm-3 control-label text-sm-right pt-2">Charge Credit </label>
 												<div class="col-sm-9">
 													<label class="pt-2">&euro; <?php  $credit = $job['budget'] / 100; echo $credit; ?></label>
+													
 												</div>
 											</div>
 
 											<div class="form-group row">
 												<label class="col-sm-3 control-label text-sm-right pt-2">Commission </label>
 												<div class="col-sm-9">
-													<input type="text" name="commission" id="commission" class="form-control" value="<?php //echo $job['commission'];?>"/>
+													<input type="text" name="job_commission" id="job_commission" class="form-control" value="<?php echo $job['commission'];?>"/>
 												</div>
 											</div>
 
 											<div class="form-group row">
 												<label class="col-sm-3 control-label text-sm-right pt-2">Charge Credit (Admin) </label>
 												<div class="col-sm-9">
-													<input type="text" name="commission" id="commission" class="form-control" value="<?php //echo $job['commission'];?>"/>
+													<input type="text" name="job_charge_admin" id="job_charge_admin" class="form-control" value="<?php echo $job['charge_admin'];?>"/>
 												</div>
 											</div>
 											<div class="form-group row">
 												<label class="col-sm-3 control-label text-sm-right pt-2">How many offers do you want to receive? <span class="required">*</span></label>
 												<div class="col-sm-9">
-													<input type="text" name="offers" id="offers" class="form-control" value="<?php echo $job['offers'];?>"/>
+													<input type="text" name="job_offers" id="job_offers" class="form-control" value="<?php echo $job['offers'];?>"/>
 												</div>
 											</div>
-											<div class="form-group row">
+											<!-- <div class="form-group row">
 												<label class="col-sm-3 control-label text-sm-right pt-2">When do you plan to start the job? <span class="required">*</span></label>
 												<div class="col-sm-9">
 													<div class="col-lg-3" style="float: left;">            
@@ -209,7 +210,7 @@ include('config/core.php');
 											        </div>
 
 												</div>
-											</div>
+											</div> -->
 
 										</div>
 										<div class="col-lg-6">
@@ -228,40 +229,136 @@ include('config/core.php');
 											<div class="form-group row ">
 												<label class="col-sm-3 control-label text-sm-right pt-2">Email<span class="required">*</span></label>
 												<div class="col-sm-9">
-													<input type="text" name="email" id="email" class="form-control" value="<?php echo $job['email'];?>" required/>
+													<input type="text" name="job_email" id="job_email" class="form-control" value="<?php echo $job['email'];?>" required/>
 												</div>
 											</div>
 											<div class="form-group row ">
 												<label class="col-sm-3 control-label text-sm-right pt-2">Mobile Number</label>
 												<div class="col-sm-9">
-													<input type="text" name="last_name" id="last_name" class="form-control" value="<?php echo $job['phone'];?>" required/>
+													<input type="text" name="job_phone" id="job_phone" class="form-control" value="<?php echo $job['phone'];?>" required/>
 												</div>
 											</div>
 											<div class="form-group row ">
 												<label class="col-sm-3 control-label text-sm-right pt-2">City</label>
 												<div class="col-sm-9">
-													<input type="text" name="city" id="city" class="form-control" value="<?php echo $job['city'];?>" />
+													<input type="text" name="job_city" id="job_city" class="form-control" value="<?php echo $job['city'];?>" />
 												</div>
 											</div>
 											<div class="form-group row ">
 												<label class="col-sm-3 control-label text-sm-right pt-2">County</label>
 												<div class="col-sm-9">
-													<input type="text" name="last_name" id="last_name" class="form-control" value="<?php //echo $job['last_name'];?>" />
+													<?php
+														$counties = file_get_contents($api_url.'webservices/api/county/read.php');
+														$counties = json_decode($counties, true); // decode the JSON into an associative array
+													?>
+													<select data-plugin-selectTwo class="form-control populate" id="job_county" name="job_county">
+														<?php
+															foreach ($counties as $counties) {
+																$county_id = $counties['id'];
+																$county_name = $counties['county_name'];
+																if($county_id == $job['county_id']){
+																	$selected ='selected="selected"';
+																}else{
+																	$selected = '';
+																}
+																echo '<option '.$selected.' value="'.$county_id.'">'.$county_name.'</option>';
+															}
+														?>
+													</select>
+													
 												</div>
 											</div>
 											<div class="form-group row ">
 												<label class="col-sm-3 control-label text-sm-right pt-2">Country</label>
 												<div class="col-sm-9">
-													<input type="text" name="last_name" id="last_name" class="form-control" value="<?php //echo $job['last_name'];?>" />
+													<?php
+														$countries = file_get_contents($api_url.'webservices/api/country/read.php');
+														$countries = json_decode($countries, true); // decode the JSON into an associative array
+													?>
+													<select data-plugin-selectTwo class="form-control populate" id="job_country" name="job_country">
+														<?php
+															foreach ($countries as $country) {
+																$country_id = $country['id'];
+																$country_name = $country['country_name'];
+																if($country_id == $job['country_id']){
+																	$selected ='selected="selected"';
+																}else{
+																	$selected = '';
+																}
+																echo '<option '.$selected.' value="'.$country_id.'">'.$country_name.'</option>';
+															}
+														?>
+													</select>
 												</div>
 											</div>
 											<div class="form-group row ">
 												<label class="col-sm-3 control-label text-sm-right pt-2">Post Code</label>
 												<div class="col-sm-9">
-													<input type="text" name="postcode" id="postcode" class="form-control" value="<?php echo $job['postcode'];?>" />
+													<input type="text" name="job_postcode" id="job_postcode" class="form-control" value="<?php echo $job['postcode'];?>" />
 												</div>
 											</div>
-										</div>										
+										</div>
+										
+										<div class="col-lg-12">
+											<h3>More Questions</h3>
+											<hr>
+										</div>	
+										<div class="col-lg-12">
+											<?php 
+												$jobquestionsans = array();
+												$jobquestions = json_decode($job['questions']);
+												if(@$jobquestions){
+													foreach ($jobquestions as $key => $value) {
+														$jobquestionsans[$key] = $value;
+													}
+												}	
+																						
+											?>
+											<?php
+		                                    $questions = file_get_contents($api_url.'webservices/api/category/questions.php?catid='.$job['category_id']);
+		                                    $questions = json_decode($questions, true); // decode the JSON into an associative array
+
+		                                    if(@$questions['records']){
+		                                        foreach ($questions['records'] as $qvalue) {
+		                                            
+		                                            $answers = file_get_contents($api_url.'webservices/api/category/answers.php?questionid='.$qvalue['id']);
+		                                            $answers = json_decode($answers, true); // decode the JSON into an associative array
+
+		                                            if(in_array($qvalue['id'], array_keys($jobquestionsans))){
+                                    					$selectedanswer = $jobquestionsans[$qvalue['id']];
+                                    				}else{
+                                    					$selectedanswer = "";
+                                    				}
+
+		                                ?>
+		                                            <div class="form-group row">
+		                                                <label class="col-sm-3 control-label"><?php echo $qvalue['question'];?></label>
+		                                                <div class="col-sm-9">
+		                                                    <?php
+		                                                        if(@$answers){
+		                                                            foreach ($answers as $avalue) {
+		                                                    			if($qvalue['option'] == 2){   
+
+		                                                    ?>
+			                                                               <div class="col-lg-3" style="float: left;">
+			                                                                    <label class="pt-3">
+			                                                                        <input class="" <?php if(@$selectedanswer && ($selectedanswer == $avalue['id'])){?> checked="checked" <?php }?> type="radio" name="job_question[<?php echo $qvalue['id'];?>]" value="<?php echo $avalue['id'];?>" id="">
+			                                                                        <?php echo $avalue['answer'];?>
+			                                                                    </label>
+			                                                                </div> 
+
+		                                                    <?php   
+		                                                    			}
+		                                                            }
+		                                                        }
+		                                                    ?>
+		                                                </div>
+		                                            </div>    
+		                                <?php   
+		                                        }     
+		                                    }
+		                                ?>
+										</div>									
 										
 									</div>
 									<!-- <footer class="card-footer">
@@ -273,6 +370,9 @@ include('config/core.php');
 										</div>
 									</footer> -->
 								</section>
+								<input type="hidden" name="customer_id" value="<?php echo $job['customer_id'];?>">
+								<input type="hidden" name="category_id" value="<?php echo $job['category_id'];?>">
+								<input type="hidden" name="job_id" value="<?php echo $job['id'];?>">
 							</form>
 						</div>
 						
@@ -391,38 +491,25 @@ include('config/core.php');
 		<script src="js/examples/examples.validation.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
-				
-				$("#county").on('change',function(){
-					var cnt = $(this).val();
-					if($('#buildingmtwo').length){
-						ElectricalCertificateCountyBudget();
-					} 
-				});
-				$("#category").on('change',function(){
-					 $(".smbutton button").removeAttr('disabled');
-				});
 
-				$(".sameadd").on('click',function(){
-					var pres = $("#samecatebud").val();
-					if(pres == 1){
-						$('.sameremove').css('display','block');
-					}
-					$('#samecatebud').val(parseInt(pres) + 1);
-					update_budget();
-					update_comment();
-				});
+				$('.updateJob').on('click',function(){
+					var getAvailableAPI = API_LOCATION+'job/update.php';
+					var form_data = $("#jobform").serialize();
+					//alert(form_data);
+					//return false;
+					$.ajax({
+			            type: "POST",
+			            url: getAvailableAPI,
+			            dataType: "JSON",
+			            data: $("#jobform").serialize(),
+			            success: function(data)
+			            {
+			                alert(data.message);
+			                location.reload(); 
+			            }
+			        });
 
-				$('.sameremove').on('click',function(){
-					var pres = $("#samecatebud").val();
-					if(pres >= 2){
-						$('#samecatebud').val(parseInt(pres) - 1);
-						if(pres == 2){
-							$('.sameremove').css('display','none');	
-						}
-						
-					}
-				    update_budget();
-				    update_comment();	
+			        return false
 				});
 
 			});

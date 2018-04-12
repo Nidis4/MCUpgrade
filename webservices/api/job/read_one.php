@@ -46,6 +46,9 @@ $job->id = isset($_GET['id']) ? $_GET['id'] : die();
         "county_id" => $job->county_id,
         "country_id" => $job->country_id,
         "postcode" => $job->postcode,
+        "description" => $job->description,
+        "commission" => $job->commission,
+        "charge_admin" => $job->charge_admin,
     );
      
  

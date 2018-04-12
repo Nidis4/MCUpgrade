@@ -192,7 +192,7 @@ include('config/core.php');
 											</div>										
 										</div>	
 										<div class="form-group col-md-12 row">
-											<label class="col-lg-3 control-label text-lg-right pt-2">Default SMS</label>
+											<label class="col-lg-4 control-label text-lg-right pt-2">Default SMS</label>
 											<div class="col-lg-1"><input type="checkbox" class="form-control" name="defaultsms" id="defaultsms" value="1" <?php if(@$professional['defaultsms']){ echo "checked='checked'";}?> ></div>
 										</div>								
 									</div>

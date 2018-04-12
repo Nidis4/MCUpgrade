@@ -785,3 +785,12 @@ ALTER TABLE `applications_search_terms`
 
 <!-------------------------------->
 <!-- End 10 April 2018 G Konstantinidis ---->
+
+
+<!-------------------------------->
+<!-- Start 12 April 2018 Harpreet -->
+
+ALTER TABLE `jobs` ADD `description` TEXT NULL AFTER `phone`, ADD `commission` VARCHAR(255) NULL AFTER `description`, ADD `charge_admin` VARCHAR(255) NULL AFTER `commission`;
+
+<!-------------------------------->
+<!-- End 12 April 2018 Harpreet ---->

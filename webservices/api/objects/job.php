@@ -78,7 +78,7 @@ class Job{
      
         // query to read single record
         $query = "SELECT
-                j.`id`, j.`customer_id`, j.`category_id`, j.`email`, j.`title`, j.`budget`, j.`offers`, j.`offer_balance`, j.`questions`, j.`phone`, j.`status`, j.`datetimeCreated`, c.`first_name`, c.`last_name`, ja.`city`, ja.`county_id`, ja.`country_id`, ja.`postcode`
+                j.`id`, j.`customer_id`, j.`category_id`, j.`email`, j.`title`, j.`budget`, j.`offers`, j.`offer_balance`, j.`questions`, j.`phone`, j.`description`, j.`commission`, j.`charge_admin`, j.`status`, j.`datetimeCreated`, c.`first_name`, c.`last_name`, ja.`city`, ja.`county_id`, ja.`country_id`, ja.`postcode`
                 FROM
                 " . $this->table_name . " j 
                 Left Join ".$this->customer_table_name." c 
@@ -128,6 +128,9 @@ class Job{
         $this->county_id = $row['county_id'];
         $this->country_id = $row['country_id'];
         $this->postcode = $row['postcode'];
+        $this->description = $row['description'];
+        $this->commission = $row['commission'];
+        $this->charge_admin = $row['charge_admin'];
     } // Read One
 
 
@@ -247,6 +250,32 @@ class Job{
     $stmt->execute();
  
     return $stmt;
+    }
+
+
+    function update($job_id, $title, $description, $offers, $budget, $commission, $charge_admin, $email, $questions, $phone){
+
+        $query = "UPDATE " . $this->table_name . " set title = '".$title."',description = '".$description."',offers = '".$offers."',budget = '".$budget."',commission = '".$commission."',charge_admin = '".$charge_admin."',email = '".$email."',questions = '".$questions."',phone = '".$phone."'               
+                WHERE id = :id";
+     
+        //echo $query;
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        //echo $this->id." ------ ";
+
+        // bind id of product to be updated
+        $stmt->bindParam(':id',  $job_id, PDO::PARAM_INT);
+
+
+        $stmt->execute();
+
+        if($stmt){
+            return 1;
+        }else{
+            return 0;
+        }
+
     }
 
 
