@@ -469,5 +469,15 @@ class Appointment{
     }
 
 
+    public function checkprofsms($prof_id){
+        $query = "SELECT `defaultsms` FROM `professionals` WHERE `id` = $prof_id ";
+        $stmt = $this->conn->prepare( $query );
+
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['defaultsms'];
+    }
+
+
 }
 ?>

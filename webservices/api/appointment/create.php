@@ -41,6 +41,12 @@ $appointment = new Appointment($db);
 
 // query products
 $stmt = $appointment->create($prof_id, $cust_id, $application_id, $county_id, $date, $time, $address, $budget, $commision, $agent_id, $comment, $status);
+
+// Check Professional default SMS
+
+$procheck = $appointment->checkprofsms($prof_id);
+
+
 //$stmt = $customer->search($keywords);
 //$num = $stmt->rowCount();
  
@@ -73,7 +79,7 @@ if($stmt){
 				'Ραντεβού για '.$fcname,
 				'στις '.$Ftime.' ' .$fdate.'.',
 				$address,
-				'Γραμμή εξυπηρέτησης πελατών 2103009325 '
+				'Γραμμή εξυπηρέτησης πελατών 2103009325'
 			]);
 
 			// Viber Connection			
@@ -82,7 +88,7 @@ if($stmt){
 			$viber->send($customer_mobile, $smsTexts);
 
 	}
-	if(@$professionalsms){
+	if(@$professionalsms || @$procheck){
 	    	// initialize object
 			$professional_mobile = '6940589493';
 			
