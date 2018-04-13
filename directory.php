@@ -58,6 +58,7 @@
 						$app_professionals = $application['professionals'];
 						$app_unit = $application['unit'];
 						$app_detail_description_gr = $application['detail_description_gr'];
+
 		
 				?>
 				<div class="directory-breadcrumb">
@@ -164,6 +165,7 @@
 						$professional_servicearea = $professionals['servicearea'];
 						$professional_county = $professionals['county_id'];
 						$professional_county_name_gr= $professionals['county_name_gr'];
+						$professional_review = $professionals['reviews_stats'];
 
 						
 				?>
@@ -222,15 +224,24 @@
 
 								<div class="professional-address-contact">
 									<div class="col-md-12 proffesionalDirectoryReviews">
-
+											<a target="_blank" class="directory-reviews-link" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id.'#proffessionalRiviews'; ?>">
 		                                        <div class="directoryStarsOuter">
 		                                            <div class="directoryEmptyBar">
-		                                                <div style="width:98%;"></div>
+		                                                <?php $totalRevPercentage = number_format($professional_review['average_total']/5 *100 , 1);  ?>
+		                                                <div style="width:<?php echo $totalRevPercentage.'%;';?>"></div>
 		                                            </div>
 		                                        </div>
-		                                        <div class="directory-rev-score"><span class="rating-num">4,9</span>/5</div>
-		                                       	<div class="directory-total-score"><span class="total-jobs">190</span> Αξιολογήσεις</div>
-                                    		</div>
+		                                        <div class="directory-rev-score"><span class="rating-num"><?php 
+		                                            	$totalRevScore = number_format($professional_review['average_total'], 1);
+			                                            if( $totalRevScore == 5.0 || $totalRevScore == 4.0){
+			                                                echo number_format($totalRevScore, -1);
+			                                            }else{
+			                                                echo $totalRevScore;
+			                                            }
+		                                            ?></span>/5</div>
+		                                       	<div class="directory-total-score"><span class="total-jobs"><?php echo $professional_review['total']; ?></span> Αξιολογήσεις</div>
+		                                     </a>
+                                    </div>
 
 									<div class="price-box">
 											<p><?php echo $professional_price; ?><span class="tax-fpa"><?php echo $app_unit ?></span></p>
@@ -449,6 +460,7 @@
 						$professional_description = $professionals['description'];
 						$professional_city = $professionals['city'];
 						$professional_servicearea = $professionals['servicearea'];
+						$professional_review = $professionals['reviews_stats'];
 
 						
 				?>
@@ -507,15 +519,24 @@
 
 								<div class="professional-address-contact">
 									<div class="col-md-12 proffesionalDirectoryReviews">
-
+										<a target="_blank" class="directory-reviews-link" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id.'#proffessionalRiviews'; ?>">
 		                                        <div class="directoryStarsOuter">
 		                                            <div class="directoryEmptyBar">
-		                                                <div style="width:98%;"></div>
+		                                            	<?php $totalRevPercentage = number_format($professional_review['average_total']/5 *100 , 1);  ?>
+		                                                <div style="width:<?php echo $totalRevPercentage.'%;';?>"></div>
 		                                            </div>
 		                                        </div>
-		                                        <div class="directory-rev-score"><span class="rating-num">4,9</span>/5</div>
-		                                       	<div class="directory-total-score"><span class="total-jobs">190</span> Αξιολογήσεις</div>
-                                    		</div>
+		                                        <div class="directory-rev-score"><span class="rating-num"><?php 
+		                                            	$totalRevScore = number_format($professional_review['average_total'], 1);
+			                                            if( $totalRevScore == 5.0 || $totalRevScore == 4.0){
+			                                                echo number_format($totalRevScore, -1);
+			                                            }else{
+			                                                echo $totalRevScore;
+			                                            }
+		                                            ?></span>/5</div>
+		                                       	<div class="directory-total-score"><span class="total-jobs"><?php echo $professional_review['total']; ?></span> Αξιολογήσεις</div>
+		                                 </a>
+                                    </div>
 
 									<div class="price-box">
 											<p><?php echo $professional_price; ?><span class="tax-fpa">€ + φπα</span></p>

@@ -3716,6 +3716,10 @@ a.col-sm-3.portfolio-img {
 }
 
 
+.directory-reviews-link{
+  color:#333;
+}
+
 @media screen and (max-width: 991px){
   .col-md-4.applications-tabs{
     float:left;
