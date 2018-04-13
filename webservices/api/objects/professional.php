@@ -871,10 +871,11 @@ ORDER BY `date` ASC,
     }
 
     public function getAllReviews(){
-        $query = "SELECT *
-                FROM `directory_ratings` rat 
-                WHERE rat.`professional_id`= ? 
-                ORDER BY rat.`created` DESC";
+        $query = "SELECT c.`first_name`, c.`last_name`, rat.`quality`, rat.`reliability`, rat.`cost`, rat.`schedule`, rat.`behaviour`, rat.`cleanliness`, rat.`comment`, rat.`created`
+FROM `directory_ratings` rat
+LEFT JOIN customers c ON c.id = rat.customer_id
+WHERE rat.`professional_id`=  ?
+ORDER BY rat.`created` DESC";
 
         // prepare query statement
         $stmt = $this->conn->prepare( $query );

@@ -6,6 +6,7 @@ header("Content-Type: application/json; charset=UTF-8");
 // include database and object files
 include_once '../config/database.php';
 include_once '../objects/application.php';
+include_once '../objects/professional.php';
  
 // instantiate database and category object
 $database = new Database();
@@ -31,6 +32,33 @@ if($num>0){
     $professionals_arr = array();
 
     while ($rowProf = $professionals_stmt->fetch(PDO::FETCH_ASSOC)){
+
+        $professional = new Professional($db);
+        $professional->id = $rowProf['id'];
+        //echo  $rowProf['id']." ";
+        $stmtReviews = $professional->getReviewStats();
+        $numRev = $stmtReviews->rowCount();
+        if($numRev >= 1){
+            $reviewsStat_arr = array();
+
+            while ($rowRe = $stmtReviews->fetch(PDO::FETCH_ASSOC)){
+                
+                $reviewsStat_arr=array(
+                    "total" => $rowRe['TOTAL'],
+                    "average_total" => $rowRe['AVE_TOTAL'],
+                    "quality" => $rowRe['quality'],
+                    "reliability" => $rowRe['reliability'],
+                    "cost" => $rowRe['cost'],
+                    "schedule" => $rowRe['schedule'],
+                    "behaviour" => $rowRe['behaviour'],
+                    "cleaniness" => $rowRe['cleanliness']
+                );
+                //array_push($reviewsStat_arr, $reviews_item);
+            }
+           
+        }else{
+           $reviewsStat_arr = array(); 
+        }
         
         $prof_item = array(
             "id" => $rowProf['id'],
@@ -43,7 +71,8 @@ if($num>0){
             "city" => $rowProf['city'],
             "servicearea" => $rowProf['service_area'],
             "county_id" => $rowProf['county_id'],
-            "county_name_gr" => $rowProf['county_name_gr']
+            "county_name_gr" => $rowProf['county_name_gr'],
+            "reviews_stats" => $reviewsStat_arr
         );
 
         array_push($professionals_arr, $prof_item);

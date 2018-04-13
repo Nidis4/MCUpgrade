@@ -78,6 +78,7 @@ if($numRev >= 1){
     while ($row = $stmtReviews->fetch(PDO::FETCH_ASSOC)){
         
         $reviews_item=array(
+            "customer" => $row['first_name']." ".$row['last_name'],
             "quality" => $row['quality'],
             "reliability" => $row['reliability'],
             "cost" => $row['cost'],
