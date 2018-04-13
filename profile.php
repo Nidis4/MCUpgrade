@@ -90,7 +90,7 @@
                                         <div class="total-score"><span class="total-jobs"><?php echo $review_stats['total']; ?></span> Αξιολογήσεις</div>
                                     </div>
                                 </a>
-                                <p class="front-professional-desc">Εξυπηρετούμε όλη την Αττική, Έδρα Νότια Προάστια.</p>
+                                <p class="front-professional-desc"><?php echo $service_area.', '.$city; ?>.</p>
                                 <p class="front-professional-oneline-desc"><?php echo $description; ?></p>
                                 <p class="front-proffesional-address"><i class="fa fa-map-marker"></i> <?php echo $address; ?></p>
                                 <p class="front-professional-tel"><i class="fa fa-phone"></i> <span class="front-tel-span"><?php echo $mobile; ?></span></p>
@@ -376,6 +376,7 @@
                                $format = 'Y-m-d H:i:s';
                                $date= DateTime::createFromFormat($format, $review['created']);
                                $comment= $review['comment'];
+                               $customer_name= $review['customer'];
 
                                
 
@@ -394,7 +395,7 @@
                                             <div class="rev-score"><?php echo $totalperReview; ?>/5</div>
                                             <div class="reviewdate"><?php echo  $date->format('d-m-Y') ?></div>
                                             <p class="reviewComment"><?php echo $comment; ?></p>
-                                            <p class="reviewerName">Σωτήρης Μανόφης</p>
+                                            <p class="reviewerName"><?php echo $customer_name; ?></p>
                                         </div>
                                     </div>
                             </div>
