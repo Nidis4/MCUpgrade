@@ -45,6 +45,24 @@ $("#loginForm").submit(function(){
         });
     return false;
 });
+
+//Reviews digits
+/*$(document).ready(function() {
+  
+  var totalRating = $('span.totalRatingReviews').text();
+    totalRating = parseFloat(totalRating);
+    totalRating= totalRating.toFixed(1);
+     $('span.totalRatingReviews').html(totalRating);
+     alert(totalRating);
+});*/
+
+
+
+
+
+
+
+
  // Open the Modal
 
     $(document).ready(function(){

@@ -11,25 +11,25 @@
 						        <span class="icon-bar"></span>
 						        <span class="icon-bar"></span>
 						      </button>
-						     <a class="navbar-brand" href="https://myconstructor.gr"><img src="img/home-page/logo-mcr-310.png" /></a>
+						     <a class="navbar-brand" href="<?php echo $api_url; ?>"><img src="img/home-page/logo-mcr-310.png" /></a>
 						    </div>
 						    <!-- Collect the nav links, forms, and other content for toggling -->
 						    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						      <ul class="nav navbar-nav">
-						        <li><a href="https://myconstructor.gr/">ΑΡΧΙΚΗ</a></li>
-						        <li><a href="https://myconstructor.gr/homes/search_constructors/all/all/all/126/177">ΚΑΤΑΛΟΓΟΣ ΕΠΑΓΓΕΛΜΑΤΙΩΝ</a></li>
-						        <li><a href="https://myconstructor.gr/blog/">BLOG</a></li>
+						        <li><a href="<?php echo $api_url; ?>">ΑΡΧΙΚΗ</a></li>
+						        <li><a href="<?php echo $api_url; ?>homes/search_constructors/all/all/all/126/177">ΚΑΤΑΛΟΓΟΣ ΕΠΑΓΓΕΛΜΑΤΙΩΝ</a></li>
+						        <li><a href="<?php echo $api_url; ?>blog/">BLOG</a></li>
 						        <li class="active litel"><a href="tel:2103009323">210 300 9323</a></li>
-						        <li><a href="https://myconstructor.gr/blog/">ΕΝ</a></li>
-						        <li><a href="https://myconstructor.gr/blog/">ΕL</a></li>
+						        <li><a href="<?php echo $api_url; ?>blog/">ΕΝ</a></li>
+						        <li><a href="<?php echo $api_url; ?>blog/">ΕL</a></li>
 						      </ul>
 						      <ul class="nav navbar-nav navbar-right">
-						        <li><a href="https://myconstructor.gr/members/chooseUserType"><span class="glyphicon glyphicon-user"></span> ΕΓΓΡΑΦΗ</a></li>
+						        <li><a href="<?php echo $api_url; ?>members/chooseUserType"><span class="glyphicon glyphicon-user"></span> ΕΓΓΡΑΦΗ</a></li>
 						        <li>
 						        	<?php if(@$_SESSION['login_user']){?>
-						        			<a href="<?php echo SITE_URL.'logout.php';?>"><span class="glyphicon glyphicon-log-out"></span> Αποσυνδέση</a>
+						        			<a href="<?php echo $api_url.'logout.php';?>"><span class="glyphicon glyphicon-log-out"></span> Αποσυνδέση</a>
 						        	<?php }else{?>
-						        			<a href="<?php echo SITE_URL.'login.php';?>"><span class="glyphicon glyphicon-log-in"></span> ΣΥΝΔΕΣΗ</a>
+						        			<a href="<?php echo $api_url.'login.php';?>"><span class="glyphicon glyphicon-log-in"></span> ΣΥΝΔΕΣΗ</a>
 						        	<?php }?>
 						        </li>
 						      </ul>

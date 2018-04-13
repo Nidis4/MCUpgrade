@@ -39,6 +39,9 @@
                             $percentage = $professional['percentage'];
                             $applications = $professional['applications'];
                             $portfolio_photos = $professional['photos'];
+                            $review_stats= $professional['reviews_stats'];
+                            $reviews= $professional['reviews'];
+
 
                         }else{
                               exit(header("Location: index.php"));
@@ -75,8 +78,16 @@
                                                 <div style="width:98%;"></div>
                                             </div>
                                         </div>
-                                        <div class="rev-score"><span class="rating-num">4,9</span>/5</div>
-                                        <div class="total-score"><span class="total-jobs">190</span> Αξιολογήσεις</div>
+                                        <div class="rev-score"><span class="rating-num">
+                                        <?php 
+                                            $totalRevScore = number_format($review_stats['average_total'], 1);
+                                            if( $totalRevScore == 5.0 || $totalRevScore == 4.0){
+                                                echo number_format($totalRevScore, -1);
+                                            }else{
+                                                echo $totalRevScore;
+                                            }
+                                             ?></span>/5</div>
+                                        <div class="total-score"><span class="total-jobs"><?php echo $review_stats['total']; ?></span> Αξιολογήσεις</div>
                                     </div>
                                 </a>
                                 <p class="front-professional-desc">Εξυπηρετούμε όλη την Αττική, Έδρα Νότια Προάστια.</p>
@@ -296,12 +307,21 @@
                                 </div>
                                     <div class="col-md-5 prof-total-score">
                                         <div class="reviewsTitle">
-                                            <div class="TotalRatingOuter col-md-5"><span class="totalRatingReviews">4,9</span>/5 </div>
+                                            <div class="TotalRatingOuter col-md-5"><span class="totalRatingReviews"><?php 
+                                            $totalRevScore = number_format($review_stats['average_total'], 1);
+                                            if( $totalRevScore == 5.0 || $totalRevScore == 4.0){
+                                                echo number_format($totalRevScore, -1);
+                                            }else{
+                                                echo $totalRevScore;
+                                            }
+                                             ?></span>/5 </div>
+                                            
                                             <div class="total-score col-md-7"><p>Συνολικό σκορ</p> 
-                                                    <p>Σκορ από <span class="total-jobs">190</span> αξιολογήσεις</p>
+                                                    <p>Σκορ από <span class="total-jobs"><?php echo $review_stats['total']; ?></span> αξιολογήσεις</p>
                                                 <div class="totalScore">
                                                     <div class="totalStars">
-                                                        <div style="width: 90%;"></div>
+                                                        <?php $totalRevPercentage = number_format($review_stats['average_total']/5 *100 , 1);  ?>
+                                                        <div style="width: <?php  echo $totalRevPercentage.'%'; ?>"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -309,40 +329,57 @@
                                         </div>
                                        
                                     </div>
-                                                        
-                                                    
+                                    <?php 
+                                        $quality = number_format($review_stats['quality']/5 *100 , 1).'%;';
+                                        $reliability= number_format($review_stats['reliability']/5 *100 , 1).'%;';
+                                        $cost= number_format($review_stats['cost']/5 *100 , 1).'%';
+                                        $schedule= number_format($review_stats['schedule']/5 *100 , 1).'%;';
+                                        $behaviour= number_format($review_stats['behaviour']/5 *100 , 1).'%;';
+                                        $cleaniness= number_format($review_stats['cleaniness']/5 *100 , 1).'%;';
+                                    ?>                 
                                     <div class="col-md-7">
                                         <div class="col-md-6 bars-one-half">                         
-                                                <p class="emplexp">Quality</p>
+                                                <p class="emplexp">Ποιότητα</p>
                                                    <div class="quality-empty">
-                                                        <div style="width:100%;"></div>
+                                                        <div style="width:<?php echo $quality; ?>"></div>
                                                     </div>
-                                                 <p class="emplexp">Reliability</p>
+                                                 <p class="emplexp">Αξιοπιστία</p>
                                                     <div class="reliability-empty">
-                                                        <div style="width:100%;"></div>
+                                                        <div style="width:<?php echo $reliability; ?>"></div>
                                                     </div>
-                                                 <p class="emplexp">Cost</p>
+                                                 <p class="emplexp">Τιμή</p>
                                                     <div class="cost-empty">
-                                                        <div style="width:70%;"></div>
+                                                        <div style="width:<?php echo $cost; ?>"></div>
                                                     </div>
                                         </div>
                                             <div class="col-md-6 bars-one-half">
-                                             <p class="emplexp">Schedule</p>
+                                             <p class="emplexp">Συνέπεια</p>
                                                 <div class="schedule-empty">
-                                                    <div style="width:100%;"></div>
+                                                    <div style="width:<?php echo $schedule; ?>"></div>
                                                 </div>
-                                             <p class="emplexp">Behaviour</p>
+                                             <p class="emplexp">Συμπεριφορά</p>
                                                 <div class="behaviour-empty">
-                                                    <div style="width:100%;"></div>
+                                                    <div style="width:<?php echo $behaviour; ?>"></div>
                                                 </div>
-                                             <p class="emplexp">Cleanliness</p>
+                                             <p class="emplexp">Καθαριότητα</p>
                                                 <div class="cleanliness-empty">
-                                                    <div style="width:80%;"></div>
+                                                    <div style="width:<?php echo $cleaniness; ?>"></div>
                                                 </div>
                                             </div>
                                      </div>
                             </div>
 
+                            <?php foreach ($reviews as $review ) {
+                               $total = $review['quality'] + $review['reliability'] + $review['cost'] +$review['schedule'] + $review['behaviour'] + $review['cleaniness'];
+                               $totalperReview = number_format($total/6 , 1);
+                               $totalperReviewPercentage = number_format(($total/6)/5 *100 , 1).'%;';
+                               $format = 'Y-m-d H:i:s';
+                               $date= DateTime::createFromFormat($format, $review['created']);
+                               $comment= $review['comment'];
+
+                               
+
+                            ?>
                             <div class="row row-profile-review">
                                     <div class="col-md-12 review-outer">
                                         <div class="col-review">
@@ -350,89 +387,19 @@
                                             
                                                 <div class="starsouter">
                                                     <div class="empty-bar">
-                                                         <div style="width:80%;"></div>
+                                                         <div style="width:<?php echo $totalperReviewPercentage; ?>"></div>
                                                      </div>
                                                 </div>
                                             
-                                            <div class="rev-score">5.0/5</div>
-                                            <div class="reviewdate">Φεβρουάριος 16, 2018</div>
-                                            <p class="reviewComment">Έμεινα πάρα πολύ ικανοποιημένος με τον κ.Παναγιωτακόπουλο Βασίλη.Προσεχτικός &amp; Συνεπής στην ώρα του.</p>
+                                            <div class="rev-score"><?php echo $totalperReview; ?>/5</div>
+                                            <div class="reviewdate"><?php echo  $date->format('d-m-Y') ?></div>
+                                            <p class="reviewComment"><?php echo $comment; ?></p>
                                             <p class="reviewerName">Σωτήρης Μανόφης</p>
                                         </div>
                                     </div>
                             </div>
-                            <div class="row row-profile-review">
-                                    <div class="col-md-12 review-outer">
-                                        <div class="col-review">
-                                            
-                                            
-                                                <div class="starsouter">
-                                                    <div class="empty-bar">
-                                                         <div style="width:80%;"></div>
-                                                     </div>
-                                                </div>
-                                            
-                                            <div class="rev-score">5.0/5</div>
-                                            <div class="reviewdate">Φεβρουάριος 16, 2018</div>
-                                            <p class="reviewComment">Έμεινα πάρα πολύ ικανοποιημένος με τον κ.Παναγιωτακόπουλο Βασίλη.Προσεχτικός &amp; Συνεπής στην ώρα του.</p>
-                                            <p class="reviewerName">Σωτήρης Μανόφης</p>
-                                        </div>
-                                    </div>
-                            </div>
-                            <div class="row row-profile-review">
-                                    <div class="col-md-12 review-outer">
-                                        <div class="col-review">
-                                            
-                                            
-                                                <div class="starsouter">
-                                                    <div class="empty-bar">
-                                                         <div style="width:80%;"></div>
-                                                     </div>
-                                                </div>
-                                            
-                                            <div class="rev-score">5.0/5</div>
-                                            <div class="reviewdate">Φεβρουάριος 16, 2018</div>
-                                            <p class="reviewComment">Έμεινα πάρα πολύ ικανοποιημένος με τον κ.Παναγιωτακόπουλο Βασίλη.Προσεχτικός &amp; Συνεπής στην ώρα του.</p>
-                                            <p class="reviewerName">Σωτήρης Μανόφης</p>
-                                        </div>
-                                    </div>
-                            </div>
-                            <div class="row row-profile-review">
-                                    <div class="col-md-12 review-outer">
-                                        <div class="col-review">
-                                            
-                                            
-                                                <div class="starsouter">
-                                                    <div class="empty-bar">
-                                                         <div style="width:80%;"></div>
-                                                     </div>
-                                                </div>
-                                            
-                                            <div class="rev-score">5.0/5</div>
-                                            <div class="reviewdate">Φεβρουάριος 16, 2018</div>
-                                            <p class="reviewComment">Έμεινα πάρα πολύ ικανοποιημένος με τον κ.Παναγιωτακόπουλο Βασίλη.Προσεχτικός &amp; Συνεπής στην ώρα του.</p>
-                                            <p class="reviewerName">Σωτήρης Μανόφης</p>
-                                        </div>
-                                    </div>
-                            </div>
-                            <div class="row row-profile-review">
-                                    <div class="col-md-12 review-outer">
-                                        <div class="col-review">
-                                            
-                                            
-                                                <div class="starsouter">
-                                                    <div class="empty-bar">
-                                                         <div style="width:80%;"></div>
-                                                     </div>
-                                                </div>
-                                            
-                                            <div class="rev-score">5.0/5</div>
-                                            <div class="reviewdate">Φεβρουάριος 16, 2018</div>
-                                            <p class="reviewComment">Έμεινα πάρα πολύ ικανοποιημένος με τον κ.Παναγιωτακόπουλο Βασίλη.Προσεχτικός &amp; Συνεπής στην ώρα του.</p>
-                                            <p class="reviewerName">Σωτήρης Μανόφης</p>
-                                        </div>
-                                    </div>
-                            </div>
+                            <?php } ?>
+                            
                     </div>
                 </div>
                 <script src="js/proffessional-profile.js"></script>
