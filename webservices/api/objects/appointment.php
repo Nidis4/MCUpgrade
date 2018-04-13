@@ -35,6 +35,8 @@ class Appointment{
     public $customer_first_name;
     public $customer_last_name;
     public $category_id;
+    public $viewed;
+    public $viewed_datetime;
  
     public function __construct($db){
         $this->conn = $db;
@@ -187,7 +189,7 @@ class Appointment{
      
         // select query
         $query = "SELECT
-                    `id`, `prof_member_id`, `cust_member_id`, `application_id`, `county_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelReason`, `cancelComment`
+                    `id`, `prof_member_id`, `cust_member_id`, `application_id`, `county_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelReason`, `cancelComment`, `viewed`, `viewed_datetime`
                 FROM
                     " . $this->table_name . " WHERE `status`!=2
                 ORDER BY `datetimeCreated` DESC
