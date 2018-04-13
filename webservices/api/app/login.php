@@ -30,6 +30,7 @@ if(isset($_REQUEST['email']) && isset($_REQUEST['password']))
     // check if more than 0 record found
     if($num>0){
 
+        
         // retrieve our table contents
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
