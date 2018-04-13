@@ -39,6 +39,7 @@ if($num>0){
             "id" => $id,
             "category_id" => $category_id,
             "category_name" => $name_greek,
+            "image" => $image_loc,
             "title" => $title,
             "title_greek" => $title_greek,
             "short_description" => html_entity_decode($short_description),

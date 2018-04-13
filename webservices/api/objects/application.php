@@ -109,6 +109,7 @@ class Application{
   applications.id,
   applications.category_id,
   categories.name_greek,
+  categories.image_loc,
   applications.`title`,
   applications.`title_greek`,
   applications.`short_description`,

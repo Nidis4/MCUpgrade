@@ -794,3 +794,11 @@ ALTER TABLE `jobs` ADD `description` TEXT NULL AFTER `phone`, ADD `commission` V
 
 <!-------------------------------->
 <!-- End 12 April 2018 Harpreet ---->
+
+<!-------------------------------->
+<!-- Start 13 April 2018 Harpreet -->
+
+ALTER TABLE `categories` ADD `image_loc` VARCHAR(200) NOT NULL AFTER `commissionRate`;
+
+<!-------------------------------->
+<!-- End 13 April 2018 Harpreet ---->
