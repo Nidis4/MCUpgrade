@@ -35,7 +35,7 @@ if($num>0){
 
         $professional = new Professional($db);
         $professional->id = $rowProf['id'];
-        //echo  $rowProf['id']." ";
+        
         $stmtReviews = $professional->getReviewStats();
         $numRev = $stmtReviews->rowCount();
         if($numRev >= 1){
@@ -59,6 +59,24 @@ if($num>0){
         }else{
            $reviewsStat_arr = array(); 
         }
+
+        $stmtCounties = $professional->getCounties();
+        $numRev = $stmtCounties->rowCount();
+        if($numRev >= 1){
+            $counties_arr = array();
+
+            while ($rowCo = $stmtCounties->fetch(PDO::FETCH_ASSOC)){
+                
+                $counties_item=array(
+                    "county_id" => $rowCo['county_id'],
+                    "county_name" => $rowCo['county_name_gr']
+                );
+                array_push($counties_arr, $counties_item);
+            }
+           
+        }else{
+           $counties_arr = array(); 
+        }
         
         $prof_item = array(
             "id" => $rowProf['id'],
@@ -70,8 +88,7 @@ if($num>0){
             "description" => $rowProf['description'],
             "city" => $rowProf['city'],
             "servicearea" => $rowProf['service_area'],
-            "county_id" => $rowProf['county_id'],
-            "county_name_gr" => $rowProf['county_name_gr'],
+            "counties" => $counties_arr,
             "reviews_stats" => $reviewsStat_arr
         );
 

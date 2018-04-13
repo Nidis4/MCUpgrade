@@ -915,7 +915,7 @@ ORDER BY rat.`created` DESC";
     public function getCounties(){
      
         // select query
-        $query = "SELECT pc.`county_id`, pc.`is_main`, c.`county_name` FROM ". $this->counties_table_name ." pc 
+        $query = "SELECT pc.`county_id`, pc.`is_main`, c.`county_name`, c.`county_name_gr` FROM ". $this->counties_table_name ." pc 
                   Join counties c ON pc.county_id = c.id
                 WHERE pc.`professional_id`= ? order by pc.is_main desc";
      

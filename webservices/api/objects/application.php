@@ -78,12 +78,10 @@ class Application{
     function getProfessionalsByApplication($id){
      
         // query to read single record
-        $query = "SELECT p.id, p.first_name, p.last_name, p.image,p.service_area, pa.description, pa.budget, pa.price, pc.city, pou.county_id, cou.county_name_gr
+        $query = "SELECT p.id, p.first_name, p.last_name, p.image,p.service_area, pa.description, pa.budget, pa.price, pc.city
                     FROM `professionals` p
                     LEFT JOIN `professionals_applications` pa ON p.`id`=pa.`professional_id`
                     LEFT JOIN `professionals_contact_details` pc ON p.`id`=pc.`professional_id` AND pa.`professional_id`=pc.`professional_id`
-                    LEFT JOIN `professionals_counties` pou ON p.`id`=pou.`professional_id`
-                    LEFT JOIN `counties` cou ON cou.`id`=pou.`county_id`
                     WHERE pa.`application_id`=:app_id AND pa.`price` > 0 
                     ORDER BY pa.`price`, p.id ASC";
      
