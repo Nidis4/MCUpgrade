@@ -19,7 +19,7 @@ echo "Synchronization Starts<br>";
 //syncCustomers();
 syncProfessionals();
 //syncAppointments();
-//syncReviews();
+syncReviews();
 
 function syncReviews(){
 	echo "In Sync Reviews<br>";
@@ -31,7 +31,7 @@ function syncReviews(){
 
 	    /* fetch associative array */
 	    while ($row = $result->fetch_assoc()) {
-	        insertReview($row['professional_id'], $row['employer_id'], $row['agent_id'], $row['appointment_id'], $row['category_id'], $row['job_title'], $row['quality'], $row['reliability'], $row['cost'], $row['schedule'], $row['behaviour'], $row['cleanliness'], $row['active'], $row['comment'], $row['professional_comment'], $row['created'], $row['modified']);
+	        insertReview($row['id'], $row['professional_id'], $row['employer_id'], $row['agent_id'], $row['appointment_id'], $row['category_id'], $row['job_title'], $row['quality'], $row['reliability'], $row['cost'], $row['schedule'], $row['behaviour'], $row['cleanliness'], $row['active'], $row['comment'], $row['professional_comment'], $row['created'], $row['modified']);
 	    }
 
 	    /* free result set */
@@ -40,12 +40,12 @@ function syncReviews(){
 }
 
 
-function insertReview($professional_id, $employer_id, $agent_id, $appointment_id, $category_id, $job_title, $quality, $reliability, $cost, $schedule, $behaviour, $cleanliness, $active, $comment, $professional_comment, $created, $modified){
+function insertReview($id, $professional_id, $employer_id, $agent_id, $appointment_id, $category_id, $job_title, $quality, $reliability, $cost, $schedule, $behaviour, $cleanliness, $active, $comment, $professional_comment, $created, $modified){
 	//echo "Inserting Appointment ".$id."<br>";
 
 	$upgrade = UpgradeDB();
 
-	$query = "INSERT INTO `directory_ratings`( `professional_id`, `customer_id`, `agent_id`, `appointment_id`, `category_id`, `job_title`, `quality`, `reliability`, `cost`, `schedule`, `behaviour`, `cleanliness`, `active`, `comment`,  `professional_comment`, `created`, `modified`) VALUES ('".$professional_id."', '".$employer_id."', '".$agent_id."', '".$appointment_id."', '".$category_id."', '".$job_title."', '".$quality."', '".$reliability."', '".$cost."', '".$schedule."', '".$behaviour."', '".$cleanliness."', '".$active."', \"".$comment."\", '".$professional_comment."', '".$created."', '".$modified."') ";
+	$query = "INSERT INTO `directory_ratings`( `id`, `professional_id`, `customer_id`, `agent_id`, `appointment_id`, `category_id`, `job_title`, `quality`, `reliability`, `cost`, `schedule`, `behaviour`, `cleanliness`, `active`, `comment`,  `professional_comment`, `created`, `modified`) VALUES ('".$id."', '".$professional_id."', '".$employer_id."', '".$agent_id."', '".$appointment_id."', '".$category_id."', '".$job_title."', '".$quality."', '".$reliability."', '".$cost."', '".$schedule."', '".$behaviour."', '".$cleanliness."', '".$active."', \"".$comment."\", '".$professional_comment."', '".$created."', '".$modified."') ";
 	
 	if (!$upgrade->query($query)) {
 	    echo $query."<br>";
