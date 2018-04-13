@@ -1,4 +1,8 @@
-              
+              <?php
+                    function floordec($zahl,$decimals=1){   
+                        return floor($zahl*pow(10,$decimals))/pow(10,$decimals);
+                    }
+               ?>
 
                 <?php        
                     include('front_end_config/core.php');
@@ -63,7 +67,14 @@
                             <div class="col-md-3 profile-img">
                                 <div class="profile-img-inner">
                                     <img src="<?php echo 'img/professional-imgs/'.$image ?>" onerror="this.src='img/professional-imgs/default-img-4.jpg';" alt="" />
-                                    <div class="total-rating-num-outer"><span class="total-rating-num">4.9</span>/5</div>
+                                    <div class="total-rating-num-outer"><span class="total-rating-num"><?php 
+                                            $totalRevScore = floordec($review_stats['average_total'], 1);
+                                            if( $totalRevScore == 5.0 || $totalRevScore == 4.0){
+                                                echo number_format($totalRevScore, -1);
+                                            }else{
+                                                echo $totalRevScore;
+                                            }
+                                             ?></span>/5</div>
                                 </div>
 
                                 
@@ -80,7 +91,7 @@
                                         </div>
                                         <div class="rev-score"><span class="rating-num">
                                         <?php 
-                                            $totalRevScore = number_format($review_stats['average_total'], 1);
+                                            $totalRevScore = floordec($review_stats['average_total'], 1);
                                             if( $totalRevScore == 5.0 || $totalRevScore == 4.0){
                                                 echo number_format($totalRevScore, -1);
                                             }else{
@@ -308,7 +319,7 @@
                                     <div class="col-md-5 prof-total-score">
                                         <div class="reviewsTitle">
                                             <div class="TotalRatingOuter col-md-5"><span class="totalRatingReviews"><?php 
-                                            $totalRevScore = number_format($review_stats['average_total'], 1);
+                                            $totalRevScore = floordec($review_stats['average_total'], 1);
                                             if( $totalRevScore == 5.0 || $totalRevScore == 4.0){
                                                 echo number_format($totalRevScore, -1);
                                             }else{
@@ -320,7 +331,7 @@
                                                     <p>Σκορ από <span class="total-jobs"><?php echo $review_stats['total']; ?></span> αξιολογήσεις</p>
                                                 <div class="totalScore">
                                                     <div class="totalStars">
-                                                        <?php $totalRevPercentage = number_format($review_stats['average_total']/5 *100 , 1);  ?>
+                                                        <?php $totalRevPercentage = floordec($review_stats['average_total']/5 *100 , 1);  ?>
                                                         <div style="width: <?php  echo $totalRevPercentage.'%'; ?>"></div>
                                                     </div>
                                                 </div>
@@ -330,12 +341,12 @@
                                        
                                     </div>
                                     <?php 
-                                        $quality = number_format($review_stats['quality']/5 *100 , 1).'%;';
-                                        $reliability= number_format($review_stats['reliability']/5 *100 , 1).'%;';
-                                        $cost= number_format($review_stats['cost']/5 *100 , 1).'%';
-                                        $schedule= number_format($review_stats['schedule']/5 *100 , 1).'%;';
-                                        $behaviour= number_format($review_stats['behaviour']/5 *100 , 1).'%;';
-                                        $cleaniness= number_format($review_stats['cleaniness']/5 *100 , 1).'%;';
+                                        $quality = floordec($review_stats['quality']/5 *100 , 1).'%;';
+                                        $reliability= floordec($review_stats['reliability']/5 *100 , 1).'%;';
+                                        $cost= floordec($review_stats['cost']/5 *100 , 1).'%';
+                                        $schedule= floordec($review_stats['schedule']/5 *100 , 1).'%;';
+                                        $behaviour= floordec($review_stats['behaviour']/5 *100 , 1).'%;';
+                                        $cleaniness= floordec($review_stats['cleaniness']/5 *100 , 1).'%;';
                                     ?>                 
                                     <div class="col-md-7">
                                         <div class="col-md-6 bars-one-half">                         
@@ -371,14 +382,13 @@
 
                             <?php foreach ($reviews as $review ) {
                                $total = $review['quality'] + $review['reliability'] + $review['cost'] +$review['schedule'] + $review['behaviour'] + $review['cleaniness'];
-                               $totalperReview = number_format($total/6 , 1);
-                               $totalperReviewPercentage = number_format(($total/6)/5 *100 , 1).'%;';
+                               //$totalperReview = number_format($total/6 , 1);
+                               $totalperReview= floordec($total/6,1);
+                               $totalperReviewPercentage = floordec(($total/6)/5 *100 , 1).'%;';
                                $format = 'Y-m-d H:i:s';
                                $date= DateTime::createFromFormat($format, $review['created']);
                                $comment= $review['comment'];
                                $customer_name= $review['customer'];
-
-                               
 
                             ?>
                             <div class="row row-profile-review">

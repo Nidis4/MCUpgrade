@@ -163,15 +163,15 @@
 						$professional_description = $professionals['description'];
 						$professional_city = $professionals['city'];
 						$professional_servicearea = $professionals['servicearea'];
-						$professional_county = $professionals['county_id'];
-						$professional_county_name_gr= $professionals['county_name_gr'];
+						$professional_county = $professionals['counties'];
+						//$professional_county_name_gr= $professionals['county_name_gr'];
 						$professional_review = $professionals['reviews_stats'];
 
 						
 				?>
 
 
-						<div class="prof-main-col" data-county="<?php echo $professional_county; ?>" data-price="<?php echo $professional_price; ?>">
+						<div class="prof-main-col" data-county="<?php //echo $professional_county; ?>" data-price="<?php echo $professional_price; ?>">
 					  		<div class="col-md-3 col-sm-12 professional-img-con">
 					  			<div class="professional-img">
 					  				<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id . '&app_id=' . $application_id; ?>" >
@@ -268,6 +268,7 @@
 						
               			$category_title = $directory_cat[0]['category_name'];
               			$category_id = $directory_cat[0]['category_id'];
+              			$category_icon = $directory_cat[0]['image'];
 						/*$directory_= $directory_cat['category_name'];
 						$app_name= $directory_cat['title_greek'];
 						$category_id = $directory_cat['category_id'];
@@ -322,7 +323,7 @@
 								<div class="col-md-2">
 									<div class="app-img">
 										<div class="app-img-inner">
-												<img src="img/plintirio.png">	
+												<img src="img/cat_icons/<?php echo $category_icon; ?>">	
 										</div>							
 										<i style="display: none;" class="fa fa-truck fa-4x icon-bg"></i>
 									</div>
