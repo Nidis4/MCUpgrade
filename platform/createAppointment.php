@@ -499,6 +499,25 @@ include('config/core.php');
 		<script src="js/examples/examples.validation.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
+
+				// $("#applications").on('change',function(){
+				// 	var date = new Date;
+				// 	var day = date.getDay();
+				// 	var adddays = 1;
+				// 	if(day == 5){
+				// 		adddays = 3;
+				// 	}else if(day == 6){
+				// 		adddays = 3;
+				// 	}else if(day == 7){
+				// 		adddays = 2;
+				// 	}
+
+				// 	var newday = date.setDate(date.getDate() + adddays);
+				// 	var minDate = new Date(newday);
+				// 	//$('#startDate').datepicker('setStartDate', minDate);
+				// 	$( "#startDate" ).datepicker( "option", "minDate", minDate );
+				// 	//$('#datetimepicker7').data("DateTimePicker").minDate(minDate);
+				// });
 				
 				$("#county").on('change',function(){
 					var cnt = $(this).val();

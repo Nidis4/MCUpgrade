@@ -1308,6 +1308,3 @@ ORDER BY rat.`created` DESC";
 
 
     }
-
-}
-?>

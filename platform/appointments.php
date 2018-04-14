@@ -57,6 +57,27 @@ include('config/core.php');
 				//echo $api_url.'webservices/api/appointment/read_paging.php';			
 			?>
 
+			<?php 
+				$date = date("Y-m-d");
+				
+				if(@$_GET['comdate']){
+					$date = $_GET['comdate'];
+				}
+
+				$commissions = file_get_contents($api_url.'webservices/api/appointment/commission.php?date='.$date);
+				$comision = json_decode($commissions, true); // decode the JSON into an associative array
+
+				if(@$comision['commision']){
+					$com = $comision['commision'];
+				}else{
+					$com = "0";
+				}
+				
+				
+
+
+			?>
+
 			<div class="inner-wrapper">
 				
 				<!-- Sidebar Position -->
@@ -94,10 +115,31 @@ include('config/core.php');
 							</header>
 							<div class="card-body">
 								<div class="row">
-									<div class="col-sm-6">
+									<div class="col-sm-4">
 										<div class="mb-3">
 											<a href='createAppointment.php'><button id="addToTable" class="btn btn-primary">Add <i class="fa fa-plus"></i></button></a>
 										</div>
+									</div>
+									<div class="col-sm-8" >
+										<form action="" method="get">
+											<div class="row">
+												<div class="col-sm-4">
+													<div class="input-group date" data-provide="datepicker">
+													    <input type="text" name="comdate" class="form-control" value="<?php echo $date;?>" placeholder='Date'>
+													    <div class="input-group-addon">
+													        <i class="fa fa-calendar"></i>
+													    </div>
+													</div>
+												</div>
+												<div class="col-sm-3">
+													<input type="text" class="form-control" readonly="" value="<?php echo $com;?>" placeholder="Commission">
+													
+												</div>
+												<div class="col-sm-2">
+													<input type="submit" name="comsubmit" class="btn btn-primary" value="Load">
+												</div>
+											</div>
+										</form>
 									</div>
 								</div>
 								<table class="table table-bordered table-striped mb-0" id="datatable-editable">
@@ -389,5 +431,10 @@ include('config/core.php');
 		<!-- Examples -->
 		<script src="js/examples/examples.datatables.editable.js"></script>
 		<script src="js/examples/examples.modals.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				//$("#datepicker").datepicker();
+			});
+		</script>
 	</body>
 </html>
