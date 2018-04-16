@@ -2,6 +2,7 @@
 	include('header.php');
 	include('menu.php');
 	include('search.php');
+
 ?>
 
 <div class="container-fluid">
@@ -59,14 +60,28 @@
 						$app_unit = $application['unit'];
 						$app_detail_description_gr = $application['detail_description_gr'];
 
+
+
+
 		
 				?>
 				<div class="directory-breadcrumb">
 					<ul class="ul-breadcrumb">
 						<li><a class="a-breadcrumb" href="<?php echo $api_url; ?>">Αρχική</a></li>
 						<li><a class="a-breadcrumb" href="<?php echo $directory_url .'?cat_id='. $category_id; ?>"><?php echo $cat_app_name; ?></a></li>
-						<li><a class="a-breadcrumb" href="<?php echo $directory_url .'?cat_id='. $category_id . '&app_id=' .$application_id; ?>"><?php echo $app_name; ?></a></li>
-						<li class="breadcrumb-county">Αττική</li>
+						<li><a class="a-breadcrumb breadcrumb_app_name" data-app-id="<?php echo $application_id; ?>" href="<?php echo $directory_url .'?cat_id='. $category_id . '&app_id=' .$application_id; ?>"><?php echo $app_name; ?></a></li>
+						<li class="breadcrumb-county">
+						<?php
+							if(isset($_GET['county_id'])){ ?>
+								<a href="<?php echo $directory_url .'?cat_id='. $category_id . '&app_id=' .$application_id. '&county_id='. $_GET['county_id']; ?>">Αττική</a>
+						<?php
+							}else{
+						?>
+								<a href="<?php echo $directory_url .'?cat_id='. $category_id . '&app_id=' .$application_id. '&county_id=53'; ?>">Ελλάδα</a>
+						<?php
+							}
+						?>
+						</li>
 					</ul>
 				</div>
 
@@ -82,7 +97,7 @@
 				</div>
 
 				<div class="results-title">
-					<h1 id="directory-top"><span class="span-count-professionals"><?php echo sizeof($app_professionals); ?></span> Συνεργεία για <?php echo $app_name; ?> <span class="stin-color">στην</span> Αττική</h1>
+					<h3 id="directory-top"><span class="span-count-professionals"><?php echo sizeof($app_professionals); ?></span> Συνεργεία για <?php echo $app_name; ?> <span class="stin-color"> στην</span> <span class="span_county">Αττική</span></h3>
 				</div>
 
 				<nav class="navbar navbar-default directory-filters" role="navigation">
@@ -163,15 +178,33 @@
 						$professional_description = $professionals['description'];
 						$professional_city = $professionals['city'];
 						$professional_servicearea = $professionals['servicearea'];
-						$professional_county = $professionals['counties'];
-						//$professional_county_name_gr= $professionals['county_name_gr'];
 						$professional_review = $professionals['reviews_stats'];
+						$porfessional_counties = $professionals['counties'];
+
+						$professional_counties_num = sizeof($porfessional_counties);
+
+						$professional_county = false;
+
+
+						if(isset($_GET['county_id'])){
+							$county_id= $_GET['county_id'];
+							foreach ($porfessional_counties as $counties ) {
+								if(intval($county_id) == intval($counties['county_id'])){
+									$professional_county = true; // print proffessionals with equal $_GET['county_id']
+								}
+							}
+						}else{
+							$professional_county = true; // if !$_GET['county_id']  print all proffessionals
+						}
 
 						
 				?>
+				<?php if($professional_county){ ?>
 
-
-						<div class="prof-main-col" data-county="<?php //echo $professional_county; ?>" data-price="<?php echo $professional_price; ?>">
+						<div class="prof-main-col" data-county-num="<?php echo $professional_counties_num ?>" 
+							<?php foreach ($porfessional_counties as $key=>$counties) {
+									$county_ids= $counties['county_id']; // print county_ids for county filter
+									echo "data-county".$key."='$county_ids'"; }?> data-price="<?php echo $professional_price; ?>">
 					  		<div class="col-md-3 col-sm-12 professional-img-con">
 					  			<div class="professional-img">
 					  				<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id . '&app_id=' . $application_id; ?>" >
@@ -253,6 +286,7 @@
 									<?php } ?>
 								</div>
 							</div>
+						<?php } ?>
 
 
 				<?php } ?>
@@ -296,26 +330,13 @@
 						
 						$application_name = $cat_apps['title_greek'];
 						$application_min_price = $cat_apps['min_price'];
-						$application_unit= $cat_apps['unit'];
+						$application_unit= $cat_apps['unit']; 
 						$short_description_gr = $cat_apps['short_description_gr'];
 						$cat_id = $cat_apps['category_id'];
 						$app_id = $cat_apps['id'];
 						$sum_professionals = $cat_apps['professionals'];
 
 					 ?>
-					
-					<div style="display: none;" class="col-md-4 cat-application-outer">
-						<div class="col-application">
-							<div class="app-img">
-								<img src="img/directory-photos/metafores-metakomisis.jpg"/>
-							</div>
-							<h3 class="app-h3"><?php echo $application_name; ?></h3>
-
-							<div class="app-price"><span class="price-start">από</span> <?php echo $application_min_price; ?><span class="app-units"><?php echo $application_unit; ?></span></div>
-							<div class="professionals-num"><?php echo $sum_professionals; ?> διαθέσιμα συνεργεία</div>
-
-						</div>
-					</div>
 
 					<a  class="a-app" href="<?php echo $directory_url.'?cat_id='. $cat_id .'&app_id='.$app_id ?>">
 						<div  class="col-md-12 applications_outer">
@@ -325,7 +346,6 @@
 										<div class="app-img-inner">
 												<img src="img/cat_icons/<?php echo $category_icon; ?>">	
 										</div>							
-										<i style="display: none;" class="fa fa-truck fa-4x icon-bg"></i>
 									</div>
 								</div>
 								<div class="col-md-7 app-details">
@@ -360,12 +380,13 @@
 						$app_detail_description_gr = $application['detail_description_gr'];
 
 
+
 					?>		
 					<div class="directory-breadcrumb">
 						<ul class="ul-breadcrumb">
 							<li><a class="a-breadcrumb" href="<?php echo $api_url; ?>">Αρχική</a></li>
 							<li><a class="a-breadcrumb" href="<?php echo $directory_url .'?cat_id='. $category_id; ?>"><?php echo $cat_app_name; ?></a></li>
-							<li><a class="a-breadcrumb" href="<?php echo $directory_url .'?cat_id='. $category_id . '&app_id='. $application_id; ?>"><?php echo $app_name; ?></a></li>
+							<li><a class="a-breadcrumb breadcrumb_app_name" data-app-id="<?php echo $application_id; ?>" href="<?php echo $directory_url .'?cat_id='. $category_id . '&app_id='. $application_id; ?>"><?php echo $app_name; ?></a></li>
 							<li>Αττική</li>
 						</ul>
 					</div>
@@ -382,7 +403,7 @@
 				</div>
 
 				<div class="results-title">
-					<h1 id="directory-top"><?php echo sizeof($app_professionals); ?> Συνεργεία για <?php echo $app_name; ?> <span class="stin-color">στην</span> Αττική</h1>
+					<h1 id="directory-top"><span class="span-count-professionals"><?php echo sizeof($app_professionals); ?></span> Συνεργεία για <?php echo $app_name; ?> <span class="stin-color">στην</span> <span class="span_county">Αττική</span></h1>
 				</div>
 
 				<nav class="navbar navbar-default directory-filters" role="navigation">
@@ -462,12 +483,32 @@
 						$professional_city = $professionals['city'];
 						$professional_servicearea = $professionals['servicearea'];
 						$professional_review = $professionals['reviews_stats'];
+						$porfessional_counties = $professionals['counties'];
+
+						$professional_counties_num = sizeof($porfessional_counties);
+
+						$professional_county = false;
+
+
+						if(isset($_GET['county_id'])){
+							$county_id= $_GET['county_id'];
+							foreach ($porfessional_counties as $counties ) {
+								if(intval($county_id) == intval($counties['county_id'])){
+									$professional_county = true; // print proffessionals with equal $_GET['county_id']
+								}
+							}
+						}else{
+							$professional_county = true; // if !$_GET['county_id']  print all proffessionals
+						}
 
 						
-				?>
+						?>
+						<?php if($professional_county){ ?>
 
-
-						<div class="prof-main-col">
+					  <div class="prof-main-col" data-county-num="<?php echo $professional_counties_num ?>" 
+							<?php foreach ($porfessional_counties as $key=>$counties) {
+									$county_ids= $counties['county_id']; // print county_ids for county filter
+									echo "data-county".$key."='$county_ids'"; }?> >
 					  		<div class="col-md-3 col-sm-12 professional-img-con">
 					  			<div class="professional-img">
 					  				<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id. '&app_id='. $application_id; ?>" >
@@ -549,6 +590,7 @@
 									<?php } ?>
 								</div>
 							</div>
+						<?php } ?>
 
 
 					<?php } ?>

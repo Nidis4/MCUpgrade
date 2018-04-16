@@ -1,4 +1,62 @@
 $(document).ready(function(){
+	var urlParams;
+		(window.onpopstate = function () {
+
+		    var match,
+		        pl     = /\+/g,  // Regex for replacing addition symbol with a space
+		        search = /([^&=]+)=?([^&]*)/g,
+		        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+		        query  = window.location.search.substring(1);
+
+		    urlParams = {};
+
+		    while (match = search.exec(query))
+
+		       urlParams[decode(match[1])] = decode(match[2]);
+
+			})();
+			
+			var county_id = urlParams["county_id"];
+			
+
+			if (typeof county_id === "undefined") {
+				$("select.counties").val('53');
+				var county = $('select.counties option:selected').val();
+				var county_name =  $('select.counties option:selected').attr('val');
+				var length = $("div.prof-main-col").length;
+				$('span.span-count-professionals').html(length);
+				$('li.breadcrumb-county a').html(county_name);
+				$('span.stin-color').html('στην');
+				$('span.span_county').html(county_name);
+
+			}else{
+				$("select.counties").val(county_id);
+				var county = $('select.counties option:selected').val();
+				var county_name =  $('select.counties option:selected').attr('val');
+				var length = $("div.prof-main-col").length;
+				$('span.span-count-professionals').html(length);
+				$('li.breadcrumb-county a').html(county_name);
+				$('span.span_county ').html(county_name);
+
+				if(county == 50 || county == 45 || county == 20 || county == 11 || county == 9){
+					$('span.stin-color').html('στα');
+				}else if(county == 12){
+					$('span.stin-color').html('στον');
+				}else if(county == 52 || county == 41 || county == 32 || county == 26 || county == 18){
+					$('span.stin-color').html('στο');
+				}else if(county == 44 || county == 29){
+					$('span.stin-color').html('στις');
+				}else{
+					$('span.stin-color').html('στην');
+				}
+			}
+
+
+
+
+});
+
+$(document).ready(function(){
 	$("#open-close-filters").click(function (){
 		//$("div#filters").css('display','block');
 		$("div#filters").delay(50).fadeIn();
@@ -107,11 +165,37 @@ $(document).ready(function(){
 
 $(document).ready(function(){
 	$('select.counties').change(function(){
+
+		var urlParams;
+		(window.onpopstate = function () {
+
+		    var match,
+		        pl     = /\+/g,  // Regex for replacing addition symbol with a space
+		        search = /([^&=]+)=?([^&]*)/g,
+		        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+		        query  = window.location.search.substring(1);
+
+		    urlParams = {};
+
+		    while (match = search.exec(query))
+
+		       urlParams[decode(match[1])] = decode(match[2]);
+
+			})();
+
+			app_id=urlParams["app_id"];
+
+			if (typeof app_id === "undefined") {
+				app_id= $('a.breadcrumb_app_name').data('app-id');
+			}
+
 		var county = $('select.counties option:selected').val();
-		var county_name =  $('select.counties option:selected').text();
-		$('li.breadcrumb-county').html(county_name);
+		var url= window.location.href; 
+		var new_url = url.substring(0, url.indexOf('?'));
 		var i= 0;
-		$("div.prof-main-col").each(function(){
+		window.location.href = new_url+'?app_id='+app_id+'&county_id='+county;
+
+		/*$("div.prof-main-col").each(function(){
 			//alert($(this).attr('data-county'));
 			if($(this).attr('data-county') == county){
 				i++;
@@ -119,8 +203,10 @@ $(document).ready(function(){
 			}else{
 				$(this).hide();
 			} 
-		});
-		$('span.span-count-professionals').html(i);
+		});*/
+
+
+		//$('span.span-count-professionals').html(i);
 
 	});
 });
