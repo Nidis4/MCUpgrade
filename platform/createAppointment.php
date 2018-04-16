@@ -45,6 +45,16 @@ include('config/core.php');
 		<script src="vendor/modernizr/modernizr.js"></script>
 
 	</head>
+	<?php 
+		$t = date('l, F d, Y 12:00:00 A'); 
+		$d = strtotime($t).'000';
+	?>
+	<style type="text/css">
+		td[data-date = "<?php echo $d;?>"] {
+		    background: #ddd;
+		} 
+	</style>
+
 	<body>
 		<section class="body">
 
@@ -177,7 +187,7 @@ include('config/core.php');
 										<div class="form-group row duration">
 												<label class="col-lg-3 control-label text-lg-right pt-2">Duration in mins</label>
 												<div class="col-lg-9">
-													<input class="form-control" id="duration" type="number" min="0" max="900" step="30">
+													<input class="form-control" id="duration" type="number" value="60" min="0" max="900" step="30">
 												</div>
 										</div>
 										<div class="form-group row">
@@ -204,7 +214,8 @@ include('config/core.php');
 											</div>
 										</div>
 										<div class="form-group row daterange">
-												<label class="col-lg-3 control-label text-lg-right pt-2">Date range</label>
+												
+												<label class="col-lg-3 control-label text-lg-right pt-2">Date range </label>
 												<div class="col-lg-9">
 													<div class="input-daterange input-group" data-plugin-datepicker="">
 														<span class="input-group-addon">
