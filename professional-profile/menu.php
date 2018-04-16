@@ -26,6 +26,12 @@
                             Timeline & Calendar
                         </a>
                     </li>
+                    <li class="<?php if($currentPage =='balance'){echo 'active';}?>">
+                        <a href="balance.php">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                            Balance
+                        </a>
+                    </li>
                     <li class="<?php if($currentPage =='review'){echo 'active';}?>">
                         <a href="review.php" >
                             <i class="glyphicon glyphicon-star"></i>

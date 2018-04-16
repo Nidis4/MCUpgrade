@@ -481,5 +481,17 @@ class Appointment{
     }
 
 
+    public function commision($date){
+        $query = "SELECT sum(`commision`) as commision FROM  `appointments` WHERE  `datetimeCreated` LIKE  '%".$date."%' and `status` ='1'";
+        $stmt = $this->conn->prepare( $query );
+
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row;
+
+    }
+    
+
+
 }
 ?>
