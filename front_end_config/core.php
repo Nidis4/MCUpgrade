@@ -1,7 +1,7 @@
 <!--core front end -->
 <?php
 	//$api_url= "http://localhost/MCUpgrade/";
-	$api_url= SITE_URL;
+	$api_url= "https://upgrade.myconstructor.gr/";
 	
 	$directory_url ="directory.php";
 	$directory_url = $api_url . $directory_url;
