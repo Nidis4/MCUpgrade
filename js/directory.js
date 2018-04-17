@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function(){ //CHANGE COUNTIES FILTER, breadcrumb county, and titles
 	var urlParams;
 		(window.onpopstate = function () {
 
@@ -28,7 +28,6 @@ $(document).ready(function(){
 				$('li.breadcrumb-county a').html(county_name);
 				$('span.stin-color').html('στην');
 				$('span.span_county').html(county_name);
-
 			}else{
 				$("select.counties").val(county_id);
 				var county = $('select.counties option:selected').val();
@@ -50,11 +49,8 @@ $(document).ready(function(){
 					$('span.stin-color').html('στην');
 				}
 			}
-
-
-
-
 });
+
 
 $(document).ready(function(){
 	$("#open-close-filters").click(function (){
@@ -121,6 +117,10 @@ $(document).ready(function(){
 
 	$('#loadmore').click(function () {
 		//$('#showLess').show();
+		   count= $('div.prof-main-col').filter(function() {
+    			return $(this).css('display') !== 'none';
+		   }).length;
+
 		   count=count+5;
 		   if(count_professionals > count ){
 			    $('.prof-main-col:lt(' + count + ')').slideDown( "slow" );	
@@ -136,11 +136,16 @@ $(document).ready(function(){
 			}
 		});
 		$('#showless').click(function () {
-		    $('#loadmore').show();
 		    $('#showless').hide();
 		    count = 10;
 		   	$('.prof-main-col').slideToggle( "slow" );
 		   	$('.prof-main-col:lt(' + count + ')').slideDown( "slow" );
+
+		   	if(count >= count_professionals){
+				$('div#loadmore').hide();
+			}else{
+				$('div#loadmore').show();
+			}
 
 		});
 
@@ -163,7 +168,7 @@ $(document).ready(function(){
 });
 
 
-$(document).ready(function(){
+$(document).ready(function(){ //DIRECTORY FILTERS
 	$('select.counties').change(function(){
 
 		var urlParams;
@@ -192,7 +197,6 @@ $(document).ready(function(){
 		var county = $('select.counties option:selected').val();
 		var url= window.location.href; 
 		var new_url = url.substring(0, url.indexOf('?'));
-		var i= 0;
 		window.location.href = new_url+'?app_id='+app_id+'&county_id='+county;
 
 		/*$("div.prof-main-col").each(function(){
@@ -207,8 +211,276 @@ $(document).ready(function(){
 
 
 		//$('span.span-count-professionals').html(i);
+	});
+
+
+	$('select.select-price-rating').change(function(){
+
+		if($('select.select-price-rating option:selected').val() == 1){
+			var professionals = $('div.prof-main-col');
+			professionals.sort(function(a,b){
+				return $(a).data("price")-$(b).data("price")
+			});
+
+			$('div.prof-main-col').remove();
+
+			$(professionals).insertAfter('nav.navbar.navbar-default.directory-filters');
+
+			var count_professionals = $('.prof-main-col').length;
+			var count = 10;
+			$('.prof-main-col').hide();
+			$('.prof-main-col:lt(' + count + ')').show();
+
+			$('#showless').hide();
+			if(count >= count_professionals){
+				$('div#loadmore').hide();
+			}else{
+				$('div#loadmore').show();
+			}
+
+		}
+
+		if($('select.select-price-rating option:selected').val() == 2){
+			var professionals = $('div.prof-main-col');
+			professionals.sort(function(a,b){
+				return $(a).data("rating") < $(b).data("rating") ? 1 : -1;
+			});
+
+			$('div.prof-main-col').remove();
+
+			$(professionals).insertAfter('nav.navbar.navbar-default.directory-filters');
+
+			var count_professionals = $('.prof-main-col').length;
+			var count = 10;
+			$('.prof-main-col').hide();
+			$('.prof-main-col:lt(' + count + ')').show();
+
+			$('#showless').hide();
+			if(count >= count_professionals){
+				$('div#loadmore').hide();
+			}else{
+				$('div#loadmore').show();
+			}
+		}
+
 
 	});
+
+
+	$('select.select-rating').change(function(){
+		if($('select.select-rating option:selected').val() == 5){
+			var professionals = $('div.prof-main-col');
+			professionals.sort(function(a,b){
+				return $(a).data("rating") < $(b).data("rating") ? 1 : -1;
+			});
+
+			$('div.prof-main-col').remove();
+
+			$(professionals).insertAfter('nav.navbar.navbar-default.directory-filters');
+			var count_professionals = $('.prof-main-col').length;
+			var count=0;
+			
+			$("div.prof-main-col").each(function(){
+				if($(this).data("rating") >= 5){
+					$(this).show();
+					count++;
+				}
+			});
+			$('.prof-main-col').hide();
+			$('.prof-main-col:lt(' + count + ')').show();
+
+			$('#showless').hide();
+			if(count >= count_professionals){
+				$('div#loadmore').hide();
+			}else{
+				$('div#loadmore').show();
+			}
+		}
+
+
+		if($('select.select-rating option:selected').val() == 4.5){
+			var professionals = $('div.prof-main-col');
+			professionals.sort(function(a,b){
+				return $(a).data("rating") < $(b).data("rating") ? 1 : -1;
+			});
+
+			$('div.prof-main-col').remove();
+
+			$(professionals).insertAfter('nav.navbar.navbar-default.directory-filters');
+			var count_professionals = $('.prof-main-col').length;
+			var count=0;
+			
+			$("div.prof-main-col").each(function(){
+				if($(this).data("rating") >= 4.5){
+					$(this).show();
+					count++;
+				}
+			});
+			$('.prof-main-col').hide();
+			$('.prof-main-col:lt(' + count + ')').show();
+
+			$('#showless').hide();
+			if(count >= count_professionals){
+				$('div#loadmore').hide();
+			}else{
+				$('div#loadmore').show();
+			}
+		}
+
+		if($('select.select-rating option:selected').val() == 4){
+			var professionals = $('div.prof-main-col');
+			professionals.sort(function(a,b){
+				return $(a).data("rating") < $(b).data("rating") ? 1 : -1;
+			});
+
+			$('div.prof-main-col').remove();
+
+			$(professionals).insertAfter('nav.navbar.navbar-default.directory-filters');
+			var count_professionals = $('.prof-main-col').length;
+			var count=0;
+			
+			$("div.prof-main-col").each(function(){
+				if($(this).data("rating") >= 4){
+					$(this).show();
+					count++;
+				}
+			});
+			$('.prof-main-col').hide();
+			$('.prof-main-col:lt(' + count + ')').show();
+
+			$('#showless').hide();
+			if(count >= count_professionals){
+				$('div#loadmore').hide();
+			}else{
+				$('div#loadmore').show();
+			}
+		}
+
+	});
+
+	
+	$('select.select-total-ratings').change(function(){
+		if($('select.select-total-ratings option:selected').val() == 1){
+			var professionals = $('div.prof-main-col');
+			professionals.sort(function(a,b){
+				return $(a).data("reviews") < $(b).data("reviews") ? 1 : -1;
+			});
+
+			$('div.prof-main-col').remove();
+
+			$(professionals).insertAfter('nav.navbar.navbar-default.directory-filters');
+			var count_professionals = $('.prof-main-col').length;
+			var count=10;
+
+			$('.prof-main-col').hide();
+			$('.prof-main-col:lt(' + count + ')').show();
+
+			$('#showless').hide();
+			if(count >= count_professionals){
+				$('div#loadmore').hide();
+			}else{
+				$('div#loadmore').show();
+			}
+		}
+
+
+		if($('select.select-total-ratings option:selected').val() == 5){
+			var professionals = $('div.prof-main-col');
+			professionals.sort(function(a,b){
+				return $(a).data("reviews") < $(b).data("reviews") ? 1 : -1;
+			});
+
+			$('div.prof-main-col').remove();
+
+			$(professionals).insertAfter('nav.navbar.navbar-default.directory-filters');
+			var count_professionals = $('.prof-main-col').length;
+			var count=0;
+
+			$('.prof-main-col').hide();
+
+			$("div.prof-main-col").each(function(){
+				if($(this).data("reviews") >= 5){
+					$(this).show();
+					count++;
+				}else{
+					$(this).hide();
+				}
+			});
+			
+			$('#showless').hide();
+			if(count >= count_professionals){
+				$('div#loadmore').hide();
+			}else{
+				$('div#loadmore').show();
+			}
+		}
+
+		if($('select.select-total-ratings option:selected').val() == 10){
+			var professionals = $('div.prof-main-col');
+			professionals.sort(function(a,b){
+				return $(a).data("reviews") < $(b).data("reviews") ? 1 : -1;
+			});
+
+			$('div.prof-main-col').remove();
+
+			$(professionals).insertAfter('nav.navbar.navbar-default.directory-filters');
+			var count_professionals = $('.prof-main-col').length;
+			var count=0;
+
+			$('.prof-main-col').hide();
+
+			$("div.prof-main-col").each(function(){
+				if($(this).data("reviews") >= 10){
+					$(this).show();
+					count++;
+				}else{
+					$(this).hide();
+				}
+			});
+			
+			$('#showless').hide();
+			if(count >= count_professionals){
+				$('div#loadmore').hide();
+			}else{
+				$('div#loadmore').show();
+			}
+		}
+
+
+		if($('select.select-total-ratings option:selected').val() == 15){
+			var professionals = $('div.prof-main-col');
+			professionals.sort(function(a,b){
+				return $(a).data("reviews") < $(b).data("reviews") ? 1 : -1;
+			});
+
+			$('div.prof-main-col').remove();
+
+			$(professionals).insertAfter('nav.navbar.navbar-default.directory-filters');
+			var count_professionals = $('.prof-main-col').length;
+			var count=0;
+
+			$('.prof-main-col').hide();
+
+			$("div.prof-main-col").each(function(){
+				if($(this).data("reviews") >= 15){
+					$(this).show();
+					count++;
+				}else{
+					$(this).hide();
+				}
+			});
+			
+			$('#showless').hide();
+			if(count >= count_professionals){
+				$('div#loadmore').hide();
+			}else{
+				$('div#loadmore').show();
+			}
+		}
+
+	});
+
+
 });
 
 

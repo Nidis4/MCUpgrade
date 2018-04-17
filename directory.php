@@ -1,3 +1,9 @@
+<?php
+    function floordec($zahl,$decimals=1){   
+       return floor($zahl*pow(10,$decimals))/pow(10,$decimals);
+    }
+?>
+
 <?php 
 	include('header.php');
 	include('menu.php');
@@ -105,7 +111,7 @@
 				    <!-- Brand and toggle get grouped for better mobile display -->
 				   
 				    <!-- Collect the nav links, forms, and other content for toggling -->
-				    <div class="navbar-collapse style= collapse in" id="bs-megadropdown-tabs" style="padding-left: 0px;">
+				    <div class="navbar-collapse style= collapse in" id="bs-megadropdown-tabs">
 				        <ul class="nav navbar-nav filters-menu">
 
 				        	
@@ -119,37 +125,41 @@
 				                         
 				                          
 				                          <div class="tab-pane active" id="filters-area">
-				                          	<div class="col-md-3">
-				                          		<label>Νομός</label>
-				                                	<?php echo $select_counties; ?> <!-- front_end_config/core.php  -->
-				                          	</div>
+					                          	<div class="col-md-3">
+					                          		<label>Νομός</label>
+					                                	<?php echo $select_counties; ?> <!-- front_end_config/core.php  -->
+					                          	</div>
 
-				                          	<div class="col-md-3">
-				                          		<label>Τιμή ή βαθμολογία</label>
-				                          		<select>
-				                          			<option>χαμηλότερη → υψηλότερη τιμή</option>
-				                          			<option>υψηλότερη → χαμηλότερη αξιολόγηση</option>
-				                          		</select>
-				                          	</div>
+					                          	<div class="col-md-3">
+					                          		<label>Τιμή ή βαθμολογία</label>
+					                          		<select class="select-price-rating">
+					                          			<option value="0">Επιλογή ταξινόμησης</option>
+					                          			<option value="1">χαμηλότερη → υψηλότερη τιμή</option>
+					                          			<option value="2">υψηλότερη → χαμηλότερη αξιολόγηση</option>
+					                          		</select>
+					                          	</div>
 
-				                          	<div class="col-md-3">
-				                          		<label>Συνολική βαθμολογία</label>
-				                          		<select>
-				                          			<option>Τουλάχιστον 5/5 αστέρια</option>
-				                          			<option>Τουλάχιστον 4,5/5 αστέρια</option>
-				                          			<option>Τουλάχιστον 4/5 αστέρια</option>
-				                          		</select>
-				                          	</div>
+					                          	<div class="col-md-3">
+					                          		<label>Συνολική βαθμολογία</label>
+					                          		<select class="select-rating">
+					                          			<option value="0">Επιλογή ταξινόμησης</option>
+					                          			<option value="5">Τουλάχιστον 5/5 αστέρια</option>
+					                          			<option value="4.5">Τουλάχιστον 4,5/5 αστέρια</option>
+					                          			<option value="4">Τουλάχιστον 4/5 αστέρια</option>
+					                          		</select>
+					                          	</div>
 
-				                          	<div class="col-md-3">
-				                          		<label>Αριθμό αξιολογήσεων</label>
-				                          		<select>
-				                          			<option>Τουλάχιστον 5 αξιολογήσεις</option>
-				                          			<option>Τουλάχιστον 10 αξιολογήσεις</option>
-				                          			<option>Τουλάχιστον 15 αξιολογήσεις</option>
-				                          		</select>
-				                          	</div>
-				                          </div>
+					                          	<div class="col-md-3">
+					                          		<label>Αριθμό αξιολογήσεων</label>
+					                          		<select class="select-total-ratings">
+					                          			<option value="0">Επιλογή ταξινόμησης</option>
+					                          			<option value="1">Περισσότερες αξιολογήσεις</option>
+					                          			<option value="5">Τουλάχιστον 5 αξιολογήσεις</option>
+					                          			<option value="10">Τουλάχιστον 10 αξιολογήσεις</option>
+					                          			<option value="15">Τουλάχιστον 15 αξιολογήσεις</option>
+					                          		</select>
+					                          	</div>
+					                          </div>
 				                          
 				                        </div>
 				                    </div>
@@ -204,7 +214,7 @@
 						<div class="prof-main-col" data-county-num="<?php echo $professional_counties_num ?>" 
 							<?php foreach ($porfessional_counties as $key=>$counties) {
 									$county_ids= $counties['county_id']; // print county_ids for county filter
-									echo "data-county".$key."='$county_ids'"; }?> data-price="<?php echo $professional_price; ?>">
+									echo "data-county".$key."='$county_ids'"; }?> data-price="<?php echo $professional_price; ?>" data-reviews="<?php echo $professional_review['total']; ?>" data-rating="<?php if($professional_review['average_total'] == null){ echo '0'; }else echo $professional_review['average_total']; ?>"  >
 					  		<div class="col-md-3 col-sm-12 professional-img-con">
 					  			<div class="professional-img">
 					  				<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id . '&app_id=' . $application_id; ?>" >
@@ -257,15 +267,16 @@
 
 								<div class="professional-address-contact">
 									<div class="col-md-12 proffesionalDirectoryReviews">
+										<?php if($professional_review['total'] > 0){ ?>
 											<a target="_blank" class="directory-reviews-link" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id.'#proffessionalRiviews'; ?>">
 		                                        <div class="directoryStarsOuter">
 		                                            <div class="directoryEmptyBar">
-		                                                <?php $totalRevPercentage = number_format($professional_review['average_total']/5 *100 , 1);  ?>
-		                                                <div style="width:<?php echo $totalRevPercentage.'%;';?>"></div>
+		                                                <?php $totalRevPercentage = floordec($professional_review['average_total']/5 *100 , 1).'%;';  ?>
+		                                                <div style="width:<?php echo $totalRevPercentage;?>"></div>
 		                                            </div>
 		                                        </div>
 		                                        <div class="directory-rev-score"><span class="rating-num"><?php 
-		                                            	$totalRevScore = number_format($professional_review['average_total'], 1);
+		                                            	$totalRevScore = floordec($professional_review['average_total'], 1);
 			                                            if( $totalRevScore == 5.0 || $totalRevScore == 4.0){
 			                                                echo number_format($totalRevScore, -1);
 			                                            }else{
@@ -274,6 +285,9 @@
 		                                            ?></span>/5</div>
 		                                       	<div class="directory-total-score"><span class="total-jobs"><?php echo $professional_review['total']; ?></span> Αξιολογήσεις</div>
 		                                     </a>
+		                                <?php }else{
+		                                	echo '<div class="directory-rev-score">Δεν υπάρχουν αξιολογήσεις</div>';
+		                                } ?>
                                     </div>
 
 									<div class="price-box">
@@ -411,7 +425,7 @@
 				    <!-- Brand and toggle get grouped for better mobile display -->
 				   
 				    <!-- Collect the nav links, forms, and other content for toggling -->
-				    <div class="navbar-collapse style= collapse in" id="bs-megadropdown-tabs" style="padding-left: 0px;">
+				    <div class="navbar-collapse style= collapse in" id="bs-megadropdown-tabs" >
 				        <ul class="nav navbar-nav filters-menu">
 
 				        	
@@ -423,39 +437,38 @@
 				    				    <!-- Tab panes -->
 				                        <div class="tab-content">
 				                         
-				                          
-				                          <div class="tab-pane active" id="filters-area">
-				                          	<div class="col-md-3">
-				                          		<label>Νομός</label>
-				                                	<?php echo $select_counties; ?> <!-- front_end_config/core.php  -->
-				                          	</div>
+					                          <div class="tab-pane active" id="filters-area">
+					                          	<div class="col-md-3">
+					                          		<label>Νομός</label>
+					                                	<?php echo $select_counties; ?> <!-- front_end_config/core.php  -->
+					                          	</div>
 
-				                          	<div class="col-md-3">
-				                          		<label>Τιμή ή βαθμολογία</label>
-				                          		<select>
-				                          			<option>χαμηλότερη → υψηλότερη τιμή</option>
-				                          			<option>υψηλότερη → χαμηλότερη αξιολόγηση</option>
-				                          		</select>
-				                          	</div>
+					                          	<div class="col-md-3">
+					                          		<label>Τιμή ή βαθμολογία</label>
+					                          		<select class="select-price-rating">
+					                          			<option value="1">χαμηλότερη → υψηλότερη τιμή</option>
+					                          			<option vlaue="2">υψηλότερη → χαμηλότερη αξιολόγηση</option>
+					                          		</select>
+					                          	</div>
 
-				                          	<div class="col-md-3">
-				                          		<label>Συνολική βαθμολογία</label>
-				                          		<select>
-				                          			<option>Τουλάχιστον 5/5 αστέρια</option>
-				                          			<option>Τουλάχιστον 4,5/5 αστέρια</option>
-				                          			<option>Τουλάχιστον 4/5 αστέρια</option>
-				                          		</select>
-				                          	</div>
+					                          	<div class="col-md-3">
+					                          		<label>Συνολική βαθμολογία</label>
+					                          		<select class="select-rating">
+					                          			<option value="5">Τουλάχιστον 5/5 αστέρια</option>
+					                          			<option value="4.5">Τουλάχιστον 4,5/5 αστέρια</option>
+					                          			<option value="4">Τουλάχιστον 4/5 αστέρια</option>
+					                          		</select>
+					                          	</div>
 
-				                          	<div class="col-md-3">
-				                          		<label>Αριθμό αξιολογήσεων</label>
-				                          		<select>
-				                          			<option>Τουλάχιστον 5 αξιολογήσεις</option>
-				                          			<option>Τουλάχιστον 10 αξιολογήσεις</option>
-				                          			<option>Τουλάχιστον 15 αξιολογήσεις</option>
-				                          		</select>
-				                          	</div>
-				                          </div>
+					                          	<div class="col-md-3">
+					                          		<label>Αριθμό αξιολογήσεων</label>
+					                          		<select class="select-total-ratings">
+					                          			<option value="5">Τουλάχιστον 5 αξιολογήσεις</option>
+					                          			<option value="10">Τουλάχιστον 10 αξιολογήσεις</option>
+					                          			<option value="15">Τουλάχιστον 15 αξιολογήσεις</option>
+					                          		</select>
+					                          	</div>
+					                          </div>
 				                          
 				                        </div>
 				                    </div>
@@ -508,7 +521,7 @@
 					  <div class="prof-main-col" data-county-num="<?php echo $professional_counties_num ?>" 
 							<?php foreach ($porfessional_counties as $key=>$counties) {
 									$county_ids= $counties['county_id']; // print county_ids for county filter
-									echo "data-county".$key."='$county_ids'"; }?> >
+									echo "data-county".$key."='$county_ids'"; }?> data-price="<?php echo $professional_price; ?>" data-reviews="<?php echo $professional_review['total']; ?>" data-rating="<?php if($professional_review['average_total'] == null){ echo '0'; }else echo $professional_review['average_total']; ?>" >
 					  		<div class="col-md-3 col-sm-12 professional-img-con">
 					  			<div class="professional-img">
 					  				<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id. '&app_id='. $application_id; ?>" >
@@ -564,8 +577,8 @@
 										<a target="_blank" class="directory-reviews-link" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id.'#proffessionalRiviews'; ?>">
 		                                        <div class="directoryStarsOuter">
 		                                            <div class="directoryEmptyBar">
-		                                            	<?php $totalRevPercentage = number_format($professional_review['average_total']/5 *100 , 1);  ?>
-		                                                <div style="width:<?php echo $totalRevPercentage.'%;';?>"></div>
+		                                            	<?php $totalRevPercentage = floordec($professional_review['average_total']/5 *100 , 1).'%;';  ?>
+		                                                <div style="width:<?php echo $totalRevPercentage;?>"></div>
 		                                            </div>
 		                                        </div>
 		                                        <div class="directory-rev-score"><span class="rating-num"><?php 
