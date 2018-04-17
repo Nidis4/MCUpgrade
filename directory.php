@@ -189,8 +189,8 @@
 						if(isset($_GET['county_id'])){
 							$county_id= $_GET['county_id'];
 							foreach ($porfessional_counties as $counties ) {
-								if(intval($county_id) == intval($counties['county_id'])){
-									$professional_county = true; // print proffessionals with equal $_GET['county_id']
+								if(intval($county_id) == intval($counties['county_id']) || intval($county_id) == 53){
+									$professional_county = true; // print proffessionals with equal $_GET['county_id'] || if county_id greece is selected print all
 								}
 							}
 						}else{

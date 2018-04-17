@@ -57,27 +57,6 @@ include('config/core.php');
 				//echo $api_url.'webservices/api/appointment/read_paging.php';			
 			?>
 
-			<?php 
-				$date = date("Y-m-d");
-				
-				if(@$_GET['comdate']){
-					$date = $_GET['comdate'];
-				}
-
-				$commissions = file_get_contents($api_url.'webservices/api/appointment/commission.php?date='.$date);
-				$comision = json_decode($commissions, true); // decode the JSON into an associative array
-
-				if(@$comision['commision']){
-					$com = $comision['commision'];
-				}else{
-					$com = "0";
-				}
-				
-				
-
-
-			?>
-
 			<div class="inner-wrapper">
 				
 				<!-- Sidebar Position -->
@@ -115,31 +94,10 @@ include('config/core.php');
 							</header>
 							<div class="card-body">
 								<div class="row">
-									<div class="col-sm-4">
+									<div class="col-sm-6">
 										<div class="mb-3">
 											<a href='createAppointment.php'><button id="addToTable" class="btn btn-primary">Add <i class="fa fa-plus"></i></button></a>
 										</div>
-									</div>
-									<div class="col-sm-8" >
-										<form action="" method="get">
-											<div class="row">
-												<div class="col-sm-4">
-													<div class="input-group date" data-provide="datepicker">
-													    <input type="text" name="comdate" class="form-control" value="<?php echo $date;?>" placeholder='Date'>
-													    <div class="input-group-addon">
-													        <i class="fa fa-calendar"></i>
-													    </div>
-													</div>
-												</div>
-												<div class="col-sm-3">
-													<input type="text" class="form-control" readonly="" value="<?php echo $com;?>" placeholder="Commission">
-													
-												</div>
-												<div class="col-sm-2">
-													<input type="submit" name="comsubmit" class="btn btn-primary" value="Load">
-												</div>
-											</div>
-										</form>
 									</div>
 								</div>
 								<table class="table table-bordered table-striped mb-0" id="datatable-editable">
@@ -158,7 +116,6 @@ include('config/core.php');
 									</thead>
 									<tbody>
 										<?php
-
 										foreach ($appointmentsPag['records'] as $field => $value) {
 											$id = $appointmentsPag['records'][$field]['id'];
 											$submission_date = $appointmentsPag['records'][$field]['datetimeCreated'];
@@ -170,6 +127,8 @@ include('config/core.php');
 											$budget = $appointmentsPag['records'][$field]['budget'];
 											$commission = $appointmentsPag['records'][$field]['commision'];
 											$status = $appointmentsPag['records'][$field]['status'];
+											$viewed = $appointmentsPag['records'][$field]['viewed'];
+											$viewed_datetime = $appointmentsPag['records'][$field]['viewed_datetime'];
 											if ($status==0){
 												$statusLabel = "CN";
 											
@@ -229,6 +188,14 @@ include('config/core.php');
 												}
 
 												echo "<tr><td colspan='7'>Cancelled on: ".date("d/m/Y H:i:s",strtotime($appointmentsPag['records'][$field]['datetimeStatusUpdated']))." by Agent : ".$_SESSION['fullname'].", Type : ".$cancelreason.", Comments : ".$appointmentsPag['records'][$field]['cancelComment']."</td></tr>";
+											}
+											if($viewed == "Viewed"){
+												$ViewedDateTime=date_create($viewed_datetime);
+												$V_p_date =  date_format($ViewedDateTime,"H:i d/m");
+												echo "<tr><td colspan='7' style='color: green;'>Viewed ".$V_p_date."</td></tr>";
+											}
+											else{
+												echo "<tr><td colspan='7'>Not Viewed</td></tr>";
 											}
 											echo 	  '</tr>';
 										?>
@@ -433,7 +400,16 @@ include('config/core.php');
 		<script src="js/examples/examples.modals.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
-				//$("#datepicker").datepicker();
+				var memberid = '111';
+				$.ajax({
+					type: "GET",     
+					url: API_LOCATION + 'app/notification.php',
+					data: 'memberid='+memberid,
+					success: function (data) {
+					},
+					error: function(e) {
+					}
+				});
 			});
 		</script>
 	</body>
