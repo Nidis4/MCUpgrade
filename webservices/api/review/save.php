@@ -39,6 +39,27 @@ $stmt = $review->save($quality, $reliability, $cost, $schedule, $behaviour,$clea
  
 // check if more than 0 record found
 if($stmt){
+
+    if($quality == 5 && $reliability == 5 && $cost == 5 && $schedule == 5 && $behaviour == 5 && $cleanliness == 5){
+    		include_once '../objects/customer.php';
+    		include_once '../objects/viber.php';
+    		$customer = new Customer($db);
+    		$customer->id = $customer_id;
+    		$cdata = $customer->readOne();
+
+	    	// initialize object
+    		$customer_mobile = $customer->mobile;
+    		$customer_mobile = '6940589493';
+
+			$smsTexts = "Η άποψή σας είναι πολύτιμη, Αξιολογήστε μας στο google goo.gl/WRGed8 ή στο facebook goo.gl/ZqQRRC και κερδίστε αυτόματα έκπτωση 10€ για την επόμενη εργασία μέσω του myconstructor! ";
+
+			// Viber Connection			
+			$viber = new Viber($db);
+			
+			$viber->send($customer_mobile, $smsTexts);
+
+	}
+
  
     echo json_encode(
         array("message" => "Review added successfully.")
