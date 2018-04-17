@@ -51,7 +51,7 @@ if($stmt){
     		$customer_mobile = $customer->mobile;
     		$customer_mobile = '6940589493';
 
-			$smsTexts = "Η άποψή σας είναι πολύτιμη, Αξιολογήστε μας στο google goo.gl/WRGed8 ή στο facebook goo.gl/ZqQRRC και κερδίστε αυτόματα έκπτωση 10€ για την επόμενη εργασία μέσω του myconstructor! ";
+			$smsTexts = "Η άποψή σας είναι πολύτιμη, Αξιολογήστε μας στο <a href='http://goo.gl/WRGed8'>google</a>  ή στο <a href='http://goo.gl/ZqQRRC'>facebook</a> και κερδίστε αυτόματα έκπτωση 10€ για την επόμενη εργασία μέσω του myconstructor! ";
 
 			// Viber Connection			
 			$viber = new Viber($db);
