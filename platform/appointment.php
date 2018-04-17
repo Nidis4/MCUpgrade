@@ -83,6 +83,7 @@ include('config/core.php');
 					$activeStatusID = $statuses['id'];
 				}
 			?>
+
 			<div class="inner-wrapper">				
 				<!-- Sidebar Position -->
 				<?php
