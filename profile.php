@@ -50,6 +50,8 @@
                         }else{
                               exit(header("Location: index.php"));
                         }
+
+                        $totalRevPercentage = floordec($review_stats['average_total']/5 *100 , 1).'%;'; // total scrore for stars
                  ?>
 
 
@@ -67,14 +69,16 @@
                             <div class="col-md-3 profile-img">
                                 <div class="profile-img-inner">
                                     <img src="<?php echo 'img/professional-imgs/'.$image ?>" onerror="this.src='img/professional-imgs/default-img-4.jpg';" alt="" />
-                                    <div class="total-rating-num-outer"><span class="total-rating-num"><?php 
-                                            $totalRevScore = floordec($review_stats['average_total'], 1);
-                                            if( $totalRevScore == 5.0 || $totalRevScore == 4.0){
-                                                echo number_format($totalRevScore, -1);
-                                            }else{
-                                                echo $totalRevScore;
-                                            }
-                                             ?></span>/5</div>
+                                    <?php if(sizeof($reviews)>0){ ?>
+                                        <div class="total-rating-num-outer"><span class="total-rating-num"><?php 
+                                                $totalRevScore = floordec($review_stats['average_total'], 1);
+                                                if( $totalRevScore == 5.0 || $totalRevScore == 4.0){
+                                                    echo number_format($totalRevScore, -1);
+                                                }else{
+                                                    echo $totalRevScore;
+                                                }
+                                                 ?></span>/5</div>
+                                    <?php } ?>
                                 </div>
 
                                 
@@ -82,25 +86,27 @@
 
                             <div class="col-md-5">
                                 <h3 class="front-professional-name"><?php echo  $first_name . " " . $last_name; ?></h3>
-                                <a class="go-to-reviews" href="#proffessionalRiviews">
-                                    <div class="col-md-12 proffesionalTotalReviews">
-                                        <div class="starsouter">
-                                            <div class="empty-bar">
-                                                <div style="width:98%;"></div>
+                                <?php if(sizeof($reviews)>0){ ?>
+                                    <a class="go-to-reviews" href="#proffessionalRiviews">
+                                        <div class="col-md-12 proffesionalTotalReviews">
+                                            <div class="starsouter">
+                                                <div class="empty-bar">
+                                                    <div style="width:<?php echo $totalRevPercentage; ?>"></div>
+                                                </div>
                                             </div>
+                                            <div class="rev-score"><span class="rating-num">
+                                            <?php 
+                                                $totalRevScore = floordec($review_stats['average_total'], 1);
+                                                if( $totalRevScore == 5.0 || $totalRevScore == 4.0){
+                                                    echo number_format($totalRevScore, -1);
+                                                }else{
+                                                    echo $totalRevScore;
+                                                }
+                                                 ?></span>/5</div>
+                                            <div class="total-score"><span class="total-jobs"><?php echo $review_stats['total']; ?></span> Αξιολογήσεις</div>
                                         </div>
-                                        <div class="rev-score"><span class="rating-num">
-                                        <?php 
-                                            $totalRevScore = floordec($review_stats['average_total'], 1);
-                                            if( $totalRevScore == 5.0 || $totalRevScore == 4.0){
-                                                echo number_format($totalRevScore, -1);
-                                            }else{
-                                                echo $totalRevScore;
-                                            }
-                                             ?></span>/5</div>
-                                        <div class="total-score"><span class="total-jobs"><?php echo $review_stats['total']; ?></span> Αξιολογήσεις</div>
-                                    </div>
-                                </a>
+                                    </a>
+                                <?php } ?>
                                 <p class="front-professional-desc"><?php echo $service_area.', '.$city; ?>.</p>
                                 <p class="front-professional-oneline-desc"><?php echo $description; ?></p>
                                 <p class="front-proffesional-address"><i class="fa fa-map-marker"></i> <?php echo $address; ?></p>
@@ -141,8 +147,8 @@
                                             <a href="#professionalDetails"><li class="first active">Στοιχεία Επαγγελματία</li></a><!--
                                          --><a href="#services"><li>Υπηρεσίες</li></a><!--
                                          --><a href="#prices"><li>Τιμές</li></a><!--
-                                         --><a href="#proffessionalImages"><li>Εικόνες Επαγγελματία</li></a><!--
-                                         --><a href="#proffessionalRiviews"><li>Αξιολογήσεις</li></a>
+                                         --><?php if(sizeof($portfolio_photos) > 0){ ?><a href="#proffessionalImages"><li>Εικόνες Επαγγελματία</li></a><?php } ?><!--
+                                         --><?php if(sizeof($reviews)>0){ ?><a href="#proffessionalRiviews"><li>Αξιολογήσεις</li></a><?php } ?>
                                         </ul>
                                     </div>
                                 </div>
@@ -304,8 +310,9 @@
                             
                         </div>
                     </div>
-                <?php } ?>
-
+                <?php } 
+                if(sizeof($reviews)>0){
+                ?>
                     <div class="container container-reviews">
                         
 
@@ -331,7 +338,6 @@
                                                     <p>Σκορ από <span class="total-jobs"><?php echo $review_stats['total']; ?></span> αξιολογήσεις</p>
                                                 <div class="totalScore">
                                                     <div class="totalStars">
-                                                        <?php $totalRevPercentage = floordec($review_stats['average_total']/5 *100 , 1);  ?>
                                                         <div style="width: <?php  echo $totalRevPercentage.'%'; ?>"></div>
                                                     </div>
                                                 </div>
@@ -380,22 +386,21 @@
                                      </div>
                             </div>
 
-                            <?php foreach ($reviews as $review ) {
-                               $total = $review['quality'] + $review['reliability'] + $review['cost'] +$review['schedule'] + $review['behaviour'] + $review['cleaniness'];
-                               //$totalperReview = number_format($total/6 , 1);
-                               $totalperReview= floordec($total/6,1);
-                               $totalperReviewPercentage = floordec(($total/6)/5 *100 , 1).'%;';
-                               $format = 'Y-m-d H:i:s';
-                               $date= DateTime::createFromFormat($format, $review['created']);
-                               $comment= $review['comment'];
-                               $customer_name= $review['customer'];
+                            <?php 
+                                foreach ($reviews as $review ) {
+                                   $total = $review['quality'] + $review['reliability'] + $review['cost'] +$review['schedule'] + $review['behaviour'] + $review['cleaniness'];
+                                   //$totalperReview = number_format($total/6 , 1);
+                                   $totalperReview= floordec($total/6,1);
+                                   $totalperReviewPercentage = floordec(($total/6)/5 *100 , 1).'%;';
+                                   $format = 'Y-m-d H:i:s';
+                                   $date= DateTime::createFromFormat($format, $review['created']);
+                                   $comment= $review['comment'];
+                                   $customer_name= $review['customer'];
 
-                            ?>
+                                ?>
                             <div class="row row-profile-review">
                                     <div class="col-md-12 review-outer">
                                         <div class="col-review">
-                                            
-                                            
                                                 <div class="starsouter">
                                                     <div class="empty-bar">
                                                          <div style="width:<?php echo $totalperReviewPercentage; ?>"></div>
@@ -412,6 +417,7 @@
                             <?php } ?>
                             
                     </div>
+                <?php  } ?>
                 </div>
                 <script src="js/proffessional-profile.js"></script>
                 <link href="lightbox/dist/ekko-lightbox.css" rel="stylesheet">
