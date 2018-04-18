@@ -4,7 +4,9 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
  
 // home page url
-$home_url="http://upgrade.myconstructor.gr/webservices/api/";
+$home_url="https://upgrade.myconstructor.gr/webservices/api/";
+// home page url
+//$home_url="http://localhost/webservices/api/";
  
 // page given in URL parameter, default page is one
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
