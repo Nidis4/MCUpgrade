@@ -446,14 +446,16 @@
 					                          	<div class="col-md-3">
 					                          		<label>Τιμή ή βαθμολογία</label>
 					                          		<select class="select-price-rating">
+					                          			<option value="0">Επιλογή ταξινόμησης</option>
 					                          			<option value="1">χαμηλότερη → υψηλότερη τιμή</option>
-					                          			<option vlaue="2">υψηλότερη → χαμηλότερη αξιολόγηση</option>
+					                          			<option value="2">υψηλότερη → χαμηλότερη αξιολόγηση</option>
 					                          		</select>
 					                          	</div>
 
 					                          	<div class="col-md-3">
 					                          		<label>Συνολική βαθμολογία</label>
 					                          		<select class="select-rating">
+					                          			<option value="0">Επιλογή ταξινόμησης</option>
 					                          			<option value="5">Τουλάχιστον 5/5 αστέρια</option>
 					                          			<option value="4.5">Τουλάχιστον 4,5/5 αστέρια</option>
 					                          			<option value="4">Τουλάχιστον 4/5 αστέρια</option>
@@ -463,6 +465,8 @@
 					                          	<div class="col-md-3">
 					                          		<label>Αριθμό αξιολογήσεων</label>
 					                          		<select class="select-total-ratings">
+					                          			<option value="0">Επιλογή ταξινόμησης</option>
+					                          			<option value="1">Περισσότερες αξιολογήσεις</option>
 					                          			<option value="5">Τουλάχιστον 5 αξιολογήσεις</option>
 					                          			<option value="10">Τουλάχιστον 10 αξιολογήσεις</option>
 					                          			<option value="15">Τουλάχιστον 15 αξιολογήσεις</option>

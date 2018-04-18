@@ -59,14 +59,13 @@ function search(){
    
 
 $('input#mk-fullscreen-search-input').keyup(function() {
-  //alert('asd');
   if( this.value.length >= 2){
 
     delay(function(){
       //alert('Time elapsed!');
       
     var term = $('input#mk-fullscreen-search-input').val();
-    var getSearchAPI = API_LOCATION+'application/search.php';
+    var getSearchAPI ='https://upgrade.myconstructor.gr/MCUpgrade/webservices/api/application/search.php';
     $("#search-results").empty();
     //alert (term);
     //alert (getSearchAPI);
