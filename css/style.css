@@ -96,14 +96,6 @@ img{
   color: #fff!important;
 }
 
-.navbar-nav>li>a:hover{
-  color:#161616!important;
-  background-color:#FFDC39!important;
-}
-
-li.active.litel a:hover {
-    color: #161616!important;
-}
 
 .container.container-home-slider {
     width: 100%;
@@ -2255,9 +2247,7 @@ div#mk-fullscreen-search-wrapper {
 }
 
 @media screen and (max-width: 480px){
-  .search-btn-style span.search-text{
-    font-size:14px;
-  }
+  
 
   .mk-fullscreen-search-overlay #mk-fullscreen-search-wrapper #mk-fullscreen-searchform #mk-fullscreen-search-input{
         font-size: 20px;
@@ -2278,22 +2268,7 @@ div#mk-fullscreen-search-wrapper {
     padding-left: 0px;
   }
 
-  .search-btn-style{
-    border-right: 6px solid #FF5722;
-  }
-  .search-btn-style span.search-text{
-    padding-left: 6px;
-  }
-
-  .search-btn-style .icon-search i{
-    font-size: 17px;
-  }
-  .search-btn-style .icon-search{
-    background: #FF5722;
-    width: 32px;
-    padding-top: 11px;
-    padding-bottom: 11px;
-  }
+  
   .mk-fullscreen-search-overlay #mk-fullscreen-search-wrapper #mk-fullscreen-searchform #mk-fullscreen-search-input{
         font-size: 18px;
   }
