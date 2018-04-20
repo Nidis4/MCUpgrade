@@ -279,6 +279,27 @@
 			</div>
 		</div>
 	</div>
+	<div class="container-fluid mcr-social-container">
+	<div class="row">
+		<div class="col-md-12">
+			<h5 class="title-heading-center">MyConstructor.gr Is Getting Social..</h5>
+			<p>Learn more about work, craftsman & clients</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="div-mycon-social">
+				<ul class="mycon-social">
+					<li><img src="https://myconstructor.gr/blog/wp-content/uploads/2018/03/zougla_logo.png"></li>
+					<li><img src="https://myconstructor.gr/blog/wp-content/uploads/2018/03/dikaiologitika.png"></li>
+					<li><img src="https://myconstructor.gr/blog/wp-content/uploads/2018/03/newsbeasts.png"></li>
+					<li><img src="https://myconstructor.gr/blog/wp-content/uploads/2018/03/xe_logo.png"></li>
+					<li><img src="https://myconstructor.gr/blog/wp-content/uploads/2018/03/amna.jpg"></li>
+				</ul>
+  			</div>
+		</div>
+	</div>
+</div>
 
 	<footer>
 		<div class="container-fluid footer-container">

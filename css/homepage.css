@@ -708,6 +708,48 @@ a.a-btn-blog{
     max-width: 218px;
 }
 
+.container-fluid.mcr-social-container {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    background: #f9f9f9;
+}
+
+
+
+
+h5.title-heading-center {
+    text-align: center;
+    font-size: 30px;
+    font-family: dinrg;
+}
+
+.div-mycon-social {
+    margin: auto;
+    max-width: 991px;
+}
+
+ul.mycon-social {
+    max-width: 100%;
+    margin: 30px auto 30px auto;
+    list-style: none;
+}
+
+ul.mycon-social li {
+    display: inline-block;
+    margin-right: 28px;
+    margin-bottom: 20px;
+}
+
+.container-fluid.mcr-social-container p{
+    text-align: center;
+    color: #757575;
+    font-size: 20px;
+}
+
+ul.mycon-social li img {
+    vertical-align: top;
+    height: auto;
+}
 
 @media screen and (max-width: 1249px){
     .category-box-title h3{
