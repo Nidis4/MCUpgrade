@@ -1,9 +1,9 @@
 <div class="container searchbar-container">
 	<div class="row">
 			<div class="searchbar">
-				<div class="search-outer">
+				<div class="search-outer" onclick="search()">
 							<a class="mk-search-trigger mk-fullscreen-trigger" href="#" id="search-button-listener">
-								<div id="search-button" class="search-btn-style">
+								<div id="search-button" class="search-btn-style" >
 									<span class="search-text">Βρες την υπηρεσία που χρειάζεσαι... </span>
 									<div class="icon-search">
 										<div class="fa-outer">

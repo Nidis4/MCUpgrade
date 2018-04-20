@@ -2,7 +2,7 @@ $(document).ready(function(){
 	$('.skillbar').each(function(){
 		$(this).find('.skillbar-bar').animate({
 			width:$(this).attr('data-percent')
-		},6000);
+		},1000);
 	});
 });
 
@@ -54,6 +54,7 @@ var delay = (function(){
     timer = setTimeout(callback, ms);
   };
 })();
+
 function search(){
 
    
@@ -61,7 +62,7 @@ function search(){
 $('input#mk-fullscreen-search-input').keyup(function() {
   if( this.value.length >= 2){
 
-    delay(function(){
+   delay(function(){
       //alert('Time elapsed!');
       
     var term = $('input#mk-fullscreen-search-input').val();
@@ -100,7 +101,7 @@ $('input#mk-fullscreen-search-input').keyup(function() {
         });
 
 
-    }, 500 );
+    }, 200 );
   }
 
 });
