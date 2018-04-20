@@ -492,13 +492,11 @@ include('config/core.php');
 		
 		<!-- Theme Custom -->
 		<script src="<?php echo $home_url;?>js/core.js"></script>
-		<script type="text/javascript">
-			var HOME_LOCATION = '<?php echo $home_url;?>';
-		</script>
-		<script src="js/custom.js"></script>
-		<script src="js/searchAddress.js"></script>
+		
+		<script src="<?php echo $home_url;?>js/custom.js"></script>
+		<script src="<?php echo $home_url;?>js/searchAddress.js"></script>
 
-		  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOB9VUHID5_exudRHHduRUvCYOu--Lg0w&libraries=places&callback=initAutocomplete" async defer></script>
 
