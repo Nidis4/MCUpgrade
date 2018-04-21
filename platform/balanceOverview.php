@@ -55,7 +55,7 @@ include('config/core.php');
 				$fromdate = !empty($_GET['fromdate']) ? $_GET['fromdate'] : date('Y-m-01');
 				$todate = !empty($_GET['todate']) ? $_GET['todate'] : date('Y-m-d');
 
-				$balancecategories = file_get_contents($api_url.'webservices/api/balance/categories.php?fromdate='.$fromdate.'&todate='.$todate);
+				$balancecategories = file_get_contents($api_url.'balance/categories.php?fromdate='.$fromdate.'&todate='.$todate);
 				$catePag = json_decode($balancecategories, true); // decode the JSON into an associative array				
 			?>
 
@@ -156,7 +156,7 @@ include('config/core.php');
 						</section>
 					<!-- end: page -->
 					<?php
-						$balanceagents = file_get_contents($api_url.'webservices/api/balance/agents.php?fromdate='.$fromdate.'&todate='.$todate);
+						$balanceagents = file_get_contents($api_url.'balance/agents.php?fromdate='.$fromdate.'&todate='.$todate);
 						$agentPag = json_decode($balanceagents, true); // decode the JSON into an associative array	
 					?>
 					<!-- start: page -->

@@ -61,13 +61,13 @@ include('config/core.php');
 				}
 
 				include('header.php');
-				$job = file_get_contents($api_url.'webservices/api/job/read_one.php?id='.$id);
+				$job = file_get_contents($api_url.'job/read_one.php?id='.$id);
 				$job = json_decode($job, true); // decode the JSON into an associative array
 
 
 
 				// if(@$job['category_id']){
-				// 	$applications = file_get_contents($api_url.'webservices/api/application/readByCategory.php?cat_id='.$job['category_id']);
+				// 	$applications = file_get_contents($api_url.'application/readByCategory.php?cat_id='.$job['category_id']);
 				// 	$applications = json_decode($applications, true); // decode the JSON into an associative array
 
 				// 	$application_disable = "";
@@ -248,7 +248,7 @@ include('config/core.php');
 												<label class="col-sm-3 control-label text-sm-right pt-2">County</label>
 												<div class="col-sm-9">
 													<?php
-														$counties = file_get_contents($api_url.'webservices/api/county/read.php');
+														$counties = file_get_contents($api_url.'county/read.php');
 														$counties = json_decode($counties, true); // decode the JSON into an associative array
 													?>
 													<select data-plugin-selectTwo class="form-control populate" id="job_county" name="job_county">
@@ -272,7 +272,7 @@ include('config/core.php');
 												<label class="col-sm-3 control-label text-sm-right pt-2">Country</label>
 												<div class="col-sm-9">
 													<?php
-														$countries = file_get_contents($api_url.'webservices/api/country/read.php');
+														$countries = file_get_contents($api_url.'country/read.php');
 														$countries = json_decode($countries, true); // decode the JSON into an associative array
 													?>
 													<select data-plugin-selectTwo class="form-control populate" id="job_country" name="job_country">
@@ -315,13 +315,13 @@ include('config/core.php');
 																						
 											?>
 											<?php
-		                                    $questions = file_get_contents($api_url.'webservices/api/category/questions.php?catid='.$job['category_id']);
+		                                    $questions = file_get_contents($api_url.'category/questions.php?catid='.$job['category_id']);
 		                                    $questions = json_decode($questions, true); // decode the JSON into an associative array
 
 		                                    if(@$questions['records']){
 		                                        foreach ($questions['records'] as $qvalue) {
 		                                            
-		                                            $answers = file_get_contents($api_url.'webservices/api/category/answers.php?questionid='.$qvalue['id']);
+		                                            $answers = file_get_contents($api_url.'category/answers.php?questionid='.$qvalue['id']);
 		                                            $answers = json_decode($answers, true); // decode the JSON into an associative array
 
 		                                            if(in_array($qvalue['id'], array_keys($jobquestionsans))){

@@ -61,10 +61,10 @@ include('config/core.php');
 				}
 				include('header.php');
 
-				$customer = file_get_contents($api_url.'webservices/api/customer/read_one.php?id='.$id);
+				$customer = file_get_contents($api_url.'customer/read_one.php?id='.$id);
 				$customer = json_decode($customer, true); // decode the JSON into an associative array	
 
-				$appointments = file_get_contents($api_url.'webservices/api/appointment/read_paging.php?cust_id='.$id);
+				$appointments = file_get_contents($api_url.'appointment/read_paging.php?cust_id='.$id);
 				$appointmentsPag = json_decode($appointments, true); // decode the JSON into an associative array			
 			?>
 

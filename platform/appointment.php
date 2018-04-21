@@ -61,11 +61,11 @@ include('config/core.php');
 				}
 
 				include('header.php');
-				$appointment = file_get_contents($api_url.'webservices/api/appointment/read_one.php?id='.$id);
+				$appointment = file_get_contents($api_url.'appointment/read_one.php?id='.$id);
 				$appointment = json_decode($appointment, true); // decode the JSON into an associative array
 
 				if(@$appointment['category_id']){
-					$applications = file_get_contents($api_url.'webservices/api/application/readByCategory.php?cat_id='.$appointment['category_id']);
+					$applications = file_get_contents($api_url.'application/readByCategory.php?cat_id='.$appointment['category_id']);
 					$applications = json_decode($applications, true); // decode the JSON into an associative array
 
 					$application_disable = "";
@@ -77,7 +77,7 @@ include('config/core.php');
 
 				if ($appointment['status']!=''){
 					//echo "----".$api_url.'webservices/api/appointment/getStatusInfo.php?id='.$appointment['status']."---";
-					$statuses = file_get_contents($api_url.'webservices/api/appointment/getStatusInfo.php?id='.$appointment['status']);
+					$statuses = file_get_contents($api_url.'appointment/getStatusInfo.php?id='.$appointment['status']);
 					$statuses = json_decode($statuses, true); // decode the JSON into an associative array
 					$activeStatusName = $statuses['name'];
 					$activeStatusID = $statuses['id'];
@@ -169,7 +169,7 @@ include('config/core.php');
 											<label class="col-lg-3 control-label text-lg-right pt-2">Category</label>
 											<div class="col-lg-6">
 												<?php
-													$categories = file_get_contents($api_url.'webservices/api/category/read.php');
+													$categories = file_get_contents($api_url.'category/read.php');
 													$categories = json_decode($categories, true); // decode the JSON into an associative array
 												?>
 												<select data-plugin-selectTwo class="form-control populate" name="category" id="category">
@@ -231,7 +231,7 @@ include('config/core.php');
 											<label class="col-sm-3 control-label text-sm-right pt-2">County <span class="required">*</span></label>
 											<div class="col-sm-9">
 												<?php
-													$counties = file_get_contents($api_url.'webservices/api/county/read.php');
+													$counties = file_get_contents($api_url.'county/read.php');
 													$counties = json_decode($counties, true); // decode the JSON into an associative array
 												?>
 												<select data-plugin-selectTwo class="form-control populate" id="county">

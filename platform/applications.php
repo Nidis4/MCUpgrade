@@ -51,7 +51,7 @@ include('config/core.php');
 
 			<?php
 				include('header.php');
-				$appointments = file_get_contents($api_url.'webservices/api/appointment/read_paging.php');
+				$appointments = file_get_contents($api_url.'appointment/read_paging.php');
 
 				$appointmentsPag = json_decode($appointments, true); // decode the JSON into an associative array	
 				//echo $api_url.'webservices/api/appointment/read_paging.php';			
@@ -90,7 +90,7 @@ include('config/core.php');
 
 							<div class="accordion" id="accordion">
 								<?php
-									$applications = file_get_contents($api_url.'webservices/api/application/read.php');
+									$applications = file_get_contents($api_url.'application/read.php');
 									$applicationsPag = json_decode($applications, true); // decode the JSON into an associative array
 
 									foreach ($applicationsPag['records'] as $field => $value) {

@@ -51,7 +51,7 @@ include('config/core.php');
 
 			<?php
 				include('header.php');
-				$appointments = file_get_contents($api_url.'webservices/api/appointment/read_paging.php');
+				$appointments = file_get_contents($api_url.'appointment/read_paging.php');
 
 				$appointmentsPag = json_decode($appointments, true); // decode the JSON into an associative array	
 				//echo $api_url.'webservices/api/appointment/read_paging.php';			
@@ -64,7 +64,7 @@ include('config/core.php');
 					$date = $_GET['comdate'];
 				}
 
-				$commissions = file_get_contents($api_url.'webservices/api/appointment/commission.php?date='.$date);
+				$commissions = file_get_contents($api_url.'appointment/commission.php?date='.$date);
 				$comision = json_decode($commissions, true); // decode the JSON into an associative array
 
 				if(@$comision['commision']){

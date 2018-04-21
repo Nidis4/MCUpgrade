@@ -121,7 +121,7 @@ include('config/core.php');
 														  <td>'.$comment.'</td>
 														  <td>'.$amount.'</td>
 														  <td class="actions">
-															<a href="'.$api_url.'webservices/api/payment/invoice_receipt_pdf.php?payment_id='.$payment_id.'" class="btn btn-danger" style="color:#ffffff;"><i class="fa fa-file-pdf-o"></i></a>
+															<a href="'.$api_url.'payment/invoice_receipt_pdf.php?payment_id='.$payment_id.'" class="btn btn-danger" style="color:#ffffff;"><i class="fa fa-file-pdf-o"></i></a>
 														  </td></tr>';
 										?>
 										

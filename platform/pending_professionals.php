@@ -50,7 +50,7 @@ include('config/core.php');
 
 			<?php
 				include('header.php');
-				$professionals = file_get_contents($api_url.'webservices/api/professional/read_paging.php?verified=0');
+				$professionals = file_get_contents($api_url.'professional/read_paging.php?verified=0');
 				$professionalsPag = json_decode($professionals, true); // decode the JSON into an associative array				
 			?>
 

@@ -54,7 +54,7 @@ include('config/core.php');
 
 				$fromdate = !empty($_GET['fromdate']) ? $_GET['fromdate'] : date('Y-m-01');
 				$todate = !empty($_GET['todate']) ? $_GET['todate'] : date('Y-m-d');
-				$balancePayments = file_get_contents($api_url.'webservices/api/balance/payments.php?fromdate='.$fromdate.'&todate='.$todate);
+				$balancePayments = file_get_contents($api_url.'balance/payments.php?fromdate='.$fromdate.'&todate='.$todate);
 				$balancePag = json_decode($balancePayments, true); // decode the JSON into an associative array				
 			?>
 

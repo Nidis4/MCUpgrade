@@ -62,10 +62,10 @@ include('config/core.php');
 				}
 				include('header.php');
 				
-				$professional = file_get_contents($api_url.'webservices/api/professional/read_one.php?id='.$id);
+				$professional = file_get_contents($api_url.'professional/read_one.php?id='.$id);
 				$professional = json_decode($professional, true); // decode the JSON into an associative array	
 
-				$applications = file_get_contents($api_url.'webservices/api/professional/getApplications.php?id='.$id);
+				$applications = file_get_contents($api_url.'professional/getApplications.php?id='.$id);
 				$applications = json_decode($applications, true);	
 				
 
@@ -452,7 +452,7 @@ include('config/core.php');
 											</div>
 											<div class="form-group col-md-12 row">
 												<?php
-														$categories = file_get_contents($api_url.'webservices/api/category/read.php');
+														$categories = file_get_contents($api_url.'category/read.php');
 														$categories = json_decode($categories, true); // decode the JSON into an associative array
 														if(@$professional['categories']){
 															foreach ($professional['categories'] as $cvalue) {
@@ -495,7 +495,7 @@ include('config/core.php');
 											</div>
 											<div class="form-group col-md-12 row">
 												<?php
-													$counties = file_get_contents($api_url.'webservices/api/county/read.php');
+													$counties = file_get_contents($api_url.'county/read.php');
 													$counties = json_decode($counties, true); // decode the JSON into an associative array
 
 												?>
@@ -748,10 +748,10 @@ include('config/core.php');
 									</thead>
 									<tbody>
 										<?php
-										//$appointments = file_get_contents($api_url.'webservices/api/appointment/read_paging.php?prof_id='.$id);
+										//$appointments = file_get_contents($api_url.'appointment/read_paging.php?prof_id='.$id);
 										//$appointmentsPag = json_decode($appointments, true); // decode the JSON into an associative array
 
-										$payments = file_get_contents($api_url.'webservices/api/payment/paymentByProf.php?prof_id='.$id);
+										$payments = file_get_contents($api_url.'payment/paymentByProf.php?prof_id='.$id);
 										$paymentsPag = json_decode($payments, true); // decode the JSON into an associative array
 										
 										if(@$paymentsPag['message'] && ($paymentsPag['message'] == "No Payments found.")){
@@ -1073,7 +1073,7 @@ include('config/core.php');
 									</thead>
 									<tbody>
 										<?php
-											$statistics = file_get_contents($api_url.'webservices/api/professional/statistics.php?id='.$id);
+											$statistics = file_get_contents($api_url.'professional/statistics.php?id='.$id);
 											$statisticsPag = json_decode($statistics, true); // decode the JSON into an associative array
 										?>
 										<tr>

@@ -52,7 +52,7 @@ include('config/core.php');
 
 			<?php
 				include('header.php');
-				$appointments = file_get_contents($api_url.'webservices/api/appointment/read_paging.php?agent_id='.$_SESSION['id']);
+				$appointments = file_get_contents($api_url.'appointment/read_paging.php?agent_id='.$_SESSION['id']);
 				$appointmentsPag = json_decode($appointments, true); // decode the JSON into an associative array				
 			?>
 

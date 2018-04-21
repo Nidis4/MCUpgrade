@@ -50,7 +50,7 @@ include('config/core.php');
 
 			<?php
 				include('header.php');
-				$customers = file_get_contents($api_url.'webservices/api/customer/read_paging.php');
+				$customers = file_get_contents($api_url.'customer/read_paging.php');
 				$customersPag = json_decode($customers, true); // decode the JSON into an associative array				
 			?>
 

@@ -50,7 +50,7 @@ include('config/core.php');
 
 			<?php
 				include('header.php');
-				$jobs = file_get_contents($api_url.'webservices/api/job/read_paging.php');
+				$jobs = file_get_contents($api_url.'job/read_paging.php');
 				$jobsPag = json_decode($jobs, true); // decode the JSON into an associative array
 
 
