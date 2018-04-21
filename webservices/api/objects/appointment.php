@@ -285,7 +285,7 @@ class Appointment{
 
         // select query
         $query = "SELECT
-                    a.`id`, a.`prof_member_id`, a.`cust_member_id`, a.`application_id`, a.`date`, a.`time`, a.`address`, a.`budget`, a.`commision`, a.`agent_id`, a.`comment`, a.`sms`, a.`sms_log_id`,  a.`datetimeCreated`, a.`datetimeStatusUpdated`, a.`sourceAppointmentId`, a.`status`, a.`cancelReason`, a.`cancelComment`, ap.`category_id` 
+                    a.`id`, a.`prof_member_id`, a.`cust_member_id`, a.`application_id`, a.`date`, a.`time`, a.`address`, a.`budget`, a.`commision`, a.`agent_id`, a.`comment`, a.`sms`, a.`sms_log_id`,  a.`datetimeCreated`, a.`datetimeStatusUpdated`, a.`sourceAppointmentId`, a.`status`, a.`cancelReason`, a.`cancelComment`,  a.`viewed`,  a.`viewed_datetime`, ap.`category_id` 
                 FROM " . $this->table_name . " a 
                 JOIN ". $this->application_table_name." ap ON a.application_id = ap.id
                 WHERE a.`prof_member_id`= ? AND a.`status`=1 AND a.`date` >= '".date('Y-m-d')."' ORDER BY a.`date`, a.`time`
@@ -311,7 +311,7 @@ class Appointment{
      
         // select query
         $query = "SELECT
-                    a.`id`, a.`prof_member_id`, a.`cust_member_id`, ap.`category_id`, a.`application_id`, a.`date`, a.`time`, a.`address`, a.`budget`, a.`commision`, a.`agent_id`, a.`comment`, a.`sms`, a.`sms_log_id`, a.`datetimeCreated`, a.`datetimeStatusUpdated`, a.`sourceAppointmentId`, a.`status`, a.`cancelReason`, a.`cancelComment`
+                    a.`id`, a.`prof_member_id`, a.`cust_member_id`, ap.`category_id`, a.`application_id`, a.`date`, a.`time`, a.`address`, a.`budget`, a.`commision`, a.`agent_id`, a.`comment`, a.`sms`, a.`sms_log_id`, a.`datetimeCreated`, a.`datetimeStatusUpdated`, a.`sourceAppointmentId`, a.`status`, a.`cancelReason`, a.`cancelComment`, a.`viewed`, a.`viewed_datetime`
                 FROM
                     " . $this->table_name . " a 
                     LEFT JOIN ". $this->application_table_name." ap
