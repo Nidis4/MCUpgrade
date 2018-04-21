@@ -234,7 +234,7 @@ class Appointment{
      
         // select query
         $query = "SELECT
-                    `id`, `prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelReason`, `cancelComment`
+                    `id`, `prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelReason`, `cancelComment`, `viewed`, `viewed_datetime`
                 FROM
                     " . $this->table_name . " WHERE `cust_member_id`= ? AND (`status`=1 OR `status`=0)
                 ORDER BY `datetimeCreated` DESC
@@ -260,7 +260,7 @@ class Appointment{
      
         // select query
         $query = "SELECT
-                    `id`, `prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`,  `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelReason`, `cancelComment`
+                    `id`, `prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`,  `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelReason`, `cancelComment`, `viewed`, `viewed_datetime`
                 FROM
                     " . $this->table_name . " WHERE `prof_member_id`= ? AND (`status`=1 OR `status`=0)
                 ORDER BY `datetimeCreated` DESC
