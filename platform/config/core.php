@@ -9,4 +9,6 @@ $api_url  = API_URL;
 //$home_url="http://localhost/";
 //$api_url ="http://localhost/";
 
+$platform_url = $home_url.'platform/';
+
 ?>
