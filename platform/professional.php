@@ -67,9 +67,29 @@ include('config/core.php');
 
 				$applications = file_get_contents($api_url.'professional/getApplications.php?id='.$id);
 				$applications = json_decode($applications, true);	
+
+
+				$categories = file_get_contents($api_url.'category/read.php');
+				$categories = json_decode($categories, true); // decode the JSON into an associative array
+				if(@$professional['categories']){
+					foreach ($professional['categories'] as $cvalue) {
+						$cids[] = $cvalue['category_id'];
+					}
+				}else{
+					$cids = array();
+				}
+
+				if(@$professional['counties']){
+					foreach ($professional['counties'] as $cvalue) {
+						$ctids[] = $cvalue['county_id'];
+					}
+				}else{
+					$ctids = array();
+				}
 				
 
 			?>
+
 
 			<div class="inner-wrapper">
 				
@@ -194,7 +214,35 @@ include('config/core.php');
 										<div class="form-group col-md-12 row">
 											<label class="col-lg-4 control-label text-lg-right pt-2">Default SMS</label>
 											<div class="col-lg-1"><input type="checkbox" class="form-control" name="defaultsms" id="defaultsms" value="1" <?php if(@$professional['defaultsms']){ echo "checked='checked'";}?> ></div>
-										</div>								
+										</div>	
+
+										<?php 
+											// For transport category
+											if(in_array('103', $cids)){
+										?>
+											<div class="form-group col-md-12 row">
+												<label class="col-lg-4 control-label text-lg-right pt-2">Truck Dimensions in meters</label>	
+												<div class="col-lg-8" style="padding-left: 0;">
+													<div class="col-lg-4" style="padding-right: 0; float: left;">
+														<input type="text" name="truckdimension['width']" value="<?php //echo $professional['truckdimension']['width']; ?>" class="form-control" placeholder="Width">
+													</div>
+													<div class="col-lg-4" style="padding-right: 0; float: left;">
+														<input type="text" name="truckdimension['length']"  value="<?php //echo $professional['truckdimension']['length']; ?>"" class="form-control" placeholder="Length">
+													</div>
+													<div class="col-lg-4" style="padding-right: 0; float: left;" >
+														<input type="text" name="truckdimension['height']" value="<?php //echo $professional['truckdimension']['height']; ?>"" class="form-control" placeholder="Height">
+													</div>
+												</div>
+											</div>
+											<div class="form-group col-md-12 row">
+												<label class="col-lg-4 control-label text-lg-right pt-2">Hydraulic Door</label>
+												<div class="col-lg-1"><input type="checkbox" class="form-control" name="truckdimension['door']" id="door" value="1" <?php if(@$professional['truckdimension']['door']){ echo "checked='checked'";}?> ></div>
+											</div>	
+										<?php		
+											}
+										?>
+
+
 									</div>
 									<div class="col-sm-12 col-md-7"><!-- Right-->
 										<div class="form-group row">								
@@ -451,28 +499,7 @@ include('config/core.php');
 												</div>
 											</div>
 											<div class="form-group col-md-12 row">
-												<?php
-														$categories = file_get_contents($api_url.'category/read.php');
-														$categories = json_decode($categories, true); // decode the JSON into an associative array
-														if(@$professional['categories']){
-															foreach ($professional['categories'] as $cvalue) {
-																$cids[] = $cvalue['category_id'];
-															}
-														}else{
-															$cids = array();
-														}
-
-														if(@$professional['counties']){
-															foreach ($professional['counties'] as $cvalue) {
-																$ctids[] = $cvalue['county_id'];
-															}
-														}else{
-															$ctids = array();
-														}
-
-														
-														
-													?>
+												
 												<label class="col-lg-3 control-label text-lg-right pt-2">Select Trades</label>
 												<div class="col-lg-8 pt-2"> 
 													<select multiple data-plugin-selectTwo class="form-control populate" id="profile_categories" name="profile_categories[]">
