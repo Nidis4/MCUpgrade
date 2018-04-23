@@ -64,12 +64,27 @@
                                                 <label class="col-lg-5 control-label"><?php echo $qvalue['question'];?></label>
                                                 <div class="col-lg-7">
                                                     <?php
-                                                        if(@$answers){
+                                                        if(@$answers && ($qvalue['option'] == 2)){
                                                             foreach ($answers as $avalue) {
                                                     ?>
                                                                <div class="col-lg-4">
                                                                     <label class="pt-3">
                                                                         <input class="" type="radio" name="job_question[<?php echo $qvalue['id'];?>]" value="<?php echo $avalue['id'];?>" id="">
+                                                                        <?php echo $avalue['answer'];?>
+                                                                    </label>
+                                                                </div> 
+                                                    <?php   
+                                                            }
+                                                        }elseif($qvalue['option'] == 1){
+                                                    ?>
+                                                            <input name="job_question[<?php echo $qvalue['id'];?>]" value="" class="form-control" id="" type="text">
+                                                    <?php        
+                                                        }else if(@$answers && ($qvalue['option'] == 4)){
+                                                            foreach ($answers as $avalue) {
+                                                    ?>
+                                                               <div class="col-lg-4">
+                                                                    <label class="pt-3">
+                                                                        <input class="" type="checkbox" name="job_question[<?php echo $qvalue['id'];?>][]" value="<?php echo $avalue['id'];?>" id="">
                                                                         <?php echo $avalue['answer'];?>
                                                                     </label>
                                                                 </div> 
