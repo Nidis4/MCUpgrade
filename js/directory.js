@@ -511,32 +511,46 @@ $(document).ready(function(){
 
 	if (typeof cat_id === "undefined") {
 	   cat_id=126;
-	   var div_menu = $('#MainMenu').find('div#'+cat_id).prop('outerHTML');
-	   var a_menu = $('#MainMenu').find('[href$="#'+cat_id+'"]').prop('outerHTML');
+	   /*var div_menu = $('#MainMenu').find('div#'+cat_id).prop('outerHTML');
+	   var a_menu = $('#MainMenu').find('[href$="#'+cat_id+'"]').prop('outerHTML');*/
+
+	   var a_cat_text = $('#MainMenu').find('[href$="#'+cat_id+'"]').text();
+	   var a_cat_apps = $('#MainMenu').find('div#'+cat_id).html();
 
 	   $('#MainMenu').find('[href$="#'+cat_id+'"]').remove();
 	   $('#MainMenu').find('div#'+cat_id).remove();
 
-	   var top_menu = a_menu + div_menu;
+	  /* var top_menu = a_menu + div_menu;
 
 	   $('#MainMenu div.list-group').prepend(top_menu);
 	   $('#MainMenu').find('div#'+cat_id).addClass('in');
+
+	   $('.menu-cat-selected .selected-cat-apps').append(top_menu);*/
+	   $('span.span_selected_cat_title').append(a_cat_text);
+ 	   $('.selected-cat-apps').append(a_cat_apps);
 
 	}else{
 
-	   var div_menu = $('#MainMenu').find('div#'+cat_id).prop('outerHTML');
-	   var a_menu = $('#MainMenu').find('[href$="#'+cat_id+'"]').prop('outerHTML');
+	   /*var div_menu = $('#MainMenu').find('div#'+cat_id).prop('outerHTML');
+	   var a_menu = $('#MainMenu').find('[href$="#'+cat_id+'"]').prop('outerHTML');*/
+	   
+	   var a_cat_text = $('#MainMenu').find('[href$="#'+cat_id+'"]').text();
+	   var a_cat_apps = $('#MainMenu').find('div#'+cat_id).html();
 
 	   $('#MainMenu').find('[href$="#'+cat_id+'"]').remove();
 	   $('#MainMenu').find('div#'+cat_id).remove();
 
-	   var top_menu = a_menu + div_menu;
+	   /*var top_menu = a_menu + div_menu;
 
 	   $('#MainMenu div.list-group').prepend(top_menu);
 
 	   $('#MainMenu').find('div#'+cat_id).addClass('in');
-	   $('#MainMenu').find('[href$="#'+cat_id+'"]').addClass('selected-cat');
- 
+	   $('#MainMenu').find('[href$="#'+cat_id+'"]').addClass('selected-cat');*/
+ 		
+ 	   //$('.menu-cat-selected .selected-cat-apps') 	
+
+ 	   $('span.span_selected_cat_title').append(a_cat_text);
+ 	   $('.selected-cat-apps').append(a_cat_apps);
 	}
 	
 });

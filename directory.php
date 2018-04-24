@@ -14,39 +14,51 @@
 <div class="container-fluid">
 
 	<div class="row row-directory">
-		<div class="col-md-3">
-			<div class="title-catelog">Κατηγορίες</div>
-			<div id="MainMenu">
-			        <div class="list-group panel">
-				        <?php    
-				        	$categories = file_get_contents($api_url .'webservices/api/category/read.php');
-              				$categories = json_decode($categories, true); // decode the JSON into an associative array
+		<div class="col-md-3 col-md-sub-cats">
+			<div class="menu-cat-selected">
+				<div class="menu-cat-selected-title"><span class="span_selected_cat_title"></span></div>
+				<p style="
+    font-size: 16px;
+    font-family: dinmd;
+">Υπηρεσίες σε Προσφορά:</p>
+				<div class="selected-cat-apps">
+					
+				</div>
+			</div>
+			<div class="col-md-sub-cats-inner">
+				<div class="title-catelog">Κατηγορίες</div>
+				<div id="MainMenu">
+				        <div class="list-group panel">
+					        <?php    
+					        	$categories = file_get_contents($api_url .'webservices/api/category/read.php');
+	              				$categories = json_decode($categories, true); // decode the JSON into an associative array
 
 
-	              				foreach ($categories as $category) {
-	              					if (!empty($category['applications'])){
-								            $cat_id = $category['id'];
-								            $cat_title = $category['title_greek'];
-								           	$apps = $category['applications'];
+		              				foreach ($categories as $category) {
+		              					if (!empty($category['applications'])){
+									            $cat_id = $category['id'];
+									            $cat_title = $category['title_greek'];
+									           	$apps = $category['applications'];
 
-						?>
-						<a href="#<?php echo $cat_id; ?>" class="list-group-item main-cat collapsed" data-toggle="collapse" data-parent="#MainMenu" aria-expanded="false"><?php echo $cat_title; ?>  <i class="fa fa-caret-down"></i></a> <!-- Sidebar Categories names --> 
+							?>
+							<a href="#<?php echo $cat_id; ?>" class="list-group-item main-cat collapsed" data-toggle="collapse" data-parent="#MainMenu" aria-expanded="false"><?php echo $cat_title; ?>  <i class="fa fa-caret-down"></i></a> <!-- Sidebar Categories names --> 
 
-						<div class="collapse" id="<?php echo $cat_id; ?>" aria-expanded="false" >
-							<?php 
-										foreach ($apps as $app ) {
-										    $app_id = $app['id'];
-										    $app_title = $app['title_greek'];
-							?>	
-											<a href="<?php echo $directory_url . '?cat_id=' . $cat_id . '&app_id=' . $app_id  ?>" class="list-group-item"><?php echo $app_title; ?></a>
-								 <?php  } ?>
-						</div>
-							<?php
+							<div class="collapse" id="<?php echo $cat_id; ?>" aria-expanded="false" >
+								<?php 
+											foreach ($apps as $app ) {
+											    $app_id = $app['id'];
+											    $app_title = $app['title_greek'];
+								?>	
+												<a href="<?php echo $directory_url . '?cat_id=' . $cat_id . '&app_id=' . $app_id  ?>" class="list-group-item"><?php echo $app_title; ?></a>
+									 <?php  } ?>
+							</div>
+								<?php
 
-								     }
-			              		}
-		              		?>
-		            </div>          
+									     }
+				              		}
+			              		?>
+			            </div>          
+				</div>
 			</div>
       	</div>	
 
@@ -210,62 +222,117 @@
 						
 				?>
 				<?php if($professional_county){ ?>
-
+						
 						<div class="prof-main-col" data-county-num="<?php echo $professional_counties_num ?>" 
-							<?php foreach ($porfessional_counties as $key=>$counties) {
-									$county_ids= $counties['county_id']; // print county_ids for county filter
-									echo "data-county".$key."='$county_ids'"; }?> data-price="<?php echo $professional_price; ?>" data-reviews="<?php echo $professional_review['total']; ?>" data-rating="<?php if($professional_review['average_total'] == null){ echo '0'; }else echo $professional_review['average_total']; ?>"  >
-					  		<div class="col-md-3 col-sm-12 professional-img-con">
-					  			<div class="professional-img">
-					  				<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id . '&app_id=' . $application_id; ?>" >
-					  					<img src="<?php echo 'img/professional-imgs/'.$profile_img ?>" onerror="this.src='img/professional-imgs/default-img-4.jpg';" alt="" />
-					  					
-					  				</a>
-					  			</div>
-					  		</div>
+								<?php foreach ($porfessional_counties as $key=>$counties) {
+										$county_ids= $counties['county_id']; // print county_ids for county filter
+										echo "data-county".$key."='$county_ids'"; }?> data-price="<?php echo $professional_price; ?>" data-reviews="<?php echo $professional_review['total']; ?>" data-rating="<?php if($professional_review['average_total'] == null){ echo '0'; }else echo $professional_review['average_total']; ?>"  >
+						<div class="row row-prof-main-col-inner">
+						  		<div class="col-md-3 col-sm-3 professional-img-con">
+						  			<div class="professional-img">
+						  				<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id . '&app_id=' . $application_id; ?>" >
+						  					<img src="<?php echo 'img/professional-imgs/'.$profile_img ?>" onerror="this.src='img/professional-imgs/default-img-4.jpg';" alt="" />
+						  					
+						  				</a>
+						  			</div>
+						  		</div>
 
-					  		<div class="col-md-9 col-sm-12 professional-details-box-con">
-									<div class="professional-details-box">
-										<div class="professional-info-text">
-											<div class="professional-info-text-name">
-												<p class="professional-name"><span class="newmemname"><a target="_blank" class="con-name" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id; ?>"><?php echo $professional_first_name . ' ' . $professional_last_name; ?></a></span></p>
-											</div>
+						  		<div class="col-md-6 col-sm-6 professional-details-box-con">
+										<div class="row professional-details-box">
 											
+												<div class="professional-info-text-name">
 
-											<div class="professional-info-text-box">
-												<div class="professional-service-area">
-													<p><i class="fa fa-map-marker"></i><span> <?php echo $professional_city; ?></span> <?php echo $professional_servicearea; ?></p>
+													<p class="professional-name"><span class="newmemname"><a target="_blank" class="con-name" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id; ?>"><?php echo $professional_first_name . ' ' . $professional_last_name; ?></a></span></p>
+													<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id; ; ?>">
+														<p><span class="profile-label">Προβολή προφίλ</span></p>
+													</a>
 												</div>
 												
-												<div class="professional-extra-infos">
-														<p class="small-description"><?php echo $professional_description; ?></p>
-														<div class="price-info">
-															<p class="price-for"><span class="professional-cat-labels">Τιμή για: </span><?php echo $app_name; ?></p>
-														</div>
-														<div class="price-info" >
-															<p class="price-for"> <span class="professional-cat-labels">Πληροφορίες Χρέωσης:</span>
-																<span><?php echo $professional_budget; ?></span>
-															</p>
-														</div>
-														
 
-														<div class="Techinical-data"></div>
+												<div class="professional-info-text-box">
+													<div class="professional-service-area">
+														<p><i class="fa fa-map-marker"></i><span> <?php echo $professional_city; ?></span> <?php echo $professional_servicearea; ?></p>
+													</div>
+													
+													<div class="professional-extra-infos">
+															<p class="small-description"><?php echo $professional_description; ?></p>
+															<div class="price-info">
+																<p class="price-for"><span class="professional-cat-labels">Τιμή για: </span><?php echo $app_name; ?></p>
+															</div>
+															<div class="price-info" >
+																<p class="price-for"> <span class="professional-cat-labels">Πληροφορίες Χρέωσης:</span>
+																	<span><?php echo $professional_budget; ?></span>
+																</p>
+															</div>
+															
+
+															<div class="Techinical-data"></div>
+
+													</div>
 												</div>
-											</div>
+											
 										</div>
-									</div>
 
+										
+								</div>
+								<div class="col-md-3 col-sm-3 col-professional-review">
 									
-							</div>
+										<?php if($professional_review['total'] > 0){ ?>
+												<a target="_blank" class="directory-reviews-link" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id.'#proffessionalRiviews'; ?>">
+			                                        <div class="new_professional_review_score">
+				                                        <div class="professional_score">Βαθμολογία</div>
+				                                        <div class="newTotalRatingOuter"><span class="rating-num"><?php 
+				                                            	$totalRevScore = floordec($professional_review['average_total'], 1);
+					                                            if( $totalRevScore == 5.0 || $totalRevScore == 4.0){
+					                                                echo number_format($totalRevScore, -1);
+					                                            }else{
+					                                                echo $totalRevScore;
+					                                            }
+				                                            ?></span>/5</div>
+				                                            <div class="directory-total-score"><span class="total-jobs"><?php echo $professional_review['total']; ?></span> Αξιολογήσεις</div>        
+				                                    </div>
+				                                    <div class="directoryStarsOuter">
+				                                        <div class="directoryEmptyBar">
+				                                            <?php $totalRevPercentage = floordec($professional_review['average_total']/5 *100 , 1).'%;';  ?>
+				                                            <div style="width:<?php echo $totalRevPercentage;?>"></div>
+				                                        </div>
+				                                    </div>
+				                                    
+				                                    
+			                                     </a>
+			                                <?php }else{
+			                                	echo '<div class="directory-rev-score">Δεν υπάρχουν αξιολογήσεις</div>';
+			                                } ?>
 
+			                                <div class="prices"><span><?php echo $professional_price; ?><span class="tax-fpa"><?php echo $app_unit ?></span></span></div>
+
+			                                
+
+											<?php if( $application_id == '69' || $application_id == '70' || $application_id == '71' || $application_id == '72' || $application_id == '196' || $application_id == '219' || $application_id == '218' ||  $application_id == '216'  ){ ?>
+											<a href="https://myconstructor.gr/transport/?catid=<?php echo $category_id; ?>&amp;memid=<?php echo $professional_id; ?>&amp;appid=<?php echo $application_id; ?>&amp;name=<?php echo $professional_first_name; ?>&amp;surname=<?php echo $professional_last_name; ?>" target="_blank">
+												<div class="btn-book-transport">Κλείσε online</div>
+											</a>
+											<?php } ?>
+
+											<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id; ; ?>">
+											<div class="professional_new_tel"><img src="img/new-tel-white.png">Τηλέφωνο</div>
+											</a>
+									
+								</div>
+							</div>
+							<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id; ; ?>">
+								<div style="display: none;" class="row row-professional-profile">
+									<div class="prof-profile-btn">Προφίλ Επαγγελματία  <i class="fa fa-angle-right"></i></div>
+								</div>
+							</a>
 
 							<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id; ; ?>">
-								<div class="professional-phone-number"><img src="img/new-tel-white.png">Τηλέφωνο</div>
+								<div style="display: none;" class="professional-phone-number"><img src="img/new-tel-white.png">Τηλέφωνο</div>
 							</a>
 							
 							
 
-								<div class="professional-address-contact">
+								<div style="display: none;" class="professional-address-contact">
 									<div class="col-md-12 proffesionalDirectoryReviews">
 										<?php if($professional_review['total'] > 0){ ?>
 											<a target="_blank" class="directory-reviews-link" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id.'#proffessionalRiviews'; ?>">
@@ -295,7 +362,7 @@
 									</div>
 									<?php if( $application_id == '69' || $application_id == '70' || $application_id == '71' || $application_id == '72' || $application_id == '196' || $application_id == '219' || $application_id == '218' ||  $application_id == '216'  ){ ?>
 									<a href="https://myconstructor.gr/transport/?catid=<?php echo $category_id; ?>&amp;memid=<?php echo $professional_id; ?>&amp;appid=<?php echo $application_id; ?>&amp;name=<?php echo $professional_first_name; ?>&amp;surname=<?php echo $professional_last_name; ?>" target="_blank">
-										<div class="btn-prosfora">Κλείσε online</div>
+										<div style="display: none;" class="btn-prosfora">Κλείσε online</div>
 									</a>
 									<?php } ?>
 								</div>
