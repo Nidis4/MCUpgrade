@@ -744,8 +744,10 @@ $( ".findProfessionals" ).click(function() {
                             calendarCode += "</div>";
                         } // Calendar Slots
                         
+                        // address
+                        var vaddress = v.address;
                         
-                        htmlStr += "<div class='col-md-12 availProf' data-listing-distance='"+profDistance+"'><div class='row'><div class='col-md-12'><div class='profile' id='"+profID+"'><div class='name'><a href='"+SITE_LOCATION+"platform/professional.php?id="+profID+"' target='blank'>"+profName+"</a></div><div class='appointDate'>"+dateAvail+" "+timeAvail+"</div><div class='distance'>"+profDistance+"</div> SELECT</div></div></div><div class='col-md-12 calendar calendar"+profID+"'>"+calendarCode+"</div></div>";
+                        htmlStr += "<div class='col-md-12 availProf' data-listing-distance='"+profDistance+"'><div class='row'><div class='col-md-12'><div class='profile' id='"+profID+"'><div class='name'><a href='"+SITE_LOCATION+"platform/professional.php?id="+profID+"' target='blank'>"+profName+"</a><br>"+vaddress+"</div><div class='appointDate'>"+dateAvail+" "+timeAvail+"</div><div class='distance'>"+profDistance+"</div> SELECT</div></div></div><div class='col-md-12 calendar calendar"+profID+"'>"+calendarCode+"</div></div>";
                     }
                   
                 });
