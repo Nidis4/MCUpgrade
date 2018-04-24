@@ -47,7 +47,7 @@ if($num>0){
             "detail_description" => html_entity_decode($detail_description),
             "detail_description_gr" => html_entity_decode($detail_description_gr),
             "unit" => $unit,
-            "min_price" => $min_price,
+            "min_price" => $minimum_price,
             "sequence" => $sequence,
             "modified" => $modified,
             "professionals" => $total
