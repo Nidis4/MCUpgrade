@@ -66,7 +66,8 @@ $('input#mk-fullscreen-search-input').keyup(function() {
       //alert('Time elapsed!');
       
     var term = $('input#mk-fullscreen-search-input').val();
-    var getSearchAPI ='https://upgrade.myconstructor.gr/webservices/api/application/search.php';
+    //var getSearchAPI ='https://upgrade.myconstructor.gr/webservices/api/application/search.php';
+    var getSearchAPI ='http://localhost/webservices/api/application/search.php';
     $("#search-results").empty();
     //alert (term);
     //alert (getSearchAPI);
@@ -88,7 +89,7 @@ $('input#mk-fullscreen-search-input').keyup(function() {
 
 
                     if (v.id!=undefined){
-                        htmlStr += "<a class='avail-professional' href='application.php?id="+v.id+"'><div class='search-results-icon'><img src='../img/home-page/hat-icon.png'/></div> "+v.title_greek+" <i class='fa fa-chevron-right'></i></div>";
+                        htmlStr += "<a class='avail-professional' href='directory.php?app_id="+v.id+"&cat_id="+v.category_id+"'><div class='search-results-icon'><img src='../img/cat_icons/"+v.image+"'/></div> "+v.title_greek+" <i class='fa fa-chevron-right'></i></div>";
                     }
                     else{
 

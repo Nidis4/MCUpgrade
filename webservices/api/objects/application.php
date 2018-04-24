@@ -145,16 +145,18 @@ ORDER BY applications.sequence ASC";
     function search($term){
 
 
-        $query = "SELECT s.`application_id`, a.`title_greek` 
+        $query = "SELECT s.`application_id`, a.`title_greek` , a.`category_id`, c.`image_loc`
                 FROM
-                    `applications_search` s, `applications` a
+                    `applications_search` s, `applications` a, `categories` c
                 WHERE
                     (s.`tags` LIKE '%$term%' OR a.`title_greek` LIKE '%$term%')
-
                 AND
                     s.`application_id` = a.`id`
+                AND
+                    a.`category_id` = c.`id`
                 ORDER BY
                     a.`title_greek` ASC";
+
 
         // prepare query statement
         $stmt = $this->conn->prepare( $query );

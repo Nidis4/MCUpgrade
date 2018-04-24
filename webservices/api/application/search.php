@@ -39,6 +39,8 @@ if($num>0){
         $application_item=array(
             "id" => $application_id,
             "title_greek" => $title_greek,
+            "category_id" => $category_id,
+            "image" => $image_loc
         );
  
         array_push($applications_arr, $application_item);
