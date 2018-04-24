@@ -66,8 +66,8 @@ $('input#mk-fullscreen-search-input').keyup(function() {
       //alert('Time elapsed!');
       
     var term = $('input#mk-fullscreen-search-input').val();
-    //var getSearchAPI ='https://upgrade.myconstructor.gr/webservices/api/application/search.php';
-    var getSearchAPI ='http://localhost/webservices/api/application/search.php';
+    var getSearchAPI ='https://upgrade.myconstructor.gr/webservices/api/application/search.php';
+    //var getSearchAPI ='http://localhost/webservices/api/application/search.php';
     $("#search-results").empty();
     //alert (term);
     //alert (getSearchAPI);
