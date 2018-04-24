@@ -131,11 +131,17 @@ $stmt = $professional->update($_POST['professional_id'], $_POST['first_name'], $
  
 // check if more than 0 record found
 if($stmt){
+    
+
     if(isset($_POST['profile_categories'])){
         $professional->update_categories($_POST['professional_id'],$_POST['profile_categories']);
     }
     if(isset($_POST['profile_counties'])){
         $professional->update_counties($_POST['professional_id'],$_POST['profile_counties']);
+    }
+
+    if(isset($_POST['truck_width']) && isset($_POST['truck_length']) && isset($_POST['truck_height']) && isset($_POST['truck_door'])){
+        $professional->update_truck_dimensions($_POST['professional_id'],$_POST['truck_width'],$_POST['truck_length'],$_POST['truck_height'],$_POST['truck_door']);    
     }
  
     echo json_encode(

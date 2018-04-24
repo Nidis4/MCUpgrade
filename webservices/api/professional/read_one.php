@@ -29,7 +29,7 @@ $professional->id = isset($_GET['id']) ? $_GET['id'] : die();
 // create array
 $stmt = $professional->readOne();
 $stmtApplications = $professional->getApplications();
-$stmtCategories = $professional->getCategories();
+$stmtCategories = $professional->getCategories(); 
 $stmtReviews = $professional->getAllReviews();
 
 $numCat = $stmtCategories->rowCount();
@@ -41,7 +41,8 @@ if($numCat >= 1){
         $category_item=array(
             "category_name" => $row['title'],
             "category_id" => $row['category_id'],
-            "is_main" => $row['is_main']
+            "is_main" => $row['is_main'],
+            "truck_dimensions" => $row['truck_dimensions']
         );
         array_push($categories_arr, $category_item);
     }

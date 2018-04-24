@@ -802,3 +802,12 @@ ALTER TABLE `categories` ADD `image_loc` VARCHAR(200) NOT NULL AFTER `commission
 
 <!-------------------------------->
 <!-- End 13 April 2018 Harpreet ---->
+
+
+<!-------------------------------->
+<!-- Start 23 April 2018 Harpreet -->
+
+ALTER TABLE `professionals_categories` ADD `truck_dimensions` TEXT NULL AFTER `is_main`;
+
+<!-------------------------------->
+<!-- End 23 April 2018 Harpreet ---->

@@ -816,7 +816,7 @@ ORDER BY `date` ASC,
     public function getCategories(){
      
         // select query
-        $query = "SELECT pc.`category_id`, pc.`is_main`, c.`title` FROM ". $this->categories_table_name ." pc 
+        $query = "SELECT pc.`category_id`, pc.`is_main`, c.`title`, pc.`truck_dimensions` FROM ". $this->categories_table_name ." pc 
                   Join categories c ON pc.category_id = c.id
                 WHERE pc.`professional_id`= ? order by pc.is_main desc";
      
@@ -1306,6 +1306,22 @@ ORDER BY rat.`created` DESC";
             return 0;
         }
 
+
+    }
+
+
+    function update_truck_dimensions($professional_id, $width, $length, $height, $door){
+
+        $data = array('width'=>$width, 'length'=>$length, 'height'=>$height, 'door'=>$door);
+
+        $query = "UPDATE ". $this->categories_table_name." SET `truck_dimensions`= '".json_encode($data)."' WHERE `professional_id`='".$professional_id."' and `category_id`='103'";
+
+        $stmt = $this->conn->prepare($query);
+        //$stmt->execute();
+        if( $stmt->execute()){
+             return 1;
+        }
+        return 0;
 
     }
 }

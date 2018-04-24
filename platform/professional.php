@@ -71,9 +71,17 @@ include('config/core.php');
 
 				$categories = file_get_contents($api_url.'category/read.php');
 				$categories = json_decode($categories, true); // decode the JSON into an associative array
+				$truck_dimensions = array();
+				// $truck_dimensions->width = "";
+				// $truck_dimensions->length = "";
+				// $truck_dimensions->height = "";
+				// $truck_dimensions->door = "";
 				if(@$professional['categories']){
 					foreach ($professional['categories'] as $cvalue) {
 						$cids[] = $cvalue['category_id'];
+						if(@$cvalue['truck_dimensions']){
+							$truck_dimensions = json_decode($cvalue['truck_dimensions']);
+						}
 					}
 				}else{
 					$cids = array();
@@ -87,7 +95,9 @@ include('config/core.php');
 					$ctids = array();
 				}
 				
-
+				// echo "<pre>";
+				// print_r($truck_dimensions);
+				// die;
 			?>
 
 
@@ -224,19 +234,19 @@ include('config/core.php');
 												<label class="col-lg-4 control-label text-lg-right pt-2">Truck Dimensions in meters</label>	
 												<div class="col-lg-8" style="padding-left: 0;">
 													<div class="col-lg-4" style="padding-right: 0; float: left;">
-														<input type="text" name="truckdimension['width']" value="<?php //echo $professional['truckdimension']['width']; ?>" class="form-control" placeholder="Width">
+														<input type="text" name="truck_width" id="truck_width" value="<?php if(isset($truck_dimensions->width)){echo $truck_dimensions->width;} ?>" class="form-control" placeholder="Width">
 													</div>
 													<div class="col-lg-4" style="padding-right: 0; float: left;">
-														<input type="text" name="truckdimension['length']"  value="<?php //echo $professional['truckdimension']['length']; ?>"" class="form-control" placeholder="Length">
+														<input type="text" name="truck_length" id="truck_length" value="<?php if(isset($truck_dimensions->length)){echo $truck_dimensions->length;} ?>" class="form-control" placeholder="Length">
 													</div>
 													<div class="col-lg-4" style="padding-right: 0; float: left;" >
-														<input type="text" name="truckdimension['height']" value="<?php //echo $professional['truckdimension']['height']; ?>"" class="form-control" placeholder="Height">
+														<input type="text" name="truck_height" id="truck_height" value="<?php if(isset($truck_dimensions->height)){echo $truck_dimensions->height;} ?>" class="form-control" placeholder="Height">
 													</div>
 												</div>
 											</div>
 											<div class="form-group col-md-12 row">
 												<label class="col-lg-4 control-label text-lg-right pt-2">Hydraulic Door</label>
-												<div class="col-lg-1"><input type="checkbox" class="form-control" name="truckdimension['door']" id="door" value="1" <?php if(@$professional['truckdimension']['door']){ echo "checked='checked'";}?> ></div>
+												<div class="col-lg-1"><input type="checkbox" class="form-control" id="truck_door" name="truck_door" id="door" value="1" <?php if(@$truck_dimensions->door){ echo "checked='checked'";}?> ></div>
 											</div>	
 										<?php		
 											}
@@ -1359,6 +1369,24 @@ include('config/core.php');
 					form_data.append('viewtype', $('input[name=viewtype]:checked').val());
 					form_data.append('profile_categories', $('#profile_categories').val());
 					form_data.append('profile_counties', $('#profile_counties').val());
+
+					//
+					if($('#truck_width').length){
+						form_data.append('truck_width', $('#truck_width').val());
+					}
+					if($('#truck_length').length){
+						form_data.append('truck_length', $('#truck_length').val());
+					}
+					if($('#truck_height').length){
+						form_data.append('truck_height', $('#truck_height').val());
+
+						if ($('#truck_door').prop('checked') == true){
+	    					form_data.append('truck_door', 1);
+						} else{
+						    form_data.append('truck_door', 0);
+						}
+					}
+
 
 					if ($('#approve_per').prop('checked') == true){
     					form_data.append('approve_per', 1);
