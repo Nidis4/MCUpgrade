@@ -18,7 +18,7 @@ class County{
     public function read(){
         //select all data
         $query = "SELECT
-                    id, county_name, county_name_gr
+                    id, county_name, county_name_gr, display_name_gr
                 FROM
                     " . $this->table_name . "
                 ORDER BY
