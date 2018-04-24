@@ -26,7 +26,10 @@
 </head>
 <body>
 
-	<?php include('constants.php'); session_start(); // Starting Session?>
+	<?php 
+	include('constants.php');
+	include('front_end_config/core.php'); 
+	session_start(); // Starting Session?>
 	<div class="container-fluid container-hero">
 				<nav id="myTopnav" class="navbar navbar-default">
 					
@@ -46,12 +49,12 @@
 						      
 						      <ul class="nav navbar-nav navbar-right">
 						      	<li><a href="https://myconstructor.gr/">ΑΡΧΙΚΗ</a></li>
-						        <li><a href="https://myconstructor.gr/homes/search_constructors/all/all/all/126/177">ΚΑΤΑΛΟΓΟΣ ΕΠΑΓΓΕΛΜΑΤΙΩΝ</a></li>
+						        <li><a href="<?php echo $directory_url; ?>">ΚΑΤΑΛΟΓΟΣ ΕΠΑΓΓΕΛΜΑΤΙΩΝ</a></li>
 						        <li><a href="https://myconstructor.gr/blog/">BLOG</a></li>
 						        <li><a href="https://myconstructor.gr/blog/">ΕΝ</a></li>
 						        <li><a href="https://myconstructor.gr/blog/">ΕL</a></li>
 						        <li class="active litel"><a href="tel:2103009323">210 300 9323</a></li>
-						        <li><a href="https://myconstructor.gr/members/chooseUserType"><span class="glyphicon glyphicon-user"></span> ΕΓΓΡΑΦΗ</a></li>
+						        <li><a href="<?php echo $signup_url; ?>"><span class="glyphicon glyphicon-user"></span> ΕΓΓΡΑΦΗ</a></li>
 						        <li>
 						        	<?php if(@$_SESSION['login_user']){?>
 						        			<a href="<?php echo SITE_URL.'logout.php';?>"><span class="glyphicon glyphicon-log-out"></span> Αποσυνδέση</a>

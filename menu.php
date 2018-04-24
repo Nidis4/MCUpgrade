@@ -17,14 +17,14 @@
 						    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						      <ul class="nav navbar-nav">
 						        <li><a href="<?php echo $api_url; ?>">ΑΡΧΙΚΗ</a></li>
-						        <li><a href="<?php echo $api_url; ?>homes/search_constructors/all/all/all/126/177">ΚΑΤΑΛΟΓΟΣ ΕΠΑΓΓΕΛΜΑΤΙΩΝ</a></li>
+						        <li><a href="<?php echo $directory_url; ?>">ΚΑΤΑΛΟΓΟΣ ΕΠΑΓΓΕΛΜΑΤΙΩΝ</a></li>
 						        <li><a href="<?php echo $api_url; ?>blog/">BLOG</a></li>
 						        <li class="active litel"><a href="tel:2103009323">210 300 9323</a></li>
 						        <li><a href="<?php echo $api_url; ?>blog/">ΕΝ</a></li>
 						        <li><a href="<?php echo $api_url; ?>blog/">ΕL</a></li>
 						      </ul>
 						      <ul class="nav navbar-nav navbar-right">
-						        <li><a href="<?php echo $api_url; ?>members/chooseUserType"><span class="glyphicon glyphicon-user"></span> ΕΓΓΡΑΦΗ</a></li>
+						        <li><a href="<?php echo $signup_url; ?>"><span class="glyphicon glyphicon-user"></span> ΕΓΓΡΑΦΗ</a></li>
 						        <li>
 						        	<?php if(@$_SESSION['login_user']){?>
 						        			<a href="<?php echo $api_url.'logout.php';?>"><span class="glyphicon glyphicon-log-out"></span> Αποσυνδέση</a>

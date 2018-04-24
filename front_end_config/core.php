@@ -9,6 +9,9 @@
 	$profile_url = "profile.php";
 	$profile_url = $api_url . $profile_url;
 
+	$signup_url = "sign_up.php";
+	$signup_url = $api_url . $signup_url;
+
 	$portfolio_url = $api_url . 'img/professional-imgs/portfolio/';
 
 	
