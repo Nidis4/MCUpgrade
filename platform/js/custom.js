@@ -746,8 +746,17 @@ $( ".findProfessionals" ).click(function() {
                         
                         // address
                         var vaddress = v.address;
+                        var vcat = v.truck_cat;
+                        var vdimensions = "";
+                        if(vcat == 1){
+                            var door = "";
+                            if(v.truck_dimensions['door'] == "1"){
+                                door = "Hydraulic";
+                            }
+                            vdimensions = "H:"+v.truck_dimensions['height']+" W:"+v.truck_dimensions['width']+" l:"+v.truck_dimensions['length']+" "+door;
+                        }
                         
-                        htmlStr += "<div class='col-md-12 availProf' data-listing-distance='"+profDistance+"'><div class='row'><div class='col-md-12'><div class='profile' id='"+profID+"'><div class='name'><a href='"+SITE_LOCATION+"platform/professional.php?id="+profID+"' target='blank'>"+profName+"</a><br>"+vaddress+"</div><div class='appointDate'>"+dateAvail+" "+timeAvail+"</div><div class='distance'>"+profDistance+"</div> SELECT</div></div></div><div class='col-md-12 calendar calendar"+profID+"'>"+calendarCode+"</div></div>";
+                        htmlStr += "<div class='col-md-12 availProf' data-listing-distance='"+profDistance+"'><div class='row'><div class='col-md-12'><div class='profile' id='"+profID+"'><div class='name'><a href='"+SITE_LOCATION+"platform/professional.php?id="+profID+"' target='blank'>"+profName+"</a><br>"+vaddress+"<br>"+vdimensions+"</div><div class='appointDate'>"+dateAvail+" "+timeAvail+"</div><div class='distance'>"+profDistance+"</div> SELECT</div></div></div><div class='col-md-12 calendar calendar"+profID+"'>"+calendarCode+"</div></div>";
                     }
                   
                 });

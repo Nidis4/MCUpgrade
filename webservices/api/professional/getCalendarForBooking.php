@@ -57,6 +57,30 @@ if($num>0){
         $calendar = getCalendarDetails($startDate, $endDate, $opening, $closing, $busy_arr);
         $days = dateDiff($startDate, $endDate) + 1;
 
+        $truck_dimensions = array();
+
+        $professional->id = $id;
+        $stmtCategories = $professional->getCategories(); 
+        $numCat = $stmtCategories->rowCount();
+        $truck_cat = 0;
+        if($numCat >= 1){
+            $categories_arr = array();
+
+            while ($row = $stmtCategories->fetch(PDO::FETCH_ASSOC)){
+                //print_r($row);
+                if($row['category_id'] == '103' && @$row['truck_dimensions']){
+                    $dimensions = json_decode($row['truck_dimensions']);
+                    $truck_dimensions['width'] = $dimensions->width;
+                    $truck_dimensions['length'] = $dimensions->length;
+                    $truck_dimensions['height'] = $dimensions->height;
+                    $truck_dimensions['door'] = $dimensions->door;
+                    $truck_cat = 1;
+                }else{
+                    $truck_dimensions = array(); 
+                }
+            }            
+        }
+
         $professional_item=array(
             "id" => $id,
             "first_name" => $first_name,
@@ -66,7 +90,9 @@ if($num>0){
             "Appointment" => $addressAppoint,
             "distance" => $dist,
             "busy" => $busy_arr,
-            "calendar" => $calendar
+            "calendar" => $calendar,
+            "truck_dimensions" => $truck_dimensions,
+            "truck_cat" => $truck_cat
         );
  
         array_push($professionals_arr, $professional_item);
