@@ -80,8 +80,8 @@
 	<div class="container-fluid container-prop-works">
 		<div class="row row-titles">
 			<div class="col-md-12 col-first-titles">
-				<h2>What is your next project?</h2>
-				<p>The most popular categories</p>
+				<h2>Ποια είναι η εργασία που σε ενδιαφέρει;</h2>
+				<p>Δημοφιλείς κατηγορίες βάσει χρηστών.</p>
 			</div>
 		</div>
 		<div class="row prop-works-row">
@@ -166,35 +166,35 @@
 
 	<div class="container-fluid container-how-it">
 		<div class="row row-how-it-titles">
-			<h3>How does it works?</h3>
-			<p>Very simple business model.</p>
+			<h3>Γιατί να επιλέξεις το MyConstructor.gr;</h3>
+			<p>Μάθε τις δυνατότητες που σου προσφέρει.</p>
 		</div>
 		<div class="row row-how-it-works">
 			<div class="col-md-4 col-how-it">
 				<div class="col-how-it-inner">
 					<div class="how-it-img">
-						<img src="img/home-page/how_1.png" />
+						<img src="img/home-page/how_11.png" />
 					</div>
-					<h4>Post Project</h4>
-					<p>Add project and in 24 hours craftsman will start responding.</p>
+					<h4>Καταχώρηση Έργου</h4>
+					<p>Καταχώρησε online στη φόρμα την εργασία που επιθυμείς και λάβε άμεσα δωρεάν προσφορά από τα εξειδικευμένα συνεργεία μας.</p>
 				</div>
 			</div>
 			<div class="col-md-4 col-how-it">
 				<div class="col-how-it-inner">
 					<div class="how-it-img">
-						<img src="img/home-page/how_2.png" />
+						<img src="img/home-page/how_21.png" />
 					</div>
-					<h4>Browse Quotes</h4>
-					<p>Browse received applications and quotes from craftsman.</p>
+					<h4>Κατάλογος Επαγγελματιών</h4>
+					<p>Μπες στον κατάλογο, σύγκρινε τιμές και αξιολογήσεις και επέλεξε τον επαγγελματία που σου ταιριάζει.</p>
 				</div>
 			</div>
 			<div class="col-md-4 col-how-it">
 				<div class="col-how-it-inner">
 					<div class="how-it-img">
-						<img src="img/home-page/how_3.png" />
+						<img src="img/home-page/how_31.png" />
 					</div>
-					<h4>Leave Review</h4>
-					<p>After project is finished you can rate craftsman.</p>
+					<h4>Αξιολόγηση Επαγγελματιών</h4>
+					<p>Μετά το πέρας της εργασίας αξιολόγησε τον επαγγελματία  και ενημέρωσε τους επόμενους χρήστες για την εμπειρία σου.</p>
 				</div>
 			</div>
 			<div class="col-sm-12">
@@ -210,21 +210,21 @@
 					<div class="category-box box-looking">
 						<div class="col-looking">
 							<div class="col-looking-inner">
-								<p>Looking for job?</p>
-								<h4>Scale your business</h4>
+								<p>Είσαι Επαγγελματίας;</p>
+								<h4>Ανέλαβε νέες δουλειές!</h4>
 							</div>
 						</div>
 					</div>
 				</a>
 			</div>
-			<div class="delimiter"><span>OR</span></div>
+			<div class="delimiter"><span>Η</span></div>
 			<div class="col-md-6">
 				<a href="#">
 					<div class="category-box box-job">
 						<div class="col-looking">
 							<div class="col-looking-inner">
-								<p>You need project done?</p>
-								<h4>Get the job done</h4>
+								<p>Ενδιαφέρεσαι για τεχνική εργασία;</p>
+								<h4>Κλείσε τώρα ραντεβού!</h4>
 							</div>
 						</div>
 					</div>
@@ -236,8 +236,8 @@
 	<div class="container-fluid container-articles">
 		<div class="row row-articles-title">
 			<div class="col-md-12">
-				<h3>Valuable Tips & Tricks</h3>
-				<p>Learn more about work, craftsman & clients</p>
+				<h3>Tips & Tricks</h3>
+				<p>Έξυπνες ιδέες και λύσεις για οποιαδήποτε εργασία και αν σε ενδιαφέρει!</p>
 			</div>
 		</div>
 		<div class="row row-articles">
@@ -246,7 +246,8 @@
 					<div class="article">
 						<img src="img/home-page/renovation-article.jpg" />
 						<div class="article-title">
-							<p>Ask an expert: plumbing, electrics and the cost of fitting new doors</p>
+							<h4>Γενική Ανακαίνιση Οικίας</h4>
+							<p>Λύσε απορίες σχετικά με μερική ή γενική ανακαίνιση οικίας και πάρε χρήσιμες ιδέες για την ανακαίνιση του χώρου σου.</p>
 						</div>
 					</div>
 				</a>
@@ -256,7 +257,8 @@
 					<div class="article">
 						<img src="img/home-page/movers2.jpg" />
 						<div class="article-title">
-							<p>Ask an expert: plumbing, electrics and the cost of fitting new doors</p>
+							<h4>Μεταφορές</h4>
+							<p>Μετακομίζεις ή ενδιαφέρεσαι για μεταφορά; Διάβασε εδώ τι πρέπει να προσέξεις πριν ξεκινήσεις την μετακόμισή σου.</p>
 						</div>
 					</div>
 				</a>
@@ -266,7 +268,8 @@
 					<div class="article">
 						<img src="img/home-page/cleaning-company.jpg" />
 						<div class="article-title">
-							<p>Ask an expert: plumbing, electrics and the cost of fitting new doors</p>
+							<h4>Συνεργεία Καθαρισμού</h4>
+							<p>Καθαρισμοί σπιτιού ή επαγγελματικών χώρων. Ενημερώσου για τις παρεχόμενες υπηρεσίες και το κόστος!</p>
 						</div>
 					</div>
 				</a>

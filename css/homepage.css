@@ -56,13 +56,13 @@ li.active.litel a:hover {
 
 .row.row-search-titles {
     padding-top: 100px;
-   padding-bottom: 260px;
+   padding-bottom: 300px;
 }
 
 .container-fluid.container-hero{
-	background: url(../img/home-page/renovation-12.jpg) no-repeat;
+	background: url(../img/home-page/family_old_black.jpg) no-repeat;
     background-size: cover;
-    background-position: center;
+    background-position: center top;
 
 }
 
@@ -350,7 +350,7 @@ li.active.litel a:hover {
 }
 
 .col-looking {
-    max-width: 260px;
+    max-width: 292px;
     margin: auto;
     text-align: center;
     margin-top: 120px;
@@ -464,6 +464,8 @@ li.active.litel a:hover {
 .row.row-articles .col-sm-4{
     flex:1;
 }
+
+
 
 .article{
 	position: relative;
@@ -705,7 +707,7 @@ a.a-btn-blog{
 }
 
 .category-box.box-job .col-looking {
-    max-width: 218px;
+    max-width: 292px;
 }
 
 .container-fluid.mcr-social-container {
@@ -749,6 +751,10 @@ ul.mycon-social li {
 ul.mycon-social li img {
     vertical-align: top;
     height: auto;
+}
+
+.row.row-articles a {
+    text-decoration: none;
 }
 
 @media screen and (max-width: 1249px){

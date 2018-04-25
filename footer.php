@@ -1,77 +1,69 @@
 <footer>
-		<div class="container footer-container">
-			<div class="row footer-first-row">
-				<div class="col-md-3">
-					<h3>Σχετικά με Εμάς</h3>
-					<ul>
-						<li><a href="#">Ποιοί είμαστε</a></li>
-						<li>Πολιτική απορρήτου</li>
-						<li>Τρόποι πληρωμής</li>
-						<li>Όροι χρήσης</li>
-						<li>Επικοινωνήστε μαζί μας</li>
-
-					</ul>
-					
+		<div class="container-fluid footer-container">
+			<div class="row">
+				<div class="col-sm-6">
+					<h4>Χρήσιμοι Σύνδεσμοι</h4>
+					<div class="col-sm-6 col-sm-6-inner">
+						<ul>
+							<li><a href="https://myconstructor.gr/cms_pages/view_cms/who_we_are">Ποιοι είμαστε</a></li>
+							<li><a href="https://myconstructor.gr/cms_pages/view_cms/privacy_policy">Πολιτική απορρήτου</a></li>
+							<li><a href="https://myconstructor.gr/cms_pages/view_cms/alternate_payment_method">Τρόποι πληρωμής</a></li>
+							<li><a href="https://myconstructor.gr/cms_pages/view_cms/terms_of_use">Όροι Χρήσης</a></li>
+							<li><a href="https://myconstructor.gr/f_a_qs/faq">Συχνές Ερωτήσεις</a></li>
+						</ul>
+					</div>
+					<div class="col-sm-6 col-sm-6-inner">
+						<ul>
+							
+							<li><a href="https://myconstructor.gr/cms_pages/view_cms/why_myconstructor">Γιατί το myConstructor.gr;</a></li>
+							<li><a href="https://myconstructor.gr/cms_pages/view_cms/how_i_earn">Είμαι επαγγελματίας, πώς κερδίζω;</a></li>
+							<li><a href="https://myconstructor.gr/members/chooseUserType">Συνδεθείτε/Εγγραφείτε</a></li>
+						</ul>
+					</div>
 				</div>
-				<div class="col-md-3">
-
-					<h3>Χρήσιμοι Σύνδεσμοι</h3>
-					<ul>
-						<li>Συχνές ερωτήσεις</li>
-						<li>Γιατί το myConstructor.gr;</li>
-						<li>Είμαι επαγγελματίας, πώς κερδίζω;</li>
-						<li>Σύνδεση</li>
-						<li>Εγγραφή</li>
-
-					</ul>
-					
+				<div class="col-sm-6">
+					<h4>Δείτε Ακόμα</h4>
+					<div class="col-sm-6 col-sm-6-inner">
+						<ul>
+							<li><a href="https://myconstructor.gr/blog/vapsimo-spitiou/">Ελαιοχρωματισμοί</a></li>
+							<li><a href="https://myconstructor.gr/blog/gypsosanides/">Τοποθέτηση Γυψοσανίδων</a></li>
+							<li><a href="https://myconstructor.gr/blog/topothetisi-plakidion-dapedou/">Τοποθέτηση Πλακιδίων</a></li>
+							<li><a href="https://myconstructor.gr/blog/apolumanseis/">Απολύμανση Απεντόμωση</a></li>
+							<li><a href="https://myconstructor.gr/blog/matakomiseis-metafores/">Μετακόμιση</a></li>
+							<li><a href="https://myconstructor.gr/services/anakainisi-spitiou/">Γενική Ανακαίνιση</a></li>
+						</ul>
+					</div>
+					<div class="col-sm-6 col-sm-6-inner">
+						<ul>
+							<li><a href="tel:2103009323">Τηλεφωνικό Κέντρο:<br/>210 300 9323</a></li>
+							<li>Δευτέρα - Παρασκευή <br/>9:00 - 21:30<br/>Σάββατο 9:30-18:00</li>
+						</ul>
+					</div>
 				</div>
-				<div class="col-md-3">
-					<h3>Blog MyConstructor</h3>
-					<ul>
-						<li>Ελαιοχρωματισμοί</li>
-						<li>Τοποθέτηση γυψοσανίδων</li>
-						<li>Τοποθέτηση πλακιδίων</li>
-						<li>Απολύμανση απεντόμωση</li>
-						<li>Μετακόμιση</li>
-
-					</ul>
-					
-				</div>
-				<div class="col-md-3">
-					<h3>Επικοινωνία</h3>
-					<ul>
-						<li>Τηλεφωνικό Κέντρο: 210 300 9323</li>
-						<li>Δευτέρα - Παρασκευή 9:00 - 21:30</li>
-						<li>Σάββατο 9:30-18:00</li>
-						
-
-					</ul>
-					
-				</div>				
-			</div>
-			<div class="row-footer-sep"><div class="footer-sep"></div></div>
-			<div class="row footer-second-row">
-				<div class="col-md-3 footer-logo">
-					<img src="img/home-page/logo-white.png"></div>
-				<div class="col-md-6">
-					<h3>Σχετικά με το ΜyConstructor.gr</h3>
-					<p>Lorem ipsum dolor sit amet, ubique dictas in semei tanta argumentum. Mundi eu sea, liber option alidenique sercivi. An duo lorem altera gloriatur. No imperdiet adver sarium pro. No sit sumo lorem. Mei ea eius elitr consequ untur. In mel aeterno facilis option alidenique.</p>
-				</div>
-				<div class="col-md-3">
-					<h3>Δείτε Τις Προσφορές Μας</h3>
-					<div class="offer-footer-btn">ΠΡΟΣΦΟΡΕΣ</div>
-				</div>
-				
 			</div>
 		</div>
-
+		<div class="container-fluid container-footer-btm">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="div-socials">
+						<ul>
+							<li><a class="a_fb"><i class="fa fa-facebook"></i></a></li>
+							<li><a class="a_tw"><i class="fa fa-twitter"></i></a></li>
+							<li><a class="a_google"><i class="fa fa-google"></i></a></li>
+							<li><a class="a_inst"><i class="fa fa-instagram"></i></a></li>
+							<li><a class="a_lkdin"><i class="fa fa-linkedin"></i></a></li>
+						</ul>
+					</div>
+					<p class="p-copyrights">© 2012 - 2018 All rights reserved - <a href="https://myconstructor.gr">myconstructor.gr</a></p>
+				</div>
+			</div>
+		</div>
 	</footer>
 
-	<script src='https://www.google.com/recaptcha/api.js'></script>
+
+  
+
 	<script type="text/javascript" src="js/home.js?version=2"></script>
-
-
+	<script type="text/javascript" src="platform/js/core.js"></script>
 </body>
-
 </html>
