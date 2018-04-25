@@ -3931,6 +3931,27 @@ li.breadcrumb-county a {
     color:#004a86;
 }
 
+.mobile-cat-btn {
+    background: #febb02;
+    max-width: 130px;
+    padding: 6px 8px;
+    font-size: 18px;
+    text-align: center;
+    font-family: dinbd;
+    color: #333;
+    border-radius: 3px;
+    position: fixed;
+    z-index: 2;
+    left: 28px;
+    display: none;
+    box-shadow: 0px 0px 5px 0px #333;
+}
+
+.mobile-cat-btn:hover{
+  cursor: pointer;
+  background:#ffc629; 
+}
+
 /*NEW FOOTER */
 
 .footer-container{
@@ -4131,6 +4152,14 @@ a.a_lkdin:hover {
     cursor: pointer;
 }
 
+.mobile_cats_close {
+    font-family: dinbd;
+    font-size: 20px;
+    text-align: right;
+    margin-right: -12px;
+    cursor:pointer;
+    display: none;
+}
 
 
 
@@ -4148,6 +4177,26 @@ a.a_lkdin:hover {
     overflow: auto;
     float: left;
   }
+  .col-md-3.col-md-sub-cats {
+    padding: 0px 18px 20px;
+    background: #fff;
+    margin-bottom: 30px;
+    border-radius: 4px;
+    max-width: 310px;
+    position: absolute;
+    z-index: 1;
+    left:-310px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.11);
+  }
+
+  .mobile_cats_close{
+    display: block;
+  }
+
+
+  
+
+  
 }
 
 @media screen and (max-width: 767px){
@@ -4200,6 +4249,7 @@ a.a_lkdin:hover {
     padding-right: 0px;
   }
 
+ 
 }
 
 
@@ -4256,14 +4306,26 @@ a.a_lkdin:hover {
     margin-right: 30px;
         
   }
+  .professional_new_tel, .btn-book-transport{
+    max-width: unset;
+    text-align: center;
+    padding: 6px 16px 8px;
+    font-size: 21px;
+    width:100%;
+  }
+
   .col-professional-review .prices{
     margin-bottom:20px;
+    margin-top:15px;
   }
   .new_professional_review_score{
     margin-top: 20px;
   }
   .btn-book-transport{
       margin-bottom: 12px;
+      max-width: unset;
+      text-align: center;
+
   }
 
  

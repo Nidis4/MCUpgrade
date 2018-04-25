@@ -1,3 +1,51 @@
+
+/*Show category menu btn on mobile */
+jQuery(window).scroll(function() {
+	if($(window).width() <= 991 & $('.mobile-cat-btn').hasClass('show_cats')) {
+        if (jQuery(document).scrollTop() > 185) {
+	        	$('.mobile-cat-btn').css('top','20px');
+	        	$('.mobile-cat-btn').css('display','block');
+
+        }else{
+        		$('.mobile-cat-btn').css('top','200px');
+        		$('.mobile-cat-btn').css('display','none');
+        }       
+    }
+});
+
+function showMobileMenuCat(){
+	var right = $(".col-md-3.col-md-sub-cats").offset().right;
+	$(".col-md-3.col-md-sub-cats").css({left:right}).animate({"left":"0px"}, "slow");
+	$(".mobile-cat-btn").css("display","none");
+	$(".mobile-cat-btn").removeClass("show_cats");
+}
+
+function closeMobileMenuCat(){
+	var left = $(".col-md-3.col-md-sub-cats").offset().left;
+	$(".col-md-3.col-md-sub-cats").css({left:left}).animate({"left":"-310px"}, "slow");
+	$(".mobile-cat-btn").addClass("show_cats");
+}
+
+$(document).ready(function(){
+	if($(window).width() <= 991){
+		$('.col-md-3.col-md-sub-cats').addClass('mobile_cat_menu');
+	}else{
+		$('.col-md-3.col-md-sub-cats').removeClass('mobile_cat_menu');
+	}
+});
+
+$(document).mouseup(function (e){
+	var container = $(".mobile_cat_menu");
+    if (!container.is(e.target) && container.has(e.target).length === 0){// if the target of the click isn't the container... nor a descendant of the container
+        closeMobileMenuCat();
+    }
+});
+
+
+
+
+
+
 $(document).ready(function(){ //CHANGE COUNTIES FILTER, breadcrumb county, and titles
 	var urlParams;
 		(window.onpopstate = function () {

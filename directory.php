@@ -12,9 +12,11 @@
 ?>
 
 <div class="container-fluid">
+	<div class="mobile-cat-btn show_cats" onclick="showMobileMenuCat()"><i class="fa fa-th-list"></i> Κατηγορίες</div>
 
 	<div class="row row-directory">
 		<div class="col-md-3 col-md-sub-cats">
+			<div class="mobile_cats_close" onclick="closeMobileMenuCat()"><i class="fa fa-times"></i></div>
 			<div class="menu-cat-selected">
 				<div class="menu-cat-selected-title"><span class="span_selected_cat_title"></span></div>
 				<p class="menu-cat-sub-title" >Υπηρεσίες σε Προσφορά:</p>
