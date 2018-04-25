@@ -53,6 +53,7 @@ tr.status-0 .cancel-row, tr.status-8 .cancel-row, tr.status-7 .cancel-row, tr.st
 #available .profile{
     padding: 10px;
     cursor: pointer;
+    float: left;
 }
 .calendar li {
     display: block;
