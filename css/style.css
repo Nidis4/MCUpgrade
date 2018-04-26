@@ -2048,7 +2048,7 @@ a.btn-book-online {
 .search-results-icon{
   width:42px;
   float: left;
-  margin-right: 5px;
+  margin-right: 8px;
 }
 
 a.go-to-reviews {
@@ -2069,6 +2069,53 @@ a.go-to-reviews {
     font-size: 70px;
 }
 
+a.a-cycle-btn {
+    text-decoration: none;
+}
+
+.container-fluid.container-faq .row {
+    max-width: 1120px;
+    margin: 80px auto;
+}
+.container-fluid.container-faq p{
+  font-size:16px;
+  text-align: justify;
+}
+
+.container-fluid.container-faq p.title-helpful-pages {
+    font-size: 22px;
+    font-family: dinmd;
+}
+
+.container-how-it-works{
+  background:url('../img/engynieers-3.jpg') no-repeat;
+  background-size:cover;
+  background-position: center;
+
+}
+
+.container-fluid.container-how-it-content .row {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.how-it-icon-right, .how-it-icon-left {
+    max-width: 206px;
+    float: left;
+}
+
+.how-it-text{
+  float: left;
+}
+
+.container-fluid.container-how-it-content{
+ background:#f9f9f9;
+}
+
+.container-fluid.container-how-it-content .row{
+  padding:70px;
+  background:#fff;
+}
 
 
 
@@ -3942,7 +3989,7 @@ li.breadcrumb-county a {
     border-radius: 3px;
     position: fixed;
     z-index: 2;
-    left: 28px;
+    left: 6px;
     display: none;
     box-shadow: 0px 0px 5px 0px #333;
 }
@@ -4281,6 +4328,20 @@ div#professionalDetails a {
     padding-right: 0px;
   }
 
+  .row-directory{
+    margin: 10px auto;
+  }
+
+  ul.ul-breadcrumb li {
+    font-size: 12px;
+  }
+
+  ul.ul-breadcrumb li + li:before {
+    width: 6px;
+    height: 18px;
+    margin: 0 4px;
+  }
+
  
 }
 
@@ -4312,6 +4373,9 @@ div#professionalDetails a {
   .title-app-tabs h3, .title-app-tabs-content h3{
 
   }
+  a.navbar-brand img {
+    max-width: 200px;
+  }
 
 }
 
@@ -4326,7 +4390,11 @@ div#professionalDetails a {
 
   .professional-img{
       max-width: 210px;
-      margin-bottom: 10px;
+      
+  }
+  #myTopnav{
+    min-height: unset;
+    max-height: 69px;
   }
 
 }

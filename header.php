@@ -23,7 +23,7 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   	<link rel="stylesheet" type="text/css" href="<?php echo $api_url; ?>css/style.css">
-  	<link rel="stylesheet" type="text/css" href="<?php echo $api_url; ?>css/sidenav.css">
+  	<!--<link rel="stylesheet" type="text/css" href="<?php /*echo $api_url;*/ ?>css/sidenav.css">-->
 
     <script src="<?php echo $api_url; ?>js/directory.js"></script> 
 

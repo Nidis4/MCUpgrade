@@ -47,11 +47,11 @@
 				<div class="col-md-12">
 					<div class="div-socials">
 						<ul>
-							<li><a class="a_fb"><i class="fa fa-facebook"></i></a></li>
-							<li><a class="a_tw"><i class="fa fa-twitter"></i></a></li>
-							<li><a class="a_google"><i class="fa fa-google"></i></a></li>
-							<li><a class="a_inst"><i class="fa fa-instagram"></i></a></li>
-							<li><a class="a_lkdin"><i class="fa fa-linkedin"></i></a></li>
+							<li><a target="_blank" href="https://www.facebook.com/MyConstructorGR/" class="a_fb"><i class="fa fa-facebook"></i></a></li>
+							<li><a target="_blank" href="https://twitter.com/myConstructor" class="a_tw"><i class="fa fa-twitter"></i></a></li>
+							<li><a target="_blank" href="https://plus.google.com/u/0/111872566385119596767" class="a_google"><i class="fa fa-google"></i></a></li>
+							<li><a target="_blank" href="https://www.instagram.com/myconstructorgr/" class="a_inst"><i class="fa fa-instagram"></i></a></li>
+							<li><a target="_blank" href="https://www.linkedin.com/company/myconstructor-gr/" class="a_lkdin"><i class="fa fa-linkedin"></i></a></li>
 						</ul>
 					</div>
 					<p class="p-copyrights">© 2012 - 2018 All rights reserved - <a href="https://myconstructor.gr">myconstructor.gr</a></p>

@@ -88,7 +88,7 @@
 			<div class="col-sm-9">
 				<div class="row">
 					<div class="col-4">
-						<a href="#">
+						<a href="/directory.php?app_id=141&cat_id=118">
 							<div class="category-box box-texnikos-asfaleias">
 								<div class="category-box-title">
 						            <h3>Τεχνικός Ασφαλείας
@@ -99,7 +99,7 @@
 						</a>
 					</div>
 					<div class="col-5">
-						<a href="#">
+						<a href="/directory.php?app_id=217&cat_id=43">
 							<div class="category-box box-pea">
 								<div class="category-box-title">
 									<h3>Ενεργειακό Πιστοποιητικό <span class="category-box-title-count"><img src="img/cat_icons/pea.png" /></span>
@@ -109,7 +109,7 @@
 						</a>
 					</div>
 					<div class="col">
-						<a href="#">
+						<a href="/directory.php?app_id=32&cat_id=54">
 							<div class="category-box box-painter">
 								<div class="category-box-title">
 									<h3>Βάψιμο <span class="category-box-title-count"><img src="img/cat_icons/vapsimo.png" /></span>
@@ -121,7 +121,7 @@
 				</div>
 				<div class="row sec-row-works">
 					<div class="col-4">
-						<a href="#">
+						<a href="/directory.php?app_id=16&cat_id=57">
 							<div class="category-box  box-aircondition">
 								<div class="category-box-title">
 									<h3>Κλιματιστικό <span class="category-box-title-count"><img src="img/cat_icons/klimatistiko.png" /></span>
@@ -131,7 +131,7 @@
 						</a>
 					</div>
 					<div class="col-9">
-						<a href="#">
+						<a href="/services/anakainisi/">
 							<div class="category-box box-renovation">
 								<div class="category-box-title">
 						            <h3>Γενική Ανακαίνιση
@@ -148,7 +148,7 @@
 			<div class="col-sm-3">
 				<div class="row full-height">
 					<div class="col-3">
-						<a href="#">
+						<a href="/directory.php?app_id=69&cat_id=103">
 							<div class="category-box category-box-alt box-mover">
 								<div class="category-box-title">
 						            <h3>Μετακομίσεις
@@ -198,7 +198,9 @@
 				</div>
 			</div>
 			<div class="col-sm-12">
-				<div class="cycle-btn">+</div>
+				<a class="a-cycle-btn" href="#">
+					<div class="cycle-btn">+</div>
+				</a>
 			</div>
 		</div>
 	</div>
@@ -206,7 +208,7 @@
 	<div class="container-fluid container-looking">
 		<div class="row row-looking">
 			<div class="col-md-6">
-				<a href="#">
+				<a href="/sign_up.php">
 					<div class="category-box box-looking">
 						<div class="col-looking">
 							<div class="col-looking-inner">
@@ -219,7 +221,7 @@
 			</div>
 			<div class="delimiter"><span>Η</span></div>
 			<div class="col-md-6">
-				<a href="#">
+				<a href="/directory.php">
 					<div class="category-box box-job">
 						<div class="col-looking">
 							<div class="col-looking-inner">
@@ -242,7 +244,7 @@
 		</div>
 		<div class="row row-articles">
 			<div class="col-sm-4">
-				<a href="#">
+				<a href="/services/anakainisi-spitiou/">
 					<div class="article">
 						<img src="img/home-page/renovation-article.jpg" />
 						<div class="article-title">
@@ -253,7 +255,7 @@
 				</a>
 			</div>
 			<div class="col-sm-4">
-				<a href="#">
+				<a href="/blog/matakomiseis-metafores/">
 					<div class="article">
 						<img src="img/home-page/movers2.jpg" />
 						<div class="article-title">
@@ -264,7 +266,7 @@
 				</a>
 			</div>
 			<div class="col-sm-4">
-				<a href="#">
+				<a href="/blog/synergeio-katharismou/">
 					<div class="article">
 						<img src="img/home-page/cleaning-company.jpg" />
 						<div class="article-title">
@@ -277,7 +279,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12 col-blog-btn">
-				<a class="a-btn-blog" href="https://myconstructor.gr/blog/">
+				<a class="a-btn-blog" href="/blog/">
 					<div class="btn-blog">
 	            		Δέιτε περισσότερα  <i class="fa fa-angle-right"></i>
 	        		</div>
@@ -289,7 +291,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<h5 class="title-heading-center">MyConstructor.gr Is Getting Social..</h5>
-			<p>Learn more about work, craftsman & clients</p>
+			<p>Είστε σε καλά χέρια! Ποιοί μίλησαν για το MyConstructor.gr</p>
 		</div>
 	</div>
 	<div class="row">
@@ -356,11 +358,11 @@
 				<div class="col-md-12">
 					<div class="div-socials">
 						<ul>
-							<li><a class="a_fb"><i class="fa fa-facebook"></i></a></li>
-							<li><a class="a_tw"><i class="fa fa-twitter"></i></a></li>
-							<li><a class="a_google"><i class="fa fa-google"></i></a></li>
-							<li><a class="a_inst"><i class="fa fa-instagram"></i></a></li>
-							<li><a class="a_lkdin"><i class="fa fa-linkedin"></i></a></li>
+							<li><a target="_blank" href="https://www.facebook.com/MyConstructorGR/" class="a_fb"><i class="fa fa-facebook"></i></a></li>
+							<li><a target="_blank" href="https://twitter.com/myConstructor" class="a_tw"><i class="fa fa-twitter"></i></a></li>
+							<li><a target="_blank" href="https://plus.google.com/u/0/111872566385119596767" class="a_google"><i class="fa fa-google"></i></a></li>
+							<li><a target="_blank" href="https://www.instagram.com/myconstructorgr/" class="a_inst"><i class="fa fa-instagram"></i></a></li>
+							<li><a target="_blank" href="https://www.linkedin.com/company/myconstructor-gr/" class="a_lkdin"><i class="fa fa-linkedin"></i></a></li>
 						</ul>
 					</div>
 					<p class="p-copyrights">© 2012 - 2018 All rights reserved - <a href="https://myconstructor.gr">myconstructor.gr</a></p>
