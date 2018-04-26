@@ -35,10 +35,15 @@ $(document).ready(function(){
 });
 
 $(document).mouseup(function (e){
-	var container = $(".mobile_cat_menu");
-    if (!container.is(e.target) && container.has(e.target).length === 0){// if the target of the click isn't the container... nor a descendant of the container
-        closeMobileMenuCat();
-    }
+		if($('.col-md-3.col-md-sub-cats').hasClass('mobile_cat_menu')){
+			var cat_menu = $(".mobile_cat_menu");
+		    if (!cat_menu.is(e.target) && cat_menu.has(e.target).length === 0){// if the target of the click isn't the container... nor a descendant of the container
+			   
+			        closeMobileMenuCat();
+			    
+			}
+		}
+	
 });
 
 
@@ -119,8 +124,7 @@ $(document).ready(function(){
 	});
 });
 
-$(document).mouseup(function (e)
-{
+$(document).mouseup(function (e){
     var container = $("div#filters");
 
     if (!container.is(e.target) && container.has(e.target).length === 0){// if the target of the click isn't the container... nor a descendant of the container

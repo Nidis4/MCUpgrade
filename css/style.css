@@ -1911,7 +1911,7 @@ ul.ul-app-info li span {
     font-size: 16px;
 }
 li.app-price-li span.app-price {
-    font-size: 21px;
+    font-size: 26px;
 }
 
 p.reviewerName {
@@ -4161,7 +4161,39 @@ a.a_lkdin:hover {
     display: none;
 }
 
+div#professionalDetails a {
+    text-decoration: none;
+}
 
+@media screen and (max-width:1269px){
+  .app-small-description-outer {
+ 
+    display: block;
+  }
+
+  .h3-small-desc-title{
+    text-align: left;
+    padding-left: 13px;
+  }
+  .app-small-description-outer .app-small-desc-title{
+    margin:0px;
+  }
+
+  .app-small-description-outer .app-small-desc-title:before{
+    display: none;
+  }
+  h1.h3-small-desc-title, .offer-details{
+    font-size: 18px;
+        line-height: 24px;
+  }
+
+  h3#directory-top {
+    line-height: 35px;
+    font-size: 24px;
+  }
+
+
+}
 
 
 
@@ -4299,6 +4331,20 @@ a.a_lkdin:hover {
 
 }
 
+@media screen and (max-width: 485px){
+  .search-btn-style span.search-text{
+    font-size:17px;
+  }
+  .offer-details{
+    margin-left: 5px;
+  }
+  .h3-small-desc-title{
+    padding-left: 0px;
+  }
+
+}
+
+
 @media screen and (max-width: 459px){
   .professional_new_tel, .btn-book-transport,  .col-professional-review .prices, .new_professional_review_score{
     position: unset;
@@ -4331,3 +4377,24 @@ a.a_lkdin:hover {
  
 }
 
+
+@media screen and (max-width: 401px){
+  .search-btn-style span.search-text{
+    font-size:15px;
+  }
+  .search-btn-style .icon-search{
+    width: 40px;
+    padding: 6px 8px 6px 6px;
+    margin: 7px;
+    
+  }
+  .search-btn-style .icon-search i{
+    font-size: 21px;
+  }
+}
+
+@media screen and (max-width: 401px){
+  .search-btn-style span.search-text{
+    font-size:13px;
+  }
+}
