@@ -2094,9 +2094,15 @@ a.a-cycle-btn {
 
 }
 
-.container-fluid.container-how-it-content .row {
+.container-fluid.container-how-it-content .row-how-it-content, .container-fluid.container-how-it-content .row.row-how-it-menu {
     max-width: 1100px;
     margin: auto;
+    padding:70px;
+  background:#fff;
+}
+
+.container-fluid.container-how-it-content .row.row-how-it-menu{
+  padding:0px;
 }
 
 .how-it-icon-right, .how-it-icon-left {
@@ -2112,12 +2118,64 @@ a.a-cycle-btn {
  background:#f9f9f9;
 }
 
-.container-fluid.container-how-it-content .row{
-  padding:70px;
-  background:#fff;
+.container-how-it-works{
+    background: url(../img/pistopoihtika-14.jpg) no-repeat;
+    background-position: top;
+    background-size: cover;
+    padding: 100px 0px 140px;
+
 }
 
+ul.ul-how-it {
+    list-style: none;
+    display: inline-flex;
+    padding-left: 0px;
+}
 
+.how-it-menu {
+  max-width: 516px;
+  margin: -60px auto 0px;
+
+}
+ul.ul-how-it li div.worker{
+
+     border-top-right-radius:  7px;
+        background: #004a86;
+        color:#fff;
+}
+
+ul.ul-how-it li div.customer{
+  
+    border-top-left-radius: 7px;
+}
+
+ul.ul-how-it li div {
+    background: #fff;
+    font-size: 20px;
+    min-width: 258px;
+    text-align: center;
+    padding: 16px;
+    cursor: pointer;
+}
+
+.container-fluid.container-how-it-works {
+    text-align: center;
+    color: #fff;
+}
+
+.container-fluid.container-how-it-works h4 {
+    font-size: 40px;
+    font-family: dinrg;
+}
+
+.container-fluid.container-how-it-works p {
+    font-size: 21px;
+}
+
+.container-fluid.container-how-it-works .row{
+  margin-left: 0px;
+  margin-right: 0px;
+}
 
 @media screen and (max-width: 1398px){
   #myTopnav .navbar-brand img {
@@ -2252,6 +2310,7 @@ a.a-cycle-btn {
   #search-results i.fa.fa-chevron-right {
     font-size: 20px;
   }
+
 
 
 }
@@ -2538,6 +2597,64 @@ p.score_from {
     font-size: 25px;
 }
 
+.col-equal-height-outer{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin:55px 0px;
+}
+
+.col-sm-3.how-it-icon-right, .col-sm-3.how-it-icon-left{
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 25%;
+    -ms-flex: 0 0 25%;
+    flex: 0 0 25%;
+    max-width: 25%;
+    align-self: center;
+
+}
+.col-sm-9.how-it-text{
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 75%;
+    -ms-flex: 0 0 75%;
+    flex: 0 0 75%;
+    max-width: 75%;
+    align-self: center;
+}
+
+.col-sm-9.how-it-text h4, .col-md-12.how-it-text h4 {
+    font-size: 28px;
+    font-family: dinrg;
+}
+
+.col-sm-9.how-it-text p, .col-md-12.how-it-text p {
+    font-size: 16px;
+}
+
+.content-worker{
+  display: none;
+}
+
+.btn-how-it {
+    background: #004a86;
+    color: #fff;
+    max-width: 290px;
+    text-align: center;
+    padding: 10px;
+    font-size: 18px;
+    margin: 30px auto;
+    border-radius: 5px;
+}
+
+.btn-how-it:hover {
+    opacity: 0.8;
+}
+
+
 
 
   @media screen and (max-width: 1091px){
@@ -2623,6 +2740,7 @@ ul.ul-breadcrumb li + li:before {
     background: #FEBB02;
     margin-bottom:30px;
     border-radius: 4px;
+    
   }
 
   .menu-cat-selected-title{
@@ -2630,6 +2748,7 @@ ul.ul-breadcrumb li + li:before {
     font-family: dinmd;
     color: #333;
     margin-bottom:18px;
+
   }
 
 .selected-cat-apps a {
@@ -2646,8 +2765,10 @@ ul.ul-breadcrumb li + li:before {
     border-top-left-radius: 3px!important;
     border-bottom-left-radius: 3px!important;
     border-bottom-right-radius: 3px!important;
-    /*border: 1px solid #929292;*/
+    
     min-height: 50px;
+    display: flex;
+    align-items: center;
 }
 
 #MainMenu a.list-group-item, #MainMenu button.list-group-item {
@@ -4208,6 +4329,7 @@ a.a_lkdin:hover {
     display: none;
 }
 
+
 div#professionalDetails a {
     text-decoration: none;
 }
@@ -4342,6 +4464,16 @@ div#professionalDetails a {
     margin: 0 4px;
   }
 
+    .col-sm-3.how-it-icon-right, .col-sm-3.how-it-icon-left{
+    display: none;
+  }
+  .col-sm-9.how-it-text{
+      flex: unset;
+      max-width: unset;
+      width: 100%;
+  }
+
+
  
 }
 
@@ -4385,6 +4517,7 @@ div#professionalDetails a {
   .col-md-3.col-sm-3.professional-img-con{
     width: 100%;
     max-width: unset;
+    margin-bottom:15px;
 
   }
 

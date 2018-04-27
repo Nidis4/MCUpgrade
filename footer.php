@@ -5,19 +5,19 @@
 					<h4>Χρήσιμοι Σύνδεσμοι</h4>
 					<div class="col-sm-6 col-sm-6-inner">
 						<ul>
-							<li><a href="https://myconstructor.gr/cms_pages/view_cms/who_we_are">Ποιοι είμαστε</a></li>
-							<li><a href="https://myconstructor.gr/cms_pages/view_cms/privacy_policy">Πολιτική απορρήτου</a></li>
-							<li><a href="https://myconstructor.gr/cms_pages/view_cms/alternate_payment_method">Τρόποι πληρωμής</a></li>
-							<li><a href="https://myconstructor.gr/cms_pages/view_cms/terms_of_use">Όροι Χρήσης</a></li>
-							<li><a href="https://myconstructor.gr/f_a_qs/faq">Συχνές Ερωτήσεις</a></li>
+							<li><a href="<?php echo $api_url; ?>helpful_pages/who_we_are.php">Ποιοι είμαστε</a></li>
+							<li><a href="<?php echo $api_url; ?>#">Πολιτική απορρήτου</a></li>
+							<li><a href="<?php echo $api_url; ?>helpful_pages/terms_of_use.php">Όροι Χρήσης</a></li>
+							<li><a href="<?php echo $api_url; ?>helpful_pages/faq.php">Συχνές Ερωτήσεις</a></li>
+							<li><a href="<?php echo $api_url; ?>helpful_pages/how_it_works.php">Πως λειτουργεί</a></li>
 						</ul>
 					</div>
 					<div class="col-sm-6 col-sm-6-inner">
 						<ul>
 							
-							<li><a href="https://myconstructor.gr/cms_pages/view_cms/why_myconstructor">Γιατί το myConstructor.gr;</a></li>
-							<li><a href="https://myconstructor.gr/cms_pages/view_cms/how_i_earn">Είμαι επαγγελματίας, πώς κερδίζω;</a></li>
-							<li><a href="https://myconstructor.gr/members/chooseUserType">Συνδεθείτε/Εγγραφείτε</a></li>
+							<li><a href="<?php echo $api_url; ?>helpful_pages/why_myconstructor.php">Γιατί το myConstructor.gr;</a></li>
+							<li><a href="<?php echo $api_url; ?>#">Είμαι επαγγελματίας, πώς κερδίζω;</a></li>
+							<li><a href="<?php echo $api_url; ?>sign_up.php">Συνδεθείτε/Εγγραφείτε</a></li>
 						</ul>
 					</div>
 				</div>
@@ -63,7 +63,7 @@
 
   
 
-	<script type="text/javascript" src="js/home.js?version=2"></script>
-	<script type="text/javascript" src="platform/js/core.js"></script>
+	<script type="text/javascript" src="<?php echo $api_url; ?>js/home.js?version=2"></script>
+	<script type="text/javascript" src="<?php echo $api_url; ?>platform/js/core.js"></script>
 </body>
 </html>
