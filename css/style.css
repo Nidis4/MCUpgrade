@@ -1992,6 +1992,10 @@ a.btn-book-online {
     
 }
 
+.row.row-search-titles .search-btn-style{
+  background: rgba(255,255,255,0.7);
+}
+
 .searchbar {
     max-width: 560px;
     margin: auto;
