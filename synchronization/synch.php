@@ -26,8 +26,11 @@ $func = isset($_POST['fun']) ? $_POST['fun'] : "";
 if ($func == "syncTest"){
 	syncTest();
 }
-else if ($func == "syncCategory"){
+else if ($func == "Categories"){
 	syncCategories();
+}
+else if ($func == "Applications"){
+	syncApplications();
 }
 else if ($func == ""){
 
