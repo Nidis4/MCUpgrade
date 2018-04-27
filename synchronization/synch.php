@@ -13,13 +13,33 @@ $live_user_name = 'stgmycon_db_user';
 $live_db_pass = 'u~,oEFS]5b}I';
 
 
-echo "Synchronization Starts<br>";
+//echo "Synchronization Starts<br>";
 //syncCategories();
 //syncApplications();
 //syncCustomers();
-syncProfessionals();
+//syncProfessionals();
 //syncAppointments();
-syncReviews();
+//syncReviews();
+
+$func = isset($_POST['fun']) ? $_POST['fun'] : "";
+
+if ($func == "syncTest"){
+	syncTest();
+}
+else if ($func == "syncCategory"){
+	syncCategories();
+}
+else if ($func == ""){
+
+}
+else{
+	echo "Klarino";
+}
+
+function syncTest(){
+	echo "Inside";
+}
+
 
 function syncReviews(){
 	echo "In Sync Reviews<br>";
@@ -231,7 +251,7 @@ function insertCategories($id, $name, $name_greek, $title, $title_greek, $descri
 	$title_greek = $upgrade->real_escape_string($title_greek);
 	$description_greek = $upgrade->real_escape_string($description_greek);
 
-	$query = "INSERT INTO `categories` ( `id`, `name`, `name_greek`, `title`, `title_greek`, `description`, `description_greek`, `sequence`, `modified`, `commissionRate`) VALUES (".$id.",'".$name."','".$name_greek."','".$title."','".$title_greek."','".$description."','".$description_greek."','".$sequence."','".$modified."','".$commissionRate."') ON DUPLICATE KEY UPDATE `name`='".$name."', `name_greek`='".$name_greek."', `title`='".$title."', `title_greek`='".$title_greek."', `description`='".$description."', `description_greek`='".$description_greek."', `sequence`='".$sequence."', `modified`='".$modified."', `commissionRate`='".$commissionRate."' ";
+	$query = "INSERT INTO `categories` ( `id`, `name`, `name_greek`, `title`, `title_greek`, `description`, `description_greek`, `sequence`, `modified`, `commissionRate`) VALUES (".$id.",'".$name."','".$name_greek."','".$title."','".$title_greek."','".$description."','".$description_greek."','".$sequence."','".$modified."','".$commissionRate."') ON DUPLICATE KEY UPDATE `name`='".$name."', `name_greek`='".$name_greek."', `title`='".$title."', `description`='".$description."', `sequence`='".$sequence."', `modified`='".$modified."', `commissionRate`='".$commissionRate."' ";
 	//echo $query;
 
 	if (!$upgrade->query($query)) {
@@ -267,7 +287,7 @@ function insertApplications($id, $category_id, $title, $title_greek, $short_desc
 	$detail_description = $upgrade->real_escape_string($detail_description);
 	$detail_description_gr = $upgrade->real_escape_string($detail_description_gr);
 
-	$query = "INSERT INTO `applications` ( `id`, `category_id`, `title`, `title_greek`, `short_description`, `short_description_gr`, `detail_description`, `detail_description_gr`, `unit`, `min_price`, `sequence`, `modified`) VALUES (".$id.",'".$category_id."','".$title."','".$title_greek."','".$short_description."','".$short_description_gr."','".$detail_description."','".$detail_description_gr."','".$unit."','".$min_price."', '".$sequence."', '".$modified."') ON DUPLICATE KEY UPDATE `category_id`='".$category_id."', `title`='".$title."', `title_greek`='".$title_greek."', `short_description`='".$short_description."', `short_description_gr`='".$short_description_gr."', `detail_description`='".$detail_description."', `detail_description_gr`='".$detail_description_gr."', `unit`='".$unit."', `min_price`='".$min_price."', `sequence`='".$sequence."', `modified`='".$modified."' ";
+	$query = "INSERT INTO `applications` ( `id`, `category_id`, `title`, `title_greek`, `short_description`, `short_description_gr`, `detail_description`, `detail_description_gr`, `unit`, `min_price`, `sequence`, `modified`) VALUES (".$id.",'".$category_id."','".$title."','".$title_greek."','".$short_description."','".$short_description_gr."','".$detail_description."','".$detail_description_gr."','".$unit."','".$min_price."', '".$sequence."', '".$modified."') ON DUPLICATE KEY UPDATE `category_id`='".$category_id."', `title`='".$title."', `title_greek`='".$title_greek."', `short_description`='".$short_description."', `detail_description`='".$detail_description."', `unit`='".$unit."', `min_price`='".$min_price."', `sequence`='".$sequence."', `modified`='".$modified."' ";
 
 	if (!$upgrade->query($query)) {
 	    echo $query."<br>";
