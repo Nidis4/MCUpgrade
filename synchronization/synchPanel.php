@@ -31,10 +31,10 @@ include 'synch.php';
 <body>
 	<div class="action" id="Categories">Sync Categories</div>
 	<div class="action" id="Applications">Sync Application</div>
-	<div class="action" id="category">Sync Customers</div>
-	<div class="action" id="category">Sync Professionals</div>
-	<div class="action" id="category">Sync Appointments</div>
-	<div class="action" id="category">Sync Reviews</div>
+	<div class="action" id="Customers">Sync Customers</div>
+	<div class="action" id="Professionals">Sync Professionals</div>
+	<div class="action" id="Appointments">Sync Appointments</div>
+	<div class="action" id="Reviews">Sync Reviews</div>
 
 	<div id='output'></div>
 

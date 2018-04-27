@@ -26,11 +26,27 @@ $func = isset($_POST['fun']) ? $_POST['fun'] : "";
 if ($func == "syncTest"){
 	syncTest();
 }
-else if ($func == "Categories"){
+else if ($func == "syncCategories"){
 	syncCategories();
 }
-else if ($func == "Applications"){
+else if ($func == "syncApplications"){
 	syncApplications();
+}
+else if ($func == "syncCustomers"){
+	//syncApplications();
+	echo "Not Implemented";
+}
+else if ($func == "syncProfessionals"){
+	//syncApplications();
+	echo "Not Implemented";
+}
+else if ($func == "syncAppointments"){
+	//syncApplications();
+	echo "Not Implemented";
+}
+else if ($func == "syncReviews"){
+	syncReviews();
+	//echo "Not Implemented";
 }
 else if ($func == ""){
 
@@ -60,6 +76,8 @@ function syncReviews(){
 	    /* free result set */
 	    $result->free();
 	}
+
+	echo "Sync Completed<br>";
 }
 
 
@@ -68,7 +86,7 @@ function insertReview($id, $professional_id, $employer_id, $agent_id, $appointme
 
 	$upgrade = UpgradeDB();
 
-	$query = "INSERT INTO `directory_ratings`( `id`, `professional_id`, `customer_id`, `agent_id`, `appointment_id`, `category_id`, `job_title`, `quality`, `reliability`, `cost`, `schedule`, `behaviour`, `cleanliness`, `active`, `comment`,  `professional_comment`, `created`, `modified`) VALUES ('".$id."', '".$professional_id."', '".$employer_id."', '".$agent_id."', '".$appointment_id."', '".$category_id."', '".$job_title."', '".$quality."', '".$reliability."', '".$cost."', '".$schedule."', '".$behaviour."', '".$cleanliness."', '".$active."', \"".$comment."\", '".$professional_comment."', '".$created."', '".$modified."') ";
+	$query = "INSERT INTO `directory_ratings`( `id`, `professional_id`, `customer_id`, `agent_id`, `appointment_id`, `category_id`, `job_title`, `quality`, `reliability`, `cost`, `schedule`, `behaviour`, `cleanliness`, `active`, `comment`,  `professional_comment`, `created`, `modified`) VALUES ('".$id."', '".$professional_id."', '".$employer_id."', '".$agent_id."', '".$appointment_id."', '".$category_id."', '".$job_title."', '".$quality."', '".$reliability."', '".$cost."', '".$schedule."', '".$behaviour."', '".$cleanliness."', '".$active."', \"".$comment."\", '".$professional_comment."', '".$created."', '".$modified."') ON DUPLICATE KEY UPDATE `professional_id`='".$professional_id."', `customer_id`='".$employer_id."',`agent_id`='".$agent_id."',`appointment_id`='".$appointment_id."',`category_id`='".$category_id."',`job_title`='".$job_title."',`quality`='".$quality."',`reliability`='".$reliability."',`cost`='".$cost."',`schedule`='".$schedule."',`behaviour`='".$behaviour."',`cleanliness`='".$cleanliness."',`active`='".$active."',`comment`='".$comment."',`professional_comment`='".$professional_comment."',`created`='".$created."',`modified`='".$modified."' ";
 	
 	if (!$upgrade->query($query)) {
 	    echo $query."<br>";
@@ -245,6 +263,7 @@ function syncCategories(){
 	    /* free result set */
 	    $result->free();
 	}
+	echo "Sync Completed<br>";
 }
 
 function insertCategories($id, $name, $name_greek, $title, $title_greek, $description, $description_greek, $sequence, $modified, $commissionRate){
@@ -278,6 +297,7 @@ function syncApplications(){
 	    /* free result set */
 	    $result->free();
 	}
+	echo "Sync Completed<br>";
 }
 
 function insertApplications($id, $category_id, $title, $title_greek, $short_description, $short_description_gr, $detail_description, $detail_description_gr, $unit, $min_price, $sequence, $modified){
