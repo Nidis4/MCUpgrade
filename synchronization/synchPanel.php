@@ -26,6 +26,10 @@ include 'synch.php';
 			padding: 0px;
 			font-family: Verdana;
 		}
+		div#output {
+		    padding: 20px;
+		    font-size: 12px;
+		}
 	</style>
 </head>
 <body>

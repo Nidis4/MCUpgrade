@@ -33,12 +33,12 @@ else if ($func == "syncApplications"){
 	syncApplications();
 }
 else if ($func == "syncCustomers"){
-	//syncApplications();
-	echo "Not Implemented";
+	syncCustomers();
+	//echo "Not Implemented";
 }
 else if ($func == "syncProfessionals"){
-	//syncApplications();
-	echo "Not Implemented";
+	syncProfessionals();
+	//echo "Not Implemented";
 }
 else if ($func == "syncAppointments"){
 	//syncApplications();
@@ -89,12 +89,12 @@ function insertPayment($id, $professional_id, $category_id, $amount, $agent_id, 
 
 	$upgrade = UpgradeDB();
 
-	$query = "INSERT INTO `payments`(`id`, `professional_id`, `category_id`, `amount`, `agent_id`, `comment`, `type`, `bank_name`, `datetime_added`, `status`, `datetimeStatusUpdated`, `cancelComment`) VALUES ('".$id."', '".$professional_id."', '".$category_id."', '".$amount."', '".$agent_id."', '".$comment."', '".$type."', '".$bank_name."', '".$datetime_added."', '".$status."', '".$datetimeStatusUpdated."','".$cancelComment."') ON DUPLICATE KEY UPDATE `professional_id`='".$professional_id."', `category_id`='".$category_id."',`amount`='".$amount."',`agent_id`='".$agent_id."',`comment`='".$comment."',`type`='".$type."',`bank_name`='".$bank_name."',`datetime_added`='".$datetime_added."',`status`='".$status."',`datetimeStatusUpdated`='".$datetimeStatusUpdated."',`cancelComment`='".$cancelComment."' ";
+	$query = "INSERT INTO `payments`(`id`, `professional_id`, `category_id`, `amount`, `agent_id`, `comment`, `type`, `bank_name`, `datetime_added`, `status`, `datetimeStatusUpdated`, `cancelComment`) VALUES ('".$id."', '".$professional_id."', '".$category_id."', '".$amount."', '".$agent_id."', \"".$comment."\", '".$type."', '".$bank_name."', '".$datetime_added."', '".$status."', '".$datetimeStatusUpdated."','".$cancelComment."') ON DUPLICATE KEY UPDATE `professional_id`='".$professional_id."', `category_id`='".$category_id."',`amount`='".$amount."',`agent_id`='".$agent_id."',`comment`=\"".$comment."\",`type`='".$type."',`bank_name`='".$bank_name."',`datetime_added`='".$datetime_added."',`status`='".$status."',`datetimeStatusUpdated`='".$datetimeStatusUpdated."',`cancelComment`='".$cancelComment."' ";
 	
 	if (!$upgrade->query($query)) {
 	    echo $query."<br>";
-	    printf("Errormessage: %s\n", $upgrade->error);
-	    echo "<br>";
+	    printf("<b>Errormessage:</b> %s\n", $upgrade->error);
+	    echo "<br><br>";
 	}
 }
 
@@ -131,8 +131,8 @@ function insertReview($id, $professional_id, $employer_id, $agent_id, $appointme
 	
 	if (!$upgrade->query($query)) {
 	    echo $query."<br>";
-	    printf("Errormessage: %s\n", $upgrade->error);
-	    echo "<br>";
+	    printf("<b>Errormessage:</b> %s\n", $upgrade->error);
+	    echo "<br><br>";
 	}
 }
 
@@ -189,6 +189,8 @@ function syncProfessionals(){
 	    /* free result set */
 	    $result->free();
 	}
+
+	echo "Sync <b>Completed</b><br>";
 }
 
 function insertProfessional($id, $first_name, $last_name, $nick_name, $current_working, $description, $image, $id_card_number, $personal_vat_id, $company_vat_id, $profile_status, $profile_status_change_reason, $admin_comments, $hide_earning, $sex, $email, $password, $created, $modified, $last_login, $last_login_ip, $status, $serviceArea, $address, $area, $city, $country_id, $postcode, $latitude, $longitude, $phone, $mobile_no){
