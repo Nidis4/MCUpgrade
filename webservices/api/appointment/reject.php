@@ -19,7 +19,7 @@ $db = $database->getConnection();
 $appointment = new Appointment($db);
 
 // set ID property of product to be edited
-$appointment->id = isset($_POST['id']) ? $_POST['id'] : die();
+$appointment->id = isset($_POST['id']) ? $_POST['id'] : fail();
 
 
 $cancelReason = 2;
@@ -74,6 +74,7 @@ $appointment->create($prof_new_id, $cust_id, $application_id, $county_id, $date,
 }
 
 $appointment_arr=array(
+	"status" => "1",
 	"previous_prof" => $prof_id,
 	"next_prof" => $prof_new_id,
 	"cancel" => $cancelComment,
@@ -81,4 +82,17 @@ $appointment_arr=array(
 );
  
 echo json_encode($appointment_arr);
+
+
+function fail(){
+	echo json_encode(
+        array(
+        	"status" => "0",
+        	"error" => "missing arguments"
+        )
+    );
+    die();
+}
+
+
 ?>

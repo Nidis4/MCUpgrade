@@ -18,20 +18,30 @@ $db = $database->getConnection();
 // initialize object
 $appointment = new Appointment($db);
 
-$id = isset($_POST['id']) ? $_POST['id'] : die();
-$close_times = isset($_POST['close_times']) ? $_POST['close_times'] : die();
+$id = isset($_POST['id']) ? $_POST['id'] : fail();
+$close_times = isset($_POST['close_times']) ? $_POST['close_times'] : fail();
 
 $stmt = $appointment->updateCloseTimes($id, $close_times);
 
 if($stmt){ 
     echo json_encode(
-        array("message" => "Update Completed.")
+        array("status" => "1")
     );
 }
  
 else{
     echo json_encode(
-        array("message" => "No Update Made.")
+        array("status" => "0")
     );
+}
+
+function fail(){
+	echo json_encode(
+        array(
+        	"status" => "0",
+        	"error" => "missing arguments"
+        )
+    );
+    die();
 }
 ?>
