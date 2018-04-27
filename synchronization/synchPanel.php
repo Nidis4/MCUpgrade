@@ -35,6 +35,7 @@ include 'synch.php';
 	<div class="action" id="Professionals">Sync Professionals</div>
 	<div class="action" id="Appointments">Sync Appointments</div>
 	<div class="action" id="Reviews">Sync Reviews</div>
+	<div class="action" id="Payments">Sync Payments</div>
 
 	<div id='output'></div>
 

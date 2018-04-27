@@ -44,6 +44,10 @@ else if ($func == "syncAppointments"){
 	//syncApplications();
 	echo "Not Implemented";
 }
+else if ($func == "syncPayments"){
+	syncPayments();
+	//echo "Not Implemented";
+}
 else if ($func == "syncReviews"){
 	syncReviews();
 	//echo "Not Implemented";
@@ -58,6 +62,43 @@ else{
 function syncTest(){
 	echo "Inside";
 }
+
+
+
+function syncPayments(){
+	echo "In Sync Payments<br>";
+
+	$query = "SELECT `id`, `member_id`, `category_id`, `amount`, `agent_id`, `comment`, `type`, `bank_name`, `datetime_added`, `status`, `datetimeStatusUpdated`, `cancelComment` FROM `professionals_payments` ";
+
+	$live = LiveDB();
+	if ($result = $live->query($query)) {
+
+	    /* fetch associative array */
+	    while ($row = $result->fetch_assoc()) {
+	        insertPayment($row['id'], $row['member_id'], $row['category_id'], $row['amount'], $row['agent_id'], $row['comment'], $row['type'], $row['bank_name'], $row['datetime_added'], $row['status'], $row['datetimeStatusUpdated'], $row['cancelComment']);
+	    }
+
+	    /* free result set */
+	    $result->free();
+	}
+
+	echo "Sync Completed<br>";
+}
+
+function insertPayment($id, $professional_id, $category_id, $amount, $agent_id, $comment, $type, $bank_name, $datetime_added, $status, $datetimeStatusUpdated, $cancelComment){
+
+	$upgrade = UpgradeDB();
+
+	$query = "INSERT INTO `payments`(`id`, `professional_id`, `category_id`, `amount`, `agent_id`, `comment`, `type`, `bank_name`, `datetime_added`, `status`, `datetimeStatusUpdated`, `cancelComment`) VALUES ('".$id."', '".$professional_id."', '".$category_id."', '".$amount."', '".$agent_id."', '".$comment."', '".$type."', '".$bank_name."', '".$datetime_added."', '".$status."', '".$datetimeStatusUpdated."','".$cancelComment."') ON DUPLICATE KEY UPDATE `professional_id`='".$professional_id."', `category_id`='".$category_id."',`amount`='".$amount."',`agent_id`='".$agent_id."',`comment`='".$comment."',`type`='".$type."',`bank_name`='".$bank_name."',`datetime_added`='".$datetime_added."',`status`='".$status."',`datetimeStatusUpdated`='".$datetimeStatusUpdated."',`cancelComment`='".$cancelComment."' ";
+	
+	if (!$upgrade->query($query)) {
+	    echo $query."<br>";
+	    printf("Errormessage: %s\n", $upgrade->error);
+	    echo "<br>";
+	}
+}
+
+
 
 
 function syncReviews(){
@@ -86,11 +127,12 @@ function insertReview($id, $professional_id, $employer_id, $agent_id, $appointme
 
 	$upgrade = UpgradeDB();
 
-	$query = "INSERT INTO `directory_ratings`( `id`, `professional_id`, `customer_id`, `agent_id`, `appointment_id`, `category_id`, `job_title`, `quality`, `reliability`, `cost`, `schedule`, `behaviour`, `cleanliness`, `active`, `comment`,  `professional_comment`, `created`, `modified`) VALUES ('".$id."', '".$professional_id."', '".$employer_id."', '".$agent_id."', '".$appointment_id."', '".$category_id."', '".$job_title."', '".$quality."', '".$reliability."', '".$cost."', '".$schedule."', '".$behaviour."', '".$cleanliness."', '".$active."', \"".$comment."\", '".$professional_comment."', '".$created."', '".$modified."') ON DUPLICATE KEY UPDATE `professional_id`='".$professional_id."', `customer_id`='".$employer_id."',`agent_id`='".$agent_id."',`appointment_id`='".$appointment_id."',`category_id`='".$category_id."',`job_title`='".$job_title."',`quality`='".$quality."',`reliability`='".$reliability."',`cost`='".$cost."',`schedule`='".$schedule."',`behaviour`='".$behaviour."',`cleanliness`='".$cleanliness."',`active`='".$active."',`comment`='".$comment."',`professional_comment`='".$professional_comment."',`created`='".$created."',`modified`='".$modified."' ";
+	$query = "INSERT INTO `directory_ratings`( `id`, `professional_id`, `customer_id`, `agent_id`, `appointment_id`, `category_id`, `job_title`, `quality`, `reliability`, `cost`, `schedule`, `behaviour`, `cleanliness`, `active`, `comment`,  `professional_comment`, `created`, `modified`) VALUES ('".$id."', '".$professional_id."', '".$employer_id."', '".$agent_id."', '".$appointment_id."', '".$category_id."', '".$job_title."', '".$quality."', '".$reliability."', '".$cost."', '".$schedule."', '".$behaviour."', '".$cleanliness."', '".$active."', \"".$comment."\", '".$professional_comment."', '".$created."', '".$modified."') ON DUPLICATE KEY UPDATE `professional_id`='".$professional_id."', `customer_id`='".$employer_id."',`agent_id`='".$agent_id."',`appointment_id`='".$appointment_id."',`category_id`='".$category_id."',`job_title`='".$job_title."',`quality`='".$quality."',`reliability`='".$reliability."',`cost`='".$cost."',`schedule`='".$schedule."',`behaviour`='".$behaviour."',`cleanliness`='".$cleanliness."',`active`='".$active."',`comment`=\"".$comment."\",`professional_comment`='".$professional_comment."',`created`='".$created."',`modified`='".$modified."' ";
 	
 	if (!$upgrade->query($query)) {
 	    echo $query."<br>";
 	    printf("Errormessage: %s\n", $upgrade->error);
+	    echo "<br>";
 	}
 }
 
