@@ -138,7 +138,19 @@
 				                          <div class="tab-pane active" id="filters-area">
 					                          	<div class="col-md-3">
 					                          		<label>Νομός</label>
-					                                	<?php echo $select_counties; ?> <!-- front_end_config/core.php  -->
+					                          		<?php 
+					                          			$counties = file_get_contents( $api_url .'webservices/api/county/read.php');
+					                          			$counties = json_decode($counties, true);
+					                          			//$counties[0];
+					                          		?>
+
+					                          		<select class="counties">
+					                                <?php 
+					                                    foreach ($counties as $county) {	
+							                                echo '<option val="'. $county["display_name_gr"] .'" value="'. $county["id"] .'">' .$county["county_name_gr"] .'</option>';
+							                            }
+					                            	 ?>
+					                                </select>
 					                          	</div>
 
 					                          	<div class="col-md-3">
@@ -467,7 +479,18 @@
 					                          <div class="tab-pane active" id="filters-area">
 					                          	<div class="col-md-3">
 					                          		<label>Νομός</label>
-					                                	<?php echo $select_counties; ?> <!-- front_end_config/core.php  -->
+					                                	<label>Νομός</label>
+						                          		<?php 
+						                          			$counties = file_get_contents( $api_url .'webservices/api/county/read.php');
+						                          			$counties = json_decode($counties, true);
+						                          		?>
+						                          		<select class="counties">
+						                                <?php 
+						                                    foreach ($counties as $county) {	
+								                                echo '<option val="'. $county["display_name_gr"] .'" value="'. $county["id"] .'">' .$county["county_name_gr"] .'</option>';
+								                            }
+						                            	 ?>
+						                                </select>
 					                          	</div>
 
 					                          	<div class="col-md-3">

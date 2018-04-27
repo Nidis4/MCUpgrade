@@ -6,8 +6,8 @@
 <div class="container-fluid container-how-it-works">
 	<div class="row">
 		<div class="col-md-12">
-			<h4>How It Works?</h4>
-			<p>Lets see how this works, select your status below</p>
+			<h4>Πώς Λειτουργεί το MyConstructor.gr;</h4>
+			<p>Ας δούμε μαζί! Διάλεξε μόνο σε ποια κατηγορία ανήκεις.</p>
 		</div>
 	</div>
 </div>
