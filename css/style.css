@@ -1115,7 +1115,7 @@ h4.cleaning-hover-title {
   -o-transform: rotate(0deg);
   transform: rotate(0deg);
   margin-top:50px;
-  background: rgba(255,255,255, 0.7);
+  background: #fff;
   font-family: dinmd;
   overflow: auto;
   border-top: 30px solid #da3a10;
@@ -1981,7 +1981,7 @@ a.btn-book-online {
     -ms-transform: rotate(0deg);
     -o-transform: rotate(0deg);
     transform: rotate(0deg);
-    background: rgba(255,255,255, 0.7);
+    background: #fff;
     font-family: dinmd;
     overflow: auto;
     /*border-top: 6px solid #FF5722;
