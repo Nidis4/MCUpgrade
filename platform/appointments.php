@@ -51,8 +51,11 @@ include('config/core.php');
 
 			<?php
 				include('header.php');
-				$appointments = file_get_contents($api_url.'appointment/read_paging.php');
-
+				if(@$_GET['rejected']){
+					$appointments = file_get_contents($api_url.'appointment/read_rejected_paging.php');
+				}else{
+					$appointments = file_get_contents($api_url.'appointment/read_paging.php');
+				}
 				$appointmentsPag = json_decode($appointments, true); // decode the JSON into an associative array	
 				//echo $api_url.'webservices/api/appointment/read_paging.php';			
 			?>
@@ -137,6 +140,14 @@ include('config/core.php');
 												<div class="col-sm-2">
 													<input type="submit" name="comsubmit" class="btn btn-primary" value="Load">
 												</div>
+												<div class="col-sm-3">
+													<?php
+														$api_url.'appointment/reject_count.php';
+														$rejectedappointments = file_get_contents($api_url.'appointment/reject_count.php');
+														$rejectedappointmentstotal = json_decode($rejectedappointments, true);
+													?>
+													<a href="<?php echo SITE_URL;?>platform/appointments.php?rejected=1" style="color: red"><?php echo $rejectedappointmentstotal['total'];?> Rejected</a>
+												</div>
 											</div>
 										</form>
 									</div>
@@ -157,6 +168,7 @@ include('config/core.php');
 									</thead>
 									<tbody>
 										<?php
+										if(@$appointmentsPag['records']){
 										foreach ($appointmentsPag['records'] as $field => $value) {
 											$id = $appointmentsPag['records'][$field]['id'];
 											$submission_date = $appointmentsPag['records'][$field]['datetimeCreated'];
@@ -307,6 +319,12 @@ include('config/core.php');
 										</div>
 										<?php
 										}
+										}else{
+									?>
+											<tr><td  colspan="9">No Record found</td></tr>
+									<?php		
+										}
+
 										?>										
 									</tbody>
 								</table>

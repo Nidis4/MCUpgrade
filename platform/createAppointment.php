@@ -230,7 +230,7 @@ include('config/core.php');
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Budget <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="budget" id="budget" class="form-control" placeholder="Add Budget" required value="0" />
+												<input type="text" name="budget" id="budget" class="form-control" placeholder="Add Budget" required value="" />
 												<input type="hidden" name="countrybudget" value="0" id="countrybudget">
 											</div>
 										</div>
