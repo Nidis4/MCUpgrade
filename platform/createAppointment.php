@@ -156,7 +156,7 @@ include('config/core.php');
 														<?php
 															foreach ($categories as $category) {
 																$cat_id = $category['id'];
-																$cat_name = $category['title'];
+																$cat_name = $category['title_greek'];
 																$commision = $category['commissionRate'];
 																echo '<option value="'.$cat_id.'" comm="'.$commision.'">'.$cat_name.'</option>';
 															}
