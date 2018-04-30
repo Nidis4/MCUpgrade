@@ -99,7 +99,7 @@ include('config/core.php');
 						
 								<h2 class="card-title">Help Information </h2>
 							</header>
-							<form action="#" method="POST" id="updateCustomerform">
+							<form action="#" method="POST" id="updateHelpform">
 								<div class="card-body col-sm-12 col-md-12 row" style="margin-left: 0px;">
 									<div class="col-sm-12 col-md-6"><!-- Left-->
 										<div class="form-group row" >
@@ -284,27 +284,15 @@ include('config/core.php');
 			$(document).ready(function(){
 				$("#updatecustomer").on('click',function(){
 
-					var form_data = new FormData(); 
-					form_data.append('first_name', $("#first_name").val());					
-					form_data.append('last_name', $("#last_name").val());
-					form_data.append('sex', $("#sex").val());
-					form_data.append('address', $("#pac-input-address").val());
-					form_data.append('mobile', $("#mobile").val());
-					form_data.append('phone', $("#phone").val());
-					form_data.append('email', $("#email").val());
-					form_data.append('customer_id', $("#customer_id").val());
-					
 
+					var form_data = $("#updateHelpform").serialize();			
 					
-					var getAvailableAPI = API_LOCATION +'customer/save.php';
+					var getAvailableAPI = API_LOCATION +'help/save.php';
 					
 					$.ajax({
 			            type: "POST",
 			            url: getAvailableAPI,
 			            dataType: "JSON",
-			            cache: false,
-		                contentType: false,
-		                processData: false,
 		                data: form_data,
 			            success: function(data)
 			            {
