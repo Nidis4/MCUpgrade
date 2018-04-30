@@ -73,7 +73,7 @@ $(document).ready(function(){ //CHANGE COUNTIES FILTER, breadcrumb county, and t
 			
 
 			if (typeof county_id === "undefined") {
-				$("select.counties").val('53');
+				$("select.counties").val('1');
 				var county = $('select.counties option:selected').val();
 				var county_name =  $('select.counties option:selected').attr('val');
 				var length = $("div.prof-main-col").length;
@@ -240,16 +240,23 @@ $(document).ready(function(){ //DIRECTORY FILTERS
 
 			})();
 
-			app_id=urlParams["app_id"];
+			var app_id=urlParams["app_id"];
+			var cat_id=urlParams["cat_id"];
+			
 
 			if (typeof app_id === "undefined") {
 				app_id= $('a.breadcrumb_app_name').data('app-id');
 			}
 
+			if(typeof cat_id === "undefined"){
+				cat_id = $('a.breadcrumb_cat_id').data('cat_id');
+			}
+
+		
 		var county = $('select.counties option:selected').val();
 		var url= window.location.href; 
 		var new_url = url.substring(0, url.indexOf('?'));
-		window.location.href = new_url+'?app_id='+app_id+'&county_id='+county;
+		window.location.href = new_url+'?cat_id='+cat_id+'&app_id='+app_id+'&county_id='+county;
 
 		/*$("div.prof-main-col").each(function(){
 			//alert($(this).attr('data-county'));

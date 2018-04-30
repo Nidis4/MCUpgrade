@@ -5,6 +5,14 @@
 ?>
 
 <?php 
+   if(isset($_GET['county_id'])){
+   		$url_county= $_GET['county_id'];
+   }else{
+   		$url_county='1';
+   }
+
+
+
 	include('header.php');
 	include('menu.php');
 	include('search.php');
@@ -48,7 +56,7 @@
 											    $app_id = $app['id'];
 											    $app_title = $app['title_greek'];
 								?>	
-												<a href="<?php echo $directory_url . '?cat_id=' . $cat_id . '&app_id=' . $app_id  ?>" class="list-group-item"><?php echo $app_title; ?></a>
+												<a href="<?php echo $directory_url . '?cat_id=' . $cat_id . '&app_id=' . $app_id .'&county_id='. $url_county ?>" class="list-group-item"><?php echo $app_title; ?></a>
 									 <?php  } ?>
 							</div>
 								<?php
@@ -85,8 +93,8 @@
 				<div class="directory-breadcrumb">
 					<ul class="ul-breadcrumb">
 						<li><a class="a-breadcrumb" href="<?php echo $api_url; ?>">Αρχική</a></li>
-						<li><a class="a-breadcrumb" href="<?php echo $directory_url .'?cat_id='. $category_id; ?>"><?php echo $cat_app_name; ?></a></li>
-						<li><a class="a-breadcrumb breadcrumb_app_name" data-app-id="<?php echo $application_id; ?>" href="<?php echo $directory_url .'?cat_id='. $category_id . '&app_id=' .$application_id; ?>"><?php echo $app_name; ?></a></li>
+						<li><a class="a-breadcrumb breadcrumb_cat_id" data-cat-id="<?php echo $category_id; ?>" href="<?php echo $directory_url .'?cat_id='. $category_id .'$county_id='. $url_county; ?>"><?php echo $cat_app_name; ?></a></li>
+						<li><a class="a-breadcrumb breadcrumb_app_name" data-app-id="<?php echo $application_id; ?>" href="<?php echo $directory_url .'?cat_id='. $category_id . '&app_id=' .$application_id . '&county_id='.$url_county; ?>"><?php echo $app_name; ?></a></li>
 						<li class="breadcrumb-county">
 						<?php
 							if(isset($_GET['county_id'])){ ?>
@@ -94,7 +102,7 @@
 						<?php
 							}else{
 						?>
-								<a href="<?php echo $directory_url .'?cat_id='. $category_id . '&app_id=' .$application_id. '&county_id=53'; ?>">Ελλάδα</a>
+								<a href="<?php echo $directory_url .'?cat_id='. $category_id . '&app_id=' .$application_id. '&county_id=1'; ?>">Ελλάδα</a>
 						<?php
 							}
 						?>
@@ -365,7 +373,7 @@
 					<div class="directory-breadcrumb">
 						<ul class="ul-breadcrumb">
 							<li><a href="<?php echo $api_url; ?>">Αρχική</a></li>
-							<li><a href="<?php echo $directory_url .'?cat_id='. $category_id; ?>"><?php echo $category_title; ?></a></li>
+							<li><a href="<?php echo $directory_url .'?cat_id='. $category_id . '$county_id='. $url_county; ?>"><?php echo $category_title; ?></a></li>
 							
 						</ul>
 					</div>
@@ -377,6 +385,8 @@
 						</div>
 						<div class="offer-details"> Υπηρεσίες σε προσφορά:</div>
 					</div>
+
+
 
 					<?php foreach ($directory_cat as $cat_apps) {
 						
@@ -390,7 +400,7 @@
 
 					 ?>
 
-					<a  class="a-app" href="<?php echo $directory_url.'?cat_id='. $cat_id .'&app_id='.$app_id ?>">
+					<a  class="a-app" href="<?php echo $directory_url.'?cat_id='. $cat_id .'&app_id='.$app_id. '&county_id='.$url_county  ?>">
 						<div  class="col-md-12 applications_outer">
 							<div class="col-application">
 								<div class="col-md-2">
@@ -438,8 +448,8 @@
 					<div class="directory-breadcrumb">
 						<ul class="ul-breadcrumb">
 							<li><a class="a-breadcrumb" href="<?php echo $api_url; ?>">Αρχική</a></li>
-							<li><a class="a-breadcrumb" href="<?php echo $directory_url .'?cat_id='. $category_id; ?>"><?php echo $cat_app_name; ?></a></li>
-							<li><a class="a-breadcrumb breadcrumb_app_name" data-app-id="<?php echo $application_id; ?>" href="<?php echo $directory_url .'?cat_id='. $category_id . '&app_id='. $application_id; ?>"><?php echo $app_name; ?></a></li>
+							<li><a class="a-breadcrumb breadcrumb_cat_id" data-cat-id="<?php echo $category_id; ?>" href="<?php echo $directory_url .'?cat_id='. $category_id .'$county_id='. $url_county; ?>"><?php echo $cat_app_name; ?></a></li>
+							<li><a class="a-breadcrumb breadcrumb_app_name" data-app-id="<?php echo $application_id; ?>" href="<?php echo $directory_url .'?cat_id='. $category_id . '&app_id='. $application_id . '&county_id='. $url_county; ?>"><?php echo $app_name; ?></a></li>
 							<li>Αττική</li>
 						</ul>
 					</div>
@@ -479,7 +489,6 @@
 					                          <div class="tab-pane active" id="filters-area">
 					                          	<div class="col-md-3">
 					                          		<label>Νομός</label>
-					                                	<label>Νομός</label>
 						                          		<?php 
 						                          			$counties = file_get_contents( $api_url .'webservices/api/county/read.php');
 						                          			$counties = json_decode($counties, true);
