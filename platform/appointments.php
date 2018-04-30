@@ -248,7 +248,7 @@ include('config/core.php');
 												echo "<tr><td colspan='7' style='color: green;'>Viewed ".$V_p_date."</td></tr>";
 											}
 											else{
-												echo "<tr><td colspan='7'>Not Viewed</td></tr>";
+												echo "<tr><td colspan='9'>Not Viewed</td></tr>";
 											}
 											echo 	  '</tr>';
 										?>

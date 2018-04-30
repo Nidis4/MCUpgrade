@@ -419,6 +419,19 @@
 				                            
 				                        </ul>
 				                    </li>
+				                    <li class="nav-parent">
+				                        <a class="nav-link" href="#">
+				                            <i class="fa fa-list-alt" aria-hidden="true"></i>
+				                            <span>Manage</span>
+				                        </a>
+				                        <ul class="nav nav-children">
+				                            <li>
+				                                <a class="nav-link" href="helps.php">
+				                                    Help
+				                                </a>
+				                            </li>
+				                        </ul>
+				                    </li>
 				                    <!--<li class="nav-parent">
 				                        <a class="nav-link" href="#">
 				                            <i class="fa fa-table" aria-hidden="true"></i>
