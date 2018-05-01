@@ -135,103 +135,55 @@ class Help{
     } // Read One
 
 
-    function update($id, $first_name, $last_name, $address, $sex, $mobile, $phone, $email){
+    function update($id, $category_id, $name, $help){
         
-        /*$query = "UPDATE " . $this->table_name . "
-                    SET
-                    `first_name`=:first_name, `last_name`=:last_name, `sex`=:sex";
-        
-        $query .=" WHERE id = :id";*/
-        
-        if(@$id){
-            $id = $id;
-        }elseif(@$mobile){
-            $query = "Select customer_id from ".$this->contact_table_name." where mobile='".$mobile."'";        
-            $stmt = $this->conn->prepare( $query );
-            $stmt->execute();
-            $num = $stmt->rowCount();
-            if($num >= 1){
-                // get retrieved row
-                $row = $stmt->fetch(PDO::FETCH_ASSOC);  
-                $id = $row['customer_id'];            
-            }else{
-                $id = NULL;
-            }
-        }else{
-            $id = NULL;
-        }
 
-
-        $query = "INSERT INTO ". $this->table_name ." (`id`, `first_name`, `last_name`, `sex`) VALUES (:id, :first_name, :last_name, :sex) ON DUPLICATE KEY UPDATE `first_name`=:first_name, `last_name`=:last_name, `sex`=:sex";
+        $query = "INSERT INTO ". $this->table_name ." (`id`, `category_id`, `name`, `help`) VALUES (:id, :category_id, :name, :help) ON DUPLICATE KEY UPDATE `category_id`=:category_id, `name`=:name, `help`=:help";
 
         $stmt = $this->conn->prepare( $query );
        
         // bind id of product to be updated
         $stmt->bindParam(':id',  $id);
-        $stmt->bindParam(':first_name',  $first_name);
-        $stmt->bindParam(':last_name',  $last_name);
-        $stmt->bindParam(':sex',  $sex);
+        $stmt->bindParam(':category_id',  $category_id);
+        $stmt->bindParam(':name',  $name);
+        $stmt->bindParam(':help',  $help);
         
         if ($as = $stmt->execute()) {
            if(empty($id)){ 
                 //$stmt->commit();
                 $id = $this->conn->lastInsertId();
            }
-           $this->update_contact($id, $address, $mobile, $phone); 
-           $this->update_account($id, $email ); 
-
            return $id;
         } else {
            return 0;
         }
-    } // Save Customer
+    } // Save Help
 
-    function update_contact($id, $address, $mobile, $phone ){
-        /*$query = "UPDATE " . $this->contact_table_name . "
-                    SET
-                    `mobile`=:mobile, `phone`=:phone, `address`=:address";
-        
-        $query .=" WHERE customer_id = :id";*/
+    function insert($category_id, $name, $help){
 
-        $query = "INSERT INTO ". $this->contact_table_name ." (`customer_id`, `address`, `mobile`, `phone`) VALUES (:id, :address, :mobile, :phone) ON DUPLICATE KEY UPDATE `phone`=:phone, `mobile`=:mobile, `address`=:address";
+        $query = "INSERT INTO ". $this->table_name ." (`category_id`, `name`, `help`) VALUES (:category_id, :name, :help)";
 
         $stmt = $this->conn->prepare( $query );
-
-        // bind id of product to be updated
-        $stmt->bindParam(':id',  $id, PDO::PARAM_INT);
-        $stmt->bindParam(':mobile',  $mobile);
-        $stmt->bindParam(':phone',  $phone);
-        $stmt->bindParam(':address',  $address);
-        
-        if ($stmt->execute()) { 
-           return 1;
-        } else {
-           return 0;
-        }
-    } // Save Professional
-
-    function update_account($id, $email ){
-        
-        /*$query = "UPDATE " . $this->account_table_name . "
-                    SET
-                    `email`=:email";
-        
-        $query .=" WHERE customer_id = :id";*/
-
-        $query = "INSERT INTO ". $this->account_table_name ." (`customer_id`, `email`) VALUES (:id, :email) ON DUPLICATE KEY UPDATE `email`=:email";
-
-        $stmt = $this->conn->prepare( $query );
-
        
         // bind id of product to be updated
-        $stmt->bindParam(':id',  $id, PDO::PARAM_INT);
-        $stmt->bindParam(':email',  $email);
         
-        if ($stmt->execute()) { 
-           return 1;
+        $stmt->bindParam(':category_id',  $category_id);
+        $stmt->bindParam(':name',  $name);
+        $stmt->bindParam(':help',  $help);
+        
+        if ($as = $stmt->execute()) {
+           
+            $id = $this->conn->lastInsertId();
+           
+           return $id;
         } else {
            return 0;
         }
-    } // Save Professional
+
+    }
+
+    
+
+
 }
 ?>

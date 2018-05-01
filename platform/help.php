@@ -133,7 +133,7 @@ include('config/core.php');
 										<div class="form-group row">
 											<label class="col-sm-4 control-label text-sm-right pt-2">Sub Category Name <span class="required">*</span></label>
 											<div class="col-sm-8">
-												<input type="text" name="help_name" id="pac-input-address" class="form-control" value="<?php if(@$helpdata['name']){ echo $helpdata['name'];}?>" required />
+												<input type="text" name="help_name" class="form-control" value="<?php if(@$helpdata['name']){ echo $helpdata['name'];}?>" required />
 											</div>										
 										</div>
 									</div>
@@ -141,7 +141,7 @@ include('config/core.php');
 										<div class="form-group row">
 											<label class="col-sm-2 control-label text-sm-right pt-2">Help <span class="required">*</span></label>
 											<div class="col-sm-10">
-												<textarea class="form-control" name="help_text"><?php if(@$helpdata['help']){ echo $helpdata['help'];}?></textarea>
+												<textarea class="form-control" rows="8" name="help_text"><?php if(@$helpdata['help']){ echo $helpdata['help'];}?></textarea>
 											</div>										
 										</div>
 										<div class="col-sm-3 offset-md-5">

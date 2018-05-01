@@ -99,6 +99,14 @@ include('config/core.php');
 										<button type="button" class="mb-1 mt-4 mr-1 btn btn-warning" id="searchCustomer">Search</button>
 									</div>
 								</div> -->
+								<div class="row">
+									<div class="col-sm-4">
+										<div class="mb-3">
+											<a href="help.php"><button id="addToTable" class="btn btn-primary">Add <i class="fa fa-plus"></i></button></a>
+										</div>
+									</div>
+									
+								</div>
 								
 								<table class="table table-bordered table-striped mb-0" id="datatable-editable">
 									<thead>

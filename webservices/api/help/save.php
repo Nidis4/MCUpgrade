@@ -12,35 +12,29 @@ $database = new Database();
 $db = $database->getConnection();
 
 
-
+$message = "Something went wrong, Please try again.";
 
 // initialize object
 $helps = new Help($db);
 
 if(@$_POST['help_id']){
 	$stmt = $helps->update($_POST['help_id'], $_POST['category_id'], $_POST['help_name'], $_POST['help_text']);
+	if($stmt){ 
+	    $message = "Updated successfully";
+	}
+
 }else{
 	$stmt = $helps->insert($_POST['category_id'], $_POST['help_name'], $_POST['help_text']);
+	if($stmt){ 
+	    $message = "Added successfully";
+	}
 }
-echo "<pre>";
-print_r($_POST);
-die;
- 
-// query products
-$stmt = $customer->update($_POST['customer_id'], $_POST['first_name'], $_POST['last_name'], $_POST['address'], $_POST['sex'], $_POST['mobile'], $_POST['phone'], $_POST['email']);
-//$stmt = $customer->search($keywords);
-//$num = $stmt->rowCount();
+
  
 // check if more than 0 record found
-if($stmt){ 
-    echo json_encode(
-        array("message" => "Customer updated successfully.")
-    );
-}
- 
-else{
-    echo json_encode(
-        array("message" => "No Customer found.")
-    );
-}
+
+echo json_encode(
+    array("message" => $message )
+);
+
 ?>
