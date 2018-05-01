@@ -210,6 +210,32 @@ class Appointment{
         return $stmt;
     }
 
+        // read products with pagination
+    public function readPagingOffers($from_record_num, $records_per_page){
+     
+        // select query
+        $query = "SELECT
+                    `id`, `prof_member_id`, `cust_member_id`, `application_id`, `county_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelReason`, `cancelComment`, `viewed`, `viewed_datetime`
+                FROM
+                    " . $this->table_name . " WHERE `status`=3
+                ORDER BY `datetimeCreated` DESC
+                LIMIT ?, ?";
+     
+        // prepare query statement
+
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind variable values
+        $stmt->bindParam(1, $from_record_num, PDO::PARAM_INT);
+        $stmt->bindParam(2, $records_per_page, PDO::PARAM_INT);
+     
+        // execute query
+        $stmt->execute();
+     
+        // return values from database
+        return $stmt;
+    }
+
     // read products with pagination
     public function readRejectPaging($from_record_num, $records_per_page){
      
@@ -362,6 +388,15 @@ class Appointment{
     // used for paging products
     public function count(){
         $query = "SELECT COUNT(*) as total_rows FROM " . $this->table_name . "";
+     
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+        return $row['total_rows'];
+    }
+    public function countOffers(){
+        $query = "SELECT COUNT(*) as total_rows FROM " . $this->table_name . " where status=3";
      
         $stmt = $this->conn->prepare( $query );
         $stmt->execute();

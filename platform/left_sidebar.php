@@ -323,6 +323,11 @@
 				                                </a>
 				                            </li>
 				                            <li>
+				                                <a class="nav-link" href="offers.php">
+				                                    List of Offers
+				                                </a>
+				                            </li>
+				                            <li>
 				                                <a class="nav-link" href="appointments_agent.php">
 				                                    List of Agent Appointments
 				                                </a>
