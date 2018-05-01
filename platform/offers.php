@@ -123,33 +123,7 @@ include('config/core.php');
 										</div>
 									</div>
 									<div class="col-sm-8" >
-										<form action="" method="get">
-											<div class="row">
-												<div class="col-sm-4">
-													<div class="input-group date" data-provide="datepicker">
-													    <input type="text" name="comdate" class="form-control" value="<?php echo $date;?>" placeholder='Date'>
-													    <div class="input-group-addon">
-													        <i class="fa fa-calendar"></i>
-													    </div>
-													</div>
-												</div>
-												<div class="col-sm-3">
-													<input type="text" class="form-control" readonly="" value="<?php echo $com;?>" placeholder="Commission">
-													
-												</div>
-												<div class="col-sm-2">
-													<input type="submit" name="comsubmit" class="btn btn-primary" value="Load">
-												</div>
-												<div class="col-sm-3">
-													<?php
-														$api_url.'appointment/reject_count.php';
-														$rejectedappointments = file_get_contents($api_url.'appointment/reject_count.php');
-														$rejectedappointmentstotal = json_decode($rejectedappointments, true);
-													?>
-													<a href="<?php echo SITE_URL;?>platform/appointments.php?rejected=1" style="color: red"><?php echo $rejectedappointmentstotal['total'];?> Rejected</a>
-												</div>
-											</div>
-										</form>
+										
 									</div>
 								</div>
 								<table class="table table-bordered table-striped mb-0" id="datatable-editable">

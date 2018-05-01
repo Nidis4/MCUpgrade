@@ -109,7 +109,7 @@ include('config/core.php');
 										<div class="col-lg-6">
 											<select data-plugin-selectTwo class="form-control populate" name="appointmentStatus" id="appointmentStatus">
 												<option value="1" >Appointment</option>
-												<option value="3" >Offer</option>
+												<option value="3" <?php if(@$_GET['type'] && ($_GET['type'] == "offers")){?> selected='selected' <?php }?> >Offer</option>
 												<option value="4" >Appointment for Offer</option>
 											</select>
 										</div>			
@@ -508,6 +508,21 @@ include('config/core.php');
 		<script src="js/examples/examples.validation.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
+
+				<?php 
+					if(@$_GET['type'] && ($_GET['type'] == "offers")){
+				?>
+						var status_id = '3';
+					    //alert(status_id);
+
+					    $('.status').css("display", "none");
+					    $('body').removeAttr('id');
+
+					    $('.status-'+status_id).css("display", "block");
+					    $('body').attr('id','status-'+status_id);
+				<?php		
+					}
+				?>
 
 				// $("#applications").on('change',function(){
 				// 	var date = new Date;

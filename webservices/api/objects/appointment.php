@@ -191,7 +191,7 @@ class Appointment{
         $query = "SELECT
                     `id`, `prof_member_id`, `cust_member_id`, `application_id`, `county_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelReason`, `cancelComment`, `viewed`, `viewed_datetime`
                 FROM
-                    " . $this->table_name . " WHERE `status`!=2
+                    " . $this->table_name . " WHERE `status` NOT IN ('2','3')
                 ORDER BY `datetimeCreated` DESC
                 LIMIT ?, ?";
      
@@ -387,7 +387,7 @@ class Appointment{
     }
     // used for paging products
     public function count(){
-        $query = "SELECT COUNT(*) as total_rows FROM " . $this->table_name . "";
+        $query = "SELECT COUNT(*) as total_rows FROM " . $this->table_name . " WHERE `status` NOT IN ('2','3')";
      
         $stmt = $this->conn->prepare( $query );
         $stmt->execute();
@@ -396,7 +396,7 @@ class Appointment{
         return $row['total_rows'];
     }
     public function countOffers(){
-        $query = "SELECT COUNT(*) as total_rows FROM " . $this->table_name . " where status=3";
+        $query = "SELECT COUNT(*) as total_rows FROM " . $this->table_name . " where status = 3";
      
         $stmt = $this->conn->prepare( $query );
         $stmt->execute();

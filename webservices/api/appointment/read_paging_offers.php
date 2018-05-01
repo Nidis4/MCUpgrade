@@ -111,6 +111,8 @@ if($num>0){
             "agent_name" => $agentName,
             "mobile" => $customerMobile,
             "category_name" => $categoryName,
+            "viewed" => $viewed,
+            "viewed_datetime" => $viewed_datetime,
         );
         if(@$category_id){
            $appointment_item['category_id'] = $category_id; 
