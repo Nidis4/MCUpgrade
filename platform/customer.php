@@ -222,7 +222,77 @@ include('config/core.php');
 											}
 										}
 										else{
-											echo "<td>No Appointments</td>";
+											echo "<td colspan='8'>No Appointments</td>";
+										}
+										
+										?>										
+									</tbody>
+								</table>
+							</div>
+						</section>
+						<section class="card">
+							<header class="card-header">
+								<div class="card-actions">
+									<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+									<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
+								</div>
+						
+								<h2 class="card-title">Customer's Offers</h2>
+							</header>
+							<?php 
+								$offers = file_get_contents($api_url.'appointment/read_paging_offers.php?cust_id='.$id);
+								$offersPag = json_decode($offers, true); // decode the JSON into an associative array	
+							?>
+
+							<div class="card-body">
+								<table class="table table-bordered table-striped mb-0" id="datatable-editable">
+									<thead>
+										<tr>
+											<th>Submission Date</th>
+											<th>Professional</th>
+											<th>Customer</th>
+											<th>Date</th>
+											<th width="460px">Comments</th>
+											<th>Budget</th>
+											<th>Commision</th>
+											<th>Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php
+										if (!empty($offersPag['records'])) {
+											foreach ($offersPag['records'] as $field => $value) {
+											$id = $offersPag['records'][$field]['id'];
+											$submission_date = $offersPag['records'][$field]['datetimeCreated'];
+											$prof_id = $offersPag['records'][$field]['prof_member_id'];
+											$prof_name = $offersPag['records'][$field]['prof_member_name'];
+											$cust_id = $offersPag['records'][$field]['cust_member_id'];
+											$cust_name = $offersPag['records'][$field]['cust_member_name'];
+											$date = $offersPag['records'][$field]['date']." ".$offersPag['records'][$field]['time'];
+											$budget = $offersPag['records'][$field]['budget'];
+											$commission = $offersPag['records'][$field]['commision'];
+											$status = $offersPag['records'][$field]['status'];
+											$comment = $offersPag['records'][$field]['comment'];
+
+											echo '<tr data-item-id="'.$id.'" class="status-'.$status.'">
+													  <td>'.$submission_date.'</td>
+													  <td><a href="professional.php?id='.$prof_id.'">'.$prof_name.'</a></td>
+													  <td><a href="customer.php?id='.$cust_id.'">'.$cust_name.'</a></td>
+													  <td>'.$date.'</td>
+													  <td>'.$comment.'</td>
+													  <td>'.$budget.'</td>
+													  <td>'.$commission.'</td>
+													  <td class="actions">
+														<a href="#" class="on-editing copy-row"><i class="fa fa-copy"></i></a>
+														<a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
+														<a href="#" class="hidden on-default remove-row"><i class="fa fa-trash-o"></i></a>
+														<a href="#" class="on-editing cancel-row"><i class="fa fa-times"></i></a>
+													  </td>
+												  </tr>';
+											}
+										}
+										else{
+											echo "<td colspan='8'>No offers</td>";
 										}
 										
 										?>										

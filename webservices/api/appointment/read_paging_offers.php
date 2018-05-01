@@ -31,8 +31,8 @@ if(isset($_GET['records_per_page']) && !empty($_GET['records_per_page'])){
 // query products
 if (isset($_GET['cust_id'])) {
     $cust_id = $_GET['cust_id'];
-    $stmt = $appointment->readPagingByCust($from_record_num, $records_per_page, $cust_id);
-    $total_rows = $appointment->countCust($cust_id); 
+    $stmt = $appointment->readPagingOffersByCust($from_record_num, $records_per_page, $cust_id);
+    $total_rows = $appointment->countOffersCust($cust_id); 
 } 
 elseif (isset($_GET['prof_id'])) {
     $prof_id = $_GET['prof_id'];

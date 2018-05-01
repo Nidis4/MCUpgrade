@@ -307,6 +307,32 @@ class Appointment{
         return $stmt;
     }
 
+        // read products with pagination for Customer
+    public function readPagingOffersByCust($from_record_num, $records_per_page, $cust_id){
+     
+        // select query
+        $query = "SELECT
+                    `id`, `prof_member_id`, `cust_member_id`, `application_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelReason`, `cancelComment`, `viewed`, `viewed_datetime`
+                FROM
+                    " . $this->table_name . " WHERE `cust_member_id`= ? AND `status`=3
+                ORDER BY `datetimeCreated` DESC
+                LIMIT ?, ?";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind variable values
+        $stmt->bindParam(1, $cust_id, PDO::PARAM_INT);
+        $stmt->bindParam(2, $from_record_num, PDO::PARAM_INT);
+        $stmt->bindParam(3, $records_per_page, PDO::PARAM_INT);
+     
+        // execute query
+        $stmt->execute();
+     
+        // return values from database
+        return $stmt;
+    }
+
     // read products with pagination for Customer
     public function readPagingByProf($from_record_num, $records_per_page, $prof_id){
      
@@ -434,6 +460,15 @@ class Appointment{
     }
     public function countCust($cust_id){
         $query = "SELECT COUNT(*) as total_rows FROM " . $this->table_name . " where cust_member_id = '".$cust_id."'";
+     
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+        return $row['total_rows'];
+    }
+    public function countOffersCust($cust_id){
+        $query = "SELECT COUNT(*) as total_rows FROM " . $this->table_name . " where cust_member_id = '".$cust_id."' and status='3'";
      
         $stmt = $this->conn->prepare( $query );
         $stmt->execute();
