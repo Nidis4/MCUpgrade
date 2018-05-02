@@ -88,6 +88,33 @@ if($stmt){
 			
 			$viber->send($customer_mobile, $smsTexts);
 
+			// Reminder to Customer before 24 hours
+			$adate1 = date_create($date);
+			$fdate1 = date_format($adate1, 'Y-m-d');
+
+			$d1 = new DateTime($fdate1." ".$FFtime.":00"); 
+			$d2 = new DateTime(date("Y-m-d H:i:s"));
+			$interval = $d1->diff($d2);
+			$d_hours = ($interval->days * 24) + $interval->h;
+			if($d_hours >= 54){
+				
+
+				$smsTexts = implode(' - ', [
+					'Υπενθύμιση: Ραντεβού για '.$fcname,
+					'στις '.$Ftime.' ' .$fdate.'.',
+					$address,
+					'Γραμμή εξυπηρέτησης πελατών 2103009325'
+				]);
+				$senddate = date("Ymd",strtotime($fdate1." ".$FFtime.":00 -2Hours"));
+				$sendtime = date("Hi",strtotime($fdate1." ".$FFtime.":00 -2Hours"));
+				$viber->send($customer_mobile, $smsTexts, $senddate, $sendtime );
+
+			}
+			//die;
+
+
+
+
 	}
 	if(@$professionalsms || @$procheck){
 	    	// initialize object
