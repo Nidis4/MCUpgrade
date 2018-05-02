@@ -444,6 +444,7 @@ $( ".createOffer" ).click(function() {
                         firstname: firstname,
                         address: address,
                         mobile: mobile,
+                        county_id: county,
                         sex: sex,
                         phone: phone,
                         email: email,

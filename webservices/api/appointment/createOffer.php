@@ -30,11 +30,12 @@ $appointment = new Appointment($db);
  $landline = isset($_POST['phone']) ? $_POST['phone'] : "";
  $firstname = isset($_POST['firstname']) ? $_POST['firstname'] : die();
  $surname = isset($_POST['surname']) ? $_POST['surname'] : die();
+ $status = isset($_POST['status']) ? $_POST['status'] : "3";
 
 $prof_id = "0";
 $date = "0000-00-00";
 $time = "";
-$status = 3;
+// /$status = 3;
 
 
 // query products
