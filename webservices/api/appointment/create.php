@@ -96,7 +96,7 @@ if($stmt){
 			$d2 = new DateTime(date("Y-m-d H:i:s"));
 			$interval = $d1->diff($d2);
 			$d_hours = ($interval->days * 24) + $interval->h;
-			if($d_hours >= 54){
+			if($d_hours >= 12){
 				
 
 				$smsTexts = implode(' - ', [
