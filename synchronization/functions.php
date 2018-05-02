@@ -4,8 +4,8 @@ $upgrade_db_name = 'upgradem_main';
 $upgrade_user_name = 'upgradem_super';
 $upgrade_db_pass = 'x}zLIzWrI^zC';
 
-$upgrade_user_name = "root";
-$upgrade_db_pass = "";
+//$upgrade_user_name = "root";
+//$upgrade_db_pass = "";
 
 
 function UpgradeDB(){
@@ -105,6 +105,15 @@ function getReviewsPerc($prof_id, $startDate, $endDate){
 		$perc = $row['gloval_avg']/5;
 	}
 	return $perc;
+}
+
+function updateScore($id, $conv, $market, $reviews, $score){
+	$upgrade = UpgradeDB();
+	$query = "INSERT INTO `professionals_scoring`(`PROF_ID`, `PAYMENTS_CONVERSION`, `MARKET_SHARE`, `REVIEWS`, `TOTAL`) VALUES ('$id','$conv','$market','$reviews','$score') ON DUPLICATE KEY UPDATE `PAYMENTS_CONVERSION` = '$conv', `MARKET_SHARE`='$market', `REVIEWS` = '$reviews', `TOTAL` = '$score' ";
+	//echo $query;
+
+	$result = $upgrade->query($query);
+
 }
 
 ?>

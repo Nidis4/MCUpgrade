@@ -9,7 +9,7 @@ include 'functions.php';
 echo "In Score<br>";
 
 $today = date("Y/m/d");
-$today = "2018/01/01";
+//$today = "2018/01/01";
 
 $minus2days = date('Y/m/d', strtotime($today.' -2 days'));
 $minus1month = date('Y/m/d', strtotime($today.' -1 month'));
@@ -54,5 +54,7 @@ while ($row = $profs->fetch_assoc()) {
 	echo "Market Share: ".$market."<br>";
 	echo "Reviews: ".$reviews."<br>";
 	echo "Score: ".$score."<br><br>";
+
+	updateScore($id, $conv, $market, $reviews, $score);
 }
 ?>
