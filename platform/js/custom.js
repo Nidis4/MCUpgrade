@@ -457,13 +457,16 @@ $( ".createOffer" ).click(function() {
                         email: email,
                         status: status
                     },
-                    dataType: "json",
+                    //dataType: "json",
                     success: function(data)
                     {
                         //alert(data);
 
                         alert("Offer Created");
                         window.location.replace('../platform/appointments.php');
+                    },
+                    error: function(data){
+                        alert(data);
                     }
                 });
 

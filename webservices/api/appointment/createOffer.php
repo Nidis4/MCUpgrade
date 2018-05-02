@@ -17,19 +17,19 @@ $db = $database->getConnection();
 $appointment = new Appointment($db);
  
 
- $cust_id = isset($_POST['cust_id']) ? $_POST['cust_id'] : die();
- $category_id = isset($_POST['category_id']) ? $_POST['category_id'] : die();
- $application_id = isset($_POST['application_id']) ? $_POST['application_id'] : die();
- $address = isset($_POST['address']) ? $_POST['address'] : die();
- $budget = isset($_POST['budget']) ? $_POST['budget'] : die();
- $county_id = isset($_POST['county_id']) ? $_POST['county_id'] : die();
- $commision = isset($_POST['commision']) ? $_POST['commision'] : die();
- $agent_id = isset($_POST['agent_id']) ? $_POST['agent_id'] : die();
- $comment = isset($_POST['comment']) ? $_POST['comment'] : die();
- $customer_mobile = isset($_POST['mobile']) ? $_POST['mobile'] : die();
+ $cust_id = isset($_POST['cust_id']) ? $_POST['cust_id'] : fail();
+ $category_id = isset($_POST['category_id']) ? $_POST['category_id'] : fail();
+ $application_id = isset($_POST['application_id']) ? $_POST['application_id'] : fail();
+ $address = isset($_POST['address']) ? $_POST['address'] : fail();
+ $budget = isset($_POST['budget']) ? $_POST['budget'] : fail();
+ $county_id = isset($_POST['county_id']) ? $_POST['county_id'] : fail();
+ $commision = isset($_POST['commision']) ? $_POST['commision'] : fail();
+ $agent_id = isset($_POST['agent_id']) ? $_POST['agent_id'] : fail();
+ $comment = isset($_POST['comment']) ? $_POST['comment'] : fail();
+ $customer_mobile = isset($_POST['mobile']) ? $_POST['mobile'] : fail();
  $landline = isset($_POST['phone']) ? $_POST['phone'] : "";
- $firstname = isset($_POST['firstname']) ? $_POST['firstname'] : die();
- $surname = isset($_POST['surname']) ? $_POST['surname'] : die();
+ $firstname = isset($_POST['firstname']) ? $_POST['firstname'] : fail();
+ $surname = isset($_POST['surname']) ? $_POST['surname'] : fail();
  $status = isset($_POST['status']) ? $_POST['status'] : "3";
 
 $prof_id = "0";
@@ -45,13 +45,21 @@ $stmt = $appointment->create($prof_id, $cust_id, $application_id, $county_id, $d
 //$stmt = $customer->search($keywords);
 //$num = $stmt->rowCount();
  if($stmt){ 
- 	echo $stmt;
+ 	echo json_encode(
+       array("message" => "Completed")
+ 	);
  }
  else{
  	echo json_encode(
        array("message" => "No Appointment found.")
- );
- 	}
+ 	);
+ }
 // check if more than 0 record found
 
+function fail(){
+	echo json_encode(
+       array("Error" => "Missing Argument")
+ 	);
+ 	die();
+}
 ?>
