@@ -48,9 +48,6 @@ $stmt = $appointment->create($prof_id, $cust_id, $application_id, $county_id, $d
 $procheck = $appointment->checkprofsms($prof_id);
 
 
-//$stmt = $customer->search($keywords);
-//$num = $stmt->rowCount();
- 
 // check if more than 0 record found
 if($stmt){ 
     /*echo json_encode(
