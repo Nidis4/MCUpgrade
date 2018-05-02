@@ -62,7 +62,7 @@ class Appointment{
      
         // query to read single record
         $query = "SELECT
-                    a.`id`, a.`prof_member_id`, a.`cust_member_id`, a.`application_id`,a.`county_id`, a.`date`, a.`time`, a.`address`, a.`budget`, a.`commision`, a.`agent_id`, a.`comment`, a.`sms`, a.`sms_log_id`,  a.`datetimeCreated`, a.`datetimeStatusUpdated`, a.`sourceAppointmentId`, a.`status`, a.`cancelComment`, ap.`category_id`, ac.`first_name` as customer_first_name, ac.`last_name` as customer_last_name, ac.`sex` as customer_sex, cc.`address` as customer_address, cc.`phone` as customer_phone, cc.`mobile` as customer_mobile, ca.`email` as customer_email
+                    a.`id`, a.`prof_member_id`, a.`cust_member_id`, a.`application_id`,a.`county_id`, a.`date`, a.`time`, a.`address`,a.`delivery_address`, a.`budget`, a.`commision`, a.`agent_id`, a.`comment`, a.`sms`, a.`sms_log_id`,  a.`datetimeCreated`, a.`datetimeStatusUpdated`, a.`sourceAppointmentId`, a.`status`, a.`cancelComment`, ap.`category_id`, ac.`first_name` as customer_first_name, ac.`last_name` as customer_last_name, ac.`sex` as customer_sex, cc.`address` as customer_address, cc.`phone` as customer_phone, cc.`mobile` as customer_mobile, ca.`email` as customer_email
                 FROM
                     " . $this->table_name . " a
                 LEFT JOIN ". $this->application_table_name." ap 
@@ -105,6 +105,7 @@ class Appointment{
         $this->date = $row['date'];
         $this->time = $row['time'];
         $this->address = $row['address'];
+        $this->delivery_address = $row['delivery_address'];
         $this->budget = $row['budget'];
         $this->commision =$row['commision'];
         $this->agent_id = $row['agent_id'];
@@ -526,8 +527,8 @@ class Appointment{
         return $row;
     }
 
-    public function create($prof_id, $cust_id, $application_id, $county_id, $date, $time, $address, $budget, $commision, $agent_id, $comment, $status){
-        $query = "INSERT INTO `appointments`(`prof_member_id`, `cust_member_id`, `application_id`,`county_id`,  `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`) VALUES ('$prof_id', '$cust_id', '$application_id','$county_id', '$date', '$time', '$address', '$budget','$commision', '$agent_id','$comment','0','0', NOW(),NOW(),'0','$status','')";
+    public function create($prof_id, $cust_id, $application_id, $county_id, $date, $time, $address, $budget, $commision, $agent_id, $comment, $status, $delivery_address = NULL){
+        $query = "INSERT INTO `appointments`(`prof_member_id`, `cust_member_id`, `application_id`,`county_id`,  `date`, `time`, `address`,`delivery_address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`) VALUES ('$prof_id', '$cust_id', '$application_id','$county_id', '$date', '$time', '$address', '$delivery_address', '$budget','$commision', '$agent_id','$comment','0','0', NOW(),NOW(),'0','$status','')";
 
         $stmt = $this->conn->prepare( $query );
         $stmt->execute();

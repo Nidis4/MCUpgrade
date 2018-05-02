@@ -811,3 +811,12 @@ ALTER TABLE `professionals_categories` ADD `truck_dimensions` TEXT NULL AFTER `i
 
 <!-------------------------------->
 <!-- End 23 April 2018 Harpreet ---->
+
+
+<!-------------------------------->
+<!-- Start 02 May 2018 Harpreet -->
+
+ALTER TABLE `appointments` ADD `delivery_address` TEXT NULL AFTER `address`;
+
+<!-------------------------------->
+<!-- End 02 May 2018 Harpreet ---->

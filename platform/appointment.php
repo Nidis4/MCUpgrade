@@ -176,7 +176,7 @@ include('config/core.php');
 													<?php
 														foreach ($categories as $category) {
 															$cat_id = $category['id'];
-															$cat_name = $category['title'];
+															$cat_name = $category['title_greek'];
 															$commision = $category['commissionRate'];
 															if($cat_id == $appointment['category_id']){
 																$selected = "selected='selected'";
@@ -211,7 +211,7 @@ include('config/core.php');
 																		$selected = "";
 																	}
 														?>
-																<option value="<?php echo $value['id'];?>" <?php echo $selected;?>><?php echo $value['title'];?></option>
+																<option value="<?php echo $value['id'];?>" <?php echo $selected;?>><?php echo $value['title_greek'];?></option>
 														<?php
 																}
 															}
@@ -342,6 +342,14 @@ include('config/core.php');
 												<input type="text" name="address" id="pac-input-address" value="<?php echo $appointment['customer_address'];?>" class="form-control" placeholder="eg.: Gonata 7, 152 12, Athens" required/>
 											</div>
 										</div>
+
+										<div class="form-group row" id="deliverydisplay" <?php if(($appointment['category_id'] == '103') && ($appointment['application_id'] != '199')){?> style="display: block" <?php }else{?> style="display: none" <?php } ?> >
+											<label class="col-sm-3 control-label text-sm-right pt-2">Delivery Address</label>
+											<div class="col-sm-9" style="float: right;" >
+												<input type="text" name="delivery_address" id="delivery_address" class="form-control" placeholder="eg.: Gonata 7, 152 12, Athens" required value="<?php echo $appointment['delivery_address'];?>" />
+											</div>
+										</div>
+
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Mobile <span class="required">*</span></label>
 											<div class="col-sm-9">

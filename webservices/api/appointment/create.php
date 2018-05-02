@@ -26,6 +26,7 @@ $appointment = new Appointment($db);
  $date = isset($_POST['date']) ? $_POST['date'] : die();
  $time = isset($_POST['time']) ? $_POST['time'] : die();
  $address = isset($_POST['address']) ? $_POST['address'] : die();
+ $delivery_address = isset($_POST['delivery_address']) ? $_POST['delivery_address'] : "";
  $budget = isset($_POST['budget']) ? $_POST['budget'] : die();
  $commision = isset($_POST['commision']) ? $_POST['commision'] : die();
  $agent_id = isset($_POST['agent_id']) ? $_POST['agent_id'] : die();
@@ -40,7 +41,7 @@ $appointment = new Appointment($db);
 
 
 // query products
-$stmt = $appointment->create($prof_id, $cust_id, $application_id, $county_id, $date, $time, $address, $budget, $commision, $agent_id, $comment, $status);
+$stmt = $appointment->create($prof_id, $cust_id, $application_id, $county_id, $date, $time, $address,  $budget, $commision, $agent_id, $comment, $status, $delivery_address);
 
 // Check Professional default SMS
 

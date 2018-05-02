@@ -311,6 +311,12 @@ include('config/core.php');
 												<input type="text" name="address" id="pac-input-address" class="form-control" placeholder="eg.: Gonata 7, 152 12, Athens" required/>
 											</div>
 										</div>
+										<div class="form-group row" id="deliverydisplay" style="display: none;">
+											<label class="col-sm-3 control-label text-sm-right pt-2">Delivery Address</label>
+											<div class="col-sm-9" style="float: right;" >
+												<input type="text" name="delivery_address" id="delivery_address" class="form-control" placeholder="eg.: Gonata 7, 152 12, Athens" required/>
+											</div>
+										</div>
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Mobile <span class="required">*</span></label>
 											<div class="col-sm-9">

@@ -90,6 +90,12 @@ $('select#category').on('change', function() {
             }
         });
 
+    if(cat_id == "103"){
+        $('#deliverydisplay').css('display','block');
+    }else{
+        $('#deliverydisplay').css('display','none');
+    }
+
     // To get the Questions for the Selected Category
     var getApplicationsQue = API_LOCATION+'application/readByCategoryQue.php?cat_id='+cat_id;
     $.ajax({
@@ -107,10 +113,18 @@ $('select#category').on('change', function() {
 $('select#applications').on('change', function() {
     var minprice = $('select#applications option:selected').attr('minp');
     var duration = $('select#applications option:selected').attr('dur');
+    var id = $(this).val();
+    if(id == "69" || id == "70" || id == "71" || id == "72" || id == "196" || id == "198" || id == "216" || id == "218" || id == "219"){
+        $('#deliverydisplay').css('display','block');
+    }else{
+        $('#deliverydisplay').css('display','none');
+    }
 
     $('#budget').val(minprice);
     $('#budget').keyup();
     $('#duration').val(duration);
+
+
 });
 
 var delay = (function(){
@@ -486,6 +500,13 @@ $( ".createAppointment" ).click(function() {
     var firstname = $("#firstname").val();
     var sex = $("#sex").val();
     var address = $("#pac-input-address").val();
+
+    if($('#delivery_address').length){
+        var delivery_address = $("#delivery_address").val();
+    }else{
+        var delivery_address = "";
+    } 
+
     var mobile = $("#mobile").val();
     var phone = $("#phone").val();
     var email = $("#email").val();
@@ -554,6 +575,7 @@ $( ".createAppointment" ).click(function() {
                         surname: surname,
                         firstname: firstname,
                         address: address,
+                        delivery_address: delivery_address,
                         mobile: mobile,
                         sex: sex,
                         phone: phone,
