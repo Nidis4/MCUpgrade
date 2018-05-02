@@ -22,6 +22,7 @@ $appointment = new Appointment($db);
  $application_id = isset($_POST['application_id']) ? $_POST['application_id'] : die();
  $address = isset($_POST['address']) ? $_POST['address'] : die();
  $budget = isset($_POST['budget']) ? $_POST['budget'] : die();
+ $county_id = isset($_POST['county_id']) ? $_POST['county_id'] : die();
  $commision = isset($_POST['commision']) ? $_POST['commision'] : die();
  $agent_id = isset($_POST['agent_id']) ? $_POST['agent_id'] : die();
  $comment = isset($_POST['comment']) ? $_POST['comment'] : die();
@@ -37,7 +38,7 @@ $status = 3;
 
 
 // query products
-$stmt = $appointment->create($prof_id, $cust_id, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment, $status);
+$stmt = $appointment->create($prof_id, $cust_id, $application_id, $county_id, $date, $time, $address, $budget, $commision, $agent_id, $comment, $status);
 
 //$stmt = $appointment->create('', $cust_id, $application_id, '', '', $address, $budget, $commision, $agent_id, $comment,'3');
 //$stmt = $customer->search($keywords);
@@ -45,10 +46,10 @@ $stmt = $appointment->create($prof_id, $cust_id, $application_id, $date, $time, 
  if($stmt){ 
  	echo $stmt;
  }
- 	else{
- 		echo json_encode(
-        array("message" => "No Appointment found.")
-    );
+ else{
+ 	echo json_encode(
+       array("message" => "No Appointment found.")
+ );
  	}
 // check if more than 0 record found
 
