@@ -87,7 +87,7 @@ $tcpdf->setTextShadow(array('enabled' => true, 'depth_w' => 0.2, 'depth_h' => 0.
 	 
 		<td style="text-align:left" colspan="3" >
 		
-			INTERNET SERVICES PROVIDER PRIVATE COMPANY  <br/>
+			MYCONSTRUCTOR <br/>
 			Βασικές Υπηρεσίες Διαδικτύου
 			28ης Οκτωβρίου 20,Άγ. Ανάργυροι, 13561
 			ΑΦΜ: 800439186 ΔΟΥ:ΑΓ.ΑΝΑΡΓΥΡΩΝ
