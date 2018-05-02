@@ -41,8 +41,8 @@ else if ($func == "syncProfessionals"){
 	//echo "Not Implemented";
 }
 else if ($func == "syncAppointments"){
-	//syncApplications();
-	echo "Not Implemented";
+	syncApplications();
+	//echo "Not Implemented";
 }
 else if ($func == "syncPayments"){
 	syncPayments();
@@ -229,6 +229,15 @@ function insertProfessional($id, $first_name, $last_name, $nick_name, $current_w
 
 function syncCustomers(){
 	echo "In Sync Customers<br>";
+	echo "Empty Tables<br>";
+	$upgrade = UpgradeDB();
+	$query1 = "TRUNCATE `customers`";
+    $upgrade->query($query1);
+    $query2 = "TRUNCATE `customers_account_info`";
+    $upgrade->query($query2);
+    $query3 = "TRUNCATE `customers_contact_details`";
+    $upgrade->query($query3);
+	
 	$query = "SELECT `id`, `first_name`, `last_name`, `sex`, `email`, `password`, `created`, `modified`, `last_login`, `last_login_ip`, `status`, `address`, `area`, `city`, `country_id`, `postcode`, `latitude`, `longitude`, `phone`, `mobile_no` FROM `members` WHERE `user_type`='Employer'";
 
 	$live = LiveDB();
@@ -255,12 +264,13 @@ function syncCustomers(){
 	    /* free result set */
 	    $result->free();
 	}
+	echo "Sync <b>Completed</b><br>";
 }
 
 function insertCustomers($id, $first_name, $last_name, $sex, $email, $password, $created, $modified, $last_login, $last_login_ip, $status, $address, $area, $city, $country_id, $postcode, $latitude, $longitude, $phone, $mobile_no){
 	//echo "Inserting Customer ".$id."<br>";
 	$upgrade = UpgradeDB();
-
+    
 	$first_name = $upgrade->real_escape_string($first_name);
 	$last_name = $upgrade->real_escape_string($last_name);
 	$address = $upgrade->real_escape_string($address);

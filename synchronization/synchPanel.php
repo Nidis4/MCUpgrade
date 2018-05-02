@@ -52,7 +52,7 @@ include 'synch.php';
   	$( ".action" ).click(function() {
 	  //alert(this.id);
 	  var funct = 'sync'+this.id;
-	  //alert(funct);
+	  alert(funct);
 	  $.ajax({
         type: "POST",
         url: 'synch.php',
