@@ -136,5 +136,5 @@ else{
     echo json_encode(
         array("message" => "No appointments found.")
     );
-}
+} 
 ?>
