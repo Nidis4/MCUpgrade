@@ -29,11 +29,13 @@ if(@$_POST['cancelComment']){
 	$cancelComment = $_POST['cancelComment'];
 }else{
 	$cancelComment = "Rejected";
+
 }
 if(@$_POST['type']){
 	if ($_POST['type']==2){
 		$type = "Reject";
 		$cancelComment = "Reject Reason: ".$cancelComment;
+		$cancelReason = 4;
 	}
 	else{
 		$type = "Cancel";
