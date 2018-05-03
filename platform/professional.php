@@ -1146,6 +1146,15 @@ include('config/core.php');
 									<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
 									<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
 								</div>
+								<?php
+									$invoicesettingsd = file_get_contents($api_url.'professional/getInvoiceSettings.php?id='.$_GET['id']);
+									$invoicesettingsPag = json_decode($invoicesettingsd, true); // decode the JSON into an associative array
+									
+									if(@$invoicesettingsPag['record']['professional_id']){
+										$invoicesettings = $invoicesettingsPag['record'];
+									}
+									
+								?>
 						
 								<h2 class="card-title">Professional's Invoice Settings</h2>
 							</header>
@@ -1185,6 +1194,13 @@ include('config/core.php');
 												<label class="col-sm-4 control-label text-sm-right pt-2">Tax Office</label>
 												<div class="col-sm-8">
 													<input type="text" name="tax_office" class="form-control" value="<?php if(@$invoicesettings['tax_office']){ echo $invoicesettings['tax_office']; }?>" id="tax_office" required />
+												</div>
+											</div>
+
+											<div class="form-group row">
+												<label class="col-sm-4 control-label text-sm-right pt-2">Invoice Email</label>
+												<div class="col-sm-8">
+													<input type="text" name="receipt_email" class="form-control" value="<?php if(@$invoicesettings['receipt_email']){ echo $invoicesettings['receipt_email']; }?>" id="receipt_email" required />
 												</div>
 											</div>
 											

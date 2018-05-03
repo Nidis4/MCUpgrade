@@ -827,5 +827,7 @@ ALTER TABLE `appointments` ADD `delivery_address` TEXT NULL AFTER `address`;
 
 ALTER TABLE `payments` ADD `sent_email` INT(1) NOT NULL DEFAULT '0' AFTER `receipt_no`;
 
+ALTER TABLE `professionals_invoice_settings` ADD `invoice_email` VARCHAR(255) NULL AFTER `tax_office`;
+
 <!-------------------------------->
 <!-- End 03 May 2018 Harpreet -->
