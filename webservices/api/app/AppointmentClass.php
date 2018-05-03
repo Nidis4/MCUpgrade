@@ -296,5 +296,19 @@ class AppointmentClass{
         fclose($fp);
 
     }
+
+    public function GetDistanceBetweenTwoAddresses($address,$delivery_address){
+        $addressNew = urlencode($address);
+        $delivery_addressNew = urlencode($delivery_address);
+        $url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins='".$addressNew."'&destinations='".$delivery_addressNew."'&mode=driving&language=en-EN&sensor=false";
+        $obj = json_decode(file_get_contents($url), true);
+        if($obj['status'] =='OK'){
+            return $distance =  $obj['rows'][0]['elements'][0]['distance']['text'];
+        }
+        else{
+            return '';
+        }
+        
+    }
 }
 ?>
