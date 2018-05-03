@@ -21,7 +21,7 @@ if(isset($_REQUEST['member_id']) && isset($_REQUEST['page']))
     $page=isset($_REQUEST["page"]) ? $_REQUEST["page"] : "";
 
 // query appointment
-    $stmt = $GetAppoinments->GetAppoinments($member_id,$page,"0");
+    $stmt = $GetAppoinments->GetAppoinmentsCancel($member_id,$page,"0");
     $num = $stmt->rowCount();
 
 // check if more than 0 record found
