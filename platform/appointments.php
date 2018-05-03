@@ -71,7 +71,7 @@ include('config/core.php');
 				$comision = json_decode($commissions, true); // decode the JSON into an associative array
 
 				if(@$comision['commision']){
-					$com = $comision['commision'];
+					$com = number_format($comision['commision'],2);
 				}else{
 					$com = "0";
 				}
