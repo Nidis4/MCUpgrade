@@ -62,12 +62,14 @@ if(isset($_REQUEST['member_id']))
                 $FinleScore = $quality + $reliability +$cost +$schedule +$behaviour +$cleanliness;
                 $sub = $FinleScore / $count / 6;
                 $totalscore = round($sub, 1);
+                if(is_nan($totalscore)){
+                    $totalscore =0;
+                }
             }
             else{
                
                 $totalscore = 0;
             }
-
 
         $obj['id'] = $stmt['id'];
         $obj['member_id'] = $stmt['member_id'];
