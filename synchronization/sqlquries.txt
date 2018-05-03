@@ -820,3 +820,12 @@ ALTER TABLE `appointments` ADD `delivery_address` TEXT NULL AFTER `address`;
 
 <!-------------------------------->
 <!-- End 02 May 2018 Harpreet ---->
+
+
+<!-------------------------------->
+<!-- Start 03 May 2018 Harpreet -->
+
+ALTER TABLE `payments` ADD `sent_email` INT(1) NOT NULL DEFAULT '0' AFTER `receipt_no`;
+
+<!-------------------------------->
+<!-- End 03 May 2018 Harpreet -->

@@ -172,9 +172,11 @@ class Payment{
     public function readInvoicePaging($from_record_num, $records_per_page){
      
         // select query
-        $query = "SELECT pm.`id`as payment_id, pm.`datetime_added`, pm.`invoice_no`, pm.`comment`, pm.`amount`, pm.`status`
+        $query = "SELECT pm.`id`as payment_id, pm.`professional_id`, pm.`sent_email`, pm.`datetime_added`, pm.`invoice_no`, pm.`comment`, pm.`amount`, pm.`status`, pp.`first_name`, pp.`last_name`
                 FROM
                     " . $this->table_name . " pm  
+                Left Join ".$this->professionals_table_name." pp 
+                on pm.professional_id = pp.id 
                 WHERE (pm.`status`=1 OR pm.`status`=0) and pm.`issuetype` = 'Invoice'
                 ORDER BY `datetime_added` DESC
                 LIMIT ?, ?";
@@ -207,9 +209,11 @@ class Payment{
     public function readReceiptPaging($from_record_num, $records_per_page){
      
         // select query
-        $query = "SELECT pm.`id`as payment_id, pm.`datetime_added`, pm.`receipt_no`, pm.`comment`, pm.`amount`, pm.`status`
+        $query = "SELECT pm.`id`as payment_id, pm.`professional_id`, pm.`sent_email`, pm.`datetime_added`, pm.`receipt_no`, pm.`comment`, pm.`amount`, pm.`status`,  pp.`first_name`, pp.`last_name`
                 FROM
                     " . $this->table_name . " pm  
+                Left Join ".$this->professionals_table_name." pp 
+                on pm.professional_id = pp.id 
                 WHERE (pm.`status`=1 OR pm.`status`=0) and pm.`issuetype` = 'Receipt'
                 ORDER BY `datetime_added` DESC
                 LIMIT ?, ?";
@@ -301,5 +305,28 @@ class Payment{
 
 
     } // Read One
+
+    public function sentEmail(){
+        // query to read single record
+        $query = "UPDATE " . $this->table_name . "
+                    SET
+                    `sent_email`=1
+                WHERE
+                    id = :id";
+     
+        $stmt = $this->conn->prepare( $query );
+     
+        $cur_id = $this->payment_id;
+        // bind id of product to be updated
+        $stmt->bindParam(':id',  $cur_id, PDO::PARAM_INT);
+
+        if ($stmt->execute()) { 
+            
+           return 1;
+        } else {
+            
+           return 0;
+        }
+    }
 }
 ?>
