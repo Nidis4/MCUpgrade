@@ -46,8 +46,23 @@ if(isset($_REQUEST['id']))
             $CategoriesName = $GetAppoinments->getCategoriesName($application_id);
             //print_r($getCustomersContactDetails);
             //extract($PhoneAndMobile);
- 
+            $close_times_offer_json = $GetAppoinments->getAppointmentsOffersDetails($id);
+            $close_times = $close_times_offer_json['close_times'];
+            $offer_json = $close_times_offer_json['offer_json'];
             $agent = array('first_name' => $afname, 'last_name' => $alname);
+            if($status == '4'){
+                $offer ='1';
+            }else{
+                $offer ='0';
+            }
+            if($category_id =='103' && $address !='' && $delivery_address !=''){
+                $distance = $GetAppoinments-> GetDistanceBetweenTwoAddresses($address,$delivery_address);
+                 
+            }
+            else{
+                $distance ='';
+                $delivery_address ='';
+            }
             $appointment_item=array(
                 "id" => $id,
                 "date" => $date,
@@ -56,15 +71,15 @@ if(isset($_REQUEST['id']))
                 "email" => $CustomersEmail,
                 "budget" => $budget,
                 "commision" => $commision,
-                "googleEventId" => $googleEventId,
+                "googleEventId" => "",
                 "land_line" => $PhoneAndMobile['phone'],
                 "comment" => $comment,
                 "surname" => $last_name,
                 "county_name" => $county_name,
                 "address" => $address,
-                "del_address" => $del_address,
+                "del_address" => $delivery_address,
                 "distance" => $distance,
-                "is_offer" => "0",
+                "is_offer" => $offer,
                 "offer_json" => $offer_json,
                 "close_times" => $close_times,
                 "mobile" => $PhoneAndMobile['mobile'],
