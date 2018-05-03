@@ -44,6 +44,10 @@ if($num>0){
 
         $payment_item=array(
             "payment_id" => $payment_id,
+            "professional_id" => $professional_id,
+            "first_name" => $first_name,
+            "last_name" => $last_name,
+            "sent_email" => $sent_email,
             "datetime_added" => $datetime_added,
             "receipt_no" => $receipt_no,
             "comment" => $comment,

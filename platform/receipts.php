@@ -96,6 +96,7 @@ include('config/core.php');
 									<thead>
 										<tr>
 											<th>Date</th>
+											<th>Customer name</th>
 											<th>Receipt No</th>
 											<th>Comment</th>
 											<th>Amount</th>
@@ -108,28 +109,37 @@ include('config/core.php');
 										if(empty($receiptsPag['message'])){
 											foreach ($receiptsPag['records'] as $field => $value) {
 												$payment_id = $receiptsPag['records'][$field]['payment_id'];
+												$name = $receiptsPag['records'][$field]['first_name']." ".$receiptsPag['records'][$field]['last_name'];
 												$datetime_added = $receiptsPag['records'][$field]['datetime_added'];
 												$receipt_no = $receiptsPag['records'][$field]['receipt_no'];
 												$comment = $receiptsPag['records'][$field]['comment'];
 												$amount = $receiptsPag['records'][$field]['amount'];
 												$status = $receiptsPag['records'][$field]['status'];
+												$sent_email = $receiptsPag['records'][$field]['sent_email'];
 												
 
 												echo '<tr data-item-id="'.$payment_id.'" class="status-'.$status.'">
 														  <td>'.$datetime_added.'</td>
+														  <td>'.$name.'</td>
 														  <td>'.$receipt_no.'</td>
 														  <td>'.$comment.'</td>
 														  <td>'.$amount.'</td>
 														  <td class="actions">
-															<a href="'.$api_url.'payment/invoice_receipt_pdf.php?payment_id='.$payment_id.'" class="btn btn-danger" style="color:#ffffff;"><i class="fa fa-file-pdf-o"></i></a>
-														  </td></tr>';
+															<a href="'.$api_url.'payment/invoice_receipt_pdf.php?payment_id='.$payment_id.'" class="btn btn-danger" style="color:#ffffff;"><i class="fa fa-file-pdf-o"></i></a>';
+												if(@$sent_email){
+													echo '<a href="javascript:void(0);" rel="'.$payment_id.'" class="btn btn-warning sent_email" style="color:#ffffff;"><i class="fa fa-lightbulb-o"></i></a>';
+												}else{
+													echo '<a href="javascript:void(0);" rel="'.$payment_id.'"  class="btn btn-default sent_email" style=""><i class="fa fa-lightbulb-o"></i></a>';
+												}
+
+												echo '</td></tr>';
 										?>
 										
 										<?php
 											}
 										}else{
 										?>
-												<tr><td colspan="5">No Payment found.</td></tr>	
+												<tr><td colspan="6">No Payment found.</td></tr>	
 										<?php	
 										}
 										?>										
@@ -242,5 +252,28 @@ include('config/core.php');
 
 		<!-- Examples -->
 		<script src="js/examples/examples.datatables.editable.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("a.sent_email").on('click',function(){
+					if (confirm('Are you sure want to sent email?')) {
+				    	var rel = $(this).attr('rel');
+				    	var getAvailableAPI = API_LOCATION+'payment/sentEmail.php?id='+rel;
+				    	var form_data = "";
+				    	$.ajax({
+				            type: "POST",
+				            url: getAvailableAPI,
+				            dataType: "JSON",
+			                data: form_data,
+				            success: function(data)
+				            {
+				                alert(data.message);
+				                location.reload(); 
+				            }
+				        });
+						return false;
+				    }
+				});
+			});
+		</script>
 	</body>
 </html>
