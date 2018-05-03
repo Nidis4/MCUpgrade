@@ -25,7 +25,7 @@ if(isset($_REQUEST['member_id']))
     if($stmt !== 0){
         $Propayment = $GetProfessionalClass->GetPropayment($member_id);
 
-        $total = number_format($Propayment['propayment'] - $stmt['commisiont']);
+        $total = $Propayment['propayment'] - $stmt['commisiont'];
 
       if($total ==''){
             $total = 0;
