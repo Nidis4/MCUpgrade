@@ -51,8 +51,9 @@ include('config/core.php');
 
 			<?php
 				include('header.php');
-				$invoices = file_get_contents($api_url.'webservices/api/payment/read_invoice_paging.php');
-				$invoicesPag = json_decode($invoices, true); // decode the JSON into an associative array				
+				$invoices = file_get_contents($api_url.'payment/read_invoice_paging.php');
+				$invoicesPag = json_decode($invoices, true); // decode the JSON into an associative array	
+			
 			?>
 
 			<div class="inner-wrapper">
@@ -106,7 +107,7 @@ include('config/core.php');
 										<?php
 
 										if(empty($invoicesPag['message'])){
-											foreach ($invoicesPag['records'] as $field => $value) {
+												foreach ($invoicesPag['records'] as $field => $value) {
 												$payment_id = $invoicesPag['records'][$field]['payment_id'];
 												$datetime_added = $invoicesPag['records'][$field]['datetime_added'];
 												$invoice_no = $invoicesPag['records'][$field]['invoice_no'];
