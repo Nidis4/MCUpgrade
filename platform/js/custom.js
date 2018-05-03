@@ -428,13 +428,13 @@ $( ".createOffer" ).click(function() {
             {
 
                 var customer_id = data;
-                alert(customer_id);
+                //alert(customer_id);
                 //var date = "2018-05-05";
                 //var time ="10:00-12:00";
                 
 
                 var createOfferAPI = API_LOCATION+'appointment/createOffer.php';
-                alert(createOfferAPI);
+                //alert(createOfferAPI);
                 //create($prod_id, $cust_id, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment);
                 $.ajax({
                     type: "POST",
@@ -463,7 +463,7 @@ $( ".createOffer" ).click(function() {
                         //alert(data);
 
                         alert("Offer Created");
-                        window.location.replace('../platform/appointments.php');
+                        window.location.replace('../platform/offers.php');
                     },
                     error: function(data){
                         alert(data);
