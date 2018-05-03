@@ -244,7 +244,7 @@ class Appointment{
         $query = "SELECT
                     `id`, `prof_member_id`, `cust_member_id`, `application_id`, `county_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelReason`, `cancelComment`, `viewed`, `viewed_datetime`
                 FROM
-                    " . $this->table_name . " WHERE `reject_status` IN ('1','2')
+                    " . $this->table_name . " WHERE `cancelReason` = '4'
                 ORDER BY `reject_datetime` DESC
                 LIMIT ?, ?";
      
@@ -591,7 +591,7 @@ class Appointment{
 
 
     public function rejectCount(){
-        $query = "SELECT Count(`id`) as total FROM  `appointments` WHERE  `reject_status` IN ('1','2')";
+        $query = "SELECT Count(`id`) as total FROM  `appointments` WHERE  `cancelReason` = '4'";
         $stmt = $this->conn->prepare( $query );
 
         $stmt->execute();
