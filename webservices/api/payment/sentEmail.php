@@ -58,7 +58,24 @@ $subject = "Invoice from myConstructor";
 
 
 $path = "save.php";
-$path = "https://upgrade.myconstructor.gr/webservices/api/payment/invoice_receipt_pdf.php?payment_id=1725";
+$path = "https://upgrade.myconstructor.gr/webservices/api/payment/invoice_receipt_pdf.php?payment_id=1722";
+
+
+$ch = curl_init($path);
+
+ curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+ curl_setopt($ch, CURLOPT_HEADER, TRUE);
+ curl_setopt($ch, CURLOPT_NOBODY, TRUE);
+
+ $data = curl_exec($ch);
+ $file_size = curl_getinfo($ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD);
+
+curl_close($ch);
+	
+
+
+
+
 $separator = md5( time() );
 // carriage return type (we use a PHP end of line constant)
 $eol = PHP_EOL;
@@ -72,7 +89,9 @@ $from_name = "Myconstructor";
 $file = $path;
 $filenamepdf = "save.pdf";
 $file_size = filesize($file);
+
 $handle = fopen($file, "r");
+
 $content = fread($handle, $file_size);
 fclose($handle);
 $content = chunk_split(base64_encode($content));
