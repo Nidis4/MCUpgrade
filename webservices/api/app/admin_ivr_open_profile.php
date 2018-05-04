@@ -1,6 +1,7 @@
 <?php
 // include database and object files
 include_once '../config/database.php';
+include_once '../../../constants.php';
 include_once 'CallClass.php';
 
 // instantiate database and product object
@@ -31,7 +32,7 @@ if (isset($_REQUEST['admin_email'])) {
 			$Calls->UpdateCallAnsweredAdminProfile($sip_number);
 			if($AppointmentCheck !== 0){
 
-				$url = 'https://upgrade.myconstructor.gr/platform/customer.php?id='.$AppointmentCheck['id'];
+				$url = SITE_URL.'platform/customer.php?id='.$AppointmentCheck['id'];
 				$about ='Customer';
 				$name = $AppointmentCheck['first_name'];
 				$surname = $AppointmentCheck['last_name'];
@@ -39,7 +40,7 @@ if (isset($_REQUEST['admin_email'])) {
 			}
 			elseif($ProfessionalsCheck !== 0){
 				
-				$url = 'https://upgrade.myconstructor.gr/platform/professional.php?id='.$ProfessionalsCheck['id'];
+				$url = SITE_URL.'platform/professional.php?id='.$ProfessionalsCheck['id'];
 				$about ='Proffesional';
 				$name = $ProfessionalsCheck['first_name'];
 				$surname = $ProfessionalsCheck['last_name'];
@@ -50,7 +51,7 @@ if (isset($_REQUEST['admin_email'])) {
 				$about ='Other';
 				$surname = '('.$CREATED_DATE.')';
 				$callId = $Calls->InsertCallFromOpenProfile('0',$about,$calldate,$call_duration,$agent_id,$call_answered_mobile,$surname,$call_answered_mobile,$rconrding,$uuid);
-				$url = 'https://upgrade.myconstructor.gr/platform/call.php?id='.$callId;
+				$url = SITE_URL.'platform/call.php?id='.$callId;
 			}
 			echo $url;
 			
