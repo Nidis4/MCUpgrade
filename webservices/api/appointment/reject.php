@@ -35,6 +35,9 @@ if(@$_POST['type']){
 	if ($_POST['type']==2){
 		$type = "Reject";
 		$cancelComment = "Reject Reason: ".$cancelComment;
+	}else if ($_POST['type']==4){
+		$type = "Reject";
+		$cancelComment = "Reject Reason: ".$cancelComment;
 		$cancelReason = 4;
 	}
 	else{
