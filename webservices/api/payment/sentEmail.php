@@ -33,11 +33,6 @@ $subject = "Invoice from myConstructor";
 
 
 $path = "save.php";
-$file = fopen( $path, "r" );
-# Read the file into a variable
-$size = filesize($path);
-$content = fread( $file, $size);
-$attachment = chunk_split( base64_encode($content));
 $separator = md5( time() );
 // carriage return type (we use a PHP end of line constant)
 $eol = PHP_EOL;
@@ -62,18 +57,18 @@ $header .= "MIME-Version: 1.0\r\n";
 $header .= "Content-Type: multipart/mixed; boundary=\"".$uid."\"\r\n\r\n";
 
 $nmessage = "--".$uid."\r\n";
-$nmessage .= "Content-type:text/plain; charset=iso-8859-1\r\n";
+$nmessage .= "Content-type:text/html; charset=iso-8859-1\r\n";
 $nmessage .= "Content-Transfer-Encoding: 7bit\r\n\r\n";
 $nmessage .= $message."\r\n\r\n";
 $nmessage .= "--".$uid."\r\n";
-$nmessage .= "Content-Type: application/octet-stream; name=\"".$filename."\"\r\n"; 
+$nmessage .= "Content-Type: application/octet-stream; name=\"".$path."\"\r\n"; 
 $nmessage .= "Content-Transfer-Encoding: base64\r\n";
-$nmessage .= "Content-Disposition: attachment; filename=\"".$filename."\"\r\n\r\n";
+$nmessage .= "Content-Disposition: attachment; filename=\"".$path."\"\r\n\r\n";
 $nmessage .= $content."\r\n\r\n";
 $nmessage .= "--".$uid."--";
 
 
-error_reporting(E_ALL);
+//error_reporting(E_ALL);
 
 
 // More headers
@@ -98,10 +93,9 @@ if(mail( $to, $subject,  $nmessage,  $header )){
 }
  
 else{
-	print_r(error_get_last());
-    die;
+	
     echo json_encode(
-        array("message" => error_get_last())
+        array("message" => error_get_last()['message'])
     );
 }
 ?>
