@@ -30,11 +30,36 @@ class AppointmentClass{
 
         return $stmt;
     }
+    public function GetAppoinmentsCancel($member_id,$page,$status){
+        $limit = "limit ".(10 * $page).", 10";
+        $sql ="SELECT `appointments`.`id`,`appointments`.`date`,`appointments`.`time`,`appointments`.`address`,`customers`.`first_name`,`customers`.`last_name`,`customers_contact_details`.`country_id` FROM `appointments` JOIN `customers` on `customers`.`id` = `appointments`.`cust_member_id` JOIN `customers_contact_details` on `customers_contact_details`.`customer_id` = `appointments`.`cust_member_id`  WHERE `appointments`.`prof_member_id` = '".$member_id."' and `appointments`.`status`='0'";
+        $sql .= " ORDER BY  `appointments`.`date` DESC ,`appointments`.`time` DESC ".$limit;
 
+        // prepare query statement
+        $stmt = $this->conn->prepare($sql);
+
+        // execute query
+        $stmt->execute();
+
+        return $stmt;
+    }
+    public function GetAppoinmentsOffer($member_id,$page,$status){
+        $limit = "limit ".(10 * $page).", 10";
+        $sql ="SELECT `appointments`.`id`,`appointments`.`date`,`appointments`.`time`,`appointments`.`address`,`customers`.`first_name`,`customers`.`last_name`,`customers_contact_details`.`country_id` FROM `appointments` JOIN `customers` on `customers`.`id` = `appointments`.`cust_member_id` JOIN `customers_contact_details` on `customers_contact_details`.`customer_id` = `appointments`.`cust_member_id`  WHERE `appointments`.`prof_member_id` = '".$member_id."' and `appointments`.`status`='".$status."'";
+        $sql .= " ORDER BY  `appointments`.`date` DESC ,`appointments`.`time` DESC ".$limit;
+
+        // prepare query statement
+        $stmt = $this->conn->prepare($sql);
+
+        // execute query
+        $stmt->execute();
+
+        return $stmt;
+    }
     // Appoinments Details
     public function GetAppoinmentsDetails($id){
         $sql ="SELECT `appointments`.`id`,`appointments`.`cust_member_id`,`appointments`.`date`,`appointments`.`time`,`appointments`.`application_id`,`customers`.`first_name`,`customers`.`last_name`,`appointments`.`address`,`appointments`.`delivery_address`,`appointments`.`budget`,`appointments`.`commision`,`appointments`.`comment`,`appointments`.`status`,`customers_contact_details`.`country_id`,`admin`.`first_name` AS `afname`,`admin`.`last_name` AS `alname`,`applications`.`category_id` AS `category_id` FROM `appointments` JOIN `customers` on `customers`.`id` = `appointments`.`cust_member_id`  JOIN `customers_contact_details` on `customers_contact_details`.`customer_id` = `appointments`.`cust_member_id` JOIN `applications` on `applications`.`id` = `appointments`.`application_id` JOIN `admin` on `admin`.`id` = `appointments`.`agent_id` WHERE `appointments`.`id` = '".$id."'";
-        $sql .= " ORDER BY  `appointments`.`date` DESC ,`appointments`.`time` DESC ".$limit;
+        $sql .= " ORDER BY  `appointments`.`date` DESC ,`appointments`.`time` DESC ";
 
         // prepare query statement
         $stmt = $this->conn->prepare($sql);
@@ -171,7 +196,7 @@ class AppointmentClass{
     }
 
     public function UpdateDateTimeOfAppoinment($id,$date,$time,$date_old,$time_old){
-/*UPDATE `appointments` SET `date`='".$date."',`time`='".$time."',`date_old`='".$_REQUEST['date_old']."',`time_old`='".$_REQUEST['time_old']."',`googleEventId`='".$FinalEventId."' WHERE `id` = '".$_REQUEST['id']."'*/
+
         $query = "UPDATE `appointments` SET `date`='".$date."',`time`='".$time."',`date_old`='".$date_old."',`time_old`='".$time_old."' WHERE `id`='".$id."'";
         $stmt = $this->conn->prepare( $query );
         $stmt->execute();
@@ -296,7 +321,63 @@ class AppointmentClass{
         fclose($fp);
 
     }
+    public function getAppointmentsOffersDetails($id){
+        $sql = "SELECT `offer_json`,`close_times` FROM `appointments_offers_details` WHERE `appointment_id` = '".$id."'";
+        $AppointmentCheckV = $this->conn->prepare($sql);
+        $AppointmentCheckV->execute();
+        $num = $AppointmentCheckV->rowCount();
+        if($num>0){
+           return $android_row = $AppointmentCheckV->fetch(PDO::FETCH_ASSOC);
+        }
+        else{
+            return "";
+        }
+    }
+    public function PostAppointmentOfferJson($id,$budget,$offer_json){
+        $sql = "SELECT `appointment_id` FROM `appointments_offers_details` WHERE `appointment_id` = '".$id."'";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $num = $stmt->rowCount();
+        if($num>0){
+            $query = "UPDATE `appointments_offers_details` SET `offer_json`='".$offer_json."' WHERE `appointment_id`='".$id."'";
+            $stmtu = $this->conn->prepare( $query );
+            $stmtu->execute();
+        }
+        else{
+            $queryi = "INSERT INTO `appointments_offers_details`(`appointment_id`, `offer_json`) VALUES ('".$id."','".$offer_json."')";
+            $stmti = $this->conn->prepare( $queryi );
+            $stmti->execute();
+        }
+        $queryb = "UPDATE `appointments` SET `budget`='".$budget."' WHERE `id`='".$id."'";
+        $stmtb = $this->conn->prepare( $queryb );
+        $stmtb->execute();
+    }
+    public function NotificationBeforeFourtyAppointmentNotViewed(){
+       $sql ="SELECT `id`,`prof_member_id`,`date`,`time` FROM `appointments` WHERE `notification_before_appointment`='0' AND `status`='1' ORDER BY `date` ASC LIMIT 0,1";
 
+        // prepare query statement
+        $stmt = $this->conn->prepare($sql);
+
+        // execute query
+        $stmt->execute();
+
+        return $stmt;
+    }
+    public function CheckAppoinmentsIsOffer($id,$status){
+        $sql ="SELECT `id` FROM `appointments` WHERE `id` = '".$id."' AND `status` = '4'";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare($sql);
+
+        // execute query
+        $stmt->execute();
+
+        return $stmt;
+    }
+    public function GreeceCurrentTime(){
+        date_default_timezone_set('Europe/Athens');
+        return date("Y-m-d H:i:s");
+    }
     public function GetDistanceBetweenTwoAddresses($address,$delivery_address){
         $addressNew = urlencode($address);
         $delivery_addressNew = urlencode($delivery_address);
@@ -309,6 +390,20 @@ class AppointmentClass{
             return '';
         }
         
+    }
+    public function TimeDiffrenceInMinute($CurrentTime,$appointments_DateTime){
+       $sql ="SELECT TIMESTAMPDIFF(MINUTE,'".$appointments_DateTime."','".$CurrentTime."') AS minute";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $num = $stmt->rowCount();
+        if($num>0){
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row['minute'];
+        }
+        else{
+            return 0;
+        }
     }
 }
 ?>
