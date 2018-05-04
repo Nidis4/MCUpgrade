@@ -353,7 +353,7 @@
 				                    </li>
 				                    <li class="nav-parent">
 				                        <a class="nav-link" href="#">
-				                            <i class="fa fa-list-alt" aria-hidden="true"></i>
+				                            <i class="fa fa-phone-square" aria-hidden="true"></i>
 				                            <span>Calls</span>
 				                        </a>
 				                        <ul class="nav nav-children">
@@ -647,6 +647,40 @@
 				                    sidebarLeft.scrollTop = initialPosition;
 				                }
 				            }
+				            
+				            setInterval(get_fb, 6000);
+				            var xhr;
+							function get_fb(){
+								if(xhr && xhr.readyState != 4){
+						            xhr.abort();
+						        }
+						        console.log(xhr);
+								var admin_id = '<?php echo $_SESSION['id']?>';									
+								if(admin_id !=''){									
+									xhr = $.ajax({
+										type: "GET",     
+										url: '../webservices/api/app/admin_ivr_open_profile.php',
+										data: 'admin_email='+admin_id,
+							            global: false,
+										success: function (data) {
+											
+											if (data != null && data !='') {
+												var newWin = window.open(data,'_blank');
+
+												if(!newWin || newWin.closed || typeof newWin.closed=='undefined') 
+												{
+													alert("please allow popup window in your browser after open profile in new tab");
+													window.location = data;
+												}
+											}
+										},
+										error: function(e) {
+											
+										}
+									});
+										
+								} 
+							}
 				        </script>
 				        
 				
