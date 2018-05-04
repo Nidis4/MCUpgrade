@@ -25,7 +25,7 @@ $payment->payment_id = $_GET['id'];
 $body = file_get_contents("../../../emails/send_invoice.php");
 //$body .= file_get_contents("../../../emails/footer.php");
 $message = str_replace('{{URL}}', SITE_URL, $body );
-$message = str_replace('{{KEY}}', $stmt['key'], $message );
+//$message = str_replace('{{KEY}}', $stmt['key'], $message );
 
 $to = "er.hpreetsingh@gmail.com";
 $subject = "Invoice from myConstructor";
@@ -38,17 +38,17 @@ $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 //$headers .= 'Cc: myboss@example.com' . "\r\n";
 
 
-mail($to,$subject,$message,$headers); 
+
 
 
 // query products
-$stmt = $payment->sentEmail();
+
 //$stmt = $customer->search($keywords);
 //$num = $stmt->rowCount();
  
 // check if more than 0 record found
-if($stmt){
- 
+if(mail($to,$subject,$message,$headers)){
+ 	$stmt = $payment->sentEmail();
     echo json_encode(
         array("message" => "Email sent successfully.")
     );
