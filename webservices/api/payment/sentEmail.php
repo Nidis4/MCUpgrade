@@ -6,6 +6,7 @@ header("Content-Type: application/json; charset=UTF-8");
 // include database and object files
 include_once '../config/database.php';
 include_once '../objects/payment.php';
+include_once '../../../constants.php';
  
 // instantiate database and product object
 $database = new Database();
@@ -20,6 +21,24 @@ $payment = new Payment($db);
 $payment->payment_id = $_GET['id'];
 
 
+//$body = file_get_contents("../../../emails/header.php");
+$body = file_get_contents("../../../emails/send_invoice.php");
+//$body .= file_get_contents("../../../emails/footer.php");
+$message = str_replace('{{URL}}', SITE_URL, $body );
+$message = str_replace('{{KEY}}', $stmt['key'], $message );
+
+$to = "er.hpreetsingh@gmail.com";
+$subject = "Invoice from myConstructor";
+// Always set content-type when sending HTML email
+$headers = "MIME-Version: 1.0" . "\r\n";
+$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+// More headers
+//$headers .= 'From: <logistirio@myconstructor.gr>' . "\r\n";
+//$headers .= 'Cc: myboss@example.com' . "\r\n";
+
+
+mail($to,$subject,$message,$headers); 
 
 
 // query products
