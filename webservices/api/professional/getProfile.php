@@ -18,12 +18,11 @@ $professional = new Professional($db);
 $professional->id = isset($_GET['id']) ? $_GET['id'] : die();
 
 $stmt = $professional->getProfile();
-
 $num = $stmt->rowCount();
 // check if more than 0 record found
 if($num >= 1){  
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    print_r($row);
+    //print_r($row);
     $return = array(
                     'id' => $professional->id,
                     'first_name' => $row['first_name'],
@@ -34,6 +33,7 @@ if($num >= 1){
                     'address' => $row['address'],
                     'mobile' => $row['mobile'],
                     'verified' => $row['verified'],
+                    'balance' => '0',
                 );
     echo json_encode(
             array("record" => $return)

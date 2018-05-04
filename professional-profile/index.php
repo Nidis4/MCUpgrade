@@ -20,15 +20,17 @@
                                 <?php if($profile['record']['verified']==0){?>    
                                  <div class="alert alert-danger">
                                     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                                    <strong>Attention!</strong> Your profile is under verification.
+                                    <strong>Ενημέρωση!</strong> Το αίτημα σας για τη δημιουργία του προφιλ είναι υπο επεξεργασία.
                                   </div>
                                 <?php }?>
 
+                                <?php if($profile['record']['balance'] > 150){?>    
                                  <div class="alert alert-danger">
                                     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                                    <strong>Attention!</strong> Υou have unpaid debts. Your account will be frozen! <a href="/manage-profile/payments.php" class="alert-link">read more</a>.
+                                    <strong>Προσοχή!</strong> Το χρέος σας έχει ξεπεράσει τα 150 Ευρώ και ο λογαριασμός σας θα απενεργοποιηθεί εντός των επόμενων 3 ημερών! <a href="/professional-profile/payments.php" class="alert-link">read more</a>.
                                   </div>
-
+                                <?php }?>
+                                
                                   <div class="alert alert-info">
                                     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                                     <strong>Info!</strong> 1500 Users viewed your category and 300 users viewed your profile at the past month.
