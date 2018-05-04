@@ -4,8 +4,8 @@ $upgrade_db_name = 'upgradem_main';
 $upgrade_user_name = 'upgradem_super';
 $upgrade_db_pass = 'x}zLIzWrI^zC';
 
-$upgrade_user_name = "root";
-$upgrade_db_pass = "";
+//$upgrade_user_name = "root";
+//$upgrade_db_pass = "";
 
 
 function UpgradeDB(){
