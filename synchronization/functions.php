@@ -4,8 +4,8 @@ $upgrade_db_name = 'upgradem_main';
 $upgrade_user_name = 'upgradem_super';
 $upgrade_db_pass = 'x}zLIzWrI^zC';
 
-//$upgrade_user_name = "root";
-//$upgrade_db_pass = "";
+$upgrade_user_name = "root";
+$upgrade_db_pass = "";
 
 
 function UpgradeDB(){
@@ -67,27 +67,31 @@ function getPayments($prof_id, $startDate, $endDate){
 	return $amount;
 }
 
-function getPaymentByCategory($prof_id, $startDate, $endDate){
+function getPaymentByCategory($prof_id, $cat_id, $startDate, $endDate){
 	$upgrade = UpgradeDB();
-	$query = "SELECT SUM(amount) AS main, category_id FROM `payments` WHERE professional_id = ".$prof_id." AND `status` = 1 AND `datetime_added` BETWEEN '".$startDate."' AND '".$endDate."' GROUP BY category_id ORDER BY main DESC";
-	//echo $query;
-	$result = $upgrade->query($query);
-	$row = $result->fetch_assoc();
+	 $query = "SELECT SUM(amount) AS main FROM `payments` WHERE professional_id = ".$prof_id." AND category_id = ".$cat_id." AND `status` = 1 AND `datetime_added` BETWEEN '".$startDate."' AND '".$endDate."'ORDER BY main DESC";
+	 //echo $query;
+	 $result = $upgrade->query($query);
+	 $row = $result->fetch_assoc();
+	 
+	 if ($row['main']==""){
+	  $perc = 0;
+	 }
+	 else{
+	  $amount = $row['main'];
+	  $query = "SELECT SUM(amount) AS main FROM `payments` WHERE category_id = $cat_id AND `datetime_added` AND `status` = 1 BETWEEN '".$startDate."' AND '".$endDate."' ";
+	  $result = $upgrade->query($query);
+	  $row = $result->fetch_assoc();
+
+	  $totalAmount = $row['main'];
+	  if ($totalAmount==""){
+	  	$perc = 0;
+	  }else{
+	  	$perc = $amount/$totalAmount;
+	  }
+	}
 	
-	if ($row['main']==""){
-		$perc = 0;
-	}
-	else{
-		$amount = $row['main'];
-		$category = $row['category_id'];
-
-		$query = "SELECT SUM(amount) AS main FROM `payments` WHERE category_id = $category AND `datetime_added` BETWEEN '".$startDate."' AND '".$endDate."' ";
-		$result = $upgrade->query($query);
-		$row = $result->fetch_assoc();
-		$totalAmount = $row['main'];
-		$perc = $amount/$totalAmount;
-	}
-
+	
 	return $perc;
 }
 
@@ -107,13 +111,21 @@ function getReviewsPerc($prof_id, $startDate, $endDate){
 	return $perc;
 }
 
-function updateScore($id, $conv, $market, $reviews, $score){
+function updateScore($id, $cat_id, $conv, $market, $reviews, $score){
 	$upgrade = UpgradeDB();
-	$query = "INSERT INTO `professionals_scoring`(`PROF_ID`, `PAYMENTS_CONVERSION`, `MARKET_SHARE`, `REVIEWS`, `TOTAL`) VALUES ('$id','$conv','$market','$reviews','$score') ON DUPLICATE KEY UPDATE `PAYMENTS_CONVERSION` = '$conv', `MARKET_SHARE`='$market', `REVIEWS` = '$reviews', `TOTAL` = '$score' ";
+	$query = "INSERT INTO `professionals_scoring`(`PROF_ID`, `CATEGORY_ID`, `PAYMENTS_CONVERSION`, `MARKET_SHARE`, `REVIEWS`, `TOTAL`) VALUES ('$id','$cat_id','$conv','$market','$reviews','$score') ON DUPLICATE KEY UPDATE `PAYMENTS_CONVERSION` = '$conv', `MARKET_SHARE`='$market', `REVIEWS` = '$reviews', `TOTAL` = '$score' ";
 	//echo $query;
 
 	$result = $upgrade->query($query);
 
 }
 
+function getCategories($id){
+	$upgrade = UpgradeDB();
+
+	$query = "SELECT `category_id` FROM `professionals_applications` WHERE `professional_id` = $id GROUP BY `category_id`";
+	//echo $query;
+	$result = $upgrade->query($query);
+	return $result;
+}
 ?>

@@ -33,7 +33,10 @@ $profs = getVerifiedProfessionals();
 
 while ($row = $profs->fetch_assoc()) {
 	$id = $row['id'];
+	$first = $row['first_name'];
 	$last = $row['last_name'];
+	
+	echo $id.": ".$first." ".$last."<br>";
 
 	$commisionEarned = round(getCommisions($id, $minus3months, $today),2);
 	$amountPaid = round(getPayments($id, $minus3months, $today),2);
@@ -43,18 +46,24 @@ while ($row = $profs->fetch_assoc()) {
 	else{
 		$conv = 0;
 	}
-	
-	$market = round(getPaymentByCategory($id, $minus1month, $today),2);
+		
 	$reviews = round(getReviewsPerc($id, $minus12months, $today),2);
 	
-	$score = (($market*0.25) + ($conv*0.25) + ($reviews*0.50))*100;
+	$categories = getCategories($id);
+	
+	while ($cat = $categories->fetch_assoc()) {
+		$cat_id = $cat['category_id'];
+		$market = round(getPaymentByCategory($id, $cat_id, $minus1month, $today),2);
+		$score = (($market*0.25) + ($conv*0.25) + ($reviews*0.50))*100;
 
-	echo $id.": ".$last."<br>"; 
-	echo $amountPaid." / ".$commisionEarned." ------ $conv <br>"; 
-	echo "Market Share: ".$market."<br>";
-	echo "Reviews: ".$reviews."<br>";
-	echo "Score: ".$score."<br><br>";
+		echo "Category: ".$cat_id."<br>";
+		echo $amountPaid." / ".$commisionEarned." ------ $conv <br>"; 
+		echo "Market Share: ".$market."<br>";
+		echo "Reviews: ".$reviews."<br>";
+		echo "Score: ".$score."<br><br>";
 
-	updateScore($id, $conv, $market, $reviews, $score);
+		updateScore($id, $cat_id, $conv, $market, $reviews, $score);
+	}
+
 }
 ?>
