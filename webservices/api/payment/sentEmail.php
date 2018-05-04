@@ -57,8 +57,8 @@ $subject = "Invoice from myConstructor";
 // Always set content-type when sending HTML email
 
 
-$path = "save.php";
-$path = "https://upgrade.myconstructor.gr/webservices/api/payment/invoice_receipt_pdf.php?payment_id=1722";
+//$path = "save.php";
+$path = SITE_URL."webservices/api/payment/invoice_receipt_pdf.php?payment_id=".$_GET['id'];
 
 
 $ch = curl_init($path);
