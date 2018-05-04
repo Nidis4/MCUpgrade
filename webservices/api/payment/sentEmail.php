@@ -52,6 +52,7 @@ $body = file_get_contents("../../../emails/send_invoice.php");
 $message = str_replace('{{URL}}', SITE_URL, $body );
 $message = str_replace('{{NAME}}', $name, $message );
 
+$to = $payment->receipt_email;
 $to = "er.hpreetsingh@gmail.com";
 $subject = "Invoice from myConstructor";
 // Always set content-type when sending HTML email
