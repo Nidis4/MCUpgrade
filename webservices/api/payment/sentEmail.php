@@ -37,33 +37,43 @@ $file = fopen( $path, "r" );
 # Read the file into a variable
 $size = filesize($path);
 $content = fread( $file, $size);
-$encoded_content = chunk_split( base64_encode($content));
-$num = md5( time() );
+$attachment = chunk_split( base64_encode($content));
+$separator = md5( time() );
+// carriage return type (we use a PHP end of line constant)
+$eol = PHP_EOL;
 
 
-# Define the main headers.
-$header  = "From:logistirio@myconstructor.gr\r\n";
+
+// main header (multipart mandatory)
+$from_mail = "logistirio@myconstructor.gr";
+$from_name = "Myconstructor";
+
+$file = $path;
+$file_size = filesize($file);
+$handle = fopen($file, "r");
+$content = fread($handle, $file_size);
+fclose($handle);
+$content = chunk_split(base64_encode($content));
+$uid = md5(uniqid(time()));
+$name = basename($file);
+$header = "From: ".$from_name." <".$from_mail.">\r\n";
+$header .= "Reply-To: ".$replyto."\r\n";
 $header .= "MIME-Version: 1.0\r\n";
-$header .= "Content-Type: multipart/mixed; ";
-$header .= "boundary=$num\r\n";
-$header .= "--$num\r\n";
+$header .= "Content-Type: multipart/mixed; boundary=\"".$uid."\"\r\n\r\n";
 
- # Define the message section
-$header .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-$header .= "Content-Transfer-Encoding:8bit\r\n\n";
-$header .= "$message\r\n";
-$header .= "--$num\r\n";
+$nmessage = "--".$uid."\r\n";
+$nmessage .= "Content-type:text/plain; charset=iso-8859-1\r\n";
+$nmessage .= "Content-Transfer-Encoding: 7bit\r\n\r\n";
+$nmessage .= $message."\r\n\r\n";
+$nmessage .= "--".$uid."\r\n";
+$nmessage .= "Content-Type: application/octet-stream; name=\"".$filename."\"\r\n"; 
+$nmessage .= "Content-Transfer-Encoding: base64\r\n";
+$nmessage .= "Content-Disposition: attachment; filename=\"".$filename."\"\r\n\r\n";
+$nmessage .= $content."\r\n\r\n";
+$nmessage .= "--".$uid."--";
 
 
-# Define the attachment section
-$header .= "Content-Type:  multipart/mixed; ";
-$header .= "name=\"save.php\"\r\n";
-$header .= "Content-Transfer-Encoding:base64\r\n";
-$header .= "Content-Disposition:attachment; ";
-$header .= "filename=\"save.php\"\r\n\n";
-$header .= "$encoded_content\r\n";
-$header .= "--$num--";
-
+error_reporting(E_ALL);
 
 
 // More headers
@@ -80,7 +90,7 @@ $header .= "--$num--";
 //$num = $stmt->rowCount();
  
 // check if more than 0 record found
-if(mail( $to, $subject, "", $header )){
+if(mail( $to, $subject,  $nmessage,  $header )){
  	$stmt = $payment->sentEmail();
     echo json_encode(
         array("message" => "Email sent successfully.")
@@ -88,8 +98,10 @@ if(mail( $to, $subject, "", $header )){
 }
  
 else{
+	print_r(error_get_last());
+    die;
     echo json_encode(
-        array("message" => "Please try again.")
+        array("message" => error_get_last())
     );
 }
 ?>
