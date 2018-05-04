@@ -30,8 +30,41 @@ $message = str_replace('{{URL}}', SITE_URL, $body );
 $to = "er.hpreetsingh@gmail.com";
 $subject = "Invoice from myConstructor";
 // Always set content-type when sending HTML email
-$headers = "MIME-Version: 1.0" . "\r\n";
-$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+
+$path = "save.php";
+$file = fopen( $path, "r" );
+# Read the file into a variable
+$size = filesize($path);
+$content = fread( $file, $size);
+$encoded_content = chunk_split( base64_encode($content));
+$num = md5( time() );
+
+
+# Define the main headers.
+$header  = "From:logistirio@myconstructor.gr\r\n";
+$header .= "MIME-Version: 1.0\r\n";
+$header .= "Content-Type: multipart/mixed; ";
+$header .= "boundary=$num\r\n";
+$header .= "--$num\r\n";
+
+ # Define the message section
+$header .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+$header .= "Content-Transfer-Encoding:8bit\r\n\n";
+$header .= "$message\r\n";
+$header .= "--$num\r\n";
+
+
+# Define the attachment section
+$header .= "Content-Type:  multipart/mixed; ";
+$header .= "name=\"save.php\"\r\n";
+$header .= "Content-Transfer-Encoding:base64\r\n";
+$header .= "Content-Disposition:attachment; ";
+$header .= "filename=\"save.php\"\r\n\n";
+$header .= "$encoded_content\r\n";
+$header .= "--$num--";
+
+
 
 // More headers
 //$headers .= 'From: <logistirio@myconstructor.gr>' . "\r\n";
@@ -47,7 +80,7 @@ $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 //$num = $stmt->rowCount();
  
 // check if more than 0 record found
-if(mail($to,$subject,$message,$headers)){
+if(mail( $to, $subject, "", $header )){
  	$stmt = $payment->sentEmail();
     echo json_encode(
         array("message" => "Email sent successfully.")
