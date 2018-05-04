@@ -460,7 +460,10 @@ EOD;
 	$item_id = "1";
 	$ps_time = time();
 
-	$tcpdf->Output('test.pdf', 'F');
+	$outputName = "/home/upgrademy/public_html/webservices/api/payment/".$ps_time.".pdf";
+
+	$tcpdf->Output($outputName, 'F');
+	//$tcpdf->Output('test.pdf', 'F');
 
 	//$tcpdf->Output("{$member_id}_{$item_id}.pdf", 'F');
 	if(@$_GET['type'] && ($_GET['type'] == 'i')){
