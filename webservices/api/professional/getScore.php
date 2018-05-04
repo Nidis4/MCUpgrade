@@ -20,42 +20,37 @@ $db = $database->getConnection();
 $professional = new Professional($db);
  
 // query products
-$professional->id = isset($_GET['prof_id']) ? $_GET['prof_id'] : die();
-$stmt = $professional->getCategories();
-
+$cat_id = isset($_GET['cat_id']) ? $_GET['cat_id'] : die();
+$stmt = $professional->getScore($cat_id);
 $num = $stmt->rowCount();
  
 // check if more than 0 record found
-if($num >= 1){    
-
-    // products array
-    $categories_arr=array();
+if($num>0){
  
-    // retrieve our table contents
-    // fetch() is faster than fetchAll()
-    // http://stackoverflow.com/questions/2770630/pdofetchall-vs-pdofetch-in-a-loop
+    // products array
+    $professionals_arr=array();
+ 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
         // extract row
         // this will make $row['name'] to
         // just $name only
-        
+        extract($row);
  
-        $category_item=array(
-            "category_id" => $row['category_id'],
-            "category_name" => $row['title'],
-            "is_main" => $row['is_main'],
+        $professional_item=array(
+            "professional_id" => $prof_id,
+            "firstname" => $first_name,
+            "lastname" => $last_name,
+            "score" => $total
         );
  
-        array_push($categories_arr, $category_item);
+        array_push($professionals_arr, $professional_item);
     }
  
-        echo json_encode($categories_arr);
+    echo json_encode($professionals_arr);
 }
-else
-{
-        echo json_encode(
-            array("message" => "No categories found.")
-        );
+else{
+    echo json_encode(
+        array("message" => "No Applications found.")
+    );
 }
-
 ?>

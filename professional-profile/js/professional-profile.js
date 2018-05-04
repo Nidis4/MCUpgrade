@@ -156,3 +156,54 @@ $("#resetForm").submit(function(){
                 $(this).closest('div.read-more-txt').prev().css('display','inline');
          });
     });
+
+
+$(document).ready(function(){
+
+    $('select#category').on('change', function() {
+        var cat_id = this.value;
+        var name = $('select#category option:selected').attr('data-name');
+        var prof_id = $('select#category option:selected').attr('data-prof');
+        //alert(name);
+        $(".profScores").empty();
+
+        var getScoreAPI = API_LOCATION+'professional/getScore.php?cat_id='+cat_id;
+        //alert(getScoreAPI);
+        $.ajax({
+                type: "POST",
+                url: getScoreAPI,
+                dataType: "json",
+                success: function(data)
+                {
+                    //alert(data.length);
+                     var htmlStr = '';
+                     //htmlStr += '<option value="" disabled selected>Select your option</option>';
+                    var i = 0;
+                    $.each(data, function(k, v){
+                        //htmlStr += v.id + ' ' + v.name + '<br />';
+                        
+                        if (v.professional_id!=undefined){
+                            i += 1;
+                            if (prof_id==v.professional_id){
+                                htmlStr += "<tr class='mypossition'>";
+                            }
+                            else {
+                                htmlStr += "<tr>";
+                            }
+                            htmlStr += "<td>"+i+"</td>";
+                            htmlStr += "<td>"+v.firstname+" "+v.lastname+"</td>";
+                            htmlStr += "<td><span class='badge badge-success'>"+name+"</td>";
+                            htmlStr += "<td><div class='progress progress-sm progress-half-rounded m-0 mt-1 light'><div class='progress-bar progress-bar-primary' role='progressbar' aria-valuenow='60' aria-valuemin='0' aria-valuemax='100' style='width: "+v.score+"%;'>"+v.score+"</div></div></td>";
+                            htmlStr += "</tr>";
+                        }
+                        else{
+
+                        }
+                   });
+                   $(".profScores").append(htmlStr);
+                   
+                }
+            });
+
+    });
+});

@@ -322,6 +322,17 @@ ORDER BY `date` ASC,
         return $stmt;
     }
 
+    public function getScore($cat_id){
+        $query = "SELECT s.`prof_id`, p.`first_name`, p.`last_name`, s.`total` FROM `professionals_scoring` s LEFT JOIN `professionals` p ON s.PROF_ID = p.ID WHERE `CATEGORY_ID` = $cat_id ORDER BY `TOTAL` DESC";
+        $stmt = $this->conn->prepare( $query );
+
+        // execute query
+        $stmt->execute();
+     
+        // return values from database
+        return $stmt;
+    }
+
     public function searchList($name, $surname, $mobile, $address){
  
     // select all query
@@ -816,9 +827,30 @@ ORDER BY `date` ASC,
     public function getCategories(){
      
         // select query
-        $query = "SELECT pc.`category_id`, pc.`is_main`, c.`title`, pc.`truck_dimensions` FROM ". $this->categories_table_name ." pc 
+        $query = "SELECT pc.`category_id`, pc.`is_main`, c.`title`, c.`title_greek`,pc.`truck_dimensions` FROM ". $this->categories_table_name ." pc 
                   Join categories c ON pc.category_id = c.id
                 WHERE pc.`professional_id`= ? order by pc.is_main desc";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind variable values
+        $id = $this->id;
+        $stmt->bindParam(1, $id, PDO::PARAM_INT);
+        
+        // execute query
+        $stmt->execute();
+        
+        // return values from database
+        return $stmt;
+    }
+
+    public function getScoredCategories(){
+     
+        // select query
+        $query = "SELECT pc.`category_id`,  c.`title`, c.`title_greek` FROM `professionals_scoring` pc 
+                  Join categories c ON pc.category_id = c.id
+                WHERE pc.`prof_id`= ? ";
      
         // prepare query statement
         $stmt = $this->conn->prepare( $query );

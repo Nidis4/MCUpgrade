@@ -22,6 +22,7 @@
          <!-- Bootstrap Js CDN -->
          <script src="../assets/bootstrap337/js/bootstrap.min.js"></script>
          <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+         <script src="<?php echo SITE_URL;?>platform/js/core.js"></script>
          <link rel="stylesheet" href="<?php echo SITE_URL;?>professional-profile/js/timeline.js">
          <script src="<?php echo SITE_URL;?>professional-profile/js/professional-profile.js"></script>
 
