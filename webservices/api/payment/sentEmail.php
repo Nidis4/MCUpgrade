@@ -59,7 +59,7 @@ $subject = "Invoice from myConstructor";
 
 
 //$path = "save.php";
-$path = SITE_URL."webservices/api/payment/invoice_receipt_pdf.php?payment_id=".$_GET['id'];
+$path = SITE_URL."webservices/api/payment/invoice_receipt_pdf.php?type=i&payment_id=".$_GET['id'];
 
 
 $ch = curl_init($path);
@@ -88,8 +88,8 @@ $from_mail = "logistirio@myconstructor.gr";
 $from_name = "Myconstructor";
 
 $file = $path;
-$filenamepdf = "save.pdf";
-$file_size = filesize($file);
+$filenamepdf = "invoice-".$_GET['id'].".pdf";
+//$file_size = filesize($file);
 
 $handle = fopen($file, "r");
 
