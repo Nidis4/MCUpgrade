@@ -831,3 +831,22 @@ ALTER TABLE `professionals_invoice_settings` ADD `invoice_email` VARCHAR(255) NU
 
 <!-------------------------------->
 <!-- End 03 May 2018 Harpreet -->
+
+
+<!-------------------------------->
+<!-- Start 04 May 2018 GKonstantinidis -->
+CREATE TABLE `applications_meta` (
+  `application_id` int(11) NOT NULL,
+  `meta_title` varchar(300) NOT NULL,
+  `meta_description` varchar(500) NOT NULL,
+  `meta_robots` varchar(50) NOT NULL,
+  `permalink` varchar(100) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE `applications_meta`
+  ADD PRIMARY KEY (`application_id`);
+COMMIT;
+
+<!-------------------------------->
+<!-- End 04 May 2018 GKonstantinidis -->

@@ -47,7 +47,11 @@ if($num>0){
             "unit" => $unit,
             "min_price" => $min_price,
             "sequence" => $sequence,
-            "modified" => $modified
+            "modified" => $modified,
+            "meta_title" => $meta_title,
+            "meta_description" => $meta_description,
+            "meta_robots" => $meta_robots,
+            "permalink" => $permalink,
         );
  
         array_push($applications_arr["records"], $application_item);

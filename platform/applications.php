@@ -51,9 +51,6 @@ include('config/core.php');
 
 			<?php
 				include('header.php');
-				$appointments = file_get_contents($api_url.'appointment/read_paging.php');
-
-				$appointmentsPag = json_decode($appointments, true); // decode the JSON into an associative array	
 				//echo $api_url.'webservices/api/appointment/read_paging.php';			
 			?>
 
@@ -97,6 +94,10 @@ include('config/core.php');
 										$id = $applicationsPag['records'][$field]['id'];
 										$title_greek = $applicationsPag['records'][$field]['title_greek'];
 										$tags = $applicationsPag['records'][$field]['tags'];
+										$title = $applicationsPag['records'][$field]['meta_title'];
+										$description = $applicationsPag['records'][$field]['meta_description'];
+										$robots = $applicationsPag['records'][$field]['meta_robots'];
+										$permalink = $applicationsPag['records'][$field]['permalink'];
 
 										//echo $title_greek;
 										echo "
@@ -110,7 +111,36 @@ include('config/core.php');
 											</div>
 											<div id='collapse1".$id."' class='collapse' style=''>
 												<div class='card-body'>
-													<textarea id='textarea".$id."' rows='4' cols='150'>$tags</textarea>
+													<div class='form-group row'>
+														<label class='col-sm-3 control-label text-sm-right pt-2'>Meta Title <span class='required'>*</span></label>
+														<div class='col-sm-9'>
+															<input type='text' name='commision' id='commision' class='form-control' placeholder='eg.: John' required value='".$title."' />
+														</div>
+													</div>
+													<div class='form-group row'>
+														<label class='col-sm-3 control-label text-sm-right pt-2'>Meta Description <span class='required'>*</span></label>
+														<div class='col-sm-9'>
+															<input type='text' name='commision' id='commision' class='form-control' placeholder='eg.: John' required value='".$description."' />
+														</div>
+													</div>
+													<div class='form-group row'>
+														<label class='col-sm-3 control-label text-sm-right pt-2'>Meta Robots <span class='required'>*</span></label>
+														<div class='col-sm-9'>
+															<input type='text' name='commision' id='commision' class='form-control' placeholder='eg.: John' required value='".$robots."' />
+														</div>
+													</div>
+													<div class='form-group row'>
+														<label class='col-sm-3 control-label text-sm-right pt-2'>Permalink <span class='required'>*</span></label>
+														<div class='col-sm-9'>
+															<input type='text' name='commision' id='commision' class='form-control' placeholder='eg.: John' required value='".$permalink."' />
+														</div>
+													</div>
+													<div class='form-group row'>
+														<label class='col-sm-3 control-label text-sm-right pt-2'>Search Terms <span class='required'>*</span></label>
+														<div class='col-sm-9'>
+															<textarea id='textarea".$id."' rows='4' cols='100'>$tags</textarea>
+														</div>
+													</div>
 													<p><button type='button' class='mb-1 mt-4 mr-1 btn btn-warning updateTag' id='updateTag".$id."'>Update</button></p>
 												</div>
 											</div>

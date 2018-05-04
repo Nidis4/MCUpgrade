@@ -5,6 +5,7 @@ class Application{
     private $conn;
     private $table_name = "applications";
     private $table_search = "applications_search";
+    private $table_meta = "applications_meta";
  
     // object properties
     public $id;
@@ -30,10 +31,11 @@ class Application{
     public function read(){
         //select all data
         $query = "SELECT
-                    a.id, a.category_id, a.title, a.title_greek, a.short_description, a.short_description_gr, a.detail_description, a.detail_description_gr, a.unit, a.min_price, a.sequence, a.modified, ast.tags
+                    a.id, a.category_id, a.title, a.title_greek, a.short_description, a.short_description_gr, a.detail_description, a.detail_description_gr, a.unit, a.min_price, a.sequence, a.modified, ast.tags, m.meta_title, m.meta_description, m.meta_robots, m.permalink
                 FROM
-                    " . $this->table_name . " a,  " . $this->table_search . " ast 
-                WHERE a.id = ast.application_id
+                    " . $this->table_name . " a  
+                LEFT JOIN " . $this->table_search . " ast ON a.id = ast.application_id
+                LEFT JOIN " . $this->table_meta . " m ON a.id = m.application_id
                 ORDER BY
                     id ASC";
  
