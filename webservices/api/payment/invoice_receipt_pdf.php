@@ -453,16 +453,16 @@ $tcpdf->setTextShadow(array('enabled' => true, 'depth_w' => 0.2, 'depth_h' => 0.
 EOD;
 
 
-	$tcpdf->writeHTML($html, true, 0, true, 0);
+	$tcpdf->writeHTML($html, true, false, false, false, '');
 	//$member_id = $invoice_receipt_data['Member']['id'];
 	$member_id = "1";
 	//$item_id = $invoice_receipt_data['ReceiptInvoice']['id'];
 	$item_id = "1";
 	$ps_time = time();
 	//$tcpdf->Output("{$member_id}_{$item_id}.pdf", 'F');
-	//$tcpdf->Output("{$ps_time}.pdf", 'D');
-
 	$tcpdf->Output("{$ps_time}.pdf", 'I');
+	//$dirname = dirname(dirname(dirname(dirname(__FILE__)))).'/platform/UserFiles/professionals';
+	//$tcpdf->Output($dirname."/".$ps_time.".pdf", 'F');
 
 
 ?>

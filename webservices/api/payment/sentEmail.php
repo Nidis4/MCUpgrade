@@ -58,7 +58,7 @@ $subject = "Invoice from myConstructor";
 
 
 $path = "save.php";
-$path = "http://localhost/MCUpgrade/webservices/api/payment/invoice_receipt_pdf.php?payment_id=1725";
+$path = "https://upgrade.myconstructor.gr/webservices/api/payment/invoice_receipt_pdf.php?payment_id=1725";
 $separator = md5( time() );
 // carriage return type (we use a PHP end of line constant)
 $eol = PHP_EOL;
