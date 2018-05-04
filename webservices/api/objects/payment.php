@@ -245,13 +245,15 @@ class Payment{
     function readOne(){
      
         // query to read single record
-        $query = "SELECT pm.*, iv.`company_name`, iv.`profession`, iv.`address` as legal_address, iv.`tax_id`, iv.`tax_office`, pc.`phone` 
+        $query = "SELECT pm.*, iv.`company_name`, iv.`profession`, iv.`address` as legal_address, iv.`tax_id`, iv.`tax_office`, pc.`phone`,  pp.`first_name`, pp.`last_name`
                 FROM
                     " . $this->table_name . " pm 
                 Left Join ".$this->invoicesettings_table_name." iv 
                 on pm.professional_id = iv.professional_id  
                 Left Join ".$this->contact_table_name." pc 
-                on pm.professional_id = pc.professional_id                
+                on pm.professional_id = pc.professional_id 
+                Left Join ".$this->professionals_table_name." pp 
+                on pm.professional_id = pp.id                
                 WHERE
                     pm.id = :id
                 LIMIT
@@ -301,6 +303,8 @@ class Payment{
         $this->tax_office = $row['tax_office'];
         
         $this->phone = $row['phone'];
+        $this->first_name = $row['first_name'];
+        $this->last_name = $row['last_name'];
 
 
 

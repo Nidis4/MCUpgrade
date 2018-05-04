@@ -20,12 +20,37 @@ $payment = new Payment($db);
 
 $payment->payment_id = $_GET['id'];
 
+$payment->readOne();
+
+
+
+
+// // create curl resource 
+// $ch = curl_init(); 
+
+// // set url 
+// curl_setopt($ch, CURLOPT_URL, "http://localhost/MCUpgrade/webservices/api/payment/invoice_receipt_pdf.php?payment_id=1725"); 
+
+// //return the transfer as a string 
+// curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+
+// // $output contains the output string 
+// $output = curl_exec($ch); 
+
+// // close curl resource to free up system resources 
+// curl_close($ch);
+
+
+$name = $payment->first_name." ".$payment->last_name;
+
+
+
 
 //$body = file_get_contents("../../../emails/header.php");
 $body = file_get_contents("../../../emails/send_invoice.php");
 //$body .= file_get_contents("../../../emails/footer.php");
 $message = str_replace('{{URL}}', SITE_URL, $body );
-//$message = str_replace('{{KEY}}', $stmt['key'], $message );
+$message = str_replace('{{NAME}}', $name, $message );
 
 $to = "er.hpreetsingh@gmail.com";
 $subject = "Invoice from myConstructor";
@@ -33,6 +58,7 @@ $subject = "Invoice from myConstructor";
 
 
 $path = "save.php";
+$path = "http://localhost/MCUpgrade/webservices/api/payment/invoice_receipt_pdf.php?payment_id=1725";
 $separator = md5( time() );
 // carriage return type (we use a PHP end of line constant)
 $eol = PHP_EOL;
@@ -44,6 +70,7 @@ $from_mail = "logistirio@myconstructor.gr";
 $from_name = "Myconstructor";
 
 $file = $path;
+$filenamepdf = "save.pdf";
 $file_size = filesize($file);
 $handle = fopen($file, "r");
 $content = fread($handle, $file_size);
@@ -61,9 +88,9 @@ $nmessage .= "Content-type:text/html; charset=iso-8859-1\r\n";
 $nmessage .= "Content-Transfer-Encoding: 7bit\r\n\r\n";
 $nmessage .= $message."\r\n\r\n";
 $nmessage .= "--".$uid."\r\n";
-$nmessage .= "Content-Type: application/octet-stream; name=\"".$path."\"\r\n"; 
+$nmessage .= "Content-Type: application/octet-stream; name=\"".$filenamepdf."\"\r\n"; 
 $nmessage .= "Content-Transfer-Encoding: base64\r\n";
-$nmessage .= "Content-Disposition: attachment; filename=\"".$path."\"\r\n\r\n";
+$nmessage .= "Content-Disposition: attachment; filename=\"".$filenamepdf."\"\r\n\r\n";
 $nmessage .= $content."\r\n\r\n";
 $nmessage .= "--".$uid."--";
 

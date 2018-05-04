@@ -460,7 +460,9 @@ EOD;
 	$item_id = "1";
 	$ps_time = time();
 	//$tcpdf->Output("{$member_id}_{$item_id}.pdf", 'F');
-	$tcpdf->Output("{$ps_time}.pdf", 'D');
+	//$tcpdf->Output("{$ps_time}.pdf", 'D');
+
+	$tcpdf->Output("{$ps_time}.pdf", 'I');
 
 
 ?>
