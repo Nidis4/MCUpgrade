@@ -460,14 +460,17 @@ EOD;
 	$item_id = "1";
 	$ps_time = time();
 
-	$outputName = "/home/upgrademy/public_html/webservices/api/payment/".$ps_time.".pdf";
+	$outputName = dirname(__FILE__). "/".$ps_time.".pdf";
 
-	$tcpdf->Output($outputName, 'F');
+	
 	//$tcpdf->Output('test.pdf', 'F');
 
 	//$tcpdf->Output("{$member_id}_{$item_id}.pdf", 'F');
 	if(@$_GET['type'] && ($_GET['type'] == 'i')){
-		$tcpdf->Output("{$ps_time}.pdf", 'I');
+		//$tcpdf->Output("{$ps_time}.pdf", 'I');
+		$outputName = dirname(__FILE__). "/".$_GET['filename'];
+
+		$tcpdf->Output($outputName, 'F');
 	}else{
 		$tcpdf->Output("{$ps_time}.pdf", 'D');
 	}

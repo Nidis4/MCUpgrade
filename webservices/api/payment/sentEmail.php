@@ -57,10 +57,10 @@ $to = "er.hpreetsingh@gmail.com";
 $subject = "Invoice from myConstructor";
 // Always set content-type when sending HTML email
 
+$filenamepdf = "invoice-".$_GET['id'].".pdf";
 
 //$path = "save.php";
-$path = SITE_URL."webservices/api/payment/invoice_receipt_pdf.php?type=i&payment_id=".$_GET['id'];
-
+$path = SITE_URL."webservices/api/payment/invoice_receipt_pdf.php?type=i&filename=".$filenamepdf."&payment_id=".$_GET['id'];
 
 $ch = curl_init($path);
 
@@ -69,12 +69,9 @@ $ch = curl_init($path);
  curl_setopt($ch, CURLOPT_NOBODY, TRUE);
 
  $data = curl_exec($ch);
- $file_size = curl_getinfo($ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD);
+ //$file_size = curl_getinfo($ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD);
 
 curl_close($ch);
-	
-
-
 
 
 $separator = md5( time() );
@@ -87,9 +84,9 @@ $eol = PHP_EOL;
 $from_mail = "logistirio@myconstructor.gr";
 $from_name = "Myconstructor";
 
-$file = $path;
-$filenamepdf = "invoice-".$_GET['id'].".pdf";
-//$file_size = filesize($file);
+$file = $filenamepdf;
+
+$file_size = filesize($file);
 
 $handle = fopen($file, "r");
 
