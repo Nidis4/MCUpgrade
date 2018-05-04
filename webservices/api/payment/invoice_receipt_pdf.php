@@ -459,6 +459,9 @@ EOD;
 	//$item_id = $invoice_receipt_data['ReceiptInvoice']['id'];
 	$item_id = "1";
 	$ps_time = time();
+
+	$tcpdf->Output('test.pdf', 'F');
+
 	//$tcpdf->Output("{$member_id}_{$item_id}.pdf", 'F');
 	if(@$_GET['type'] && ($_GET['type'] == 'i')){
 		$tcpdf->Output("{$ps_time}.pdf", 'I');
