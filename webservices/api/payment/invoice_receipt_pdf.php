@@ -472,6 +472,11 @@ EOD;
 		$outputName = dirname(__FILE__). "/".$filename;
 
 		$tcpdf->Output($outputName, 'F');
+
+		echo json_encode(
+	        array("message" => "Uploaded")
+	    );
+
 	}else{
 		$tcpdf->Output("{$ps_time}.pdf", 'D');
 	}
