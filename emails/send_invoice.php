@@ -16,7 +16,7 @@
             <td valign="top" align="center" height="42" style="height:42px;">&nbsp;</td>
         </tr>
         <tr>
-            <td valign="top" align="center" style="font-family:Arial, Helvetica, sans-serif; font-size:20px; text-transform:uppercase; font-weight:bold; text-align:center; color:#ef910b; line-height:30px; padding:0px 0px;">&Sigma;&Upsilon;&Nu;&Eta;&Mu;&Mu;&Epsilon;&Nu;&Omicron; &Theta;&Alpha; &Beta;&Rho;&Epsilon;&Iota;&Tau;&Epsilon; &Tau;&Omicron; &Tau;&Iota;&Mu;&Omicron;&Lambda;&Omicron;&Gamma;&Iota;&Omicron; &Tau;&Omega;&Nu; &Alpha;&Gamma;&Omicron;&Rho;&Alpha;&Sigma;&Mu;&Epsilon;&Nu;&Omega;&Nu; CREDITS.</td>
+            <td valign="top" align="center" style="font-family:Arial, Helvetica, sans-serif; font-size:20px; text-transform:uppercase; font-weight:bold; text-align:center; color:#ef910b; line-height:30px; padding:0px 0px;">&Sigma;&Upsilon;&Nu;&Eta;&Mu;&Mu;&Epsilon;&Nu;&Omicron; &Theta;&Alpha; &Beta;&Rho;&Epsilon;&Iota;&Tau;&Epsilon; &Tau;&Omicron; &Tau;&Iota;&Mu;&Omicron;&Lambda;&Omicron;&Gamma;&Iota;&Omicron;</td>
         </tr>
         <tr>
             <td valign="top" align="center" height="18" style="height:18px;">&nbsp;</td>
