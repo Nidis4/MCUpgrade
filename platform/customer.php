@@ -154,6 +154,7 @@ include('config/core.php');
 											</div>										
 										</div>
 										
+										
 									</div>
 									<div class="col-sm-12 col-md-12 pt-2">
 										<div class="col-sm-3 offset-md-5">
@@ -313,6 +314,104 @@ include('config/core.php');
 								
 							</div>
 						</section>
+
+						<section class="card">
+							<header class="card-header">
+								<div class="card-actions">
+									<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+									<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
+								</div>
+								<?php
+									$invoicesettingsd = file_get_contents($api_url.'customer/getInvoiceSettings.php?id='.$_GET['id']);
+									$invoicesettingsPag = json_decode($invoicesettingsd, true); // decode the JSON into an associative array
+									
+									if(@$invoicesettingsPag['record']['customer_id']){
+										$invoicesettings = $invoicesettingsPag['record'];
+									}
+									
+								?>
+						
+								<h2 class="card-title">Customer's Invoice Settings</h2>
+							</header>
+							<div class="card-body">
+								<form action="#" method="POST" id="updateCustomerInvoice">
+									<div class="card-body col-sm-12 col-md-12 row" style="margin: 0">
+									
+										<div class="col-sm-12 col-md-5"><!-- Left-->
+											<div class="form-group row">
+												<label class="col-sm-4 control-label text-sm-right pt-2">Company Name</label>
+												<div class="col-sm-8">
+													<input type="text" name="company_name" class="form-control" value="<?php if(@$invoicesettings['company_name']){ echo $invoicesettings['company_name']; }?>" id="company_name" required />
+												</div>
+											</div>
+											<div class="form-group row">
+												<label class="col-sm-4 control-label text-sm-right pt-2">Profession</label>
+												<div class="col-sm-8">
+													<input type="text" name="profession" class="form-control" value="<?php if(@$invoicesettings['profession']){ echo $invoicesettings['profession']; }?>" id="profession" required />
+												</div>
+											</div>
+											<div class="form-group row">
+												<label class="col-sm-4 control-label text-sm-right pt-2">Legal Address</label>
+												<div class="col-sm-8">
+													<textarea class="form-control" name="address" id="address"><?php if(@$invoicesettings['address']){echo $invoicesettings['address']; } ?></textarea>
+													
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-12 col-md-5"><!-- Left-->
+											<div class="form-group row">
+												<label class="col-sm-4 control-label text-sm-right pt-2">Tax Id</label>
+												<div class="col-sm-8">
+													<input type="text" name="tax_id" class="form-control" value="<?php if(@$invoicesettings['tax_id']){ echo $invoicesettings['tax_id']; }?>" id="tax_id" required />
+												</div>
+											</div>
+											<div class="form-group row">
+												<label class="col-sm-4 control-label text-sm-right pt-2">Tax Office</label>
+												<div class="col-sm-8">
+													<input type="text" name="tax_office" class="form-control" value="<?php if(@$invoicesettings['tax_office']){ echo $invoicesettings['tax_office']; }?>" id="tax_office" required />
+												</div>
+											</div>
+
+											<div class="form-group row">
+												<label class="col-sm-4 control-label text-sm-right pt-2">Invoice Email</label>
+												<div class="col-sm-8">
+													<input type="text" name="receipt_email" class="form-control" value="<?php if(@$invoicesettings['receipt_email']){ echo $invoicesettings['receipt_email']; }?>" id="receipt_email" required />
+												</div>
+											</div>
+
+											<div class="form-group col-md-12 row">
+												<label class="col-lg-3 control-label text-lg-right pt-2">&nbsp;</label>
+												<div class="col-lg-8 pt-2">
+													<div class="col-lg-3" style="float: left;">            
+											            <div class="radio">
+											                <label class="pt-3">
+											                    <input class="" <?php if((@$invoicesettings['viewtype'] && ($invoicesettings['viewtype'] == "1")) || (empty($invoicesettings['viewtype']))){?> checked="checked" <?php }?> type="radio" name="viewtype" value="1" id="viewtype1">
+											                    Invoice
+											                </label>
+											            </div>
+											        </div>
+											        <div class="col-lg-3"  style="float: left;">            
+											            <div class="radio">
+											                <label class="pt-3">
+											                    <input class="" type="radio" <?php if(@$invoicesettings['viewtype'] && ($invoicesettings['viewtype'] == "2")) {?> checked="checked" <?php }?> name="viewtype" value="2" id="viewtype2">
+											                    Receipt
+											                </label>
+											            </div>
+											        </div>
+												</div>
+											</div>
+											
+										</div>
+										<div class="col-sm-12 col-md-12 pt-2">
+										<div class="col-sm-3 offset-md-5">
+											<input type="hidden" value="<?php echo $customer['id']; ?>" name="customer_id" id="customer_id">
+											<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning" id="updateCustomerInvoiceButton">Update Settings</button>
+										</div>
+									</div>
+									</div>
+								</form>
+							</div>
+						</section>
 					<!-- end: page -->
 				</section>
 			</div>
@@ -440,6 +539,28 @@ include('config/core.php');
 		<!-- Page JS-->
 		<script type="text/javascript">
 			$(document).ready(function(){
+
+				$("#updateCustomerInvoiceButton").on('click',function(){
+					
+					var getAvailableAPI = API_LOCATION+'customer/saveIncoiceSettings.php';
+					var form_data = $("#updateCustomerInvoice").serialize();
+
+					$.ajax({
+			            type: "POST",
+			            url: getAvailableAPI,
+			            dataType: "JSON",
+		                data: form_data,
+			            success: function(data)
+			            {
+			                alert(data.message);
+			                //location.reload(); 
+			            }
+			        });
+					return false;
+				});
+
+
+
 				$("#updatecustomer").on('click',function(){
 
 					var form_data = new FormData(); 

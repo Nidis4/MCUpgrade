@@ -6,6 +6,7 @@ class Customer{
     private $table_name = "customers";
     private $contact_table_name = "customers_contact_details";
     private $account_table_name = "customers_account_info";
+    private $invoicesettings_table_name = "customers_invoice_settings";
  
     // object properties
     public $id;
@@ -357,5 +358,55 @@ class Customer{
            return 0;
         }
     } // Save Professional
+
+
+    public function getIncoiceSettings(){
+        $query = "Select pi.* from ".$this->invoicesettings_table_name." pi 
+                  where pi.customer_id = :id";
+
+        $stmt = $this->conn->prepare( $query );
+        $id = $this->id;
+        $stmt->bindParam(':id',  $id, PDO::PARAM_INT);
+        
+        $stmt->execute();
+
+        // return values from database
+        return $stmt;
+
+    }
+
+    function updateInvoiceSettings($customer_id, $company_name, $profession, $address, $tax_id, $tax_office, $receipt_email, $viewtype){
+
+
+        $query = "INSERT INTO ". $this->invoicesettings_table_name ." (`customer_id`, `company_name`, `profession`, `address`, `tax_id`, `tax_office`, `receipt_email`, `viewtype`) VALUES (:customer_id, :company_name, :profession, :address, :tax_id, :tax_office, :receipt_email, :viewtype) ON DUPLICATE KEY UPDATE `company_name`=:company_name, `profession`=:profession, `address`=:address, `tax_id`=:tax_id, `tax_office`=:tax_office, `receipt_email`=:receipt_email,  `viewtype`=:viewtype";
+
+        $stmt = $this->conn->prepare( $query );
+       
+        // bind id of product to be updated
+        $stmt->bindParam(':customer_id', $customer_id, PDO::PARAM_INT);
+        $stmt->bindParam(':company_name',  $company_name);
+        $stmt->bindParam(':profession',  $profession);
+        $stmt->bindParam(':address',  $address);
+        $stmt->bindParam(':tax_id',  $tax_id);
+        $stmt->bindParam(':tax_office',  $tax_office);
+        
+        $stmt->bindParam(':receipt_email',  $receipt_email);
+        
+        $stmt->bindParam(':viewtype',  $viewtype);
+        //$stmt->execute();
+        //$stmt->debugDumpParams();
+        //die($customer_id);
+        
+        if ($stmt->execute()) {
+           //die('sdf');
+           return 1;
+           
+        } else {
+           //die('0');
+           return 0;
+
+        }
+    } // Save Customer Invoice Setting
+
 }
 ?>
