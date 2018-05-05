@@ -127,7 +127,7 @@ include('config/core.php');
 														  <td class="actions">
 															<a href="'.$api_url.'payment/invoice_receipt_pdf.php?payment_id='.$payment_id.'" class="btn btn-danger" style="color:#ffffff;"><i class="fa fa-file-pdf-o"></i></a>';
 												if(@$sent_email){
-													echo '<a href="javascript:void(0);" rel="'.$payment_id.'" class="btn btn-warning sent_email" style="color:#ffffff;"><i class="fa fa-lightbulb-o"></i></a>';
+													echo '<a href="javascript:void(0);" rel="'.$payment_id.'" class="btn btn-warning" style="color:#ffffff;"><i class="fa fa-lightbulb-o"></i></a>';
 												}else{
 													echo '<a href="javascript:void(0);" rel="'.$payment_id.'"  class="btn btn-default sent_email" style=""><i class="fa fa-lightbulb-o"></i></a>';
 												}
