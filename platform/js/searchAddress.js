@@ -15,9 +15,14 @@
             /** @type {!HTMLInputElement} */(document.getElementById('pac-input-address')),
             {types: ['geocode']});
 
+        autocomplete2 = new google.maps.places.Autocomplete(
+            /** @type {!HTMLInputElement} */(document.getElementById('delivery_address')),
+            {types: ['geocode']});
+
         // When the user selects an address from the dropdown, populate the address
         // fields in the form.
         autocomplete.addListener('place_changed', fillInAddress);
+        autocomplete2.addListener('place_changed', fillInAddress);
       }
 
       function fillInAddress() {

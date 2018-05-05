@@ -501,10 +501,11 @@ include('config/core.php');
 		
 		<script src="<?php echo $platform_url;?>js/custom.js"></script>
 		<script src="<?php echo $platform_url;?>js/searchAddress.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOB9VUHID5_exudRHHduRUvCYOu--Lg0w&libraries=places&callback=initAutocomplete" async defer></script>
 
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOB9VUHID5_exudRHHduRUvCYOu--Lg0w&libraries=places&callback=initAutocomplete" async defer></script>
+		
 
 		
 		<!-- Theme Initialization Files -->

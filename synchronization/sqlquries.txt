@@ -850,3 +850,24 @@ COMMIT;
 
 <!-------------------------------->
 <!-- End 04 May 2018 GKonstantinidis -->
+
+
+<!-------------------------------->
+<!-- Start 05 May 2018 Harpreet -->
+
+CREATE TABLE `customers_invoice_settings` (
+  `customer_id` int(11) NOT NULL,
+  `company_name` varchar(255) DEFAULT NULL,
+  `profession` varchar(255) DEFAULT NULL,
+  `address` text,
+  `tax_id` varchar(255) DEFAULT NULL,
+  `tax_office` varchar(255) DEFAULT NULL,
+  `receipt_email` varchar(255) DEFAULT NULL,
+  `viewtype` int(1) NOT NULL DEFAULT '1' COMMENT '1= Invoice, 2 = Receipt'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `customers_invoice_settings`
+  ADD PRIMARY KEY (`customer_id`);
+
+<!-------------------------------->
+<!-- End 05 May 2018 Harpreet -->
