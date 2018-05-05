@@ -60,18 +60,9 @@ $subject = "Invoice from myConstructor";
 $filenamepdf = "invoice-".$_GET['id'].".pdf";
 
 //$path = "save.php";
-$path = SITE_URL."webservices/api/payment/invoice_receipt_pdf.php?type=i&filename=".$filenamepdf."&payment_id=".$_GET['id'];
+$path = $filenamepdf;
 
 $ch = curl_init($path);
-
- curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
- curl_setopt($ch, CURLOPT_HEADER, TRUE);
- curl_setopt($ch, CURLOPT_NOBODY, TRUE);
-
- $data = curl_exec($ch);
- //$file_size = curl_getinfo($ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD);
-
-curl_close($ch);
 
 
 $separator = md5( time() );

@@ -468,7 +468,8 @@ EOD;
 	//$tcpdf->Output("{$member_id}_{$item_id}.pdf", 'F');
 	if(@$_GET['type'] && ($_GET['type'] == 'i')){
 		//$tcpdf->Output("{$ps_time}.pdf", 'I');
-		$outputName = dirname(__FILE__). "/".$_GET['filename'];
+		$filename = 'invoice-'.$_GET['payment_id'].".pdf";
+		$outputName = dirname(__FILE__). "/".$filename;
 
 		$tcpdf->Output($outputName, 'F');
 	}else{

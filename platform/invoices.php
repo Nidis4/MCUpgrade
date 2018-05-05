@@ -258,7 +258,7 @@ include('config/core.php');
 				$("a.sent_email").on('click',function(){
 					if (confirm('Are you sure want to sent email?')) {
 				    	var rel = $(this).attr('rel');
-				    	var getAvailableAPI = API_LOCATION+'payment/sentEmail.php?id='+rel;
+				    	var getAvailableAPI = API_LOCATION+'payment/invoice_receipt_pdf.php?type=i&payment_id='+rel;
 				    	var form_data = "";
 				    	$.ajax({
 				            type: "POST",
@@ -267,8 +267,19 @@ include('config/core.php');
 			                data: form_data,
 				            success: function(data)
 				            {
-				                alert(data.message);
-				                location.reload(); 
+				                getAvailableAPI = API_LOCATION+'payment/sentEmail.php?id='+rel;
+						    	$.ajax({
+						            type: "POST",
+						            url: getAvailableAPI,
+						            dataType: "JSON",
+					                data: form_data,
+						            success: function(data)
+						            {
+						                alert(data.message);
+						                //alert("Download");
+						                location.reload(); 
+						            }
+						        });
 				            }
 				        });
 						return false;
