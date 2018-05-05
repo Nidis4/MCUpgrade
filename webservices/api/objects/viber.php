@@ -16,15 +16,26 @@ class Viber{
     }
 
 
-    public function send($phone, $text){
+    public function send($phone, $text, $date = NULL, $time = NULL){
 
         $url = 'https://services.yuboto.com/omni/v1/Send';
 
-        $parameters = [
+        if(@$date && @$time){
+            $parameters = [
+                    'phonenumbers' =>'30'.$phone,
+                    'dateinToSend' => $date,
+                    'timeinToSend' => $time,
+                    'sms' => array('sender'=>self::SMS_SENDER,'text'=>$text,'typesms'=>'sms','priority'=>1),
+                    'viber' => array('sender'=>self::VIBER_SENDER,'Text'=>$text,'priority'=>0,'expiryText'=>$text)
+                  ];
+        }else{
+            $parameters = [
                     'phonenumbers' =>'30'.$phone,
                     'sms' => array('sender'=>self::SMS_SENDER,'text'=>$text,'typesms'=>'sms','priority'=>1),
                     'viber' => array('sender'=>self::VIBER_SENDER,'Text'=>$text,'priority'=>0,'expiryText'=>$text)
                   ];
+        }
+        
         $headers = array(
             'Content-type: application/json; charset=utf-8',
             'Authorization: Basic '.base64_encode(self::API_KEY),
