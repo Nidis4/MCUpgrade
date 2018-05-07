@@ -315,6 +315,8 @@ include('config/core.php');
 											<label class="col-sm-3 control-label text-sm-right pt-2">Delivery Address</label>
 											<div class="col-sm-9" style="float: right;" >
 												<input type="text" name="delivery_address" id="delivery_address" class="form-control" placeholder="eg.: Gonata 7, 152 12, Athens" required/>
+												<div class="distance"></div>
+												<input type="hidden" name="distance" id="distance">
 											</div>
 										</div>
 										<div class="form-group row">
