@@ -5,6 +5,7 @@ class Payment{
     private $conn;
     private $table_name = "payments";
     private $professionals_table_name = "professionals";
+    private $customers_table_name = "customers";
     private $invoicesettings_table_name = "professionals_invoice_settings";
     private $contact_table_name = "professionals_contact_details";
  
@@ -247,11 +248,13 @@ class Payment{
     public function readReceiptPaging($from_record_num, $records_per_page){
      
         // select query
-        $query = "SELECT pm.`id`as payment_id, pm.`professional_id`, pm.`sent_email`, pm.`datetime_added`, pm.`receipt_no`, pm.`comment`, pm.`amount`, pm.`status`,  pp.`first_name`, pp.`last_name`
+        $query = "SELECT pm.`id`as payment_id, pm.`professional_id`, pm.`sent_email`, pm.`datetime_added`, pm.`receipt_no`, pm.`comment`, pm.`amount`, pm.`status`,  pp.`first_name`, pp.`last_name`, pc.`first_name` as cfirst_name, pc.`last_name` as clast_name
                 FROM
                     " . $this->table_name . " pm  
                 Left Join ".$this->professionals_table_name." pp 
                 on pm.professional_id = pp.id 
+                Left Join ".$this->customers_table_name." pc 
+                on pm.customer_id = pc.id 
                 WHERE (pm.`status`=1 OR pm.`status`=0) and pm.`issuetype` = 'Receipt'
                 ORDER BY `datetime_added` DESC
                 LIMIT ?, ?";

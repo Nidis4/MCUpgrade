@@ -47,6 +47,8 @@ if($num>0){
             "professional_id" => $professional_id,
             "first_name" => $first_name,
             "last_name" => $last_name,
+            "cfirst_name" => $cfirst_name,
+            "clast_name" => $clast_name,
             "sent_email" => $sent_email,
             "datetime_added" => $datetime_added,
             "invoice_no" => $invoice_no,

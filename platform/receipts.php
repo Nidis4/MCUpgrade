@@ -110,6 +110,9 @@ include('config/core.php');
 											foreach ($receiptsPag['records'] as $field => $value) {
 												$payment_id = $receiptsPag['records'][$field]['payment_id'];
 												$name = $receiptsPag['records'][$field]['first_name']." ".$receiptsPag['records'][$field]['last_name'];
+												if(@$receiptsPag['records'][$field]['cfirst_name']){
+													$name = $receiptsPag['records'][$field]['cfirst_name']." ".$receiptsPag['records'][$field]['clast_name'];
+												}
 												$datetime_added = $receiptsPag['records'][$field]['datetime_added'];
 												$receipt_no = $receiptsPag['records'][$field]['receipt_no'];
 												$comment = $receiptsPag['records'][$field]['comment'];
