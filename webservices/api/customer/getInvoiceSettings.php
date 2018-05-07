@@ -35,7 +35,7 @@ if($num >= 1){
                     'viewtype' => $row['viewtype'],
                 );
     echo json_encode(
-            array("record" => $return)
+            array("record" => $return,'message'=>"")
         );
 
 }else{

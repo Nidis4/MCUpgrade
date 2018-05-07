@@ -350,6 +350,12 @@ include('config/core.php');
 												<input type="checkbox" class="form-control" name="employersms" id="employersms" checked="checked">
 											</div>
 										</div>
+										<div class="form-group row smsEmpl">
+											<label class="col-sm-3 control-label text-sm-right pt-2">Send Invoice/Receipt</label>
+											<div class="col-sm-1">												
+												<input type="checkbox" class="form-control" name="sendinvoice" id="sendinvoice">
+											</div>
+										</div>
 									</div>
 									<!-- <footer class="card-footer">
 										<div class="row justify-content-end">

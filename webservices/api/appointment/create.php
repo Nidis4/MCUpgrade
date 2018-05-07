@@ -54,6 +54,20 @@ if($stmt){
         array("message" => "Appointment updated successfully.")
     );*/
 
+
+    /// Create invoice for Customer
+    if(@$_POST['sendinvoice']){
+    	include_once '../objects/payment.php';
+    	$payment = new Payment($db);
+    	date_default_timezone_set('Europe/Athens');
+		$Pdatetimeadded = date("Y-m-d H:i:s");
+
+    	$datetime_added  = $Pdatetimeadded;
+
+    	$payment->saveCustomerInvoice($cust_id, $category_id, $budget, $agent_id, $comment, "Cash", "", $datetime_added, $_POST['issuetype']);
+    }
+
+
     if(@$employersms){
 	    	// initialize object
     		$customer_mobile = '6940589493';

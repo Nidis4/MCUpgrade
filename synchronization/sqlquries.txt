@@ -871,3 +871,14 @@ ALTER TABLE `customers_invoice_settings`
 
 <!-------------------------------->
 <!-- End 05 May 2018 Harpreet -->
+
+
+
+<!-------------------------------->
+<!-- Start 07 May 2018 Harpreet -->
+
+ALTER TABLE `payments` ADD `customer_id` INT(11) NULL AFTER `professional_id`;
+ALTER TABLE `payments` CHANGE `professional_id` `professional_id` INT(10) UNSIGNED NULL;
+
+<!-------------------------------->
+<!-- End 07 May 2018 Harpreet -->

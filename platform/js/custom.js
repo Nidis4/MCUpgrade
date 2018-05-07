@@ -504,6 +504,12 @@ $( ".createAppointment" ).click(function() {
     var sex = $("#sex").val();
     var address = $("#pac-input-address").val();
 
+    if($("#sendinvoice").is(':checked')){
+        var sendinvoice = 1;
+    }else{
+        var sendinvoice = 0;
+    }
+
     if($('#delivery_address').length){
         var delivery_address = $("#delivery_address").val();
     }else{
@@ -567,46 +573,110 @@ $( ".createAppointment" ).click(function() {
                 //var date = "2018-05-05";
                 //var time ="10:00-12:00";
                 
+                if(sendinvoice == 1){
+                    var checkinvoiceAPI = API_LOCATION+'customer/getInvoiceSettings.php?id='+customer_id;
+                    $.ajax({
+                        type: "POST",
+                        url: checkinvoiceAPI,
+                        data: "",
+                        dataType: "json",
+                        success: function(data)
+                        {
+                            if(data.message != ""){
+                                alert("Please update the Customer's Invoice Setting data!");
+                                return false;
+                            }else{
+                                var createAppointAPI = API_LOCATION+'appointment/create.php';
+                                //create($prod_id, $cust_id, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment);
+                                $.ajax({
+                                        type: "POST",
+                                        url: createAppointAPI,
+                                        data: {
+                                            status: status,
+                                            surname: surname,
+                                            firstname: firstname,
+                                            address: address,
+                                            delivery_address: delivery_address,
+                                            mobile: mobile,
+                                            sex: sex,
+                                            phone: phone,
+                                            email: email,
+                                            prof_id : professional,
+                                            cust_id : customer_id,
+                                            application_id: application,
+                                            category_id: category,
+                                            date: date,
+                                            time: time,
+                                            address: address,
+                                            budget: budget,
+                                            commision: commision,
+                                            agent_id: agent,
+                                            comment: comments,
+                                            professionalsms: professionalsms,
+                                            employersms: employersms,
+                                            county_id: county,
+                                            sendinvoice: sendinvoice,
+                                            issuetype: data.record.viewtype
+                                        },
+                                        dataType: "json",
+                                        success: function(data)
+                                        {
+                                            alert("Appointment Booked");
+                                            window.location.replace('../platform/appointments.php');
+                                        }
+                                    });
+                            }
+                            //alert("Appointment Booked");
+                            //window.location.replace('../platform/appointments.php');
+                        }
+                    });                    
 
-                var createAppointAPI = API_LOCATION+'appointment/create.php';
-                //create($prod_id, $cust_id, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment);
-                $.ajax({
-                    type: "POST",
-                    url: createAppointAPI,
-                    data: {
-                        status: status,
-                        surname: surname,
-                        firstname: firstname,
-                        address: address,
-                        delivery_address: delivery_address,
-                        mobile: mobile,
-                        sex: sex,
-                        phone: phone,
-                        email: email,
-                        prof_id : professional,
-                        cust_id : customer_id,
-                        application_id: application,
-                        category_id: category,
-                        date: date,
-                        time: time,
-                        address: address,
-                        budget: budget,
-                        commision: commision,
-                        agent_id: agent,
-                        comment: comments,
-                        professionalsms: professionalsms,
-                        employersms: employersms,
-                        county_id: county
-                    },
-                    dataType: "json",
-                    success: function(data)
-                    {
-                        //alert(data);
+                }else{
+                    var createAppointAPI = API_LOCATION+'appointment/create.php';
+                    //create($prod_id, $cust_id, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment);
+                    $.ajax({
+                            type: "POST",
+                            url: createAppointAPI,
+                            data: {
+                                status: status,
+                                surname: surname,
+                                firstname: firstname,
+                                address: address,
+                                delivery_address: delivery_address,
+                                mobile: mobile,
+                                sex: sex,
+                                phone: phone,
+                                email: email,
+                                prof_id : professional,
+                                cust_id : customer_id,
+                                application_id: application,
+                                category_id: category,
+                                date: date,
+                                time: time,
+                                address: address,
+                                budget: budget,
+                                commision: commision,
+                                agent_id: agent,
+                                comment: comments,
+                                professionalsms: professionalsms,
+                                employersms: employersms,
+                                county_id: county,
+                                sendinvoice: sendinvoice
+                            },
+                            dataType: "json",
+                            success: function(data)
+                            {
+                                //alert(data);
 
-                        alert("Appointment Booked");
-                        window.location.replace('../platform/appointments.php');
-                    }
-                });
+                                alert("Appointment Booked");
+                                window.location.replace('../platform/appointments.php');
+                            }
+                        });    
+                }
+
+
+
+                
 
             }
         });
@@ -655,6 +725,8 @@ $( ".findProfessionals" ).click(function() {
     var mobile = $("#mobile").val();
     var phone = $("#phone").val();
     var email = $("#email").val();
+
+   
     
 
     //alert("email "+email);
@@ -662,6 +734,10 @@ $( ".findProfessionals" ).click(function() {
         alert("Please check the following fields: Address, Application, County, Start and End Date");
     }
     else{ 
+
+
+
+
         //alert("County: "+county);
         //alert("Application: "+application);
         //alert("Start: "+startDate);
