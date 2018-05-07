@@ -21,6 +21,12 @@
 				                            <span>Dashboard</span>
 				                        </a>                        
 				                    </li>
+				                    <li>
+				                        <a class="nav-link" href="AdminTransport">
+				                            <i class="fa fa-truck" aria-hidden="true"></i>
+				                            <span>Transports Form</span>
+				                        </a>                        
+				                    </li>
 				                    <!--<li class="nav-parent">
 				                        <a class="nav-link" href="#">
 				                            <i class="fa fa-columns" aria-hidden="true"></i>
