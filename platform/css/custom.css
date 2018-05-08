@@ -11,7 +11,7 @@ tr.status-0 .cancel-row, tr.status-8 .cancel-row, tr.status-7 .cancel-row, tr.st
     display: none;
 }
 .cancel-row .fa, .edit-row .fa ,.copy-row .fa  {
-   /* display: none;*/
+   display: none;
 }
 .status-0 .copy-row .fa{
     display: initial;

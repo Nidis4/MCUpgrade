@@ -22,7 +22,7 @@
 								<i class="fa fa-times-circle"></i>
 							</div>
 							<div class="modal-text">
-								<p>Rejected from <?php echo $rejectpops['first_name']." ".$rejectpops['last_name']." - ". $rejectpops['categoryName']." ".$rejectpops['date'];?></p>
+								<p>Rejected from <?php echo $rejectpops['first_name']." ".$rejectpops['last_name']." - ". $rejectpops['categoryName']." ".$rejectpops['date']." ".$rejectpops['time']." , ".$rejectpops['cancelComment'];?></p>
 							</div>
 						</div>
 					</div>

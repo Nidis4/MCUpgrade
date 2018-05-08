@@ -35,6 +35,7 @@ $stmt = $appointment->readOne();
             "date" => $appointment->date,
             "time" => $appointment->time,
             "address" => $appointment->address,
+            "county_id" => $appointment->county_id,
             "delivery_address" => $appointment->delivery_address,
             "budget" => $appointment->budget,
             "commision" => $appointment->commision,

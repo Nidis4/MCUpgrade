@@ -291,5 +291,6 @@ include('config/core.php');
 
 		<!-- Examples -->
 		<script src="js/examples/examples.datatables.editable.js"></script>
+		<?php include('reject_popup.php');?>
 	</body>
 </html>
