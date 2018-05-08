@@ -18,11 +18,12 @@ $meta_title = isset($_POST['meta_title']) ? $_POST['meta_title'] : die();
 $meta_description = isset($_POST['meta_description']) ? $_POST['meta_description'] : die();
 $meta_robots = isset($_POST['meta_robots']) ? $_POST['meta_robots'] : die();
 $permalink = isset($_POST['permalink']) ? $_POST['permalink'] : die();
+$category_description = isset($_POST['category_description']) ? $_POST['category_description'] : die();
 $tags = isset($_POST['tags']) ? $_POST['tags'] : die();
 $id = isset($_POST['id']) ? $_POST['id'] : die();
  
 // query categorys
-$stmt = $application->updateTag($id, $meta_title, $meta_description, $meta_robots, $permalink, $tags);
+$stmt = $application->updateTag($id, $meta_title, $meta_description, $meta_robots, $permalink, $tags, $category_description);
 
 if($stmt){ 
     echo json_encode(

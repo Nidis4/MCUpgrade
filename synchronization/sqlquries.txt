@@ -904,3 +904,11 @@ ALTER TABLE `days` ADD `working_hours` VARCHAR(50) NULL AFTER `greek`;
 
 <!-------------------------------->
 <!-- End 08 May 2018 Harpreet -->
+
+<!-------------------------------->
+<!-- Start 08 May 2018 GKonstantinidis -->
+
+ALTER TABLE `applications` ADD `category_description` TEXT NOT NULL AFTER `detail_description_gr`;
+
+<!-------------------------------->
+<!-- End 08 May 2018 GKonstantinidis -->

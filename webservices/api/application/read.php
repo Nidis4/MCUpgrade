@@ -43,6 +43,7 @@ if($num>0){
             "short_description_gr" => html_entity_decode($short_description_gr),
             "detail_description" => html_entity_decode($detail_description),
             "detail_description_gr" => html_entity_decode($detail_description_gr),
+            "category_description" => html_entity_decode($category_description),
             "tags" => $tags,
             "unit" => $unit,
             "min_price" => $min_price,

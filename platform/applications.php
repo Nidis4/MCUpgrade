@@ -93,6 +93,7 @@ include('config/core.php');
 									foreach ($applicationsPag['records'] as $field => $value) {
 										$id = $applicationsPag['records'][$field]['id'];
 										$title_greek = $applicationsPag['records'][$field]['title_greek'];
+										$category_description = $applicationsPag['records'][$field]['category_description'];
 										$tags = $applicationsPag['records'][$field]['tags'];
 										$title = $applicationsPag['records'][$field]['meta_title'];
 										$description = $applicationsPag['records'][$field]['meta_description'];
@@ -133,6 +134,12 @@ include('config/core.php');
 														<label class='col-sm-3 control-label text-sm-right pt-2'>Permalink <span class='required'>*</span></label>
 														<div class='col-sm-9'>
 															<input type='text' name='permalink' id='permalink".$id."' class='form-control' placeholder='eg.: John' required value='".$permalink."' />
+														</div>
+													</div>
+													<div class='form-group row'>
+														<label class='col-sm-3 control-label text-sm-right pt-2'>Περιγραφή Σε Κατηγορία<span class='required'>*</span></label>
+														<div class='col-sm-9'>
+															<textarea id='category_description".$id."' rows='4' cols='100'>$category_description</textarea>
 														</div>
 													</div>
 													<div class='form-group row'>
