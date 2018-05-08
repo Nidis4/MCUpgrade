@@ -882,3 +882,23 @@ ALTER TABLE `payments` CHANGE `professional_id` `professional_id` INT(10) UNSIGN
 
 <!-------------------------------->
 <!-- End 07 May 2018 Harpreet -->
+
+
+<!-------------------------------->
+<!-- Start 08 May 2018 Harpreet -->
+
+CREATE TABLE `agent_reject_view` (
+  `id` int(11) NOT NULL,
+  `agent_id` int(11) NOT NULL,
+  `appointment_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `agent_reject_view`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `agent_reject_view`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+<!-------------------------------->
+<!-- End 08 May 2018 Harpreet -->

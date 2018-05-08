@@ -635,7 +635,7 @@ class Appointment{
         
 
         // select query
-        $query = "SELECT a.`id`, a.`prof_member_id`, a.`date`, a.`cancelComment`, a.`application_id`, ap.`category_id`, p.`first_name`, p.`last_name` 
+        $query = "SELECT a.`id`, a.`prof_member_id`, a.`date`, a.`time`, a.`cancelComment`, a.`application_id`, ap.`category_id`, p.`first_name`, p.`last_name` 
                 FROM " . $this->table_name . " a
                 Join professionals p on a.prof_member_id = p.id 
                 LEFT JOIN ". $this->application_table_name." ap
