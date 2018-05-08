@@ -689,6 +689,18 @@ $( ".createAppointment" ).click(function() {
 
     }
 });
+
+
+
+$( ".updateAppointment" ).click(function() { 
+
+
+
+
+});
+
+
+
 $( ".createCall" ).click(function() {
     var CallId = $("#CallId").val();
     var commentcall = $("#commentcall").val();
