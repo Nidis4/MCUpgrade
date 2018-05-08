@@ -542,6 +542,23 @@ class Appointment{
         return "1";
     }
 
+
+    public function updateAppointment($appointment_id, $cust_id, $category_id, $application_id, $address, $delivery_address, $budget, $county_id, $commision, $agent_id, $comment, $status, $selected_date, $selected_time, $prof_id){
+
+        $now = date('Y-m-d H:i:s');        
+
+        $query = "UPDATE `appointments` SET  `prof_member_id`='". $prof_id."', `cust_member_id`= '".$cust_id."', `application_id`='".$application_id."', `county_id`='".$county_id."', `date`= '".$selected_date."', `time`= '".$selected_time."', `address`= '".$address."', `delivery_address`= '".$delivery_address."', `budget`= '".$budget."', `commision`= '".$commision."', `comment`= '".$comment."', `datetimeStatusUpdated`= '".date('Y-m-d H:i:s')."', `status`= '".$status."'  WHERE id = '".$appointment_id."'";
+        //echo $query;
+
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+
+      
+        return "1";
+    }
+
+
+
       public function createTransportOffer($prof_id, $cust_id, $application_id, $county_id, $date, $time, $address, $budget, $commision, $agent_id, $comment, $status, $delivery_address){
         $query = "INSERT INTO `appointments`(`prof_member_id`, `cust_member_id`, `application_id`,`county_id`,  `date`, `time`, `address`,`delivery_address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`) VALUES ('$prof_id', '$cust_id', '$application_id','$county_id', '$date', '$time', '$address', '$delivery_address', '$budget','$commision', '$agent_id','$comment','0','0', NOW(),NOW(),'0','$status','')";
         //echo $query;

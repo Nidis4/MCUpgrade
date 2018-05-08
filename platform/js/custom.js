@@ -693,30 +693,174 @@ $( ".createAppointment" ).click(function() {
                             }
                         });    
                 }
-
-
-
-                
+   
 
             }
         });
         return false;
-
-        
-
-
-        
 
     }
 });
 
 
 
-$( ".updateAppointment" ).click(function() { 
+$( "button.updateAppointment" ).click(function() {
+    //alert("Create");
+
+    
+    var professional = $('.selectedProf').attr('id');
+    //alert(professional);
+
+    var agent = $("#agent").attr('agentUser');
+    //alert(agent);
+    var status = $("#appointmentStatus").val();
+    var application = $("#applications").val();
+    var category = $("#category").val();
+    var county = $("#county").val();
+    var budget = $("#budget").val();
+    var commision = $("#commision").val();
+    var startDate = $("#startDate").val();
+    var endDate = $("#endDate").val();
+    var comments = $("#comment123").val();
+
+    var surname = $("#surname").val();
+    var firstname = $("#firstname").val();
+    var sex = $("#sex").val();
+    var address = $("#pac-input-address").val();
+
+    var duration = $("#duration").val();
+
+    var appointment_id = $('button.updateAppointment').val();
+
+    if($("#sendinvoice").is(':checked')){
+        var sendinvoice = 1;
+    }else{
+        var sendinvoice = 0;
+    }
+
+    if($('#delivery_address').length){
+        var delivery_address = $("#delivery_address").val();
+    }else{
+        var delivery_address = "";
+    } 
+
+    var mobile = $("#mobile").val();
+    var phone = $("#phone").val();
+    var email = $("#email").val();
+
+    if($(this).hasClass('changeWithOutProf')){
+        var date= $(".date_time").attr('valdate');
+        var time= $(".date_time").attr('valtime');
+
+    }else{
+        var date = $("#appDate").html();
+        var time = $("#appTime").html();
+    }
+
+    alert(date + time);
+   
+
+    if($("#employersms").is(':checked')){
+        var employersms = 1;
+    }else{
+        var employersms = 0;
+    }
+
+    if($("#professionalsms").is(':checked')){
+        var professionalsms = 1;
+    }else{
+        var professionalsms = 0;
+    }
 
 
+    // Check if all fields are correct
+    if (surname==""){
+        alert('Please fill in the Surname');
+    }
+    else if(firstname==""){
+        alert('Please fill in the Name');
+    }
+    else if(address==""){
+        alert('Please fill in the Address');
+    }
+    else if(mobile==""){
+        alert('Please fill in the Mobile');
+    }
+    else{
+       /* // Find/Insert Customer data
+        var findCustomerAPI = API_LOCATION+'customer/search_by_mobile.php?mobile='+mobile;
+        $.ajax({
+            type: "POST",
+            url: findCustomerAPI,
+            data: {
+                surname: surname,
+                firstname: firstname,
+                address: address,
+                mobile: mobile,
+                sex: sex,
+                phone: phone,
+                email: email,
+                date: date,
+                time: time
+            },
+            dataType: "json",
+            success: function(data)
+            {
+                var customer_id = data;
+                //var date = "2018-05-05";
+                //var time ="10:00-12:00";
+                
+                
+                    var updateAppointAPI = API_LOCATION+'appointment/updateApppointment.php';
+                    //create($prod_id, $cust_id, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment);
+                    $.ajax({
+                            type: "POST",
+                            url: createAppointAPI,
+                            data: {
+                                status: status,
+                                surname: surname,
+                                firstname: firstname,
+                                address: address,
+                                delivery_address: delivery_address,
+                                mobile: mobile,
+                                sex: sex,
+                                phone: phone,
+                                email: email,
+                                prof_id : professional,
+                                cust_id : customer_id,
+                                application_id: application,
+                                category_id: category,
+                                date: date,
+                                time: time,
+                                address: address,
+                                budget: budget,
+                                commision: commision,
+                                agent_id: agent,
+                                comment: comments,
+                                professionalsms: professionalsms,
+                                employersms: employersms,
+                                county_id: county,
+                                sendinvoice: sendinvoice,
+                                duration: duration,
+                                appointment_id: appointment_id
+                            },
+                            dataType: "json",
+                            success: function(data)
+                            {
+                                //alert(data);
 
+                                alert("Appointment Updated");
+                                window.location.replace('../platform/appointments.php');
+                            }
+                        });    
+                
+   
 
+            }
+        });
+        return false;
+            */
+    }
 });
 
 
@@ -742,6 +886,13 @@ $( ".createCall" ).click(function() {
         });
 });
 $( ".findProfessionals" ).click(function() {
+
+    if($(this).hasClass('editWithoutChangeProf')){
+        $('.changeWithOutProf').css('display', 'none');
+    }
+
+
+
     var agent = $("#agent").attr('agentUser');
     var application = $("#applications").val();
     var county = $("#county").val();

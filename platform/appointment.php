@@ -240,7 +240,11 @@ include('config/core.php');
 															foreach ($counties as $counties) {
 																$county_id = $counties['id'];
 																$county_name = $counties['county_name'];
-																echo '<option value="'.$county_id.'">'.$county_name.'</option>';
+																if($appointment['county_id'] == $county_id){
+																	echo '<option selected value="'.$county_id.'">'.$county_name.'</option>';
+																}else{
+																	echo '<option value="'.$county_id.'">'.$county_name.'</option>';
+																}
 															}
 														?>
 												</select>
@@ -267,7 +271,7 @@ include('config/core.php');
 															<span class="input-group-addon">
 																<i class="fa fa-calendar"></i>
 															</span>
-															<input type="text" value="<?php echo $appointment['date'] . ' ' . $appointment['time'];?>" class="form-control" disabled >
+															<input class="date_time" type="text" valdate="<?php echo $appointment['date']; ?>" valtime="<?php echo $appointment['time']; ?>" value="<?php echo $appointment['date'] . ' ' . $appointment['time'];?>" class="form-control" disabled >
 														</div>
 													</div>
 										</div>
@@ -481,12 +485,12 @@ include('config/core.php');
 					</div>
 					<div class="row">
 						<div class="col-sm-6 offset-sm-3 text-center" >
-							<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning findProfessionals">Find Professionals</button>
+							<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning editWithoutChangeProf findProfessionals">Find Professionals</button>
 						</div>
 					</div>
 					<div class="row status-3 status">
 						<div class="col-sm-6 offset-sm-3 text-center">
-							<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning updateAppointment">Update Appointment</button>
+							<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning changeWithOutProf updateAppointment" value="<?php echo $_GET['id']; ?>">Update Appointment</button>
 						</div>
 					</div>
 					<div class="row available">
@@ -506,8 +510,11 @@ include('config/core.php');
 									<div class="row" id="available">
 									</div>
 									<div class="row">
-										<div class="col-sm-6 offset-sm-3 text-center">
-											<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning createAppointment">Book Appointment</button>
+										<div class="col-sm-3 text-center">
+											<div id='chosen-slot'><strong>Chosen slot:</strong><span id='appDate'></span> <span id='appTime'></span></span></div>
+										</div>
+										<div class="col-sm-6 text-center">
+											<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning updateAppointment" value="<?php echo $_GET['id']; ?>" >Book Appointment</button>
 										</div>
 										<div class="col-sm-3 text-right">
 											<button type="button" class="mb-1 mt-1 mr-1 btn btn-danger cancelAppointment">Cancel</button>
@@ -610,8 +617,11 @@ include('config/core.php');
 		<!-- Theme Custom -->
 		<script src="<?php echo $home_url;?>js/core.js"></script>
 		
-		<script src="<?php echo $platform_url;?>js/custom.js"></script>
+		<!--<script src="<?php echo $platform_url;?>js/custom.js"></script>-->
+		<script src="http://localhost/MCUpgrade/platform/js/custom.js"></script>
 		<script src="<?php echo $platform_url;?>js/searchAddress.js"></script>
+
+
 		
 
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

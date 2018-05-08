@@ -190,3 +190,7 @@ p.reviewerName {
 #status-8.app-status #reviewDetails, #status-6.app-status #reviewDetails, #status-5.app-status #reviewDetails{
     display: block;
 }
+
+input.date_time {
+    width: 100%;
+}
