@@ -12,19 +12,22 @@
                             </div>
                             <?php 
                                 //echo SITE_URL.'webservices/api/professional/getProfile.php?id='.$_SESSION['id'];
-
                                 $profile = file_get_contents(SITE_URL.'webservices/api/professional/getProfile.php?id='.$_SESSION['id']);
+                                //echo SITE_URL.'webservices/api/professional/getProfile.php?id='.$_SESSION['id'];
                                 $profile = json_decode($profile, true); // decode the JSON into an associative array
+
+                                $categories = $profile['categories'];
+                                
                             ?>
                             <div class="col-md-12">
-                                <?php if($profile['record']['verified']==0){?>    
+                                <?php if($profile['verified']==0){?>    
                                  <div class="alert alert-danger">
                                     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                                     <strong>Ενημέρωση!</strong> Το αίτημα σας για τη δημιουργία του προφιλ είναι υπο επεξεργασία.
                                   </div>
                                 <?php }?>
 
-                                <?php if($profile['record']['balance'] > 150){?>    
+                                <?php if($profile['balance'] > 150){?>    
                                  <div class="alert alert-danger">
                                     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                                     <strong>Προσοχή!</strong> Το χρέος σας έχει ξεπεράσει τα 150 Ευρώ και ο λογαριασμός σας θα απενεργοποιηθεί εντός των επόμενων 3 ημερών! <a href="/professional-profile/payments.php" class="alert-link">read more</a>.
@@ -47,8 +50,24 @@
                                     
                                     <div class="card-body">
                                         <h3>Top 10 Professionals</h3>
-
-                                        <table class="table table-responsive-md table-striped mb-0">
+                                        <div class="row">
+                                            <select data-plugin-selectTwo class="form-control populate" name="category" id="category">
+                                                <?php
+                                                $selCat = "";
+                                                foreach ($categories as $category) {
+                                                    
+                                                    $cat_id = $category['category_id'];
+                                                    $cat_name = $category['category_name'];
+                                                    if ($selCat == ""){
+                                                        $selCat = $cat_id;
+                                                        $selCatName = $cat_name;
+                                                    }
+                                                    echo '<option value="'.$cat_id.'" data-name="'.$cat_name.'" data-prof="'.$_SESSION['id'].'">'.$cat_name.'</option>';
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <table class="table table-responsive-md mb-0">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
@@ -57,92 +76,29 @@
                                                     <th>Progress</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>7</td>
-                                                    <td>Αριστείδης Βελέντζας</td>
-                                                    <td><span class="badge badge-success">Transports</span></td>
-                                                    <td>
-                                                        <div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
-                                                            <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-                                                                80%
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>8</td>
-                                                    <td>Γιάννης Πράγιας</td>
-                                                    <td><span class="badge badge-success">Energy Certificate</span></td>
-                                                    <td>
-                                                        <div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
-                                                            <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 78%;">
-                                                                78%
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>9</td>
-                                                    <td>Δημήτρης Παππάς</td>
-                                                    <td><span class="badge badge-warning">Paint</span></td>
-                                                    <td>
-                                                        <div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
-                                                            <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 76%;">
-                                                                76%
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr class="mypossition">
-                                                    <td>10</td>
-                                                    <td>Λευτέρης Ματζουράνης</td>
-                                                    <td><span class="badge badge-success">Transports</span></td>
-                                                    <td>
-                                                        <div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
-                                                            <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 70%;">
-                                                                70%
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>11</td>
-                                                    <td>Μάριος Ιωαννίδης</td>
-                                                    <td><span class="badge badge-warning">Plumber</span></td>
-                                                    <td>
-                                                        <div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
-                                                            <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 61%;">
-                                                                63%
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>12</td>
-                                                    <td>Βασίλης Μούγιος</td>
-                                                    <td><span class="badge badge-warning">Plumber</span></td>
-                                                    <td>
-                                                        <div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
-                                                            <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                                                                62%
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>13</td>
-                                                    <td>Θοδωρής Γιαννόπουλος</td>
-                                                    <td><span class="badge badge-warning">Plumber</span></td>
-                                                    <td>
-                                                        <div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
-                                                            <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 57%;">
-                                                                61%
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                               
+                                            <tbody class="profScores">
+                                                <?php
+                                                    $professionals = file_get_contents(SITE_URL.'webservices/api/professional/getScore.php?cat_id='.$selCat);
+                                                    //echo 'webservices/api/professional/getScore.php?cat_id='.$selCat;
+                                                    //echo SITE_URL.'webservices/api/professional/getProfile.php?id='.$_SESSION['id'];
+                                                    $professionals = json_decode($professionals, true); // decode the JSON into an associative array
+                                                    $i = 0;
+                                                    foreach ($professionals as $professional) {
+                                                        $i++;
+                                                        if ($_SESSION['id'] == $professional['professional_id']){
+                                                            echo "<tr class='mypossition'>";
+                                                        }
+                                                        else{
+                                                            echo "<tr>";
+                                                        }
+                                                        
+                                                        echo "<td>$i</td>";
+                                                        echo "<td>".$professional['firstname']." ".$professional['lastname']."</td>";
+                                                        echo "<td><span class='badge badge-success'>".$selCatName."</td>";
+                                                        echo "<td><div class='progress progress-sm progress-half-rounded m-0 mt-1 light'><div class='progress-bar progress-bar-primary' role='progressbar' aria-valuenow='60' aria-valuemin='0' aria-valuemax='100' style='width: ".$professional['score']."%;'>".$professional['score']."</div></div></td>";
+                                                        echo "</tr>";
+                                                    }
+                                                ?>     
                                             </tbody>
                                         </table>
                                     </div>
@@ -150,13 +106,14 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="card-body">
-                                        <h3>How to the best!</h3>
+                                        <h3>Πώς να γίνεις ο καλύτερος:</h3>
 
                                         <ul class="ul-how-to-best">
-                                            <li><i class="fa fa-bolt"></i> Be kind to the clients! Remember it is how we make our living! </li>
-                                            <li><i class="fa fa-bolt"></i> Be clean and presentable. We understand that you can’t look polished after a hard day at work but keeping our clothes neat and our personal hygiene to a good level will most certainly pay us back!</li>
-                                            <li><i class="fa fa-bolt"></i> Work on your negotiations skills with the assigned jobs! Do your best to meet your clients need in the most respectful way! Listen to your clients and their needs.</li>
-                                            <li><i class="fa fa-bolt"></i> Pay on time: Paying your commissions on time will help building the trust between us and will help us all work better and more efficient!</li>
+                                            <li><i class="fa fa-bolt"></i> Κάνε τις πληρωμές σου στην ώρα σου. Οι συνεπείς πληρωμές θα βοηθήσουν στη δημιουργία ενός κλίματος εμπιστοσύνης  ανάμεσα μας και αυτό με βεβαιότητα θα κάνει καλό στις δουλειές μας. </li>
+                                            <li><i class="fa fa-bolt"></i> Να είσαι καλός και ευγενικός με τους πελάτες. Να θυμάσαι ότι έχουν το δικαίωμα αξιολόγησης και οι καλές αξιολογήσεις θα σε ανεβάσουν ψηλά!!</li>
+                                            <li><i class="fa fa-bolt"></i> Μην ξεχνάς ότι όλοι οι πελάτες μας μας έχουν ανάγκη!  Μην απορρίπτεις δουλειές όσο μικρές και αν είναι! Στόχος μας είναι όλοι οι πελάτες μας να είναι ευχαριστημένοι!</li>
+                                            <li><i class="fa fa-bolt"></i> Και μην ξεχνάς ότι για να κλείνουμε δουλειές πρέπει να είμαστε ευχάριστοι, διαλλακτικοί και με αξιοπρεπή εμφάνιση.</li>
+                                            <li><i class="fa fa-bolt"></i> Άκου τον πελάτη σου και τις ανάγκες του! Αυτό θα σε βοηθήσει να κλείσεις περισσότερες δουλειές και θα σε ανεβάσει ψηλά στη κατάταξ</li>
                                         </ul>
                                     </div>
 
