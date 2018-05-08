@@ -616,6 +616,59 @@ class Appointment{
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row; 
     }
+
+        public function rejectpopups($agent_id){
+
+        $time = date('Y-m-d H:i:s',strtotime("-48 hours"));
+        $aids = array();
+        $aquery = "Select appointment_id from agent_reject_view where agent_id='".$agent_id."'";
+        $astmt = $this->conn->prepare( $aquery );
+        $astmt->execute();
+
+        $num = $astmt->rowCount();
+        if($num > 0){
+            
+            while ($arow = $astmt->fetch(PDO::FETCH_ASSOC)){
+                $aids[] = $arow['appointment_id'];
+            }
+        }
+        
+
+        // select query
+        $query = "SELECT a.`id`, a.`prof_member_id`, a.`date`, a.`cancelComment`, a.`application_id`, ap.`category_id`, p.`first_name`, p.`last_name` 
+                FROM " . $this->table_name . " a
+                Join professionals p on a.prof_member_id = p.id 
+                LEFT JOIN ". $this->application_table_name." ap
+                    ON a.application_id = ap.id
+                WHERE a.`cancelReason` = '4' and a.`datetimeStatusUpdated` >= '".$time."' and a.`id` Not IN ('".implode("','", $aids)."')
+                ORDER BY a.`reject_datetime` DESC limit 1";
+        
+
+        $stmt = $this->conn->prepare( $query );
+
+        $stmt->execute();
+
+        $num = $stmt->rowCount();
+
+        if($num > 0){
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $appointment_id = $row['id'];
+            // // Add in view list
+            $iquery = "INSERT INTO `agent_reject_view` (`agent_id`, `appointment_id`)  VALUES ('$agent_id', '$appointment_id')";
+         
+            $istmt = $this->conn->prepare( $iquery );
+            $istmt->execute();
+
+            return $row;
+        }else{
+            return 0;
+        }
+        
+        
+        
+        
+           
+    }
     
 
 
