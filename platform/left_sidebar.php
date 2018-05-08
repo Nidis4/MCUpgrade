@@ -441,6 +441,11 @@
 				                                    Help
 				                                </a>
 				                            </li>
+				                            <li>
+				                                <a class="nav-link" href="working_hours.php">
+				                                    Working Hours
+				                                </a>
+				                            </li>
 				                        </ul>
 				                    </li>
 				                    <!--<li class="nav-parent">
