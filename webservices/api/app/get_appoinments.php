@@ -51,6 +51,7 @@ if(isset($_REQUEST['member_id']) && isset($_REQUEST['page']))
                 "surname" => $last_name,
                 "county_name" => $customerName,
                 "address" => $address,
+                "status" => $status,
                 "close_times" => $close_times
                 );
 

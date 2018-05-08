@@ -19,7 +19,7 @@ class AppointmentClass{
     // Appoinments List
     public function GetAppoinments($member_id,$page,$status){
         $limit = "limit ".(10 * $page).", 10";
-        $sql ="SELECT `appointments`.`id`,`appointments`.`date`,`appointments`.`time`,`appointments`.`address`,`customers`.`first_name`,`customers`.`last_name`,`customers_contact_details`.`country_id` FROM `appointments` JOIN `customers` on `customers`.`id` = `appointments`.`cust_member_id` JOIN `customers_contact_details` on `customers_contact_details`.`customer_id` = `appointments`.`cust_member_id`  WHERE `appointments`.`prof_member_id` = '".$member_id."' and `appointments`.`status` IN ('".$status."')";
+        $sql ="SELECT `appointments`.`id`,`appointments`.`date`,`appointments`.`time`,`appointments`.`address`,`customers`.`first_name`,`customers`.`last_name`,`customers_contact_details`.`country_id`,`appointments`.`status` FROM `appointments` JOIN `customers` on `customers`.`id` = `appointments`.`cust_member_id` JOIN `customers_contact_details` on `customers_contact_details`.`customer_id` = `appointments`.`cust_member_id`  WHERE `appointments`.`prof_member_id` = '".$member_id."' and `appointments`.`status` IN ('".$status."')";
         $sql .= " ORDER BY  `appointments`.`date` DESC ,`appointments`.`time` DESC ".$limit;
 
         // prepare query statement
