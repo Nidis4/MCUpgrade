@@ -246,8 +246,20 @@ function setNavigation(){
 
 $( ".copy-row" ).click(function() {
     var id = $(this).closest('tr').attr('data-item-id');
+    //alert(id);
+
+    var getCloneAPI = API_LOCATION+'appointment/clone.php?app_id='+id;
     
-    alert("Should be Implemented");
+    $.ajax({
+        type: "POST",
+        url: getCloneAPI,
+        dataType: "json",
+        success: function(data)
+            {
+                alert("Cloned Appointment Created");
+                window.location.replace('../platform/appointments.php');
+            }
+        });
     
 });
 
