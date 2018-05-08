@@ -250,13 +250,25 @@ include('config/core.php');
 												<label class="col-lg-3 control-label text-lg-right pt-2">Date range</label>
 												<div class="col-lg-9">
 													<div class="input-daterange input-group" data-plugin-datepicker="">
-														<span class="input-group-addon">
+														<span class=" input-group-addon">
 															<i class="fa fa-calendar"></i>
 														</span>
-														<input type="text" class="form-control" name="start" value="<?php echo $appointment['date'];?>" id='startDate'>
+														<input type="text" class="form-control" name="start" value="" id='startDate'>
 														<span class="input-group-addon">to</span>
-														<input type="text" class="form-control" value="<?php echo date('Y-m-d',strtotime($appointment['date']." +5 days"));?>" name="end" id='endDate'>
+														<input type="text" class="form-control" value="" name="end" id='endDate'>
 													</div>
+												</div>
+										</div>
+
+										<div class="form-group row">
+												<label class="col-lg-3 control-label text-lg-right pt-2">Date Selected</label>
+												<div class="col-lg-9" >
+														<div class="input-daterange input-group" data-plugin-datepicker="">
+															<span class="input-group-addon">
+																<i class="fa fa-calendar"></i>
+															</span>
+															<input id="date" data-plugin-masked-input="" value="<?php echo $appointment['date'];?>" placeholder="__/__/____" class="form-control" />
+														</div>
 												</div>
 										</div>
 										<div class="form-group row">

@@ -5010,7 +5010,7 @@ telikos,
  //https://upgrade.myconstructor.gr/webservices/api/
 
         // Find/Insert Customer data
-        var findCustomerAPI ='http://localhost/MCUpgrade/webservices/api/customer/search_by_mobile.php?mobile='+mobile;
+        var findCustomerAPI ='https://upgrade.myconstructor.gr/webservices/api/customer/search_by_mobile.php?mobile='+mobile;
         $.ajax({
             type: "POST",
             url: findCustomerAPI,
@@ -5033,7 +5033,7 @@ telikos,
                 //var time ="10:00-12:00";
                 
 
-                var createOfferAPI = 'http://localhost/MCUpgrade/webservices/api/appointment/createTransportOffer.php';
+                var createOfferAPI = 'https://upgrade.myconstructor.gr/webservices/api/appointment/createTransportOffer.php';
                 //alert(createOfferAPI);
                 //create($prod_id, $cust_id, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment);
                 $.ajax({
@@ -5065,7 +5065,7 @@ telikos,
                         //alert(data);
 
                         alert("Offer Created");
-                        window.location.replace('../platform/offers.php');
+                        window.location.replace('../../../../offers.php');
                     },
                     error: function(data){
                         alert(data);
