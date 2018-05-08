@@ -709,6 +709,18 @@ $( ".createAppointment" ).click(function() {
 
     }
 });
+
+
+
+$( ".updateAppointment" ).click(function() { 
+
+
+
+
+});
+
+
+
 $( ".createCall" ).click(function() {
     var CallId = $("#CallId").val();
     var commentcall = $("#commentcall").val();
@@ -763,6 +775,7 @@ $( ".findProfessionals" ).click(function() {
         //alert("Start: "+startDate);
         //alert("End: "+endDate);
         //alert("Address: "+address);
+        
         var getAvailableAPI = API_LOCATION+'professional/getCalendarForBooking.php?duration='+duration+'&county_id='+county+'&application_id='+application+'&startDate='+startDate+'&endDate='+endDate+'&address='+address;
 
         $.ajax({
