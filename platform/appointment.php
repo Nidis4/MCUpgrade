@@ -271,7 +271,7 @@ include('config/core.php');
 															<span class="input-group-addon">
 																<i class="fa fa-calendar"></i>
 															</span>
-															<input class="date_time" type="text" valdate="<?php echo $appointment['date']; ?>" valtime="<?php echo $appointment['time']; ?>" value="<?php echo $appointment['date'] . ' ' . $appointment['time'];?>" class="form-control" disabled >
+															<input class="date_time" type="text" valprofid="<?php echo $appointment['prof_member_id']; ?>" valdate="<?php echo $appointment['date']; ?>" valtime="<?php echo $appointment['time']; ?>" value="<?php echo $appointment['date'] . ' ' . $appointment['time'];?>" class="form-control" disabled >
 														</div>
 													</div>
 										</div>

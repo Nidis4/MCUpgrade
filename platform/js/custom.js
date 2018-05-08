@@ -783,14 +783,15 @@ $( "button.updateAppointment" ).click(function() {
     if($(this).hasClass('changeWithOutProf')){
         var date= $(".date_time").attr('valdate');
         var time= $(".date_time").attr('valtime');
+        var professional = $('.date_time').attr('valprofid');
+        
 
     }else{
         var date = $("#appDate").html();
         var time = $("#appTime").html();
+        var professional = $('.selectedProf').attr('id');
     }
-
-    alert(date + time);
-   
+ 
 
     if($("#employersms").is(':checked')){
         var employersms = 1;
