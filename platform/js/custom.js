@@ -367,6 +367,36 @@ $( ".updateTag" ).click(function() {
     
 });
 
+$( ".updateCat" ).click(function() {
+    var tagId = $(this).attr('id');
+    var id = tagId.substring(9);
+    
+    var meta_title = $('#meta_title'+id).val();
+    var meta_description = $('#meta_description'+id).val();
+    var meta_robots = $('#meta_robots'+id).val();
+    var permalink = $('#permalink'+id).val();
+    alert("Should be Implemented:"+id+" "+meta_title);
+
+    var updateCatAPI = API_LOCATION+'category/updateCat.php';
+    //alert(updateTagsAPI);
+    $.ajax({
+        type: "POST",
+        url: updateCatAPI,
+        data: {
+            id: id,
+            meta_title: meta_title,
+            meta_description: meta_description,
+            meta_robots: meta_robots,
+            permalink: permalink
+        },
+        success: function(data)
+        {
+            alert("Meta Information Saved!");
+        }
+    });
+    
+});
+
 $("input#startDate").change(function(){
     //alert("The text has been changed.");
     var date = new Date($("#startDate").val()); 

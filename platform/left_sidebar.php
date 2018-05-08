@@ -523,10 +523,11 @@
 				                                </a>
 				                            </li>
 				                            <li>
-				                                <a class="nav-link" href="extra-ajax-made-easy.html">
-				                                    Ajax Made Easy
+				                                <a class="nav-link" href="categories.php">
+				                                    Categories
 				                                </a>
 				                            </li>
+
 				                        </ul>
 				                    </li>
 				                    <!--<li>

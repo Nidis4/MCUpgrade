@@ -7,6 +7,7 @@ class Category{
     private $table_name = "categories";
     private $question_table_name = "categories_questions";
     private $question_answer_table_name = "categories_questions_answers";
+    private $table_meta = "categories_meta";
  
     // object properties
     public $id;
@@ -26,9 +27,10 @@ class Category{
     public function read(){
         //select all data
         $query = "SELECT
-                    id, title, title_greek, description, description_greek, sequence, modified, commissionRate
+                    c.id, c.title, c.title_greek, c.description, c.description_greek, c.sequence, c.modified, c.commissionRate, m.meta_title, m.meta_description, m.meta_robots, m.permalink
                 FROM
-                    " . $this->table_name . "
+                    `" . $this->table_name . "` c
+                LEFT JOIN `" . $this->table_meta . "` m ON m.category_id= c.id 
                 ORDER BY
                     title_greek ASC";
  
@@ -143,6 +145,17 @@ class Category{
  
         return $stmt;
     }
+
+    function updateCat($id, $meta_title, $meta_description, $meta_robots, $permalink){
+        $query = "INSERT INTO `categories_meta`(`category_id`, `meta_title`, `meta_description`, `meta_robots`, `permalink`) VALUES ('".$id."', '".$meta_title."', '".$meta_description."', '".$meta_robots."', '".$permalink."') ON DUPLICATE KEY UPDATE `meta_title`= '".$meta_title."' , `meta_description`= '".$meta_description."', `meta_robots`= '".$meta_robots."', `permalink`= '".$permalink."'  ";
+        //echo $query;
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+
+        // execute query
+        $stmt->execute();
+        return $stmt;
+    }    
 
 }
 ?>
