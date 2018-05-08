@@ -819,7 +819,7 @@ $( "button.updateAppointment" ).click(function() {
         alert('Please fill in the Mobile');
     }
     else{
-       /* // Find/Insert Customer data
+        // Find/Insert Customer data
         var findCustomerAPI = API_LOCATION+'customer/search_by_mobile.php?mobile='+mobile;
         $.ajax({
             type: "POST",
@@ -891,7 +891,7 @@ $( "button.updateAppointment" ).click(function() {
             }
         });
         return false;
-            */
+            
     }
 });
 
