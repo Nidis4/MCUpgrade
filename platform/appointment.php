@@ -608,9 +608,11 @@ include('config/core.php');
 		<script src="js/theme.js"></script>
 		
 		<!-- Theme Custom -->
-		<script src="js/core.js"></script>
-		<script src="js/custom.js"></script>
-		<script src="js/searchAddress.js"></script>
+		<script src="<?php echo $home_url;?>js/core.js"></script>
+		
+		<script src="<?php echo $platform_url;?>js/custom.js"></script>
+		<script src="<?php echo $platform_url;?>js/searchAddress.js"></script>
+		
 
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		
