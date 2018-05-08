@@ -239,12 +239,13 @@ class Appointment{
 
     // read products with pagination
     public function readRejectPaging($from_record_num, $records_per_page){
-     
+         $time = date('Y-m-d H:i:s',strtotime("-48 hours"));
+
         // select query
         $query = "SELECT
                     `id`, `prof_member_id`, `cust_member_id`, `application_id`, `county_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelReason`, `cancelComment`, `viewed`, `viewed_datetime`
                 FROM
-                    " . $this->table_name . " WHERE `cancelReason` = '4'
+                    " . $this->table_name . " WHERE `cancelReason` = '4' and `datetimeStatusUpdated` >= '".$time."'
                 ORDER BY `reject_datetime` DESC
                 LIMIT ?, ?";
      
@@ -528,7 +529,10 @@ class Appointment{
     }
 
     public function create($prof_id, $cust_id, $application_id, $county_id, $date, $time, $address, $budget, $commision, $agent_id, $comment, $status, $delivery_address = NULL){
-        $query = "INSERT INTO `appointments`(`prof_member_id`, `cust_member_id`, `application_id`,`county_id`,  `date`, `time`, `address`,`delivery_address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`) VALUES ('$prof_id', '$cust_id', '$application_id','$county_id', '$date', '$time', '$address', '$delivery_address', '$budget','$commision', '$agent_id','$comment','0','0', NOW(),NOW(),'0','$status','')";
+
+        $now = date('Y-m-d H:i:s');        
+
+        $query = "INSERT INTO `appointments`(`prof_member_id`, `cust_member_id`, `application_id`,`county_id`,  `date`, `time`, `address`,`delivery_address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`) VALUES ('$prof_id', '$cust_id', '$application_id','$county_id', '$date', '$time', '$address', '$delivery_address', '$budget','$commision', '$agent_id','$comment','0','0', '$now','$now','0','$status','')";
         //echo $query;
 
         $stmt = $this->conn->prepare( $query );
@@ -602,7 +606,10 @@ class Appointment{
 
 
     public function rejectCount(){
-        $query = "SELECT Count(`id`) as total FROM  `appointments` WHERE  `cancelReason` = '4'";
+
+        $time = date('Y-m-d H:i:s',strtotime("-48 hours"));
+
+        $query = "SELECT Count(`id`) as total FROM  `appointments` WHERE  `cancelReason` = '4' and datetimeStatusUpdated >= '".$time."'";
         $stmt = $this->conn->prepare( $query );
 
         $stmt->execute();

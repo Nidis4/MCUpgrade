@@ -43,6 +43,7 @@ include('config/core.php');
 
 		<!-- Head Libs -->
 		<script src="vendor/modernizr/modernizr.js"></script>
+		<script src="vendor/jquery/jquery.js"></script>
 
 	</head>
 	<body>
@@ -232,7 +233,6 @@ include('config/core.php');
 		</div>
 
 		<!-- Vendor -->
-		<script src="vendor/jquery/jquery.js"></script>
 		<script src="vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
 		<script src="vendor/popper/umd/popper.min.js"></script>
 		<script src="vendor/bootstrap/js/bootstrap.js"></script>
