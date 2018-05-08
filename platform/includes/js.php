@@ -1,5 +1,5 @@
 <?php
-echo '	<script src="vendor/jquery/jquery.js"></script>
+echo '	
 		<script src="vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
 		<script src="vendor/popper/umd/popper.min.js"></script>
 		<script src="vendor/bootstrap/js/bootstrap.js"></script>

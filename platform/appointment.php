@@ -43,6 +43,7 @@ include('config/core.php');
 
 		<!-- Head Libs -->
 		<script src="vendor/modernizr/modernizr.js"></script>
+		<script src="vendor/jquery/jquery.js"></script>
 
 	</head>
 	<body>
