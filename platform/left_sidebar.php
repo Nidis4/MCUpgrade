@@ -441,6 +441,11 @@
 				                                    Help
 				                                </a>
 				                            </li>
+				                            <li>
+				                                <a class="nav-link" href="working_hours.php">
+				                                    Working Hours
+				                                </a>
+				                            </li>
 				                        </ul>
 				                    </li>
 				                    <!--<li class="nav-parent">
@@ -523,10 +528,11 @@
 				                                </a>
 				                            </li>
 				                            <li>
-				                                <a class="nav-link" href="extra-ajax-made-easy.html">
-				                                    Ajax Made Easy
+				                                <a class="nav-link" href="categories.php">
+				                                    Categories
 				                                </a>
 				                            </li>
+
 				                        </ul>
 				                    </li>
 				                    <!--<li>

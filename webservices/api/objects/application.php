@@ -31,7 +31,7 @@ class Application{
     public function read(){
         //select all data
         $query = "SELECT
-                    a.id, a.category_id, a.title, a.title_greek, a.short_description, a.short_description_gr, a.detail_description, a.detail_description_gr, a.unit, a.min_price, a.sequence, a.modified, ast.tags, m.meta_title, m.meta_description, m.meta_robots, m.permalink
+                    a.id, a.category_id, a.title, a.title_greek, a.short_description, a.short_description_gr, a.detail_description, a.detail_description_gr, a.category_description, a.unit, a.min_price, a.sequence, a.modified, ast.tags, m.meta_title, m.meta_description, m.meta_robots, m.permalink
                 FROM
                     " . $this->table_name . " a  
                 LEFT JOIN " . $this->table_search . " ast ON a.id = ast.application_id
@@ -184,8 +184,13 @@ ORDER BY applications.sequence ASC";
         $stmt->execute();
     }
 
-    function updateTag($id, $meta_title, $meta_description, $meta_robots, $permalink, $tags){
+    function updateTag($id, $meta_title, $meta_description, $meta_robots, $permalink, $tags, $category_description){
         $query = "UPDATE `applications_search` SET `tags`='$tags' WHERE `application_id` = $id";
+        $stmt = $this->conn->prepare( $query );
+        // execute query
+        $stmt->execute();
+
+        $query = "UPDATE `applications` SET `category_description`='$category_description' WHERE `id` = $id";
         $stmt = $this->conn->prepare( $query );
         // execute query
         $stmt->execute();
