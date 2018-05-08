@@ -900,5 +900,7 @@ ALTER TABLE `agent_reject_view`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
+ALTER TABLE `days` ADD `working_hours` VARCHAR(50) NULL AFTER `greek`;
+
 <!-------------------------------->
 <!-- End 08 May 2018 Harpreet -->
