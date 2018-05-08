@@ -847,7 +847,7 @@ $( "button.updateAppointment" ).click(function() {
                     //create($prod_id, $cust_id, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment);
                     $.ajax({
                             type: "POST",
-                            url: createAppointAPI,
+                            url: updateAppointAPI,
                             data: {
                                 status: status,
                                 surname: surname,
