@@ -21,7 +21,8 @@ if(isset($_REQUEST['member_id']) && isset($_REQUEST['page']))
     $page=isset($_REQUEST["page"]) ? $_REQUEST["page"] : "";
 
 // query appointment
-    $stmt = $GetAppoinments->GetAppoinments($member_id,$page,"1");
+    $stmt = $GetAppoinments->GetAppoinments($member_id,$page,"1','4");
+    
     $num = $stmt->rowCount();
 
 // check if more than 0 record found
@@ -39,7 +40,8 @@ if(isset($_REQUEST['member_id']) && isset($_REQUEST['page']))
         // just $name only
             extract($row);
             $customerName = $GetAppoinments->getCountryNameByID($country_id);
- 
+            $close_times_V = $GetAppoinments->getAppointmentsOffersDetails($id);
+            $close_times = $close_times_V['close_times'];
 
             $appointment_item=array(
                 "id" => $id,
@@ -48,7 +50,8 @@ if(isset($_REQUEST['member_id']) && isset($_REQUEST['page']))
                 "name" => $first_name,
                 "surname" => $last_name,
                 "county_name" => $customerName,
-                "address" => $address
+                "address" => $address,
+                "close_times" => $close_times
                 );
 
             array_push($appointments_arr, $appointment_item);
