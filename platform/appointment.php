@@ -259,7 +259,7 @@ include('config/core.php');
 													</div>
 												</div>
 										</div>
-
+ 										
 										<div class="form-group row">
 													<label class="col-lg-3 control-label text-lg-right pt-2">Date Selected</label>
 													<div class="col-lg-9" >
@@ -267,7 +267,7 @@ include('config/core.php');
 															<span class="input-group-addon">
 																<i class="fa fa-calendar"></i>
 															</span>
-															<input id="date" data-plugin-masked-input="" value="<?php echo $appointment['date'];?>" placeholder="__/__/____" class="form-control">
+															<input type="text" value="<?php echo $appointment['date'] . ' ' . $appointment['time'];?>" class="form-control" disabled >
 														</div>
 													</div>
 										</div>
