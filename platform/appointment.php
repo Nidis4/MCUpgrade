@@ -617,8 +617,8 @@ include('config/core.php');
 		<!-- Theme Custom -->
 		<script src="<?php echo $home_url;?>js/core.js"></script>
 		
-		<!--<script src="<?php echo $platform_url;?>js/custom.js"></script>-->
-		<script src="http://localhost/MCUpgrade/platform/js/custom.js"></script>
+		<script src="<?php echo $platform_url;?>js/custom.js"></script>
+		<!--<script src="http://localhost/MCUpgrade/platform/js/custom.js"></script>-->
 		<script src="<?php echo $platform_url;?>js/searchAddress.js"></script>
 
 
