@@ -495,6 +495,6 @@ include('config/core.php');
 		<!-- Examples -->
 		<script src="js/examples/examples.datatables.editable.js"></script>
 		<script src="js/examples/examples.modals.js"></script>
-		
+		<?php include('reject_popup.php');?>
 	</body>
 </html>

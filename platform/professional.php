@@ -1480,5 +1480,6 @@ include('config/core.php');
 				});
 			});
 		</script>
+		<?php include('reject_popup.php');?>
 	</body>
 </html>
