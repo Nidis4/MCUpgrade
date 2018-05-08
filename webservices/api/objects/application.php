@@ -184,8 +184,13 @@ ORDER BY applications.sequence ASC";
         $stmt->execute();
     }
 
-    function updateTag($id, $tags){
+    function updateTag($id, $meta_title, $meta_description, $meta_robots, $permalink, $tags){
         $query = "UPDATE `applications_search` SET `tags`='$tags' WHERE `application_id` = $id";
+        $stmt = $this->conn->prepare( $query );
+        // execute query
+        $stmt->execute();
+
+        $query = "INSERT INTO `applications_meta`(`application_id`, `meta_title`, `meta_description`, `meta_robots`, `permalink`) VALUES ('".$id."', '".$meta_title."', '".$meta_description."', '".$meta_robots."', '".$permalink."') ON DUPLICATE KEY UPDATE `meta_title`= '".$meta_title."' , `meta_description`= '".$meta_description."', `meta_robots`= '".$meta_robots."', `permalink`= '".$permalink."'  ";
         //echo $query;
         // prepare query statement
         $stmt = $this->conn->prepare( $query );

@@ -328,7 +328,11 @@ $( ".updateTag" ).click(function() {
     var id = tagId.substring(9);
     
     var text = $('textarea#textarea'+id).val();
-    //alert("Should be Implemented:"+id+" "+text);
+    var meta_title = $('#meta_title'+id).val();
+    var meta_description = $('#meta_description'+id).val();
+    var meta_robots = $('#meta_robots'+id).val();
+    var permalink = $('#permalink'+id).val();
+    //alert("Should be Implemented:"+id+" "+meta_title);
 
     var updateTagsAPI = API_LOCATION+'application/updateTags.php';
     //alert(updateTagsAPI);
@@ -337,11 +341,15 @@ $( ".updateTag" ).click(function() {
         url: updateTagsAPI,
         data: {
             id: id,
-            tags: text    
+            tags: text,
+            meta_title: meta_title,
+            meta_description: meta_description,
+            meta_robots: meta_robots,
+            permalink: permalink
         },
         success: function(data)
         {
-            alert("Tag saved!");
+            alert("Meta Information Saved!");
         }
     });
     

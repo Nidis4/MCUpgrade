@@ -114,25 +114,25 @@ include('config/core.php');
 													<div class='form-group row'>
 														<label class='col-sm-3 control-label text-sm-right pt-2'>Meta Title <span class='required'>*</span></label>
 														<div class='col-sm-9'>
-															<input type='text' name='commision' id='commision' class='form-control' placeholder='eg.: John' required value='".$title."' />
+															<input type='text' name='meta_title' id='meta_title".$id."' class='form-control' placeholder='eg.: John' required value='".$title."' />
 														</div>
 													</div>
 													<div class='form-group row'>
 														<label class='col-sm-3 control-label text-sm-right pt-2'>Meta Description <span class='required'>*</span></label>
 														<div class='col-sm-9'>
-															<input type='text' name='commision' id='commision' class='form-control' placeholder='eg.: John' required value='".$description."' />
+															<input type='text' name='meta_description' id='meta_description".$id."' class='form-control' placeholder='eg.: John' required value='".$description."' />
 														</div>
 													</div>
 													<div class='form-group row'>
 														<label class='col-sm-3 control-label text-sm-right pt-2'>Meta Robots <span class='required'>*</span></label>
 														<div class='col-sm-9'>
-															<input type='text' name='commision' id='commision' class='form-control' placeholder='eg.: John' required value='".$robots."' />
+															<input type='text' name='meta_robots' id='meta_robots".$id."' class='form-control' placeholder='eg.: John' required value='".$robots."' />
 														</div>
 													</div>
 													<div class='form-group row'>
 														<label class='col-sm-3 control-label text-sm-right pt-2'>Permalink <span class='required'>*</span></label>
 														<div class='col-sm-9'>
-															<input type='text' name='commision' id='commision' class='form-control' placeholder='eg.: John' required value='".$permalink."' />
+															<input type='text' name='permalink' id='permalink".$id."' class='form-control' placeholder='eg.: John' required value='".$permalink."' />
 														</div>
 													</div>
 													<div class='form-group row'>
