@@ -25,7 +25,9 @@
                                     <option class="0" value="">Select</option>
                                     <?php 
                                         if(@$categories){
+                                            $pcats = array();
                                             foreach ($categories as $value) {
+                                                $pcats[] = $value['category_id'];
                                     ?>
                                                <option <?php if($value['is_main'] == 1){?> selected <?php }?> value="<?php echo $value['category_id']?>"><?php echo $value['category_name']?></option> 
                                     <?php
@@ -35,7 +37,7 @@
                                    
                                 </select>
 
-                                <div class="addtrade">ADD ANOTHER TRADE</div>
+                                <div class="addtrade"  data-toggle="modal" data-target="#modalLoginForm">ADD ANOTHER TRADE</div>
                             </div>
                             <div class="col-md-6">
 
@@ -193,6 +195,56 @@
                     </div>
                     </form>
             </div>
+
+
+<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Add New Trade</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <div class="md-form mb-5">
+                    <div class="form-group row">
+                            <label class="col-lg-3 control-label text-lg-right pt-2">Select Trade</label>
+                            <div class="col-lg-9">
+                                <?php
+                                    $categories = file_get_contents(SITE_URL.'webservices/api/category/read.php');
+                                    $categories = json_decode($categories, true); // decode the JSON into an associative array
+                                ?>
+                                <select data-plugin-selectTwo class="form-control populate" name="category" id="category">
+                                    <option value="">Select Trade</option>
+                                    <?php
+                                        foreach ($categories as $category) {
+                                            $cat_id = $category['id'];
+                                            $cat_name = $category['title'];
+                                            $commision = $category['commissionRate'];
+                                            if(!in_array($cat_id , $pcats)){
+                                                echo '<option value="'.$cat_id.'" comm="'.$commision.'">'.$cat_name.'</option>';
+                                            }
+                                            
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                            
+                            
+                    </div>
+                    
+                </div>
+
+                
+
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button class="btn btn-info addtradecat">Add</button>
+            </div>
+        </div>
+    </div>
+</div>            
 <script src="../js/core.js"></script> 
 <script type="text/javascript">
     $(document).ready(function(){
@@ -213,6 +265,31 @@
                 return false;
            
         });
+
+        $('.addtradecat').on('click', function(){
+            var cat_id = $("#category").val();
+            if(cat_id != ""){
+                var getSaveAPI = API_LOCATION+'professional/addCategory.php?prof_id=<?php echo $_SESSION['id'];?>&cat_id='+cat_id;
+                $.ajax({
+                        type: "POST",
+                        url: getSaveAPI,
+                        data: "",
+                        dataType: "json",
+                        success: function(data)
+                        {
+                            alert(data['message']);
+                            location.reload();
+                        }
+                    });
+                return false;
+
+            }else{
+                alert("Please Select Trade");
+            }
+            
+            return false;
+        });
+
     });
 
 </script>

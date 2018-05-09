@@ -1356,5 +1356,29 @@ ORDER BY rat.`created` DESC";
         return 0;
 
     }
+
+    public function addCategory($category_id){
+        
+        $id = $this->id;
+        // select query
+         $query = "INSERT INTO `professionals_categories` (`professional_id`, `category_id`) VALUES ('".$id."', '".$category_id."');";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind variable values
+        
+        
+        // execute query
+        if($stmt->execute()){
+            return 1;
+        }else{
+            return 0;
+        }
+        
+        
+    }
+
+
 }
 ?>
