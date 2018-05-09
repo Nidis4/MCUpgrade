@@ -157,5 +157,21 @@ class Category{
         return $stmt;
     }    
 
+
+
+    function readCategoryMeta($cat_id){
+
+        $query ="SELECT * FROM categories_meta WHERE category_id ='".$cat_id."'";
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+
+        return $stmt;
+        
+    }
+
 }
+
+
+
+
 ?>

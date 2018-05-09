@@ -1,8 +1,31 @@
 <?php 
-	include('header.php');
-	include('menu.php');
-
+    include('constants.php'); 
+    include('front_end_config/core.php');
 ?>
+
+<!DOCTYPE html>
+<html lang="el">
+	<head>
+		
+		<title>ΜyConstructor</title>
+
+		<link rel="alternate" hreflang="el" href="https://myconstructor.gr/blog/matakomiseis-metafores/">
+
+		<meta name="description" content="Μετακόμιση οικοσκευών από 49€. Μετακομίσεις σε όλη την Ελλάδα. Οικονομικές μεταφορές με ανυψωτικό και αμπαλάζ. ΠΡΟΣΦΟΡΕΣ Μετακόμιση Γκαρσονιέρα 49€ - Μετακόμιση Δυάρι 70€ - Μετακόμιση Τριάρι 90€ - Μετακόμιση Τεσσάρι 110€. Μετακομίστε με ασφάλεια! Αξιολογημένες Μεταφορικές Εταιρίες.">
+		<link rel="canonical" href="https://myconstructor.gr/blog/matakomiseis-metafores/">
+		<meta property="og:locale" content="el_GR">
+
+		<?php include('header.php'); ?>
+
+
+		
+	</head>
+
+<?php
+include('menu.php');
+include('search.php');
+ 
+ ?>
 
 	<div class="container-fluid top-sign-in-container">
 		<div class="row">

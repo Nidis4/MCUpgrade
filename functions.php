@@ -31,4 +31,8 @@
 			base64_decode($data), MCRYPT_MODE_CBC, md5(md5($key))), "\0");
 	}
 
+	function floordec($zahl,$decimals=1){   
+        return floor($zahl*pow(10,$decimals))/pow(10,$decimals);
+    }
+
 ?>

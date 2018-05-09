@@ -1,23 +1,75 @@
 <?php
-    function floordec($zahl,$decimals=1){   
-       return floor($zahl*pow(10,$decimals))/pow(10,$decimals);
-    }
-?>
+   include('functions.php');
 
-<?php 
    if(isset($_GET['county_id'])){
    		$url_county= $_GET['county_id'];
    }else{
    		$url_county='1';
    }
 
+   include('constants.php'); 
+   include('front_end_config/core.php');
 
-
-	include('header.php');
-	include('menu.php');
-	include('search.php');
-
+   $categories = file_get_contents($api_url .'webservices/api/category/read.php');
+   $categories = json_decode($categories, true); // decode the JSON into an associative array
 ?>
+<!DOCTYPE html>
+<html lang="el">
+	<head>
+		<?php if(isset($_GET['app_id'])){ 
+
+			$metadata = file_get_contents( $api_url .'webservices/api/application/readAppMetaData.php?app_id='. $_GET['app_id']);
+			$metadata = json_decode($metadata, true);
+
+			$meta_title= $metadata['meta_title'];
+			$meta_description= $metadata['meta_description'];
+			$meta_robots=  $metadata['meta_robots'];
+			$permalink= $metadata['permalink'];
+
+			?>
+			<title><?php echo $meta_title; ?></title>
+			<link rel="alternate" hreflang="el" href="<?php echo $directory_url; ?> "><!--+permanlink -->
+			<meta name="description" content="<?php echo $meta_description; ?> ">
+			<meta name="robots" content="<?php echo $meta_robots; ?> ">
+			<link rel="canonical" href="<?php echo $directory_url; ?> "><!--+permanlink -->
+			
+		<?php }elseif(!isset($_GET['app_id']) && isset($_GET['cat_id'])){ 
+
+			$metadata = file_get_contents( $api_url .'webservices/api/category/readCategoryMeta.php?cat_id='. $_GET['cat_id']);
+			$metadata = json_decode($metadata, true);
+
+			$meta_title= $metadata['meta_title'];
+			$meta_description= $metadata['meta_description'];
+			$meta_robots=  $metadata['meta_robots'];
+			$permalink= $metadata['permalink'];
+			?>
+
+			<title><?php echo $meta_title; ?></title>
+			<link rel="alternate" hreflang="el" href="<?php echo $directory_url; ?>"><!--+permanlink -->
+			<meta name="description" content="<?php echo $meta_description; ?>">
+			<meta name="robots" content="<?php echo $meta_robots; ?>">
+			<link rel="canonical" href="<?php echo $directory_url; ?>"><!--+permanlink -->
+		<?php }else{?>
+
+			<title>Υπηρεσίες MyConstructor σε προσφορά</title>
+			<link rel="alternate" hreflang="el" href="<?php echo $directory_url; ?>"><!--+permanlink -->
+			<meta name="description" content="">
+			<meta name="robots" content="index,follow">
+			<link rel="canonical" href="<?php echo $directory_url; ?>"><!--+permanlink -->
+
+		<?php } ?>
+		<meta property="og:locale" content="el_GR">
+		<?php include('header.php'); ?>
+
+
+		
+	</head>
+
+<?php
+include('menu.php');
+include('search.php');
+ 
+ ?>
 
 <div class="container-fluid">
 	<div class="mobile-cat-btn show_cats" onclick="showMobileMenuCat()"><i class="fa fa-th-list"></i> Κατηγορίες</div>
@@ -37,8 +89,7 @@
 				<div id="MainMenu">
 				        <div class="list-group panel">
 					        <?php    
-					        	$categories = file_get_contents($api_url .'webservices/api/category/read.php');
-	              				$categories = json_decode($categories, true); // decode the JSON into an associative array
+					        	
 
 
 		              				foreach ($categories as $category) {

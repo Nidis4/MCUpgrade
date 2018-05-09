@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html>
-<?php 
-    include('constants.php'); 
-    include('front_end_config/core.php');
-?>
-<head>
-	<meta charset="utf-8">
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="content-language" content="el-gr">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="../../favicon.ico">
-	<title>ΜyConstructor</title>
+    <meta property="fb:app_id" content="116665672330868">
+	
 
     <link href="<?php echo $api_url; ?>assets/bootstrap337/css/bootstrap.min.css" rel="stylesheet">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -30,4 +26,3 @@
     <script src="<?php echo $api_url; ?>js/core.js" type="text/javascript"></script>
 
 
-</head>

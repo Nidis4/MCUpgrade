@@ -102,6 +102,15 @@ class Application{
 
     } 
 
+    function readAppMeta($app_id){
+        $query ="SELECT * FROM applications_meta WHERE application_id ='".$app_id."'";
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+
+        return $stmt;
+    }
+
+
     function readByCategory(){
      
         // query to read single record

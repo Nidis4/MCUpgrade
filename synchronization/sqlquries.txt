@@ -912,3 +912,8 @@ ALTER TABLE `applications` ADD `category_description` TEXT NOT NULL AFTER `detai
 
 <!-------------------------------->
 <!-- End 08 May 2018 GKonstantinidis -->
+
+ALTER TABLE `appointments` ADD `transport_details` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `notification_before_appointment`; 
+
+<!-------------------------------->
+<!-- End 09 May 2018 GPRAGIAS -->
