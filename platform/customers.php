@@ -44,7 +44,9 @@ include('config/core.php');
 		<!-- Head Libs -->
 		<script src="vendor/modernizr/modernizr.js"></script>
 		<script src="vendor/jquery/jquery.js"></script>
-
+		<style type="text/css">
+			.cancel-row .fa, .edit-row .fa, .copy-row .fa{ display: block; }
+		</style>
 	</head>
 	<body>
 		<section class="body">

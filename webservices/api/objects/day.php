@@ -56,6 +56,50 @@ class Day{
         return $stmt;
     }
 
+    function readWorkPaging(){
+        // select query
+        $query = "SELECT
+                *
+            FROM
+                office_working_hours
+                ORDER BY
+                    id
+                ";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+     
+        // execute query
+        $stmt->execute();
+     
+        // return values from database
+        return $stmt;
+    }
+
+    
+
+    function save($date, $starttime, $endtime, $holiday){
+
+        $query = "INSERT INTO office_working_hours (`working_date`, `start_time`, `end_time`, `is_holiday`) VALUES (:date, :starttime, :endtime, :holiday)";
+
+        $stmt = $this->conn->prepare( $query );
+       
+        // bind id of product to be updated
+        
+        $stmt->bindParam(':date',  $date);
+        $stmt->bindParam(':starttime',  $starttime);
+        $stmt->bindParam(':endtime',  $endtime);
+        $stmt->bindParam(':holiday',  $holiday);
+        
+        if ($as = $stmt->execute()) {
+           return 1;
+        } else {
+           return 0;
+        }
+
+    }
+
 
 
     

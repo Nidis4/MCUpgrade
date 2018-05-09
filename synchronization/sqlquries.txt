@@ -912,3 +912,25 @@ ALTER TABLE `applications` ADD `category_description` TEXT NOT NULL AFTER `detai
 
 <!-------------------------------->
 <!-- End 08 May 2018 GKonstantinidis -->
+
+
+<!-------------------------------->
+<!-- Start 09 May 2018 Harpreet -->
+
+CREATE TABLE `office_working_hours` (
+  `id` int(11) NOT NULL,
+  `working_date` varchar(50) NOT NULL,
+  `start_time` varchar(50) DEFAULT NULL,
+  `end_time` varchar(50) DEFAULT NULL,
+  `is_holiday` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `office_working_hours`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `office_working_hours`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+<!-------------------------------->
+<!-- End 09 May 2018 Harpreet -->
