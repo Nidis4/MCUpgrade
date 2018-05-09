@@ -19,12 +19,13 @@
 
                                     $categories = file_get_contents(SITE_URL.'webservices/api/professional/getCategories.php?prof_id='.$_SESSION['id']);
                                     $categories = json_decode($categories, true); // decode the JSON into an associative array
+
                                     
                                 ?>
                                 <select class="select_trade" name="profile_main_category" id="profile_main_category">
                                     <option class="0" value="">Select</option>
                                     <?php 
-                                        if(@$categories){
+                                        if(@$categories[0]['category_id']){
                                             $pcats = array();
                                             foreach ($categories as $value) {
                                                 $pcats[] = $value['category_id'];
