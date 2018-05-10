@@ -47,8 +47,9 @@ include('config/core.php');
 
 	</head>
 	<?php 
-		$t = date('l, F d, Y 12:00:00 A'); 
+		$t = date('l, F d, Y 00:00:00'); 
 		$d = strtotime($t).'000';
+		//die;
 	?>
 	<style type="text/css">
 		td[data-date = "<?php echo $d;?>"] {
