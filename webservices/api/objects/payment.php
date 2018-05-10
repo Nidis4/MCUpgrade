@@ -132,11 +132,11 @@ class Payment{
         }
     }
 
-    public function updatePayment($id, $amount, $comment, $datetime_added){
+    public function updatePayment($id, $amount, $description, $datetime_added){
 
 
 
-        $query = "UPDATE ".$this->table_name." SET `amount` = '".$amount."', `comment` = '".$comment."' WHERE `id` = '".$id."';";
+        $query = "UPDATE ".$this->table_name." SET `amount` = '".$amount."', `description` = '".$description."' WHERE `id` = '".$id."';";
         
         $stmt = $this->conn->prepare( $query );
 
@@ -226,7 +226,7 @@ class Payment{
     public function readInvoicePaging($from_record_num, $records_per_page){
      
         // select query
-        $query = "SELECT pm.`id`as payment_id, pm.`professional_id`, pm.`sent_email`, pm.`datetime_added`, pm.`invoice_no`, pm.`comment`, pm.`amount`, pm.`status`, pp.`first_name`, pp.`last_name`,  pc.`first_name` as cfirst_name, pc.`last_name` as clast_name
+        $query = "SELECT pm.`id`as payment_id, pm.`professional_id`, pm.`sent_email`, pm.`datetime_added`, pm.`invoice_no`, pm.`comment`, pm.`amount`, pm.`status`, pm.`description`, pp.`first_name`, pp.`last_name`,  pc.`first_name` as cfirst_name, pc.`last_name` as clast_name
                 FROM
                     " . $this->table_name . " pm  
                 Left Join ".$this->professionals_table_name." pp 
@@ -265,7 +265,7 @@ class Payment{
     public function readReceiptPaging($from_record_num, $records_per_page){
      
         // select query
-        $query = "SELECT pm.`id`as payment_id, pm.`professional_id`, pm.`sent_email`, pm.`datetime_added`, pm.`receipt_no`, pm.`comment`, pm.`amount`, pm.`status`,  pp.`first_name`, pp.`last_name`, pc.`first_name` as cfirst_name, pc.`last_name` as clast_name
+        $query = "SELECT pm.`id`as payment_id, pm.`professional_id`, pm.`sent_email`, pm.`datetime_added`, pm.`receipt_no`, pm.`comment`, pm.`amount`, pm.`status`, pm.`description`,  pp.`first_name`, pp.`last_name`, pc.`first_name` as cfirst_name, pc.`last_name` as clast_name
                 FROM
                     " . $this->table_name . " pm  
                 Left Join ".$this->professionals_table_name." pp 
@@ -344,6 +344,7 @@ class Payment{
         $this->amount = $row['amount'];
         $this->agent_id = $row['agent_id'];
         $this->comment = $row['comment'];
+        $this->description = $row['description'];
         $this->type = $row['type'];
         $this->bank_name =$row['bank_name'];
         $this->datetime_added = $row['datetime_added'];

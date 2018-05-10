@@ -72,6 +72,12 @@ $tcpdf->setTextShadow(array('enabled' => true, 'depth_w' => 0.2, 'depth_h' => 0.
 	$amount = $payment->amount;
 	$quantity = '';
 	$vat_price = $payment->amount * (24 / 100);
+	if(@$payment->description){
+		$description = $payment->description;
+	}else{
+		$description = "παροχή υπηρεσιών";
+	}
+	
 	//$vat_price = '';
 	$net_value = $payment->amount - $vat_price;
 	$total_amount = $payment->amount + $vat_price;
@@ -167,7 +173,7 @@ $tcpdf->setTextShadow(array('enabled' => true, 'depth_w' => 0.2, 'depth_h' => 0.
 	
 	<tr>
 	    <td style="text-align:center; border:0.1px solid black;" colspan="4">
-			 παροχή υπηρεσιών  
+			 {$description} 
 		</td>
  
 		
@@ -371,7 +377,7 @@ $tcpdf->setTextShadow(array('enabled' => true, 'depth_w' => 0.2, 'depth_h' => 0.
 	
 	<tr style="height:100px;" >
 	
-	    <td style="text-align:center">Σημείωση:</td>
+	    <td style="text-align:justify">Σημείωση:</td>
  
 		<td style="text-align:center">
 			&nbsp;
@@ -396,17 +402,9 @@ $tcpdf->setTextShadow(array('enabled' => true, 'depth_w' => 0.2, 'depth_h' => 0.
 	
 	<tr style="height:100px;" >
 	
-	    <td style="text-align:center">
+	    <td style="text-align:justify" colspan="3">
 			Έχει Εξοφληθεί
 		</td>
- 
-		<td style="text-align:center"    >
-			&nbsp;
-		 </td>
-		 
-		 <td style="text-align:center"    >
-			&nbsp; 
-		 </td>
 		 
 		 <td style="text-align:center"    >
 			&nbsp;
@@ -439,13 +437,7 @@ $tcpdf->setTextShadow(array('enabled' => true, 'depth_w' => 0.2, 'depth_h' => 0.
 			&nbsp;
 		 </td>
 		 
-		 <td style="text-align:center"    >
-			&nbsp;
-		 </td>
-		 
-		  <td style="text-align:center"    >
-			&nbsp;  
-		 </td> 
+ 
 	</tr>
 	
 	

@@ -18,13 +18,13 @@ $Pdatetimeadded = date("Y-m-d H:i:s");
 $payment = new Payment($db);
 
 $amount          = $_POST['amount'];
-$comment         = $_POST['comment'];
+$description         = $_POST['description'];
 $datetime_added  = $Pdatetimeadded;
 $id       		 = $_POST['id'];
 
 
 // query products
-$stmt = $payment->updatePayment($id, $amount, $comment, $datetime_added);
+$stmt = $payment->updatePayment($id, $amount, $description, $datetime_added);
 //$stmt = $customer->search($keywords);
 //$num = $stmt->rowCount();
  
