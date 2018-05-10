@@ -919,6 +919,7 @@ ALTER TABLE `appointments` ADD `transport_details` TEXT CHARACTER SET utf8 COLLA
 <!-- End 09 May 2018 GPRAGIAS -->
 
 
+
 <!-------------------------------->
 <!-- Start 10 May 2018 Harpreet -->
 
