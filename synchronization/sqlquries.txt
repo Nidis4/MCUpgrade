@@ -917,3 +917,14 @@ ALTER TABLE `appointments` ADD `transport_details` TEXT CHARACTER SET utf8 COLLA
 
 <!-------------------------------->
 <!-- End 09 May 2018 GPRAGIAS -->
+
+
+<!-------------------------------->
+<!-- Start 10 May 2018 Harpreet -->
+
+ALTER TABLE `payments` ADD `description` TEXT NULL AFTER `comment`;
+
+ALTER TABLE `customers_invoice_settings` CHANGE `company_name` `company_name` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL, CHANGE `profession` `profession` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL, CHANGE `address` `address` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL, CHANGE `tax_id` `tax_id` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL, CHANGE `tax_office` `tax_office` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL, CHANGE `receipt_email` `receipt_email` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+
+<!-------------------------------->
+<!-- End 10 May 2018 Harpreet -->
