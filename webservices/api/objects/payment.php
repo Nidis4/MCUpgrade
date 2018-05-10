@@ -7,6 +7,7 @@ class Payment{
     private $professionals_table_name = "professionals";
     private $customers_table_name = "customers";
     private $invoicesettings_table_name = "professionals_invoice_settings";
+    private $invoicesettings_customer_table_name = "customers_invoice_settings";
     private $contact_table_name = "professionals_contact_details";
  
     // object properties
@@ -303,11 +304,13 @@ class Payment{
     function readOne(){
      
         // query to read single record
-        $query = "SELECT pm.*, iv.`company_name`, iv.`profession`, iv.`address` as legal_address, iv.`tax_id`, iv.`tax_office`, pc.`phone`,  pp.`first_name`, pp.`last_name`, iv.`receipt_email`
+        $query = "SELECT pm.*, iv.`company_name`, ic.`company_name` as c_company_name, ic.`profession` as c_profession, ic.`address` as c_legal_address, ic.`tax_id` as c_tax_id, ic.`tax_office` as c_tax_office, ic.`receipt_email` as c_receipt_email, iv.`profession`, iv.`address` as legal_address, iv.`tax_id`, iv.`tax_office`, pc.`phone`,  pp.`first_name`, pp.`last_name`, iv.`receipt_email`
                 FROM
                     " . $this->table_name . " pm 
                 Left Join ".$this->invoicesettings_table_name." iv 
-                on pm.professional_id = iv.professional_id  
+                on pm.professional_id = iv.professional_id 
+                Left Join ".$this->invoicesettings_customer_table_name." ic 
+                on pm.customer_id = iv.customer_id  
                 Left Join ".$this->contact_table_name." pc 
                 on pm.professional_id = pc.professional_id 
                 Left Join ".$this->professionals_table_name." pp 
@@ -340,6 +343,24 @@ class Payment{
         // set values to object properties
         $this->id = $row['id'];
         $this->professional_id = $row['professional_id'];
+        $this->customer_id = $row['customer_id'];
+
+        if(@$row['professional_id']){
+            $this->company_name = $row['company_name'];
+            $this->profession = $row['profession'];
+            $this->legal_address = $row['legal_address'];
+            $this->tax_id = $row['tax_id'];
+            $this->tax_office = $row['tax_office'];
+            $this->receipt_email = $row['receipt_email'];
+        }else{
+            $this->company_name = $row['c_company_name'];
+            $this->profession = $row['c_profession'];
+            $this->legal_address = $row['c_legal_address'];
+            $this->tax_id = $row['c_tax_id'];
+            $this->tax_office = $row['c_tax_office'];
+            $this->receipt_email = $row['c_receipt_email'];
+        }
+
         $this->category_id = $row['category_id'];
         $this->amount = $row['amount'];
         $this->agent_id = $row['agent_id'];
@@ -355,16 +376,12 @@ class Payment{
         $this->datetimeStatusUpdated = $row['datetimeStatusUpdated'];
         $this->cancelComment = $row['cancelComment'];
 
-        $this->company_name = $row['company_name'];
-        $this->profession = $row['profession'];
-        $this->legal_address = $row['legal_address'];
-        $this->tax_id = $row['tax_id'];
-        $this->tax_office = $row['tax_office'];
+        
         
         $this->phone = $row['phone'];
         $this->first_name = $row['first_name'];
         $this->last_name = $row['last_name'];
-        $this->receipt_email = $row['receipt_email'];
+        
 
 
 
