@@ -5065,7 +5065,7 @@ telikos,
                         //alert(data);
 
                         alert("Offer Created");
-                        window.location.replace('../../../offers.php');
+                        window.location.replace('https://upgrade.myconstructor.gr/platform/offers.php');
                     },
                     error: function(data){
                         alert(data);
