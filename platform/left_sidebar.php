@@ -22,7 +22,7 @@
 				                        </a>                        
 				                    </li>
 				                    <li>
-				                        <a class="nav-link" href="AdminTransport">
+				                        <a class="nav-link" target="_blank" href="AdminTransport">
 				                            <i class="fa fa-truck" aria-hidden="true"></i>
 				                            <span>Transports Form</span>
 				                        </a>                        
@@ -666,7 +666,6 @@
 								if(xhr && xhr.readyState != 4){
 						            xhr.abort();
 						        }
-						        console.log(xhr);
 								var admin_id = '<?php echo $_SESSION['id']?>';									
 								if(admin_id !=''){									
 									xhr = $.ajax({
