@@ -21,6 +21,8 @@ $payment->payment_id = isset($_GET['payment_id']) ? $_GET['payment_id'] : die();
 
 $stmt = $payment->readOne();
 
+
+
 if($payment->issuetype == "Invoice"){
 	$serial_no = sprintf('%05d', $payment->invoice_no);
 }else{

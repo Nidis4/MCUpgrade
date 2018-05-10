@@ -304,13 +304,13 @@ class Payment{
     function readOne(){
      
         // query to read single record
-        $query = "SELECT pm.*, iv.`company_name`, ic.`company_name` as c_company_name, ic.`profession` as c_profession, ic.`address` as c_legal_address, ic.`tax_id` as c_tax_id, ic.`tax_office` as c_tax_office, ic.`receipt_email` as c_receipt_email, iv.`profession`, iv.`address` as legal_address, iv.`tax_id`, iv.`tax_office`, pc.`phone`,  pp.`first_name`, pp.`last_name`, iv.`receipt_email`
+         $query = "SELECT pm.*, iv.`company_name`, ic.`company_name` as c_company_name, ic.`profession` as c_profession, ic.`address` as c_legal_address, ic.`tax_id` as c_tax_id, ic.`tax_office` as c_tax_office, ic.`receipt_email` as c_receipt_email, iv.`profession`, iv.`address` as legal_address, iv.`tax_id`, iv.`tax_office`, pc.`phone`,  pp.`first_name`, pp.`last_name`, iv.`receipt_email`
                 FROM
                     " . $this->table_name . " pm 
                 Left Join ".$this->invoicesettings_table_name." iv 
                 on pm.professional_id = iv.professional_id 
                 Left Join ".$this->invoicesettings_customer_table_name." ic 
-                on pm.customer_id = iv.customer_id  
+                on pm.customer_id = ic.customer_id  
                 Left Join ".$this->contact_table_name." pc 
                 on pm.professional_id = pc.professional_id 
                 Left Join ".$this->professionals_table_name." pp 
@@ -339,6 +339,7 @@ class Payment{
         // get retrieved row
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         
+
        
         // set values to object properties
         $this->id = $row['id'];
@@ -346,6 +347,7 @@ class Payment{
         $this->customer_id = $row['customer_id'];
 
         if(@$row['professional_id']){
+
             $this->company_name = $row['company_name'];
             $this->profession = $row['profession'];
             $this->legal_address = $row['legal_address'];
@@ -353,6 +355,7 @@ class Payment{
             $this->tax_office = $row['tax_office'];
             $this->receipt_email = $row['receipt_email'];
         }else{
+            
             $this->company_name = $row['c_company_name'];
             $this->profession = $row['c_profession'];
             $this->legal_address = $row['c_legal_address'];
