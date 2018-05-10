@@ -1379,6 +1379,28 @@ ORDER BY rat.`created` DESC";
         
     }
 
+    public function deleteCategory($category_id){
+        
+        $id = $this->id;
+        // select query
+         $query = "Delete from `professionals_categories` where professional_id = '".$id."' and category_id = '".$category_id."'";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind variable values
+        
+        
+        // execute query
+        if($stmt->execute()){
+            return 1;
+        }else{
+            return 0;
+        }
+        
+        
+    }
+
 
 }
 ?>

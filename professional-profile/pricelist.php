@@ -36,7 +36,21 @@
                                         }
                                     ?>
                                    
-                                </select>
+                                </select><br><br>
+
+                                <?php 
+                                        if(@$categories[0]['category_id']){
+                                           
+                                            foreach ($categories as $value) {
+                                                
+                                    ?>
+                                                 <button type="button" class="mb-1 mt-1 mr-1 btn btn-default delcat" data-id="<?php echo $value['category_id'];?>" style="margin-bottom: 5px"><?php echo $value['category_name'];?> <i class="fa fa-close" style="color: red"></i> </button>
+                                    <?php
+                                            }
+                                        }
+                                    ?>
+
+                              
 
                                 <div class="addtrade"  data-toggle="modal" data-target="#modalLoginForm">ADD ANOTHER TRADE</div>
                             </div>
@@ -286,6 +300,28 @@
 
             }else{
                 alert("Please Select Trade");
+            }
+            
+            return false;
+        });
+
+
+        $('.delcat').on('click',function(){
+            var cat_id = $(this).attr('data-id');
+            if (confirm('Are you sure want to remove this Trade?')) {
+                var getSaveAPI = API_LOCATION+'professional/deleteCategory.php?prof_id=<?php echo $_SESSION['id'];?>&cat_id='+cat_id;
+                $.ajax({
+                        type: "POST",
+                        url: getSaveAPI,
+                        data: "",
+                        dataType: "json",
+                        success: function(data)
+                        {
+                            alert(data['message']);
+                            location.reload();
+                        }
+                    });
+                return false;
             }
             
             return false;
