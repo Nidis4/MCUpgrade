@@ -3,7 +3,7 @@
     <meta http-equiv="content-language" content="el-gr">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="<?php echo $api_url; ?>img/favicon.jpg">
     <meta property="fb:app_id" content="116665672330868">
 	
 

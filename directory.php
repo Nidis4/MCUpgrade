@@ -16,6 +16,9 @@
 <!DOCTYPE html>
 <html lang="el">
 	<head>
+		<?php include('header.php'); ?>
+
+		
 		<?php if(isset($_GET['app_id'])){ 
 
 			$metadata = file_get_contents( $api_url .'webservices/api/application/readAppMetaData.php?app_id='. $_GET['app_id']);
@@ -59,7 +62,7 @@
 
 		<?php } ?>
 		<meta property="og:locale" content="el_GR">
-		<?php include('header.php'); ?>
+		
 
 
 		

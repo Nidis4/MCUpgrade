@@ -18,6 +18,7 @@
 							<li><a href="<?php echo $api_url; ?>helpful_pages/why_myconstructor.php">Γιατί το myConstructor.gr;</a></li>
 							<li><a href="<?php echo $api_url; ?>#">Είμαι επαγγελματίας, πώς κερδίζω;</a></li>
 							<li><a href="<?php echo $api_url; ?>sign_up.php">Συνδεθείτε/Εγγραφείτε</a></li>
+							<li><a href="<?php echo $api_url; ?>contact_us.php">Επικοινωνία</a></li>
 						</ul>
 					</div>
 				</div>

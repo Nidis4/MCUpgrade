@@ -1,9 +1,27 @@
 <?php 
-	include('../header.php');
-	include('../menu.php');
-	include('../search.php');
+    include('../constants.php'); 
+    include('../front_end_config/core.php');
 ?>
+<!DOCTYPE html>
+<html lang="el">
+    <head>
+        
+        <title>ΜyConstructor</title>
 
+        <link rel="alternate" hreflang="el" href="">
+
+        <meta name="description" content="">
+        <link rel="canonical" href="">
+        <meta property="og:locale" content="el_GR">
+
+        <?php include('../header.php'); ?>
+
+    </head>
+
+<?php
+include('../menu.php');
+include('../search.php');
+?>
 <div class="container-fluid container-faq">
 	<div class="row">
 		<div class="col-md-12">

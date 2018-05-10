@@ -10,10 +10,10 @@ include('front_end_config/core.php');
         
         <title>ΜyConstructor</title>
 
-        <link rel="alternate" hreflang="el" href="https://myconstructor.gr/blog/matakomiseis-metafores/">
+        <link rel="alternate" hreflang="el" href="">
 
-        <meta name="description" content="Μετακόμιση οικοσκευών από 49€. Μετακομίσεις σε όλη την Ελλάδα. Οικονομικές μεταφορές με ανυψωτικό και αμπαλάζ. ΠΡΟΣΦΟΡΕΣ Μετακόμιση Γκαρσονιέρα 49€ - Μετακόμιση Δυάρι 70€ - Μετακόμιση Τριάρι 90€ - Μετακόμιση Τεσσάρι 110€. Μετακομίστε με ασφάλεια! Αξιολογημένες Μεταφορικές Εταιρίες.">
-        <link rel="canonical" href="https://myconstructor.gr/blog/matakomiseis-metafores/">
+        <meta name="description" content="">
+        <link rel="canonical" href="">
         <meta property="og:locale" content="el_GR">
 
         <?php include('header.php'); ?>
