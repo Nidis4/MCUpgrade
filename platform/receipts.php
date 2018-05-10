@@ -128,6 +128,7 @@ include('config/core.php');
 														  <td>'.$comment.'</td>
 														  <td>'.$amount.'</td>
 														  <td class="actions">
+														  	<a href="javascript:void(0);" data-id="'.$payment_id.'" data-amount="'.$amount.'" data-comment="'.$comment.'" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
 															<a href="'.$api_url.'payment/invoice_receipt_pdf.php?payment_id='.$payment_id.'" class="btn btn-danger" style="color:#ffffff;"><i class="fa fa-file-pdf-o"></i></a>';
 												if(@$sent_email){
 													echo '<a href="javascript:void(0);" rel="'.$payment_id.'" class="btn btn-warning" style="color:#ffffff;"><i class="fa fa-lightbulb-o"></i></a>';
@@ -223,7 +224,37 @@ include('config/core.php');
 			</aside>
 		</section>
 
-		
+		<div id="modalInfo" class="modal-block modal-block-info mfp-hide">
+			<form id="updateinvoicepayment">
+				<section class="card">
+					<header class="card-header">
+						<h2 class="card-title">Edit Details</h2>
+					</header>
+					<div class="card-body">
+						<div class="form-group row">
+							<label class="col-sm-3 control-label text-sm-right pt-2">Amount</label>
+							<div class="col-sm-9">
+								<input type="text" name="amount" value="" class="pamount form-control" >
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-3 control-label text-sm-right pt-2">Comment</label>
+							<div class="col-sm-9">
+								<textarea class="form-control pcomment" name="comment" ></textarea>
+							</div>
+						</div>
+					</div>
+					<footer class="card-footer">
+						<div class="row">
+							<div class="col-md-12 text-right">
+								<input type="hidden" class="pid" name="id" value="">
+								<button class="btn btn-warning updateinvoice">Update</button>
+							</div>
+						</div>
+					</footer>
+				</section>
+			</form>
+		</div>
 
 		
 
@@ -286,6 +317,45 @@ include('config/core.php');
 				        });
 						return false;
 				    }
+				});
+
+				$("a.edit-row").on('click',function(){
+					
+					var id      = $(this).attr('data-id');
+					var comment = $(this).attr('data-comment');
+					var amount  = $(this).attr('data-amount');
+
+					$(".pid").val(id);
+					$(".pcomment").val(comment);
+					$(".pamount").val(amount);
+					
+					$.magnificPopup.open({
+					  items: {
+					    src: '#modalInfo'
+					  }
+					});
+				});
+
+				$(".updateinvoice").on('click',function(){
+
+					var form_data = $("#updateinvoicepayment").serialize();			
+					
+					var getAvailableAPI = API_LOCATION +'payment/updatePayment.php';
+					
+					$.ajax({
+			            type: "POST",
+			            url: getAvailableAPI,
+			            dataType: "JSON",
+		                data: form_data,
+			            success: function(data)
+			            {
+			                alert(data.message);
+			                location.reload(); 
+			            }
+			        });
+
+
+					return false;
 				});
 			});
 		</script>

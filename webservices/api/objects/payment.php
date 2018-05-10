@@ -132,6 +132,21 @@ class Payment{
         }
     }
 
+    public function updatePayment($id, $amount, $comment, $datetime_added){
+
+
+
+        $query = "UPDATE ".$this->table_name." SET `amount` = '".$amount."', `comment` = '".$comment."' WHERE `id` = '".$id."';";
+        
+        $stmt = $this->conn->prepare( $query );
+
+        if ($stmt->execute()) { 
+           return 1;
+        } else {
+           return 0;
+        }
+    }
+
     function cancelpayment($cancelReason = NULL, $cancelComment = NULL){
 
 
@@ -211,11 +226,13 @@ class Payment{
     public function readInvoicePaging($from_record_num, $records_per_page){
      
         // select query
-        $query = "SELECT pm.`id`as payment_id, pm.`professional_id`, pm.`sent_email`, pm.`datetime_added`, pm.`invoice_no`, pm.`comment`, pm.`amount`, pm.`status`, pp.`first_name`, pp.`last_name`
+        $query = "SELECT pm.`id`as payment_id, pm.`professional_id`, pm.`sent_email`, pm.`datetime_added`, pm.`invoice_no`, pm.`comment`, pm.`amount`, pm.`status`, pp.`first_name`, pp.`last_name`,  pc.`first_name` as cfirst_name, pc.`last_name` as clast_name
                 FROM
                     " . $this->table_name . " pm  
                 Left Join ".$this->professionals_table_name." pp 
                 on pm.professional_id = pp.id 
+                Left Join ".$this->customers_table_name." pc 
+                on pm.customer_id = pc.id 
                 WHERE (pm.`status`=1 OR pm.`status`=0) and pm.`issuetype` = 'Invoice'
                 ORDER BY `datetime_added` DESC
                 LIMIT ?, ?";
