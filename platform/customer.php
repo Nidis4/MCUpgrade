@@ -106,7 +106,7 @@ include('config/core.php');
 								<h2 class="card-title">Customer Information #<?php echo $customer['id']; ?></h2>
 							</header>
 							<form action="#" method="POST" id="updateCustomerform">
-								<div class="card-body col-sm-12 col-md-12 row">
+								<div class="card-body col-sm-12 col-md-12 row" style="margin-left: 0px; padding-left: 10px;">
 									<div class="col-sm-12 col-md-6"><!-- Left-->
 										<div class="form-group row">
 											<label class="col-sm-4 control-label text-sm-right pt-2">Name <span class="required">*</span></label>
@@ -152,6 +152,13 @@ include('config/core.php');
 											<label class="col-sm-4 control-label text-sm-right pt-2">Landline <span class="required">*</span></label>
 											<div class="col-sm-8">
 												<input type="text" name="phone" id="phone" class="form-control" value="<?php echo $customer['phone']; ?>" required />
+											</div>										
+										</div>
+										<div class="form-group row">
+											<label class="col-sm-4 control-label text-sm-right pt-2">SMS</label>
+											<div class="col-sm-8">
+												<textarea class="form-control" name="messagetext" id="messagetext"></textarea>
+												<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning" style="float: right;" id="messagesent">Sent</button>
 											</div>										
 										</div>
 										
@@ -595,6 +602,45 @@ include('config/core.php');
 
 
 					return false;
+				});
+
+				$("#messagesent").on('click',function(){
+					var form_data = new FormData(); 
+					var mobile = $("#mobile").val(); 
+					var messagetext = $("#messagetext").val(); 
+
+					if(mobile == ""){
+						alert('Please enter mobile number');
+						return false;
+					}
+
+					if(messagetext == ""){
+						alert('Please enter message');
+						return false;
+					}
+
+					form_data.append('mobile', mobile);
+					form_data.append('messagetext', messagetext);
+
+					var getAvailableAPI = API_LOCATION+'sms/sent.php';
+					
+					$.ajax({
+			            type: "POST",
+			            url: getAvailableAPI,
+			            dataType: "JSON",
+			            cache: false,
+		                contentType: false,
+		                processData: false,
+		                data: form_data,
+			            success: function(data)
+			            {
+			                alert(data.message);
+			                
+			            }
+			        });
+
+			        return false;
+							
 				});
 			});
 		</script>

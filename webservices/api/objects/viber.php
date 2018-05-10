@@ -34,6 +34,8 @@ class Viber{
                     'sms' => array('sender'=>self::SMS_SENDER,'text'=>$text,'typesms'=>'sms','priority'=>1),
                     'viber' => array('sender'=>self::VIBER_SENDER,'Text'=>$text,'priority'=>0,'expiryText'=>$text)
                   ];
+
+
         }
         
         $headers = array(
@@ -59,11 +61,13 @@ class Viber{
 
               $stmt = $this->conn->prepare( $query );
               $stmt->execute();
-              return "1";
+              return 1;
             }
+
+             return 1;
         }
         
-        return '1';
+        return 1;
 
     }
 

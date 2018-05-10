@@ -582,6 +582,13 @@ include('config/core.php');
 											        </div>
 												</div>
 											</div>
+											<div class="form-group col-md-12 row">
+												<label class="col-sm-3 control-label text-sm-right pt-2">SMS</label>
+												<div class="col-sm-9">
+													<textarea class="form-control" name="messagetext" id="messagetext"></textarea>
+													<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning" style="float: right;" id="messagesent">Sent</button>
+												</div>										
+											</div>
 										</div>
 									</div>
 									<div class="col-sm-12 col-md-12 pt-2">
@@ -1477,6 +1484,45 @@ include('config/core.php');
 
 
 					return false;
+				});
+
+				$("#messagesent").on('click',function(){
+					var form_data = new FormData(); 
+					var mobile = $("#mobile").val(); 
+					var messagetext = $("#messagetext").val(); 
+
+					if(mobile == ""){
+						alert('Please enter mobile number');
+						return false;
+					}
+
+					if(messagetext == ""){
+						alert('Please enter message');
+						return false;
+					}
+
+					form_data.append('mobile', mobile);
+					form_data.append('messagetext', messagetext);
+
+					var getAvailableAPI = API_LOCATION+'sms/sent.php';
+					
+					$.ajax({
+			            type: "POST",
+			            url: getAvailableAPI,
+			            dataType: "JSON",
+			            cache: false,
+		                contentType: false,
+		                processData: false,
+		                data: form_data,
+			            success: function(data)
+			            {
+			                alert(data.message);
+			                
+			            }
+			        });
+
+			        return false;
+							
 				});
 			});
 		</script>
