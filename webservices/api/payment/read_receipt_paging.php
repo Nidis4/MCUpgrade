@@ -55,6 +55,7 @@ if($num>0){
             "comment" => $comment,
             "amount" => $amount,
             "status" => $status,
+            "description" => $description,
         );
         
         array_push($invoices_arr["records"], $payment_item);

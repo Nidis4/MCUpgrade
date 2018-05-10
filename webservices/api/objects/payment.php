@@ -7,6 +7,7 @@ class Payment{
     private $professionals_table_name = "professionals";
     private $customers_table_name = "customers";
     private $invoicesettings_table_name = "professionals_invoice_settings";
+    private $invoicesettings_customer_table_name = "customers_invoice_settings";
     private $contact_table_name = "professionals_contact_details";
  
     // object properties
@@ -132,11 +133,11 @@ class Payment{
         }
     }
 
-    public function updatePayment($id, $amount, $comment, $datetime_added){
+    public function updatePayment($id, $amount, $description, $datetime_added){
 
 
 
-        $query = "UPDATE ".$this->table_name." SET `amount` = '".$amount."', `comment` = '".$comment."' WHERE `id` = '".$id."';";
+        $query = "UPDATE ".$this->table_name." SET `amount` = '".$amount."', `description` = '".$description."' WHERE `id` = '".$id."';";
         
         $stmt = $this->conn->prepare( $query );
 
@@ -226,7 +227,7 @@ class Payment{
     public function readInvoicePaging($from_record_num, $records_per_page){
      
         // select query
-        $query = "SELECT pm.`id`as payment_id, pm.`professional_id`, pm.`sent_email`, pm.`datetime_added`, pm.`invoice_no`, pm.`comment`, pm.`amount`, pm.`status`, pp.`first_name`, pp.`last_name`,  pc.`first_name` as cfirst_name, pc.`last_name` as clast_name
+        $query = "SELECT pm.`id`as payment_id, pm.`professional_id`, pm.`sent_email`, pm.`datetime_added`, pm.`invoice_no`, pm.`comment`, pm.`amount`, pm.`status`, pm.`description`, pp.`first_name`, pp.`last_name`,  pc.`first_name` as cfirst_name, pc.`last_name` as clast_name
                 FROM
                     " . $this->table_name . " pm  
                 Left Join ".$this->professionals_table_name." pp 
@@ -265,7 +266,7 @@ class Payment{
     public function readReceiptPaging($from_record_num, $records_per_page){
      
         // select query
-        $query = "SELECT pm.`id`as payment_id, pm.`professional_id`, pm.`sent_email`, pm.`datetime_added`, pm.`receipt_no`, pm.`comment`, pm.`amount`, pm.`status`,  pp.`first_name`, pp.`last_name`, pc.`first_name` as cfirst_name, pc.`last_name` as clast_name
+        $query = "SELECT pm.`id`as payment_id, pm.`professional_id`, pm.`sent_email`, pm.`datetime_added`, pm.`receipt_no`, pm.`comment`, pm.`amount`, pm.`status`, pm.`description`,  pp.`first_name`, pp.`last_name`, pc.`first_name` as cfirst_name, pc.`last_name` as clast_name
                 FROM
                     " . $this->table_name . " pm  
                 Left Join ".$this->professionals_table_name." pp 
@@ -303,11 +304,13 @@ class Payment{
     function readOne(){
      
         // query to read single record
-        $query = "SELECT pm.*, iv.`company_name`, iv.`profession`, iv.`address` as legal_address, iv.`tax_id`, iv.`tax_office`, pc.`phone`,  pp.`first_name`, pp.`last_name`, iv.`receipt_email`
+         $query = "SELECT pm.*, iv.`company_name`, ic.`company_name` as c_company_name, ic.`profession` as c_profession, ic.`address` as c_legal_address, ic.`tax_id` as c_tax_id, ic.`tax_office` as c_tax_office, ic.`receipt_email` as c_receipt_email, iv.`profession`, iv.`address` as legal_address, iv.`tax_id`, iv.`tax_office`, pc.`phone`,  pp.`first_name`, pp.`last_name`, iv.`receipt_email`
                 FROM
                     " . $this->table_name . " pm 
                 Left Join ".$this->invoicesettings_table_name." iv 
-                on pm.professional_id = iv.professional_id  
+                on pm.professional_id = iv.professional_id 
+                Left Join ".$this->invoicesettings_customer_table_name." ic 
+                on pm.customer_id = ic.customer_id  
                 Left Join ".$this->contact_table_name." pc 
                 on pm.professional_id = pc.professional_id 
                 Left Join ".$this->professionals_table_name." pp 
@@ -336,14 +339,36 @@ class Payment{
         // get retrieved row
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         
+
        
         // set values to object properties
         $this->id = $row['id'];
         $this->professional_id = $row['professional_id'];
+        $this->customer_id = $row['customer_id'];
+
+        if(@$row['professional_id']){
+
+            $this->company_name = $row['company_name'];
+            $this->profession = $row['profession'];
+            $this->legal_address = $row['legal_address'];
+            $this->tax_id = $row['tax_id'];
+            $this->tax_office = $row['tax_office'];
+            $this->receipt_email = $row['receipt_email'];
+        }else{
+            
+            $this->company_name = $row['c_company_name'];
+            $this->profession = $row['c_profession'];
+            $this->legal_address = $row['c_legal_address'];
+            $this->tax_id = $row['c_tax_id'];
+            $this->tax_office = $row['c_tax_office'];
+            $this->receipt_email = $row['c_receipt_email'];
+        }
+
         $this->category_id = $row['category_id'];
         $this->amount = $row['amount'];
         $this->agent_id = $row['agent_id'];
         $this->comment = $row['comment'];
+        $this->description = $row['description'];
         $this->type = $row['type'];
         $this->bank_name =$row['bank_name'];
         $this->datetime_added = $row['datetime_added'];
@@ -354,16 +379,12 @@ class Payment{
         $this->datetimeStatusUpdated = $row['datetimeStatusUpdated'];
         $this->cancelComment = $row['cancelComment'];
 
-        $this->company_name = $row['company_name'];
-        $this->profession = $row['profession'];
-        $this->legal_address = $row['legal_address'];
-        $this->tax_id = $row['tax_id'];
-        $this->tax_office = $row['tax_office'];
+        
         
         $this->phone = $row['phone'];
         $this->first_name = $row['first_name'];
         $this->last_name = $row['last_name'];
-        $this->receipt_email = $row['receipt_email'];
+        
 
 
 

@@ -177,7 +177,7 @@ class Professional{
     }
 
     public function available(){
-        $query = "SELECT p.`id`, p.`first_name`, p.`last_name`, p.`profile_status`, co.`address` FROM `professionals` p, `professionals_counties` c, `professionals_applications` a, `professionals_contact_details` co WHERE c.professional_id=p.id AND p.`verified` = 1 AND a.professional_id=p.id AND co.professional_id=p.id  AND c.county_id= :county AND a.application_id=:application ";
+        $query = "SELECT p.`id`, p.`first_name`, p.`last_name`, p.`profile_status`, co.`address` FROM `professionals` p, `professionals_counties` c, `professionals_applications` a, `professionals_contact_details` co WHERE c.professional_id=p.id AND p.`verified` = 1 AND a.professional_id=p.id AND co.professional_id=p.id  AND c.county_id= :county AND a.application_id=:application AND a.`price` >= '1'";
 
         $stmt = $this->conn->prepare( $query );
 
@@ -1362,6 +1362,28 @@ ORDER BY rat.`created` DESC";
         $id = $this->id;
         // select query
          $query = "INSERT INTO `professionals_categories` (`professional_id`, `category_id`) VALUES ('".$id."', '".$category_id."');";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind variable values
+        
+        
+        // execute query
+        if($stmt->execute()){
+            return 1;
+        }else{
+            return 0;
+        }
+        
+        
+    }
+
+    public function deleteCategory($category_id){
+        
+        $id = $this->id;
+        // select query
+         $query = "Delete from `professionals_categories` where professional_id = '".$id."' and category_id = '".$category_id."'";
      
         // prepare query statement
         $stmt = $this->conn->prepare( $query );

@@ -666,7 +666,6 @@
 								if(xhr && xhr.readyState != 4){
 						            xhr.abort();
 						        }
-						        console.log(xhr);
 								var admin_id = '<?php echo $_SESSION['id']?>';									
 								if(admin_id !=''){									
 									xhr = $.ajax({

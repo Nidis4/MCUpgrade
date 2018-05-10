@@ -116,6 +116,7 @@ include('config/core.php');
 												$datetime_added = $receiptsPag['records'][$field]['datetime_added'];
 												$receipt_no = $receiptsPag['records'][$field]['receipt_no'];
 												$comment = $receiptsPag['records'][$field]['comment'];
+												$description = $receiptsPag['records'][$field]['description'];
 												$amount = $receiptsPag['records'][$field]['amount'];
 												$status = $receiptsPag['records'][$field]['status'];
 												$sent_email = $receiptsPag['records'][$field]['sent_email'];
@@ -128,7 +129,7 @@ include('config/core.php');
 														  <td>'.$comment.'</td>
 														  <td>'.$amount.'</td>
 														  <td class="actions">
-														  	<a href="javascript:void(0);" data-id="'.$payment_id.'" data-amount="'.$amount.'" data-comment="'.$comment.'" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
+														  	<a href="javascript:void(0);" data-id="'.$payment_id.'" data-amount="'.$amount.'" data-comment="'.$description.'" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
 															<a href="'.$api_url.'payment/invoice_receipt_pdf.php?payment_id='.$payment_id.'" class="btn btn-danger" style="color:#ffffff;"><i class="fa fa-file-pdf-o"></i></a>';
 												if(@$sent_email){
 													echo '<a href="javascript:void(0);" rel="'.$payment_id.'" class="btn btn-warning" style="color:#ffffff;"><i class="fa fa-lightbulb-o"></i></a>';
@@ -238,9 +239,9 @@ include('config/core.php');
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-sm-3 control-label text-sm-right pt-2">Comment</label>
+							<label class="col-sm-3 control-label text-sm-right pt-2">Description</label>
 							<div class="col-sm-9">
-								<textarea class="form-control pcomment" name="comment" ></textarea>
+								<textarea class="form-control pdescription" name="description" ></textarea>
 							</div>
 						</div>
 					</div>
@@ -321,12 +322,12 @@ include('config/core.php');
 
 				$("a.edit-row").on('click',function(){
 					
-					var id      = $(this).attr('data-id');
-					var comment = $(this).attr('data-comment');
-					var amount  = $(this).attr('data-amount');
+					var id          = $(this).attr('data-id');
+					var description = $(this).attr('data-comment');
+					var amount      = $(this).attr('data-amount');
 
 					$(".pid").val(id);
-					$(".pcomment").val(comment);
+					$(".pdescription").val(description);
 					$(".pamount").val(amount);
 					
 					$.magnificPopup.open({

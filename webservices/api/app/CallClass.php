@@ -290,22 +290,24 @@ class CallClass{
         }
     }
     public function UpdateCallFailureAppointments($uuid,$status){
-        $query = "UPDATE `appointments` SET `viewed`= 'Viewed', `viewed_datetime`=CURRENT_TIMESTAMP, `viewed_remainder_status`= '".$status."' WHERE `init_uuid`= '".$uuid."'";
+        $CurrentTime = $this->GreeceCurrentTime();
+        $query = "UPDATE `appointments` SET `viewed`= 'Viewed', `viewed_datetime`='".$CurrentTime."', `viewed_remainder_status`= '".$status."' WHERE `init_uuid`= '".$uuid."'";
         $stmt = $this->conn->prepare( $query );
         $stmt->execute();
         return $stmt;
     }
     public function UpdateCallFailureElseAppointments($uuid,$status){
-        $query = "UPDATE `appointments` SET `viewed_remainder_status`= '".$status."',`viewed_remainder_status_date_time`=CURRENT_TIMESTAMP WHERE `init_uuid`= '".$uuid."'";
+        $CurrentTime = $this->GreeceCurrentTime();
+        $query = "UPDATE `appointments` SET `viewed_remainder_status`= '".$status."',`viewed_remainder_status_date_time`='".$CurrentTime."' WHERE `init_uuid`= '".$uuid."'";
         $stmt = $this->conn->prepare( $query );
         $stmt->execute();
         return $stmt;
     }
     public function AppointmentsRjectToCall($appoinments_id,$uuid){
-        
-        $data = array("id" => $appoinments_id,"cancelComment" => "rejected from IVR ","type"=>"2" );
+        $CurrentTime = $this->GreeceCurrentTime();
+        $data = array("id" => $appoinments_id,"cancelComment" => "rejected from IVR ","type"=>"4" );
        
-        $autha = 'http://upgrade.myconstructor.gr/webservices/api/appointment/reject.php';
+        $autha = 'https://upgrade.myconstructor.gr/webservices/api/appointment/reject.php';
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,$autha);
         curl_setopt($ch, CURLOPT_POST,1);
@@ -314,7 +316,7 @@ class CallClass{
         $authres=curl_exec ($ch);
         curl_close ($ch);
         
-        $query = "UPDATE `appointments` SET `viewed`= 'Viewed', `viewed_datetime`=CURRENT_TIMESTAMP WHERE `init_uuid`= '".$uuid."'";
+        $query = "UPDATE `appointments` SET `viewed`= 'Viewed', `viewed_datetime`='".$CurrentTime."' WHERE `init_uuid`= '".$uuid."'";
         $stmt = $this->conn->prepare( $query );
         $stmt->execute();
         return $stmt;
@@ -376,6 +378,39 @@ class CallClass{
         $stmt = $this->conn->prepare( $query );
         $stmt->execute();
         return $stmt;
+    }
+    public function GreeceCurrentTime(){
+        date_default_timezone_set('Europe/Athens');
+        return date("Y-m-d H:i:s");
+    }
+    public function GetCallOutboundSchedule(){
+        $sql = "SELECT `id`, `mobile`, `callTime`, `agent_id` FROM `call_outbound_schedule` WHERE `status`='0' ORDER BY `id` ASC";
+        $stmt = $this->conn->prepare($sql);
+
+        // execute query
+        $stmt->execute();
+
+        return $stmt;
+    }
+    public function CheckCallOutboundSchedule($callTime){
+        $CurrentTime = $this->GreeceCurrentTime();
+        $sql ="SELECT TIMESTAMPDIFF(MINUTE,'".$callTime."','".$CurrentTime."') AS minute";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $num = $stmt->rowCount();
+        if($num>0){
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row['minute'];
+        }
+        else{
+            return '';
+        }
+    }
+    public function UpdateCallOutboundSchedule($id){
+        $query = "UPDATE `call_outbound_schedule` SET`status`='1' WHERE `id`='".$id."'";
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
     }
     
 }
