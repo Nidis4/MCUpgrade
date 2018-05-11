@@ -1,5 +1,4 @@
-<link rel="stylesheet" href="vendor/bootstrap-timepicker/css/bootstrap-timepicker.css" />
-<script src="vendor/bootstrap-timepicker/bootstrap-timepicker.js"></script>
+
 <!-- start: header -->
 			<header class="header">
 				<div class="logo-container">
@@ -13,13 +12,11 @@
 			
 				<!-- start: search & user box -->
 				<div class="header-right">
-					<a class="modal-with-form btn btn-primary" style="" href="#modalCallForm">Call <i class="fa fa-plus"></i></a>
-					<form action="pages-search-results.html" class="search nav-form">
+					<a class="btn btn-primary" id="CallAgentToCustomersbtn" href="javascript:void(0)">Call <i class="fa fa-plus"></i></a>
+					<form action="#" class="search nav-form">
 						<div class="input-group input-search">
-							<input type="text" class="form-control" name="q" id="q" placeholder="Search...">
-							<span class="input-group-btn">
-								<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-							</span>
+							<input type="number" class="form-control" name="Customersmobile" id="Customersmobile">
+							
 						</div>
 					</form>
 			
@@ -220,113 +217,26 @@
 				<!-- end: search & user box -->
 			</header>
 			<!-- end: header -->
-
-<div id="modalCallForm" class="modal-block modal-block-primary mfp-hide">
-	<section class="card">
-		<header class="card-header">
-			<h2 class="card-title">Είμαστε εδώ για οποιαδήποτε απορία και αν έχεις.</h2>
-			<label for="inputEmail4">Στείλε μας ένα αίτημα για επικοινωνία!</label>
-		</header>
-		<div class="card-body">
-
-			<div class="form-group">
-				<input name="mobile" class="form-control" id="Customersmobile" placeholder="Τηλ: 691 234 5678" type="number" required="">
-			</select>
-		</div>
-		<div class="form-group">
-			<div class="radio">
-				<label><input type="radio" id="radio" name="calltype" value="directcall">  Θέλω να με καλέσετε τώρα.</label>
-			</div>
-			<div class="radio">
-				<label><input type="radio" id="radio" name="calltype" value="schedulecall">  Θέλω να επιλέξω άλλη ώρα.</label>
-			</div>
-		</div>
-
-
-		<div class="form-group" id="CallSId">
-			
-
-		</div>
-		<div class="input-group" id="calltimes" style="display: none;">
-			<span class="input-group-addon"><i class="fa fa-clock-o"></i></span><input type="text" name="calltimes" data-plugin-timepicker id="calltime" class="form-control" data-plugin-options='{ "showMeridian": false }' >
-		</div>
-
-	</div>
-	<footer class="card-footer">
-		<div class="row">
-			<div class="col-md-12 text-right">
-				<button class="btn btn-primary" id="CallAgentToCustomersbtn">Submit</button>
-				<button class="btn btn-default modal-dismiss">Cancel</button>
-			</div>
-		</div>
-	</footer>
-	<script type="text/javascript">
-		$(document).ready(function(){															
-			$('#modalCallForm input[name=calltype]').change(function(){
-				var value = $( 'input[name=calltype]:checked' ).val();
-				if(value =='schedulecall'){
-					$('#calltimes').show();
-				}
-				else{
-					$('#calltimes').hide();
-				}
-
-
-			});
-			$("#CallAgentToCustomersbtn").click(function(){
-				var Customersmobile = $('#Customersmobile').val();
-				var value = $( 'input[name=calltype]:checked' ).val();
-				var agent_id =  '<?php echo $_SESSION['id']?>';
-				if(value =='schedulecall'){
-					var calltime = $('#calltime').val();
-					if(calltime != '' && Customersmobile !=''){
-						var createOutboundCallShadule = 'https://upgrade.myconstructor.gr/webservices/api/call/createschedule.php';
-						$.ajax({
-				            type: "POST",
-				            url: createOutboundCallShadule,
-				            data: {
-				                calltime: calltime,
-				                Customersmobile: Customersmobile,
-				                agent_id: agent_id,
-				                
-				            },
-				            dataType: "json",
-				            success: function(data)
-				            {
-				                alert("Call Shadule saved");
-				                location.reload();
-				            }
-				        });
-			        }
-			        else{
-			        	alert("Please enter time and mobile number");
-			        }
-				}
-				else{
-					if(Customersmobile !=''){
-						$.ajax({
-							type: "POST",     
-							url: 'https://upgrade.myconstructor.gr/webservices/api/app/init_outbound.php',
-							data: 'admin_email='+agent_id+'&number='+Customersmobile,
-				            success: function (data) {
-								location.reload();
-							},
-							error: function(e) {
-							}
-						});
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#CallAgentToCustomersbtn").click(function(){
+			var Customersmobile = $('#Customersmobile').val();
+			var agent_id =  '<?php echo $_SESSION['id']?>';
+			if(Customersmobile !=''){
+				$.ajax({
+					type: "POST",     
+					url: 'https://upgrade.myconstructor.gr/webservices/api/app/init_outbound.php',
+					data: 'admin_email='+agent_id+'&number='+Customersmobile,
+		            success: function (data) {
+						
+					},
+					error: function(e) {
 					}
-					else{
-						alert("Please enter customer number");
-					}	
-				}
-
-			});
-			
-
+				});
+			}
+			else{
+				alert("Please enter customer number");
+			}	
 		});
-		
-
-	</script>
-</section>
-</div>
-
+	});
+</script>

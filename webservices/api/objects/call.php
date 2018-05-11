@@ -133,16 +133,5 @@ class Call{
         return "1";
     }
 
-    public function createschedule($calldatetime, $Customersmobile, $agent_id){
-
-        $query = "INSERT INTO `call_outbound_schedule`(`mobile`, `callTime`, `agent_id`) VALUES ('".$Customersmobile."','".$calldatetime."','".$agent_id."')";
-        
-        $stmt = $this->conn->prepare( $query );
-        $stmt->execute();
-
-        
-        return "1";
-    }
-
 }
 ?>
