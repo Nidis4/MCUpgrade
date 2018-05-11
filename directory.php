@@ -549,10 +549,12 @@ include('search.php');
 						$cat_id = $cat_apps['category_id'];
 						$app_id = $cat_apps['id'];
 						$sum_professionals = $cat_apps['professionals'];
+						$appPermalink = $cat_apps['permalink'];
 
+						$appLink= $directory_url . $cat_permalink .'/'. $appPermalink . '/';
 					 ?>
 
-					<a  class="a-app" href="<?php echo $directory_url.'?cat_id='. $cat_id .'&app_id='.$app_id. '&county_id='.$url_county  ?>">
+					<a  class="a-app" href="<?php echo $appLink;  ?>">
 						<div  class="col-md-12 applications_outer">
 							<div class="col-application">
 								<div class="col-md-2">
