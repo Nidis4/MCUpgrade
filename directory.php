@@ -146,7 +146,7 @@ include('search.php');
 									$cat_id = $category['id'];
 									$cat_title = $category['title_greek'];
 									$apps = $category['applications'];
-									$cat_permalink = $category['permalink'];
+									$cat_permalink_menu = $category['permalink'];
 								}
 							}else{
 								if( $category['id'] == '126' ){
@@ -169,9 +169,9 @@ include('search.php');
 							foreach ($apps as $app ) {
 								$app_id = $app['id'];
 								$app_title = $app['title_greek'];
-								$app_permalink = $app['permalink'];
+								$app_permalink_menu = $app['permalink'];
 
-								$app_url= $directory_url . $cat_permalink . '/' . $app_permalink . '/'.$county_permalink.'/';
+								$app_url= $directory_url . $cat_permalink_menu . '/' . $app_permalink_menu . '/'.$county_permalink.'/';
 							?>	
 
 								<a href="<?php echo $app_url; ?>" class="list-group-item"><?php echo $app_title; ?></a>
@@ -190,7 +190,7 @@ include('search.php');
 									            $cat_id = $category['id'];
 									            $cat_title = $category['title_greek'];
 									           	$apps = $category['applications'];
-									           	$cat_permalink = $category['permalink'];
+									           	$cat_permalink_menu = $category['permalink'];
 
 							?>
 							<a href="#<?php echo $cat_id; ?>" class="list-group-item main-cat collapsed" data-toggle="collapse" data-parent="#MainMenu" aria-expanded="false"><?php echo $cat_title; ?>  <i class="fa fa-caret-down"></i></a> <!-- Sidebar Categories names --> 
@@ -200,9 +200,9 @@ include('search.php');
 											foreach ($apps as $app ) {
 											    $app_id = $app['id'];
 											    $app_title = $app['title_greek'];
-											    $app_permalink = $app['permalink'];
+											    $app_permalink_menu = $app['permalink'];
 
-											    $app_url= $directory_url . $cat_permalink . '/' . $app_permalink . '/'.$county_permalink.'/';
+											    $app_url= $directory_url . $cat_permalink_menu . '/' . $app_permalink_menu . '/'.$county_permalink.'/';
 								?>	
 												<a href="<?php echo $app_url; ?>" class="list-group-item"><?php echo $app_title; ?></a>
 									 <?php  } ?>
@@ -523,8 +523,10 @@ include('search.php');
 					<div class="directory-breadcrumb">
 						<ul class="ul-breadcrumb">
 							<li><a href="<?php echo $api_url; ?>">Αρχική</a></li>
-							<li><a href="<?php echo $directory_url .'?cat_id='. $category_id . '$county_id='. $url_county; ?>"><?php echo $category_title; ?></a></li>
+							<?php $breadcrumb_cat_url= $directory_url . $cat_permalink .'/';  ?>
+							<li><a href="<?php echo $breadcrumb_cat_url; ?>"><?php echo $category_title; ?></a></li>
 							
+
 						</ul>
 					</div>
 
@@ -597,11 +599,15 @@ include('search.php');
 					?>		
 					<div class="directory-breadcrumb">
 						<ul class="ul-breadcrumb">
-							<li><a class="a-breadcrumb" href="<?php echo $api_url; ?>">Αρχική</a></li>
-							<li><a class="a-breadcrumb breadcrumb_cat_id" data-cat-id="<?php echo $category_id; ?>" href="<?php echo $directory_url .'?cat_id='. $category_id .'&county_id='. $url_county; ?>"><?php echo $cat_app_name; ?></a></li>
-							<li><a class="a-breadcrumb breadcrumb_app_name" data-app-id="<?php echo $application_id; ?>" href="<?php echo $directory_url .'?cat_id='. $category_id . '&app_id='. $application_id . '&county_id='. $url_county; ?>"><?php echo $app_name; ?></a></li>
-							<li>Αττική</li>
-						</ul>
+						<li><a class="a-breadcrumb" href="<?php echo $api_url; ?>">Αρχική</a></li>
+
+						<?php $breadcrumb_cat_url= $directory_url . $cat_permalink .'/';  ?>
+
+						<li><a class="a-breadcrumb breadcrumb_cat_id" data-cat-id="<?php echo $category_id; ?>" href="<?php echo $breadcrumb_cat_url; ?>"><?php echo $cat_app_name; ?></a></li>
+						<?php $breadcrumb_app_url = $directory_url . $cat_permalink .'/'.$app_permalink .'/' . $county_permalink . '/'; ?>
+						<li><a class="a-breadcrumb breadcrumb_app_name" href="<?php echo $breadcrumb_app_url ?>"><?php echo $app_name; ?></a></li>
+						<li class="breadcrumb-county"><?php echo $county_display_name_gr; ?></li>
+					</ul>
 					</div>
 
 					<div class="app-small-description-outer">
