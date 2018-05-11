@@ -110,6 +110,23 @@ class Application{
         return $stmt;
     }
 
+    function read_app_id($permalink){
+        $query ="SELECT * FROM applications_meta WHERE permalink ='".$permalink."'";
+        $stmt = $this->conn->prepare( $query );
+     
+        $stmt->execute();
+     
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+        // set values to object properties
+        $this->application_id = $row['application_id'];
+        $this->meta_title = $row['meta_title'];
+        $this->meta_description = $row['meta_description'];
+        $this->meta_robots = $row['meta_robots'];
+        $this->permalink = $row['permalink'];
+    }
+
 
     function readByCategory(){
      

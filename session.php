@@ -18,7 +18,7 @@ else {
 		if(@$_SESSION['usertype'] && $_SESSION['usertype'] == "Professional" ){
 			$user_check=$_SESSION['login_user'];
 		}else{
-			header('Location: login.html'); // Redirecting To Home Page
+			header('Location: login.php'); // Redirecting To Home Page
 			exit();
 		}
 		

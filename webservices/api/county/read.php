@@ -37,7 +37,8 @@ if($num>0){
             "id" => $id,
             "county_name" => $county_name,
             "county_name_gr" => $county_name_gr,
-            "display_name_gr" => $display_name_gr
+            "display_name_gr" => $display_name_gr,
+            "permalink" => $permalink
         );
  
         array_push($counties_arr, $county_item);

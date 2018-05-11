@@ -1,17 +1,86 @@
 <?php
    include('functions.php');
 
-   if(isset($_GET['county_id'])){
-   		$url_county= $_GET['county_id'];
-   }else{
-   		$url_county='1';
-   }
 
    include('constants.php'); 
    include('front_end_config/core.php');
 
    $categories = file_get_contents($api_url .'webservices/api/category/read.php');
    $categories = json_decode($categories, true); // decode the JSON into an associative array
+   
+   $SelectedCatId=0;
+   $SelectedAppId = 0;
+   $url_county=1;
+
+   $hasCategory = false;
+   $hasApplication = false;
+   
+
+
+   $select_county = file_get_contents($api_url .'webservices/api/county/read_one_county.php?county_id='.$url_county);
+   $select_county = json_decode($select_county, true);
+
+   $url_county= $select_county['id'];
+
+   $county_name_gr = $select_county['county_name_gr'];
+   $county_display_name_gr = $select_county['display_name_gr'];
+   $county_permalink = $select_county['permalink'];
+
+
+   if(isset($_GET['cat_title'])){
+   		$hasCategory=true;
+
+   		$select_cat = file_get_contents($api_url .'webservices/api/category/read_cat_id.php?permalink='.$_GET['cat_title']);
+   		$select_cat = json_decode($select_cat, true);
+
+   		$SelectedCatId= $select_cat['category_id'];
+   		$cat_meta_title= $select_cat['meta_title'];
+   		$cat_meta_description= $select_cat['meta_description'];
+		$cat_meta_robots=  $select_cat['meta_robots'];
+		$cat_permalink= $select_cat['permalink'];
+
+
+   		if(isset($_GET['app_title'])){
+   			$hasApplication=true;
+
+   			$select_app = file_get_contents($api_url .'webservices/api/application/read_app_id.php?permalink='.$_GET['app_title']);
+   			$select_app = json_decode($select_app, true);
+
+   			$SelectedAppId= $select_app['application_id'];
+   			$app_meta_title= $select_app['meta_title'];
+   			$app_meta_description= $select_app['meta_description'];
+			$app_meta_robots=  $select_app['meta_robots'];
+			$app_permalink= $select_app['permalink'];
+
+   			if(isset($_GET['county_title'])){
+   				$select_county = file_get_contents($api_url .'webservices/api/county/read_county_id.php?permalink='.$_GET['county_title']);
+   				$select_county = json_decode($select_county, true);
+
+   				$url_county= $select_county['id'];
+
+   				
+
+   				$county_name_gr = $select_county['county_name_gr'];
+   				$county_display_name_gr = $select_county['display_name_gr'];
+   				$county_permalink = $select_county['permalink'];
+
+   			}
+   		}else{
+   			$SelectedAppId= 0;
+   		}
+   }else{
+   		
+
+   		$select_cat = file_get_contents($api_url .'webservices/api/category/read_cat_id.php?permalink=prosfores');
+   		$select_cat = json_decode($select_cat, true);
+
+   		$SelectedCatId= $select_cat['category_id'];
+   		$cat_meta_title= $select_cat['meta_title'];
+   		$cat_meta_description= $select_cat['meta_description'];
+		$cat_meta_robots=  $select_cat['meta_robots'];
+		$cat_permalink= $select_cat['permalink'];
+   }
+
 ?>
 <!DOCTYPE html>
 <html lang="el">
@@ -19,39 +88,26 @@
 		<?php include('header.php'); ?>
 
 		
-		<?php if(isset($_GET['app_id'])){ 
+		<?php if($hasCategory & $hasApplication ){ 
 
-			$metadata = file_get_contents( $api_url .'webservices/api/application/readAppMetaData.php?app_id='. $_GET['app_id']);
-			$metadata = json_decode($metadata, true);
-
-			$meta_title= $metadata['meta_title'];
-			$meta_description= $metadata['meta_description'];
-			$meta_robots=  $metadata['meta_robots'];
-			$permalink= $metadata['permalink'];
-
+			$permalink = $directory_url . $cat_permalink .'/'.$app_permalink .'/'.$county_permalink .'/';
 			?>
-			<title><?php echo $meta_title; ?></title>
-			<link rel="alternate" hreflang="el" href="<?php echo $directory_url; ?> "><!--+permanlink -->
-			<meta name="description" content="<?php echo $meta_description; ?> ">
-			<meta name="robots" content="<?php echo $meta_robots; ?> ">
-			<link rel="canonical" href="<?php echo $directory_url; ?> "><!--+permanlink -->
+			<title><?php echo $app_meta_title; ?></title>
+			<link rel="alternate" hreflang="el" href="<?php echo $permalink; ?> ">
+			<meta name="description" content="<?php echo $app_meta_description; ?> ">
+			<meta name="robots" content="<?php echo $app_meta_robots; ?> ">
+			<link rel="canonical" href="<?php echo $permalink; ?> ">
 			
-		<?php }elseif(!isset($_GET['app_id']) && isset($_GET['cat_id'])){ 
+		<?php }elseif( $hasCategory & !$hasApplication ){ //if has category and has not app
 
-			$metadata = file_get_contents( $api_url .'webservices/api/category/readCategoryMeta.php?cat_id='. $_GET['cat_id']);
-			$metadata = json_decode($metadata, true);
-
-			$meta_title= $metadata['meta_title'];
-			$meta_description= $metadata['meta_description'];
-			$meta_robots=  $metadata['meta_robots'];
-			$permalink= $metadata['permalink'];
+			$permalink = $directory_url . $cat_permalink .'/';
 			?>
 
-			<title><?php echo $meta_title; ?></title>
-			<link rel="alternate" hreflang="el" href="<?php echo $directory_url; ?>"><!--+permanlink -->
-			<meta name="description" content="<?php echo $meta_description; ?>">
-			<meta name="robots" content="<?php echo $meta_robots; ?>">
-			<link rel="canonical" href="<?php echo $directory_url; ?>"><!--+permanlink -->
+			<title><?php echo $cat_meta_title; ?></title>
+			<link rel="alternate" hreflang="el" href="<?php echo $permalink; ?>">
+			<meta name="description" content="<?php echo $cat_meta_description; ?>">
+			<meta name="robots" content="<?php echo $cat_meta_robots; ?>">
+			<link rel="canonical" href="<?php echo $permalink; ?>">
 		<?php }else{?>
 
 			<title>Υπηρεσίες MyConstructor σε προσφορά</title>
@@ -71,9 +127,10 @@
 <?php
 include('menu.php');
 include('search.php');
- 
+
  ?>
 
+ 
 <div class="container-fluid">
 	<div class="mobile-cat-btn show_cats" onclick="showMobileMenuCat()"><i class="fa fa-th-list"></i> Κατηγορίες</div>
 
@@ -81,9 +138,45 @@ include('search.php');
 		<div class="col-md-3 col-md-sub-cats">
 			<div class="mobile_cats_close" onclick="closeMobileMenuCat()"><i class="fa fa-times"></i></div>
 			<div class="menu-cat-selected">
-				<div class="menu-cat-selected-title"><span class="span_selected_cat_title"></span></div>
+				<?php
+					foreach ($categories as $category) {
+		              	if (!empty($category['applications'] )){
+		              		if($hasCategory){
+			              		if( $category['id'] == $SelectedCatId ){
+									$cat_id = $category['id'];
+									$cat_title = $category['title_greek'];
+									$apps = $category['applications'];
+									$cat_permalink = $category['permalink'];
+								}
+							}else{
+								if( $category['id'] == '126' ){
+									$cat_id = $category['id'];
+									$cat_title = $category['title_greek'];
+									$apps = $category['applications'];
+									$cat_permalink = $category['permalink'];
+								}
+							}
+						}
+					}
+				?>
+
+
+				<div class="menu-cat-selected-title"><span class="span_selected_cat_title"><?php echo $cat_title;?></span></div>
 				<p class="menu-cat-sub-title" >Υπηρεσίες σε Προσφορά:</p>
 				<div class="selected-cat-apps">
+					<div class="selected-cat-apps">
+						<?php 
+							foreach ($apps as $app ) {
+								$app_id = $app['id'];
+								$app_title = $app['title_greek'];
+								$app_permalink = $app['permalink'];
+
+								$app_url= $directory_url . $cat_permalink . '/' . $app_permalink . '/'.$county_permalink.'/';
+							?>	
+
+								<a href="<?php echo $app_url; ?>" class="list-group-item"><?php echo $app_title; ?></a>
+					<?php  } ?>	 	
+					</div>
 					
 				</div>
 			</div>
@@ -92,14 +185,12 @@ include('search.php');
 				<div id="MainMenu">
 				        <div class="list-group panel">
 					        <?php    
-					        	
-
-
 		              				foreach ($categories as $category) {
 		              					if (!empty($category['applications'])){
 									            $cat_id = $category['id'];
 									            $cat_title = $category['title_greek'];
 									           	$apps = $category['applications'];
+									           	$cat_permalink = $category['permalink'];
 
 							?>
 							<a href="#<?php echo $cat_id; ?>" class="list-group-item main-cat collapsed" data-toggle="collapse" data-parent="#MainMenu" aria-expanded="false"><?php echo $cat_title; ?>  <i class="fa fa-caret-down"></i></a> <!-- Sidebar Categories names --> 
@@ -109,8 +200,11 @@ include('search.php');
 											foreach ($apps as $app ) {
 											    $app_id = $app['id'];
 											    $app_title = $app['title_greek'];
+											    $app_permalink = $app['permalink'];
+
+											    $app_url= $directory_url . $cat_permalink . '/' . $app_permalink . '/'.$county_permalink.'/';
 								?>	
-												<a href="<?php echo $directory_url . '?cat_id=' . $cat_id . '&app_id=' . $app_id .'&county_id='. $url_county ?>" class="list-group-item"><?php echo $app_title; ?></a>
+												<a href="<?php echo $app_url; ?>" class="list-group-item"><?php echo $app_title; ?></a>
 									 <?php  } ?>
 							</div>
 								<?php
@@ -126,9 +220,9 @@ include('search.php');
       	<div class="col-md-9">
 	
 				<?php 
-					if (isset($_GET['app_id'])) {
+					if ($hasCategory & $hasApplication) {
 						//echo $_GET['app_id'];
-						$application = file_get_contents( $api_url .'webservices/api/application/getProfessionalsByApplication.php?app_id='. $_GET['app_id']);
+						$application = file_get_contents( $api_url .'webservices/api/application/getProfessionalsByApplication.php?app_id='.$SelectedAppId);
 						$application = json_decode($application, true);
 						$cat_app_name= $application['category_name'];
 						$app_name= $application['title_greek'];
@@ -147,20 +241,13 @@ include('search.php');
 				<div class="directory-breadcrumb">
 					<ul class="ul-breadcrumb">
 						<li><a class="a-breadcrumb" href="<?php echo $api_url; ?>">Αρχική</a></li>
-						<li><a class="a-breadcrumb breadcrumb_cat_id" data-cat-id="<?php echo $category_id; ?>" href="<?php echo $directory_url .'?cat_id='. $category_id .'$county_id='. $url_county; ?>"><?php echo $cat_app_name; ?></a></li>
-						<li><a class="a-breadcrumb breadcrumb_app_name" data-app-id="<?php echo $application_id; ?>" href="<?php echo $directory_url .'?cat_id='. $category_id . '&app_id=' .$application_id . '&county_id='.$url_county; ?>"><?php echo $app_name; ?></a></li>
-						<li class="breadcrumb-county">
-						<?php
-							if(isset($_GET['county_id'])){ ?>
-								<a href="<?php echo $directory_url .'?cat_id='. $category_id . '&app_id=' .$application_id. '&county_id='. $_GET['county_id']; ?>">Αττική</a>
-						<?php
-							}else{
-						?>
-								<a href="<?php echo $directory_url .'?cat_id='. $category_id . '&app_id=' .$application_id. '&county_id=1'; ?>">Ελλάδα</a>
-						<?php
-							}
-						?>
-						</li>
+
+						<?php $breadcrumb_cat_url= $directory_url . $cat_permalink .'/';  ?>
+
+						<li><a class="a-breadcrumb breadcrumb_cat_id" data-cat-id="<?php echo $category_id; ?>" href="<?php echo $breadcrumb_cat_url; ?>"><?php echo $cat_app_name; ?></a></li>
+						<?php $breadcrumb_app_url = $directory_url . $cat_permalink .'/'.$app_permalink .'/' . $county_permalink . '/'; ?>
+						<li><a class="a-breadcrumb breadcrumb_app_name" href="<?php echo $breadcrumb_app_url ?>"><?php echo $app_name; ?></a></li>
+						<li class="breadcrumb-county"><?php echo $county_display_name_gr; ?></li>
 					</ul>
 				</div>
 
@@ -176,7 +263,7 @@ include('search.php');
 				</div>
 
 				<div class="results-title">
-					<h3 id="directory-top"><span class="span-count-professionals"><?php echo sizeof($app_professionals); ?></span> Συνεργεία για <?php echo $app_name; ?> <span class="stin-color"> στην</span> <span class="span_county">Αττική</span></h3>
+					<h3 id="directory-top"><span class="span-count-professionals"><?php echo sizeof($app_professionals); ?></span> Συνεργεία για <?php echo $app_name; ?> <span class="stin-color"> στην</span> <span class="span_county"><?php echo $county_display_name_gr; ?></span></h3>
 				</div>
 
 				<nav class="navbar navbar-default directory-filters" role="navigation">
@@ -206,11 +293,20 @@ include('search.php');
 					                          			//$counties[0];
 					                          		?>
 
-					                          		<select class="counties">
+					                          		<select value="<?php echo $url_county; ?>" class="counties" onchange="location= this.value;">
 					                                <?php 
 					                                    foreach ($counties as $county) {	
-							                                echo '<option val="'. $county["display_name_gr"] .'" value="'. $county["id"] .'">' .$county["county_name_gr"] .'</option>';
-							                            }
+
+					                                    	$county_link= $directory_url . $cat_permalink .'/'.$app_permalink .'/' . $county["permalink"] . '/';
+							                               	if($url_county == $county["id"] ){
+
+							                                ?>
+							                                	<option <?php echo 'val="'. $county["display_name_gr"] .'" value_id="'. $county["id"] .'"'; ?> value="<?php echo $county_link;?>" <?php echo 'selected'; ?> ><?php echo $county["county_name_gr"]; ?></option>
+							                        <?php }else{ ?>
+
+							                        			<option <?php echo $url_county. 'val="'. $county["display_name_gr"] .'" value_id="'. $county["id"] .'"'; ?> value="<?php echo $county_link;?>" ><?php echo $county["county_name_gr"]; ?></option>
+							                        <?php }
+							                        	}
 					                            	 ?>
 					                                </select>
 					                          	</div>
@@ -281,16 +377,16 @@ include('search.php');
 						$professional_county = false;
 
 
-						if(isset($_GET['county_id'])){
-							$county_id= $_GET['county_id'];
+					//	if(isset($_GET['county_id'])){
+							$county_id= $url_county;
 							foreach ($porfessional_counties as $counties ) {
 								if(intval($county_id) == intval($counties['county_id']) || intval($county_id) == 53){
 									$professional_county = true; // print proffessionals with equal $_GET['county_id'] || if county_id greece is selected print all
 								}
 							}
-						}else{
+					/*	}else{
 							$professional_county = true; // if !$_GET['county_id']  print all proffessionals
-						}
+						}*/
 
 						
 				?>
@@ -304,7 +400,7 @@ include('search.php');
 						  		<div class="col-md-3 col-sm-3 professional-img-con">
 						  			<div class="professional-img">
 						  				<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id . '&app_id=' . $application_id; ?>" >
-						  					<img src="<?php echo 'img/professional-imgs/'.$profile_img ?>" onerror="this.src='img/professional-imgs/default-img-4.jpg';" alt="" />
+						  					<img src="<?php echo $api_url.'img/professional-imgs/'.$profile_img ?>" onerror="this.src='<?php echo $api_url; ?>img/professional-imgs/default-img-4.jpg';" alt="" />
 						  					
 						  				</a>
 						  			</div>
@@ -388,7 +484,7 @@ include('search.php');
 											<?php } ?>
 
 											<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id; ; ?>">
-											<div class="professional_new_tel"><img src="img/new-tel-white.png">Τηλέφωνο</div>
+											<div class="professional_new_tel"><img src="<?php echo $api_url;?>img/new-tel-white.png">Τηλέφωνο</div>
 											</a>
 									
 								</div>
@@ -406,12 +502,12 @@ include('search.php');
 				<?php } ?>
 
 				<?php
-					}else if(!isset($_GET['app_id']) && isset($_GET['cat_id'])){
+					}else if( $hasCategory && !$hasApplication){
 
 						//$applications = file_get_contents($api_url .'webservices/api/application/readByCategory.php?cat_id='. $_GET['cat_id'];);
               			//$applications = json_decode($applications, true); // decode the JSON into an associative array
 
-						$directory_cat = file_get_contents($api_url .'webservices/api/application/readByCategory.php?cat_id='. $_GET['cat_id'] );
+						$directory_cat = file_get_contents($api_url .'webservices/api/application/readByCategory.php?cat_id='. $SelectedCatId );
 						$directory_cat = json_decode($directory_cat, true);
 						
               			$category_title = $directory_cat[0]['category_name'];
@@ -460,7 +556,7 @@ include('search.php');
 								<div class="col-md-2">
 									<div class="app-img">
 										<div class="app-img-inner">
-												<img src="img/cat_icons/<?php echo $category_icon; ?>">	
+												<img src="<?php echo $api_url; ?>img/cat_icons/<?php echo $category_icon; ?>">	
 										</div>							
 									</div>
 								</div>
@@ -502,7 +598,7 @@ include('search.php');
 					<div class="directory-breadcrumb">
 						<ul class="ul-breadcrumb">
 							<li><a class="a-breadcrumb" href="<?php echo $api_url; ?>">Αρχική</a></li>
-							<li><a class="a-breadcrumb breadcrumb_cat_id" data-cat-id="<?php echo $category_id; ?>" href="<?php echo $directory_url .'?cat_id='. $category_id .'$county_id='. $url_county; ?>"><?php echo $cat_app_name; ?></a></li>
+							<li><a class="a-breadcrumb breadcrumb_cat_id" data-cat-id="<?php echo $category_id; ?>" href="<?php echo $directory_url .'?cat_id='. $category_id .'&county_id='. $url_county; ?>"><?php echo $cat_app_name; ?></a></li>
 							<li><a class="a-breadcrumb breadcrumb_app_name" data-app-id="<?php echo $application_id; ?>" href="<?php echo $directory_url .'?cat_id='. $category_id . '&app_id='. $application_id . '&county_id='. $url_county; ?>"><?php echo $app_name; ?></a></li>
 							<li>Αττική</li>
 						</ul>
@@ -547,10 +643,17 @@ include('search.php');
 						                          			$counties = file_get_contents( $api_url .'webservices/api/county/read.php');
 						                          			$counties = json_decode($counties, true);
 						                          		?>
-						                          		<select class="counties">
+						                          		<select value="<?php echo $url_county; ?>" class="counties" onchange="location= this.value;">
 						                                <?php 
 						                                    foreach ($counties as $county) {	
-								                                echo '<option val="'. $county["display_name_gr"] .'" value="'. $county["id"] .'">' .$county["county_name_gr"] .'</option>';
+									                           $county_link= $directory_url . $cat_permalink .'/'.$app_permalink .'/' . $county["permalink"] . '/';
+								                               	if($url_county == $county["id"] ){
+								                                ?>
+								                                	<option <?php echo 'val="'. $county["display_name_gr"] .'" value_id="'. $county["id"] .'"'; ?> value="<?php echo $county_link;?>" <?php echo 'selected'; ?> ><?php echo $county["county_name_gr"]; ?></option>
+								                          <?php }else{ ?>
+
+								                        			<option <?php echo 'val="'. $county["display_name_gr"] .'" value_id="'. $county["id"] .'"'; ?> value="<?php echo $county_link;?>" ><?php echo $county["county_name_gr"]; ?></option>
+								                          <?php }
 								                            }
 						                            	 ?>
 						                                </select>
@@ -620,16 +723,16 @@ include('search.php');
 						$professional_county = false;
 
 
-						if(isset($_GET['county_id'])){
-							$county_id= $_GET['county_id'];
+						//if(isset($_GET['county_id'])){
+							$county_id= $url_county;
 							foreach ($porfessional_counties as $counties ) {
 								if(intval($county_id) == intval($counties['county_id'])){
 									$professional_county = true; // print proffessionals with equal $_GET['county_id']
 								}
 							}
-						}else{
+					/*	}else{
 							$professional_county = true; // if !$_GET['county_id']  print all proffessionals
-						}
+						}*/
 
 						
 						?>
@@ -643,7 +746,7 @@ include('search.php');
 						  		<div class="col-md-3 col-sm-3 professional-img-con">
 						  			<div class="professional-img">
 						  				<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id . '&app_id=' . $application_id; ?>" >
-						  					<img src="<?php echo 'img/professional-imgs/'.$profile_img ?>" onerror="this.src='img/professional-imgs/default-img-4.jpg';" alt="" />
+						  					<img src="<?php echo $api_url.'img/professional-imgs/'.$profile_img ?>" onerror="this.src='<?php echo $api_url; ?>img/professional-imgs/default-img-4.jpg';" alt="" />
 						  					
 						  				</a>
 						  			</div>
@@ -727,7 +830,7 @@ include('search.php');
 											<?php } ?>
 
 											<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id; ; ?>">
-											<div class="professional_new_tel"><img src="img/new-tel-white.png">Τηλέφωνο</div>
+											<div class="professional_new_tel"><img src="<?php echo $api_url; ?>img/new-tel-white.png">Τηλέφωνο</div>
 											</a>
 									
 								</div>
@@ -745,7 +848,7 @@ include('search.php');
 					<?php } ?>
 			  <?php } ?>
 
-			 <?php if ((isset($_GET['app_id'])) || (!isset($_GET['app_id']) && !isset($_GET['cat_id']))) { ?>
+			 <?php if ($hasApplication || (!$hasApplication && !$hasCategory)) { ?>
 
 			  <div id="loadmore">Εμφάνισε Περισσότερους</div>
 			  <a class="a-showless" href="#directory-top"><div id="showless">Εμφάνισε Λιγότερους</div></a>

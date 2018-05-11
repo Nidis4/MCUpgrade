@@ -52,7 +52,7 @@ $(document).mouseup(function (e){
 
 
 $(document).ready(function(){ //CHANGE COUNTIES FILTER, breadcrumb county, and titles
-	var urlParams;
+	/*var urlParams;
 		(window.onpopstate = function () {
 
 		    var match,
@@ -73,22 +73,23 @@ $(document).ready(function(){ //CHANGE COUNTIES FILTER, breadcrumb county, and t
 			
 
 			if (typeof county_id === "undefined") {
-				$("select.counties").val('1');
-				var county = $('select.counties option:selected').val();
+				$("select.counties").attr('value_id','1');
+				var county = $('select.counties option:selected').attr('value_id');
 				var county_name =  $('select.counties option:selected').attr('val');
 				var length = $("div.prof-main-col").length;
 				$('span.span-count-professionals').html(length);
 				$('li.breadcrumb-county a').html(county_name);
 				$('span.stin-color').html('στην');
 				$('span.span_county').html(county_name);
-			}else{
-				$("select.counties").val(county_id);
-				var county = $('select.counties option:selected').val();
-				var county_name =  $('select.counties option:selected').attr('val');
+			}else{*/
+
+				//$("select.counties").val(county_id);
+				var county = $('select.counties option:selected').attr('value_id');
+				//var county_name =  $('select.counties option:selected').attr('val');
 				var length = $("div.prof-main-col").length;
 				$('span.span-count-professionals').html(length);
-				$('li.breadcrumb-county a').html(county_name);
-				$('span.span_county ').html(county_name);
+				//$('li.breadcrumb-county a').html(county_name);
+				//$('span.span_county ').html(county_name);
 
 				if(county == 50 || county == 45 || county == 20 || county == 11 || county == 9){
 					$('span.stin-color').html('στα');
@@ -101,7 +102,7 @@ $(document).ready(function(){ //CHANGE COUNTIES FILTER, breadcrumb county, and t
 				}else{
 					$('span.stin-color').html('στην');
 				}
-			}
+			//}
 });
 
 
@@ -219,9 +220,8 @@ $(document).ready(function(){
 	});
 });
 
-
 $(document).ready(function(){ //DIRECTORY FILTERS
-	$('select.counties').change(function(){
+	/*$('select.counties').change(function(){
 
 		var urlParams;
 		(window.onpopstate = function () {
@@ -258,19 +258,10 @@ $(document).ready(function(){ //DIRECTORY FILTERS
 		var new_url = url.substring(0, url.indexOf('?'));
 		window.location.href = new_url+'?cat_id='+cat_id+'&app_id='+app_id+'&county_id='+county;
 
-		/*$("div.prof-main-col").each(function(){
-			//alert($(this).attr('data-county'));
-			if($(this).attr('data-county') == county){
-				i++;
-				$(this).show();
-			}else{
-				$(this).hide();
-			} 
-		});*/
 
 
 		//$('span.span-count-professionals').html(i);
-	});
+	});*/
 
 
 	$('select.select-price-rating').change(function(){
@@ -543,6 +534,7 @@ $(document).ready(function(){ //DIRECTORY FILTERS
 });
 
 
+/*
 $(document).ready(function(){
 
   var urlParams;
@@ -564,14 +556,13 @@ $(document).ready(function(){
 	})();
 	
 		
-//alert(urlParams["app_id"]);
+
 
 	var cat_id = urlParams["cat_id"];
 
 	if (typeof cat_id === "undefined") {
 	   cat_id=126;
-	   /*var div_menu = $('#MainMenu').find('div#'+cat_id).prop('outerHTML');
-	   var a_menu = $('#MainMenu').find('[href$="#'+cat_id+'"]').prop('outerHTML');*/
+	  
 
 	   var a_cat_text = $('#MainMenu').find('[href$="#'+cat_id+'"]').text();
 	   var a_cat_apps = $('#MainMenu').find('div#'+cat_id).html();
@@ -579,34 +570,19 @@ $(document).ready(function(){
 	   $('#MainMenu').find('[href$="#'+cat_id+'"]').remove();
 	   $('#MainMenu').find('div#'+cat_id).remove();
 
-	  /* var top_menu = a_menu + div_menu;
-
-	   $('#MainMenu div.list-group').prepend(top_menu);
-	   $('#MainMenu').find('div#'+cat_id).addClass('in');
-
-	   $('.menu-cat-selected .selected-cat-apps').append(top_menu);*/
 	   $('span.span_selected_cat_title').append(a_cat_text);
  	   $('.selected-cat-apps').append(a_cat_apps);
 
 	}else{
 
-	   /*var div_menu = $('#MainMenu').find('div#'+cat_id).prop('outerHTML');
-	   var a_menu = $('#MainMenu').find('[href$="#'+cat_id+'"]').prop('outerHTML');*/
-	   
+	
 	   var a_cat_text = $('#MainMenu').find('[href$="#'+cat_id+'"]').text();
 	   var a_cat_apps = $('#MainMenu').find('div#'+cat_id).html();
 
 	   $('#MainMenu').find('[href$="#'+cat_id+'"]').remove();
 	   $('#MainMenu').find('div#'+cat_id).remove();
 
-	   /*var top_menu = a_menu + div_menu;
-
-	   $('#MainMenu div.list-group').prepend(top_menu);
-
-	   $('#MainMenu').find('div#'+cat_id).addClass('in');
-	   $('#MainMenu').find('[href$="#'+cat_id+'"]').addClass('selected-cat');*/
- 		
- 	   //$('.menu-cat-selected .selected-cat-apps') 	
+	  
 
  	   $('span.span_selected_cat_title').append(a_cat_text);
  	   $('.selected-cat-apps').append(a_cat_apps);
@@ -614,3 +590,4 @@ $(document).ready(function(){
 	
 });
 
+*/

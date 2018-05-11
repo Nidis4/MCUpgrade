@@ -56,14 +56,26 @@ if($num>0){
                 // this will make $row['name'] to
                 // just $name only
                 //extract($rowApp);
+                $application_meta = new Application($db);
+                $stmt_meta = $application_meta->readAppMeta($rowApp['id']);
+
+                 while ($rowMeta = $stmt_meta->fetch(PDO::FETCH_ASSOC)){
+                     $app_meta= array(
+                        "permalink" => $rowMeta['permalink']
+                    );
+                 }
+
+  
          
                 $application_item=array(
                     "id" => $rowApp['id'],
                     "category_id" => $rowApp['category_id'],
                     "title" => $rowApp['title'],
-                    "title_greek" => $rowApp['title_greek']
+                    "title_greek" => $rowApp['title_greek'],
+                    "permalink" => $app_meta['permalink']
+
                 );
-         
+                
                 array_push($applications_arr, $application_item);
             }
          

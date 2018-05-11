@@ -18,7 +18,7 @@ class County{
     public function read(){
         //select all data
         $query = "SELECT
-                    id, county_name, county_name_gr, display_name_gr
+                    *
                 FROM
                     " . $this->table_name . "
                 ORDER BY
@@ -65,5 +65,45 @@ class County{
         $this->county_name = $row['county_name'];
         $this->county_name_gr = $row['county_name_gr'];
     } // Read One
+
+    function readOneCounty($county_id){
+        $query = "SELECT * FROM counties WHERE id = '".$county_id."'";
+
+        $stmt = $this->conn->prepare( $query );
+     
+        $stmt->execute();
+
+     
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+      
+        $this->id = $row['id'];
+        $this->county_name = $row['county_name'];
+        $this->county_name_gr = $row['county_name_gr'];
+        $this->display_name_gr = $row['display_name_gr'];
+        $this->permalink = $row['permalink'];
+
+    }
+
+    function read_county_id($permalink){
+
+        $query = "SELECT * FROM counties WHERE permalink ='".$permalink."'";
+
+        $stmt = $this->conn->prepare( $query );
+     
+        $stmt->execute();
+
+     
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+      
+        $this->id = $row['id'];
+        $this->county_name = $row['county_name'];
+        $this->county_name_gr = $row['county_name_gr'];
+        $this->display_name_gr = $row['display_name_gr'];
+        $this->permalink = $row['permalink'];
+
+        
+    }
+
+
 }
 ?>

@@ -4,6 +4,7 @@
 	$api_url= "https://upgrade.myconstructor.gr/";
 	
 	$directory_url ="directory.php";
+	$directory_url ="katalogos/";
 	$directory_url = $api_url . $directory_url;
 
 	$profile_url = "profile.php";
