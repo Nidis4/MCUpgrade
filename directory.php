@@ -1008,8 +1008,8 @@ div#callback .modal-header {
 			}else{
 				var time= "Καλέστε με τώρα!"
 			}
-			//var PostUrl = "<?php echo $api_url;?>callback.php";
-			var PostUrl = "http://localhost/MCUpgrade/callback.php";
+			var PostUrl = "<?php echo $api_url;?>callback.php";
+			//var PostUrl = "http://localhost/MCUpgrade/callback.php";
 	        jQuery.ajax({
 	            type:"POST",
 	            url:PostUrl,
