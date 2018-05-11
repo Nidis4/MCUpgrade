@@ -151,7 +151,7 @@ if($stmt){
 
 			// Viber Connection			
 			$viber = new Viber($db);			
-			$viber->send($customer_mobile, $smsTexts);
+			$viber->send($professional_mobile, $smsText);
 
 	}
 
