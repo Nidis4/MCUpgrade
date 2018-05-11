@@ -50,6 +50,7 @@ if($num>0){
             "min_price" => $minimum_price,
             "sequence" => $sequence,
             "modified" => $modified,
+            "permalink" => $permalink,
             "professionals" => $total
         );
  

@@ -148,6 +148,7 @@ class Application{
   applications.`min_price`,
   applications.`sequence`,
   applications.`modified`,
+  applications_meta.`permalink`,
   COUNT(professionals_applications.application_id) AS total,
   MIN(professionals_applications.price) AS minimum_price
 FROM
@@ -155,6 +156,7 @@ FROM
 LEFT JOIN professionals_applications ON applications.id = professionals_applications.application_id
 LEFT JOIN categories ON categories.id = applications.category_id
 LEFT JOIN professionals ON professionals.id = professionals_applications.professional_id
+LEFT JOIN applications_meta ON applications.id = applications_meta.application_id
 WHERE professionals_applications.price >0 AND applications.category_id=:cat_id AND professionals.verified=1
 GROUP BY applications.id
 ORDER BY applications.sequence ASC";
