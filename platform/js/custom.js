@@ -852,6 +852,7 @@ $( "button.updateAppointment" ).click(function() {
     }
     else{
         // Find/Insert Customer data
+        //alert(mobile);
         var findCustomerAPI = API_LOCATION+'customer/search_by_mobile.php?mobile='+mobile;
         $.ajax({
             type: "POST",
@@ -870,6 +871,7 @@ $( "button.updateAppointment" ).click(function() {
             dataType: "json",
             success: function(data)
             {
+                //alert(data);
                 var customer_id = data;
                 //var date = "2018-05-05";
                 //var time ="10:00-12:00";
@@ -914,7 +916,7 @@ $( "button.updateAppointment" ).click(function() {
                                 //alert(data);
 
                                 alert("Appointment Updated");
-                                window.location.replace('../platform/appointments.php');
+                                //window.location.replace('../platform/appointments.php');
                             }
                         });    
                 

@@ -38,7 +38,9 @@ if($num>0){
         extract($row);
         $customer_id = $customer_id;
     }
- 
+    
+    $customer->update($customer_id, $_POST['firstname'], $_POST['surname'], $_POST['address'], $_POST['sex'], $_POST['mobile'], $_POST['phone'], $_POST['email']);
+    
     echo $customer_id;
 }
  
