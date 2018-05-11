@@ -70,7 +70,7 @@
                                 <select class="select_counties" name="profile_main_county" id="profile_main_county">
                                     <option value="">Select</option>
                                    <?php 
-                                        if(@$counties){
+                                        if(@$counties[0]['county_id']){
                                             foreach ($counties as $value) {
                                                 $pcounties[] = $value['county_id']; 
                                     ?>
