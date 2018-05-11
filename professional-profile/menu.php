@@ -9,11 +9,15 @@
                     <h3 style="display: none;"><span class="orange-text">MY</span>CONSTRUCTOR</h3>
                    
                     <strong>MCR</strong>
-                     
+                    
+
 
                 </div>
+                <a href="logout.php">
+                           Αποσύνδεση
+                    </a>
 
-                <ul class="list-unstyled components">
+                <ul class="list-unstyled components" style="padding-top: 5px;">
                     <li  class="<?php if($currentPage =='index'){echo 'active';}?>">
                         <a href="index.php">
                             <i class="glyphicon glyphicon-home"></i>
