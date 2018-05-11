@@ -219,10 +219,10 @@ include('config/core.php');
 											if($viewed == "Viewed"){
 												$ViewedDateTime=date_create($viewed_datetime);
 												$V_p_date =  date_format($ViewedDateTime,"H:i d/m");
-												echo "<tr><td colspan='7' style='color: green;'>Viewed ".$V_p_date."</td></tr>";
+												//echo "<tr><td colspan='7' style='color: green;'>Viewed ".$V_p_date."</td></tr>";
 											}
 											else{
-												echo "<tr><td colspan='9'>Not Viewed</td></tr>";
+												//echo "<tr><td colspan='9'>Not Viewed</td></tr>";
 											}
 											echo 	  '</tr>';
 										?>
