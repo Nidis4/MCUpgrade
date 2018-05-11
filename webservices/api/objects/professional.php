@@ -194,7 +194,7 @@ class Professional{
     public function restAvailable($date, $time, $address){
         $query = "SELECT p.`id`, p.`first_name`, p.`last_name`, p.`profile_status`, co.`address` 
                 FROM `professionals` p, `professionals_counties` c, `professionals_applications` a, `professionals_contact_details` co 
-                WHERE c.professional_id=p.id AND a.professional_id=p.id AND co.professional_id=p.id  AND c.county_id= :county AND a.application_id= :application AND p.`id` NOT IN (SELECT `prof_member_id` FROM `appointments` WHERE `date` = '$date' AND `time` = '$time' AND `address`= '$address' )";
+                WHERE p.`verified`=1 AND c.professional_id=p.id AND a.professional_id=p.id AND co.professional_id=p.id  AND c.county_id= :county AND a.application_id= :application AND p.`id` NOT IN (SELECT `prof_member_id` FROM `appointments` WHERE `date` = '$date' AND `time` = '$time' AND `address`= '$address' )";
 
         $stmt = $this->conn->prepare( $query );
 
@@ -280,7 +280,11 @@ ORDER BY `date` ASC,
      
         // select query
         $query = "SELECT
-                p.`id`, p.`first_name`, p.`last_name`, p.`profile_status`, p.`admin_comments`, co.`address`, co.`mobile`, co.`phone` FROM `professionals` p,  `professionals_contact_details` co WHERE co.professional_id=p.id and p.`verified`='".$verified."'  
+                p.`id`, p.`first_name`, p.`last_name`, p.`profile_status`, p.`admin_comments`, co.`address`, co.`mobile`, co.`phone`, m.`meta_title`, m.`meta_description`, m.`meta_robots`, m.`permalink`
+                FROM `professionals` p  
+                LEFT JOIN `professionals_contact_details` co ON co.professional_id=p.id
+                LEFT JOIN `professionals_meta` m ON m.professional_id=p.id
+                WHERE p.`verified`='".$verified."'  
                 ORDER BY
                     p.`id` DESC
                 LIMIT ?, ?";
@@ -1383,7 +1387,7 @@ ORDER BY rat.`created` DESC";
         
         $id = $this->id;
         // select query
-         $query = "Delete from `professionals_categories` where professional_id = '".$id."' and category_id = '".$category_id."'";
+         $query = "Delete from `professionals_categories` where professional_id = '".$id."' and category_id = '".$category_id."'; Delete from professionals_applications where professional_id='".$id."' and category_id='".$category_id."';";
      
         // prepare query statement
         $stmt = $this->conn->prepare( $query );
@@ -1427,7 +1431,7 @@ ORDER BY rat.`created` DESC";
         
         $id = $this->id;
         // select query
-         $query = "Delete from `professionals_counties` where professional_id = '".$id."' and county_id = '".$county_id."'";
+        $query = "Delete from `professionals_counties` where professional_id = '".$id."' and county_id = '".$county_id."'";
      
         // prepare query statement
         $stmt = $this->conn->prepare( $query );
@@ -1444,6 +1448,18 @@ ORDER BY rat.`created` DESC";
         
         
     }
+
+
+    function updateMeta($id, $meta_title, $meta_description, $meta_robots, $permalink){
+        $query = "INSERT INTO `professionals_meta`(`professional_id`, `meta_title`, `meta_description`, `meta_robots`, `permalink`) VALUES ('".$id."', '".$meta_title."', '".$meta_description."', '".$meta_robots."', '".$permalink."') ON DUPLICATE KEY UPDATE `meta_title`= '".$meta_title."' , `meta_description`= '".$meta_description."', `meta_robots`= '".$meta_robots."', `permalink`= '".$permalink."'  ";
+        //echo $query;
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+
+        // execute query
+        $stmt->execute();
+        return $stmt;
+    }  
 
 
 }

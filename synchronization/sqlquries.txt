@@ -929,3 +929,21 @@ ALTER TABLE `customers_invoice_settings` CHANGE `company_name` `company_name` VA
 
 <!-------------------------------->
 <!-- End 10 May 2018 Harpreet -->
+
+<!-------------------------------->
+<!-- Start 11 May 2018 GKonstantinidis -->
+
+CREATE TABLE `professionals_meta` (
+  `professional_id` int(11) NOT NULL,
+  `meta_title` varchar(300) NOT NULL,
+  `meta_description` varchar(500) NOT NULL,
+  `meta_robots` varchar(50) NOT NULL,
+  `permalink` varchar(100) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE `professionals_meta`
+  ADD PRIMARY KEY (`professional_id`);
+COMMIT;
+<!-------------------------------->
+<!-- End 11 May 2018 GKonstantinidis -->

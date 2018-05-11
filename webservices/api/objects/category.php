@@ -187,6 +187,39 @@ class Category{
         
     }
 
+
+    public function moveCategory(){
+        
+        $query ="SELECT professional_id, category_id FROM professionals_applications";
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+            // echo "<pre>";
+            // print_r($row);
+            // die;
+            $query1 ="SELECT id FROM professionals_categories where professional_id='".$row['professional_id']."' and category_id ='".$row['category_id']."'";
+            $stmt1 = $this->conn->prepare( $query1 );
+            $stmt1->execute();
+            $num = $stmt1->rowCount();
+            
+            if($num == 0){
+                $query2 = "INSERT INTO `professionals_categories` (`professional_id`, `category_id`) VALUES ('".$row['professional_id']."', '".$row['category_id']."')";
+
+                //echo $query;
+                // prepare query statement
+                $stmt2 = $this->conn->prepare( $query2 );
+
+                // execute query
+                $stmt2->execute();
+            }
+
+        }
+
+        return 1;
+
+    }
+
 }
 
 

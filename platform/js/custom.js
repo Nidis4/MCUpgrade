@@ -399,6 +399,37 @@ $( ".updateCat" ).click(function() {
     
 });
 
+$( ".updatePro" ).click(function() {
+    var tagId = $(this).attr('id');
+    var id = tagId.substring(9);
+    
+    var meta_title = $('#meta_title'+id).val();
+    var meta_description = $('#meta_description'+id).val();
+    var meta_robots = $('#meta_robots'+id).val();
+    var permalink = $('#permalink'+id).val();
+    //alert("Should be Implemented:"+id+" "+meta_title);
+
+    var updateProfAPI = API_LOCATION+'professional/updateMeta.php';
+    //alert(updateTagsAPI);
+    $.ajax({
+        type: "POST",
+        url: updateProfAPI,
+        data: {
+            id: id,
+            meta_title: meta_title,
+            meta_description: meta_description,
+            meta_robots: meta_robots,
+            permalink: permalink
+        },
+        success: function(data)
+        {
+            alert("Meta Information Saved!");
+        }
+    });
+    
+});
+
+
 $("input#startDate").change(function(){
     //alert("The text has been changed.");
     var date = new Date($("#startDate").val()); 
@@ -821,6 +852,7 @@ $( "button.updateAppointment" ).click(function() {
     }
     else{
         // Find/Insert Customer data
+        //alert(mobile);
         var findCustomerAPI = API_LOCATION+'customer/search_by_mobile.php?mobile='+mobile;
         $.ajax({
             type: "POST",
@@ -839,6 +871,7 @@ $( "button.updateAppointment" ).click(function() {
             dataType: "json",
             success: function(data)
             {
+                //alert(data);
                 var customer_id = data;
                 //var date = "2018-05-05";
                 //var time ="10:00-12:00";
@@ -883,7 +916,7 @@ $( "button.updateAppointment" ).click(function() {
                                 //alert(data);
 
                                 alert("Appointment Updated");
-                                window.location.replace('../platform/appointments.php');
+                                //window.location.replace('../platform/appointments.php');
                             }
                         });    
                 
