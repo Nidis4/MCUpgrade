@@ -280,7 +280,11 @@ ORDER BY `date` ASC,
      
         // select query
         $query = "SELECT
-                p.`id`, p.`first_name`, p.`last_name`, p.`profile_status`, p.`admin_comments`, co.`address`, co.`mobile`, co.`phone` FROM `professionals` p,  `professionals_contact_details` co WHERE co.professional_id=p.id and p.`verified`='".$verified."'  
+                p.`id`, p.`first_name`, p.`last_name`, p.`profile_status`, p.`admin_comments`, co.`address`, co.`mobile`, co.`phone`, m.`meta_title`, m.`meta_description`, m.`meta_robots`, m.`permalink`
+                FROM `professionals` p  
+                LEFT JOIN `professionals_contact_details` co ON co.professional_id=p.id
+                LEFT JOIN `professionals_meta` m ON m.professional_id=p.id
+                WHERE p.`verified`='".$verified."'  
                 ORDER BY
                     p.`id` DESC
                 LIMIT ?, ?";
@@ -1444,6 +1448,18 @@ ORDER BY rat.`created` DESC";
         
         
     }
+
+
+    function updateMeta($id, $meta_title, $meta_description, $meta_robots, $permalink){
+        $query = "INSERT INTO `professionals_meta`(`professional_id`, `meta_title`, `meta_description`, `meta_robots`, `permalink`) VALUES ('".$id."', '".$meta_title."', '".$meta_description."', '".$meta_robots."', '".$permalink."') ON DUPLICATE KEY UPDATE `meta_title`= '".$meta_title."' , `meta_description`= '".$meta_description."', `meta_robots`= '".$meta_robots."', `permalink`= '".$permalink."'  ";
+        //echo $query;
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+
+        // execute query
+        $stmt->execute();
+        return $stmt;
+    }  
 
 
 }

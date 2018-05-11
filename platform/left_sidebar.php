@@ -523,13 +523,18 @@
 				                        </a>
 				                        <ul class="nav nav-children">
 				                            <li>
-				                                <a class="nav-link" href="applications.php">
+				                                <a class="nav-link" href="meta-applications.php">
 				                                    Applications
 				                                </a>
 				                            </li>
 				                            <li>
-				                                <a class="nav-link" href="categories.php">
+				                                <a class="nav-link" href="meta-categories.php">
 				                                    Categories
+				                                </a>
+				                            </li>
+				                            <li>
+				                                <a class="nav-link" href="meta-professionals.php">
+				                                    Professionals
 				                                </a>
 				                            </li>
 
