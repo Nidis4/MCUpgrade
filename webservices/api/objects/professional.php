@@ -194,7 +194,7 @@ class Professional{
     public function restAvailable($date, $time, $address){
         $query = "SELECT p.`id`, p.`first_name`, p.`last_name`, p.`profile_status`, co.`address` 
                 FROM `professionals` p, `professionals_counties` c, `professionals_applications` a, `professionals_contact_details` co 
-                WHERE c.professional_id=p.id AND a.professional_id=p.id AND co.professional_id=p.id  AND c.county_id= :county AND a.application_id= :application AND p.`id` NOT IN (SELECT `prof_member_id` FROM `appointments` WHERE `date` = '$date' AND `time` = '$time' AND `address`= '$address' )";
+                WHERE p.`verified`=1 AND c.professional_id=p.id AND a.professional_id=p.id AND co.professional_id=p.id  AND c.county_id= :county AND a.application_id= :application AND p.`id` NOT IN (SELECT `prof_member_id` FROM `appointments` WHERE `date` = '$date' AND `time` = '$time' AND `address`= '$address' )";
 
         $stmt = $this->conn->prepare( $query );
 
