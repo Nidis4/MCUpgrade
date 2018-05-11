@@ -1401,6 +1401,50 @@ ORDER BY rat.`created` DESC";
         
     }
 
+    public function addCounty($county_id){
+        
+        $id = $this->id;
+        // select query
+         $query = "INSERT INTO `professionals_counties` (`professional_id`, `county_id`) VALUES ('".$id."', '".$county_id."');";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind variable values
+        
+        
+        // execute query
+        if($stmt->execute()){
+            return 1;
+        }else{
+            return 0;
+        }
+        
+        
+    }
+
+    public function deleteCounty($county_id){
+        
+        $id = $this->id;
+        // select query
+         $query = "Delete from `professionals_counties` where professional_id = '".$id."' and county_id = '".$county_id."'";
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind variable values
+        
+        
+        // execute query
+        if($stmt->execute()){
+            return 1;
+        }else{
+            return 0;
+        }
+        
+        
+    }
+
 
 }
 ?>

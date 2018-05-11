@@ -63,6 +63,7 @@
                                     $counties = file_get_contents(SITE_URL.'webservices/api/professional/getCounties.php?prof_id='.$_SESSION['id']);
                                     $counties = json_decode($counties, true); // decode the JSON into an associative array
                                     
+                                    $pcounties = array();
                                     
                                 ?>
 
@@ -71,15 +72,28 @@
                                    <?php 
                                         if(@$counties){
                                             foreach ($counties as $value) {
+                                                $pcounties[] = $value['county_id']; 
                                     ?>
                                                <option <?php if($value['is_main'] == 1){?> selected <?php }?> value="<?php echo $value['county_id']?>"><?php echo $value['county_name']?></option> 
                                     <?php
                                             }
                                         }
                                     ?>
-                                </select>
+                                </select><br><br>
 
-                                <div class="addcountie">ADD ANOTHER COUNTY</div>
+                                <?php 
+                                        if(@$counties[0]['county_id']){
+                                           
+                                            foreach ($counties as $value) {
+                                                
+                                    ?>
+                                                 <button type="button" class="mb-1 mt-1 mr-1 btn btn-default delcont" data-id="<?php echo $value['county_id'];?>" style="margin-bottom: 5px"><?php echo $value['county_name'];?> <i class="fa fa-close" style="color: red"></i> </button>
+                                    <?php
+                                            }
+                                        }
+                                    ?>
+
+                                <div class="addcountie" data-toggle="modal" data-target="#modalCountyForm">ADD ANOTHER COUNTY</div>
                             </div>
                             <div class="col-md-12">
 
@@ -259,7 +273,56 @@
             </div>
         </div>
     </div>
-</div>            
+</div> 
+
+<div class="modal fade" id="modalCountyForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Add New County</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <div class="md-form mb-5">
+                    <div class="form-group row">
+                            <label class="col-lg-3 control-label text-lg-right pt-2">Select County</label>
+                            <div class="col-lg-9">
+                                <?php
+                                    $counties = file_get_contents(SITE_URL.'webservices/api/county/read.php');
+                                    $counties = json_decode($counties, true); // decode the JSON into an associative array
+                                ?>
+                                <select data-plugin-selectTwo class="form-control populate" name="county" id="county">
+                                    <option value="">Select County</option>
+                                    <?php
+                                        foreach ($counties as $county) {
+                                            $cat_id = $county['id'];
+                                            $cat_name = $county['county_name'];
+                                            if(!in_array($cat_id , $pcounties)){
+                                                echo '<option value="'.$cat_id.'">'.$cat_name.'</option>';
+                                            }
+                                            
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                            
+                            
+                    </div>
+                    
+                </div>
+
+                
+
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button class="btn btn-info addcounty">Add</button>
+            </div>
+        </div>
+    </div>
+</div> 
+
 <script src="../js/core.js"></script> 
 <script type="text/javascript">
     $(document).ready(function(){
@@ -310,6 +373,53 @@
             var cat_id = $(this).attr('data-id');
             if (confirm('Are you sure want to remove this Trade?')) {
                 var getSaveAPI = API_LOCATION+'professional/deleteCategory.php?prof_id=<?php echo $_SESSION['id'];?>&cat_id='+cat_id;
+                $.ajax({
+                        type: "POST",
+                        url: getSaveAPI,
+                        data: "",
+                        dataType: "json",
+                        success: function(data)
+                        {
+                            alert(data['message']);
+                            location.reload();
+                        }
+                    });
+                return false;
+            }
+            
+            return false;
+        });
+
+
+        $('.addcounty').on('click', function(){
+            var county_id = $("#county").val();
+            if(county_id != ""){
+                var getSaveAPI = API_LOCATION+'professional/addCounty.php?prof_id=<?php echo $_SESSION['id'];?>&county_id='+county_id;
+                $.ajax({
+                        type: "POST",
+                        url: getSaveAPI,
+                        data: "",
+                        dataType: "json",
+                        success: function(data)
+                        {
+                            alert(data['message']);
+                            location.reload();
+                        }
+                    });
+                return false;
+
+            }else{
+                alert("Please Select Trade");
+            }
+            
+            return false;
+        });
+
+
+        $('.delcont').on('click',function(){
+            var county_id = $(this).attr('data-id');
+            if (confirm('Are you sure want to remove this County?')) {
+                var getSaveAPI = API_LOCATION+'professional/deleteCounty.php?prof_id=<?php echo $_SESSION['id'];?>&county_id='+county_id;
                 $.ajax({
                         type: "POST",
                         url: getSaveAPI,
