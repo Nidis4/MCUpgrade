@@ -1387,7 +1387,7 @@ ORDER BY rat.`created` DESC";
         
         $id = $this->id;
         // select query
-         $query = "Delete from `professionals_categories` where professional_id = '".$id."' and category_id = '".$category_id."'; Delete from professionals_applications where category_id='".$category_id."';";
+         $query = "Delete from `professionals_categories` where professional_id = '".$id."' and category_id = '".$category_id."'; Delete from professionals_applications where professional_id='".$id."' and category_id='".$category_id."';";
      
         // prepare query statement
         $stmt = $this->conn->prepare( $query );
