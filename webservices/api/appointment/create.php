@@ -67,10 +67,12 @@ if($stmt){
     	$payment->saveCustomerInvoice($cust_id, $category_id, $budget, $agent_id, $comment, "Cash", "", $datetime_added, $_POST['issuetype']);
     }
 
+    $customer_mobile = '6940589493';
+    $professional_mobile = '6940589493';
 
     if(@$employersms){
 	    	// initialize object
-    		$customer_mobile = '6940589493';
+    		
 
 			$category = new Category($db);
 			$category->id = $category_id;
@@ -129,7 +131,7 @@ if($stmt){
 	}
 	if(@$professionalsms || @$procheck){
 	    	// initialize object
-			$professional_mobile = '6940589493';
+			
 			
 			$defaultTimezone = date_default_timezone_get();
 			date_default_timezone_set('Europe/Athens');
@@ -137,17 +139,31 @@ if($stmt){
 			$times = explode('-', $time);
 			$dateTstampStart = strtotime($date . ' ' . $times[0]);
 			$dateTstampEnd = strtotime($date . ' ' . $times[1]);
-			$smsDate = date('l d/m/y', $dateTstampStart);			
-			$smsText = implode(' - ', [
+			$smsDate = date('l d/m/y', $dateTstampStart);	
+
+			if( $category_id == '103'){
+				$smsText = implode(' - ', [
 						$smsDate,
 						$times[0],
 						$address,
 						$budget . '€',
 						$firstname . ' ' . $surname,
-						$professional_mobile,
 						$landline,
 						$comment
 					]);
+			}else{
+				$smsText = implode(' - ', [
+						$smsDate,
+						$times[0],
+						$address,
+						$budget . '€',
+						$firstname . ' ' . $surname,
+						$customer_mobile,
+						$landline,
+						$comment
+					]);	
+			}	
+			
 
 			// Viber Connection			
 			$viber = new Viber($db);			
