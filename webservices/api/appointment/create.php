@@ -88,39 +88,40 @@ if($stmt){
 
     $customer_mobile     = '6940589493';
     $professional_mobile = '6940589493';
-    $professional_email  = "er.hpreetsingh@gmail.com";
+    $professional_email  = $professional->email;
 
     $adate1 = date_create($date);
-	$smsDate = date_format($adate1, 'l d/m/y');
+	$smsDate = date_format($adate1, 'd/m');
     //$smsDate = date('l d/m/y', strtotime($date));
 
 
-
+	$stime = explode('-', $time);
 
 
     // Send Email to Prof
-    $body    = file_get_contents("../../../emails/header.php");
-    $body   .= file_get_contents("../../../emails/create_appointment_prof.php");
-    $body   .= file_get_contents("../../../emails/footer.php");
-    $message = str_replace('{{URL}}', SITE_URL, $body );
-    //$message = str_replace('{{SURNAME}}', $professional_surname, $message );
-    //$message = str_replace('{{APPLICATION_NAME}}', $application_name, $message );
-    $message = str_replace('{{CUSTOMER_NAME}}', $firstname." ".$surname, $message );
-    $message = str_replace('{{ADDRESS}}', $address, $message );
-    $message = str_replace('{{DELIVERY_ADDRESS}}', $delivery_address, $message );
-    if($category_id == '103'){
-    	$message = str_replace('{{PHONE}}', '-', $message );
-    	$message = str_replace('{{EMAIL}}', '-', $message ); 
-    }else{
-   		$message = str_replace('{{PHONE}}', $customer_mobile, $message );
-    	$message = str_replace('{{EMAIL}}', $email, $message ); 	
-    }
+    // $body    = file_get_contents("../../../emails/header.php");
+    // $body   .= file_get_contents("../../../emails/create_appointment_prof.php");
+    // $body   .= file_get_contents("../../../emails/footer.php");
+    // $message = str_replace('{{URL}}', SITE_URL, $body );
+    // //$message = str_replace('{{SURNAME}}', $professional_surname, $message );
+    // //$message = str_replace('{{APPLICATION_NAME}}', $application_name, $message );
+    // $message = str_replace('{{CUSTOMER_NAME}}', $firstname." ".$surname, $message );
+    // $message = str_replace('{{ADDRESS}}', $address, $message );
+    // $message = str_replace('{{DELIVERY_ADDRESS}}', $delivery_address, $message );
+    // if($category_id == '103'){
+    // 	$message = str_replace('{{PHONE}}', '-', $message );
+    // 	$message = str_replace('{{EMAIL}}', '-', $message ); 
+    // }else{
+   	// 	$message = str_replace('{{PHONE}}', $customer_mobile, $message );
+    // 	$message = str_replace('{{EMAIL}}', $email, $message ); 	
+    // }
    
-    $message = str_replace('{{COST}}', $budget, $message );
-    $message = str_replace('{{COMMENTS}}', $comment, $message );
+    // $message = str_replace('{{COST}}', $budget, $message );
+    // $message = str_replace('{{COMMENTS}}', $comment, $message );
 
     $to = $professional_email;
-    $subject ="Ραντεβού: ". $smsDate .'-'. $time .'-'. $address;
+    
+    $subject ="Ραντεβού: ". $smsDate .'-'. $stime[0];
     // Always set content-type when sending HTML email
     $headers = "MIME-Version: 1.0" . "\r\n";
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -129,6 +130,36 @@ if($stmt){
     //$headers .= 'From: <webmaster@example.com>' . "\r\n";
     //$headers .= 'Cc: myboss@example.com' . "\r\n";
     //echo $message;
+    $defaultTimezone = date_default_timezone_get();
+	date_default_timezone_set('Europe/Athens');
+
+	$times = explode('-', $time);
+	$dateTstampStart = strtotime($date . ' ' . $times[0]);
+	$dateTstampEnd = strtotime($date . ' ' . $times[1]);
+	$smsDate = date('l d/m/y', $dateTstampStart);	
+
+    if( $category_id == '103'){
+		$message = implode(' - ', [
+				$smsDate,
+				$times[0],
+				$address,
+				$budget . '€',
+				$firstname . ' ' . $surname,
+				$landline,
+				$comment
+			]);
+	}else{
+		$message = implode(' - ', [
+				$smsDate,
+				$times[0],
+				$address,
+				$budget . '€',
+				$firstname . ' ' . $surname,
+				$customer_mobile,
+				$landline,
+				$comment
+			]);	
+	}
 
     mail($to,$subject,$message,$headers);
 
