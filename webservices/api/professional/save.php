@@ -125,7 +125,7 @@ if(@$_FILES['profile_agreement5']['name']){
 $professional = new Professional($db);
  
 // query products
-$stmt = $professional->update($_POST['professional_id'], $_POST['first_name'], $_POST['last_name'], $_POST['address'], $_POST['sex'], $_POST['profile_status'], $_POST['admin_comments'], $_POST['mobile'], $_POST['phone'], $_POST['email'], $_POST['calendar_id'], $profile_image1, $profile_image2, $profile_image3, $profile_perid1, $profile_perid2, $profile_agreement1, $profile_agreement2, $profile_agreement3, $profile_agreement4,$profile_agreement5, $approve_per, $approve_doc,$_POST['viewtype'], $_POST['verified'], $_POST['defaultsms']);
+$stmt = $professional->update($_POST['professional_id'], $_POST['first_name'], $_POST['last_name'], $_POST['address'], $_POST['sex'], $_POST['profile_status'], $_POST['admin_comments'], $_POST['mobile'], $_POST['phone'], $_POST['email'], $_POST['calendar_id'], $profile_image1, $profile_image2, $profile_image3, $profile_perid1, $profile_perid2, $profile_agreement1, $profile_agreement2, $profile_agreement3, $profile_agreement4,$profile_agreement5, $approve_per, $approve_doc,$_POST['viewtype'], $_POST['verified'], $_POST['defaultsms'],$_POST['mobile2']);
 //$stmt = $customer->search($keywords);
 //$num = $stmt->rowCount();
  

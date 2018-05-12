@@ -174,6 +174,7 @@ $professional_arr=array(
     "county_id" => $professional->county_id,
     "profile_status" => $professional->profile_status,
     "mobile" => $professional->mobile,
+    "mobile2" => $professional->mobile2,
     "phone" => $professional->phone,
     "email" => $professional->email,
     "calendar_id" => $professional->calendar_id,

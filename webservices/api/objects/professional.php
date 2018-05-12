@@ -394,7 +394,7 @@ ORDER BY `date` ASC,
      
         // query to read single record
         $query = "SELECT
-                 p.`id`, p.`first_name`, p.`last_name`, p.`sex`, p.`description`, p.`image`, p.`profile_status`, p.`admin_comments`,p.`viewtype`,p.`verified`,p.`defaultsms`, p.`service_area`, cd.`image1`, cd.`image2`, cd.`image3`, cd.`perid1`, cd.`perid2`, cd.`agreement1`, cd.`agreement2`, cd.`agreement3`, cd.`agreement4`, cd.`agreement5`, cd.`approve_per`, cd.`approve_doc`, co.`address`, co.`city`, co.`mobile`, co.`phone`, ca.`email`, ca.`calendar_id`, ct.`county_id`
+                 p.`id`, p.`first_name`, p.`last_name`, p.`sex`, p.`description`, p.`image`, p.`profile_status`, p.`admin_comments`,p.`viewtype`,p.`verified`,p.`defaultsms`, p.`service_area`, cd.`image1`, cd.`image2`, cd.`image3`, cd.`perid1`, cd.`perid2`, cd.`agreement1`, cd.`agreement2`, cd.`agreement3`, cd.`agreement4`, cd.`agreement5`, cd.`approve_per`, cd.`approve_doc`, co.`address`, co.`city`, co.`mobile`, co.`mobile2`, co.`phone`, ca.`email`, ca.`calendar_id`, ct.`county_id`
             FROM
                 " . $this->table_name . " p
                 LEFT JOIN ". $this->contact_table_name." co
@@ -444,6 +444,7 @@ ORDER BY `date` ASC,
         $this->verified = $row['verified'];
         $this->defaultsms = $row['defaultsms'];
         $this->mobile = $row['mobile'];
+        $this->mobile2 = $row['mobile2'];
         $this->phone = $row['phone'];
         $this->email = $row['email'];
         $this->calendar_id = $row['calendar_id'];
@@ -467,7 +468,7 @@ ORDER BY `date` ASC,
 
 
 
-    function update($id, $first_name, $last_name, $address, $sex, $profile_status, $admin_comments, $mobile, $phone, $email, $calendar_id, $profile_image1, $profile_image2, $profile_image3, $profile_perid1, $profile_perid2, $profile_agreement1, $profile_agreement2, $profile_agreement3, $profile_agreement4, $profile_agreement5, $approve_per, $approve_doc, $viewtype, $verified, $defaultsms  ){
+    function update($id, $first_name, $last_name, $address, $sex, $profile_status, $admin_comments, $mobile, $phone, $email, $calendar_id, $profile_image1, $profile_image2, $profile_image3, $profile_perid1, $profile_perid2, $profile_agreement1, $profile_agreement2, $profile_agreement3, $profile_agreement4, $profile_agreement5, $approve_per, $approve_doc, $viewtype, $verified, $defaultsms,$mobile2  ){
         
         
         $query = "UPDATE " . $this->table_name . "
@@ -490,7 +491,7 @@ ORDER BY `date` ASC,
         $stmt->bindParam(':defaultsms',  $defaultsms);
         
         if ($stmt->execute()) { 
-           $this->update_contact($id, $address, $mobile, $phone); 
+           $this->update_contact($id, $address, $mobile, $phone, $mobile2); 
            $this->update_account($id, $email, $calendar_id ); 
            $this->update_document($id, $profile_image1, $profile_image2, $profile_image3, $profile_perid1, $profile_perid2, $profile_agreement1, $profile_agreement2, $profile_agreement3, $profile_agreement4, $profile_agreement5, $approve_per, $approve_doc ); 
            return 1;
@@ -499,14 +500,14 @@ ORDER BY `date` ASC,
         }
     } // Save Professional
 
-    function update_contact($id, $address, $mobile, $phone ){
+    function update_contact($id, $address, $mobile, $phone, $mobile2 ){
         
         
         //$query = "UPDATE " . $this->contact_table_name . "
                     // SET
                     // `mobile`=:mobile, `phone`=:phone, `address`=:address";
 
-        $query = "INSERT INTO ". $this->contact_table_name ." (`professional_id`, `mobile`, `phone`, `address`) VALUES (:id, :mobile, :phone, :address) ON DUPLICATE KEY UPDATE `mobile`=:mobile, `phone`=:phone, `address`=:address";
+        $query = "INSERT INTO ". $this->contact_table_name ." (`professional_id`, `mobile`, `phone`, `address`, `mobile2`) VALUES (:id, :mobile, :phone, :address, :mobile2) ON DUPLICATE KEY UPDATE `mobile`=:mobile, `phone`=:phone, `address`=:address, `mobile2`= :mobile2";
         
         //$query .=" WHERE professional_id = :id";
 
@@ -518,6 +519,7 @@ ORDER BY `date` ASC,
         $stmt->bindParam(':mobile',  $mobile);
         $stmt->bindParam(':phone',  $phone);
         $stmt->bindParam(':address',  $address);
+        $stmt->bindParam(':mobile2',  $mobile2);
         
         if ($stmt->execute()) { 
            return 1;
