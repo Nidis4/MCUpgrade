@@ -1,4 +1,3 @@
-<?php include('header.php');?>
 	<tr>
 		<td class="action-content head-content" style="width:100%; display:table;" colspan="2"> 
 			<img class="fullimg" src="{{URL}}mid.jpg" style="width: 100%" />	
@@ -48,4 +47,3 @@
 			<div style="padding: 10px; margin-bottom: 10px; color: #f2930a;">Μπήκες... και Βρήκες τον Μάστορα σου!</div>
 		</td>
 	</tr>
-<?php include('footer.php');?>

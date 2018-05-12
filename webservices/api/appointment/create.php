@@ -8,6 +8,7 @@ include_once '../config/database.php';
 include_once '../objects/appointment.php';
 include_once '../objects/category.php';
 include_once '../objects/viber.php';
+include_once '../../../constants.php';
  
 // instantiate database and product object
 $database = new Database();
@@ -67,8 +68,31 @@ if($stmt){
     	$payment->saveCustomerInvoice($cust_id, $category_id, $budget, $agent_id, $comment, "Cash", "", $datetime_added, $_POST['issuetype']);
     }
 
-    $customer_mobile = '6940589493';
+    $customer_mobile     = '6940589493';
     $professional_mobile = '6940589493';
+    $professional_email = "er.hpreetsingh@gmail.com";
+
+    $smsDate = date('l d/m/y', $date);
+
+    // Send Email to Prof
+    $body = file_get_contents("../../../emails/header.php");
+    $body .= file_get_contents("../../../emails/create_appointment.php");
+    $body .= file_get_contents("../../../emails/footer.php");
+    $message = str_replace('{{URL}}', SITE_URL, $body );
+    $message = str_replace('{{KEY}}', $stmt['key'], $message );
+
+    $to = $professional_email;
+    $subject ="Ραντεβού: ". $smsDate .'-'. $time .'-'. $address;
+    // Always set content-type when sending HTML email
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+    // More headers
+    //$headers .= 'From: <webmaster@example.com>' . "\r\n";
+    //$headers .= 'Cc: myboss@example.com' . "\r\n";
+    //echo $message;
+
+    mail($to,$subject,$message,$headers);
 
     if(@$employersms){
 	    	// initialize object
