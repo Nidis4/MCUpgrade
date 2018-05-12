@@ -79,7 +79,7 @@ if($stmt){
     $body .= file_get_contents("../../../emails/create_appointment.php");
     $body .= file_get_contents("../../../emails/footer.php");
     $message = str_replace('{{URL}}', SITE_URL, $body );
-    $message = str_replace('{{KEY}}', $stmt['key'], $message );
+    //$message = str_replace('{{KEY}}', $stmt['key'], $message );
 
     $to = $professional_email;
     $subject ="Ραντεβού: ". $smsDate .'-'. $time .'-'. $address;
