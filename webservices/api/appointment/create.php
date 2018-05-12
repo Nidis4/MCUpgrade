@@ -87,20 +87,20 @@ if($stmt){
 
     $customer_mobile     = '6940589493';
     $professional_mobile = '6940589493';
-    $professional_email = "er.hpreetsingh@gmail.com";
+    $professional_email  = "er.hpreetsingh@gmail.com";
 
     $adate1 = date_create($date);
-	//$fdate1 = date_format($adate1, 'Y-m-d');
-    $smsDate = date('l d/m/y', $adate1);
+	$smsDate = date_format($adate1, 'l d/m/y');
+    //$smsDate = date('l d/m/y', strtotime($date));
 
 
 
 
 
     // Send Email to Prof
-    $body = file_get_contents("../../../emails/header.php");
-    $body .= file_get_contents("../../../emails/create_appointment.php");
-    $body .= file_get_contents("../../../emails/footer.php");
+    $body    = file_get_contents("../../../emails/header.php");
+    $body   .= file_get_contents("../../../emails/create_appointment.php");
+    $body   .= file_get_contents("../../../emails/footer.php");
     $message = str_replace('{{URL}}', SITE_URL, $body );
     $message = str_replace('{{SURNAME}}', $professional_surname, $message );
     $message = str_replace('{{APPLICATION_NAME}}', $application_name, $message );
