@@ -55,6 +55,23 @@ if($stmt){
         array("message" => "Appointment updated successfully.")
     );*/
 
+    // For Application Title
+    include_once '../objects/application.php';
+    $application = new Application($db);
+    $application->id = $application_id;
+    $appointment_stmt = $application->readOne();
+    $app_row = $appointment_stmt->fetch(PDO::FETCH_ASSOC);
+    $application_name = $app_row['title_greek'];
+
+
+    // For Professional Data
+    include_once '../objects/professional.php';
+    $professional = new Professional($db);
+    $professional->id = $prof_id;
+    $professional_stmt = $professional->readOne();
+    $professional_surname = $professional->last_name;
+
+
 
     /// Create invoice for Customer
     if(@$_POST['sendinvoice']){
@@ -72,14 +89,20 @@ if($stmt){
     $professional_mobile = '6940589493';
     $professional_email = "er.hpreetsingh@gmail.com";
 
-    $smsDate = date('l d/m/y', $date);
+    $adate1 = date_create($date);
+	//$fdate1 = date_format($adate1, 'Y-m-d');
+    $smsDate = date('l d/m/y', $adate1);
+
+
+
+
 
     // Send Email to Prof
     $body = file_get_contents("../../../emails/header.php");
     $body .= file_get_contents("../../../emails/create_appointment.php");
     $body .= file_get_contents("../../../emails/footer.php");
     $message = str_replace('{{URL}}', SITE_URL, $body );
-    //$message = str_replace('{{KEY}}', $stmt['key'], $message );
+    $message = str_replace('{{SURNAME}}', $professional_surname, $message );
 
     $to = $professional_email;
     $subject ="Ραντεβού: ". $smsDate .'-'. $time .'-'. $address;
