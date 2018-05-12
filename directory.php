@@ -1018,6 +1018,9 @@ button.close-modal {
 div#callback .modal-header {
     border-bottom: 0px solid;
 }
+.submit-msg {
+	font-weight: 600;
+}
 </style>
 <div class="col-call-back">
 		<button type="button" class="close-text-call-back-btn" onclick="closetextcallbackbtn();" >×</button>
@@ -1026,7 +1029,7 @@ div#callback .modal-header {
     	
     	<div class="call-arrow"></div><p>Έχεις ακόμα απορίες;</p><p><b>Ζήτησε μας να σε καλέσουμε!</b></p></div>
 
-    <div  type="button" class="call-btn" data-toggle="modal" data-target="#callback"><img src="img/tel-call-back-2.png"></div>
+    <div  type="button" class="call-btn" data-toggle="modal" data-target="#callback"><img src="<?php echo $api_url;?>img/tel-call-back-2.png"></div>
 
 </div>
 <div id="callback" class="modal fade" role="dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button  type="button" class="close-modal" data-dismiss="modal">&times;</button></div><div class="modal-body">
@@ -1037,11 +1040,7 @@ div#callback .modal-header {
 
 				<p>Στείλε μας ένα αίτοιμα για επικοινωνία!</p>
 
-	          
-
 	            <input class="input-style" placeholder="Όνομα" name="name"  id="name" type="text" required> 
-
-	           
 
 	            <input name="mobile"  id="mobile" placeholder="Τηλ: 691 234 5678" type="number" onkeyup="check();" required ><span id="message"></span>
 
@@ -1126,7 +1125,6 @@ div#callback .modal-header {
 	            url:PostUrl,
 	            data:{name,mobile,time,url},
 				success: function(data){
-				   console.log(data); 
 				    jQuery(".submit-msg").text("Θα επικοινωήσουμε σύντομα μαζί σας!");
 				    jQuery(".submit-msg").css("color","green");
 				}
