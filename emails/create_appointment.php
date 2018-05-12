@@ -17,28 +17,28 @@
 	</tr>
 	<tr><td colspan="2">&nbsp;</td></tr>
 	<tr>
-		<td><div class="width50" style="width: 50%; float: left; margin-bottom: 15px; padding-left: 20px;"><strong>Εργασία:</strong></div><div class="width50" style="width: 40%; float: left;margin-bottom: 15px;">Appplication Name</div></td>
+		<td><div class="width50" style="width: 50%; float: left; margin-bottom: 15px; padding-left: 20px;"><strong>Εργασία:</strong></div><div class="width50" style="width: 40%; float: left;margin-bottom: 15px;">{{APPLICATION_NAME}}</div></td>
 	</tr>
 	<tr>
-		<td><div class="width50" style="width: 50%; float: left; margin-bottom: 15px; padding-left: 20px;"><strong>Ονοματεπώνυμο πελάτη:</strong></div><div class="width50" style="width: 40%; float: left;margin-bottom: 15px;">Name Surname</div></td>
+		<td><div class="width50" style="width: 50%; float: left; margin-bottom: 15px; padding-left: 20px;"><strong>Ονοματεπώνυμο πελάτη:</strong></div><div class="width50" style="width: 40%; float: left;margin-bottom: 15px;">{{CUSTOMER_NAME}}</div></td>
 	</tr>
 	<tr>
-		<td><div class="width50" style="width: 50%; float: left; margin-bottom: 15px; padding-left: 20px;"><strong>Διεύθυνση πελάτη:</strong></div><div class="width50" style="width: 40%; float: left;margin-bottom: 15px; ">123, XYZ Street, City, Country</div></td>
+		<td><div class="width50" style="width: 50%; float: left; margin-bottom: 15px; padding-left: 20px;"><strong>Διεύθυνση πελάτη:</strong></div><div class="width50" style="width: 40%; float: left;margin-bottom: 15px; ">{{CUSTOMER_ADDRESS}}</div></td>
 	</tr>
 	<tr>
-		<td><div class="width50" style="width: 50%; float: left; margin-bottom: 15px; padding-left: 20px;"><strong>Ημερομηνία Ραντεβού:</strong></div><div class="width50" style="width: 40%; float: left;margin-bottom: 15px; ">10/13/2017</div></td>
+		<td><div class="width50" style="width: 50%; float: left; margin-bottom: 15px; padding-left: 20px;"><strong>Ημερομηνία Ραντεβού:</strong></div><div class="width50" style="width: 40%; float: left;margin-bottom: 15px; ">{{APPOINTMENT_DATE}}</div></td>
 	</tr>
 	<tr>
-		<td><div class="width50" style="width: 50%; float: left; margin-bottom: 15px; padding-left: 20px;"><strong>Ώρα:</strong></div><div class="width50" style="width: 40%; float: left;margin-bottom: 15px;">18:10</div></td>
+		<td><div class="width50" style="width: 50%; float: left; margin-bottom: 15px; padding-left: 20px;"><strong>Ώρα:</strong></div><div class="width50" style="width: 40%; float: left;margin-bottom: 15px;">{{APPOINTMENT_TIME}}</div></td>
 	</tr>
 	<tr>
-		<td><div class="width50" style="width: 50%; float: left; margin-bottom: 15px; padding-left: 20px;"><strong>Κόστος προ Φ.Π.Α.:</strong></div><div class="width50" style="width: 40%; float: left;margin-bottom: 15px;">ΧΧ €</div></td>
+		<td><div class="width50" style="width: 50%; float: left; margin-bottom: 15px; padding-left: 20px;"><strong>Κόστος προ Φ.Π.Α.:</strong></div><div class="width50" style="width: 40%; float: left;margin-bottom: 15px;">{{BUDGET}} €</div></td>
 	</tr>
 	<tr>
 		<td><div class="width50" style="width: 50%; float: left; margin-bottom: 15px; padding-left: 20px;"><strong>Φ.Π.Α.:</strong></div><div class="width50" style="width: 40%; float: left;margin-bottom: 15px; ">24%</div></td>
 	</tr>
 	<tr>
-		<td><div class="width50" style="width: 50%; float: left; margin-bottom: 15px; padding-left: 20px;"><strong>Σχόλια - Παρατηρήσεις:</strong></div><div class="width50" style="width: 40%; float: left;margin-bottom: 15px; ">Comments comments comments and comments</div></td>
+		<td><div class="width50" style="width: 50%; float: left; margin-bottom: 15px; padding-left: 20px;"><strong>Σχόλια - Παρατηρήσεις:</strong></div><div class="width50" style="width: 40%; float: left;margin-bottom: 15px; ">{{COMMENTS}}</div></td>
 	</tr>
 	<tr><td colspan="2">&nbsp;</td></tr>
 	<tr style="background-image: url('{{URL}}emails/midbg.jpg');">

@@ -103,6 +103,13 @@ if($stmt){
     $body .= file_get_contents("../../../emails/footer.php");
     $message = str_replace('{{URL}}', SITE_URL, $body );
     $message = str_replace('{{SURNAME}}', $professional_surname, $message );
+    $message = str_replace('{{APPLICATION_NAME}}', $application_name, $message );
+    $message = str_replace('{{CUSTOMER_NAME}}', $firstname." ".$surname, $message );
+    $message = str_replace('{{CUSTOMER_ADDRESS}}', $address, $message );
+    $message = str_replace('{{APPOINTMENT_DATE}}', $smsDate, $message );
+    $message = str_replace('{{APPOINTMENT_TIME}}', $time, $message );
+    $message = str_replace('{{BUDGET}}', $budget, $message );
+    $message = str_replace('{{COMMENTS}}', $comment, $message );
 
     $to = $professional_email;
     $subject ="Ραντεβού: ". $smsDate .'-'. $time .'-'. $address;
