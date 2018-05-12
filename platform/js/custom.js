@@ -665,13 +665,18 @@ $( ".createAppointment" ).click(function() {
                         dataType: "json",
                         success: function(data)
                         {
-                            if(data.message != ""){
-                                alert("Please update the Customer's Invoice Setting data!");
-                                return false;
-                            }else{
-                                var createAppointAPI = API_LOCATION+'appointment/create.php';
-                                //create($prod_id, $cust_id, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment);
-                                $.ajax({
+                            // if(data.message != ""){
+                            //     alert("Please update the Customer's Invoice Setting data!");
+                            //     return false;
+                            // }else{
+                            //     var createAppointAPI = API_LOCATION+'appointment/create.php';
+                            //     //create($prod_id, $cust_id, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment);
+                                
+                            // }
+                            //alert("Appointment Booked");
+                            //window.location.replace('../platform/appointments.php');
+
+                            $.ajax({
                                         type: "POST",
                                         url: createAppointAPI,
                                         data: {
@@ -708,9 +713,7 @@ $( ".createAppointment" ).click(function() {
                                             window.location.replace('../platform/appointments.php');
                                         }
                                     });
-                            }
-                            //alert("Appointment Booked");
-                            //window.location.replace('../platform/appointments.php');
+                            
                         }
                     });                    
 
