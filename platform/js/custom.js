@@ -787,6 +787,10 @@ $( "button.updateAppointment" ).click(function() {
     var commision = $("#commision").val();
     var startDate = $("#startDate").val();
     var endDate = $("#endDate").val();
+    var old_start = $("#old_start").val();
+    var old_end = $("#old_end").val();
+    var old_address = $("#old_address").val();
+    var old_time = $("#old_time").val();
     var comments = $("#comment123").val();
 
     var surname = $("#surname").val();
@@ -911,7 +915,12 @@ $( "button.updateAppointment" ).click(function() {
                                 county_id: county,
                                 sendinvoice: sendinvoice,
                                 duration: duration,
-                                appointment_id: appointment_id
+                                appointment_id: appointment_id,
+                                old_start: old_start,
+                                old_end: old_end,
+                                old_address: old_address,
+                                startDate: startDate,
+                                endDate: endDate,
                             },
                             dataType: "json",
                             success: function(data)

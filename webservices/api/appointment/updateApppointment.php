@@ -55,6 +55,61 @@ $stmt = $appointment->updateAppointment($appointment_id, $cust_id, $category_id,
 //$stmt = $customer->search($keywords);
 //$num = $stmt->rowCount();
  if($stmt){ 
+
+ 	if(($_POST['startDate'] != $_POST['old_start']) || ($_POST['old_end'] != $_POST['endDate']) || ($_POST['address'] != $_POST['old_address'])|| ($_POST['time'] != $_POST['old_time'])){
+
+
+ 			include_once '../objects/professional.php';
+    		$professional = new Professional($db);
+    		$professional->id = $prof_id;
+    		$professional_stmt = $professional->readOne();
+    		//$professional_surname = $professional->last_name;
+    		$professional_mobile = $professional->mobile; 
+
+    	
+ 			
+ 			$professional_mobile = '6940589493';
+
+ 			$defaultTimezone = date_default_timezone_get();
+			date_default_timezone_set('Europe/Athens');
+
+			$times = explode('-', $time);
+			$dateTstampStart = strtotime($date . ' ' . $times[0]);
+			$dateTstampEnd = strtotime($date . ' ' . $times[1]);
+			$smsDate = date('l d/m/y', $dateTstampStart);	
+
+			if( $category_id == '103'){
+				$smsText = implode(' - ', [
+						$smsDate,
+						$times[0],
+						$address,
+						$budget . '€',
+						$firstname . ' ' . $surname,
+						$landline,
+						$comment
+					]);
+			}else{
+				$smsText = implode(' - ', [
+						$smsDate,
+						$times[0],
+						$address,
+						$budget . '€',
+						$firstname . ' ' . $surname,
+						$customer_mobile,
+						$landline,
+						$comment
+					]);	
+			}	
+			
+
+			// Viber Connection			
+			$viber = new Viber($db);			
+			$viber->send($professional_mobile, $smsText);
+
+ 	}
+
+
+
  	echo json_encode(
        array("message" => "Completed")
  	);

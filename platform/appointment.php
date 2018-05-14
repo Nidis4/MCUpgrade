@@ -258,8 +258,10 @@ include('config/core.php');
 															<i class="fa fa-calendar"></i>
 														</span>
 														<input type="text" class="form-control" name="start" value="<?php echo $appointment['date'];?>" id='startDate'>
+														<input type="hidden" name="old_start" id="old_start" value="<?php echo $appointment['date'];?>">
 														<span class="input-group-addon">to</span>
 														<input type="text" class="form-control" value="<?php echo date('Y-m-d', strtotime($appointment['date']." +5 days"));?>" name="end" id='endDate'>
+														<input type="hidden" name="old_end" id="old_end" value="<?php echo date('Y-m-d', strtotime($appointment['date']." +5 days"));?>">
 													</div>
 												</div>
 										</div>
@@ -357,6 +359,7 @@ include('config/core.php');
 											<label class="col-sm-3 control-label text-sm-right pt-2">Address <span class="required">*</span></label>
 											<div class="col-sm-9">
 												<input type="text" name="address" id="pac-input-address" value="<?php echo $appointment['customer_address'];?>" class="form-control" placeholder="eg.: Gonata 7, 152 12, Athens" required/>
+												<input type="hidden" name="old_address" id="old_address"> value="<?php echo $appointment['customer_address'];?>">
 											</div>
 										</div>
 
@@ -512,6 +515,7 @@ include('config/core.php');
 									<div class="row">
 										<div class="col-sm-3 text-center">
 											<div id='chosen-slot'><strong>Chosen slot:</strong><span id='appDate'></span> <span id='appTime'></span></span></div>
+											<input type="hidden" name="old_time" id="old_time" value="<?php echo $appointment['time'];?>">
 										</div>
 										<div class="col-sm-6 text-center">
 											<button type="button" class="mb-1 mt-1 mr-1 btn btn-warning updateAppointment" value="<?php echo $_GET['id']; ?>" >Book Appointment</button>
