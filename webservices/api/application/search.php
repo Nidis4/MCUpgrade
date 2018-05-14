@@ -40,7 +40,9 @@ if($num>0){
             "id" => $application_id,
             "title_greek" => $title_greek,
             "category_id" => $category_id,
-            "image" => $image_loc
+            "image" => $image_loc,
+            "app_permalink" => $app_permalink,
+            "permalink" => $permalink
         );
  
         array_push($applications_arr, $application_item);

@@ -58,8 +58,6 @@
 
    				$url_county= $select_county['id'];
 
-   				
-
    				$county_name_gr = $select_county['county_name_gr'];
    				$county_display_name_gr = $select_county['display_name_gr'];
    				$county_permalink = $select_county['permalink'];
@@ -128,7 +126,8 @@
 include('menu.php');
 include('search.php');
 
- ?>
+?>
+
 
  
 <div class="container-fluid">
@@ -231,13 +230,10 @@ include('search.php');
 						$app_short_desc_gr = $application['short_description_gr'];
 						$app_professionals = $application['professionals'];
 						$app_unit = $application['unit'];
-						$app_detail_description_gr = $application['detail_description_gr'];
-
-
-
-
+						$app_detail_description_gr = $application['detail_description_gr'];			
 		
 				?>
+
 				<div class="directory-breadcrumb">
 					<ul class="ul-breadcrumb">
 						<li><a class="a-breadcrumb" href="<?php echo $api_url; ?>">Αρχική</a></li>
@@ -371,6 +367,7 @@ include('search.php');
 						$professional_servicearea = $professionals['servicearea'];
 						$professional_review = $professionals['reviews_stats'];
 						$porfessional_counties = $professionals['counties'];
+						$professional_permalink = $professionals['permalink'] . '/';
 
 						$professional_counties_num = sizeof($porfessional_counties);
 
@@ -399,7 +396,7 @@ include('search.php');
 						<div class="row row-prof-main-col-inner">
 						  		<div class="col-md-3 col-sm-3 professional-img-con">
 						  			<div class="professional-img">
-						  				<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id . '&app_id=' . $application_id; ?>" >
+						  				<a class="apost" value="<?php echo $professional_permalink; ?>" target="_blank" href="<?php echo $profile_url . $professional_permalink; ?>" >
 						  					<img src="<?php echo $api_url.'img/professional-imgs/'.$profile_img ?>" onerror="this.src='<?php echo $api_url; ?>img/professional-imgs/default-img-4.jpg';" alt="" />
 						  					
 						  				</a>
@@ -411,8 +408,8 @@ include('search.php');
 											
 												<div class="professional-info-text-name">
 
-													<p class="professional-name"><span class="newmemname"><a target="_blank" class="con-name" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id; ?>"><?php echo $professional_first_name . ' ' . $professional_last_name; ?></a></span></p>
-													<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id; ; ?>">
+													<p class="professional-name"><span class="newmemname"><a target="_blank" class="con-name" href="<?php echo $profile_url . $professional_permalink; ?>"><?php echo $professional_first_name . ' ' . $professional_last_name; ?></a></span></p>
+													<a target="_blank" href="<?php echo $profile_url . $professional_permalink; ?>">
 														<p><span class="profile-label">Προβολή προφίλ</span></p>
 													</a>
 												</div>
@@ -447,7 +444,7 @@ include('search.php');
 								<div class="col-md-3 col-sm-3 col-professional-review">
 									
 										<?php if($professional_review['total'] > 0){ ?>
-												<a target="_blank" class="directory-reviews-link" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id.'#proffessionalRiviews'; ?>">
+												<a target="_blank" class="directory-reviews-link" href="<?php echo $profile_url . $professional_permalink . '#proffessionalRiviews'; ?>">
 			                                        <div class="new_professional_review_score">
 				                                        <div class="professional_score">Βαθμολογία</div>
 				                                        <div class="newTotalRatingOuter"><span class="rating-num"><?php 
@@ -483,13 +480,13 @@ include('search.php');
 											</a>
 											<?php } ?>
 
-											<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id; ; ?>">
+											<a target="_blank" href="<?php echo $profile_url . $professional_permalink; ?>">
 											<div class="professional_new_tel"><img src="<?php echo $api_url;?>img/new-tel-white.png">Τηλέφωνο</div>
 											</a>
 									
 								</div>
 							</div>
-							<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id; ; ?>">
+							<a target="_blank" href="<?php echo $profile_url . $professional_permalink; ?>">
 								<div style="display: none;" class="row row-professional-profile">
 									<div class="prof-profile-btn">Προφίλ Επαγγελματία  <i class="fa fa-angle-right"></i></div>
 								</div>
@@ -753,7 +750,7 @@ include('search.php');
 						<div class="row row-prof-main-col-inner">
 						  		<div class="col-md-3 col-sm-3 professional-img-con">
 						  			<div class="professional-img">
-						  				<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id . '&app_id=' . $application_id; ?>" >
+						  				<a target="_blank" href="<?php echo $profile_url . $professional_permalink; ?>" >
 						  					<img src="<?php echo $api_url.'img/professional-imgs/'.$profile_img ?>" onerror="this.src='<?php echo $api_url; ?>img/professional-imgs/default-img-4.jpg';" alt="" />
 						  					
 						  				</a>
@@ -765,8 +762,8 @@ include('search.php');
 											
 												<div class="professional-info-text-name">
 
-													<p class="professional-name"><span class="newmemname"><a target="_blank" class="con-name" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id; ?>"><?php echo $professional_first_name . ' ' . $professional_last_name; ?></a></span></p>
-													<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id; ; ?>">
+													<p class="professional-name"><span class="newmemname"><a target="_blank" class="con-name" href="<?php echo $profile_url . $professional_permalink; ?>"><?php echo $professional_first_name . ' ' . $professional_last_name; ?></a></span></p>
+													<a target="_blank" href="<?php echo $profile_url . $professional_permalink; ?>">
 														<p><span class="profile-label">Προβολή προφίλ</span></p>
 													</a>
 												</div>
@@ -801,7 +798,7 @@ include('search.php');
 								<div class="col-md-3 col-sm-3 col-professional-review">
 									
 										<?php if($professional_review['total'] > 0){ ?>
-												<a target="_blank" class="directory-reviews-link" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id.'#proffessionalRiviews'; ?>">
+												<a target="_blank" class="directory-reviews-link" href="<?php echo $profile_url . $professional_permalink; ?>">
 			                                        <div class="new_professional_review_score">
 				                                        <div class="professional_score">Βαθμολογία</div>
 				                                        <div class="newTotalRatingOuter"><span class="rating-num"><?php 
@@ -837,13 +834,13 @@ include('search.php');
 											</a>
 											<?php } ?>
 
-											<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id; ; ?>">
+											<a target="_blank" href="<?php echo $profile_url . $professional_permalink; ?>">
 											<div class="professional_new_tel"><img src="<?php echo $api_url; ?>img/new-tel-white.png">Τηλέφωνο</div>
 											</a>
 									
 								</div>
 							</div>
-							<a target="_blank" href="<?php echo $profile_url .'?id='. $professional_id .'&app_id='. $application_id; ; ?>">
+							<a target="_blank" href="<?php echo $profile_url . $professional_permalink; ?>">
 								<div style="display: none;" class="row row-professional-profile">
 									<div class="prof-profile-btn">Προφίλ Επαγγελματία  <i class="fa fa-angle-right"></i></div>
 								</div>

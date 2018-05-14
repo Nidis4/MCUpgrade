@@ -9,34 +9,34 @@ header('Content-Type: application/json');
 // include database and object files
 include_once '../config/core.php';
 include_once '../config/database.php';
-include_once '../objects/application.php';
+include_once '../objects/category.php';
  
 // instantiate database and category object
 $database = new Database();
 $db = $database->getConnection();
  
 // initialize object
-$application = new Application($db);
+$category = new Category($db);
 
 // set ID property of product to be edited
-$permalink = isset($_GET['permalink']) ? $_GET['permalink'] : die();
+$id = isset($_GET['id']) ? $_GET['id'] : die();
 
 
 //echo $category->id;
 
     // create array
-    $stmt = $application->read_app_id($permalink);
+    $stmt = $category->read_cat_meta($id);
  
-    $application_arr=array(
-        "application_id" => $application->application_id,
-        "meta_title" => $application->meta_title,
-        "meta_description" => $application->meta_description,
-        "meta_robots" => $application->meta_robots,
-        "permalink" => $application->permalink,
-        "category_id" => $application->category_id
+    $category_arr=array(
+        "category_id" => $category->category_id,
+        "meta_title" => $category->meta_title,
+        "meta_description" => $category->meta_description,
+        "meta_robots" => $category->meta_robots,
+        "permalink" => $category->permalink
+
 
         
     );
      
-    echo json_encode($application_arr);
+    echo json_encode($category_arr);
 ?>

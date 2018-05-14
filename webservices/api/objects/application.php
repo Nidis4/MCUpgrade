@@ -113,7 +113,14 @@ class Application{
     }
 
     function read_app_id($permalink){
-        $query ="SELECT * FROM applications_meta WHERE permalink ='".$permalink."'";
+        $query ="SELECT  a.`application_id`, a.`meta_title` , a.`meta_description` , a.`meta_robots`, a.`permalink`, acat.`category_id` FROM 
+         `applications_meta` a,
+         `applications` acat
+
+        WHERE permalink ='".$permalink."'
+        AND
+         a.`application_id` = acat.`id` "; 
+
         $stmt = $this->conn->prepare( $query );
      
         $stmt->execute();
@@ -127,6 +134,7 @@ class Application{
         $this->meta_description = $row['meta_description'];
         $this->meta_robots = $row['meta_robots'];
         $this->permalink = $row['permalink'];
+        $this->category_id = $row['category_id'];
     }
 
 
@@ -134,32 +142,32 @@ class Application{
      
         // query to read single record
         $query = "SELECT
-  applications.id,
-  applications.category_id,
-  categories.name_greek,
-  categories.image_loc,
-  applications.`title`,
-  applications.`title_greek`,
-  applications.`short_description`,
-  applications.`short_description_gr`,
-  applications.`detail_description`,
-  applications.`detail_description_gr`,
-  applications.`unit`,
-  applications.`min_price`,
-  applications.`sequence`,
-  applications.`modified`,
-  applications_meta.`permalink`,
-  COUNT(professionals_applications.application_id) AS total,
-  MIN(professionals_applications.price) AS minimum_price
-FROM
-  applications
-LEFT JOIN professionals_applications ON applications.id = professionals_applications.application_id
-LEFT JOIN categories ON categories.id = applications.category_id
-LEFT JOIN professionals ON professionals.id = professionals_applications.professional_id
-LEFT JOIN applications_meta ON applications.id = applications_meta.application_id
-WHERE professionals_applications.price >0 AND applications.category_id=:cat_id AND professionals.verified=1
-GROUP BY applications.id
-ORDER BY applications.sequence ASC";
+          applications.id,
+          applications.category_id,
+          categories.name_greek,
+          categories.image_loc,
+          applications.`title`,
+          applications.`title_greek`,
+          applications.`short_description`,
+          applications.`short_description_gr`,
+          applications.`detail_description`,
+          applications.`detail_description_gr`,
+          applications.`unit`,
+          applications.`min_price`,
+          applications.`sequence`,
+          applications.`modified`,
+          applications_meta.`permalink`,
+          COUNT(professionals_applications.application_id) AS total,
+          MIN(professionals_applications.price) AS minimum_price
+        FROM
+          applications
+        LEFT JOIN professionals_applications ON applications.id = professionals_applications.application_id
+        LEFT JOIN categories ON categories.id = applications.category_id
+        LEFT JOIN professionals ON professionals.id = professionals_applications.professional_id
+        LEFT JOIN applications_meta ON applications.id = applications_meta.application_id
+        WHERE professionals_applications.price >0 AND applications.category_id=:cat_id AND professionals.verified=1
+        GROUP BY applications.id
+        ORDER BY applications.sequence ASC";
      
         // prepare query statement
         $stmt = $this->conn->prepare( $query );
@@ -179,15 +187,19 @@ ORDER BY applications.sequence ASC";
     function search($term){
 
 
-        $query = "SELECT s.`application_id`, a.`title_greek` , a.`category_id`, c.`image_loc`
+        $query = "SELECT s.`application_id`, a.`title_greek` , a.`category_id`, c.`image_loc`, am.`permalink` AS `app_permalink`, cm.`permalink`
                 FROM
-                    `applications_search` s, `applications` a, `categories` c
+                    `applications_search` s, `applications` a, `categories` c, `applications_meta` am, `categories_meta` cm
                 WHERE
-                    (s.`tags` LIKE '%$term%' OR a.`title_greek` LIKE '%$term%')
+                    (s.`tags` LIKE '%$term%' OR a.`title_greek` LIKE '%$term%' )
                 AND
                     s.`application_id` = a.`id`
                 AND
                     a.`category_id` = c.`id`
+                AND 
+                    am.`application_id` = a.`id`
+                AND 
+                    cm.`category_id` = c.`id`
                 ORDER BY
                     a.`title_greek` ASC";
 

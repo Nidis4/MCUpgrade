@@ -58,6 +58,24 @@ class Category{
         $this->permalink = $row['permalink'];
     }
 
+    function read_cat_meta($id){
+        $query ="SELECT * FROM categories_meta WHERE category_id ='".$id."'";
+        
+        $stmt = $this->conn->prepare( $query );
+     
+        $stmt->execute();
+     
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+        // set values to object properties
+        $this->category_id = $row['category_id'];
+        $this->meta_title = $row['meta_title'];
+        $this->meta_description = $row['meta_description'];
+        $this->meta_robots = $row['meta_robots'];
+        $this->permalink = $row['permalink'];
+    }
+
     function readOne(){
      
         // query to read single record

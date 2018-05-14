@@ -8,6 +8,7 @@
 	$directory_url = $api_url . $directory_url;
 
 	$profile_url = "profile.php";
+	$profile_url = "profile/";
 	$profile_url = $api_url . $profile_url;
 
 	$signup_url = "sign_up.php";

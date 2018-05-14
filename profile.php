@@ -3,8 +3,15 @@
                     include('constants.php'); 
                     include('front_end_config/core.php');
 
-                        if (isset($_GET['id'])) {
-                            $professional = file_get_contents($api_url .'/webservices/api/professional/read_one.php?id='. $_GET['id']);
+                        if (isset($_GET['prof_permalink'])) {
+
+                            $professional_meta = file_get_contents($api_url .'/webservices/api/professional/read_professional_meta.php?prof_permalink='. $_GET['prof_permalink']);
+                            $professional_meta = json_decode($professional_meta, true); // decode the JSON into an associative array
+
+                            $professionalID = $professional_meta['professional_id'];
+
+
+                            $professional = file_get_contents($api_url .'/webservices/api/professional/read_one.php?id='. $professionalID);
                             $professional = json_decode($professional, true); // decode the JSON into an associative array
 
                             $first_name = $professional['first_name'];
@@ -56,10 +63,10 @@
         
         <title>ΜyConstructor</title>
 
-        <link rel="alternate" hreflang="el" href="https://myconstructor.gr/blog/matakomiseis-metafores/">
+        <link rel="alternate" hreflang="el" href="">
 
-        <meta name="description" content="Μετακόμιση οικοσκευών από 49€. Μετακομίσεις σε όλη την Ελλάδα. Οικονομικές μεταφορές με ανυψωτικό και αμπαλάζ. ΠΡΟΣΦΟΡΕΣ Μετακόμιση Γκαρσονιέρα 49€ - Μετακόμιση Δυάρι 70€ - Μετακόμιση Τριάρι 90€ - Μετακόμιση Τεσσάρι 110€. Μετακομίστε με ασφάλεια! Αξιολογημένες Μεταφορικές Εταιρίες.">
-        <link rel="canonical" href="https://myconstructor.gr/blog/matakomiseis-metafores/">
+        <meta name="description" content="">
+        <link rel="canonical" href="">
         <meta property="og:locale" content="el_GR">
 
         <?php include('header.php'); ?>
@@ -71,8 +78,7 @@
 <?php
 include('menu.php');
 include('search.php');
- 
- ?>
+?>
 
 
 
@@ -83,7 +89,7 @@ include('search.php');
 
                             <div class="col-md-3 profile-img">
                                 <div class="profile-img-inner">
-                                    <img src="<?php echo 'img/professional-imgs/'.$image ?>" onerror="this.src='img/professional-imgs/default-img-4.jpg';" alt="" />
+                                    <img src="<?php echo $api_url .'img/professional-imgs/'.$image ?>" onerror="this.src='<?php echo $api_url; ?>img/professional-imgs/default-img-4.jpg';" alt="" />
                                     <?php if(sizeof($reviews)>0){ ?>
                                         <div class="total-rating-num-outer"><span class="total-rating-num"><?php 
                                                 $totalRevScore = floordec($review_stats['average_total'], 1);
@@ -141,7 +147,7 @@ include('search.php');
                                     $app= $_GET['app_id'];
 
                                     if( $app == '69' || $app == '70' || $app == '71' || $app == '72' || $app == '196' || $app == '219' || $app == '218' ||  $app == '216'  ){ ?>
-                                        <a href="https://myconstructor.gr/transport/?memid=<?php echo $_GET['id']; ?>&amp;appid=<?php echo $app; ?>&amp;name=<?php echo $first_name; ?>&amp;surname=<?php echo $last_name; ?>" target="_blank">
+                                        <a href="https://myconstructor.gr/transport/?memid=<?php echo $professionalID; ?>&amp;appid=<?php echo $app; ?>&amp;name=<?php echo $first_name; ?>&amp;surname=<?php echo $last_name; ?>" target="_blank">
 
                                             <div class="btn-prosfora-prof">Κλείσε online</div>
                                         </a>
@@ -229,7 +235,7 @@ include('search.php');
                                             <div class="tab-pane active" id="app-<?php echo $application['id']; ?>">
                                                 <div class="title-app-tabs-content">
                                                     <h3><?php echo $application_name; ?></h3>
-                                                    <div class="img-sep-1"><img src="img/separator-4.png"></div>
+                                                    <div class="img-sep-1"><img src="<?php echo $api_url; ?>img/separator-4.png"></div>
                                                 </div>
                                                 <ul class="ul-app-info">
                                                         
@@ -258,7 +264,7 @@ include('search.php');
                                             <div class="tab-pane" id="app-<?php echo $application['id']; ?>">
                                                 <div class="title-app-tabs-content">
                                                     <h3><?php echo $application_name; ?></h3>
-                                                    <div class="img-sep-1"><img src="img/separator-4.png"></div>
+                                                    <div class="img-sep-1"><img src="<?php echo $api_url; ?>img/separator-4.png"></div>
                                                 </div>
                                                 <ul class="ul-app-info"> 
                                                     <li class="app-pricing-info">
@@ -298,7 +304,7 @@ include('search.php');
                         <div id="proffessionalImages" class="row proffessional-photos-row">
                             <div class="title-prof-photos">
                                 <h3>Εικόνες Επαγγελματία</h3>
-                                <img src="img/separator-4.png">
+                                <img src="<php echo $api_url; ?>img/separator-4.png">
                             </div>
                             <?php foreach ($portfolio_photos as $photos) {
                                 
@@ -309,15 +315,6 @@ include('search.php');
                                         <img src="<?php echo $portfolio_url . $photo_name; ?>" class="img-fluid">
                                 </a>
                             <?php } ?>
-                              <!--  <a href="img/matzouranis-2.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
-                                        <img src="img/matzouranis-3.jpg" class="img-fluid">
-                                </a>
-                                <a href="img/matzouranis-3.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
-                                        <img src="img/matzouranis-4.jpg" class="img-fluid">
-                                </a>
-                                <a href="img/matzouranis-4.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
-                                        <img src="img/matzouranis-4.jpg" class="img-fluid">
-                                </a> -->
                             <div class="col-md-12 outer-porfolio-btns">
                                 <div id="loadmore">Εμφάνισε Περισσότερες</div>
                                 <div id="showless">Εμφάνισε Λιγότερες</div>
@@ -335,7 +332,7 @@ include('search.php');
                                 <div class="col-md-12">
                                     <div class="title-prof-reviews">
                                         <h3>Αξιολογήσεις πελατών</h3>
-                                        <img src="img/separator-4.png">
+                                        <img src="<?php echo $api_url; ?>img/separator-4.png">
                                     </div>
                                 </div>
                                     <div class="col-md-5 prof-total-score">
@@ -434,9 +431,9 @@ include('search.php');
                     </div>
                 <?php  } ?>
                 </div>
-                <script src="js/proffessional-profile.js"></script>
-                <link href="lightbox/dist/ekko-lightbox.css" rel="stylesheet">
-                <script src="lightbox/dist/ekko-lightbox.js"></script>
+                <script src="<?php echo $api_url;?>js/proffessional-profile.js"></script>
+                <link href="<?php echo $api_url;?>lightbox/dist/ekko-lightbox.css" rel="stylesheet">
+                <script src="<?php echo $api_url;?>lightbox/dist/ekko-lightbox.js"></script>
 
 
 <?php include('footer.php'); ?>

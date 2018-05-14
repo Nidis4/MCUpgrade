@@ -71,28 +71,6 @@ $('input#mk-fullscreen-search-input').keyup(function() {
     $("#search-results").empty();
     //alert (term);
     //alert (getSearchAPI);
-    var urlParams;
-    (window.onpopstate = function () {
-
-        var match,
-            pl     = /\+/g,  // Regex for replacing addition symbol with a space
-            search = /([^&=]+)=?([^&]*)/g,
-            decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
-            query  = window.location.search.substring(1);
-
-        urlParams = {};
-
-        while (match = search.exec(query))
-
-           urlParams[decode(match[1])] = decode(match[2]);
-
-      })();
-
-      county_id=urlParams["county_id"];
-
-      if (typeof county_id === "undefined") {
-        county_id= '1';
-      }
 
 
 
@@ -114,7 +92,7 @@ $('input#mk-fullscreen-search-input').keyup(function() {
 
 
                     if (v.id!=undefined){
-                        htmlStr += "<a class='avail-professional' href='directory.php?app_id="+v.id+"&cat_id="+v.category_id+"&county_id="+county_id+"'><div class='search-results-icon'><img src='../img/cat_icons/"+v.image+"'/></div> "+v.title_greek+" <i class='fa fa-chevron-right'></i></div>";
+                        htmlStr += "<a class='avail-professional' href='https://upgrade.myconstructor.gr/katalogos/"+v.permalink+"/"+v.app_permalink+"/'><div class='search-results-icon'><img src='../img/cat_icons/"+v.image+"'/></div> "+v.title_greek+" <i class='fa fa-chevron-right'></i></div>";
                     }
                     else{
 

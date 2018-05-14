@@ -144,6 +144,26 @@ class Professional{
             return 0;
         }   
     }
+
+    public function read_professional_meta($professional_permalink){
+
+        $query = "SELECT * FROM professionals_meta WHERE permalink ='".$professional_permalink."'";
+               
+        $stmt = $this->conn->prepare( $query );
+        //echo $this->id." ------ ";
+        // execute query
+        $stmt->execute();
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+        // set values to object properties
+        $this->professional_id = $row['professional_id'];
+        $this->meta_title = $row['meta_title'];
+        $this->meta_description = $row['meta_description'];
+        $this->meta_robots = $row['meta_robots'];
+        $this->permalink = $row['permalink'];
+
+    }
  
     // used by select drop-down list
     public function contactDetails(){
