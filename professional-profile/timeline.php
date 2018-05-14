@@ -4,7 +4,19 @@
     $currentPage = 'timeline';
     include('menu.php'); 
  ?>
+ <?php 
+        $t = date('l, F d, Y 00:00:00'); 
+        $d = strtotime($t).'000';
+        //die;
+    ?>
+    <style type="text/css">
+        td[data-date = "<?php echo $d;?>"] {
+            background: #ddd;
+        } 
+    </style>
  <link href="css/custom.css" rel="stylesheet">
+ <link rel="stylesheet" href="../vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
+ <link rel="stylesheet" href="../vendor/bootstrap-timepicker/css/bootstrap-timepicker.css" />
         <div class="col-md-12 page-title" ><h2>Latest Appointments</h2></div>
         <section id="cd-timeline" class="cd-container">
                 <?php
@@ -170,12 +182,151 @@
                             <div class="save-btn" id="savetime" >Save</div>
                         </div>
                     </div>
+
+                     <div class="row">
+                        <div class="col-md-12"><br>
+                            <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal">
+                                Add Busy Patterns
+                            </button>
+                        </div>
+                    </div>
                   </div>
                   
               </div>
         </div>
     </div>
+
+    <!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Select Busy time</h4>
+      </div>
+      <div class="modal-body">
+            <div class="form-group row">
+                <label class="col-sm-2 control-label text-sm-right pt-2">Title</label>
+                <div class="col-sm-10">
+                    
+                        <input type="text" name="busytitle" id="busytitle" class="popStart form-control" value="">
+                    
+                </div>
+                 
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-6">
+                    <label class="col-sm-4 control-label text-sm-right pt-2" style="padding: 0px;">Start Date</label>
+                    
+                    <div class="col-sm-8" style="padding-right: 0;">
+
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-clock-o"></i>
+                            </span>
+                             <input type="text" name="startDate" id="startDate" class="popStart form-control" value="<?php echo date("Y-m-d");?>">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <label class="col-sm-4 control-label text-sm-right pt-2" style="padding: 0px;">End Date</label>
+                    
+                    <div class="col-sm-8" style="padding-right: 0;">
+
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-clock-o"></i>
+                            </span>
+                             <input type="text" name="endDate" id="endDate" class="popStart form-control" value="<?php echo date("Y-m-d",strtotime('+1 day'));?>">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group row timerow">
+                <div class="col-lg-6">
+                    <label class="col-sm-4 control-label text-sm-right pt-2" style="padding: 0px;">Start Time</label>
+                    
+                    <div class="col-sm-8" style="padding-right: 0;">
+
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-clock-o"></i>
+                            </span>
+                            <input type="text" id="startTime" name="startTime" class="popStart form-control" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <label class="col-sm-4 control-label text-sm-right pt-2" style="padding: 0px;">End Time</label>
+                    
+                    <div class="col-sm-8" style="padding-right: 0;">
+
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-clock-o"></i>
+                            </span>
+                            <input type="text" id="endTime" name="endTime" class="popStart form-control" value="">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+              
+                
+
+                
+            
+            
+            <div class="form-group row">
+                <label class="col-sm-2 control-label text-sm-right pt-2">&nbsp;</label>
+                <div class="col-sm-9">
+                    <div class="col-lg-1" style="float: left;">
+                        <input type="checkbox" class="allday" name="allday">
+                    </div>
+
+                     <label class="col-sm-3 control-label text-sm-right pt-2">All Day</label>
+
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" id="updatetime" >Update</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+
+  </div>
+</div>
     <script src="../js/core.js"></script>
+    <script src="../vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="../vendor/bootstrap-timepicker/bootstrap-timepicker.js"></script>
+
+    <script type="text/javascript">
+            $('#startTime').timepicker({
+                minuteStep: 30,
+                secondStep: 5,
+                showInputs: false,
+                template: 'dropdown',
+                modalBackdrop: true,
+                showSeconds: false,
+                showMeridian: false
+            });
+            $("#startDate").datepicker();
+            $('#endTime').timepicker({
+                minuteStep: 30,
+                secondStep: 5,
+                showInputs: false,
+                template: 'dropdown',
+                modalBackdrop: true,
+                showSeconds: false,
+                showMeridian: false
+            });
+            $("#endDate").datepicker();
+        </script>
     <script type="text/javascript">
         $(document).ready(function(){
 
@@ -245,6 +396,67 @@
 
 
             });
+
+            $("#updatetime").on('click',function(){
+                    var startDate = $( "#startDate" ).val();
+                    var endDate = $( "#endDate" ).val();
+                    var startTime = $( "#startTime" ).val();
+                    var endTime = $( "#endTime" ).val();
+                    var profID = '<?php echo $_SESSION['id'];?>';
+
+                    if(startDate > endDate){
+                        alert("End date should be greater than or equal to Start date");
+                        return false;
+                    }
+                    
+
+                    if($('.allday').is(':checked')){
+                        var allday = 1;
+                    }else{
+                        var allday = 0;
+                        if(startTime >= endTime){
+                            alert("End time should be greater than Start time");
+                            return false;
+                        }
+                    }
+
+                    
+
+                    
+
+                    getSaveAPI = API_LOCATION+'professional/addBusyTimes.php';
+                    //form_data = "{prof_id:'"+profID+"'busy_date:"+dateChoosed+",busy_time:"+timeFrom+'-'+timeTo+"}"
+                    //form_data: { field1: "hello", field2 : "hello2"} ,
+                    //alert(getSaveAPI);
+                    
+                    $.ajax({
+                            type: "POST",
+                            url: getSaveAPI,
+                            dataType: "JSON",
+                            data: { prof_id: profID, startDate :startDate, endDate :endDate, startTime :startTime, endTime :endTime, allday :allday},
+                            success: function(data)
+                            {
+                                alert(data['message']);
+                                location.reload();
+                            }
+                        });
+            });
+
+
+            $('.allday').on('click',function(){
+                if($(this).is(':checked')){
+                    
+                    //$(".popStart").attr('disabled','disabled');
+                    //$(".popEnd").attr('disabled','disabled');
+                    $('.timerow').css('display','none');
+                }else{
+                    //$(".popStart").removeAttr('disabled');
+                    //$(".popEnd").removeAttr('disabled');
+                    $('.timerow').css('display','block');
+                }
+            });
+
+
             
         });
     </script>
