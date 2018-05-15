@@ -531,6 +531,25 @@ include('config/core.php');
 						</div>
 						
 					</div>
+					<?php if(!empty($appointment['transport_details'])){ ?>					
+						<div class="row">
+							<div class="col-lg-12">
+								<section class="card">
+									<header class="card-header">
+										<div class="card-actions">
+											<a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
+											<a href="#" class="card-action card-action-dismiss" data-card-dismiss=""></a>
+										</div>
+										<h2 class="card-title">Transport Details</h2>
+										<p class="card-subtitle">Please check appointment details</p>
+									</header>
+									<div class="card-body">
+										<?php echo $appointment['transport_details']; ?>
+									</div>
+								</section>
+							</div>
+						</div>
+					<?php } ?>
 					
 					<div id="map"></div>
 					<!-- end: page -->
