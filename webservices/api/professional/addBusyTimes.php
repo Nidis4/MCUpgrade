@@ -63,7 +63,24 @@ if(@$_POST['busy_date']){
 		$busy_time = $startTime.'-'.$endTime;
 		for ($i=1; $i <= $tdays; $i++) { 
 			# code...
-			if($repeatbusy == "weekly") {
+			if($repeatbusy == "weeklycustom") {
+				if(@$_POST['selctday']){
+					$seldays = explode(',', $_POST['selctday']);
+					$seldays = array_filter($seldays);
+					
+					$addday = $i - 1;
+					
+					$mday = date("N",strtotime("$startDate +$addday days"));
+
+					if(in_array($mday, $seldays)){
+						$currentdate = date("Y-m-d",strtotime("$startDate +$addday days"));	
+						$stmt =  $professional->addBusy($prof_id, $currentdate, $busy_time);
+					}
+				}
+
+				$dayN = date("N");
+				
+			}else if($repeatbusy == "weekly") {
 				$dayN = date("N");
 				$addday = $i - 1;
 				$mday = date("N",strtotime("$startDate +$addday days"));
