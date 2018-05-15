@@ -155,7 +155,7 @@ include('search.php');
 									$cat_id = $category['id'];
 									$cat_title = $category['title_greek'];
 									$apps = $category['applications'];
-									$cat_permalink = $category['permalink'];
+									$cat_permalink_menu = $category['permalink'];
 								}
 							}
 						}
