@@ -676,6 +676,7 @@ $( ".createAppointment" ).click(function() {
                             //alert("Appointment Booked");
                             //window.location.replace('../platform/appointments.php');
 
+                            var createAppointAPI = API_LOCATION+'appointment/create.php';
                             $.ajax({
                                         type: "POST",
                                         url: createAppointAPI,
