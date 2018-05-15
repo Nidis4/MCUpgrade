@@ -282,18 +282,42 @@
             
             <div class="form-group row">
                 <label class="col-sm-2 control-label text-sm-right pt-2">&nbsp;</label>
-                <div class="col-sm-9">
+                <div class="col-sm-10">
                     <div class="col-lg-1" style="float: left;">
                         <input type="checkbox" class="allday" name="allday">
                     </div>
 
-                     <label class="col-sm-3 control-label text-sm-right pt-2">All Day</label>
-
+                    <label class="col-sm-3 control-label text-sm-right pt-2">All Day</label>
+                    <?php
+                        $d = date('d');
+                        $nd = ceil($d/7);
+                        if($nd == 1){
+                            $tday = "first";
+                        }else if($nd == 2){
+                            $tday = "second";
+                        }else if($nd == 3){
+                            $tday = "third";
+                        }else if($nd == 4){
+                            $tday = "fourth";
+                        }else if($nd == 5){
+                            $tday = "fifth";
+                        }
+                    ?>
+                    <div class="col-lg-8" style="float: left;">
+                        <select name="repeatbusy"  id='repeatbusy' class="form-control">
+                            <option value="0">Doesn't repeat</option>
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly on <?php echo date("l")?></option>
+                            <option value="monthly">Monthly on the <?php echo $tday ." ".date("l")?></option>
+                            <option value="annually">Annually on the <?php echo date("F d")?></option>
+                            <option value="weekday">Every weekday (Monday to Friday)</option>
+                        </select>
+                    </div>
                 </div>
             </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-warning" id="updatetime" >Update</button>
+        <button type="button" class="btn btn-warning" id="updatetime">Update</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
       </div>
@@ -403,12 +427,13 @@
                     var startTime = $( "#startTime" ).val();
                     var endTime = $( "#endTime" ).val();
                     var profID = '<?php echo $_SESSION['id'];?>';
+                    var repeatbusy = $( "#repeatbusy" ).val();
 
                     if(startDate > endDate){
                         alert("End date should be greater than or equal to Start date");
                         return false;
                     }
-                    
+
 
                     if($('.allday').is(':checked')){
                         var allday = 1;
@@ -433,7 +458,7 @@
                             type: "POST",
                             url: getSaveAPI,
                             dataType: "JSON",
-                            data: { prof_id: profID, startDate :startDate, endDate :endDate, startTime :startTime, endTime :endTime, allday :allday},
+                            data: { prof_id: profID, startDate :startDate, endDate :endDate, startTime :startTime, endTime :endTime, allday :allday,repeatbusy :repeatbusy},
                             success: function(data)
                             {
                                 alert(data['message']);

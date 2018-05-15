@@ -57,26 +57,71 @@ if(@$_POST['busy_date']){
 		$numdays = round($datediff / (60 * 60 * 24));
 		$tdays = $numdays + 1;
 
+
+		$repeatbusy = $_POST['repeatbusy'];
+
+		$busy_time = $startTime.'-'.$endTime;
 		for ($i=1; $i <= $tdays; $i++) { 
 			# code...
-			if($i == 1){
-			
-				$busy_time = $startTime.'-'.$endTime;
-				$currentdate = $startDate;
-				$stmt = $professional->addBusy($prof_id, $currentdate, $busy_time);
-			
-			}else if($i == $tdays){
-				
-				$busy_time = $startTime.'-'.$endTime;
-				$currentdate = $endDate;
-				$professional->addBusy($prof_id, $currentdate, $busy_time);
-			
+			if($repeatbusy == "weekly") {
+				$dayN = date("N");
+				$addday = $i - 1;
+				$mday = date("N",strtotime("$startDate +$addday days"));
+
+				if($dayN == $mday){
+					$currentdate = date("Y-m-d",strtotime("$startDate +$addday days"));	
+					$stmt =  $professional->addBusy($prof_id, $currentdate, $busy_time);
+				}
+			}else if($repeatbusy == "monthly") {
+				$dayN = date("N");
+				$d = date('d');
+                $nd = ceil($d/7);
+
+				$addday = $i - 1;
+				$mday = date("N",strtotime("$startDate +$addday days"));
+				$nday = date("d",strtotime("$startDate +$addday days"));
+				$cnday = ceil($nday/7);
+
+				if(($dayN == $mday) && ($nd == $cnday)){
+					$currentdate = date("Y-m-d",strtotime("$startDate +$addday days"));	
+					$stmt =  $professional->addBusy($prof_id, $currentdate, $busy_time);
+				}
+			}else if($repeatbusy == "annually") {
+				$dayN = date("d-m");
+				$addday = $i - 1;
+				$mday = date("d-m",strtotime("$startDate +$addday days"));
+				if($dayN == $mday){
+					$currentdate = date("Y-m-d",strtotime("$startDate +$addday days"));	
+					$stmt =  $professional->addBusy($prof_id, $currentdate, $busy_time);
+				}
+			}else if($repeatbusy == "weekday") {
+				//$dayN = date("N");
+				$addday = $i - 1;
+				$mday = date("N",strtotime("$startDate +$addday days"));
+				if(($mday == 1) || ($mday == 2) || ($mday == 3) || ($mday == 4) || ($mday == 5)){
+					$currentdate = date("Y-m-d",strtotime("$startDate +$addday days"));	
+					$stmt =  $professional->addBusy($prof_id, $currentdate, $busy_time);
+				}
 			}else{
 
-				$busy_time = $startTime.'-'.$endTime;
-				$addday = $i - 1;
-				$currentdate = date("Y-m-d",strtotime("+$addday days"));	
-				$professional->addBusy($prof_id, $currentdate, $busy_time);
+				if($i == 1 ){
+				
+					$currentdate = $startDate;
+					$stmt = $professional->addBusy($prof_id, $currentdate, $busy_time);
+				
+				}else if($i == $tdays){
+					
+					$currentdate = $endDate;
+					$professional->addBusy($prof_id, $currentdate, $busy_time);
+				
+				}else{
+
+					
+					$addday = $i - 1;
+					$currentdate = date("Y-m-d",strtotime("$startDate +$addday days"));	
+					$professional->addBusy($prof_id, $currentdate, $busy_time);
+
+				}
 
 			}
 		}
