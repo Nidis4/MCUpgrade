@@ -439,12 +439,16 @@
                         var allday = 1;
                     }else{
                         var allday = 0;
-                        if(startTime >= endTime){
+                        var sdate = startDate +" "+startTime+":00";
+                        var edate = endDate +" "+endTime+":00";
+                        //var isLarger = new Date("2-11-2012 13:40:00") > new Date("01-11-2012 10:40:00");
+                        //alert(sdate);
+                        if(Date.parse ( sdate ) > Date.parse ( edate )){
                             alert("End time should be greater than Start time");
                             return false;
                         }
                     }
-
+                    
                     
 
                     
