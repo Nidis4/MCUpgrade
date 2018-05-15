@@ -31,6 +31,7 @@ $appointment = new Appointment($db);
  $firstname = isset($_POST['firstname']) ? $_POST['firstname'] : fail();
  $surname = isset($_POST['surname']) ? $_POST['surname'] : fail();
  $status = isset($_POST['status']) ? $_POST['status'] : "3";
+ $htmlTransport = isset($_POST['htmlTransport']) ? $_POST['htmlTransport'] : fail();
 
  $delivery_address= isset($_POST['delivery_address']) ? $_POST['delivery_address'] : fail();
 
@@ -41,7 +42,7 @@ $time = "";
 
 
 // query products
-$stmt = $appointment->createTransportOffer($prof_id, $cust_id, $application_id, $county_id, $date, $time, $address, $budget, $commision, $agent_id, $comment, $status, $delivery_address);
+$stmt = $appointment->createTransportOffer($prof_id, $cust_id, $application_id, $county_id, $date, $time, $address, $budget, $commision, $agent_id, $comment, $status, $delivery_address, $htmlTransport );
 
 
 

@@ -957,3 +957,15 @@ ALTER TABLE `professionals_contact_details` ADD `mobile2` VARCHAR(20) NULL AFTER
 
 <!-------------------------------->
 <!-- End 12 May 2018 Harpreet -->
+
+
+
+
+<!-------------------------------->
+<!-- Start 15 May 2018 GPRAGIAS -->
+
+ALTER TABLE `appointments` ADD `transport_details` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `notification_before_appointment`; 
+
+<!-------------------------------->
+<!-- End 15 May 2018 GPRAGIAS -->
+

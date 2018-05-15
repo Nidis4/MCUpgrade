@@ -359,7 +359,7 @@ include('config/core.php');
 											<label class="col-sm-3 control-label text-sm-right pt-2">Address <span class="required">*</span></label>
 											<div class="col-sm-9">
 												<input type="text" name="address" id="pac-input-address" value="<?php echo $appointment['customer_address'];?>" class="form-control" placeholder="eg.: Gonata 7, 152 12, Athens" required/>
-												<input type="hidden" name="old_address" id="old_address"> value="<?php echo $appointment['customer_address'];?>">
+												<input type="hidden" name="old_address" id="old_address" value="<?php echo $appointment['customer_address'];?>">
 											</div>
 										</div>
 

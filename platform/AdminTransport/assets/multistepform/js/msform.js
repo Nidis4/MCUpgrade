@@ -2001,7 +2001,7 @@ $("#step4btn").click(function(){
         }else if(km > 30){
           kmPrice = parseFloat(km) - parseFloat(30);
           kmPrice = 1.7*kmPrice.toFixed(1);
-          kmPrice = kmPrice + 36;
+          kmPrice = kmPrice + 24;
         }
 
         
@@ -2955,7 +2955,7 @@ $('#printTransport').click(function(){
         }else if(km > 30){
           kmPrice = parseFloat(km) - parseFloat(30);
           kmPrice = 1.7*kmPrice.toFixed(1);
-          kmPrice = kmPrice + 36;
+          kmPrice = kmPrice + 24;
         }
 
         
@@ -4186,7 +4186,7 @@ $('#savebtn').click(function(){
         }else if(km > 30){
           kmPrice = parseFloat(km) - parseFloat(30);
           kmPrice = 1.7*kmPrice.toFixed(1);
-          kmPrice = kmPrice + 36;
+          kmPrice = kmPrice + 24;
         }
 
 
@@ -4952,7 +4952,6 @@ $('#savebtn').click(function(){
         
 
 
-        alert(API_LOCATION + $('select#county option:selected').val());
 
         if(doneCustomerName && doneCustomerSureName && doneTel){
 
@@ -5057,7 +5056,8 @@ telikos,
                         sex: sex,
                         email: email,
                         status: status,
-                        date: myDate
+                        date: myDate,
+                        htmlTransport: transport
                     },
                     //dataType: "json",
                     success: function(data)
@@ -5155,14 +5155,6 @@ $('#lastprevbtn').click(function(){
 
 
 });
-
-
-
-
-
-
-
-
 
 
 function storeTblValues(){

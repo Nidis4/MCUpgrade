@@ -559,8 +559,8 @@ class Appointment{
 
 
 
-      public function createTransportOffer($prof_id, $cust_id, $application_id, $county_id, $date, $time, $address, $budget, $commision, $agent_id, $comment, $status, $delivery_address){
-        $query = "INSERT INTO `appointments`(`prof_member_id`, `cust_member_id`, `application_id`,`county_id`,  `date`, `time`, `address`,`delivery_address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`) VALUES ('$prof_id', '$cust_id', '$application_id','$county_id', '$date', '$time', '$address', '$delivery_address', '$budget','$commision', '$agent_id','$comment','0','0', NOW(),NOW(),'0','$status','')";
+      public function createTransportOffer($prof_id, $cust_id, $application_id, $county_id, $date, $time, $address, $budget, $commision, $agent_id, $comment, $status, $delivery_address, $htmlTransport){
+        $query = "INSERT INTO `appointments`(`prof_member_id`, `cust_member_id`, `application_id`,`county_id`,  `date`, `time`, `address`,`delivery_address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelComment`,`transport_details`) VALUES ('$prof_id', '$cust_id', '$application_id','$county_id', '$date', '$time', '$address', '$delivery_address', '$budget','$commision', '$agent_id','$comment','0','0', NOW(),NOW(),'0','$status','','$htmlTransport')";
         //echo $query;
 
         $stmt = $this->conn->prepare( $query );
