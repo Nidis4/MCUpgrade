@@ -533,61 +533,106 @@ $(document).ready(function(){ //DIRECTORY FILTERS
 
 });
 
+/* Callback Modal*/
 
-/*
-$(document).ready(function(){
+jQuery('input#time').css('display','none');
+    function check()
+	{
 
-  var urlParams;
-
-  (window.onpopstate = function () {
-
-    var match,
-        pl     = /\+/g,  // Regex for replacing addition symbol with a space
-        search = /([^&=]+)=?([^&]*)/g,
-        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
-        query  = window.location.search.substring(1);
-
-    urlParams = {};
-
-    while (match = search.exec(query))
-
-       urlParams[decode(match[1])] = decode(match[2]);
-
-	})();
-	
-		
+	    var pass1 = document.getElementById('mobile');
 
 
-	var cat_id = urlParams["cat_id"];
+	    var message = document.getElementById('message');
 
-	if (typeof cat_id === "undefined") {
-	   cat_id=126;
-	  
+	    var goodColor = "#0C6";
+	    var badColor = "#FF9B37";
 
-	   var a_cat_text = $('#MainMenu').find('[href$="#'+cat_id+'"]').text();
-	   var a_cat_apps = $('#MainMenu').find('div#'+cat_id).html();
+	    if(mobile.value.length!=10){
 
-	   $('#MainMenu').find('[href$="#'+cat_id+'"]').remove();
-	   $('#MainMenu').find('div#'+cat_id).remove();
+	        mobile.style.backgroundColor = badColor;
+	        message.style.color = badColor;
+	        message.innerHTML = "Παρακαλούμε συμπλήρωσε δεκαψήφιο αριθμό!"
 
-	   $('span.span_selected_cat_title').append(a_cat_text);
- 	   $('.selected-cat-apps').append(a_cat_apps);
+	    }else{
+	        message.innerHTML = "Συνέχισε!"
+		jQuery("#message").css("color","green");
+	    }
 
-	}else{
-
-	
-	   var a_cat_text = $('#MainMenu').find('[href$="#'+cat_id+'"]').text();
-	   var a_cat_apps = $('#MainMenu').find('div#'+cat_id).html();
-
-	   $('#MainMenu').find('[href$="#'+cat_id+'"]').remove();
-	   $('#MainMenu').find('div#'+cat_id).remove();
-
-	  
-
- 	   $('span.span_selected_cat_title').append(a_cat_text);
- 	   $('.selected-cat-apps').append(a_cat_apps);
 	}
-	
-});
 
-*/
+	jQuery('#call-not-now').click(function(){
+		jQuery('#call-not-now').prop('checked', true);
+		jQuery('#call-now').removeAttr('checked');
+	});
+
+	jQuery('.radio-btns').change(function() {
+	    if (jQuery('#call-not-now').attr('checked')) {
+	        jQuery('#time').show();
+	    } else {
+	        jQuery('#time').hide();
+	    }
+	});
+
+	function callbackaction(){
+	    var number = jQuery("input#mobile").val();
+	      if(number.length == 10){
+
+	        var name= jQuery("input#name").val();
+	        var mobile= jQuery("input#mobile").val();
+			var url = window.location.href; 
+			if (jQuery('#call-not-now').attr('checked')){
+		        	var time= jQuery("input#time").val();
+			}else{
+				var time= "Καλέστε με τώρα!"
+			}
+			var PostUrl = "<?php echo $api_url;?>callback.php";
+			//var PostUrl = "http://localhost/MCUpgrade/callback.php";
+	        jQuery.ajax({
+	            type:"POST",
+	            url:PostUrl,
+	            data:{name,mobile,time,url},
+				success: function(data){
+				    jQuery(".submit-msg").text("Θα επικοινωήσουμε σύντομα μαζί σας!");
+				    jQuery(".submit-msg").css("color","green");
+				}
+
+	       })
+
+
+	      }else{ 
+	        jQuery(".submit-msg").text("Συμπληρώστε σωστά τα πεδία!");
+	        jQuery(".submit-msg").css("color","red");
+	      }
+
+	}
+
+	jQuery(".button.close-btn-call-back").click(function(){
+	jQuery(".col-call-back").css("display","none");
+	});
+
+	function checktime(){
+		$("#call-not-now").attr('checked','true');
+		$("#call-now").removeAttr('checked', 'checked');
+		$('input#time').css('display','block');	
+	}
+
+	function checktimecallnow(){
+		$("#call-not-now").removeAttr('checked','true');
+		$("#call-now").attr('checked', 'checked');
+		$('input#time').css('display','none');	
+	}
+
+	$(document).mouseup(function (e)
+	{
+	    var container = $("#callback.modal-content.modal-body");
+
+	    if (!container.is(e.target) // if the target of the click isn't the container...
+	        && container.has(e.target).length === 0) // ... nor a descendant of the container
+	    {
+	        container.hide();
+	    }
+	});
+	function closetextcallbackbtn(){
+		jQuery('.text-call-back').hide();
+		jQuery('.close-text-call-back-btn').hide();
+	}

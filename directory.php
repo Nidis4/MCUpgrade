@@ -52,6 +52,9 @@
 			$app_meta_robots=  $select_app['meta_robots'];
 			$app_permalink= $select_app['permalink'];
 
+			session_start();
+			$_SESSION["appID"] = $SelectedAppId;
+
    			if(isset($_GET['county_title'])){
    				$select_county = file_get_contents($api_url .'webservices/api/county/read_county_id.php?permalink='.$_GET['county_title']);
    				$select_county = json_decode($select_county, true);
@@ -90,9 +93,9 @@
 
 			$permalink = $directory_url . $cat_permalink .'/'.$app_permalink .'/'.$county_permalink .'/';
 			?>
-			<title><?php echo $app_meta_title; ?></title>
-			<link rel="alternate" hreflang="el" href="<?php echo $permalink; ?> ">
-			<meta name="description" content="<?php echo $app_meta_description; ?> ">
+			<title><?php echo $app_meta_title .' - '. $county_display_name_gr; ?></title>
+			<link rel="alternate" hreflang="el" href="<?php echo $permalink; ?>">
+			<meta name="description" content="<?php echo $app_meta_description. ' Στην περιοχή '. $county_display_name_gr; ?>">
 			<meta name="robots" content="<?php echo $app_meta_robots; ?> ">
 			<link rel="canonical" href="<?php echo $permalink; ?> ">
 			
@@ -101,9 +104,9 @@
 			$permalink = $directory_url . $cat_permalink .'/';
 			?>
 
-			<title><?php echo $cat_meta_title; ?></title>
+			<title><?php echo $cat_meta_title .' - '. $county_display_name_gr; ?></title>
 			<link rel="alternate" hreflang="el" href="<?php echo $permalink; ?>">
-			<meta name="description" content="<?php echo $cat_meta_description; ?>">
+			<meta name="description" content="<?php echo $cat_meta_description. ' Στην περιοχή '. $county_display_name_gr;?>">
 			<meta name="robots" content="<?php echo $cat_meta_robots; ?>">
 			<link rel="canonical" href="<?php echo $permalink; ?>">
 		<?php }else{?>
@@ -871,300 +874,18 @@ include('search.php');
 
 	</div>
 </div>
-<style type="text/css">
-.call-btn img {
-    box-shadow: 0px 2px 6px 0px #333;
-    border-radius: 50%;
-}
-.col-call-back {
-    max-width: 400px;
-    position: fixed;
-    bottom: 40px;
-    right: 40px;
-    z-index: 20;
-}
-button.close-text-call-back-btn {
-    position: fixed;
-    border: 0px solid;
-    font-size: 24px;
-    line-height: 17px;
-    padding: 1px;
-    background-color: transparent;
-    color: #fff;
-    font-weight: bold;
-    z-index: 30;
-    margin-top: 11px;
-    margin-left: 5px;
-}
-.text-call-back {
-    background: #333;
-    padding: 10px 22px;
-    margin-top: 7px;
-    border-radius: 5px;
-    float: left;
-    margin-right: 20px;
-    box-shadow: 0px 2px 6px 0px #333;
-    cursor: pointer;
-    position: relative;
-}
-.call-btn {
-    float: left;
-}
-.text-call-back p {
-    margin-bottom: 5px;
-    text-align: center;
-    font-family: opensans;
-    color: #fff;
-    margin-top: 3px;
-}
-div#callback.modal {
-    background: none;
-}
 
-div#callback {
-    border: 0px;
-    box-shadow: 0px 0px 0px 0px;
-}
-#callback .modal-dialog {
-    all: unset;
-}
-div#callback .modal-content {
-    max-width: 400px;
-    margin: auto;
-    background: #fff;
-    font-family: opensans;
-    color: #686F7F;
-}
-div#callback .modal-header {
-    border-bottom: 0px solid;
-    padding: 9px 15px;
-}
-#callback .modal-dialog .modal-content .modal-body {
-    max-height: none;
-}
-
-div#callback .modal-body {
-    padding: 4px 20px 20px 20px;
-    background: #fff;
-}
-div#callback .modal-body {
-    clear: both;
-}
-.callback-form {
-    max-width: 300px;
-    margin: auto;
-}
-div#callback h4.modal-title {
-    font-size: 21px;
-    text-align: center;
-    color: #686F7F;
-    font-family: opensans;
-}
-div#callback h4.modal-title span {
-    font-family: opensans;
-}
-#callback p {
-    font-size: 16px;
-    text-align: center;
-    margin-top: 20px;
-    font-style: italic;
-}
-.callback-form input#name, .callback-form input#mobile, .callback-form input#time {
-    width: 100%;
-    min-height: 41px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    border: 1px solid #D2D2D2;
-    font-size: 18px;
-}
-.callback-form input#mobile, .callback-form input#time {
-    padding: 0px 15px;
-}
-
-.callback-form input#name, .callback-form input#mobile, .callback-form input#time {
-    width: 100%;
-    min-height: 41px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    border: 1px solid #D2D2D2;
-    font-size: 18px;
-}
-.radio-btns {
-    margin-bottom: 15px;
-    font-size: 18px;
-}
-button.btn-call-back {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background: #2E8DC7;
-    font-size: 20px;
-    border-radius: 5px;
-    color: #fff;
-    margin-top: 10px;
-    font-family: opensans;
-}
-button.close-modal {
-    border: 0px solid;
-    font-size: 33px;
-    line-height: 19px;
-    float: right;
-    color: #333;
-    padding: 4px 10px;
-}
-div#callback .modal-header {
-    border-bottom: 0px solid;
-}
-.submit-msg {
-	font-weight: 600;
-}
-</style>
-<div class="col-call-back">
-		<button type="button" class="close-text-call-back-btn" onclick="closetextcallbackbtn();" >×</button>
-
-    <div class="text-call-back" data-toggle="modal" data-target="#callback" >
-    	
-    	<div class="call-arrow"></div><p>Έχεις ακόμα απορίες;</p><p><b>Ζήτησε μας να σε καλέσουμε!</b></p></div>
-
-    <div  type="button" class="call-btn" data-toggle="modal" data-target="#callback"><img src="<?php echo $api_url;?>img/tel-call-back-2.png"></div>
-
-</div>
-<div id="callback" class="modal fade" role="dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button  type="button" class="close-modal" data-dismiss="modal">&times;</button></div><div class="modal-body">
-
-		<div class="callback-form">
-
-			<h4 class="modal-title"><span>Είμαστε εδώ για οποιαδήποτε απορία και αν έχεις.</span></h4>
-
-				<p>Στείλε μας ένα αίτοιμα για επικοινωνία!</p>
-
-	            <input class="input-style" placeholder="Όνομα" name="name"  id="name" type="text" required> 
-
-	            <input name="mobile"  id="mobile" placeholder="Τηλ: 691 234 5678" type="number" onkeyup="check();" required ><span id="message"></span>
-
-	            <div class="radio-btns">
-
-	          		<input type="radio" id="call-now" class="radio-time" name="radio-time" value="Τώρα" onclick="checktimecallnow();" checked> <span>Θέλω να με καλέσετε τώρα.</span><br>
-
-						<input type="radio" id="call-not-now" class="radio-time" name="radio-time" value="Άλλη ώρα" onclick="checktime();"> <span>Θέλω να επιλέξω άλλη ώρα.</span><br>
-
-					</div>
-
-	             <input type="text"  id="time" name="usr_time" value='12:00 μμ'>
-
-	            <button class="btn-call-back" onclick="callbackaction();">Επικοινωνήστε μαζί μου</button>
-
-	            <p class="submit-msg"></p>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
 <script type="text/javascript">
-	jQuery('input#time').css('display','none');
-    function check()
-	{
-
-	    var pass1 = document.getElementById('mobile');
-
-
-	    var message = document.getElementById('message');
-
-	    var goodColor = "#0C6";
-	    var badColor = "#FF9B37";
-
-	    if(mobile.value.length!=10){
-
-	        mobile.style.backgroundColor = badColor;
-	        message.style.color = badColor;
-	        message.innerHTML = "Παρακαλούμε συμπλήρωσε δεκαψήφιο αριθμό!"
-
-	    }else{
-	        message.innerHTML = "Συνέχισε!"
-		jQuery("#message").css("color","green");
-	    }
-
-	}
-
-	jQuery('#call-not-now').click(function(){
-		jQuery('#call-not-now').prop('checked', true);
-		jQuery('#call-now').removeAttr('checked');
-	});
-
-	jQuery('.radio-btns').change(function() {
-	    if (jQuery('#call-not-now').attr('checked')) {
-	        jQuery('#time').show();
-	    } else {
-	        jQuery('#time').hide();
-	    }
-	});
-
-	function callbackaction(){
-	    var number = jQuery("input#mobile").val();
-	      if(number.length == 10){
-
-	        var name= jQuery("input#name").val();
-	        var mobile= jQuery("input#mobile").val();
-			var url = window.location.href; 
-			if (jQuery('#call-not-now').attr('checked')){
-		        	var time= jQuery("input#time").val();
-			}else{
-				var time= "Καλέστε με τώρα!"
-			}
-			var PostUrl = "<?php echo $api_url;?>callback.php";
-			//var PostUrl = "http://localhost/MCUpgrade/callback.php";
-	        jQuery.ajax({
-	            type:"POST",
-	            url:PostUrl,
-	            data:{name,mobile,time,url},
-				success: function(data){
-				    jQuery(".submit-msg").text("Θα επικοινωήσουμε σύντομα μαζί σας!");
-				    jQuery(".submit-msg").css("color","green");
-				}
-
-	       })
-
-
-	      }else{ 
-	        jQuery(".submit-msg").text("Συμπληρώστε σωστά τα πεδία!");
-	        jQuery(".submit-msg").css("color","red");
-	      }
-
-	}
-
-	jQuery(".button.close-btn-call-back").click(function(){
-	jQuery(".col-call-back").css("display","none");
-	});
-
-	function checktime(){
-		$("#call-not-now").attr('checked','true');
-		$("#call-now").removeAttr('checked', 'checked');
-		$('input#time').css('display','block');	
-	}
-
-	function checktimecallnow(){
-		$("#call-not-now").removeAttr('checked','true');
-		$("#call-now").attr('checked', 'checked');
-		$('input#time').css('display','none');	
-	}
-
-	$(document).mouseup(function (e)
-	{
-	    var container = $("#callback.modal-content.modal-body");
-
-	    if (!container.is(e.target) // if the target of the click isn't the container...
-	        && container.has(e.target).length === 0) // ... nor a descendant of the container
-	    {
-	        container.hide();
-	    }
-	});
-	function closetextcallbackbtn(){
-		jQuery('.text-call-back').hide();
-		jQuery('.close-text-call-back-btn').hide();
-	}
+	
 </script>
-<?php include('footer.php'); ?>
+<?php 
+	include('footer.php'); 
+	include('callback_modal.php'); 
+
+	if ( $application_id != 196 && $application_id != 198  && $application_id != 199 && strpos($_SERVER['REQUEST_URI'], 'metakomiseis-metaforikes') != false){
+    	include('transportsModal.php'); 
+    }
+
+
+?>
+

@@ -4467,6 +4467,338 @@ div#bs-example-navbar-collapse-1.in {
     box-shadow: 0px 0px 3px 0px #ccc;
 }
 
+/* MODAL CALL BACK */
+
+.call-btn img {
+    box-shadow: 0px 2px 6px 0px #333;
+    border-radius: 50%;
+}
+.col-call-back {
+    max-width: 400px;
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 20;
+}
+button.close-text-call-back-btn {
+    position: fixed;
+    border: 0px solid;
+    font-size: 24px;
+    line-height: 17px;
+    padding: 1px;
+    background-color: transparent;
+    color: #fff;
+    font-weight: bold;
+    z-index: 30;
+    margin-top: 11px;
+    margin-left: 5px;
+}
+.text-call-back {
+    background: #333;
+    padding: 10px 22px;
+    margin-top: 7px;
+    border-radius: 5px;
+    float: left;
+    margin-right: 20px;
+    box-shadow: 0px 2px 6px 0px #333;
+    cursor: pointer;
+    position: relative;
+}
+.call-btn {
+    float: left;
+}
+.text-call-back p {
+    margin-bottom: 5px;
+    text-align: center;
+    font-family: dinmd;
+    color: #fff;
+    margin-top: 3px;
+}
+div#callback.modal {
+    background: none;
+}
+
+div#callback {
+    border: 0px;
+    box-shadow: 0px 0px 0px 0px;
+}
+#callback .modal-dialog {
+    all: unset;
+}
+div#callback .modal-content {
+    max-width: 400px;
+    margin: auto;
+    background: #fff;
+    font-family: opensans;
+    color: #686F7F;
+}
+div#callback .modal-header {
+    border-bottom: 0px solid;
+    padding: 9px 15px;
+}
+#callback .modal-dialog .modal-content .modal-body {
+    max-height: none;
+}
+
+div#callback .modal-body {
+    padding: 4px 20px 20px 20px;
+    background: #fff;
+}
+div#callback .modal-body {
+    clear: both;
+}
+.callback-form {
+    max-width: 300px;
+    margin: auto;
+}
+div#callback h4.modal-title {
+    font-size: 21px;
+    text-align: center;
+    color: #686F7F;
+    font-family: opensans;
+}
+div#callback h4.modal-title span {
+    font-family: dinmd;
+}
+#callback p {
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+    font-style: italic;
+}
+.callback-form input#name, .callback-form input#mobile, .callback-form input#time {
+    width: 100%;
+    min-height: 41px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #D2D2D2;
+    font-size: 18px;
+}
+.callback-form input#mobile, .callback-form input#time {
+    padding: 0px 15px;
+}
+
+.callback-form input#name, .callback-form input#mobile, .callback-form input#time {
+    width: 100%;
+    min-height: 41px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #D2D2D2;
+    font-size: 18px;
+}
+.radio-btns {
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+button.btn-call-back {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: #2E8DC7;
+    font-size: 20px;
+    border-radius: 5px;
+    color: #fff;
+    margin-top: 10px;
+    font-family: dinrg;
+}
+button.close-modal {
+    border: 0px solid;
+    font-size: 33px;
+    line-height: 19px;
+    float: right;
+    color: #333;
+    padding: 4px 10px;
+}
+div#callback .modal-header {
+    border-bottom: 0px solid;
+}
+.submit-msg {
+  font-weight: 600;
+}
+
+div#callback .close-modal{
+  background: #fff;
+}
+.callback-form input#name {
+    padding-left: 15px;
+}
+
+
+/* Transports Modal */
+/*REMOVAL MODAL*/
+div#Removal-Modal .modal {
+    left: unset!important;
+    margin-left: unset!important;
+}
+
+
+div#Removal-Modal .modal-body{
+    clear: both;
+   
+}
+div#Removal-Modal{
+  background:none;
+}
+
+.modal-body-mover{
+  background:url(https://myconstructor.gr/blog/wp-content/uploads/2017/11/removal-home-2.jpg);
+}
+
+#Removal-Modal .modal-dialog{
+
+        max-width: 560px;
+
+
+}
+#Removal-Modal{
+  width: 100%;
+}
+
+#Removal-Modal.modal.fade.in{
+  top: 38%;
+    border: none;
+    height: auto;
+    box-shadow:0px 0px 0px 0px;
+}
+
+.modal-title-removal {
+    color: #fff;
+    text-align: center;
+    font-size: 43px;
+    font-family: dinmd;
+    font-weight: bold;
+}
+
+.btn-mover-modal {
+    background: #FF5722;
+    max-width: 230px;
+    margin: auto;
+    text-align: center;
+    font-size: 21px;
+    padding: 8px;
+    color: #fff;
+   /* font-family: opensansbold;*/
+}
+
+.mover-modal-inner{
+    padding-bottom: 60px;
+    padding-top: 20px;
+}
+
+.modal-title-removal {
+    color: #fff;
+    text-align: center;
+    font-size: 43px;
+    line-height: 54px;
+    font-family: dinmd;
+    margin-top: 24px;
+    margin-bottom: 36px;
+}
+
+@media screen and (max-width: 560px){
+  #Removal-Modal .modal-dialog{
+    max-width: 330px;
+      margin: auto;
+
+  }
+.modal-title-removal {
+  font-size: 33px;
+    line-height: 44px;
+}
+
+}
+
+
+
+/*REMOVAL MODAL*/
+
+
+div#Removal-Modal .modal {
+    left: unset!important;
+    margin-left: unset!important;
+}
+
+
+div#Removal-Modal .modal-body{
+    clear: both;
+   
+}
+div#Removal-Modal{
+  background:none;
+}
+
+.modal-body-mover{
+  background:url(https://myconstructor.gr/blog/wp-content/uploads/2017/11/removal-home-2.jpg);
+}
+
+#Removal-Modal .modal-dialog{
+  
+  
+}
+#Removal-Modal{
+  
+}
+
+#Removal-Modal.modal.fade.in{
+  top:38%;
+    border: none;
+    height: auto;
+    box-shadow:0px 0px 0px 0px;
+    left: unset;
+    overflow: hidden;
+}
+
+.modal-title-removal {
+    color: #fff;
+    text-align: center;
+    font-size: 43px;
+    font-family: dinmd;
+    font-weight: bold;
+}
+
+.btn-mover-modal {
+    background: #FF5722;
+    max-width: 230px;
+    margin: auto;
+    text-align: center;
+    font-size: 21px;
+    padding: 8px;
+    color: #fff;
+   font-family: dinmd;
+}
+.btn-mover-modal:hover {
+    background: #FF794E;
+}
+
+.mover-modal-inner a {
+  text-decoration: none;
+}
+
+
+.modal-title-removal {
+    color: #fff;
+    text-align: center;
+    font-size: 45px;
+    line-height: 54px;
+    font-family: dinmd;
+    margin-top: 24px;
+    margin-bottom: 36px;
+}
+
+@media screen and (max-width: 560px){
+  #Removal-Modal .modal-dialog{
+    max-width: 330px;
+      margin: auto;
+
+  }
+.modal-title-removal {
+  font-size: 33px;
+    line-height: 44px;
+}
+
+}
+/*EnD REMOVAL MODAL*/
+
 
 @media screen and (max-width:1269px){
   .app-small-description-outer {

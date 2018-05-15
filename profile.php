@@ -9,6 +9,10 @@
                             $professional_meta = json_decode($professional_meta, true); // decode the JSON into an associative array
 
                             $professionalID = $professional_meta['professional_id'];
+                            $professional_meta_title = $professional_meta['meta_title'];
+                            $professional_meta_description = $professional_meta['meta_description'];
+                            $professional_meta_robots = $professional_meta['meta_robots'];
+                            $professional_permalink = $professional_meta['permalink'] .'/';
 
 
                             $professional = file_get_contents($api_url .'/webservices/api/professional/read_one.php?id='. $professionalID);
@@ -61,24 +65,36 @@
 <html lang="el">
     <head>
         
-        <title>ΜyConstructor</title>
+        <title><?php $professional_meta_title; ?></title>
 
-        <link rel="alternate" hreflang="el" href="">
+        <link rel="alternate" hreflang="el" href="<?php echo $profile_url . $professional_permalink; ?>">
+        <meta name="description" content="<?php $professional_meta_description; ?>">
+        <link rel="canonical" href="<?php echo $profile_url . $professional_permalink; ?>">
 
-        <meta name="description" content="">
-        <link rel="canonical" href="">
+        <meta name="robots" content="<?php echo $professional_meta_robots; ?>">
         <meta property="og:locale" content="el_GR">
 
-        <?php include('header.php'); ?>
+        <?php include('header.php');  
+
+        session_start();
+
+        if(isset($_SESSION["appID"])){
+            $SelectedAppId = $_SESSION["appID"];
+        }else{
+            $SelectedAppId = '0';
+        }
+        ?>
 
 
-        
+       
     </head>
 
 <?php
 include('menu.php');
 include('search.php');
+
 ?>
+
 
 
 
@@ -143,8 +159,8 @@ include('search.php');
                                 <p class="offer-mcr-txt">*Ενημερώστε τους ότι καλείτε για την προσφορά του myConstructor.</p>
 
                                 <?php 
-                                if (isset($_GET['app_id'])) {
-                                    $app= $_GET['app_id'];
+                                if ($SelectedAppId != '0') {
+                                    $app= $SelectedAppId;
 
                                     if( $app == '69' || $app == '70' || $app == '71' || $app == '72' || $app == '196' || $app == '219' || $app == '218' ||  $app == '216'  ){ ?>
                                         <a href="https://myconstructor.gr/transport/?memid=<?php echo $professionalID; ?>&amp;appid=<?php echo $app; ?>&amp;name=<?php echo $first_name; ?>&amp;surname=<?php echo $last_name; ?>" target="_blank">
@@ -188,8 +204,8 @@ include('search.php');
                                      
                                     <ul class="nav nav-pills-vertical mytabs tab-app-profile">
                                         <?php 
-                                            if (isset($_GET['app_id'])) {
-                                                $active_tab = $_GET['app_id'];
+                                            if ($SelectedAppId != '0') {
+                                                $active_tab = $SelectedAppId;
                                             }else{
                                                 $active_tab = $applications[0]['id'];
                                             }
@@ -217,8 +233,8 @@ include('search.php');
                                 <div class="tab-content clearfix">
 
                                     <?php 
-                                        if (isset($_GET['app_id'])) {
-                                            $active_tab = $_GET['app_id'];
+                                        if ($SelectedAppId != '0') {
+                                            $active_tab = $SelectedAppId;
                                         }else{
                                             $active_tab = $applications[0]['id'];
                                         }
