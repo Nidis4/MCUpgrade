@@ -906,7 +906,7 @@ ORDER BY `date` ASC,
                 $cids[] = $rowCat['category_id'];                
             }
                 
-            $query = "Select a.id as application_id, a.category_id, c.name as category_name, a.title as application_title, a.short_description as application_short_description, a.detail_description as application_detail_description, a.unit as application_unit, pa.price as application_price, pa.free_distance as application_free_distance, pa.extra_price_km as application_extra_price_km, pa.description as application_description, pa.tec_description as application_tec_description from applications a  
+            $query = "Select a.id as application_id, a.category_id, c.name as category_name, a.title as application_title, a.title_greek as application_title_gr, a.short_description as application_short_description, a.detail_description as application_detail_description, a.unit as application_unit, pa.price as application_price, pa.free_distance as application_free_distance, pa.extra_price_km as application_extra_price_km, pa.description as application_description, pa.tec_description as application_tec_description, pa.budget as application_budget from applications a  
                 LEFT JOIN professionals_applications pa ON a.id = pa.application_id and pa.professional_id= ? 
                         JOIN categories c ON a.category_id = c.id
                         WHERE a.category_id IN ('".implode("','", $cids)."')  ORDER BY a.category_id, a.sequence";
@@ -999,7 +999,7 @@ ORDER BY rat.`created` DESC";
                 $free_distance = $value['free_distance'];
                 $extra_price_km = $value['extra_price_km'];
                 $description = $value['description'];
-                $tec_description = $value['tec_description'];
+                $budget = $value['budget'];
                 $application_id = $value['application_id'];
                 $category_id = $value['category_id'];
 
@@ -1012,13 +1012,13 @@ ORDER BY rat.`created` DESC";
                 if($num >= 1){
                     // Update
                     $row = $stmt->fetch(PDO::FETCH_ASSOC);   
-                    $uquery = "Update ".$this->applications_table_name." set price='".$price."',  free_distance='".$free_distance."', extra_price_km='".$extra_price_km."', description='".$description."', tec_description='".$tec_description."',modified='".date('Y-m-d H:i:s')."' WHERE id='".$row['id']."'"; 
+                    $uquery = "Update ".$this->applications_table_name." set price='".$price."',  free_distance='".$free_distance."', extra_price_km='".$extra_price_km."', description='".$description."', budget='".$budget."',modified='".date('Y-m-d H:i:s')."' WHERE id='".$row['id']."'"; 
                     $ustmt = $this->conn->prepare( $uquery ); 
                     $ustmt->execute();
                     
                 }else{
                     // Insert
-                    $iquery = "INSERT INTO " . $this->applications_table_name . " (`professional_id`, `application_id`, `category_id`, `price`, `free_distance`, `extra_price_km`, `description`,  `tec_description`, `status`,`created`, `modified`) VALUES ($professional_id, '".$application_id."', '".$category_id."', '".$price."', '".$free_distance."', '".$extra_price_km."', '".$description."', '".$tec_description."', 'Active', '".date('Y-m-d')."', '".date('Y-m-d H:i:s')."')";
+                    $iquery = "INSERT INTO " . $this->applications_table_name . " (`professional_id`, `application_id`, `category_id`, `price`, `free_distance`, `extra_price_km`, `description`,  `budget`, `status`,`created`, `modified`) VALUES ($professional_id, '".$application_id."', '".$category_id."', '".$price."', '".$free_distance."', '".$extra_price_km."', '".$description."', '".$budget."', 'Active', '".date('Y-m-d')."', '".date('Y-m-d H:i:s')."')";
 
                     $istmt = $this->conn->prepare($iquery); 
                     $istmt->execute(); 

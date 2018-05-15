@@ -154,7 +154,7 @@
                                                               <div class="panel-heading">
                                                                 <a data-toggle="collapse" data-parent="#accordion<?php echo $value['application_id']?>" href="#collapse<?php echo $value['application_id']?>">
                                                                     <h4 class="panel-title">
-                                                                     <?php echo $value['application_title'];?> <i class="fa fa-angle-down inner-angel-style"></i>
+                                                                     <?php echo $value['application_title_gr'];?> <i class="fa fa-angle-down inner-angel-style"></i>
                                                                     </h4>
                                                                 </a>
                                                               </div>
@@ -191,7 +191,7 @@
 
                                                                     <div class="app-cols">
                                                                         <label class="app-label">Charge info:</label>
-                                                                        <input type="text" name="profile_application[<?php echo $value['application_id'];?>][tec_description]" class="app-one-line-desc" value="<?php echo $value['application_tec_description'];?>">
+                                                                        <input type="text" name="profile_application[<?php echo $value['application_id'];?>][budget]" class="app-one-line-desc" value="<?php echo $value['application_budget'];?>">
                                                                     </div>
                                                                     <input type="hidden" name="profile_application[<?php echo $value['application_id'];?>][application_id]" value="<?php echo $value['application_id'];?>">
                                                                     <input type="hidden" name="profile_application[<?php echo $value['application_id'];?>][category_id]" value="<?php echo $value['category_id'];?>">
@@ -327,6 +327,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $("#pricesave").on('click',function(){ 
+            //alert('clicked');
                 var getSaveAPI = API_LOCATION+'professional/saveApplications.php';
                 
                 $.ajax({

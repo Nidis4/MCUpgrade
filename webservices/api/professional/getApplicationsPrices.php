@@ -33,6 +33,7 @@ if($stmt){
                 "category_id" => $row['category_id'],
                 "category_name" => $row['category_name'],
                 "application_title" => $row['application_title'],
+                "application_title_gr" => $row['application_title_gr'],
                 "application_short_description" => $row['application_short_description'],
                 "application_detail_description" => $row['application_detail_description'],
                 "application_unit" => $row['application_unit'],
@@ -41,6 +42,7 @@ if($stmt){
                 "application_extra_price_km" => $row['application_extra_price_km'],
                 "application_description" => $row['application_description'],
                 "application_tec_description" => $row['application_tec_description'],
+                "application_budget" => $row['application_budget'],
             );
      
             array_push($application_array, $application_item);
