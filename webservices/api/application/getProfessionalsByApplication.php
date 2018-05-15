@@ -89,6 +89,7 @@ if($num>0){
             "city" => $rowProf['city'],
             "servicearea" => $rowProf['service_area'],
             "permalink" => $rowProf['permalink'],
+            "score" => $rowProf['total'],
             "counties" => $counties_arr,
             "reviews_stats" => $reviewsStat_arr
         );

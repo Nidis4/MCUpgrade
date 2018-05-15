@@ -80,13 +80,14 @@ class Application{
     function getProfessionalsByApplication($id){
      
         // query to read single record
-        $query = "SELECT p.id, p.first_name, p.last_name, p.image,p.service_area, pa.description, pa.budget, pa.price, pc.city, m.permalink
+        $query = "SELECT p.id, p.first_name, p.last_name, p.image,p.service_area, pa.description, pa.budget, pa.price, pc.city, m.permalink, sc.total
                     FROM `professionals` p
                     LEFT JOIN `professionals_applications` pa ON p.`id`=pa.`professional_id`
                     LEFT JOIN `professionals_contact_details` pc ON p.`id`=pc.`professional_id` AND pa.`professional_id`=pc.`professional_id`
                     LEFT JOIN `professionals_meta` m ON p.`id`=m.`professional_id`
-                    WHERE p.verified=1 AND pa.`application_id`=:app_id AND pa.`price` > 0 
-                    ORDER BY pa.`price`, p.id ASC";
+                    LEFT JOIN `professionals_scoring` sc ON p.`id`=sc.`prof_id`
+                    WHERE p.verified=1 AND pa.`application_id`=:app_id AND pa.`price` > 0 AND sc.CATEGORY_ID IN (SELECT `category_id` FROM `applications` WHERE id = :app_id )
+                    ORDER BY pa.`price` ASC, sc.TOTAL DESC";
      
      //echo $query;
         // prepare query statement
