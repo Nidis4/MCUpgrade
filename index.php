@@ -1,35 +1,43 @@
+<?php 
+	include('constants.php');
+	include('front_end_config/core.php'); 
+	session_start(); // Starting Session
+?>
 <!DOCTYPE html>
-<html>
+<html lang="el">
 <head>
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="../../favicon.ico">
-	<title>ΜyConstructor</title>
+    <link rel="icon" href="<?php echo $api_url; ?>img/favicon.png">
 
-	<link href="assets/bootstrap337/css/bootstrap.min.css" rel="stylesheet">
+	<title>ΜyConstructor</title>
+	<link rel="alternate" hreflang="el" href="<?php echo $api_url; ?>">
+	<meta name="description" content="Όλες οι τεχνικές και κατασκευαστικές εργασίες βρίσκονται εδώ! Ανακάλυψε
+	τον κατάλογο των επαγγελματιών μας & βρες εκείνον που καλύπτει τις ανάγκες σου. Επέλεξε το MyConstructor
+	για μια γκάμα εργασιών από μετακομίσεις μέχρι ελαιοχρωματισμούς και καθαρισμούς..και πες πως έγινε!">
+	<meta name="robots" content="index,follow">
+	<link rel="canonical" href="<?php echo $api_url; ?>">
+	<link href="<?php echo $api_url; ?>assets/bootstrap337/css/bootstrap.min.css" rel="stylesheet">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!-- <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <script src="assets/bootstrap337/js/bootstrap.min.js"></script> 
+    <script src="<?php echo $api_url; ?>assets/bootstrap337/js/bootstrap.min.js"></script> 
 
        <!-- Custom styles -->
     <!--<link rel="stylesheet" href="social-likes_flat.css">-->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  	<link rel="stylesheet" type="text/css" href="css/style.css?version=24">
-  	<link rel="stylesheet" type="text/css" href="css/homepage.css">
-  	<link rel="stylesheet" type="text/css" href="css/sidenav.css">
+  	<link rel="stylesheet" type="text/css" href="<?php echo $api_url; ?>css/style.css?version=24">
+  	<link rel="stylesheet" type="text/css" href="<?php echo $api_url; ?>css/homepage.css">
+  	<link rel="stylesheet" type="text/css" href="<?php echo $api_url; ?>css/sidenav.css">
 
 
 </head>
 <body>
 
-	<?php 
-	include('constants.php');
-	include('front_end_config/core.php'); 
-	session_start(); // Starting Session?>
+	
 	<div class="container-fluid container-hero">
 				<nav id="myTopnav" class="navbar navbar-default">
 					
@@ -42,17 +50,17 @@
 						        <span class="icon-bar"></span>
 						        <span class="icon-bar"></span>
 						      </button>
-						     <a class="navbar-brand" href="https://myconstructor.gr"><img src="img/home-page/logo-white.png" /></a>
+						     <a class="navbar-brand" href="<?php echo $api_url; ?>"><img src="img/home-page/logo-white.png" /></a>
 						    </div>
 						    <!-- Collect the nav links, forms, and other content for toggling -->
 						    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						      
 						      <ul class="nav navbar-nav navbar-right">
-						      	<li><a href="https://myconstructor.gr/">ΑΡΧΙΚΗ</a></li>
+						      	<li><a href="<?php echo $api_url; ?>">ΑΡΧΙΚΗ</a></li>
 						        <li><a href="<?php echo $directory_url; ?>">ΚΑΤΑΛΟΓΟΣ ΕΠΑΓΓΕΛΜΑΤΙΩΝ</a></li>
-						        <li><a href="https://myconstructor.gr/blog/">BLOG</a></li>
-						        <li><a href="https://myconstructor.gr/blog/">ΕΝ</a></li>
-						        <li><a href="https://myconstructor.gr/blog/">ΕL</a></li>
+						        <li><a href="<?php echo $api_url; ?>blog/">BLOG</a></li>
+						        <li class="lang-menu"><a href="<?php echo $api_url; ?>blog/">ΕΝ</a></li>
+						        <li class="lang-menu"><a href="<?php echo $api_url; ?>blog/">ΕL</a></li>
 						        <li class="active litel"><a href="tel:2103009323">210 300 9323</a></li>
 						        <li><a href="<?php echo $signup_url; ?>"><span class="glyphicon glyphicon-user"></span> ΕΓΓΡΑΦΗ</a></li>
 						        <li>
@@ -88,31 +96,31 @@
 			<div class="col-sm-9">
 				<div class="row">
 					<div class="col-4">
-						<a href="/directory.php?app_id=141&cat_id=118">
+						<a href="<?php echo $api_url; ?>katalogos/texnikoi-asfaleias/">
 							<div class="category-box box-texnikos-asfaleias">
 								<div class="category-box-title">
 						            <h3>Τεχνικός Ασφαλείας
-						                <span class="category-box-title-count"><img src="img/cat_icons/texnikos-asfaleias.png" /></span>
+						                <span class="category-box-title-count"><img src="<?php echo $api_url; ?>img/cat_icons/texnikos-asfaleias.png" /></span>
 						            </h3>
 						        </div>
 							</div>
 						</a>
 					</div>
 					<div class="col-5">
-						<a href="/directory.php?app_id=217&cat_id=43">
+						<a href="<?php echo $api_url; ?>katalogos/pea/">
 							<div class="category-box box-pea">
 								<div class="category-box-title">
-									<h3>Ενεργειακό Πιστοποιητικό <span class="category-box-title-count"><img src="img/cat_icons/pea.png" /></span>
+									<h3>Ενεργειακό Πιστοποιητικό <span class="category-box-title-count"><img src="<?php echo $api_url; ?>img/cat_icons/pea.png" /></span>
 							        </h3>
 							    </div>
 							</div>
 						</a>
 					</div>
 					<div class="col">
-						<a href="/directory.php?app_id=32&cat_id=54">
+						<a href="<?php echo $api_url; ?>katalogos/elaioxromatismoi/">
 							<div class="category-box box-painter">
 								<div class="category-box-title">
-									<h3>Βάψιμο <span class="category-box-title-count"><img src="img/cat_icons/vapsimo.png" /></span>
+									<h3>Βάψιμο <span class="category-box-title-count"><img src="<?php echo $api_url; ?>img/cat_icons/vapsimo.png" /></span>
 							        </h3>
 							    </div>
 							</div>
@@ -121,10 +129,10 @@
 				</div>
 				<div class="row sec-row-works">
 					<div class="col-4">
-						<a href="/directory.php?app_id=16&cat_id=57">
+						<a href="<?php echo $api_url; ?>katalogos/klimatistiko/">
 							<div class="category-box  box-aircondition">
 								<div class="category-box-title">
-									<h3>Κλιματιστικό <span class="category-box-title-count"><img src="img/cat_icons/klimatistiko.png" /></span>
+									<h3>Κλιματιστικό <span class="category-box-title-count"><img src="<?php echo $api_url; ?>img/cat_icons/klimatistiko.png" /></span>
 							        </h3>
 							    </div>
 							</div>
@@ -135,7 +143,7 @@
 							<div class="category-box box-renovation">
 								<div class="category-box-title">
 						            <h3>Γενική Ανακαίνιση
-						                <span class="category-box-title-count"><img src="img/cat_icons/anakainisi-kouzinas.png" /></span>
+						                <span class="category-box-title-count"><img src="<?php echo $api_url; ?>img/cat_icons/anakainisi-kouzinas.png" /></span>
 						            </h3>
 						        </div>
 							</div>
@@ -148,11 +156,11 @@
 			<div class="col-sm-3">
 				<div class="row full-height">
 					<div class="col-3">
-						<a href="/directory.php?app_id=69&cat_id=103">
+						<a href="<?php echo $api_url; ?>katalogos/metakomiseis-metaforikes/">
 							<div class="category-box category-box-alt box-mover">
 								<div class="category-box-title">
 						            <h3>Μετακομίσεις
-						                <span class="category-box-title-count"><img src="img/cat_icons/metakomisis.png" /></span>
+						                <span class="category-box-title-count"><img src="<?php echo $api_url; ?>img/cat_icons/metakomisis.png" /></span>
 						            </h3>
 						        </div>
 							</div>
@@ -173,7 +181,7 @@
 			<div class="col-md-4 col-how-it">
 				<div class="col-how-it-inner">
 					<div class="how-it-img">
-						<img src="img/home-page/how_11.png" />
+						<img src="<?php echo $api_url; ?>img/home-page/how_11.png" />
 					</div>
 					<h4>Καταχώρηση Έργου</h4>
 					<p>Καταχώρησε online στη φόρμα την εργασία που επιθυμείς και λάβε άμεσα δωρεάν προσφορά από τα εξειδικευμένα συνεργεία μας.</p>
@@ -182,7 +190,7 @@
 			<div class="col-md-4 col-how-it">
 				<div class="col-how-it-inner">
 					<div class="how-it-img">
-						<img src="img/home-page/how_21.png" />
+						<img src="<?php echo $api_url; ?>img/home-page/how_21.png" />
 					</div>
 					<h4>Κατάλογος Επαγγελματιών</h4>
 					<p>Μπες στον κατάλογο, σύγκρινε τιμές και αξιολογήσεις και επέλεξε τον επαγγελματία που σου ταιριάζει.</p>
@@ -191,7 +199,7 @@
 			<div class="col-md-4 col-how-it">
 				<div class="col-how-it-inner">
 					<div class="how-it-img">
-						<img src="img/home-page/how_31.png" />
+						<img src="<?php echo $api_url; ?>img/home-page/how_31.png" />
 					</div>
 					<h4>Αξιολόγηση Επαγγελματιών</h4>
 					<p>Μετά το πέρας της εργασίας αξιολόγησε τον επαγγελματία  και ενημέρωσε τους επόμενους χρήστες για την εμπειρία σου.</p>
@@ -208,7 +216,7 @@
 	<div class="container-fluid container-looking">
 		<div class="row row-looking">
 			<div class="col-md-6">
-				<a href="/sign_up.php">
+				<a href="<?php echo $api_url; ?>sign_up.php">
 					<div class="category-box box-looking">
 						<div class="col-looking">
 							<div class="col-looking-inner">
@@ -221,7 +229,7 @@
 			</div>
 			<div class="delimiter"><span>Η</span></div>
 			<div class="col-md-6">
-				<a href="/directory.php">
+				<a href="<?php echo $api_url; ?>katalogos/">
 					<div class="category-box box-job">
 						<div class="col-looking">
 							<div class="col-looking-inner">
@@ -244,9 +252,9 @@
 		</div>
 		<div class="row row-articles">
 			<div class="col-sm-4">
-				<a href="/services/anakainisi-spitiou/">
+				<a href="<?php echo $api_url; ?>services/anakainisi-spitiou/">
 					<div class="article">
-						<img src="img/home-page/renovation-article.jpg" />
+						<img src="<?php echo $api_url; ?>img/home-page/renovation-article.jpg" />
 						<div class="article-title">
 							<h4>Γενική Ανακαίνιση Οικίας</h4>
 							<p>Λύσε απορίες σχετικά με μερική ή γενική ανακαίνιση οικίας και πάρε χρήσιμες ιδέες για την ανακαίνιση του χώρου σου.</p>
@@ -255,9 +263,9 @@
 				</a>
 			</div>
 			<div class="col-sm-4">
-				<a href="/blog/matakomiseis-metafores/">
+				<a href="<?php echo $api_url; ?>blog/matakomiseis-metafores/">
 					<div class="article">
-						<img src="img/home-page/movers2.jpg" />
+						<img src="<?php echo $api_url; ?>img/home-page/movers2.jpg" />
 						<div class="article-title">
 							<h4>Μεταφορές</h4>
 							<p>Μετακομίζεις ή ενδιαφέρεσαι για μεταφορά; Διάβασε εδώ τι πρέπει να προσέξεις πριν ξεκινήσεις την μετακόμισή σου.</p>
@@ -266,9 +274,9 @@
 				</a>
 			</div>
 			<div class="col-sm-4">
-				<a href="/blog/synergeio-katharismou/">
+				<a href="<?php echo $api_url; ?>blog/synergeio-katharismou/">
 					<div class="article">
-						<img src="img/home-page/cleaning-company.jpg" />
+						<img src="<?php echo $api_url; ?>img/home-page/cleaning-company.jpg" />
 						<div class="article-title">
 							<h4>Συνεργεία Καθαρισμού</h4>
 							<p>Καθαρισμοί σπιτιού ή επαγγελματικών χώρων. Ενημερώσου για τις παρεχόμενες υπηρεσίες και το κόστος!</p>
@@ -279,7 +287,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12 col-blog-btn">
-				<a class="a-btn-blog" href="/blog/">
+				<a class="a-btn-blog" href="<?php echo $api_url; ?>blog/">
 					<div class="btn-blog">
 	            		Δέιτε περισσότερα  <i class="fa fa-angle-right"></i>
 	        		</div>

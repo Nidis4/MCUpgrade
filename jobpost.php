@@ -7,13 +7,15 @@
 <html lang="el">
     <head>
         
-        <title>ΜyConstructor</title>
+        <title>Καταχώρηση Έργου | MyConstructor.gr</title>
 
-        <link rel="alternate" hreflang="el" href="https://myconstructor.gr/blog/matakomiseis-metafores/">
+        <link rel="alternate" hreflang="el" href="https://myconstructor.gr/jobpost.php">
 
-        <meta name="description" content="Μετακόμιση οικοσκευών από 49€. Μετακομίσεις σε όλη την Ελλάδα. Οικονομικές μεταφορές με ανυψωτικό και αμπαλάζ. ΠΡΟΣΦΟΡΕΣ Μετακόμιση Γκαρσονιέρα 49€ - Μετακόμιση Δυάρι 70€ - Μετακόμιση Τριάρι 90€ - Μετακόμιση Τεσσάρι 110€. Μετακομίστε με ασφάλεια! Αξιολογημένες Μεταφορικές Εταιρίες.">
-        <link rel="canonical" href="https://myconstructor.gr/blog/matakomiseis-metafores/">
+        <meta name="description" content="Θέλετε να πραγματοποιήσετε κάποια τεχνική εργασία; Μπορείτε να κάνετε εύκολα & γρήγορα καταχώρηση του
+        έργου σας στην ειδική φόρμα που έχουμε φτιάξει για την πιο άμεση εξυπηρέτησή σας! Συμπληρώστε τις απαραίτητες πληροφορίες και θα επικοινωνήσουμε μαζί σας με μία προσφορά.">
+        <link rel="canonical" href="https://myconstructor.gr/jobpost.php">
         <meta property="og:locale" content="el_GR">
+        <meta name="robots" content="index,follow">
 
         <?php include('header.php'); ?>
         <link rel="stylesheet" type="text/css" href="css/harpreet_style.css">

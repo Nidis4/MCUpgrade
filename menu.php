@@ -16,11 +16,11 @@
 						    <!-- Collect the nav links, forms, and other content for toggling -->
 						    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						      <ul class="nav navbar-nav navbar-right">
-						      	<li><a href="https://myconstructor.gr/">ΑΡΧΙΚΗ</a></li>
+						      	<li><a href="<?php echo $api_url; ?>">ΑΡΧΙΚΗ</a></li>
 						        <li><a href="<?php echo $directory_url; ?>">ΚΑΤΑΛΟΓΟΣ ΕΠΑΓΓΕΛΜΑΤΙΩΝ</a></li>
-						        <li><a href="https://myconstructor.gr/blog/">BLOG</a></li>
-						        <li><a href="https://myconstructor.gr/blog/">ΕΝ</a></li>
-						        <li><a href="https://myconstructor.gr/blog/">ΕL</a></li>
+						        <li><a href="<?php echo $api_url; ?>blog/">BLOG</a></li>
+						        <li class="lang-menu"><a href="<?php echo $api_url; ?>">ΕΝ</a></li>
+						        <li class="lang-menu"><a href="<?php echo $api_url; ?>">ΕL</a></li>
 						        <li class="active litel"><a href="tel:2103009323">210 300 9323</a></li>
 						        <li><a href="<?php echo $signup_url; ?>"><span class="glyphicon glyphicon-user"></span> ΕΓΓΡΑΦΗ</a></li>
 						        <li>

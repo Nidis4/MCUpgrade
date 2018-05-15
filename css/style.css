@@ -4785,6 +4785,10 @@ div#Removal-Modal{
     margin-bottom: 36px;
 }
 
+li.lang-menu {
+    display: none;
+}
+
 @media screen and (max-width: 560px){
   #Removal-Modal .modal-dialog{
     max-width: 330px;

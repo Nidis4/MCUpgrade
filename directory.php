@@ -80,6 +80,19 @@
    		$cat_meta_description= $select_cat['meta_description'];
 		$cat_meta_robots=  $select_cat['meta_robots'];
 		$cat_permalink= $select_cat['permalink'];
+
+
+		$select_app = file_get_contents($api_url .'webservices/api/application/read_app_id.php?permalink=viologikos-katharismos-offer');
+   		$select_app = json_decode($select_app, true);
+
+   		$SelectedAppId= $select_app['application_id'];
+   		$app_meta_title= $select_app['meta_title'];
+   		$app_meta_description= $select_app['meta_description'];
+		$app_meta_robots=  $select_app['meta_robots'];
+		$app_permalink= $select_app['permalink'];
+
+		session_start();
+		$_SESSION["appID"] = $SelectedAppId;
    }
 
 ?>
@@ -111,9 +124,9 @@
 			<link rel="canonical" href="<?php echo $permalink; ?>">
 		<?php }else{?>
 
-			<title>Υπηρεσίες MyConstructor σε προσφορά</title>
+			<title>Κατάλογος Επαγγελματιών MyConstructor | Υπηρεσίες σε προσφορά</title>
 			<link rel="alternate" hreflang="el" href="<?php echo $directory_url; ?>"><!--+permanlink -->
-			<meta name="description" content="">
+			<meta name="description" content="Βρείτε όλες τις εργασίες για το σπίτι και την οικοδομή από αξιολογημενους επαγγελματίες στις καλύτερες τιμές της αγοράς.">
 			<meta name="robots" content="index,follow">
 			<link rel="canonical" href="<?php echo $directory_url; ?>"><!--+permanlink -->
 

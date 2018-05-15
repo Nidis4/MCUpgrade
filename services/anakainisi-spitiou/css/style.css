@@ -1,0 +1,1406 @@
+@font-face {
+  font-family: 'dinRg';
+  src: url('../../assets/fonts/DiGrRg__.ttf');
+}
+@font-face {
+  font-family: 'dinMd';
+  src: url('../../assets/fonts/DiGrMd__.ttf');
+}
+@font-face {
+  font-family: 'dinMdep';
+  src: url('../../assets/fonts/DiGrMdEp.ttf');
+}
+@font-face {
+  font-family: 'dinLt';
+  src: url('../../assets/fonts/DiGrLt__.ttf');
+}
+@font-face {
+  font-family: 'dinBk';
+  src: url('../../assets/fonts/DiGrBk__.ttf');
+}
+@font-face {
+  font-family: 'dinBd';
+  src: url('../../assets/fonts/DiGrBd__.ttf');
+}
+@font-face {
+  font-family: 'dinBdep';
+  src: url('../../assets/fonts/DiGrBk__.ttf');
+}
+
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+
+  src: url('../../assets/fonts/glyphicons-halflings-regular.eot');
+  src: url('../../assets/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../../assets/fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../../assets/fonts/glyphicons-halflings-regular.woff') format('woff'), url('../../assets/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../../assets/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
+
+h1,h2,h3,h3{
+  font-family: dinMd!important;
+}
+
+h3{
+    font-size: 27px;
+    margin-bottom: 25px;
+    font-family: dinbd!important;
+}
+
+.renovation-content h4{
+    font-family: dinmd;
+    font-size: 23px;
+}
+
+div{
+  font-family: dinMd;
+}
+
+p{
+   font-family: dinRg;
+   line-height: 1.65;
+}
+
+body {margin:0;}
+
+ul li, ol li{
+    font-size: 18px;
+        font-family: dinrg;
+}
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+b{
+    font-family: dinbd;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}  
+
+a{
+    text-decoration: none;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.topnav .icon {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav a:not(:first-child) {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+
+}
+
+
+.navbar-inverse{
+
+	background-color:#fff;
+
+	border-color: #fff;
+
+	box-shadow: 0 3px 10px #ebebeb;
+
+}
+
+
+
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+
+    color: #fff;
+
+    background-color: #004A86;
+
+}
+
+
+
+.navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover {
+
+    color: #f2930a;
+
+    background-color: transparent;
+
+}
+
+
+
+.navbar-brand{
+
+	height: auto;
+
+}
+
+
+
+.navbar-nav {
+
+  
+
+    margin-top: 17px;
+
+}
+
+.navbar-inverse .navbar-nav>li>a{
+
+    color:#004A86;
+
+    font-weight: bold;
+
+}
+
+nav#myTopnav.navbar-default {
+    background-color: #fff;
+}
+
+.navbar-default .navbar-nav>li>a{
+  font-family:dinbd;
+}
+
+li.litel a {
+    background-color: #004a86!important;
+    color: #fff!important;
+    font-size: 20px;
+}
+
+
+/*NEW FOOTER*/
+
+.footer-mob-col-row {
+
+    display: none;
+
+}
+
+
+
+@media screen and (max-width: 1200px){
+
+    .footer-container .col-md-3{
+
+        width:50%;
+
+        float:left;
+
+    }
+
+    .desk-col-footer{
+
+        display: none;
+
+    }
+
+    .footer-mob-col-row{
+
+        display: block;
+
+    }
+
+
+
+    .navbar-inverse .navbar-nav > li > a{
+
+            padding: 30px 8px 33px 8px;
+
+    }
+
+
+
+}
+
+@media screen and (max-width: 767px){
+
+    .footer-mob-col-row .col-sm-6{
+
+        width:50%;
+
+        float:left;
+
+    }
+
+}
+
+
+
+
+
+
+
+@media screen and (max-width: 500px){
+
+    .footer-mob-col-row .col-sm-6,.footer-container .col-md-3{
+
+        width:100%;
+
+        float:left;
+
+    }
+
+}
+
+
+
+
+
+.full {
+
+    width: 100%;    
+
+}
+
+.gap {
+
+    height: 30px;
+
+    width: 100%;
+
+    clear: both;
+
+    display: block;
+
+}
+
+.footer {
+
+    background: #333333;
+
+    height: auto;
+
+    padding-bottom: 30px;
+
+    position: relative;
+
+    width: 100%;
+
+    border-bottom: 1px solid #CCCCCC;
+
+    border-top: 1px solid #DDDDDD;
+
+        padding-top: 20px;
+
+    padding-bottom: 80px;
+
+}
+
+.footer p {
+
+    margin: 0;
+
+    color: #dcdcdc;
+
+}
+
+.footer img {
+
+    max-width: 100%;
+
+}
+
+.footer h3 {
+
+    border-bottom: 1px solid #BAC1C8;
+
+    color: #fff;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    line-height: 27px;
+
+    padding: 40px 0 10px;
+
+    text-transform: uppercase;
+
+}
+
+.footer ul {
+
+    font-size: 14px;
+
+    list-style-type: none;
+
+    margin-left: 0;
+
+    padding-left: 0;
+
+    margin-top: 15px;
+
+    color: #fff;
+
+}
+
+.footer ul li a {
+
+    padding: 0 0 5px 0;
+
+    display: block;
+
+}
+
+.footer a {
+
+    color: #dcdcdc;
+
+    text-decoration:none;
+
+}
+
+.supportLi h4 {
+
+    font-size: 20px;
+
+    font-weight: lighter;
+
+    line-height: normal;
+
+    margin-bottom: 0 !important;
+
+    padding-bottom: 0;
+
+}
+
+.newsletter-box input#appendedInputButton {
+
+    background: #FFFFFF;
+
+    display: inline-block;
+
+    float: left;
+
+    height: 30px;
+
+    clear: both;
+
+    width: 100%;
+
+}
+
+.newsletter-box .btn {
+
+    border: medium none;
+
+    -webkit-border-radius: 3px;
+
+    -moz-border-radius: 3px;
+
+    -o-border-radius: 3px;
+
+    -ms-border-radius: 3px;
+
+    border-radius: 3px;
+
+    display: inline-block;
+
+    height: 40px;
+
+    padding: 0;
+
+    width: 100%;
+
+    color: #fff;
+
+}
+
+.newsletter-box {
+
+    overflow: hidden;
+
+}
+
+.bg-gray {
+
+    background-image: -moz-linear-gradient(center bottom, #BBBBBB 0%, #F0F0F0 100%);
+
+    box-shadow: 0 1px 0 #B4B3B3;
+
+}
+
+.social li {
+
+    
+
+    -webkit-border-radius: 50%;
+
+    -moz-border-radius: 50%;
+
+    -o-border-radius: 50%;
+
+    -ms-border-radius: 50%;
+
+    border-radius: 50%;
+
+    float: left;
+
+    height: 36px;
+
+    line-height: 36px;
+
+    margin: 0 8px 0 0;
+
+    padding: 0;
+
+    text-align: center;
+
+    width: 36px;
+
+    transition: all 0.5s ease 0s;
+
+    -moz-transition: all 0.5s ease 0s;
+
+    -webkit-transition: all 0.5s ease 0s;
+
+    -ms-transition: all 0.5s ease 0s;
+
+    -o-transition: all 0.5s ease 0s;
+
+}
+
+.social li:hover {
+
+    transform: scale(1.15) rotate(360deg);
+
+    -webkit-transform: scale(1.1) rotate(360deg);
+
+    -moz-transform: scale(1.1) rotate(360deg);
+
+    -ms-transform: scale(1.1) rotate(360deg);
+
+    -o-transform: scale(1.1) rotate(360deg);
+
+}
+
+.social li a {
+
+    color: #EDEFF1;
+
+}
+
+.social li:hover {
+
+    border: 2px solid #2c3e50;
+
+    background: #2c3e50;
+
+}
+
+.social li a i {
+
+    font-size: 16px;
+
+    margin: 8px 0 0 0px;
+
+    color: #EDEFF1 !important;
+
+}
+
+.footer-bottom {
+
+    background: #313131;
+
+    border-top: 1px solid #DDDDDD;
+
+    padding-top: 10px;
+
+    padding-bottom: 10px;
+
+    color:#fff;
+
+}
+
+.footer-bottom p.pull-left {
+
+    padding-top: 6px;
+
+}
+
+.payments {
+
+    font-size: 1.5em;   
+
+}
+
+.social li:nth-child(1){
+
+    background: none repeat scroll 0 0 #3B5998;
+
+    border: 2px solid #3B5998;
+
+}
+
+.social li:nth-child(2){
+
+    background: none repeat scroll 0 0 #4AB3F4;
+
+    border: 2px solid #4AB3F4;
+
+}
+
+.social li:nth-child(3){
+
+    background: none repeat scroll 0 0 #DC4A38;
+
+    border: 2px solid #DC4A38;
+
+}
+
+.social li:nth-child(4){
+
+    background: none repeat scroll 0 0 #0073B0;
+
+    border: 2px solid #0073B0;
+
+}
+
+
+
+.footer a:hover {
+
+    color: #F2930A;
+
+}
+
+footer{
+
+    background:#333333;
+
+}
+
+
+
+
+
+.col-md-3.col-sm-6.col-xs-12 h3 {
+
+    color: #fff;
+
+    border-bottom: 1px solid #BAC1C8;
+
+    padding-bottom:10px;
+
+}
+
+
+
+.col-md-3.col-sm-6.col-xs-12 h3, .row.footer-mob-col-row h3 {
+
+    color: #fff;
+
+    font-size: 19px;
+
+}
+
+
+
+.container.footer-container {
+
+    padding-top: 50px;
+
+    padding-bottom: 50px;
+
+}
+
+
+
+.col-md-3.col-sm-6.col-xs-12.desk-col-footer p, .row.footer-mob-col-row p {
+
+    color: #fff;
+
+}
+
+
+
+.container.footer-container a:hover, .row.footer-mob-col-row a:hover {
+
+    color:#F2930A;
+
+}
+
+
+
+.social li a i {
+
+    font-size: 16px;
+
+    margin: 8px 0 0 0px;
+
+    color: #EDEFF1 !important;
+
+}
+
+
+
+.social li a i {
+
+    font-size: 20px;
+
+    padding-right: 0px;
+
+}
+
+
+
+
+
+
+footer a{
+
+    color:#F2930A;
+
+}
+
+
+
+ul.social {
+
+  list-style-type: none;
+
+}
+
+
+
+.car-first-img a{
+
+ color:#fff;
+
+ text-decoration: none;
+
+}
+
+.offer-btn{
+
+  color:#fff;
+
+}
+
+
+
+.col-md-12 a{
+
+  text-decoration: none;
+
+}
+
+.navbar-nav{
+      font-size: 16px;
+}
+.call-btn {
+    background: rgba(255,255,255,0.9);
+    width: 310px;
+    text-align: center;
+    font-size: 19px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    font-weight: bold;
+    margin-top: 22px;
+    color: #00337f;
+    border-radius: 0px;
+    margin: 30px auto;
+    cursor: pointer;
+}
+
+.call-btn:hover {
+    background: rgba(255,255,255,0.6);
+}
+
+
+.modal-dialog {
+    top: 5%;
+}
+
+
+div#callback .modal-content {
+    max-width: 400px;
+    margin: auto;
+        background: #fff;
+            font-family: opensans;
+            color: #686F7F;
+}
+div#callback .modal-header{
+    border-bottom:0px solid;
+}
+
+div#callback .modal-body{
+    padding: 4px 20px 20px 20px;
+    background:#fff;
+}
+
+div#callback h4.modal-title {
+    font-size: 21px;
+    text-align: center;
+    color:#686F7F;
+    font-family: opensans;
+}
+
+div#callback h4.modal-title span{
+    font-family: opensans;
+}
+
+#callback p {
+    font-size: 16px;
+    text-align: center;
+        margin-top: 20px;
+        font-style:italic;
+}
+.callback-form {
+    max-width: 300px;
+    margin: auto;
+}
+
+.callback-form input#name, .callback-form input#mobile, .callback-form input#time {
+    width: 100%;
+    min-height: 41px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border:1px solid #D2D2D2;
+    font-size: 18px;
+    padding: 0 15px!important;
+}
+.radio-btns {
+    margin-bottom: 15px;
+    font-size:18px;
+}
+input.radio-time {
+    min-height: 18px;
+    width: 18px;
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+ 
+
+.callback-form input#mobile,.callback-form input#time {
+    padding:0px 15px;
+}
+
+button.btn-call-back {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: #2E8DC7;
+    font-size: 20px;
+    border-radius: 5px;
+    color: #fff;
+    margin-top: 10px;
+    font-family: opensans;
+}
+button.btn-call-back:hover {
+background:#5CA6D3;
+cursor:pointer;
+}
+
+button.close-btn-call-back {
+    position: absolute;
+    right: 7px;
+    background: transparent;
+    border: 0px solid;
+    color: #fff;
+    font-size: 20px;
+    top: 3px;
+    z-index:1000;
+}
+
+div#callback.modal {
+    background: none;
+
+}
+
+div#callback.modal button.close{
+  font-size: 27px;
+    color: #000;
+}
+
+@media screen and (max-width:1169px){
+  .row{
+    width:100%!important;
+  }
+  body{
+    overflow-x: hidden;
+  }
+}
+
+
+/* The container */
+.radio-label {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-family: dinmd;
+    font-weight: normal;
+}
+
+/* Hide the browser's default radio button */
+.radio-label input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom radio button */
+.radio-label .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 22px;
+    width: 22px;
+    background-color: #eee;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+}
+
+/* On mouse-over, add a grey background color */
+.radio-label:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.radio-label input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.radio-label .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radio-label input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radio-label .checkmark:after {
+    top: 6px;
+    left: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+.row.row-form {
+    width: 1000px;
+    margin: auto;
+}
+
+.col-md-8.colmd-form h2 {
+    text-align: center;
+}
+
+
+.contianer-fluid.container-form {
+    /*background: #ff6600;
+    background: #2196f3;*/
+
+    background: #f7f7f7;
+    padding-bottom: 80px;
+}
+
+.col-md-8.colmd-form {
+    margin-top: 100px;
+    background: #fff;
+    padding: 40px;
+    border: 1px solid #e6e6e6;
+}
+
+.navbar{
+    margin-bottom: 0px;
+}
+
+.col-title {
+    margin-bottom: 35px;
+}
+
+
+
+/* The container */
+.label-check-box {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-family: dinmd;
+    font-weight: normal;
+}
+
+/* Hide the browser's default checkbox */
+.label-check-box input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.label-check-box .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 22px;
+    width: 22px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+}
+
+/* On mouse-over, add a grey background color */
+.label-check-box:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.label-check-box input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.label-check-box .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.label-check-box input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.label-check-box .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+
+.container.footer-container a {
+    color: #fff;
+}
+
+.bg-container-renov{
+    background: url('../img/sxedio-gia-anakainisi.jpg');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-top: 150px;
+    padding-bottom: 150px;
+}
+
+.col-md-5.col-5left {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    padding-left: 80px;
+    padding-right: 80px;
+    background: #004a86;
+
+}
+
+.container.container-renovation {
+    width: 100%;
+    padding: 0px;
+}
+
+.container-fluid.outer-container-renovation {
+    padding: 0px;
+}
+
+h3.h1-renovetion {
+    font-size: 44px;
+    margin-top: 8px;
+    color:#fff;
+    font-family: dinbd!important;
+    margin-bottom: 20px;
+}
+
+p.p-rev-text {
+    margin-top: 27px;
+    margin-bottom: 40px;
+    color: #fff;
+    font-size: 23px;
+    font-family: dinmd;
+}
+
+.btn-renovation-form{
+    min-width: 145px;
+    max-width: 235px;
+    background-color: #ff6600;
+    border: 2px solid #ff6600;
+    font-size: 17px;
+    font-family: dinmd;
+    padding: 12px 12px 12px;
+    margin-top: 30px;
+    text-align: center;
+    color: #fff;
+    margin-bottom:8px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.col-md-7.col-7right {
+    padding: 80px;
+  }
+
+p.p-intro {
+    font-size: 21px;
+    font-style: italic;
+}
+
+.myquotes {
+    position: relative;
+    font-size: 15px;
+    margin-bottom: 50px;
+}
+
+.first-quote {
+    position: absolute;
+    opacity: 0.2;
+    font-size: 180px;
+    margin-top: 0px;
+    line-height: 86px;
+    left: -40px;
+    color: #ff9500;
+}
+
+.second-quote {
+    position: absolute;
+    right: 0;
+    opacity: 0.2;
+    font-size: 180px;
+    line-height: 35px;
+    color: #ff9500;
+}
+
+.img-sep {
+    max-width: 551px;
+}
+
+.img-sep img{
+    width:100%;
+}
+
+
+.col-md-12.renovation-content {
+   
+    padding-bottom: 70px;
+}
+
+.col-md-12.renovation-content p {
+
+    font-size: 18px;
+    margin-bottom:20px;
+}
+
+.renovation-content h2{
+    font-size:33px;
+}
+
+.table-content {
+    width: 40%;
+    float: right;
+    background: #f3f3f3;
+    padding-top: 25px;
+    padding-bottom: 20px;
+    padding-right: 20px;
+    padding-left: 15px;
+    margin-left: 20px;
+    border: 1px solid #e2e2e2;
+    margin-bottom: 20px;
+}
+
+.table-content h4{
+    text-align: center;
+}
+
+.testimonial-bg{
+    background:url("../img/constructors.jpg");
+    background-size: cover;
+    background-position: center center;
+    padding-top: 135px;
+    padding-bottom: 135px;
+}
+
+.container-fluid.testimonial-bg .row {
+    max-width: 1140px;
+    margin: auto;
+}
+
+h5.testimon-h5 {
+    font-size: 50px;
+    font-family: dinbd;
+    color: #fff;
+    text-align: center;
+    margin-top: 10px;
+    line-height: 70px;
+}
+p.p-testimonial {
+    text-align: center;
+    color: #fff;
+    letter-spacing: 5px;
+}
+
+.container-fluid.testimonial-bg .img-sep {
+    margin: auto;
+}
+.div-testimonial{
+     padding: 30px;
+    background: #fff;
+}
+
+   .row.row-testimonials-div {
+    padding-top: 65px;
+}
+
+.div-testimonial p {
+    font-size: 20px;
+    text-align: center;
+}
+
+.testimonial-footer {
+    padding: 20px;
+    background: #458fff;
+}
+
+p.testimonial-name {
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    font-family: dinbd;
+    margin-bottom: 5px;
+}
+
+.col-md-12.col-first-title h1 {
+    text-align: center;
+    font-family: dinbd!important;
+    color: #fff;
+    font-size: 40px; 
+
+}
+
+.col-md-12.col-first-title p {
+    font-size: 25px;
+    text-align: center;
+    color: #fff;
+    font-family: dinmd;
+}
+
+.container-fluid.bg-container-renov .row {
+    max-width: 1170px;
+    margin: auto;
+}
+
+.btn-renovation-form.top-btn {
+    margin: 30px auto;
+}
+
+.container-fluid.bg-container-renov .row {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.btn-renovation-form:hover {
+    opacity: 0.8;
+}
+
+.container-fluid.why-mcr .row {
+    max-width: 1170px;
+    margin: 80px auto;
+
+}
+
+.container-fluid.why-mcr h4 {
+    font-family: dinrg;
+    line-height: 22px;
+}
+
+.col-md-3.col-3-why span.icon {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 32px;
+    color: #008dff;
+}
+
+.col-md-3.col-3-why span.text {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 10px;
+    font-size: 16px;
+}
+
+.row.row-table {
+    max-width: 1170px;
+    margin: auto;
+}
+
+.container.container-renovation {
+   /* background: url(../img/anakainisi-spitiou.jpg);
+    background-size: cover;
+    background-position:center center;
+    background-repeat: no-repeat;
+
+    padding: 120px 0px;*/
+    margin-bottom: 60px;
+        padding-top: 120px;
+    padding-bottom: 120px;
+}
+
+
+
+.renov-msg-btn {
+    text-align: center;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.img-sep {
+    max-width: 560px;
+    margin: auto;
+}
+
+.container-fluid.why-mcr {
+    background: #f7f7f7;
+    margin-bottom: 45px;
+}
+
+.div-mycon-social {
+    margin: auto;
+    max-width: 991px;
+}
+
+ul.mycon-social {
+    max-width: 100%;
+    margin: 30px auto 30px auto;
+    list-style: none;
+}
+
+img {
+    vertical-align: top;
+    height: auto;
+}
+
+ul.mycon-social li {
+    display: inline-block;
+    margin-right: 28px;
+    margin-bottom: 20px;
+}
+
+h5.title-heading-center {
+    text-align: center;
+    font-size: 26px;
+}
+
+.container-fluid.mcr-social-container {
+    padding-top: 55px;
+    padding-bottom: 55px;
+}
+
+h5.title-heading-center {
+    padding-bottom: 20px;
+}
+
+.row.row-testimonials-div .col-md-4 {
+    margin-bottom: 25px;
+}
+
+span.icon img {
+    max-width: 80px;
+}
+
+ul.nav.navbar-nav li {
+    font-size: 16px;
+}
+
+.col-md-12.col-first-title .img-sep {
+    margin-bottom: 20px;
+}
+
+.parallax {
+    /* The image used */
+    background-image: url(../img/anakainisi-spitiou-1.jpg);
+
+    /* Set a specific height
+    min-height: 500px;  */
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media screen and (max-width: 800px){
+    .table-content{
+        width: 100%;
+
+    }
+}
+
+
+@media screen and (max-width: 990px){
+    .col-md-3.col-3-why {
+    margin-bottom: 35px;
+    }
+
+
+}
+
+
+@media screen and (min-width:990px){
+    .row.row-testimonials-div .col-md-4 .div-testimonial {
+        min-height: 235px;
+
+    }
+
+
+}

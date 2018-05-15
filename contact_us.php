@@ -8,18 +8,17 @@ include('front_end_config/core.php');
 <html lang="el">
     <head>
         
-        <title>ΜyConstructor</title>
+        <title>Επικοινωνία | MyConstructor.gr</title>
 
-        <link rel="alternate" hreflang="el" href="">
+        <link rel="alternate" hreflang="el" href="https://myconstructor.gr/contact_us.php">
 
-        <meta name="description" content="">
-        <link rel="canonical" href="">
+        <meta name="description" content=" Είστε επαγγελματίας ή ιδιοκτήτης έργου; Όποιο από τα δύο και αν ισχύει μη διστάσετε να επικοινωνήσετε μαζί μας με απορίες & προβληματισμούς που αφορούν την εργασία που θέλετε να πραγματοποιήσετε! Στείλτε μας e-mail, καλέστε μας ή συμπληρώστε απλώς τη φόρμα επικοινωνίας. Είμαστε στη διάθεσή σας!">
+        <link rel="canonical" href="https://myconstructor.gr/contact_us.php">
+        <meta name="robots" content="index,follow">
         <meta property="og:locale" content="el_GR">
 
         <?php include('header.php'); ?>
 
-
-        
     </head>
 
 <?php
