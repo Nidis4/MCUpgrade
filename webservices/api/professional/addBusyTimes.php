@@ -38,8 +38,11 @@ if(@$_POST['busy_date']){
 		$startTime = "08:00";
 		$endTime = "22:00";
 	}else{
-		$startTime = $_POST['startTime'];
-		$endTime = $_POST['endTime'];
+		$startTime1 = explode(":",$_POST['startTime']);
+		$startTime = sprintf("%02d", $startTime1[0]).":".$startTime1[1];
+
+		$endTime1 = explode(':', $_POST['endTime']);
+		$endTime = sprintf("%02d", $endTime1[0]).":".$endTime1[1];
 	}
 	
 
