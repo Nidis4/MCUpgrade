@@ -83,7 +83,7 @@ if($stmt){
 
     	$datetime_added  = $Pdatetimeadded;
 
-    	$payment->saveCustomerInvoice($cust_id, $category_id, $budget, $agent_id, $comment, "Cash", "", $datetime_added, $_POST['issuetype']);
+    	$payment->saveCustomerInvoice($cust_id, $category_id, $budget, $agent_id, $comment, "Cash", "", $datetime_added,'1');
     }
 
     $customer_mobile     = '6940589493';
