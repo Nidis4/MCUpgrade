@@ -9,6 +9,7 @@ class Call{
  
     // object properties
     public $id;
+    public $cust_or_prof_id;
     public $about;
     public $name;
     public $surname;
@@ -93,7 +94,7 @@ class Call{
     public function readPaging($from_record_num, $records_per_page){
      
         // select query
-        $query = "SELECT `id`, `about`, `date`, `duration`, `name`, `surname`, `agent_id`, `mobile`, `land_line`, `rconrding`, `comment`, `datetimeCreated`, `status`, `uuid_ivr`, `call_status` 
+        $query = "SELECT `id`, `cust_or_prof_id`,`about`, `date`, `duration`, `name`, `surname`, `agent_id`, `mobile`, `land_line`, `rconrding`, `comment`, `datetimeCreated`, `status`, `uuid_ivr`, `call_status` 
                 FROM
                     " . $this->table_name . " WHERE `status`=1 OR `status`=0
                 ORDER BY `datetimeCreated` DESC

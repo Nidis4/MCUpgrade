@@ -106,9 +106,9 @@ include('config/core.php');
 									</thead>
 									<tbody>
 										<?php
-
 										foreach ($callsPag['records'] as $field => $value) {
 											$id = $callsPag['records'][$field]['id'];
+											$cust_or_prof_id = $callsPag['records'][$field]['cust_or_prof_id'];
 											$about = $callsPag['records'][$field]['about'];
 											$mobile = $callsPag['records'][$field]['mobile'];
 											$name = $callsPag['records'][$field]['name'];
@@ -118,10 +118,19 @@ include('config/core.php');
 											$status = $callsPag['records'][$field]['status'];
 											$comment = $callsPag['records'][$field]['comment'];
 											$datetimeCreated = $callsPag['records'][$field]['datetimeCreated'];
+											if($about =='Proffesional' && $cust_or_prof_id !='0'){
+												$OpenProfile = "<a href=professional.php?id=$cust_or_prof_id>$CallerName</a>";
+											}
+											else if($about =='Customer' && $cust_or_prof_id !='0'){
+												$OpenProfile = "<a href=customer.php?id=$cust_or_prof_id>$CallerName</a>";
+											}
+											else{
+												$OpenProfile = $CallerName;
+											}
 											echo '<tr data-item-id="'.$id.'" class="status-'.$status.'">
 													  <td>'.$datetimeCreated.'</td>
 													  <td>'.$mobile.'</td>
-													  <td>'.$CallerName.'</td>
+													  <td>'.$OpenProfile.'</td>
 													  <td>'.$duration.'</td>
 													  <td>'.$about.'</td>
 													  <td>'.$comment.'</td>

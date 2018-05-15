@@ -55,6 +55,7 @@ if($num>0){
 
         $call_item=array(
             "id" => $id,
+            "cust_or_prof_id" => $cust_or_prof_id,
             "about" => $about,
             "date" => $date,
             "duration" => $duration,
