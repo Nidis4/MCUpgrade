@@ -13,6 +13,23 @@
         td[data-date = "<?php echo $d;?>"] {
             background: #ddd;
         } 
+        .weekdays{
+            float: right;
+            margin-top: 10px;
+        }
+        .weekdays label {
+            background: #ddd;
+            padding: 10px;
+            border-radius: 20px;
+            width: 50px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .weekdays label.active 
+        {
+            background: #d9534f;
+            color: #fff;
+        }
     </style>
  <link href="css/custom.css" rel="stylesheet">
  <link rel="stylesheet" href="../vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
@@ -307,13 +324,24 @@
                         <select name="repeatbusy"  id='repeatbusy' class="form-control">
                             <option value="0">Doesn't repeat</option>
                             <option value="daily">Daily</option>
+                            <option value="weeklycustom">Weekly</option>
                             <option value="weekly">Weekly on <?php echo date("l")?></option>
                             <option value="monthly">Monthly on the <?php echo $tday ." ".date("l")?></option>
                             <option value="annually">Annually on the <?php echo date("F d")?></option>
                             <option value="weekday">Every weekday (Monday to Friday)</option>
                         </select>
                     </div>
+                    <div class="col-sm-12 weekdays" style="display: none;">
+                        <label rel='1'>Mon</label>
+                        <label rel='2'>Tue</label>
+                        <label rel='3'>Wed</label>
+                        <label rel='4'>Thu</label>
+                        <label rel='5'>Fri</label>
+                        <label rel='6'>Sat</label>
+                        <label rel='7'>Sun</label>
+                    </div>
                 </div>
+                
             </div>
       </div>
       <div class="modal-footer">
@@ -448,7 +476,20 @@
                             return false;
                         }
                     }
-                    
+                    var selctday = "";
+                    if($("#repeatbusy").val() == "weeklycustom"){
+                       
+                        $( "label.active" ).each(function( index ) {
+                            selctday += $(this).attr('rel')+",";
+                        });
+
+                        if(selctday == ""){
+                            alert("Please select any day of the week.");
+                            return false;
+                        }
+                    }
+
+                    //return false;
                     
 
                     
@@ -462,7 +503,7 @@
                             type: "POST",
                             url: getSaveAPI,
                             dataType: "JSON",
-                            data: { prof_id: profID, startDate :startDate, endDate :endDate, startTime :startTime, endTime :endTime, allday :allday,repeatbusy :repeatbusy},
+                            data: { prof_id: profID, startDate :startDate, endDate :endDate, startTime :startTime, endTime :endTime, allday :allday,repeatbusy :repeatbusy,selctday:selctday},
                             success: function(data)
                             {
                                 alert(data['message']);
@@ -483,6 +524,19 @@
                     //$(".popEnd").removeAttr('disabled');
                     $('.timerow').css('display','block');
                 }
+            });
+
+            $("#repeatbusy").on('change',function(){
+                var val = $(this).val();
+                if(val == "weeklycustom"){
+                    $('.weekdays').css('display','block');
+                }else{
+                     $('.weekdays').css('display','none');
+                }
+            });
+
+            $('.weekdays label').on('click',function(){
+                $(this).toggleClass('active');
             });
 
 
