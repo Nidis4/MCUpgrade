@@ -246,6 +246,18 @@ if($catId == "60"){ // Electrical Certificate
             }
 
             $("#budget").val(totalbud);
+
+
+            ////$("#budget").on('change',function(){
+                    $(".budgetvat").css('display','block');
+
+                    var val = parseFloat($('#budget').val());
+                    var newval = parseFloat((val * (24/100))) + val;
+
+                    newval = Math.round(newval * 100) / 100
+                    $(".budgetvat").html(" + 24% vat = "+newval);
+
+            /////    });
         }
         function ElectricalCertificateCountyBudget(){
             // Add Budget
@@ -671,6 +683,17 @@ if($catId == "60"){ // Electrical Certificate
                 }
 
                 $("#budget").val(totalbud);
+
+                //$("#budget").on('change',function(){
+                    $(".budgetvat").css('display','block');
+
+                    var val = parseFloat($('#budget').val());
+                    var newval = parseFloat((val * (24/100))) + val;
+
+                    newval = Math.round(newval * 100) / 100
+                    $(".budgetvat").html(" + 24% vat = "+newval);
+
+                ///});
             }
 
             function usedforbudget(){
@@ -873,6 +896,17 @@ if($catId == "60"){ // Electrical Certificate
                 }
 
                 $("#budget").val(totalbud);
+
+                //$("#budget").on('change',function(){
+                    $(".budgetvat").css('display','block');
+
+                    var val = parseFloat($('#budget').val());
+                    var newval = parseFloat((val * (24/100))) + val;
+
+                    newval = Math.round(newval * 100) / 100
+                    $(".budgetvat").html(" + 24% vat = "+newval);
+
+                //});
             }
             
 
@@ -1707,6 +1741,17 @@ if($catId == "60"){ // Electrical Certificate
                 }
 
                 $("#budget").val(totalbud);
+
+                //$("#budget").on('change',function(){
+                    $(".budgetvat").css('display','block');
+
+                    var val = parseFloat($('#budget').val());
+                    var newval = parseFloat((val * (24/100))) + val;
+
+                    newval = Math.round(newval * 100) / 100
+                    $(".budgetvat").html(" + 24% vat = "+newval);
+
+                //});
             }
             
 

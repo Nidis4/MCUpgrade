@@ -55,6 +55,15 @@ include('config/core.php');
 		td[data-date = "<?php echo $d;?>"] {
 		    background: #ddd;
 		} 
+
+		.budgetvat{
+		    color: red;
+		    display: block;
+		    font-weight: bold;
+		    font-size: 16px;
+		    padding-top: 8px;
+		    padding-left: 0;
+		}
 	</style>
 
 	<body>
@@ -231,9 +240,12 @@ include('config/core.php');
 										</div>
 										<div class="form-group row">
 											<label class="col-sm-3 control-label text-sm-right pt-2">Budget <span class="required">*</span></label>
-											<div class="col-sm-9">
+											<div class="col-sm-5">
 												<input type="text" name="budget" id="budget" class="form-control" placeholder="Add Budget" required value="" />
 												<input type="hidden" name="countrybudget" value="0" id="countrybudget">
+											</div>
+											<div class="col-sm-4 budgetvat" style="display: none;">
+
 											</div>
 										</div>
 										<div class="form-group row">
@@ -325,6 +337,8 @@ include('config/core.php');
 											<label class="col-sm-3 control-label text-sm-right pt-2">Mobile <span class="required">*</span></label>
 											<div class="col-sm-9">
 												<input type="tel" name="mobile" id="mobile" class="form-control" placeholder="eg.: 6971231231" required/>
+
+												<p style="color: #c3680f; margin-bottom: 0px;">Επαναλάβετε το τηλέφωνο του πελάτη όταν το γράφετε και πριν κλείσετε το τηλ</p>
 											</div>
 										</div>
 										<div class="form-group row">
@@ -541,7 +555,8 @@ include('config/core.php');
 					}
 				?>
 
-				// $("#applications").on('change',function(){
+				//$("#applications").on('change',function(){
+				//	alert("f");
 				// 	var date = new Date;
 				// 	var day = date.getDay();
 				// 	var adddays = 1;
@@ -558,7 +573,7 @@ include('config/core.php');
 				// 	//$('#startDate').datepicker('setStartDate', minDate);
 				// 	$( "#startDate" ).datepicker( "option", "minDate", minDate );
 				// 	//$('#datetimepicker7').data("DateTimePicker").minDate(minDate);
-				// });
+				//});
 				
 				$("#county").on('change',function(){
 					var cnt = $(this).val();
@@ -591,6 +606,17 @@ include('config/core.php');
 					}
 				    update_budget();
 				    update_comment();	
+				});
+
+				$("#budget").on('change',function(){
+					$(".budgetvat").css('display','block');
+
+					var val = parseFloat($('#budget').val());
+					var newval = parseFloat((val * (24/100))) + val;
+
+					newval = Math.round(newval * 100) / 100
+					$(".budgetvat").html(" + 24% vat = "+newval+" €");
+
 				});
 
 			});

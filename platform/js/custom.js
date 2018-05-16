@@ -111,6 +111,7 @@ $('select#category').on('change', function() {
 });
 
 $('select#applications').on('change', function() {
+
     var minprice = $('select#applications option:selected').attr('minp');
     var duration = $('select#applications option:selected').attr('dur');
     var id = $(this).val();
@@ -123,6 +124,14 @@ $('select#applications').on('change', function() {
     $('#budget').val(minprice);
     $('#budget').keyup();
     $('#duration').val(duration);
+
+    $(".budgetvat").css('display','block');
+
+    var val = parseFloat($('#budget').val());
+    var newval = parseFloat((val * (24/100))) + val;
+
+    newval = Math.round(newval * 100) / 100;
+    $(".budgetvat").html(" + 24% vat = "+newval+" €");
 
 
 });
