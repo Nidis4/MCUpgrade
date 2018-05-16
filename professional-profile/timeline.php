@@ -194,11 +194,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-md-12"><br>
                             <div class="save-btn" id="savetime" >Save</div>
                         </div>
-                    </div>
+                    </div> -->
 
                      <div class="row">
                         <div class="col-md-12"><br>
@@ -385,6 +385,46 @@
             $( ".calendar" ).selectable({
                   filter: ".slot.free",
                   stop: function() {
+
+                    if (confirm('Are you sure want to save?')) {
+                        var getSaveAPI ="";
+                        var form_data = "";
+                        var i = 1;
+                        $( ".calendar .free.ui-selected").each(function() {
+                            if(i == 1){
+                                timeFrom = $( this ).attr('timefrom');
+                                timeTo = $( this ).attr('timeto');
+                            }else{
+                                timeTo = $( this ).attr('timeto');
+                            }
+
+                            i += 1;
+                            
+                            dateChoosed = $( this ).attr('data-dateslot');
+                        });
+
+                        profID = '<?php echo $_SESSION['id'];?>';
+                        getSaveAPI = API_LOCATION+'professional/addBusyTimes.php';
+                        //form_data = "{prof_id:'"+profID+"'busy_date:"+dateChoosed+",busy_time:"+timeFrom+'-'+timeTo+"}"
+                        //form_data: { field1: "hello", field2 : "hello2"} ,
+                        //alert(getSaveAPI);
+                        
+                        $.ajax({
+                                type: "POST",
+                                url: getSaveAPI,
+                                dataType: "JSON",
+                                data: { prof_id: profID, busy_date :dateChoosed, busy_time : timeFrom+'-'+timeTo},
+                                success: function(data)
+                                {
+                                    alert('Busy time updated successfully');
+                                    location.reload();
+                                }
+                            });
+                        return false;
+                          //result.append( " #" + ( index + 1 ) );
+                        
+                    }
+
                     // var result = $( "#chosen-slot span" ).empty();
                     // var timeFrom = "";
                     // var timeTo = "";
