@@ -16,6 +16,7 @@ class Customer{
     public $address;
     public $phone;
     public $mobile;
+    public $mobile2;
     public $email;
 
     public function __construct($db){
@@ -218,7 +219,7 @@ class Customer{
      
         // query to read single record
         $query = "SELECT
-                c.id, c.first_name, c.last_name, c.sex, cc.address, cc.area , cc.postcode, cc.phone, cc.mobile, ca.email
+                c.id, c.first_name, c.last_name, c.sex, cc.address, cc.area , cc.postcode, cc.phone, cc.mobile, cc.mobile2, ca.email
             FROM
                 " . $this->table_name . " c
                 LEFT JOIN ". $this->contact_table_name." cc
@@ -256,11 +257,12 @@ class Customer{
         $this->address = $row['address'];
         $this->phone = $row['phone'];
         $this->mobile = $row['mobile'];
+        $this->mobile2 = $row['mobile2'];
         $this->email = $row['email'];
     } // Read One
 
 
-    function update($id, $first_name, $last_name, $address, $sex, $mobile, $phone, $email){
+    function update($id, $first_name, $last_name, $address, $sex, $mobile, $phone, $email, $mobile2){
         
         /*$query = "UPDATE " . $this->table_name . "
                     SET
@@ -302,7 +304,7 @@ class Customer{
                 //$stmt->commit();
                 $id = $this->conn->lastInsertId();
            }
-           $this->update_contact($id, $address, $mobile, $phone); 
+           $this->update_contact($id, $address, $mobile, $phone, $mobile2); 
            $this->update_account($id, $email ); 
 
            return $id;
@@ -311,14 +313,14 @@ class Customer{
         }
     } // Save Customer
 
-    function update_contact($id, $address, $mobile, $phone ){
+    function update_contact($id, $address, $mobile, $phone, $mobile2 ){
         /*$query = "UPDATE " . $this->contact_table_name . "
                     SET
                     `mobile`=:mobile, `phone`=:phone, `address`=:address";
         
         $query .=" WHERE customer_id = :id";*/
 
-        $query = "INSERT INTO ". $this->contact_table_name ." (`customer_id`, `address`, `mobile`, `phone`) VALUES (:id, :address, :mobile, :phone) ON DUPLICATE KEY UPDATE `phone`=:phone, `mobile`=:mobile, `address`=:address";
+        $query = "INSERT INTO ". $this->contact_table_name ." (`customer_id`, `address`, `mobile`, `phone`, `mobile2`) VALUES (:id, :address, :mobile, :phone, :mobile2) ON DUPLICATE KEY UPDATE `phone`=:phone, `mobile`=:mobile, `address`=:address, `mobile2`=:mobile2";
 
         $stmt = $this->conn->prepare( $query );
 
@@ -327,6 +329,7 @@ class Customer{
         $stmt->bindParam(':mobile',  $mobile);
         $stmt->bindParam(':phone',  $phone);
         $stmt->bindParam(':address',  $address);
+        $stmt->bindParam(':mobile2',  $mobile2);
         
         if ($stmt->execute()) { 
            return 1;

@@ -149,6 +149,12 @@ include('config/core.php');
 											</div>										
 										</div>
 										<div class="form-group row">
+											<label class="col-sm-4 control-label text-sm-right pt-2">Second Mobile </label>
+											<div class="col-sm-8">
+												<input type="text" name="mobile2" id="mobile2" class="form-control" value="<?php echo $customer['mobile2']; ?>" required />
+											</div>										
+										</div>
+										<div class="form-group row">
 											<label class="col-sm-4 control-label text-sm-right pt-2">Landline <span class="required">*</span></label>
 											<div class="col-sm-8">
 												<input type="text" name="phone" id="phone" class="form-control" value="<?php echo $customer['phone']; ?>" required />
@@ -577,6 +583,7 @@ include('config/core.php');
 					form_data.append('sex', $("#sex").val());
 					form_data.append('address', $("#pac-input-address").val());
 					form_data.append('mobile', $("#mobile").val());
+					form_data.append('mobile2', $("#mobile2").val());
 					form_data.append('phone', $("#phone").val());
 					form_data.append('email', $("#email").val());
 					form_data.append('customer_id', $("#customer_id").val());

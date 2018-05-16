@@ -18,7 +18,7 @@ $db = $database->getConnection();
 $customer = new Customer($db);
  
 // query products
-$stmt = $customer->update($_POST['customer_id'], $_POST['first_name'], $_POST['last_name'], $_POST['address'], $_POST['sex'], $_POST['mobile'], $_POST['phone'], $_POST['email']);
+$stmt = $customer->update($_POST['customer_id'], $_POST['first_name'], $_POST['last_name'], $_POST['address'], $_POST['sex'], $_POST['mobile'], $_POST['phone'], $_POST['email'], $_POST['mobile2']);
 //$stmt = $customer->search($keywords);
 //$num = $stmt->rowCount();
  

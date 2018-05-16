@@ -35,6 +35,7 @@ $stmt = $customer->readOne();
             "address" => $customer->address,
             "phone" => $customer->phone,
             "mobile" => $customer->mobile,
+            "mobile2" => $customer->mobile2,
             "email" => $customer->email
         );
      
