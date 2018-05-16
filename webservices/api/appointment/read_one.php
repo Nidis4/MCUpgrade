@@ -57,6 +57,8 @@ $stmt = $appointment->readOne();
             "customer_mobile" => $appointment->customer_mobile,
             "customer_email" => $appointment->customer_email,
             "transport_details"=> $appointment->transport_details,
+            "professional_first_name"=> $appointment->professional_first_name,
+            "professional_last_name"=> $appointment->professional_last_name,
         );
      
  

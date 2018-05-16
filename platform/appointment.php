@@ -301,6 +301,10 @@ include('config/core.php');
 											<div class="col-sm-1">												
 												<input type="checkbox" class="form-control" id="professionalsms" name="professionalsms">
 											</div>
+											<div class="col-sm-5" style="color: red">
+												<label class="col-sm-12 control-label text-sm-right pt-2">Choosen Prof: <?php echo $appointment['professional_first_name'] ." ".$appointment['professional_last_name'];?>
+												</label>
+											</div>
 										</div>
 										
 									</div>

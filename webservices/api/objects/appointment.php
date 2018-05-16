@@ -8,6 +8,7 @@ class Appointment{
     private $application_table_name = "applications";
     private $ratings_table_name = "directory_ratings";
     private $customers_table_name = "customers";
+    private $professional_table_name = "professionals";
     private $admin_table_name = "admin";
     private $customers_contact_table_name = "customers_contact_details";
     private $customers_account_table_name = "customers_account_info";
@@ -62,13 +63,15 @@ class Appointment{
      
         // query to read single record
         $query = "SELECT
-                    a.`id`, a.`prof_member_id`, a.`cust_member_id`, a.`application_id`,a.`county_id`, a.`date`, a.`time`, a.`address`,a.`delivery_address`, a.`budget`, a.`commision`, a.`agent_id`, a.`comment`, a.`sms`, a.`sms_log_id`,  a.`datetimeCreated`, a.`datetimeStatusUpdated`, a.`sourceAppointmentId`, a.`status`, a.`cancelComment`, ap.`category_id`, ac.`first_name` as customer_first_name, ac.`last_name` as customer_last_name, ac.`sex` as customer_sex, cc.`address` as customer_address, cc.`phone` as customer_phone, cc.`mobile` as customer_mobile, ca.`email` as customer_email, a.`transport_details`
+                    a.`id`, a.`prof_member_id`, a.`cust_member_id`, a.`application_id`,a.`county_id`, a.`date`, a.`time`, a.`address`,a.`delivery_address`, a.`budget`, a.`commision`, a.`agent_id`, a.`comment`, a.`sms`, a.`sms_log_id`,  a.`datetimeCreated`, a.`datetimeStatusUpdated`, a.`sourceAppointmentId`, a.`status`, a.`cancelComment`, ap.`category_id`, p.`first_name` as professional_first_name, p.`last_name` as professional_last_name, ac.`first_name` as customer_first_name, ac.`last_name` as customer_last_name, ac.`sex` as customer_sex, cc.`address` as customer_address, cc.`phone` as customer_phone, cc.`mobile` as customer_mobile, ca.`email` as customer_email, a.`transport_details`
                 FROM
                     " . $this->table_name . " a
                 LEFT JOIN ". $this->application_table_name." ap 
                     ON a.application_id = ap.id
                 LEFT JOIN ". $this->customers_table_name." ac 
                     ON a.cust_member_id = ac.id
+                LEFT JOIN ". $this->professional_table_name." p 
+                    ON a.prof_member_id = p.id    
                 LEFT JOIN ". $this->customers_contact_table_name." cc 
                     ON a.cust_member_id = cc.customer_id
                 LEFT JOIN ". $this->customers_account_table_name." ca 
@@ -126,6 +129,8 @@ class Appointment{
         $this->customer_mobile = $row['customer_mobile'];
         $this->customer_email = $row['customer_email'];
         $this->transport_details = $row['transport_details'];
+        $this->professional_first_name = $row['professional_first_name'];
+        $this->professional_last_name = $row['professional_last_name'];
 
     } // Read One
 
