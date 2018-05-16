@@ -131,7 +131,7 @@ $('select#applications').on('change', function() {
     var newval = parseFloat((val * (24/100))) + val;
 
     newval = Math.round(newval * 100) / 100;
-    $(".budgetvat").html(" + 24% vat = "+newval+" €");
+    $(".budgetvat").html(" + 24% φπα = "+newval+" €");
 
 
 });

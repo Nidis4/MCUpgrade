@@ -53,6 +53,21 @@ include('config/core.php');
 				include('header.php');
 				if(@$_GET['rejected']){
 					$appointments = file_get_contents($api_url.'appointment/read_rejected_paging.php');
+				}elseif(@$_GET['prof_name'] || @$_GET['cus_name'] || @$_GET['cus_mobile'] || @$_GET['cus_address']){
+					$prof_name = $cus_name = $cus_mobile = $cus_address = "";
+					if(@$_GET['prof_name']){
+						$prof_name = $_GET['prof_name'];
+					}
+					if(@$_GET['cus_name']){
+						$cus_name = $_GET['cus_name'];
+					}
+					if(@$_GET['cus_mobile']){
+						$cus_mobile = $_GET['cus_mobile'];
+					}
+					if(@$_GET['cus_address']){
+						$cus_address = $_GET['cus_address'];
+					}
+					$appointments = file_get_contents($api_url.'appointment/searchList.php?pn='.$prof_name.'&cn='.$cus_name.'&cm='.$cus_mobile.'&ca='.$cus_address);
 				}else{
 					$appointments = file_get_contents($api_url.'appointment/read_paging.php');
 				}
@@ -116,6 +131,47 @@ include('config/core.php');
 								<h2 class="card-title">List of Appointments</h2>
 							</header>
 							<div class="card-body">
+								<form method="get" action="">
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group row">
+											<label class="col-sm-3 control-label text-sm-right pt-2">Professional Name </label>
+											<div class="col-sm-9">
+												<input type="text" name="prof_name" id="prof_name" value="<?php if(@$_GET['prof_name']){ echo $_GET['prof_name'];}?>" class="form-control" value=""  />
+											</div>										
+										</div>
+										<div class="form-group row">
+											<label class="col-sm-3 control-label text-sm-right pt-2">Customer Name </label>
+											<div class="col-sm-9">
+												<input type="text" name="cus_name" id="cus_name" class="form-control" value="<?php if(@$_GET['cus_name']){ echo $_GET['cus_name'];}?>" />
+											</div>										
+										</div>	
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group row">
+											<label class="col-sm-3 control-label text-sm-right pt-2">Customer Mobile </label>
+											<div class="col-sm-9">
+												<input type="text" name="cus_mobile" id="cus_mobile" class="form-control" value="<?php if(@$_GET['cus_mobile']){ echo $_GET['cus_mobile'];}?>" />
+											</div>										
+										</div>
+										<div class="form-group row">
+											<label class="col-sm-3 control-label text-sm-right pt-2">Customer Address </label>
+											<div class="col-sm-9">
+												<input type="text" name="cus_address" id="pac-input-address" class="form-control" value="<?php if(@$_GET['cus_address']){ echo $_GET['cus_address'];}?>"  />
+											</div>										
+										</div>
+										
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-4 offset-sm-4 text-center">
+										<button type="submit" class="mb-1 mt-4 mr-1 btn btn-warning" id="searchAppointment1">Search</button>
+									</div>
+								</div>
+								</form>
+
+								
+								<hr>
 								<div class="row">
 									<div class="col-sm-4">
 										<div class="mb-3">
@@ -443,6 +499,9 @@ include('config/core.php');
 		<script src="vendor/select2/js/select2.js"></script>
 		<script src="vendor/datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="vendor/datatables/media/js/dataTables.bootstrap4.min.js"></script>
+
+		<script src="js/searchAddress.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOB9VUHID5_exudRHHduRUvCYOu--Lg0w&libraries=places&callback=initAutocomplete" async defer></script>
 		
 		<!-- Theme Base, Components and Settings -->
 		<script src="js/theme.js"></script>
@@ -469,6 +528,39 @@ include('config/core.php');
 					error: function(e) {
 					}
 				});
+
+				$( "#searchAppointment1" ).click(function() {
+					//alert("Search Appointment");
+					var prof_name = $("#prof_name").val();
+					var cus_name = $("#cus_name").val();
+					var cus_mobile = $("#cus_mobile").val();
+					var cus_address = $("#pac-input-address").val();
+
+					var getAvailableAPI = API_LOCATION+'appointment/searchList.php?pn='+prof_name+'&cn='+cus_name+'&cm='+cus_mobile+'&ca='+cus_address;
+					//alert(getAvailableAPI);
+
+					$.ajax({
+					    type: "POST",
+					    url: getAvailableAPI,
+					    dataType: "json",
+					    success: function(data)
+					    {
+					        htmlStr = "";
+					        $("#datatable-editable").empty();
+					        if(data.records){
+					        	
+						        $.each(data.records, function(k, v){
+						        	
+						            if (v.id!=undefined){
+						                htmlStr += '<tr data-item-id="'+v.id+'"><td>'+v.prof_name+' '+v.cus_name+'</td><td>'+v.cus_mobile+'</td><td>'+v.cus_address+'</td><td>'+v.sex+'</td><td>'+v.landline+'</td><td>'+v.address+'</td><td class="actions"><a href="customer.php?id='+v.id+'" class="on-default edit-row"><i class="fa fa-pencil"></i></a></td></tr>';
+						            }
+						        });
+					    	}
+					        $("#datatable-editable").append(htmlStr);
+					        }
+					    });
+					});
+
 			});
 		</script>
 		<?php include('reject_popup.php');?>

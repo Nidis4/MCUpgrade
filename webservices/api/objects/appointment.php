@@ -692,6 +692,81 @@ class Appointment{
         
            
     }
+
+    public function searchList($prof_name, $cus_name, $cus_mobile, $cus_address){
+     
+        // select query
+        $query = "SELECT
+                    `id`, `prof_member_id`, `cust_member_id`, `application_id`, `county_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelReason`, `cancelComment`, `viewed`, `viewed_datetime`
+                FROM
+                    " . $this->table_name . " WHERE `status` NOT IN ('2','3') ";
+
+        if(@$prof_name){
+
+            $pname = explode(" ", $prof_name);
+            
+            $pquery = "Select id from professionals where first_name like '%".$pname[0]."%' OR last_name like '%".$pname[0]."%'";
+
+            $pstmt = $this->conn->prepare($pquery);
+
+            $pstmt->execute();
+
+            $pnum = $pstmt->rowCount();
+
+            if($pnum > 0){
+                $prof_ids = array();
+                while ($row = $pstmt->fetch(PDO::FETCH_ASSOC)){
+                    $prof_ids[] = $row['id'];
+                }
+                
+                $query .= " and prof_member_id IN ('".implode("','", $prof_ids)."')";    
+            }
+
+            //die("d");
+
+        }
+        if(@$cus_name){
+
+            $pname = explode(" ", $cus_name);
+            
+            $pquery = "Select id from customers where first_name like '%".$pname[0]."%' OR last_name like '%".$pname[0]."%'";
+
+            $pstmt = $this->conn->prepare($pquery);
+
+            $pstmt->execute();
+
+            $pnum = $pstmt->rowCount();
+
+            if($pnum > 0){
+                $prof_ids = array();
+                while ($row = $pstmt->fetch(PDO::FETCH_ASSOC)){
+                    $prof_ids[] = $row['id'];
+                }
+                
+                $query .= " and cust_member_id IN ('".implode("','", $prof_ids)."')";    
+            }
+
+            //die("d");
+
+        }
+
+
+        $query .= " ORDER BY `datetimeCreated` DESC";
+        
+        // prepare query statement
+
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind variable values
+        //$stmt->bindParam(1, $from_record_num, PDO::PARAM_INT);
+        //$stmt->bindParam(2, $records_per_page, PDO::PARAM_INT);
+     
+        // execute query
+        $stmt->execute();
+     
+        // return values from database
+        return $stmt;
+    }
     
 
 
