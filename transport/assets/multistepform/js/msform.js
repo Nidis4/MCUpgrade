@@ -1109,12 +1109,12 @@ $("#step4btn").click(function(){
             var telikos = $('input#to').val();
 
 
-            var agent= 6;
+            var agent= 1;
             var application= 69;
             var category= 103;
-            var budget= "0";
-            var commision= "0";
-            var county= "1";
+            var budget= 1;
+            var commision= 1;
+            var county= 1;
             var comments= clearTransport;
             var status= 3;
 
@@ -1122,6 +1122,7 @@ $("#step4btn").click(function(){
 
 
        var findCustomerAPI ='https://upgrade.myconstructor.gr/webservices/api/customer/search_by_mobile.php?mobile='+mobile;
+ alert("findCustomerAPI");
         $.ajax({
             type: "POST",
             url: findCustomerAPI,
@@ -1137,6 +1138,7 @@ $("#step4btn").click(function(){
             dataType: "json",
             success: function(data)
             {
+              alert(mobile);
 
                 var customer_id = data;
                 //alert(customer_id);
@@ -1174,6 +1176,7 @@ $("#step4btn").click(function(){
                     //dataType: "json",
                     success: function(data)
                     {
+                      alert("test");
                         
 
                     },
@@ -1182,11 +1185,13 @@ $("#step4btn").click(function(){
                     }
                 });
 
-            }
+            },error: function(data){
+                        alert(data);
+                }
         });
 
 
-
+/*
         jQuery.ajax({
 
                   type:"POST",
@@ -1217,7 +1222,7 @@ $("#step4btn").click(function(){
 
                  }
 
-             })
+             })*/
 
      }
 
