@@ -5062,7 +5062,7 @@ telikos,
                     //dataType: "json",
                     success: function(data)
                     {
-                        var sentSmsAPI ='https://upgrade.myconstructor.gr/webservices/api/webservices/api/sms/sent.php?mobile='+mobile+'&messagetext='+viber;
+                        var sentSmsAPI ='https://upgrade.myconstructor.gr/webservices/api/sms/sent.php?mobile='+mobile+'&messagetext='+viber;
 
                         $.ajax({
                             type: "POST",
