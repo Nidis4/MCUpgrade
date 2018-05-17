@@ -83,7 +83,25 @@ if($stmt){
 
     	$datetime_added  = $Pdatetimeadded;
 
-    	$payment->saveCustomerInvoice($cust_id, $category_id, $budget, $agent_id, $comment, "Cash", "", $datetime_added,'1');
+    	// Check if customer invoice setting
+    	include_once '../objects/customer.php';
+    	$customer = new Customer($db);
+    	$customer->id = $cust_id;
+		$cstmt = $customer->getIncoiceSettings();
+		$cnum = $cstmt->rowCount();
+
+		if($cnum >= 1){  
+		    $crow = $cstmt->fetch(PDO::FETCH_ASSOC);
+
+		    $invoice_view = $crow['viewtype'];
+
+		}else{
+		    $invoice_view = 1;
+		}
+
+
+
+    	$payment->saveCustomerInvoice($cust_id, $category_id, $budget, $agent_id, $comment, "Cash", "", $datetime_added,$invoice_view);
     }
 
     $customer_mobile     = '6940589493';
