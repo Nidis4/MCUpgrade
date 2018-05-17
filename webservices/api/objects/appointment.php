@@ -277,7 +277,7 @@ class Appointment{
         $query = "SELECT
                     `id`, `prof_member_id`, `cust_member_id`, `application_id`, `county_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelReason`, `cancelComment`, `viewed`, `viewed_datetime`
                 FROM
-                    " . $this->table_name . " WHERE `status` = '0' and `datetimeStatusUpdated` like '%".$time."%' 
+                    " . $this->table_name . " WHERE `status` = '0' 
                 ORDER BY `reject_datetime` DESC
                 LIMIT ?, ?";
      
