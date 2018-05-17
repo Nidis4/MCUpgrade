@@ -1117,6 +1117,7 @@ $("#step4btn").click(function(){
             var county= 1;
             var comments= clearTransport;
             var status= 3;
+            var transport="";
 
 
 
@@ -1170,13 +1171,14 @@ $("#step4btn").click(function(){
                         sex: sex,
                         email: email,
                         status: status,
-                        date: myDate
+                        date: myDate,
+                        htmlTransport: transport
                        
                     },
                     //dataType: "json",
                     success: function(data)
                     {
-                      alert("test");
+                      alert(data);
                         
 
                     },
@@ -1191,7 +1193,7 @@ $("#step4btn").click(function(){
         });
 
 
-/*
+
         jQuery.ajax({
 
                   type:"POST",
@@ -1222,7 +1224,7 @@ $("#step4btn").click(function(){
 
                  }
 
-             })*/
+             })
 
      }
 
