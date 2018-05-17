@@ -53,6 +53,8 @@ include('config/core.php');
 				include('header.php');
 				if(@$_GET['rejected']){
 					$appointments = file_get_contents($api_url.'appointment/read_rejected_paging.php');
+				}else if(@$_GET['cancelled']){
+					$appointments = file_get_contents($api_url.'appointment/read_cancelled_paging.php');
 				}else if(@$_GET['prof_name'] || @$_GET['cus_name'] || @$_GET['cus_mobile'] || @$_GET['cus_address']){
 					$prof_name = $cus_name = $cus_mobile = $cus_address = "";
 					if(@$_GET['prof_name']){
@@ -213,7 +215,14 @@ include('config/core.php');
 														$rejectedappointments = file_get_contents($api_url.'appointment/reject_count.php');
 														$rejectedappointmentstotal = json_decode($rejectedappointments, true);
 													?>
-													<a href="<?php echo SITE_URL;?>platform/appointments.php?rejected=1" style="color: red"><?php echo $rejectedappointmentstotal['total'];?> Rejected</a>
+													<a href="<?php echo SITE_URL;?>platform/appointments.php?rejected=1" style="color: red"><?php echo $rejectedappointmentstotal['total'];?> Rejected</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+													<?php
+														
+														$cancelledappointments = file_get_contents($api_url.'appointment/cancel_count.php');
+														$cancelledappointmentstotal = json_decode($cancelledappointments, true);
+													?>
+													<a href="<?php echo SITE_URL;?>platform/appointments.php?cancelled=1" style="color: red"><?php echo $cancelledappointmentstotal['total'];?> Cancelled</a>
 												</div>
 											</div>
 										</form>

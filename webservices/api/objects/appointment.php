@@ -270,6 +270,32 @@ class Appointment{
         return $stmt;
     }
 
+    public function readCancelPaging($from_record_num, $records_per_page){
+         $time = date('Y-m-d H:i:s',strtotime("-48 hours"));
+
+        // select query
+        $query = "SELECT
+                    `id`, `prof_member_id`, `cust_member_id`, `application_id`, `county_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelReason`, `cancelComment`, `viewed`, `viewed_datetime`
+                FROM
+                    " . $this->table_name . " WHERE `status` = '0' 
+                ORDER BY `reject_datetime` DESC
+                LIMIT ?, ?";
+     
+        // prepare query statement
+
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind variable values
+        $stmt->bindParam(1, $from_record_num, PDO::PARAM_INT);
+        $stmt->bindParam(2, $records_per_page, PDO::PARAM_INT);
+     
+        // execute query
+        $stmt->execute();
+     
+        // return values from database
+        return $stmt;
+    }
+
     public function getAppointnmentsByProf($prof_id, $status){
         // select query
         $query = "SELECT
@@ -633,6 +659,18 @@ class Appointment{
         $time = date('Y-m-d H:i:s',strtotime("-48 hours"));
 
         $query = "SELECT Count(`id`) as total FROM  `appointments` WHERE  `cancelReason` = '4' and datetimeStatusUpdated >= '".$time."'";
+        $stmt = $this->conn->prepare( $query );
+
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row; 
+    }
+
+    public function cancelCount(){
+
+        $time = date('Y-m-d H:i:s',strtotime("-48 hours"));
+
+        $query = "SELECT Count(`id`) as total FROM  `appointments` WHERE  `status` = '0'";
         $stmt = $this->conn->prepare( $query );
 
         $stmt->execute();
