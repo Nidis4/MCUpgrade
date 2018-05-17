@@ -693,13 +693,15 @@ class Appointment{
            
     }
 
-    public function searchList($prof_name, $cus_name, $cus_mobile, $cus_address){
+    public function searchList($prof_name, $cus_name, $cus_mobile, $cus_address, $from_record_num, $records_per_page){
      
         // select query
         $query = "SELECT
                     `id`, `prof_member_id`, `cust_member_id`, `application_id`, `county_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelReason`, `cancelComment`, `viewed`, `viewed_datetime`
                 FROM
                     " . $this->table_name . " WHERE `status` NOT IN ('2','3') ";
+
+        $cust_ids = array();
 
         if(@$prof_name){
 
@@ -725,11 +727,118 @@ class Appointment{
             //die("d");
 
         }
-        if(@$cus_name){
+        if((@$cus_name) || (@$cus_mobile) || (@$cus_address)){
 
-            $pname = explode(" ", $cus_name);
+            if(@$cus_name){
+                $pname = explode(" ", $cus_name);
+                $pquery = "Select id from customers where first_name like '%".$pname[0]."%' OR last_name like '%".$pname[0]."%'";
+
+                $pstmt = $this->conn->prepare($pquery);
+
+                $pstmt->execute();
+
+                $pnum = $pstmt->rowCount();
+
+                if($pnum > 0){
+                    $cust_ids = array();
+                    while ($row = $pstmt->fetch(PDO::FETCH_ASSOC)){
+                        $cust_ids[] = $row['id'];
+                    }
+                    
+                       
+                }   
+            }
+            if(@$cus_mobile){
+
             
-            $pquery = "Select id from customers where first_name like '%".$pname[0]."%' OR last_name like '%".$pname[0]."%'";
+                $pquery = "Select customer_id from customers_contact_details where mobile ='".$cus_mobile."' ";
+
+                if(@$cust_ids){
+                    $pquery .=  " and customer_id IN ('".implode("','", $cust_ids)."')"; 
+                }
+
+                $pstmt = $this->conn->prepare($pquery);
+
+                $pstmt->execute();
+
+                $pnum = $pstmt->rowCount();
+
+                if($pnum > 0){
+                    $cust_ids = array();
+                    while ($row = $pstmt->fetch(PDO::FETCH_ASSOC)){
+                        $cust_ids[] = $row['customer_id'];
+                    }
+                       
+                }
+
+            }
+            if(@$cus_address){
+
+            
+                $pquery = "Select customer_id from customers_contact_details where address like '%".str_replace('|||', " ", $cus_address)."%' ";
+
+                if(@$cust_ids){
+                    $pquery .=  " and customer_id IN ('".implode("','", $cust_ids)."')"; 
+                }
+
+
+                $pstmt = $this->conn->prepare($pquery);
+
+                $pstmt->execute();
+
+                $pnum = $pstmt->rowCount();
+
+                if($pnum > 0){
+                    $cust_ids = array();
+                    while ($row = $pstmt->fetch(PDO::FETCH_ASSOC)){
+                        $cust_ids[] = $row['customer_id'];
+                    }
+                       
+                }
+
+            }
+
+
+            $query .= " and cust_member_id IN ('".implode("','", $cust_ids)."')"; 
+            
+
+            //die("d");
+
+        }
+
+
+
+       $query .= " ORDER BY `datetimeCreated` DESC LIMIT ?, ?";
+        
+        // prepare query statement
+
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind variable values
+        $stmt->bindParam(1, $from_record_num, PDO::PARAM_INT);
+        $stmt->bindParam(2, $records_per_page, PDO::PARAM_INT);
+     
+        // execute query
+        $stmt->execute();
+     
+        // return values from database
+        return $stmt;
+    }
+    public function searchListCount($prof_name, $cus_name, $cus_mobile, $cus_address){
+     
+        // select query
+        $query = "SELECT
+                    COUNT(*) as total_rows
+                FROM
+                    " . $this->table_name . " WHERE `status` NOT IN ('2','3') ";
+
+        $cust_ids = array();
+
+        if(@$prof_name){
+
+            $pname = explode(" ", $prof_name);
+            
+            $pquery = "Select id from professionals where first_name like '%".$pname[0]."%' OR last_name like '%".$pname[0]."%'";
 
             $pstmt = $this->conn->prepare($pquery);
 
@@ -743,29 +852,101 @@ class Appointment{
                     $prof_ids[] = $row['id'];
                 }
                 
-                $query .= " and cust_member_id IN ('".implode("','", $prof_ids)."')";    
+                $query .= " and prof_member_id IN ('".implode("','", $prof_ids)."')";    
             }
+
+            //die("d");
+
+        }
+        if((@$cus_name) || (@$cus_mobile) || (@$cus_address)){
+
+            if(@$cus_name){
+                $pname = explode(" ", $cus_name);
+                $pquery = "Select id from customers where first_name like '%".$pname[0]."%' OR last_name like '%".$pname[0]."%'";
+
+                $pstmt = $this->conn->prepare($pquery);
+
+                $pstmt->execute();
+
+                $pnum = $pstmt->rowCount();
+
+                if($pnum > 0){
+                    $cust_ids = array();
+                    while ($row = $pstmt->fetch(PDO::FETCH_ASSOC)){
+                        $cust_ids[] = $row['id'];
+                    }
+                    
+                       
+                }   
+            }
+            if(@$cus_mobile){
+
+            
+                $pquery = "Select customer_id from customers_contact_details where mobile ='".$cus_mobile."' ";
+
+                if(@$cust_ids){
+                    $pquery .=  " and customer_id IN ('".implode("','", $cust_ids)."')"; 
+                }
+
+                $pstmt = $this->conn->prepare($pquery);
+
+                $pstmt->execute();
+
+                $pnum = $pstmt->rowCount();
+
+                if($pnum > 0){
+                    $cust_ids = array();
+                    while ($row = $pstmt->fetch(PDO::FETCH_ASSOC)){
+                        $cust_ids[] = $row['customer_id'];
+                    }
+                       
+                }
+
+            }
+            if(@$cus_address){
+
+            
+                $pquery = "Select customer_id from customers_contact_details where address like '%".str_replace('|||', " ", $cus_address)."%' ";
+
+                if(@$cust_ids){
+                    $pquery .=  " and customer_id IN ('".implode("','", $cust_ids)."')"; 
+                }
+
+                $pstmt = $this->conn->prepare($pquery);
+
+                $pstmt->execute();
+
+                $pnum = $pstmt->rowCount();
+
+                if($pnum > 0){
+                    $cust_ids = array();
+                    while ($row = $pstmt->fetch(PDO::FETCH_ASSOC)){
+                        $cust_ids[] = $row['customer_id'];
+                    }
+                       
+                }
+
+            }
+
+
+            $query .= " and cust_member_id IN ('".implode("','", $cust_ids)."')"; 
+            
 
             //die("d");
 
         }
 
 
-        $query .= " ORDER BY `datetimeCreated` DESC";
+
+       $query .= " ORDER BY `datetimeCreated` DESC ";
         
         // prepare query statement
 
         $stmt = $this->conn->prepare( $query );
-     
-        // bind variable values
-        //$stmt->bindParam(1, $from_record_num, PDO::PARAM_INT);
-        //$stmt->bindParam(2, $records_per_page, PDO::PARAM_INT);
-     
-        // execute query
         $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
      
-        // return values from database
-        return $stmt;
+        return $row['total_rows'];
     }
     
 

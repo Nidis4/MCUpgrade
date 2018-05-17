@@ -5,9 +5,14 @@ header("Content-Type: application/json; charset=UTF-8");
  
 // include database and object files
 include_once '../config/core.php';
+include_once '../shared/utilities.php';
 include_once '../config/database.php';
 include_once '../objects/appointment.php';
  
+
+// utilities
+$utilities = new Utilities();
+
 // instantiate database and product object
 $database = new Database();
 $db = $database->getConnection();
@@ -15,15 +20,25 @@ $db = $database->getConnection();
 // initialize object
 $appointment = new Appointment($db);
 
- 
+if(isset($_GET['from_record_num']) && !empty($_GET['from_record_num'])){
+    $from_record_num = (int)$_GET['from_record_num'];
+}
+
+if(isset($_GET['records_per_page']) && !empty($_GET['records_per_page'])){
+    $records_per_page = (int)$_GET['records_per_page'];
+} 
+
 // get keywords
 $prof_name = isset($_GET["pn"]) ? $_GET["pn"] : "";
 $cus_name = isset($_GET["cn"]) ? $_GET["cn"] : "";
 $cus_mobile = isset($_GET["cm"]) ? $_GET["cm"] : "";
 $cus_address = isset($_GET["ca"]) ? $_GET["ca"] : "";
- 
+
+
+
 // query products
-$stmt = $appointment->searchList($prof_name, $cus_name, $cus_mobile, $cus_address);
+$stmt = $appointment->searchList($prof_name, $cus_name, $cus_mobile, $cus_address, $from_record_num, $records_per_page);
+$total_rows = $appointment->searchListCount($prof_name, $cus_name, $cus_mobile, $cus_address);
 //$stmt = $appointment->search($keywords);
 $num = $stmt->rowCount();
  
@@ -97,9 +112,9 @@ if($num>0){
  
     // include paging
     
-    // $page_url="{$home_url}appointment/read_paging.php?";
-    // $paging=$utilities->getPaging($page, $total_rows, $records_per_page, $page_url);
-    // $appointments_arr["paging"]=$paging;
+    $page_url="{$home_url}appointment/searchList.php?pn=".$prof_name."&cn=".$cus_name.'&cm='.$cus_mobile.'&ca='.$cus_address;
+    $paging=$utilities->getPaging($page, $total_rows, $records_per_page, $page_url);
+    $appointments_arr["paging"]=$paging;
  
     echo json_encode($appointments_arr);
 }
