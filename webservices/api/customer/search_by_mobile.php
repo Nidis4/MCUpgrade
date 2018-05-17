@@ -16,14 +16,13 @@ $customer = new Customer($db);
  
 // get keywords
 $mobile=isset($_GET["mobile"]) ? $_GET["mobile"] : die();
- 
 // query products
 $stmt = $customer->searchByMobile($mobile);
 $num = $stmt->rowCount();
  
 // check if more than 0 record found
 if($num>0){
- 
+    
     // products array
     $customers_arr=array();
     //$products_arr["records"]=array();
@@ -38,10 +37,12 @@ if($num>0){
         extract($row);
         $customer_id = $customer_id;
     }
+    //die('here');
     
-    $customer->update($customer_id, $_POST['firstname'], $_POST['surname'], $_POST['address'], $_POST['sex'], $_POST['mobile'], $_POST['phone'], $_POST['email']);
+    $customer->update($customer_id, $_POST['firstname'], $_POST['surname'], $_POST['address'], $_POST['sex'], $_POST['mobile'], $_POST['phone'], $_POST['email'],"");
     
     echo $customer_id;
+    die;
 }
  
 else{
@@ -50,5 +51,6 @@ else{
 
     $stmt = $customer->update("", $_POST['firstname'], $_POST['surname'], $_POST['address'], $_POST['sex'], $_POST['mobile'], $_POST['phone'], $_POST['email']);
     echo $stmt;
+    die;
 }
 ?>
