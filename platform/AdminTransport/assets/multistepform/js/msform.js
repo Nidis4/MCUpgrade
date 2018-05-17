@@ -4843,11 +4843,9 @@ $('#savebtn').click(function(){
 
          clearTransport+= '\n' + selectService +'\n\n';
          clearTransport+='Hμερομηνία μετακόμισης: '+ myDate +'\n\n';
-         viber+='Hμ.: '+ myDate +'\n';
-         viber+='Τηλ.: 2103009323\n';
          viber+='Τιμή: '+telprice+'€+φπα\n\n';
-         viber+='Σας Ευχαριστούμε';
-
+         viber+='Κλείστε την μετακόμιση σας\n';
+         viber+='Τηλ.: 2103009323\n';
 
          
          clearTransport+='Πληροφορίες Παλιού σπιτιού \n';
@@ -5062,7 +5060,8 @@ telikos,
                     //dataType: "json",
                     success: function(data)
                     {
-                        var sentSmsAPI ='https://upgrade.myconstructor.gr/webservices/api/sms/sent.php?mobile='+mobile+'&messagetext='+viber;
+                        alert("Offer Created");
+                        var sentSmsAPI ='https://upgrade.myconstructor.gr/webservices/api/sms/sent.php';
 
                         $.ajax({
                             type: "POST",
@@ -5080,8 +5079,35 @@ telikos,
                               }
                           });
 
+                         var sentSmsAPI ='https://upgrade.myconstructor.gr/webservices/api/email/offer.php';
 
-                        alert("Offer Created");
+                          $.ajax({
+                              type: "POST",
+                              url: sentSmsAPI,
+                              data: {
+                                  inputName :firstname,
+                                  inputSurname :surname,
+                                  myDate: myDate,
+                                  afetiria: address,
+                                  telikos: telikos,
+                                  selectService: selectService,
+                                  km: km,
+                                  telprice: budget, 
+                                  transTime: transTime,
+                                  userEmail: email,
+                                  transType1_2_msg: transType1_2_msg
+                              },
+                              dataType: "json",
+                              success: function(data){
+                                 
+                              },
+                                error: function(data){
+                                  
+                                }
+                            });
+
+
+                        
                         window.location.replace('https://upgrade.myconstructor.gr/platform/offers.php');
                     },
                     error: function(data){
