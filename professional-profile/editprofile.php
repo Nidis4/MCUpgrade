@@ -42,42 +42,41 @@
                 ?>
 
                 <?php 
+                    //echo SITE_URL.'webservices/api/professional/getProfile.php?id='.$_SESSION['id'];
                     $profile = file_get_contents(SITE_URL.'webservices/api/professional/getProfile.php?id='.$_SESSION['id']);
                     $profile = json_decode($profile, true); // decode the JSON into an associative array
-                    // echo "<pre>";
-                    // print_r($profile['record']);
-                    // die;
+                    
                     $first_name = "";
-                    if(@$profile['record']['first_name']){
-                        $first_name = $profile['record']['first_name'];
+                    if(@$profile['first_name']){
+                        $first_name = $profile['first_name'];
                     }
                     $last_name = "";
-                    if(@$profile['record']['last_name']){
-                        $last_name = $profile['record']['last_name'];
+                    if(@$profile['last_name']){
+                        $last_name = $profile['last_name'];
                     }
 
                     $description = "";
-                    if(@$profile['record']['description']){
-                        $description = $profile['record']['description'];
+                    if(@$profile['description']){
+                        $description = $profile['description'];
                     }
 
                     $service_area = "";
-                    if(@$profile['record']['service_area']){
-                        $service_area = $profile['record']['service_area'];
+                    if(@$profile['service_area']){
+                        $service_area = $profile['service_area'];
                     }
 
                     $address = "";
-                    if(@$profile['record']['address']){
-                        $address = $profile['record']['address'];
+                    if(@$profile['address']){
+                        $address = $profile['address'];
                     }
 
                     $mobile = "";
-                    if(@$profile['record']['mobile']){
-                        $mobile = $profile['record']['mobile'];
+                    if(@$profile['mobile']){
+                        $mobile = $profile['mobile'];
                     }
                     $image = "";
-                    if(@$profile['record']['image']){
-                        $image = $profile['record']['image'];
+                    if(@$profile['image']){
+                        $image = $profile['image'];
                     }
 
                 ?>
