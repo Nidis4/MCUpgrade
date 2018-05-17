@@ -5069,7 +5069,7 @@ telikos,
                             url: sentSmsAPI,
                             data: {
                                 mobile: mobile,
-                                viber: viber
+                                messagetext: viber
                             },
                             dataType: "json",
                             success: function(data){

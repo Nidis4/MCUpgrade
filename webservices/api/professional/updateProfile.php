@@ -26,13 +26,13 @@ $profile_img = "";
 $professional = new Professional($db);
 
 // Update ID Card
-if(@$_FILES['profile_img']['name']){	
+if(@$_FILES['profile_img']['name']){    
     $timet = time();
     $target_dir = dirname(dirname(dirname(dirname(__FILE__)))).DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.'professional-imgs'.DIRECTORY_SEPARATOR;
     $target_file = $target_dir.$timet.'-'.basename($_FILES["profile_img"]["name"]);
     if(move_uploaded_file($_FILES["profile_img"]["tmp_name"], $target_file)){
         $profile_img = $timet.'-'.basename($_FILES["profile_img"]["name"]);
-    }	
+    }   
 }
  
 // query products
