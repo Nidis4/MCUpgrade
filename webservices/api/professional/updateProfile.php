@@ -18,6 +18,7 @@ $service_area = isset($_POST['service_area']) ? $_POST['service_area'] : "";
 $description = isset($_POST['description']) ? $_POST['description'] : "";
 $address = isset($_POST['address']) ? $_POST['address'] : "";
 $mobile = isset($_POST['mobile']) ? $_POST['mobile'] : "";
+$city = isset($_POST['city']) ? $_POST['city'] : "";
 $profile_img = "";
 
 
@@ -35,7 +36,7 @@ if(@$_FILES['profile_img']['name']){
 }
  
 // query products
-$stmt = $professional->updateProfile($prof_id, $first_name, $last_name, $service_area, $description, $address, $mobile, $profile_img);
+$stmt = $professional->updateProfile($prof_id, $first_name, $last_name, $service_area, $description, $address, $mobile, $profile_img, $city);
 //$stmt = $customer->search($keywords);
 //$num = $stmt->rowCount();
  

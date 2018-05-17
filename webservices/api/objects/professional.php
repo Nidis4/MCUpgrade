@@ -511,7 +511,7 @@ ORDER BY `date` ASC,
         $stmt->bindParam(':defaultsms',  $defaultsms);
         
         if ($stmt->execute()) { 
-           $this->update_contact($id, $address, $mobile, $phone, $mobile2); 
+           $this->update_contact($id, $address, $mobile, $phone, $mobile2,''); 
            $this->update_account($id, $email, $calendar_id ); 
            $this->update_document($id, $profile_image1, $profile_image2, $profile_image3, $profile_perid1, $profile_perid2, $profile_agreement1, $profile_agreement2, $profile_agreement3, $profile_agreement4, $profile_agreement5, $approve_per, $approve_doc ); 
            return 1;
@@ -520,14 +520,14 @@ ORDER BY `date` ASC,
         }
     } // Save Professional
 
-    function update_contact($id, $address, $mobile, $phone, $mobile2 ){
+    function update_contact($id, $address, $mobile, $phone, $mobile2,$city = NULL ){
         
         
         //$query = "UPDATE " . $this->contact_table_name . "
                     // SET
                     // `mobile`=:mobile, `phone`=:phone, `address`=:address";
 
-        $query = "INSERT INTO ". $this->contact_table_name ." (`professional_id`, `mobile`, `phone`, `address`, `mobile2`) VALUES (:id, :mobile, :phone, :address, :mobile2) ON DUPLICATE KEY UPDATE `mobile`=:mobile, `phone`=:phone, `address`=:address, `mobile2`= :mobile2";
+        $query = "INSERT INTO ". $this->contact_table_name ." (`professional_id`, `mobile`, `phone`, `address`, `mobile2`,`city`) VALUES (:id, :mobile, :phone, :address, :mobile2, :city) ON DUPLICATE KEY UPDATE `mobile`=:mobile, `phone`=:phone, `address`=:address, `mobile2`= :mobile2, `city`= :city";
         
         //$query .=" WHERE professional_id = :id";
 
@@ -540,6 +540,7 @@ ORDER BY `date` ASC,
         $stmt->bindParam(':phone',  $phone);
         $stmt->bindParam(':address',  $address);
         $stmt->bindParam(':mobile2',  $mobile2);
+        $stmt->bindParam(':city',  $city);
         
         if ($stmt->execute()) { 
            return 1;
@@ -1067,7 +1068,7 @@ ORDER BY rat.`created` DESC";
     }
 
     public function getProfile(){
-        $query = "Select p.id, p.first_name, p.last_name, p.description, p.service_area, p.image, p.verified, pc.address, pc.mobile  from ".$this->table_name." p 
+        $query = "Select p.id, p.first_name, p.last_name, p.description, p.service_area, p.image, p.verified, pc.address, pc.city, pc.mobile  from ".$this->table_name." p 
                   LEFT JOIN ".$this->contact_table_name." pc on p.id = pc.professional_id 
                   where p.id = :id";
 
@@ -1133,7 +1134,8 @@ ORDER BY rat.`created` DESC";
         return $stmt;      
     }
 
-    public function updateProfile($prof_id, $first_name, $last_name, $service_area, $description, $address, $mobile, $profile_img){
+    public function updateProfile($prof_id, $first_name, $last_name, $service_area, $description, $address, $mobile, $profile_img, $city = NULL){
+
 
         $query = "UPDATE " . $this->table_name . "
                     SET `first_name`=:first_name, `last_name`=:last_name, `description`=:description, `service_area`=:service_area ";
@@ -1155,7 +1157,8 @@ ORDER BY rat.`created` DESC";
         $stmt->bindParam(':service_area',  $service_area);
         
         if ($stmt->execute()) { 
-           $this->update_contact($prof_id, $address, $mobile, ""); 
+           
+           $this->update_contact($prof_id, $address, $mobile, "", "",$city); 
            return 1;
         } else {
            return 0;
@@ -1350,7 +1353,7 @@ ORDER BY rat.`created` DESC";
 
         $professional_id = $this->conn->lastInsertId();
 
-        $this->update_contact($professional_id, '', $mobile, '');
+        $this->update_contact($professional_id, '', $mobile, '','','');
 
         $this->update_account($professional_id, $email, '');
 

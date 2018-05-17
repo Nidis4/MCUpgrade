@@ -51,6 +51,7 @@ if($num >= 1){
         'service_area' => $row['service_area'],
         'image' => $row['image'],
         'address' => $row['address'],
+        'city' => $row['city'],
         'mobile' => $row['mobile'],
         'verified' => $row['verified'],
         'balance' => '0',

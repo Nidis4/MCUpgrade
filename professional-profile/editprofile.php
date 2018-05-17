@@ -79,6 +79,11 @@
                         $image = $profile['image'];
                     }
 
+                    $city = "";
+                    if(@$profile['city']){
+                        $city = $profile['city'];
+                    }
+
                 ?>
                 <div class="container-fluid main-container">
                     <div class="row">
@@ -126,6 +131,8 @@
                                     <textarea class="form-control" name="description" placeholder="Description"><?php echo $description;?></textarea>
                                     <br>
                                     <input type="text" name="address" class="form-control" placeholder="Address" value="<?php echo $address;?>">
+                                    <br>
+                                    <input type="text" name="city" class="form-control" placeholder="City" value="<?php echo $city;?>">
                                     <br>
                                     <input type="text" name="mobile" class="form-control" placeholder="Mobile" value="<?php echo $mobile;?>">
                                     <!-- <p class="front-professional-desc"><?php //echo $service_area;?></p> -->
