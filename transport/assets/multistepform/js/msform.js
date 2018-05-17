@@ -1123,7 +1123,6 @@ $("#step4btn").click(function(){
 
 
        var findCustomerAPI ='https://upgrade.myconstructor.gr/webservices/api/customer/search_by_mobile.php?mobile='+mobile;
- alert("findCustomerAPI");
         $.ajax({
             type: "POST",
             url: findCustomerAPI,
@@ -1139,7 +1138,7 @@ $("#step4btn").click(function(){
             dataType: "json",
             success: function(data)
             {
-              alert(mobile);
+            
 
                 var customer_id = data;
                 //alert(customer_id);
@@ -1178,17 +1177,17 @@ $("#step4btn").click(function(){
                     //dataType: "json",
                     success: function(data)
                     {
-                      alert(data);
+                      //alert(data);
                         
 
                     },
                     error: function(data){
-                        alert(data);
+                        //alert(data);
                     }
                 });
 
             },error: function(data){
-                        alert(data);
+                       // alert(data);
                 }
         });
 

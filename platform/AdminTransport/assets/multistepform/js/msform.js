@@ -5060,7 +5060,9 @@ telikos,
                     //dataType: "json",
                     success: function(data)
                     {
-                        alert("Offer Created");
+
+                      alert("Offer Created");
+                        
                         var sentSmsAPI ='https://upgrade.myconstructor.gr/webservices/api/sms/sent.php';
 
                         $.ajax({
@@ -5099,10 +5101,10 @@ telikos,
                               },
                               dataType: "json",
                               success: function(data){
-                                 
+                                 alert(data);
                               },
                                 error: function(data){
-                                  
+                                   alert(data);
                                 }
                             });
 
@@ -5111,7 +5113,7 @@ telikos,
                         window.location.replace('https://upgrade.myconstructor.gr/platform/offers.php');
                     },
                     error: function(data){
-                        alert(data);
+                         alert(data);
                     }
                 });
 
