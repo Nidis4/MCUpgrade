@@ -271,13 +271,13 @@ class Appointment{
     }
 
     public function readCancelPaging($from_record_num, $records_per_page){
-         $time = date('Y-m-d H:i:s',strtotime("-48 hours"));
+         $time = date('Y-m-d');
 
         // select query
         $query = "SELECT
                     `id`, `prof_member_id`, `cust_member_id`, `application_id`, `county_id`, `date`, `time`, `address`, `budget`, `commision`, `agent_id`, `comment`, `sms`, `sms_log_id`, `datetimeCreated`, `datetimeStatusUpdated`, `sourceAppointmentId`, `status`, `cancelReason`, `cancelComment`, `viewed`, `viewed_datetime`
                 FROM
-                    " . $this->table_name . " WHERE `status` = '0' 
+                    " . $this->table_name . " WHERE `status` = '0' and `datetimeStatusUpdated` like '%".$time."%' 
                 ORDER BY `reject_datetime` DESC
                 LIMIT ?, ?";
      
@@ -668,9 +668,9 @@ class Appointment{
 
     public function cancelCount(){
 
-        $time = date('Y-m-d H:i:s',strtotime("-48 hours"));
+        $time = date('Y-m-d');
 
-        $query = "SELECT Count(`id`) as total FROM  `appointments` WHERE  `status` = '0'";
+        $query = "SELECT Count(`id`) as total FROM  `appointments` WHERE  `status` = '0' and datetimeStatusUpdated like '%".$time."%'";
         $stmt = $this->conn->prepare( $query );
 
         $stmt->execute();
