@@ -5128,7 +5128,7 @@ telikos,
 
 
 
-      /*    jQuery.ajax({
+          jQuery.ajax({
 
                       type:"POST",
 
@@ -5144,29 +5144,24 @@ telikos,
 
                       success: function(data){
 
-                         console.log(data);
+                     console.log(data);
 
-                        if(data){ 
+                    if(data){ 
 
-                           jQuery('p#saveMsg').html('<span style="color:green;">Αποθηκεύτηκε επιτυχώς! </span><br/>');
+                          $('#last-step').css('display','none');
 
-                           var win = window.open('https://myconstructor.gr/admin/offers/list', '_blank');
-                            if (win) {
-                              win.focus();
-                            }
+                          $('#thankyou').css('display','block');
 
-                        }else{
+                    }else{
 
-                          jQuery('p#saveMsg').html('<span style="color:red;>Αποτυχία Αποστολής</span><br/>');
+                      jQuery('p#errorsmsg').append('<span>Αποτυχία Αποστολής</span><br/>');
 
-                        }
+                    }
 
-                     }
+                 }
 
-                 })*/
-            }else{
-              alert('Συμπλήρωσε σωστά τα στοιχεία του πελάτη Όνομα, Επίθετο και Τηλέφωνο!');
-            }
+                 
+           
 
 
       }
