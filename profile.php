@@ -65,7 +65,7 @@
 <html lang="el">
     <head>
         
-        <title><?php $professional_meta_title; ?></title>
+        <title><?php echo $professional_meta_title; ?></title>
 
         <link rel="alternate" hreflang="el" href="<?php echo $profile_url . $professional_permalink; ?>">
         <meta name="description" content="<?php $professional_meta_description; ?>">
