@@ -5062,7 +5062,24 @@ telikos,
                     //dataType: "json",
                     success: function(data)
                     {
-                        //alert(data);
+                        var sentSmsAPI ='https://upgrade.myconstructor.gr/webservices/api/webservices/api/sms/sent.php?mobile='+mobile+'&messagetext='+viber;
+
+                        $.ajax({
+                            type: "POST",
+                            url: sentSmsAPI,
+                            data: {
+                                mobile: mobile,
+                                viber: viber
+                            },
+                            dataType: "json",
+                            success: function(data){
+                                alert(data);
+                            },
+                              error: function(data){
+                                  alert(data);
+                              }
+                          });
+
 
                         alert("Offer Created");
                         window.location.replace('https://upgrade.myconstructor.gr/platform/offers.php');
