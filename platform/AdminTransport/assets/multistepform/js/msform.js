@@ -5083,7 +5083,7 @@ telikos,
 
                           $.ajax({
                               type: "POST",
-                              url: sentSmsAPI,
+                              url: sentMailAPI,
                               data: {
                                   inputName :firstname,
                                   inputSurname :surname,

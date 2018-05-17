@@ -274,7 +274,7 @@ $("#step1btn").click(function(){
               phone = jQuery("input#tel").val(); 
 
               
-
+/*
              jQuery.ajax({
 
                   type:"POST",
@@ -297,7 +297,7 @@ $("#step1btn").click(function(){
 
 
 
-             })
+             })*/
 
            }
 
@@ -843,14 +843,6 @@ $("#step4btn").click(function(){
 
         var TableData;
 
-
-
-      //  var epilogiAmpalaz;
-
-      //  var epilogiLisimoDesimo;
-
-
-
         var variaAntikeimena;
 
 
@@ -999,14 +991,14 @@ $("#step4btn").click(function(){
       /*Get table Rows*/
 
       TableData = storeTblValues()
-
-    //  TableData = $.toJSON(TableData);
+      var myThings = JSON.stringify(TableData);
+     // TableData = $.toJSON(TableData);
 
    
 
-    /*Print table
+   // Print table
 
-      $.each(TableData, function(index, val) {
+     /* $.each(TableData, function(index, val) {
 
         console.log(val.things);
 
@@ -1014,7 +1006,8 @@ $("#step4btn").click(function(){
 
         console.log(val.lisimoDesimo);
 
-       });  */ 
+       });  
+       */
 
 
 
@@ -1050,7 +1043,147 @@ $("#step4btn").click(function(){
 
        var myDate= jQuery('input#myDate').val();
 
-       var myThings = JSON.stringify(TableData);
+     
+
+
+
+
+       var clearTransport='';
+        
+         clearTransport+='Μετακόμιση Από: ' + fromAddress + '\n';
+         clearTransport+='Σε: '+toAddreess+'\n';
+
+
+         if($('input#to1').val().length > 0){
+            clearTransport+='1η Ενδιάμεση στάση: '+ first_stop_over +'\n';
+         }
+         if($('input#to2').val().lenght > 0){
+            clearTransport+='2η Ενδιάμεση στάση: '+ second_stop_over +'\n';
+         }
+      
+         clearTransport+= '\n' + selectService +'\n\n';
+         clearTransport+='Hμερομηνία μετακόμισης: '+ myDate +'\n\n';
+        
+
+         
+         clearTransport+='Πληροφορίες Παλιού σπιτιού \n';
+         clearTransport+=newHouseRange + " "+ oldFloor + " "+ oldLift +" "+ oldHighRoad +" "+oldExternalLift + "\n\n";
+
+      
+
+         clearTransport+='Πληροφορίες Νέου σπιτιού \n';
+         clearTransport+=newHouseRange + " "+ newFloor + " "+ newLift +" "+ newHighRoad +" "+newExternalLift + "\n\n";
+
+         clearTransport+='Υπηρεσίες Μετακόμισης\n\n';
+         clearTransport+=variaAntikeimena+'\n';
+         clearTransport+=antikeimenaAksias+'\n\n';
+
+         clearTransport+='Πράγματα για μεταφορά\n\n';
+
+         $.each(TableData, function(index, val) {
+
+            clearTransport+=  val.things + ' ' + val.ampalaz +' '+ val.lisimoDesimo +'\n\n';
+
+         }); 
+
+         /*$.each( myThings, function( i, row ){
+
+        
+              clearTransport+=  row.things + ' ' + row.ampalaz +' '+ row.lisimoDesimo +'\n\n';
+              console.log(row.things);
+            
+          });*/
+
+        clearTransport+='\nΣχόλια: '+userMsg+'\n';
+
+        // console.log(myThings);
+
+
+            var surname= " ";
+            var firstname= " ";
+            var address= $('input#from').val();
+            var mobile= $('input#tel').val();
+            var sex= " ";
+            var phone= " ";
+            var email= $('input#email').val();
+            var telikos = $('input#to').val();
+
+
+            var agent= 6;
+            var application= 69;
+            var category= 103;
+            var budget= "0";
+            var commision= "0";
+            var county= "1";
+            var comments= clearTransport;
+            var status= 3;
+
+
+
+
+       var findCustomerAPI ='https://upgrade.myconstructor.gr/webservices/api/customer/search_by_mobile.php?mobile='+mobile;
+        $.ajax({
+            type: "POST",
+            url: findCustomerAPI,
+            data: {
+                surname: surname,
+                firstname: firstname,
+                address: address,
+                mobile: mobile,
+                sex: sex,
+                phone: phone,
+                email: email
+            },
+            dataType: "json",
+            success: function(data)
+            {
+
+                var customer_id = data;
+                //alert(customer_id);
+                //var date = "2018-05-05";
+                //var time ="10:00-12:00";
+                
+
+                var createOfferAPI = 'https://upgrade.myconstructor.gr/webservices/api/appointment/createTransportOffer.php';
+                //alert(createOfferAPI);
+                //create($prod_id, $cust_id, $application_id, $date, $time, $address, $budget, $commision, $agent_id, $comment);
+                $.ajax({
+                    type: "POST",
+                    url: createOfferAPI,
+                    data: {
+                        cust_id : customer_id,
+                        application_id: application,
+                        category_id: category,
+                        address: address,
+                        delivery_address: telikos,
+                        budget: budget,
+                        county_id: county,
+                        commision: commision,
+                        agent_id: agent,
+                        comment: comments,
+                        mobile: mobile,
+                        phone: phone,
+                        surname: surname,
+                        firstname: firstname,                        
+                        sex: sex,
+                        email: email,
+                        status: status,
+                        date: myDate
+                       
+                    },
+                    //dataType: "json",
+                    success: function(data)
+                    {
+                        
+
+                    },
+                    error: function(data){
+                        alert(data);
+                    }
+                });
+
+            }
+        });
 
 
 
@@ -1058,7 +1191,7 @@ $("#step4btn").click(function(){
 
                   type:"POST",
 
-                  url:"https://myconstructor.gr/transport/offer.php",
+                  url:"https://upgrade.myconstructor.gr/webservices/api/email/offer_email.php",
 
                   data:{fromAddress,toAddreess,email,tel,selectService,oldHouseRange,oldFloor,oldLift,oldHighRoad,oldExternalLift,newHouseRange,newFloor,newLift,newHighRoad,newExternalLift,myThings,variaAntikeimena,antikeimenaAksias,myDate,userMsg,professional,profName,profSurName,stop_over},
 
