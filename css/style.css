@@ -2222,6 +2222,10 @@ ul.ul-how-it li div {
     .collapse.in{
         display:block !important;
     }
+    li.active.litel a{
+      color:#2B347F!important;
+      font-family: dinbd;
+    }
 }
 
 
@@ -4467,6 +4471,17 @@ div#bs-example-navbar-collapse-1.in {
     box-shadow: 0px 0px 3px 0px #ccc;
 }
 
+
+nav#myTopnav li a {
+    color: #2b347f;
+}
+
+nav#myTopnav li a:hover {
+    color: #ff794e!important;
+}
+
+
+
 /* MODAL CALL BACK */
 
 .call-btn img {
@@ -4803,6 +4818,9 @@ li.lang-menu {
 }
 /*EnD REMOVAL MODAL*/
 
+@media screen and (max-width:1220px){
+
+}
 
 @media screen and (max-width:1269px){
   .app-small-description-outer {
