@@ -912,19 +912,19 @@ $("#step4btn").click(function(){
 
         oldHouseRange="Απόσταση Φορτηγού: <b>"+ jQuery('#old-home-distance option:selected').text() +"</b>";
 
-        oldFloor="Όροφος: <b>"+ jQuery('#from_floor option:selected').text() +"</b>";
+        oldFloor="Όροφος: "+ jQuery('#from_floor option:selected').text() +" ";
 
-        oldLift="Ασανσέρ: <b>"+ jQuery('#from_lift option:selected').text() +"</b>";
+        oldLift="Ασανσέρ: "+ jQuery('#from_lift option:selected').text() +"";
 
         
 
         if(jQuery('#oldHighRoad').is(':checked')){
 
-          oldHighRoad= "<b>Δρόμος υψηλής κυκλοφορίας</b>";
+          oldHighRoad= "Δρόμος υψηλής κυκλοφορίας";
 
         }else{
 
-          oldHighRoad= "<b>ΔΕΝ βρίσκεται σε δρόμο υψηλής κυκλοφορίας</b>";
+          oldHighRoad= "ΔΕΝ βρίσκεται σε δρόμο υψηλής κυκλοφορίας";
 
         }
 
@@ -932,11 +932,11 @@ $("#step4btn").click(function(){
 
         if(jQuery('#oldExternalLift').is(':checked')){
 
-          oldExternalLift= "<b>Θα χρειαστεί ανυψωτικό</b>";
+          oldExternalLift= "Θα χρειαστεί ανυψωτικό";
 
         }else{
 
-          oldExternalLift= "<b>ΔΕΝ θα χρειαστεί ανυψωτικό</b>";
+          oldExternalLift= "ΔΕΝ θα χρειαστεί ανυψωτικό";
 
         }
 
@@ -946,21 +946,21 @@ $("#step4btn").click(function(){
 
 
 
-        newHouseRange="Απόσταση Φορτηγού: <b>"+ jQuery('#new-home-distance option:selected').text() +"</b>";
+        newHouseRange="Απόσταση Φορτηγού: "+ jQuery('#new-home-distance option:selected').text() +" ";
 
-        newFloor="Όροφος: <b>"+ jQuery('#to_floor option:selected').text() +"</b>";
+        newFloor="Όροφος: "+ jQuery('#to_floor option:selected').text() +" ";
 
-        newLift="Ασανσέρ: <b>"+ jQuery('#to_lift option:selected').text() +"</b>";
+        newLift="Ασανσέρ: "+ jQuery('#to_lift option:selected').text() +" ";
 
 
 
         if(jQuery('#newHighRoad').is(':checked')){
 
-          newHighRoad= "<b>Δρόμος υψηλής κυκλοφορίας</b>";
+          newHighRoad= "Δρόμος υψηλής κυκλοφορίας";
 
         }else{
 
-          newHighRoad= "<b>ΔΕΝ βρίσκεται σε δρόμο υψηλής κυκλοφορίας</b>";
+          newHighRoad= "ΔΕΝ βρίσκεται σε δρόμο υψηλής κυκλοφορίας";
 
         }
 
@@ -968,11 +968,11 @@ $("#step4btn").click(function(){
 
         if(jQuery('#newExternalLift').is(':checked')){
 
-          newExternalLift= "<b>Θα χρειαστεί ανυψωτικό</b>";
+          newExternalLift= "Θα χρειαστεί ανυψωτικό";
 
         }else{
 
-          newExternalLift= "<b>ΔΕΝ θα χρειαστεί ανυψωτικό</b>";
+          newExternalLift= "ΔΕΝ θα χρειαστεί ανυψωτικό";
 
         }
 
@@ -1021,7 +1021,7 @@ $("#step4btn").click(function(){
 
        if(jQuery('#varia-antikeimena').is(':checked')){
 
-         variaAntikeimena="Υπάρχουν βαριά αντικείμενα που χρειάζονται: <b>"+ jQuery('#posa-atoma option:selected').text() + "άτομα</b> για να μετακινηθούν.";
+         variaAntikeimena="Υπάρχουν βαριά αντικείμενα που χρειάζονται: "+ jQuery('#posa-atoma option:selected').text() + "άτομα για να μετακινηθούν.";
 
        }else{
 
@@ -1067,12 +1067,12 @@ $("#step4btn").click(function(){
 
          
          clearTransport+='Πληροφορίες Παλιού σπιτιού \n';
-         clearTransport+=newHouseRange + " "+ oldFloor + " "+ oldLift +" "+ oldHighRoad +" "+oldExternalLift + "\n\n";
+         clearTransport+=newHouseRange + "\n "+ oldFloor + "\n "+ oldLift +"\n "+ oldHighRoad +"\n "+oldExternalLift + "\n\n";
 
       
 
          clearTransport+='Πληροφορίες Νέου σπιτιού \n';
-         clearTransport+=newHouseRange + " "+ newFloor + " "+ newLift +" "+ newHighRoad +" "+newExternalLift + "\n\n";
+         clearTransport+=newHouseRange + "\n "+ newFloor + "\n "+ newLift +"\n "+ newHighRoad +"\n "+newExternalLift + "\n\n";
 
          clearTransport+='Υπηρεσίες Μετακόμισης\n\n';
          clearTransport+=variaAntikeimena+'\n';
