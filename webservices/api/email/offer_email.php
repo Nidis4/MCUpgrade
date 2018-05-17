@@ -213,7 +213,9 @@ if($_POST){
 
                       $mail_sent = @mail( $to, $subject, $mess,implode("\r\n", $headerFields));
 
+                        $success=true;
 
+                     echo json_encode($success);
 
 
 
