@@ -56,10 +56,10 @@ include('config/core.php');
 				}else if(@$_GET['prof_name'] || @$_GET['cus_name'] || @$_GET['cus_mobile'] || @$_GET['cus_address']){
 					$prof_name = $cus_name = $cus_mobile = $cus_address = "";
 					if(@$_GET['prof_name']){
-						$prof_name = $_GET['prof_name'];
+						$prof_name = str_replace(" ", '|||', $_GET['prof_name']);
 					}
 					if(@$_GET['cus_name']){
-						$cus_name = $_GET['cus_name'];
+						$cus_name = str_replace(" ", '|||', $_GET['cus_name']);
 					}
 					if(@$_GET['cus_mobile']){
 						$cus_mobile = $_GET['cus_mobile'];

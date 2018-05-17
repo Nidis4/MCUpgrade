@@ -705,7 +705,7 @@ class Appointment{
 
         if(@$prof_name){
 
-            $pname = explode(" ", $prof_name);
+            $pname = explode("|||", $prof_name);
             
             $pquery = "Select id from professionals where first_name like '%".$pname[0]."%' OR last_name like '%".$pname[0]."%'";
 
@@ -730,7 +730,7 @@ class Appointment{
         if((@$cus_name) || (@$cus_mobile) || (@$cus_address)){
 
             if(@$cus_name){
-                $pname = explode(" ", $cus_name);
+                $pname = explode("|||", $cus_name);
                 $pquery = "Select id from customers where first_name like '%".$pname[0]."%' OR last_name like '%".$pname[0]."%'";
 
                 $pstmt = $this->conn->prepare($pquery);
