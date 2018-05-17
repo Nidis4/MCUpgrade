@@ -208,6 +208,7 @@ include('search.php');
                                                 $active_tab = $SelectedAppId;
                                             }else{
                                                 $active_tab = $applications[0]['id'];
+                                                echo $applications[0]['id'];
                                             }
                                             foreach ($applications as $application) {
                                                  $application_id = $application['id'];
