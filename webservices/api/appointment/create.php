@@ -229,8 +229,14 @@ if($stmt){
 					$address,
 					'Γραμμή εξυπηρέτησης πελατών 2103009325'
 				]);
-				$senddate = date("Ymd",strtotime($fdate1." ".$FFtime.":00 -2Hours"));
-				$sendtime = date("Hi",strtotime($fdate1." ".$FFtime.":00 -2Hours"));
+				if($FFtime <= 11){
+					$senddate = date("Ymd",strtotime($fdate1." -1 Day"));
+					$sendtime = '2100';
+				}else{
+					$senddate = date("Ymd",strtotime($fdate1." ".$FFtime.":00 -2Hours"));
+					$sendtime = date("Hi",strtotime($fdate1." ".$FFtime.":00 -2Hours"));
+				}
+				
 				$viber->send($customer_mobile, $smsTexts, $senddate, $sendtime );
 
 			}
