@@ -67,7 +67,7 @@
 
    			}
    		}else{
-   			$SelectedAppId= 0;
+   			$SelectedAppId= 177;
    		}
    }else{
    		
@@ -82,7 +82,7 @@
 		$cat_permalink= $select_cat['permalink'];
 
 
-		$select_app = file_get_contents($api_url .'webservices/api/application/read_app_id.php?permalink=viologikos-katharismos-offer');
+		$select_app = file_get_contents($api_url .'webservices/api/application/read_app_id.php?permalink=biologikos-katharismos-offer');
    		$select_app = json_decode($select_app, true);
 
    		$SelectedAppId= $select_app['application_id'];
@@ -738,6 +738,7 @@ include('search.php');
 						$professional_servicearea = $professionals['servicearea'];
 						$professional_review = $professionals['reviews_stats'];
 						$porfessional_counties = $professionals['counties'];
+						$professional_permalink = $professionals['permalink'];
 
 						$professional_counties_num = sizeof($porfessional_counties);
 
