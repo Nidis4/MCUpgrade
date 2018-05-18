@@ -34,7 +34,7 @@
  <link href="css/custom.css" rel="stylesheet">
  <link rel="stylesheet" href="../vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
  <link rel="stylesheet" href="../vendor/bootstrap-timepicker/css/bootstrap-timepicker.css" />
-        <div class="col-md-12 page-title" ><h2>Latest Appointments</h2></div>
+        <div class="col-md-12 page-title" ><h2><!-- Latest Appointments -->τελευταία ραντεβού</h2></div>
         <section id="cd-timeline" class="cd-container">
                 <?php
                     $latest = 1;
@@ -73,20 +73,20 @@
                                 <div class="cd-timeline-content">
                                     <div class="col-md-12"><h2 class="appointment-cat-title"><?php echo $appointment_category;?></h2></div>
                                         <div class="col-md-6">
-                                            <p class="appointment-customer-name">Name: <span class="custormer-name"><?php echo $appointment_cust_member_name; ?></span></p>
-                                            <p class="appointment-address">Address: <a class="customer-address" target="_blank" href="https://www.google.gr/maps/dir//<?php echo $appointment_address;?>"><?php echo $appointment_address;?></a></p>
+                                            <p class="appointment-customer-name"><!-- Name -->πελάτης: <span class="custormer-name"><?php echo $appointment_cust_member_name; ?></span></p>
+                                            <p class="appointment-address"><!-- Address -->διεύθυνση: <a class="customer-address" target="_blank" href="https://www.google.gr/maps/dir//<?php echo $appointment_address;?>"><?php echo $appointment_address;?></a></p>
                                         </div>
                                         <div class="col-md-6">
-                                            <p class="appointement-budget">Budget: <span class="customer-budget"><?php echo $appointment_budget;?>€</span></p>
-                                            <p class="appointement-commission">Commission: <span class="customer-commission"><?php echo $appointment_commision;?>€</span></p>
+                                            <p class="appointement-budget"><!-- Budget -->προϋπολογισμός: <span class="customer-budget"><?php echo $appointment_budget;?>€</span></p>
+                                            <p class="appointement-commission"><!-- Commission -->προμήθεια: <span class="customer-commission"><?php echo $appointment_commision;?>€</span></p>
                                              <p class="appointement-agent-name">Agent Name: <span class="agent-name"><?php echo $appointment_agent_name;?></span></p>
                                             
                                         </div>
-                                        <div class="read-more-btn">Read more</div>
+                                        <div class="read-more-btn"><!-- Read more -->περισσότερα</div>
                                         <div class="read-more-txt">
                                             <div class="col-md-6">
-                                                <p class="appointement-delivery-adress">Delivery Address: <span class="customer-delivery-adress"></span></p>
-                                                <p class="appointement-distance">Distance: <span class="customer-distance"></span></p>
+                                                <p class="appointement-delivery-adress"><!-- Delivery Address -->διεύθυνση παράδοσης: <span class="customer-delivery-adress"></span></p>
+                                                <p class="appointement-distance"><!-- Distance -->απόσταση: <span class="customer-distance"></span></p>
 
                                             </div>
                                             <div class="col-md-6"> 
@@ -94,7 +94,7 @@
                                             </div>
                                             <div class="col-md-12">
 
-                                                <p>Comments: <span class="appointment-comments"><?php echo $appointment_comment;?></span></p>
+                                                <p><!-- Comments -->σχόλια: <span class="appointment-comments"><?php echo $appointment_comment;?></span></p>
                                                 
                                                  
                                             </div>
