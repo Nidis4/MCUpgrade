@@ -71,6 +71,7 @@ if($stmt){
     $professional->id = $prof_id;
     $professional_stmt = $professional->readOne();
     $professional_surname = $professional->last_name;
+    $professional_mobile = $professional->mobile;
 
 
 
@@ -104,8 +105,8 @@ if($stmt){
     	$payment->saveCustomerInvoice($cust_id, $category_id, $budget, $agent_id, $comment, "Cash", "", $datetime_added,$invoice_view);
     }
 
-    $customer_mobile     = '6940589493';
-    $professional_mobile = '6940589493';
+    //$customer_mobile     = '6940589493';
+    //$professional_mobile = '6940589493';
     $professional_email  = $professional->email;
 
     $adate1 = date_create($date);
