@@ -141,46 +141,46 @@ include('config/core.php');
 							</header>
 							<div class="card-body">
 								<form method="get" action="<?php echo $home_url;?>platform/appointments.php">
-								<div class="row">
-									<div class="col-sm-3">
-										<div class="form-group row">
-											<label class="col-sm-3 control-label text-sm-right" style="padding: 0px;">Professional Name </label>
-											<div class="col-sm-9">
-												<input type="text" name="prof_name" id="prof_name" value="<?php if(@$_GET['prof_name']){ echo $_GET['prof_name'];}?>" class="form-control" value=""  />
-											</div>										
+									<div class="row">
+										<div class="col-sm-3">
+											<div class="form-group row">
+												<label class="col-sm-3 control-label text-sm-right" style="padding: 0px;">Professional Name </label>
+												<div class="col-sm-9">
+													<input type="text" name="prof_name" id="prof_name" value="<?php if(@$_GET['prof_name']){ echo $_GET['prof_name'];}?>" class="form-control" value=""  />
+												</div>										
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<div class="form-group row">
+												<label class="col-sm-3 control-label text-sm-right" style="padding: 0px;">Customer Name </label>
+												<div class="col-sm-9">
+													<input type="text" name="cus_name" id="cus_name" class="form-control" value="<?php if(@$_GET['cus_name']){ echo $_GET['cus_name'];}?>" />
+												</div>										
+											</div>	
+										</div>
+										<div class="col-sm-3">
+											<div class="form-group row">
+												<label class="col-sm-3 control-label text-sm-right" style="padding: 0px;">Customer Mobile </label>
+												<div class="col-sm-9">
+													<input type="text" name="cus_mobile" id="cus_mobile" class="form-control" value="<?php if(@$_GET['cus_mobile']){ echo $_GET['cus_mobile'];}?>" />
+												</div>										
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<div class="form-group row">
+												<label class="col-sm-3 control-label text-sm-right" style="padding: 0px;">Customer Address </label>
+												<div class="col-sm-9">
+													<input type="text" name="cus_address" id="pac-input-address" class="form-control" value="<?php if(@$_GET['cus_address']){ echo $_GET['cus_address'];}?>"  />
+												</div>										
+											</div>
+											
 										</div>
 									</div>
-									<div class="col-sm-3">
-										<div class="form-group row">
-											<label class="col-sm-3 control-label text-sm-right" style="padding: 0px;">Customer Name </label>
-											<div class="col-sm-9">
-												<input type="text" name="cus_name" id="cus_name" class="form-control" value="<?php if(@$_GET['cus_name']){ echo $_GET['cus_name'];}?>" />
-											</div>										
-										</div>	
-									</div>
-									<div class="col-sm-3">
-										<div class="form-group row">
-											<label class="col-sm-3 control-label text-sm-right" style="padding: 0px;">Customer Mobile </label>
-											<div class="col-sm-9">
-												<input type="text" name="cus_mobile" id="cus_mobile" class="form-control" value="<?php if(@$_GET['cus_mobile']){ echo $_GET['cus_mobile'];}?>" />
-											</div>										
+									<div class="row">
+										<div class="col-sm-4 offset-sm-4 text-center">
+											<button type="submit" class="mb-1 mt-4 mr-1 btn btn-warning" id="searchAppointment1">Search</button>
 										</div>
 									</div>
-									<div class="col-sm-3">
-										<div class="form-group row">
-											<label class="col-sm-3 control-label text-sm-right" style="padding: 0px;">Customer Address </label>
-											<div class="col-sm-9">
-												<input type="text" name="cus_address" id="pac-input-address" class="form-control" value="<?php if(@$_GET['cus_address']){ echo $_GET['cus_address'];}?>"  />
-											</div>										
-										</div>
-										
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-4 offset-sm-4 text-center">
-										<button type="submit" class="mb-1 mt-4 mr-1 btn btn-warning" id="searchAppointment1">Search</button>
-									</div>
-								</div>
 								</form>
 
 								

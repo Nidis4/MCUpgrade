@@ -53,6 +53,23 @@ include('config/core.php');
 				include('header.php');
 				if(@$_GET['rejected']){
 					$appointments = file_get_contents($api_url.'appointment/read_rejected_paging.php');
+				}else if(@$_GET['prof_name'] || @$_GET['cus_name'] || @$_GET['cus_mobile'] || @$_GET['cus_address']){
+					$prof_name = $cus_name = $cus_mobile = $cus_address = "";
+					if(@$_GET['prof_name']){
+						$prof_name = str_replace(" ", '|||', $_GET['prof_name']);
+					}
+					if(@$_GET['cus_name']){
+						$cus_name = str_replace(" ", '|||', $_GET['cus_name']);
+					}
+					if(@$_GET['cus_mobile']){
+						$cus_mobile = $_GET['cus_mobile'];
+					}
+					if(@$_GET['cus_address']){
+						$cus_address = str_replace(" ", '|||', $_GET['cus_address']);
+					}
+					//echo $api_url.'appointment/searchListOffers.php?pn='.$prof_name.'&cn='.$cus_name.'&cm='.$cus_mobile.'&ca='.$cus_address;
+					//die;
+					$appointments = file_get_contents($api_url.'appointment/searchListOffers.php?pn='.$prof_name.'&cn='.$cus_name.'&cm='.$cus_mobile.'&ca='.$cus_address);
 				}else{
 					$appointments = file_get_contents($api_url.'appointment/read_paging_offers.php');
 				}
@@ -116,6 +133,49 @@ include('config/core.php');
 								<h2 class="card-title">List of Offers</h2>
 							</header>
 							<div class="card-body">
+								<form method="get" action="<?php echo $home_url;?>platform/offers.php">
+									<div class="row">
+										<div class="col-sm-3">
+											<div class="form-group row">
+												<label class="col-sm-3 control-label text-sm-right" style="padding: 0px;">Professional Name </label>
+												<div class="col-sm-9">
+													<input type="text" name="prof_name" id="prof_name" value="<?php if(@$_GET['prof_name']){ echo $_GET['prof_name'];}?>" class="form-control" value=""  />
+												</div>										
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<div class="form-group row">
+												<label class="col-sm-3 control-label text-sm-right" style="padding: 0px;">Customer Name </label>
+												<div class="col-sm-9">
+													<input type="text" name="cus_name" id="cus_name" class="form-control" value="<?php if(@$_GET['cus_name']){ echo $_GET['cus_name'];}?>" />
+												</div>										
+											</div>	
+										</div>
+										<div class="col-sm-3">
+											<div class="form-group row">
+												<label class="col-sm-3 control-label text-sm-right" style="padding: 0px;">Customer Mobile </label>
+												<div class="col-sm-9">
+													<input type="text" name="cus_mobile" id="cus_mobile" class="form-control" value="<?php if(@$_GET['cus_mobile']){ echo $_GET['cus_mobile'];}?>" />
+												</div>										
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<div class="form-group row">
+												<label class="col-sm-3 control-label text-sm-right" style="padding: 0px;">Customer Address </label>
+												<div class="col-sm-9">
+													<input type="text" name="cus_address" id="pac-input-address" class="form-control" value="<?php if(@$_GET['cus_address']){ echo $_GET['cus_address'];}?>"  />
+												</div>										
+											</div>
+											
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-4 offset-sm-4 text-center">
+											<button type="submit" class="mb-1 mt-4 mr-1 btn btn-warning" id="searchAppointment1">Search</button>
+										</div>
+									</div>
+								</form>
+
 								<div class="row">
 									<div class="col-sm-4">
 										<div class="mb-3">
